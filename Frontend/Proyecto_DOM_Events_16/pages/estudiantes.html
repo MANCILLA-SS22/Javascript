@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestión de Estudiantes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="./../styles/main-style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="dark" >
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Clase 16</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon">
+
+            </span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <aclass= class="nav-link active" aria-current="page" href="./../index.html">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./carreras.html">Carreras</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./catedras.html">Catedras</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Estudiantes</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./matriculaciones.html">Matriculaciones</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <h1>Gestión de Estudiantes</h1>
+
+      <!-- Formulario -->
+      <form id="formulario" class="needs-validation" novalidate>
+        <div class="mb-3">
+          <label for="tiposDocumento" class="form-label">Tipo de Documento</label>
+          <select id="tiposDocumento" class="form-select" required>
+            <option>Seleccione un tipo de Documento</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="documento" class="form-label">Número de Documento</label>
+          <input type="text" class="form-control" id="documento" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="apellidos" class="form-label">Apellidos</label>
+          <input type="text" class="form-control" id="apellidos" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="nombres" class="form-label">Nombres</label>
+          <input type="text" class="form-control" id="nombres" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="correo" class="form-label">Correo electrónico</label>
+          <input type="text" class="form-control" id="correo" required />
+        </div>
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <button type="submit" class="btn btn-primary"                    id="btnRegistrar">Registrar</button>
+          <button type="reset"  class="btn btn-outline-secondary me-1"                       >Limpiar</button>
+        </div>
+      </form>
+
+      <hr/>
+
+      <h3 class="mt-3">Estudiantes:</h3>
+
+      <!-- Buscador -->
+      <form class="d-flex" role="search" id="searchForm">
+        <button class="btn btn-outline-secondary me-1" type="reset">Limpiar</button>
+        <input id="searchText" class="form-control me-2" type="search" placeholder="Ingrese el nombre completo o parcial de una catedra para generar un listado" aria-label="Filtrar"/>
+        <button class="btn btn-outline-success" type="submit">Filtrar</button>
+      </form>
+
+      <!-- Identificar carga -->
+      <div id="loadingMessage" class="d-flex align-items-center alert alert-info mt-3 visually-hidden">
+        <strong>Recuperando datos...</strong>
+        <div class="spinner-border ms-auto" role="status" aria-hidden="true">
+
+        </div>
+      </div>
+      
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Legajo</th>
+            <th scope="col">Tipo y N° Documento</th>
+            <th scope="col">Apellidos y Nombres</th>
+            <th scope="col">Correo electrónico</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+
+    <!-- Código Javascript insertado a través de un fichero que puede ser local o externo, como aquellos que provienen de librerías (lo veremos en la clase de hoy y en adelante) -->
+    <script src="./../classes/estudiante.js"></script>
+    <script src="./../classes/tipoDocumento.js"></script>
+    <script src="./../scripts/messageManager.js"></script>
+    <script src="./../scripts/utils.js"></script>
+    <script src="./../scripts/estudiantesController.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous" ></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  </body>
+</html>

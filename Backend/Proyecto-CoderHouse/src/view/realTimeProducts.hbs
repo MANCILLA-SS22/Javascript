@@ -1,0 +1,36 @@
+<h1>Lista de productos seleccionados EN VIVO</h1>
+
+<div>
+    <form action="/res" method="post">
+        <input type="text" name="title" id="title">
+        <input type="text" name="description" id="description">
+        <input type="number" name="price" id="price">
+        <input type="text" name="thumbnail" id="thumbnail">
+        <input type="text" name="code" id="code">
+        <input type="number" name="stock" id="stock">
+        <input type="text" name="status" id="status">
+        <input type="submit" value="Send" id="button">
+    </form>
+</div>
+
+<div id="newProducts">
+    {{#each allProducts}}
+    <div>
+        <span >
+            <h2>{{this.title}}</h2>
+            <p>description: {{this.description}}</p>
+            <p>price: {{this.price}}</p>
+            <p>thumbnail: {{this.thumbnail}}</p>
+            <p>code: {{this.code}}</p>
+            <p>stock: {{this.stock}}</p>
+            <p>status: {{this.status}}</p>
+            <p>id: {{this.id}}</p>
+        </span>
+    </div>
+    {{/each}}
+</div>
+
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/JS/realTimeProductSocket.js"></script>

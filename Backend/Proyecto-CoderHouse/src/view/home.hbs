@@ -1,0 +1,24 @@
+<div>
+    <h1 class="text">Bienvenido {{ name }}  🤑</h1>
+
+</div>
+
+<h1>Lista de productos seleccionados con handlebars</h1>
+
+
+{{#each data}}
+<div class="user-info">
+    <span id="userInfo">
+        <h2>{{this.title}}</h2>
+        <p>description: {{this.description}}</p>
+        <p>price: {{this.price}}</p>
+        <p>thumbnail: {{this.thumbnail}}</p>
+        <p>code: {{this.code}}</p>
+        <p>stock: {{this.stock}}</p>
+        <p>status: {{this.status}}</p>
+        <p>id: {{this._id}}</p>
+    </span>
+</div>
+{{/each}}
+
+<script src="/socket.io/socket.io.js"></script>

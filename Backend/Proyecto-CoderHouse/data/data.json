@@ -1,0 +1,213 @@
+[
+    {
+        "title": "Saiga-12", 
+        "description": "Shotgun", 
+        "price": 800, 
+        "thumbnail": "http://dissidentarms.com/wp-content/uploads/2016/12/20210201_181025-scaled.jpg",
+        "code": "SS2000",
+        "stock": 1,
+        "status": true,
+        "category": "New"
+    },
+    {   
+        "title": "RPG", 
+        "description": "Launchers", 
+        "price": 1000, 
+        "thumbnail": "https://static.wikia.nocookie.net/squad_gamepedia/images/9/9a/RPG-7_real_life.jpg/revision/latest?cb=20170116205104",
+        "code": "SS2001",
+        "stock": 5,
+        "status": true,
+        "category": "Old"
+    },
+    {   
+        "title": "AA-12", 
+        "description": "Shotgun", 
+        "price": 3000, 
+        "thumbnail": "https://static.wikia.nocookie.net/squad_gamepedia/images/9/9a/RPG-7_real_life.jpg/revision/latest?cb=20170116205104",
+        "code": "SS2002",
+        "stock": 8,
+        "status": true,
+        "category": "Medium"
+    },
+    {
+        "title": "Barret .50 cal", 
+        "description": "Sniper", 
+        "price": 5000, 
+        "thumbnail": "https://www.militarytimes.com/resizer/uM3S85PI9oSYKigYiohxkx3Si7w=/1024x0/filters:format(png):quality(70)/cloudfront-us-east-1.images.arcpublishing.com/archetype/    4FP5BTDFBNDWPOBKJPROA3ZDOE.png",
+        "code": "SS2003",
+        "stock": 3,
+        "status": true,
+        "category": "Medium"
+    },
+    {   
+        "title": "AK-12", 
+        "description": "Assault riffle", 
+        "price": 900, 
+        "thumbnail": "https://files.cults3d.com/uploaders/14777289/illustration-file/422a8f9d-fe09-467d-9aa0-7c6976561d36/1.png",
+        "code": "SS2004",
+        "stock": 8,
+        "status": true,
+        "category": "New"
+    },
+    {
+        "title": "MP7", 
+        "description": "Submachine gun", 
+        "price": 650, 
+        "thumbnail": "https://www.airsoftatlanta.com/cdn/shop/products/DSC07015.JPG?v=1558658466",
+        "code": "SS2005",
+        "stock": 10,
+        "status": true,
+        "category": "Medium"
+    },
+    {
+        "title": "G36C", 
+        "description": "Launchers", 
+        "price": 700, 
+        "thumbnail": "https://cdn11.bigcommerce.com/s-9mcepdq780/images/stencil/1280x1280/products/511/1738/1__81892.1553886372.jpg?c=2",
+        "code": "SS2006",
+        "stock": 9,
+        "status": true,
+        "category": "Old"
+    },
+    {
+        "title": "VEPR-12", 
+        "description": "Shotgun", 
+        "price": 1500, 
+        "thumbnail": "https://gundigest.com/wp-content/uploads/Molot-Vepr-12-f2.jpg",
+        "code": "SS2007",
+        "stock": 2,
+        "status": true,
+        "category": "New"
+    },
+    {
+        "title": "P90", 
+        "description": "Submachine gun", 
+        "price": 870, 
+        "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/P90--.png/640px-P90--.png",
+        "code": "SS2008",
+        "stock": 3,
+        "status": true,
+        "category": "Old"
+    },
+    {
+        "title": "PP-19", 
+        "description": "Submachine gun", 
+        "price": 900, 
+        "thumbnail": "https://i0.wp.com/cms.sofrep.com/wp-content/uploads/2014/03/PP-19_Bizon_right_view.jpg?fit=1024%2C683&ssl=1",
+        "code": "SS2009",
+        "stock": 7,
+        "status": true,
+        "category": "New"
+    },
+    {
+        "title": "PKP Pecheneg", 
+        "description": "Light machine gun", 
+        "price": 2300, 
+        "thumbnail": "https://roe.ru/upload/resize_cache/iblock/5c2/2743_1435_1e3cd68611aa859771f9d287689e58ce0/5c2c7c47659187a82e2a61de32ad4535.jpg",
+        "code": "SS2010",
+        "stock": 2,
+        "status": true,
+        "category": "Medium"
+    },
+    {
+        "title": "RPK", 
+        "description": "Light machine gun", 
+        "price": 790, 
+        "thumbnail": "https://lh3.googleusercontent.com/proxy/S78Lfl07eU8ifnrxJ9hKXeRkQtQrlY4C3nZdd47Mcj4a2oK3r85GK4R6PI3G3UcPJshjJZNK9pQeWvB5JUZmf--6G-c7WQ",
+        "code": "SS2011",
+        "stock": 4,
+        "status": true,
+        "category": "Old"
+    },
+    {
+        "title": "PKM", 
+        "description": "Light machine gun", 
+        "price": 1700, 
+        "thumbnail": "https://nationalinterest.org/sites/default/files/styles/desktop__1260_/public/main_images/PKM_machine_gun_in_storage%20%281%29.jpg?itok=RWlxrBGl",
+        "code": "SS2012",
+        "stock": 4,
+        "status": true,
+        "category": "New"
+    },
+    {
+        "title": "RPL-20", 
+        "description": "Light machine gun", 
+        "price": 3500, 
+        "thumbnail": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/5ece8943-3730-4539-bf1d-b4f723d06c54/dfu2m4q-55557f31-3f39-4d29-b67b-c3d6d776274d.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzVlY2U4OTQzLTM3MzAtNDUzOS1iZjFkLWI0ZjcyM2QwNmM1NFwvZGZ1Mm00cS01NTU1N2YzMS0zZjM5LTRkMjktYjY3Yi1jM2Q2ZDc3NjI3NGQuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.0UJC3XKLNXKrgHnis6NpezKPxRRzKNROwASsbtgJi58",
+        "code": "SS2013",
+        "stock": 8,
+        "status": true,
+        "category": "Medium"
+    },
+    {
+        "title": "MP5", 
+        "description": "Submachine gun", 
+        "price": 450, 
+        "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/MP5.jpg/640px-MP5.jpg",
+        "code": "SS2014",
+        "stock": 12,
+        "status": true,
+        "category": "Old"
+    },
+    {
+        "title": "UZI", 
+        "description": "Submachine gun", 
+        "price": 620, 
+        "thumbnail": "https://www.historynet.com/wp-content/uploads/2023/03/weapons-uzi-submachine-gun-1200x720.jpg",
+        "code": "SS2015",
+        "stock": 6,
+        "status": true,
+        "category": "Old"
+    },
+    {
+        "title": "PP-93", 
+        "description": "Submachine gun", 
+        "price": 420, 
+        "thumbnail": "https://modernfirearms.net/userfiles/images/smg/smg58/pp93o.jpg",
+        "code": "SS2016",
+        "stock": 3,
+        "status": true,
+        "category": "Old"
+    },
+    {
+        "title": "MP-40", 
+        "description": "Submachine gun", 
+        "price": 1900, 
+        "thumbnail": "https://static.wixstatic.com/media/77e499_2b7c7dc71eef42c1b791370ac7dbc585~mv2.jpg/v1/fill/w_560,h_373,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/77e499_2b7c7dc71eef42c1b791370ac7dbc585~mv2.jpg",
+        "code": "SS2017",
+        "stock": 2,
+        "status": true,
+        "category": "Old"
+    },
+    {
+        "title": "SCAR-H", 
+        "description": "Assault riffle", 
+        "price": 1300, 
+        "thumbnail": "https://media-cdn.redwolfairsoft.com/catalog/product/cache/92109b5bc73ebc41f4ba08fbd08f8f55/C/Y/CY-200550-1L.jpg",
+        "code": "SS2018",
+        "stock": 8,
+        "status": true,
+        "category": "Old"
+    },
+    {
+        "title": "Steyr AUG", 
+        "description": "", 
+        "price": 2200, 
+        "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/3/39/AUG_A1_508mm_04.jpg",
+        "code": "SS2019",
+        "stock": 6,
+        "status": true,
+        "category": "Old"
+    },
+    {
+        "title": "AK-47", 
+        "description": "Assault riffle", 
+        "price": 500, 
+        "thumbnail": "https://www.therange702.com/wp-content/uploads/2016/10/shutterstock_102492452_1.jpg",
+        "code": "SS2020",
+        "stock": 15,
+        "status": true,
+        "category": "Old"
+    }
+
+]

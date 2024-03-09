@@ -1,0 +1,28 @@
+{
+  "name": "ultimo-proyecto-javascript-comision-39505",
+  "version": "1.0.0",
+  "description": "Esta es la última clase y hablamos sobre equipos, tribus, herramientas y otros.",
+  "main": "index.js",
+  "dependencies": {
+    "luxon": "^3.3.0",
+    "sweetalert": "^2.1.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "class",
+    "coderhouse",
+    "javascript",
+    "chamann",
+    "squad",
+    "teams",
+    "tools",
+    "tecnology"
+  ],
+  "author": "Chaman DEV",
+  "license": "ISC",
+  "devDependencies": {
+    "bootstrap": "^5.2.3"
+  }
+}

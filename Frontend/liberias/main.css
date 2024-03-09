@@ -1,0 +1,112 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Barlow Condensed', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+
+  header {
+    text-align: center;
+  }
+
+  .logo {
+    width: 20vw;
+    margin: 2%
+  }
+
+  .cardContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+  .Item {
+    width: 330px;
+    height: 500px;
+    border-radius: 8px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    margin: 20px;
+    text-align: center;
+    transition: all 0.25s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Item:hover{
+    transform: translateY(-15px);
+    box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
+}
+
+.Item img{
+    height: 180px;
+    margin: 10px
+}
+
+.Item h4{
+    font-weight: 300;
+    font-size: 28px;
+    margin: 15px
+}
+
+button{
+    color: white;
+    background-color: #04A118;
+    border: none;
+    margin: 10px;
+    border-radius: 5px;
+    font-size: 24px;
+    padding-left: 5px;
+    padding-right: 5px;
+    display: flex;
+    }
+
+button:hover{
+ color: #04A118; 
+ background-color: white;
+ border: solid 1px #04A118;  
+}
+
+.whiteLink {
+    text-decoration: none;
+    font-weight:600;
+    color: white;
+    font-size: 15px;
+    padding: 8px;
+}
+
+.whiteLink:hover{
+    color: #04A118;
+}
+
+.green{
+  color: rgb(28, 122, 28) !important
+}
+
+.red{
+  color: rgb(255, 0, 0) !important
+}
+
+.colored-toast.swal2-icon-error {
+  background-color: #f27474 !important;
+}
+
+.colored-toast .swal2-title {
+  color: white;
+}
+
+.colored-toast .swal2-close {
+  color: white;
+}
+
+.colored-toast .swal2-html-container {
+  color: white;
+}

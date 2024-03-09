@@ -1,0 +1,43 @@
+body{
+  background-color: black;
+}
+.labelFullWith {
+  width: 100%;
+}
+
+.font-weight-bold {
+  font-weight: bold;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.messageBody {
+  width: 90% !important;
+  float: left !important;
+}
+
+.toast-success {
+  border-style: solid !important;
+  border-width: 3px !important;
+  border-radius: 10px !important;
+  background: rgb(130, 223, 130) !important;
+  border-color: rgb(44, 163, 44) !important;
+}
+
+.toast-danger {
+  border-style: solid !important;
+  border-width: 3px !important;
+  border-radius: 10px !important;
+  background: rgb(241, 112, 112) !important;
+  border-color: rgb(231, 63, 63) !important;
+}
