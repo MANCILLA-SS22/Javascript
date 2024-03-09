@@ -1,0 +1,7 @@
+#concepts {
+  max-width: 50rem;
+  margin: 2rem auto;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}

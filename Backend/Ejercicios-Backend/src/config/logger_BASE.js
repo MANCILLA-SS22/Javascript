@@ -3,7 +3,7 @@ import winston from "winston";
 const logger = winston.createLogger({
     transports: [
         new winston.transports.Console({ level: "http" }), //Al usar Console, significa que los mostrara los loggers desde http (3) hasta error (0) en la consola.
-        new winston.transports.File({ filename: './Ejercicio-43/loggers/errors.log', level: 'warn' }) //Para el caso de File, se visualizaran desde warn (1) hasta error (0), y se veran en un archivo .log con la ruta especificada
+        new winston.transports.File({ filename: './loggers/errors.log', level: 'warn' }) //Para el caso de File, se visualizaran desde warn (1) hasta error (0), y se veran en un archivo .log con la ruta especificada
     ]
 });
 

@@ -15,7 +15,7 @@ const prodLogger = winston.createLogger({ // Logger en env desarrollo
             }
         ),
         new winston.transports.File({
-                filename: './Ejercicio-43/loggers/errors-prod.log',
+                filename: './loggers/errors-prod.log',
                 level: 'warning', //Cambiamos el logger level name.
                 format: winston.format.simple()
             }
@@ -27,7 +27,7 @@ const devLogger = winston.createLogger({ // Logger en env prod
     levels: customLevelsOptions.levels,
     transports: [
         new winston.transports.Console({ level: "http" }),
-        new winston.transports.File({ filename: './Ejercicio-43/loggers/errors-dev.log', level: 'warning' })
+        new winston.transports.File({ filename: './loggers/errors-dev.log', level: 'warning' })
     ]
 });
 

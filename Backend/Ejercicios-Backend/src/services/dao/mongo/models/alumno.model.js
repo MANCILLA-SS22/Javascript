@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import mongoosePaginate from "mongoose-paginate-v2";
 
 const alumnoSchema = new Schema({
     first_name: String,
@@ -22,5 +23,6 @@ const alumnoSchema = new Schema({
 //     this.populate("courses.course");
 // });
 
+alumnoSchema.plugin(mongoosePaginate);
 const alumnoModel = model("alumnos", alumnoSchema);
 export { alumnoModel };

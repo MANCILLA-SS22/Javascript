@@ -9,12 +9,13 @@ router.get("/students", async function(req, res){
     // const order = "asc" - 1
     const students = await alumnoModel.paginate(
         {
-            group: "1A" // Criterio de busqueda
+            // group: "1A" // Criterio de busqueda
         },
         {
             page: page || 1,
             limit: limit || 5,
-        });
+        }
+    );
 
     console.log(students)    
     res.render("students", {students}); // res.json(students);
