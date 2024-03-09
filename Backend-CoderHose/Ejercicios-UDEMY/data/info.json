@@ -1,0 +1,17 @@
+[
+    {
+        "modelo": "Ford mustang",
+        "producto": "2010",
+        "millaje": "12000"
+    },
+    {
+        "modelo": "Honda accord",
+        "producto": "2021",
+        "millaje": "4560"
+    },
+    {
+        "modelo": "Nissan Sentra",
+        "producto": "2016",
+        "millaje": "58200"
+    }
+]

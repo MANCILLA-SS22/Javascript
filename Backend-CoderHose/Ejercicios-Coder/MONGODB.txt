@@ -1,0 +1,128 @@
+Copy = Ctrl + Insert
+Paste = Shift + Insert
+
+1.- Ejercicio de clase #1
+   > use filtros
+   
+   Common filters
+   > db.estudiantes.find({ $and: [ { curso: "Frontend" }, { edad: { $gte: 30 } }  ] }) 
+   
+   > db.estudiantes.find({ $or: [ { curso: "Fullstack" }, { edad: { $eq: 30 } } ] })
+   
+   > db.estudiantes.find({ $or: [ { curso: "Fullstack" }, { edad: { $ne: 30 } } ] })
+   
+   > db.estudiantes.find({ correo: { $exists: true } })
+   
+   > db.estudiantes.find({ correo: { $exists: false } })
+   
+   Array filters
+   
+   > db.estudiantes.find({ notas: { $in: [1, 2] } })
+   
+   > db.estudiantes.find({ notas: { $nin: [10] } })
+   
+   > db.estudiantes.find({ notas: { $size: 4 } })
+   
+   > db.estudiantes.find({ notas: { $size: 3 } })
+   
+   > db.estudiantes.find({ notas: { $all: [1, 1] } })
+   
+   > db.estudiantes.find({ notas: { $all: [2, 4] } })
+   
+   > db.estudiantes.find({ notas: { $elemMatch: { $gte: 7, $lt: 10 } } })
+   
+   > db.estudiantes.find({ notas: { $elemMatch: { $gte: 1, $lt: 5 } } })
+   
+   Others queries
+   
+   > db.estudiantes.disctinct("nombre")
+   
+   > db.estudiantes.disctinct("curso")
+   
+   > db.estudiantes.find({ "direccion.numero": 720 })
+   
+   > db.estudiantes.find({ "direccion.ciudad": "Springfield })
+   
+   Esta expresion regular busca un nombre que contenga una a minuscula
+   > db.estudiantes.find({ nombre: /.*a.*/ }) 
+   
+   Proyecciones
+   > db.estudiantes.find({ curso: "Fullstack"  }, { nombre: 1, apellido: 1, correo: 1, _id: 0 })
+   
+   > db.estudiantes.find({ curso: "Frontend"  }, { nombre: 1, apellido: 1, correo: 1, _id: 0 })
+   
+   Siempre ordena por el primer campo que le pasemos
+   > db.estudiantes.find({ curso: "Frontend"  }, { nombre: 1, apellido: 1, correo: 1, _id: 0, edad: 1 }).sort({ nobmre: 1, edad: 1 })
+   
+   > db.estudiantes.find({ curso: "Frontend"  }, { nombre: 1, apellido: 1, correo: 1, _id: 0, edad: 1 }).sort({ edad: -1 })
+   
+   > db.estudiantes.find({}, { nombre: 1, apellido: 1, correo: 1, _id: 0, edad: 1 }).skip(0).limit(2)
+   
+   > db.estudiantes.find({}, { nombre: 1, apellido: 1, correo: 1, _id: 0, edad: 1 }).skip(1).limit(2)
+   
+   Agregamos un alumno solo con nombre
+   > db.estudiantes.insertOne({ nombre: "Felipe" })
+   
+   > db.estudiantes.find({ sexo: "H" })
+   
+   Update
+   > db.estudiantes.updateOne({ _id: ObjectId('656fe7b6ae0b113d10e003f8') }, { $set: { nombre: "Emiliano" } })
+   
+   Inserta un campo con la fecha actual
+   "lastModified" Es el nobmre del campo asignado
+   > db.estudiantes.updateOne({ _id: ObjectId('656fea6a3209bd1385260dba') }, { $currentDate: { "lastModified": true } })
+   
+   Eliminamos el campo creado
+   > db.estudiantes.updateOne({ _id: ObjectId('656fea6a3209bd1385260dba') }, { $unset: { "last": true } })
+   
+   > db.estudiantes.updateOne({ _id: ObjectId('656fea6a3209bd1385260dba') }, { $rename: { "lastModified": "last" } })
+   
+   Si el campo especificado tiene un valor más chico que el que le pasamos, lo actualiza, sino, no
+   > db.estudiantes.updateOne({ _id: ObjectId('656fea6a3209bd1385260dba') }, { $max: { "edad": 20 } })
+   
+   Lo mismo que el anterior pero a la inversa
+   > db.estudiantes.updateOne({ _id: ObjectId('656fea6a3209bd1385260dba') }, { $min: { "edad": 20 } })
+   
+   Multiplica el valor del campo por el numero dado
+   > db.estudiantes.updateOne({ _id: ObjectId('656fea6a3209bd1385260dba') }, { $mul: { "edad": 2 } })
+   
+   Suma el numero dado
+   > db.estudiantes.updateOne({ _id: ObjectId('656fea6a3209bd1385260dba') }, { $inc: { "edad": 2 } })
+
+2.- Operaciones con Filtros 
+Sobre la base y los datos cargados anteriormente
+  1. Insertar cinco documentos más en la colección clientes con los siguientes datos: 
+     { "nombre" : "Pablo", "edad" : 25 } 
+     { "nombre" : "Juan", "edad" : 22 }
+     { "nombre" : "Lucia", "edad" : 25 }
+     { "nombre" : "Juan", "edad" : 29 }
+     { "nombre" : "Fede", "edad" : 35 }
+  
+  2. Listar todos los documentos de la colección clientes ordenados por edad descendente.
+     R= db.usuarios.find().sort({"edad": -1})
+  3. Listar el cliente más joven.
+     R= db.usuarios.find().sort({"edad": -1}).limit(1)
+  4. Listar el segundo cliente más joven.
+     R= db.usuarios.find().sort({"edad": -1}).skip(1).limit(1)
+  5. Listar los clientes llamados 'Juan'
+     R= db.usuarios.find({nombre: "Juan"})
+  6. Listar los clientes llamados 'Juan' que tengan 29 años.
+     R= db.usuarios.find( {$and:[{nombre: "Juan"}, {edad: 29}] })
+  7. Listar los clientes llamados 'Juan' ó 'Lucia'.
+     R= db.usuarios.find( {$or:[{nombre: "Juan"}, {nombre: "Lucia"}] })
+  8. Listar los clientes que tengan más de 25 años.
+     R= db.usuarios.find({edad: {$gt: 25}})
+  9. Listar los clientes que tengan 25 años ó menos.
+     R= db.usuarios.find({edad: {$lte: 25}})
+  10. Listar los clientes que NO tengan 25 años.
+     R= db.usuarios.find({edad: {$ne: 25}})
+  11. Listar los clientes que estén entre los 26 y 35 años.
+     R= db.usuarios.find( {$and:[{edad: {$gt: 25}}, {edad: {$lte: 35}}] })
+  12. Actualizar la edad de Fede a 36 años, listando y verificando que no aparezca en el último listado.
+     R= db.usuarios.updateOne({nombre: "Fede"}, {$inc: {edad: 1}})  ---  db.usuarios.find( {$and:[{edad: {$gt: 25}}, {edad: {$lte: 35}}] })
+  13. Actualizar todas las edades de 25 años a 26 años, listando y verificando que aparezcan en el último listado.
+     R= db.usuarios.updateMany({edad: 25}, {$inc: {edad: 1}}) --- db.usuarios.find( {$and:[{edad: {$gt: 25}}, {edad: {$lte: 35}}] })
+  14. Borrar los clientes que se llamen 'Juan' y listar verificando el resultado.
+     R= db.usuarios.deleteMany({nombre: "Juan"}) --- db.usuarios.find()
+  15. Eliminar además todos los documentos de estudiantes que hayan quedado con algún valor   
+     R= db.usuarios.deleteMany({})
