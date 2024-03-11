@@ -142,6 +142,7 @@ https://swiperjs.com/get-started
 https://swr.vercel.app 
 https://parceljs.org/docs/
 https://babeljs.io/docs/babel-polyfill#installation
+https://readme.so/editor
 
 GitHub: 
 https://github.com     

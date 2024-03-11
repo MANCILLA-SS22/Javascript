@@ -1,5 +1,3 @@
-// ✓ Agregar logs de valor alto en los puntos importantes de tu servidor (errores, advertencias, etc) y modificar los console.log() habituales que tenemos para que muestren todo a partir de winston.
-
 import winston from "winston";
 import { environment } from "../config/dotenvMain/env.config.js";
 import { __dirname } from "../utils.js";

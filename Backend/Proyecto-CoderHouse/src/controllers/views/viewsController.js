@@ -99,32 +99,32 @@ class LoginRegister extends Route {
             }
         });
 
-        this.get("/loggerTest/type", ['PUBLIC'], function(req, res){
+        this.get("/loggerTest/:type", ['PUBLIC'], function(req, res){
             try {
-                const {loggerType} = req.params;
-                switch(loggerType){
+                const {type} = req.params;
+                switch(type){
                     case "fatal":
-                        req.logger.fatal("Prueba de log level fatal --> en Endpoint");
+                        req.logger.fatal("Prueba de log level fatal!");
                         break;
 
                     case "error":
-                        req.logger.error("Prueba de log level error --> en Endpoint");
+                        req.logger.error("Prueba de log level error!");
                         break;
 
                     case "warning":
-                        req.logger.warning("Prueba de log level warning --> en Endpoint");
+                        req.logger.warning("Prueba de log level warning!");
                         break;
 
                     case "http":
-                        req.logger.http("Prueba de log level http --> en Endpoint");
+                        req.logger.http("Prueba de log level http!");
                         break;
 
                     case "info":
-                        req.logger.info("Prueba de log level info --> en Endpoint");
+                        req.logger.info("Prueba de log level info!");
                         break;
 
                     case "debug":
-                        req.logger.debug("Prueba de log level debug --> en Endpoint");                    
+                        req.logger.debug("Prueba de log level debug!");                    
                         break;
 
                     default :
