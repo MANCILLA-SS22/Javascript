@@ -17,7 +17,7 @@ class MongoSingleton {
     async #connectMongoDB(message){
         try {
             await mongoose.connect(MONGO_URL);
-            console.log(message);
+            // console.log(message);
         } catch (error) {
             console.error("No se pudo conectar a la BD usando Moongose: " + error);
             process.exit();

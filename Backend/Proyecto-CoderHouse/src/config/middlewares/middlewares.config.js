@@ -5,7 +5,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 
 function middlewares(app, express){
-    app.use(morgan('dev'));
+    // app.use(morgan('dev'));
     app.use(cors());
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));

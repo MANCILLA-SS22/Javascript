@@ -1,4 +1,4 @@
-import winston, { transports } from "winston";
+import winston from "winston";
 import config from "../config/config.js";
 
 const customLevelsOptions = { //Creating our logger:

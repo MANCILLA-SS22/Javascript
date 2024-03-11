@@ -9,7 +9,7 @@ import { generateMock } from "../../database/mocks/productMocks.js";
 
 class ProductRouter extends Route{
     init(){
-        this.get("/", ['PUBLIC'], passport.authenticate('jwt', { session: false }), async function(req, res){
+        this.get("/", ['PUBLIC'], async function(req, res){
             try {
                 // Copiar y pegar en barra de navegacion --> http://localhost:5500/api/products?page=1&limit=3&sort=asc&stock=8&category=New
                 let {category, stock, limit, page, sort} = req.query;
@@ -84,18 +84,19 @@ class ProductRouter extends Route{
                     user: req.user
                 };
 
-                console.log("products --> ", respuestaInfo)
+                // console.log("products --> ", respuestaInfo)
 
                 // res.status(200).render('products',{respuestaInfo}); 
                 res.sendSuccess(respuestaInfo);
         
             } catch (error) {
+                req.logger.fatal("Poductos no encontrados")
                 res.status(404).json({ mesagge:"No hay nada!!" });
             } 
         
         });
 
-        this.get("/mockingproducts", ['PUBLIC'], passport.authenticate('jwt', { session: false }), async function(req, res){
+        this.get("/mockingproducts", ['PUBLIC'], async function(req, res){
             try {
                 const products = generateMock(100);
                 res.sendSuccess(products);
@@ -111,9 +112,9 @@ class ProductRouter extends Route{
                 const getById = await productService.getProductById(pid);
                 getById ? res.sendSuccess(getById) : res.sendClientError({message: "Not product found by ID"})
             } catch (error) {
+                req.logger.error("Poductos no encontrados");
                 res.sendServerError(`something went wrong ${error}`);
             }
-            
         });
         
         this.post("/", ['ADMIN'], async function(req, res){
@@ -135,8 +136,9 @@ class ProductRouter extends Route{
                 }
 
             } catch (error) {
-                console.log(error.cause)
-                res.sendServerError(`something went wrong ${error.cause}`)
+                console.log("error.cause.toString() --> ", error.cause.toString())
+                req.logger.error(error.cause.toString().toString());
+                res.sendServerError(`something went wrong ${error.cause.toString()}`)
             }
         });
         
@@ -159,6 +161,7 @@ class ProductRouter extends Route{
                     }
                 }
             } catch (error) {
+                req.logger.error(error.cause.toString());
                 res.sendServerError(`something went wrong ${error}`);
             }
         });

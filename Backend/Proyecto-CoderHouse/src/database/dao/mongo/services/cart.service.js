@@ -14,7 +14,7 @@ class CartServiceMongo{
             const newProduct = await cartModel.create(cart);
             return "Cart added successfully";
         } catch (error) {
-            console.log(error);
+            return error;
         }
     }    
 

@@ -23,7 +23,7 @@ function generateJWToken(user){ //Generamos el token
 
 function authToken(req, res, next){ //El JWT token se guarda en los headers de autorización.
     const authHeader = req.headers.authorization;
-    console.log("Token present in header auth: ", authHeader );
+    //console.log("Token present in header auth: ", authHeader );
 
     if (!authHeader) return res.status(401).send({ error: "User not authenticated or missing token." });
 
@@ -31,7 +31,8 @@ function authToken(req, res, next){ //El JWT token se guarda en los headers de a
 
     jwt.verify(token, secretKey, function(error, credentials){ //Validar token
         if (error) return res.status(403).send({ error: "Token invalid, Unauthorized!" });
-        req.user = credentials.user; console.log("req.user", req.user);
+        req.user = credentials.user; 
+        //console.log("req.user", req.user);
         next();
     })
 };
@@ -39,7 +40,7 @@ function authToken(req, res, next){ //El JWT token se guarda en los headers de a
 //LocalStorage_Cookies_PassportJWT
 function passportCall(strategy){ // para manejo de errores
     return function(req, res, next){
-        console.log("Entrando a llamar strategy: ", strategy);
+        // console.log("Entrando a llamar strategy: ", strategy);
         passport.authenticate(strategy, function (err, user, info){
             if (err) return next(err);
             if (!user) return res.status(401).send({ error: info.messages ? info.messages : info.toString() });

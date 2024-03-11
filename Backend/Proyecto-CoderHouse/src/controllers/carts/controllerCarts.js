@@ -44,7 +44,8 @@ class CartRouter extends Route{
         this.get("/:id", ['PUBLIC'], verify, async function(req, res){
             try {
                 const {id} = req.params;
-                const getId = await cartService.getCartById(id);  console.log(getId);
+                const getId = await cartService.getCartById(id);  
+                //console.log(getId);
                 !getId ? res.sendClientError({message: "Cart not found"}) : res.sendSuccess(getId);
             } catch (error) {
                 res.sendServerError(`something went wrong ${error}`)
@@ -165,13 +166,13 @@ class CartRouter extends Route{
                     const arrayPosition = updateNumberOfProducts.products.findIndex(event => event.product._id.toString() === pid);
                     updateNumberOfProducts.products[arrayPosition].quantity = quantity;
                     const ans = await cartService.updateCartByProductsId(cid, updateNumberOfProducts);
-                    console.log("ans", ans)
+                    // console.log("ans", ans)
                     res.sendSuccess(ans);
                 }else{
                     let updateNumberOfProducts = await cartService.finder(cid);
                     updateNumberOfProducts.products.push({product: pid, quantity: quantity});
                     const ans = await cartService.updateCartByProductsId(cid, updateNumberOfProducts);
-                    console.log("ans", ans)
+                    // console.log("ans", ans);
                     res.sendSuccess(ans);
                 }
             } catch (error) {

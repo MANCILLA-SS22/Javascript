@@ -1,6 +1,8 @@
 import program from "../../process.js";
 import dotenv from "dotenv";
-dotenv.config({path: "./Entregas/TerceraEntrega/src/config.env"}); //doent allow us to read our variables from the file (config.env) and save them into node JS environment variables
+
+const environment = program.opts().mode;
+dotenv.config({ path: environment === "prod" ? "./src/config/.env.production" : "./src/config/.env.development" }); //doent allow us to read our variables from the file (config.env) and save them into node JS environment variables
 
 const MONGO_URL = process.env.MONGO_URL;
 const PORT = process.env.PORT;
@@ -14,4 +16,16 @@ const clientSecret_github = process.env.clientSecret_github
 const PERSISTENCE = program.opts().persist;
 
 
-export { MONGO_URL, PORT, COOKIE_CODE, SECRETKEY, PRIVATE_KEY, SECRET_KEY, EXPIRES_IN, clientID_github, clientSecret_github, PERSISTENCE}
+export { 
+    MONGO_URL, 
+    PORT, 
+    COOKIE_CODE, 
+    SECRETKEY, 
+    PRIVATE_KEY, 
+    SECRET_KEY, 
+    EXPIRES_IN, 
+    clientID_github, 
+    clientSecret_github, 
+    PERSISTENCE,
+    environment
+}

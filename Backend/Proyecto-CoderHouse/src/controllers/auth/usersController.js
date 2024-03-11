@@ -35,17 +35,23 @@ class AuthRouter extends Route {
                 // res.send({ message: "Login success!!"});
         
             } catch (error) {
+                req.logger.error("User found to login");
                 return res.status(400).send({status: "error", msg: "Usuario existente!"});
             }
         };
         
         async function register(req, res){
-            console.log("Registrando usuario");
-            res.status(201).send({ status: "success", message: "Usuario creado con extito." });
+            try {
+                // console.log("Registrando usuario");
+                req.logger.info("Nuevo usuario registrado")
+                res.status(201).send({ status: "success", message: "Usuario creado con extito." });
+            } catch (error) {
+                res.status(500).json({ error: 'Internal server error' })
+            }
         };
         
         async function githubcallback(req, res){ 
-            console.log("GitHub")
+            // console.log("GitHub")
             const user = req.user;
             const tokenUser = { // creamos un usuario con un token generado (Metodo 2)
                 name: `${user.first_name} ${user.last_name}`,

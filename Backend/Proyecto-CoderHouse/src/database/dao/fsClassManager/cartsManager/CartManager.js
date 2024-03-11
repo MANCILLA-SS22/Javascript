@@ -20,7 +20,7 @@ export default class CartManager{
 
     async addCart(cart){
         try {
-            console.log("1 --> ", this.res.length)
+            // console.log("1 --> ", this.res.length)
             if (this.res.length === 0) {
                 cart.id = 1;
                 cart.products = [];
@@ -39,7 +39,7 @@ export default class CartManager{
             }
             await this.saveFile(this.res, cart);
         } catch (error) {
-            console.log(error);
+            return error;
         }
     }
 
@@ -66,7 +66,7 @@ export default class CartManager{
             }
 
         } catch (error) {
-            console.log(error);
+            return error;
         }
     }
 
@@ -94,7 +94,7 @@ export default class CartManager{
             }            
 
         } catch (error) {
-            console.log(error);
+            return error;
         }
     }
 

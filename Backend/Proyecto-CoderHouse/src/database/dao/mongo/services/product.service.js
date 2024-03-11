@@ -29,7 +29,7 @@ class ProductServiceMongo{
             }
 
         } catch (error) {
-            console.log(error);
+            return error;
         }
     }
 
@@ -37,7 +37,7 @@ class ProductServiceMongo{
         try {
             return await productModel.findByIdAndDelete(id);
         } catch (error) {
-            console.log(error);
+            return error;
         }
     }
 
@@ -46,7 +46,7 @@ class ProductServiceMongo{
             return await productModel.findByIdAndUpdate(_id, product);
 
         }catch (error) {
-            console.log(error);
+            return error;
         }
     }
 }

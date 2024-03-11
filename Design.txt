@@ -1,0 +1,66 @@
+Descargar fuentes y simbolos: 
+https://fonts.google.com 
+https://fontawesome.com  
+https://fontawesome.com/v5/docs/web/use-with/wordpress/install-manually 
+https://developers.google.com/fonts 
+https://www.cssfontstack.com 
+
+Descargar iconos: 
+https://fonts.google.com/icons 
+https://developers.google.com/fonts 
+https://fontawesome.com/icons 
+https://boxicons.com/?query=menu 
+https://www.svgrepo.com/svg/473620/github 
+https://icons.getbootstrap.com/ 
+https://www.flaticon.com/ 
+https://iconmonstr.com/ 
+https://www.cssfontstack.com 
+https://icons8.com/icons/set/favicon  
+https://icons8.com/icon/set/logos/small 
+https://iconscout.com/unicons/getting-started/line 
+https://app.moqups.com// 
+ 
+Descargar imágenes e ilustraciones, y almacenar en la nube: 
+https://www.pexels.com/es-es/ 
+https://unsplash.com/ 
+https://undraw.co/illustrations 
+https://www.manypixels.co/gallery 
+https://www.pinterest.com.mx 
+https://giphy.com 
+https://pixabay.com/es/ 
+https://console.cloudinary.com/console/c-4023da8b6dcc56f76f0f9fd2aef6e2/media_library/search?q=&sortField=displayName&sortDirection=asc 
+
+Inspiración: 
+https://dribbble.com/shots/popular/web-design 
+https://www.behance.net/galleries/ui-ux/ui-ux 
+https://webflow.com/blog/website-ideas 
+https://www.frontendmentor.io/challenges/space-tourism-multipage-website-gRWj1URZ3 
+ 
+Colores, gradientes y sombras:  
+https://www.w3schools.com/css/css_colors.asp 
+https://color.adobe.com/es/create/color-wheel https://coolors.co/palettes/trending  
+https://htmlcolorcodes.com  
+https://mycolor.space/  
+https://www.w3schools.com/colors/colors_picker.asp  
+https://cssgradient.io/ 
+https://www.toptal.com/developers/css3maker/css3-rgba 
+https://www.colorzilla.com/gradient-editor/  
+https://mycolor.space/gradient?ori=circle&hex=%235B8DD7&hex2=%2398D809&sub=1 https://www.joshwcomeau.com/gradient-generator/ 
+https://imagecolorpicker.com/color-code/2596be 
+https://uigradients.com/#Poncho https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Images/Using_CSS_gradients  
+https://www.w3schools.com/cssref/css3_pr_box-shadow.php  
+https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Backgrounds_and_Borders/Box-shadow_generator https://box-shadow.dev  
+https://html-css-js.com/css/generator/box-shadow/  
+https://cssgenerator.org/box-shadow-css-generator.html 
+ 
+
+Otros: 
+https://aws.amazon.com/amplify/?trk=7af50e68-4664-481e-80a3-736a0d23dd2a&sc_channel=sm 
+https://web.dev 
+https://appdividend.com 
+https://codepen.io/giana/pen/BZaGyP 
+https://www.codementor.io/projects 
+https://purecss.io 
+https://www.frontendmentor.io/challenges 
+https://app.daily.dev 
+https://getemoji.com 

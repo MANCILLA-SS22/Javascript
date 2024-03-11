@@ -2,7 +2,7 @@
 FROM node
 
 #Carpeta interna de trabajo donde se guarda el proyecto. (Será nuestro directorio de trabajo principal, donde comenzaremos a crear todo. Las operaciones que hagamos más abajo se harán sobre este directorio)
-WORKDIR /app
+WORKDIR /backend
 
 #Se copia el archivo package.json al directorio raiz. (COPY permitirá copiar archivos de la carpeta donde estamos ejecutando el Dockerfile, y pegarlos en la carpeta que hayamos creado con WORKDIR)
 COPY package*.json ./

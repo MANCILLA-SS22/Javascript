@@ -1,0 +1,450 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        
+
+                                                                                                                   REACT
+https://github.com/crmc1798/MartinezCesar-BackEnd-CoderHouse/tree/main/Desafios
+                                                                                                                   
+npx create-react-app my-app
+cd my-app
+npm start
+
+                                                                                                                   
+- la carpeta "common" unicamente se utiliza para crear componentes que NO seran renderizados en el APP, ya que en el APP unicamente se renderizan las paginas, como el carrito, inicio, y demas paginas.
+                                                                                                                   
+- Importacion (import): You can import modules into a file in two ways, based on if they are named exports or default exports. Named exports must be destructured using curly braces. Default exports do not.
+
+  > Every module is said to have at most one default export. In order to import the default export from a file, we can use only the address and use the keyword import before it, or we can give a name to the import making the syntax as the 
+    following.                                        import GIVEN_NAME from ADDRESS
+
+  > Importing named values: Every module can have several named parameters and in order to import one we should use the syntax as follows. 
+                                                      import { PARA_NAME } from ADDRESS
+                                                      
+  > And similarly, for multiple such imports, we can use a comma to separate two-parameter names within the curly braces. Importing a combination of Default Exports and Named Values: The title makes it clear what we need to see is that the 
+    syntax of the same. In order to import a combination, we should use the following syntax. 
+ 
+                                                      import GIVEN_NAME, { PARA_NAME, ... } from ADDRESS                                                      
+
+- Exportacion (export): Now, importing is an operation that requires the permission of the module. Importing is possible only if the module or named property to be imported has been exported in its declaration. In React we use the keyword 
+  export to export a particular module or a named parameter or a combination. Let us now see the different ways we can use the import operation in React.
+
+  > Exportación por defecto: Para exportar un componente por defecto, usamos la palabra reservada default. La gran desventaja que tiene la exportación por defecto es que a la hora de importarlo puedes usar el nombre que quieras. Y esto trae 
+    problemas, ya que puedes no usar siempre el mismo en el proyecto o usar un nombre que no sea correcto con lo que importas.
+  > Exportación nombrada: Los exports nombrados nos obligan a usar el mismo nombre en todos los archivos y, por tanto, nos aseguramos de que siempre estamos usando el nombre correcto.
+
+- Componentes: Es un conjunto de elementos que cumplen una función específica en la interfaz de usuario. Se utilizan para construir la jerarquía de todos esos elementos. Cada componente puede contener otros componentes como hijos. 
+  básicamente, las aplicaciones en React básicamente se construyen mediante los mismos. permiten separar la interfaz de usuario en piezas independientes, reutilizables y pensar en cada pieza de forma aislada.
+  
+- Propiedades (props): Son la forma que tiene React para pasar parámetros de un componente superior a sus hijos. Se utilizan para pasar datos de un componente padre a un componente hijo, manteniendo el flujo unidireccional 
+  de los datos. Las props son objetos que contienen datos específicos que un componente necesita para renderizarse correctamente. Esto permite la reutilización de componentes en diferentes partes de la aplicación con diferentes datos.
+  Si alguna prop es una función (callback), el componente hijo puede llamarla para provocar efectos secundarios en el componente padre.
+  
+  > prop.childern: La prop children es una prop especial que se pasa a los componentes. Es un objeto que contiene los elementos que envuelve un componente. or ejemplo, si tenemos un componente Card que muestra una tarjeta con un título y un 
+    contenido, podemos usar la prop children para mostrar el contenido:
+    
+         function Card(props) {
+            return (
+              <div className="card">
+                 <h2>{props.title}</h2>
+                 <div>{props.children}</div>
+              </div>
+            )
+         }
+         
+    Y luego podemos usarlo de la siguiente forma:
+    
+         <Card title="Título de la tarjeta">
+           <p>Contenido de la tarjeta</p>
+         </Card>
+         
+    En este caso, la prop children contiene el elemento <p>Contenido de la tarjeta</p>.
+
+- Funcionamiento: Podemos pensar a nuestra aplicación de React como una máquina, por ejemplo, un automóvil. Así como un automóvil está compuesto por muchas piezas que trabajan en conjunto para generar un desplazamiento, una aplicación de 
+  React está compuesta por muchos componentes que trabajan juntos para crear una experiencia de usuario coherente y funcional.
+  
+- Render: The render method is a vital part of ReactJS, as it determines what gets displayed on the screen. It takes in the app’s state and renders it to a DOM node. This makes it easy to track what’s going on in your app, as the render 
+  method will always show the latest state. The render method is called automatically by ReactJS, so you don’t need to call it yourself. However, you can call it manually if you need to. 
+  The render method is also where you should do any processing that doesn’t need to happen every time the state changes. 
+  For example, if you have an extensive list of items, you might want only to render the part of the list that’s visible on the screen. Your app will be more efficient and won’t slow down as the state changes.
+  
+    > What Is The Use Of the Render Method in ReactJS? The render method in ReactJS functional component is the default lifecycle method that returns a single child component to be rendered by the parent. It’s important to use this method 
+      when you want to return a component from a parent to a child. This will ensure that the child receives the correct data and state from the parent.
+    > When Not To Use The Render Method In React Js? There may be times when you don’t want to use the render method. For example, if you’re working with higher-order components, stateless functional components, or memorization there, you 
+      may not need to use it. You can simply return whatever value is passed into the return method in these cases.
+    > 1) The render method will always return a single child component. 2) The render method sets up the child component’s initial state and lifecycle methods. 3) The render method is used when you want to create a new component. 4) The 
+      render method is more common.	
+
+- return: The return method in React is a way to return data from a component. It returns the data that was passed into the component, which the parent component can then use. The return method is generally used when you want to return a 
+  single value from a component. For example, if you want to return the text of a button from a Component, you would use the return method.
+   
+    > When To Use The Return Method In React Js? The return method can be used in a few different situations. One example would be when you want to return a default value from a function. Another instance would be when you wish to return a 
+      value from a component used as a stateless functional component. You can also use the return method to return values from higher-order components.
+    > When To Not Use The Return Method In React Js? The return method should not be used when you need to return multiple values from a function. In this case, the render method should be used instead. Additionally, the return method should 
+      not be used when you need to call a function that is not in the same component. 
+    > 1) The return method can return any value. 2) The return method returns a value. 3) The return method is used when you want to reuse an existing component. 4) The return method is less commonly used.
+  
+- Componentes basados en funciones: Hoy en día todos los componentes de React se crean a partir de funciones, lo que hace que sea mucho más fácil de escribir el código y entenderlo. Antes aquellos componentes que se encargaban del 
+  funcionamiento de la app, se creaban a partir de la clase Components para poder implementar las características de los componentes de React. Lo que hacía más complejo el modelo mental.
+  Pueden recibir propiedades (props). Tienen la capacidad de hacer render de un único elemento. Aunque este elemento puede tener muchos elementos dentro. Pueden tener estados.
+    
+- Controlled vs Uncontrolled Components & Stateless vs Stateful Components: 
+    
+- Render de un único elemento: Los componentes deben retornar un solo elemento o componente, pero este elemento o componente sí puede tener más de un elemento o componente hijo. En caso de no necesitar que el elemento padre forme parte del 
+  árbol del DOM, se puede utilizar React.Fragment, o lo que es lo mismo utilizar un tag sin tipo <></>.
+  
+- States: El concepto más importante hoy en día para entender el funcionamiento de React es el de estados. Los estados de un componente en React se utilizan para representar la información que puede cambiar durante la vida útil del 
+  componente y afectar su representación en la interfaz de usuario. Todo cambio de estado va inicializar el proceso de render a partir del nodo donde se produjo el cambio de estado y así se generará el nuevo Virtual DOM que luego será 
+  reconciliado. Los estados son un concepto de React, no de JavaScript, por lo que para implementarlo vamos a necesitar de los Hooks de React.
+  
+  El estado en React es una de las maneras en las que se procesan datos. Desde el punto de vista de los datos que React puede manejar, tenemos el objeto props, con el que podemos insertar todo tipo de 
+  propiedades a un elemento, y tenemos los estados. El estado es un objeto que contiene datos que pueden cambiar en el tiempo. En React, el estado se usa para controlar los cambios en la interfaz.
+  
+  Como puedes leer en nuestro post sobre cómo añadir estilos a un elemento React, el objeto props nos permite insertar datos estáticos. Con esto nos referimos a que pasamos propiedades a un componente o elemento que luego se renderiza o
+  visualiza de una determinada manera, con base a los datos que le pasamos. Entonces, si necesitamos darle dinamismo a un elemento, es decir, datos que se modifiquen a lo largo del tiempo, necesitaremos utilizar el estado en React.
+  
+  El estado en React, también conocido como state, es el segundo tipo de dato que maneja esta librería de JavaScript. Mientras que las props son los datos que podemos pasarle a un componente o elemento React desde afuera, un estado se 
+  conforma por los datos internos que un componente puede manejar. A medida que estos datos son modificados, ya sea por una interacción del usuario o por una recepción de datos de la API, el estado será modificado. Entonces, cada cambio de 
+  ese estado provocará que el elemento o componente se renderice de nuevo con una nueva representación en pantalla.
+  
+  Ten presente que podemos utilizar un estado en cualquier tipo de componente o elemento, sea del nivel más bajo o el nivel más alto. Allá donde necesitemos datos que cambian a lo largo del tiempo, podemos utilizar un estado.
+
+- side effects: A side effect can be fetching data from a remote server, reading or writing to local storage, setting up event listeners, or setting up a subscription. These side effects can occur when a button is clicked, a form is 
+    submitted, or when a component is mounted and unmounted. React’s useEffecthook allows functional components to do things when a component is mounted or when some properties or states change. This hook also allows cleaning up when the       
+    component is unmounted.
+
+- Hooks: Es una función especial que permite a los desarrolladores utilizar el estado y otras características de React en componentes de función, y utilizar las características de React en los componentes funcionales, en lugar de tener que 
+  usar la clase Component. Los hooks son funciones que se pueden usar dentro de los componentes funcionales para agregar funcionalidad adicional de React. Las caracteristicas de los Hooks son:
+    1) Comienzan con el prefijo “use” para que React pueda identificarlos y realizar validaciones.
+    2) Solamente pueden utilizarse dentro de componentes funcionales.
+    3) Deben ejecutarse siempre, es decir, en cada renderizado y el orden de ejecución debe ser siempre el mismo. No puede estar dentro de if, for, etc.
+    4) Deben ejecutarse siempre en el cuerpo de la función del componente, por lo que normalmente se los ejecuta al inicio.
+    5) Cuando los parametros del hook se quieran recuperar en una funcion a la que fueron mandados, se deben desestructurar. Es decir, poner como el siguiente ejemplo:  function Counter( {conteo, setConteo} ){
+    
+  Cualquier función que se declare con el prefijo “use”, React la tratará como un hook realizando las validaciones correspondientes y llamará a otros hooks dentro de esta función sin ser esta un componente, ya que si este hook padre cumple 
+  las validaciones y, dentro de él, los hooks cumplen los requisitos correspondientes, pasarán todas las validaciones y podrá ejecutarse sin problemas. A estos hooks declarados por el desarrollador para encapsular una lógica de componente 
+  específica se les llama custom hooks. Mientras el valor dentro del parentesis de useState no cambie (o se actualice), quiere decir que no se volvera a ejecutar la funcion, no hasta que haya un cambio.
+  
+  Lo más importante es que los hooks deben ser llamados únicamente en el nivel superior del componente funcional, nunca dentro de bucles, condiciones o funciones anidadas. 
+  Esto asegura que los hooks siempre sean llamados en el mismo orden en cada renderizado y mantener la relación con cada una de las fibras de React. 
+  También es importante tener en cuenta que los hooks no deben ser llamados desde funciones regulares. Si se llama a un hook desde una función regular, se producirá un error en tiempo de ejecución. 
+  React detecta que una función es un componente gracias a la convención PascalCase utilizada para nombrarlos.
+      
+    > Hooks de estado: El estado permite que un componente «recuerde» información como la entrada de un usuario. Por ejemplo, un componente de formulario puede utilizar un estado para guardar la entrada del valor mientras que un componente de 
+      galería de imágenes puede utilizar un estado para guardar el índice de la imagen seleccionada.
+      
+    > Hooks de contexto: El contexto permite a un componente recibir información de padres lejanos sin pasarlas como props. Por ejemplo, el componente en el nivel superior de tu aplicación puede pasar el actual tema de la UI a todos los 
+      componentes dentro, sin importar la profundidad dentro del componente.
+    
+    > Hooks de refs: Las refs le permiten a un componente mantener alguna información que no es utilizada para el renderizado como un nodo del DOM o el ID de un timeout. A diferencia del estado, actualizar una ref no vuelve a renderizar tu 
+      componente. Las refs son una «puerta de escape» del paradigma de React. Son útiles cuando necesitas trabajar con sistemas distintos de React, como las APIs integradas del navegador.
+
+    > Hooks de Efecto: El Hook de Efecto permite a un componente conectarse y sincronizarse con sistemas externos. Esto incluye lidiar con la red, el DOM del navegador, animaciones, widgets escritos utilizando una biblioteca de UI diferente y 
+      otro código que no es de React.
+
+    > Hooks de rendimiento: Una forma común de optimizar el rendimiento del rerenderizado es evitar trabajo innecesario. Por ejemplo, puedes decirle a React que reutilice un cálculo guardado en caché o que se salte un rerenderizado si los 
+      datos no han cambiado desde el renderizado anterior. Para evitar cálculos y renderizados innecesarios, usa uno de estos Hooks:
+
+    > Otros: Algunas veces no podrás evitar un rerenderizado porque la pantalla realmente necesita una actualización. En ese caso, puedes mejorar el rendimiento separando las actualizaciones bloqueantes que deben ser síncronas (como al 
+      escribir dentro de una entrada de texto) de las actualizaciones no bloqueantes, que no necesitan bloquear la interfaz de usuario (como actualizar un gráfico). Para priorizar el renderizado, puedes usar: useTransition y useDeferredValue.
+    
+    > Custom hooks: Los custom hooks en React son un tipo de función JavaScript que simula el funcionamiento de los hooks en React. Los custom hooks en React son muy útiles siempre que tengamos una lógica que se repite entre varios componen
+      En estos casos, podemos sacar esta lógica y aplicarla a un custom hook, es decir, una función que ejecute los pasos que necesitamos de manera automática.
+      Al no ser funciones cualquiera, los custom hooks en React deben seguir una serie de reglas para ser considerados hooks y no funciones. A continuación, te explicamos cuáles son.
+       ~ El nombre empieza por «use»: La primera regla de los custom hooks en React es que su nombre debe empezar con la palabra use. Esta convención se crea siguiendo los hooks originales de React (useEffect, useState, useRef) y los 
+         posteriores hooks en React Router (useParams, useLocation, useNavigate). Se considera que esto es una regla porque la comunidad ha decidido que es más sencillo reconocer un custom hook cuando sigue esta norma. Sin embargo, en teoría 
+         podrías crear uno con otro nombre.
+       ~ Puede llamar a otros hooks: Lo que realmente tienen de particular los custom hooks en React es que pueden llamar a otros hooks. En este orden de ideas, React considera como custom hook a aquella función que dentro llama a un hook 
+         original o a otro custom hook.
+       ~ Los custom hooks en React son muy útiles para extraer funcionalidades, hacer refactors y mantener nuestros componentes más simplificados. Esto es especialmente común cuando tenemos componentes que llaman a una API para obtener un 
+         dato, lo meten en un estado y ejecutan una acción determinada con él. Todos estos pasos, que al final son muy repetitivos, se simplifican con el uso de custom hooks.
+       ~ Cuando creamos un custom hook, este puede ser utilizado en diferentes components. Y si este custom hook tiene un useState, al momento de utilizar dicho hook en 2 o mas diferentes components, los estados de cada componente no se 
+         relacionaran los unos con los otros. Es decir, si cambia el estado en un custom hook utilizado en un componente, los estados del otro componente no se veran afectados aunque se utilice el mismo custom hook.
+
+    
+- useState: useState es un hook de React que permite a los componentes funcionales tener estado. El estado permite que un componente «recuerde» información como la entrada de un usuario. Por ejemplo, un componente de formulario puede 
+  utilizar un estado para guardar la entrada del valor mientras que un componente de galería de imágenes puede utilizar un estado para guardar el índice de la imagen seleccionada.
+  La ejecución de la función Hook useState retorna un array con dos elementos:
+    ● El primer elemento es el valor actual del estado. (estado actual)
+    ● El segundo es una función que se utiliza para actualizar el estado, al llamar esta función con un nuevo valor pasado como argumento. 
+    ● El use useState(0) representa el valor inicial
+
+                                                       const [count, setCount] = useState(0);
+                                                               
+  Es importante destacar que esta función no actualiza el valor del estado de manera síncrona, sino que React lo actualiza cuando inicia el próximo ciclo de renderizado.
+  Para inicializar el estado, se debe proporcionar un valor inicial como argumento a useState. Como esta función retorna un array de dos elementos podemos desestructurarlo para darle un nombre más apropiado a nuestro estado y a su 
+  función de actualización. El nombre debe ser representativo del contenido y la función debe ser el mismo nombre con el prefijo “set”.
+     
+  Ahora, cuando queremos agregar algo mas a la variable y NO pisar ese valor contenido, lo que tenemos que hacer es usar el operador spread (...). Por ejemplo, si tengo el siguiente hook y quisiera pisar (cambiar) un dato contenio en 
+  useState, simplemente hacemos lo de la segunda linea. Ahora, si se desea mantener el valor contenido en "cats" pero tener ahora un valor diferente, lo que debemos usar es usar el spread (...), y quedara como la tercer linea.
+                                               
+                                                       const [myThings, changeMyThings] = useState({cats: 'yes', strings: 'yellow', pizza: true });
+                                                       changeMyThings({ cats: 'no' })               //Cambiando el valor iniciar
+                                                       changeMyThings({ ...myThings, cats: 'no' })  //Agregar un valor diferente al que ya se encuentra, sin pisar o modificar el anterior.       
+                                                       
+- useEffect: Sirve para sincronizar componentes con sistemas externos. Va a ser el hook que nos permita controlar efectos secundarios provocados por cambios de estados, es decir, se ejecuta cada que el estado ha cambiado. Utilizado 
+  normalmente para sincronizar un componente con un sistema externo. Este hook recibe dos argumentos:
+    ● El primero es una función de callback con acciones a ejecutar.
+    ● El segundo es un array de dependencias, donde se indicará qué estados (pueden venir por props) deben cambiar para que se vuelva a ejecutar la función del primer argumento. 
+   
+  Para completar este array de dependencias la pregunta que debo hacerme es: ¿Con que estados debo sincronizar este efecto?
+     useEffect(fn) // Con todos los estados
+     useEffect(fn, []) // Con ningún estado
+     useEffect(fn, [esos, estados])
+         
+  1) useEffect hook without mentioning any dependency array like.. useEffect(someCallbackFuction); runs for every render of the functional component in which its included..
+  2) useEffect hook with an empty dependency array like this..  useEffect(callbackFunc , [] ) is executed only for the the initial render of the the functional component. And then it will not run in the further renders of the same
+     functional Component.
+  3) useEffect hook with some dependencies inside the dependency array like this.. useEffect(callbackFunc , [dependency] ); will run for the initial render as well as when the render happen due to change in dependencies mentioned in 
+     the dependency array.
+             
+  Hay que tener en cuenta que useEffect se ejecuta siempre después del renderizado y por lo menos una vez al montar el componente.
+  En la función de callback escribiremos el bloque de código que deseamos sincronizar en el cuerpo y retornaremos una función, llamada función de limpieza, que se ejecutará tantas veces como se haya ejecutado la función que la retorna. 
+  Es decir, que el proceso es simétrico.
+  Dado que la función se ejecutará por lo menos una vez al montar el componente, la función que se retorna se ejecutará una vez al desmontar el componente. En caso de tener dependencias de estados, la limpieza se ejecutará antes de 
+  volver a ejecutar el efecto frente a un cambio en una de sus dependencias. ESTE HOOK SE EJECUTA SIEMPRE AL FINAL (cuando el componente se monte).
+  Como podemos utilizar todos los useEffect que deseemos, es conveniente separar responsabilidades. Cada useEffect encargándose de un solo efecto y limpieza.
+  Actualmente el modo estricto de React ejecuta dos veces la función del primer argumento. Por eso puede ser que veas dos veces un mismo console.log que se ejecutó dentro de esta función.
+       
+   ~ Cleanup: It is a function of the useEffect hook that allows us to stop side effects that no longer need to be executed before our component is unmounted. This cleanup function is executed after the first render, that's to say, our 
+     first render won't take it into account, but after that, it'll execute the cleanup function and then the next useEffect, and so on. useEffectis built in such a way that we can return a function inside it and this return function is where 
+     the cleanup happens. I.e, Component A requests the API to get a list of products, but while making that asynchronous request, Component A is removed from the DOM (it’s unmounted). There is no need to complete that asynchronous request. 
+     So as a cleanup method to improve your application, you can clean up (cancel) the asynchronous request so that it’s not completed.
+      
+     React’s useEffect cleanup function saves applications from unwanted behaviors like memory leaks by cleaning up effects. In doing so, we can optimize our application’s performance. What is the useEffect cleanup function? Just like the 
+     name implies, the useEffect cleanup is a function in the useEffect Hook that allows us to tidy up our code before our component unmounts. When our code runs and reruns for every render, useEffect also cleans up after 
+     itself using the cleanup function.
+     The useEffect Hook is built in a way that we can return a function inside it and this return function is where the cleanup happens. The cleanup function prevents memory leaks and removes some unnecessary and unwanted behaviors. the 
+     useEffect cleanup function helps developers clean effects that prevent unwanted behaviors and optimizes application performance. However, it is pertinent to note that the useEffect cleanup function does not only run when our 
+     component wants to unmount, it also runs right before the execution of the next scheduled effect.
+           
+   ~ What to add & Not to add as Dependencies
+     You should add "everything" you use in the effect function as a dependency - i.e. all state variables and functions you use in there. That is correct, but there are a few exceptions you should be aware of:
+      ` You DON'T need to add state updating functions (as we did in the last lecture with setFormIsValid): React guarantees that those functions never change, hence you don't need to add them as dependencies (you could though)
+      ` You also DON'T need to add "built-in" APIs or functions like fetch(), localStorage etc (functions and features built-into the browser and hence available globally): These browser APIs / global functions are not related to the 
+        React component render cycle and they also never change.
+      ` You also DON'T need to add variables or functions you might've defined OUTSIDE of your components (e.g. if you create a new helper function in a separate file): Such functions or variables also are not created inside of a 
+        component function and hence changing them won't affect your components (components won't be re-evaluated if such variables or functions change and vice-versa).
+      ` So long story short: You must add all "things" you use in your effect function if those "things" could change because your component (or some parent component) re-rendered. That's why variables or state defined in component 
+        functions, props or functions defined in component functions have to be added as dependencies.
+                   
+                                                                                                    
+- useReducer: It is a React Hook that lets you add a reducer to your component. The useReducer() hook is similar to useState() since it also provides a way to manage state changes and updates in a functional component but is intended to 
+  handle more complex state changes more efficiently. It:
+    ` Takes a reducer() function as the first argument. This reducer() function is a pure function that takes in the current state, an action, and returns a new state. It does not modify the original state, but rather returns a new state 
+      based on the action passed to it.
+    ` Takes an initial state value as the second argument.
+    ` Takes an (optional) initializer function that can be used to initialize state as the third argument. 
+    ` And returns an array containing the current state value and a dispatch() function that can be used to trigger state changes by dispatching actions to the reducer.
+
+                    const [state, dispatch] = useReducer(reducer, initialArg, init?)    or    const [state, dispatch] = useReducer(state, action)
+
+  > Parameters
+    + state: It's the current state.
+    + reducer: The reducer function that specifies how the state gets updated. It must be pure, should take the state and action as arguments, and should return the next state. State and action can be of any types.
+    + initialState: The value from which the initial state is calculated. It can be a value of any type. How the initial state is calculated from it depends on the next init argument.
+      optional init: The initializer function that should return the initial state. If it’s not specified, the initial state is set to initialArg. Otherwise, the initial state is set to the result of calling init(initialArg).
+
+  > Return 
+    useReducer returns an array with exactly two values:
+    The current state. During the first render, it’s set to init(initialState) or initialState(if there’s no init).
+    The dispatch function that lets you update the state to a different value and trigger a re-render. Basically, what the "state" or "reducer" parameter recieves are the state (coming from initialState), and action (coming from dispatch). 
+    And of course this will return the new state.
+  
+  > Caveats 
+    useReducer is a Hook, so you can only call it at the top level of your component or your own Hooks. You can’t call it inside loops or conditions. If you need that, extract a new component and move the state into it.
+    In Strict Mode, React will call your reducer and initializer twice in order to help you find accidental impurities. This is development-only behavior and does not affect production. If your reducer and initializer are pure (as they should     
+    be), this should not affect your logic. The result from one of the calls is ignored. 
+    
+  > dispatch function 
+    The dispatch function returned by useReducer lets you update the state to a different value and trigger a re-render. You need to pass the action as the only argument to the dispatch function.
+    React will set the next state to the result of calling the reducer function you’ve provided with the current state and the action you’ve passed to dispatch.      
+      
+      
+      
+- useContext: El contexto permite a un componente recibir información de padres lejanos sin pasarlas como props. Por ejemplo, el componente en el nivel superior de tu aplicación puede pasar el actual tema de la UI a todos los 
+  componentes dentro, sin importar la profundidad dentro del componente.  
+    
+    
+    
+- useRef: This allows you to persist values between renders.This allows us to get access to other DOM elements and work with them. We can set up a connection between a HTML element which is being rendered in the end, and our JS code. 
+  In difference with useState, useRef doesn't trigger a render and re-render of the component. It is not used for something that we're rendering, it's a hook that is used for values that are not needded for rendering.
+  Se utiliza para crear una referencia mutable. Este hook retorna un objeto con una propiedad current la cual apuntará a un valor y podremos mutar. Se utiliza a menudo para acceder a elementos del DOM y modificarlos directamente. Esto 
+  puede ser especialmente útil cuando se trabaja con librerías de terceros que requieren acceso directo a elementos del DOM. Es recomendable, siempre que sea posible, dejarle a React la responsabilidad de manejar el DOM. Además, useRef 
+  también puede ser utilizado para mantener valores persistentes en el componente, lo que puede ser útil para realizar cálculos o para almacenar datos temporales que no deben ser expuestos al estado del componente. Es decir, cuando 
+  actualizamos un estado, modificamos todo el contenido del componente, pero no los pertenecientes a useRef().
+         
+  const refObject = useRef( initialValue ); //initial value: pass the initial value to the useRef hook    //ref: React returns an object with a current property
+        
+
+- useMemo: permite guardar en caché los resultados de un cálculo costoso de una funcion, y dicha funcion se volvera a ejecutar cuando una de sus dependencias (las cuales nosotros mismos definimos) cambie.
+        
+- useCallback: permite guardar en caché una función definida antes de pasarla a un componente optimizado.
+
+
+        
+- useImperativeHandle permite personalizar la ref expuesta por tu componente. Esto rara vez se usa. 
+  We can call this hook in this component function to define properties and methods that should be accessible on this component here from outside this component.
+  ref: The ref you received as the second argument from the forwardRef render function.
+  function: A function that takes no arguments and returns the ref handle you want to expose. That ref handle can have any type. Usually, you will return an object with the methods you want to expose.
+    
+- useLayoutEffect: se activa antes de que el navegador vuelva a pintar la pantalla. Aquí puedes hacer cálculos de maquetación (layout).
+- useInsertionEffect: se activa antes de que React haga cambios en el DOM. Aquí las bibliotecas pueden insertar CSS dinámico.   
+- useTransition: permite marcar una transición de estado como no bloqueante y permitir que otras actualizaciones la interrumpan.
+- useDeferredValue: te permite aplazar la actualización de una parte no crítica de la interfaz de usuario y dejar que otras partes se actualicen primero.
+- useDebugValue: permite personalizar la etiqueta que las Herramientas de Desarrollo de React muestran para tu Hook personalizado.
+- useId: permite que un componente se asocie un ID único. Normalmente, se utiliza con las APIs de accesibilidad.
+- useSyncExternalStore: permite que un componente se subscriba a un almacenamiento (store) externo.
+  
+  
+  
+- map(): Creates a new array with the result of calling a function for each array element. El método map() crea un nuevo array con todos los elementos del original transformados según las operaciones de la función enviada por parámetro. 
+         Tiene la misma cantidad de elementos pero los almacenados son el return de la función. En el ejemplo, la función retorna la propiedad nombre de cada elemento y eso es lo que se almacena en el nuevo array nombres. Map() se utiliza 
+         mucho para transformación de arrays.
+         En REACT, debemos incluir en cada elemento la propiedad key, que marque la identidad del elemento. Es decir, debemos poner algo que se encuentre en el array u objeto pero que estemos seguros de que NO SE REPETIRA (lo mas 
+         recomendable seria el id, ya que este empieza desde 1 hasta un numero indefinido pero que siempre estara cambiando). Esto ayudará a react a optimizar el rendering ante cambios en el array. De no tenerla podemos auto-generarla con el 
+         index provisto por el segundo parámetro de map, pero sólo optimizará si hay adiciones al final del array.
+         Whenever the key changes on a component, even if that component is not part of a list, whenever it changes, REACT will destroy the old component instance and create a new one.
+  
+  
+  
+- Patrones: Hay formas de crear componentes que nos ayudan a reutilizar y mantener código. Dos de ellas son High Order Components (HOC) y Render Props. Ambas son técnicas avanzadas. 
+
+  > High Order Components: Este patrón permite reutilizar una funcionalidad común entre componentes. En pocas palabras, es una función que toma un componente como argumento y devuelve un nuevo componente con una funcionalidad adicional. Un 
+    ejemplo simple de High Order Component podría ser uno que agregue la funcionalidad de validación de formularios a cualquier formulario que lo necesite.
+  
+  > Render Props: Este patrón implica pasar una función como una prop al componente hijo con el propósito de permitir al componente hijo renderizar su contenido a través de la función. En otras palabras, un componente padre puede pasar una 
+    función como prop al componente hijo y el componente hijo puede llamar a esa función en su renderizado para obtener información o funcionalidad específica que necesita.
+    
+    El patrón de diseño Render Props puede ser útil en situaciones donde quieres crear un componente reutilizable que puede ser personalizado con diferentes funciones o comportamientos según las necesidades del usuario.
+    También es una alternativa al patrón de diseño HOC (Higher Order Component), que puede ser más complicado de entender y utilizar.
+    Por ejemplo, imagina un componente que muestra una lista de tareas y un componente de filtro que se utiliza para filtrar las tareas según su estado.
+    Podrías pasar una función como prop del componente de filtro, que devuelve la lista filtrada de tareas, y el componente de filtro llamaría a esta función cuando se produce un cambio en su estado para actualizar la lista de tareas que se 
+    muestra.
+    
+  > Diferencia entre Render Props y HOC: Tanto los Render Props como los High Order Components (HOC) son técnicas avanzadas en React que nos permiten reutilizar lógica y abstraer comportamientos comunes en nuestros componentes. La principal 
+    diferencia radica en que Render Props se basa en la idea de pasar una función de renderizado como una prop a un componente para que pueda renderizar información, mientras que los HOC son componentes de orden superior que envuelven otro 
+    componente y le agregan alguna funcionalidad.
+    En pocas palabras, los Render Props nos permiten compartir la lógica de un componente a través de una función de renderizado, mientras que los HOC nos permiten compartir la lógica de un componente a través de la composición de 
+    componentes. En cuanto a cuándo usar uno u otro, depende del caso de uso específico. Tanto los Render Props como los HOC son técnicas poderosas que nos permiten escribir componentes más reutilizables y mantenibles, por lo que es 
+    importante tenerlos en cuenta en nuestra caja de herramientas de React.
+ 
+  > Patrones (Componentes de presentación): Son aquellos que simplemente se limitan a mostrar datos y tienen poca o nula lógica asociada a manipulación del estado (por eso, también son llamados stateless components). Características:
+     ✓ Orientados al aspecto visual.
+     ✓ No tienen dependencia con fuentes de datos (por ejemplo: Llamadas a APIs, Redux).
+     ✓ Normalmente no tienen estado.
+    Los componentes de presentación usualmente no tienen estado. En caso de tenerlos serán para trabajar características visuales del componente pero no para almacenar datos de la aplicación, sino que reciben datos de aplicación por props.
+    La ventaja más evidente de estos componentes es la posibilidad de reutilizarlos siempre que queramos, sin tener que recurrir a escribir el mismo código una y otra vez.
+
+  > Patrones (Componentes contenedores): Tienen como propósito encapsular a otros componentes y proporcionarles las propiedades que necesitan. Se encargan de modificar el estado de la aplicación para que el usuario vea el cambio en los datos 
+  (por eso, también son llamados state components). Las Características son:
+    ✓ Orientados al funcionamiento de la aplicación.
+    ✓ Contienen componentes de presentación y/u otros contenedores.
+    ✓ Se comunican con las fuentes de datos. (API, Flux, etc)
+    ✓ Tienen estado para representar el cambio en los datos.
+
+- Diseño modular: Los componentes permiten separar la interfaz de usuario en piezas independientes, reutilizables y pensar en cada pieza de forma aislada. Al desarrollar crearemos componentes para resolver pequeños problemas, que son fáciles 
+  de visualizar y comprender. Luego, unos componentes se apoyarán en otros para solucionar problemas mayores y al final la aplicación será un conjunto de componentes trabajando entre sí. 
+  ✓ Favorece la separación de responsabilidades: cada componente debe tener una única tarea.
+  ✓ La aplicación es más fácil de entender.
+  ✓ Mejora el rendimiento de la aplicación.
+  ✓ Se simplifica la tarea de hacer pruebas unitarias.
+  
+- Children: Children es una manera que tiene react de permitirnos proyectar/transcluir uno o más componentes dentro otro. Es ideal cuando:
+  ✓ Necesitamos que un elemento quede dentro de otro, sin que sepan el uno del otro.
+  ✓ Necesitamos implementar patrones más complejos.
+  
+  El concepto de children es la forma en que React nos permite incluir un componente dentro de otro sin que al padre le importe exactamente qué componente o componentes hijos están siendo incluidos. Los elementos hijos son aquellos que se 
+  colocan dentro de la etiqueta de apertura y cierre del componente y la prop “children” se utiliza para acceder y manipular estos elementos hijos desde dentro del componente padre. 
+  De esta manera, podemos crear componentes más flexibles y reutilizables que acepten contenido personalizado y que puedan renderizarlo de manera dinámica.  
+  
+- Ciclos de vida: El ciclo de vida no es más que una serie de estados por los cuales pasa todo componente a lo largo de su existencia. Esos estados tienen correspondencia en diversos métodos, que podemos implementar para realizar acciones 
+  cuando se van produciendo.
+  > El montaje: Se produce la primera vez que un componente va a generarse, incluyéndose en el DOM.
+  > La actualización: Se produce cuando el componente ya generado se está actualizando.
+  > El desmontaje: Se produce cuando el componente se elimina del DOM.
+  > Métodos de ciclos de vida (class based):
+    + componentWillMount()*: este método del ciclo de vida es de tipo montaje. Se ejecuta justo antes del primer renderizado del componente. 
+    + componentDidMount(): método de montaje, que solo se ejecuta en el lado del cliente. Se produce justo después del primer renderizado. Una vez se invoca este método ya están disponibles los elementos asociados al componente en el DOM. 
+    + componentWillReceiveProps(): método de actualización que se invoca cuando las propiedades se van a actualizar, aunque no en el primer renderizado del componente, por lo tanto no se invocará antes de inicializar las propiedades por 
+      primera vez.
+
+- Render y efectos: El funcionamiento de React está estrechamente ligado al cambio de estados. Cuando se produce un cambio de estado, React ejecuta un nuevo proceso de renderizado para ese componente y, de manera recursiva, para todos sus 
+  componentes hijos. Durante este proceso React ejecuta de nuevo las funciones de los componentes para generar el nuevo árbol de elementos de la interfaz de usuario.  Dentro de los componentes podemos tener funciones para realizar diferentes 
+  tareas, como, por ejemplo, una llamada a una api para obtener datos. Si en cada render se ejecuta esta llamada a la API, quiere decir que un cambio de estado está provocando efectos secundarios y no controlarlos puede traernos problemas. 
+  
+
+- React router: Por defecto, React no viene con un mecanismo integrado de navegación. Esto es para mantener sus dependencias al mínimo y dado que no todo proyecto necesita routing, se maneja como una dependencia aparte. La version que se 
+  debe utilizar es la siguiente: react-router-dom => para routing en el browser.
+  El modulo que se debe importar desde react-router es: import {BrowserRouter, Routes, Route} from "react-router-dom".
+  Una vez realizado el import necesitamos configurar dos cosas: 
+  1. Wrappear (envolver) la aplicación en un BrowserRouter  2. Crear un Routes (donde proyectaremos las vistas navegadas) 3. Crear los Route’s de las distintas navegaciones con sus componentes asociados
+    
+    > Especificidad de match: Por defecto se matchean (coinciden) únicamente partes de la url, por lo tanto ‘/’ va a matchear ‘/cart’ o ‘/checkout’, a no ser que le digamos que use la propiedad exact:
+    > Navegar a una ruta: Ahora que tenemos todo configurado, podemos importar un link perteneciente a react-router-dom, en cualquier componente del sub-árbol del <BrowserRouter>
+      Usarlo para que al clickear, el BrowserRouter renderice ese Route que habíamos declarado dentro del Switch. Esto se hace de la siguiente manera: 
+         import { Link } from "react-router-dom"; 
+                         .
+                         .
+                         .
+         <li> <Link to="/category/urbanas">Urbanas</Link> </li>
+     
+    > Navegar a una ruta (con parámetros): Si hacemos la ruta dinámica (con parámetros), podremos navegarla idénticamente, pero de manera dinámica. Para hacer esto, se coloca "/:num_id". Esto indica que lo que dice 
+      num_id cambiara de nombre en la barra de navegacion, lo que represetna la parte dinamica. Como por ejemplo: 
+         <Route path='/itemDetail/:num_id' element={<ProductDetailContainer/>} /> 
+         
+         Se puede poner cualquier nombre pero cuando querramos usar el useParams en el JS, ahi forzosamente tendremos que usar el nombre de la variable que se utilizo en el HTML, qu en este caso es num_id.
+         const { num_id } = useParams()
+         
+         y finalmente, navegamos en la ruta pero ahora en lugar de poner /:num_id, ahora se cambiara por lo que queremos que sea la parte dinamica
+         <Link to={`/itemDetail/${evento.id}`}>  <Button variant="contained">Ver detalles</Button>  </Link>
+         
+    > Navegar a una ruta - navlink: Es un link con un estilo, está siempre detectando la ruta actual, y si coincide con la suya nos activa la clase que le demos para que el user sepa qué item de la lista corresponde con la vista actual.
+    
+    > Recibir parámetros por ruta: React router provee integración con Hooks. useParams:
+       ✓ Lo podemos utilizar para leer en js los parámetros de la ruta.
+       ✓ En combinación con un useEffect, nos sirve para obtener actualizaciones sobre los parámetros.
+
+- Evento: es un estímulo programático, que puede ser provocado de manera automática, o ser el resultado de una interacción del usuario con la UI
+
+- Event listener: Un Event Listener es un patrón de diseño que sirve, como su nombre lo indica, para escuchar cuando un algo ocurre en algún elemento, librería o API, y poder realizar una acción en consecuencia. 
+
+   > Agregando un event listener  window.addEventListener("resize", onResize);   "resize" = Nombre de evento que quiero escuchar    onResize = Referencia de la función a registrar       Nota: ¡guardar referencia para poder removerlo después!
+   > Removiendo un event listener:  return () => {                                           Nota: invocar el removeEventListener en la función de limpieza de nuestros hooks en donde los hayamos registrado.
+                                       console.log("On dismount");
+                                       window.removeEventListener(onResize);
+                                    }
+                                    
+   > Removiendo eventos: 
+     ✓ Se des-registran con el nombre y la referencia a la función con que los registramos (no alcanza únicamente el nombre).
+     ✓ Si registras manualmente un evento del DOM en tu componente de react hazlo dentro de un effect y asegúrate de de-registrarlo en la función de limpieza en el return del efecto.
+     ✓ Recordemos: Si dejamos event listeners sin des-registrar corremos riesgos de crear leaks de memoria o registrar un evento más de una vez ( se ejecutara una vez por cada register ).
+     
+     
+   > Declarando un evento: 
+     Algunos eventos como onKeyDown son cancelables, por ejemplo: evt.preventDefault()
+     Los eventos por default se ejecutan en el elemento, y en cada uno de sus ancestros. Si esto puede traer algún efecto secundario podemos cancelar la propagación (bubbling): evt.stopPropagation()
+   
+   
+- Synthetic events: Suelen tener algunas variaciones en el contenido de los eventos. Esto haría difícil utilizarlos de manera uniforme en cada plataforma. React es consciente de esto, y nos ayuda proveyendo esta abstracción. 
+    ✓ Sirven para normalizar/estandarizar eventos entre browsers.
+    ✓ Siempre que registre un evento vía React/Jsx con onClick, no obtendré el evento nativo, sino uno sintético.
+    ✓ Se destruyen al terminar la ejecución de la función vinculada (por performance).
+    ✓ Puedo acceder al evento nativo via evt.nativeEvent
+
+- Intercambiabilidad: Implementando componentes de manera eficiente, podremos generar intercambiabilidad, e intercambiar funcionalidades sin esfuerzo. Podemos generar variaciones del mismo componente, con distinto layout y el mismo comportam
+
+- Abstracción: 
+  (1) Sirve como estrategia para ocultar el comportamiento interno de rendering e implementación de change events
+  (2) El consumer sigue sin cambiar la firma de consumo
+
+- Orientación a eventos
+  ✓ Permite mover la lógica compleja a componentes de menor orden
+  ✓ Si ambos se comportan igual, el parent no lo sabrá aunque sus implementaciones sean distintas.
+  ✓ Permite que el parent se encargue del resultado final sin darle esa responsabilidad a sus children.
+
+- 
+
+- 
+
+- 
+
+- 
+

@@ -2,7 +2,7 @@ import { Router } from "express";
 import passport from "passport";
 // import jwt from "jsonwebtoken";
 // import { SECRET_KEY } from "../config/dotenvMain/env.config.js";
-// import { authToken, passportCall, authorization } from "../../utils.js";
+// import { authToken, passportCall, authorization } from "../utils.js";
 
 class CustomRouter { //Esta es la clase padre, y CustomRouter es la clase que hereda de esta misma clase.
     constructor() {
@@ -42,8 +42,8 @@ class CustomRouter { //Esta es la clase padre, y CustomRouter es la clase que he
             function authJWT(err, user, info){ //La funcion interna en passport.authenticate(), por defecto tiene tres parametros que representan el error, el usuario y la informacion.
                 if (err) return next(err); // will generate a 500 error
                 if (!user) return res.status(401).send({ error: info.messages ? info.messages : info.toString() }); // Generate a JSON response reflecting authentication status
-                console.log("user.role", user.role.toUpperCase());
-                console.log("user.role", policies[0])
+                // console.log("user.role", user.role.toUpperCase());
+                // console.log("user.role", policies[0])
                 if (user.role.toUpperCase() !== policies[0]) return res.status(403).send({ error: "Forbidden. You don`t have enough permissions" });
 
                 // console.log("Usuario obtenido del strategy: ", user);

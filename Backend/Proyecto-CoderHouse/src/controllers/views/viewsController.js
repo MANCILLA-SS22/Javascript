@@ -98,6 +98,43 @@ class LoginRegister extends Route {
                 res.sendServerError(`something went wrong ${error}`)
             }
         });
+
+        this.get("/loggerTest/type", ['PUBLIC'], function(req, res){
+            try {
+                const {loggerType} = req.params;
+                switch(loggerType){
+                    case "fatal":
+                        req.logger.fatal("Prueba de log level fatal --> en Endpoint");
+                        break;
+
+                    case "error":
+                        req.logger.error("Prueba de log level error --> en Endpoint");
+                        break;
+
+                    case "warning":
+                        req.logger.warning("Prueba de log level warning --> en Endpoint");
+                        break;
+
+                    case "http":
+                        req.logger.http("Prueba de log level http --> en Endpoint");
+                        break;
+
+                    case "info":
+                        req.logger.info("Prueba de log level info --> en Endpoint");
+                        break;
+
+                    case "debug":
+                        req.logger.debug("Prueba de log level debug --> en Endpoint");                    
+                        break;
+
+                    default :
+                        break;
+                }
+                res.status(200).json({message: 'succes'});
+            } catch (error) {
+                res.sendServerError(`something went wrong ${error}`);
+            }
+        })
     } 
 }
 

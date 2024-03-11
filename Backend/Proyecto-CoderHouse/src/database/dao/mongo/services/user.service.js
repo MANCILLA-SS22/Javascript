@@ -21,7 +21,7 @@ class UserServiceMongo{
         try {
             return await userModel.findById(id);
         } catch (error) {
-            console.log(error)
+            return error
         }
     }
 
@@ -30,7 +30,7 @@ class UserServiceMongo{
             return await userModel.findByIdAndUpdate(_id, user);
 
         }catch (error) {
-            console.log(error);
+            return error;
         }
     }    
 

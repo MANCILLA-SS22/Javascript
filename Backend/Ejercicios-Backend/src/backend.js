@@ -9,8 +9,8 @@
 // 9. Optimizacion (gzip y brotli, error handling)
 // 10. Logging y testing de performance 
 
-// nodemon Ejercicio-43/src/backend.js --mode prod   -->   Servidor escuchando por el puerto: 3001
-// nodemon Ejercicio-43/src/backend.js --mode dev   -->   Servidor escuchando por el puerto: 5500
+// nodemon src/backend.js --mode prod   -->   Servidor escuchando por el puerto: 3001
+// nodemon src/backend.js --mode dev   -->   Servidor escuchando por el puerto: 5500
 import express from "express";
 import handlebars from "express-handlebars";
 import Handlebars from "handlebars";
@@ -52,8 +52,8 @@ import { tests } from "./methods/test.method.js";
 import { listens } from "./methods/listens.method.js";
 import { mongoInstance } from "./methods/mongoInstance.method.js";
 import { clusters } from "./methods/clusters.method.js";
-import { indexation1, indexation2, indexation3 } from "./MongoDB/indexation.js";
-import { aggregation1, aggregation2 } from "./MongoDB/aggregation.js";
+import { indexation1, indexation2, indexation3 } from "./methods/indexation.js";
+import { aggregation1, aggregation2 } from "./methods/aggregation.js";
 import { socket1, socket2, socket3, socket4 } from "./sockets/sockets.js";
 
 // import { addLogger } from "./config/logger_BASE.js";    //Logger 1
@@ -152,7 +152,7 @@ export {backend}
 //   --count: Especifica el número de usuarios virtuales que se crearán para hacer las peticiones
 //   --num: Especifica el número de peticiones que realizará cada usuario
 //   -o : Devuelve un formato json con los resultados del test.
-// Artillery                     -->    `artillery quick --count 40 --num 50 "http://localhost:5500/api/performance/operation/sencilla" -o ./Ejercicio-43/data/resultadosSencilla.json`
-// Artillery                     -->    `artillery quick --count 40 --num 50 "http://localhost:5500/api/performance/operation/complex" -o ./Ejercicio-43/data/resultadosComplex.json`
-// Ejecucion de script .yml      -->    `artillery run ./Ejercicio-43/src/config.yml --output ./Ejercicio-43/data/test01.json`
-// Generacion de reporte .html   -->    `artillery report test01.json -o ./Ejercicio-43/data/resultUser.html` (opcional)
+// Artillery                     -->    `artillery quick --count 40 --num 50 "http://localhost:5500/api/performance/operation/sencilla" -o ./data/resultadosSencilla.json`
+// Artillery                     -->    `artillery quick --count 40 --num 50 "http://localhost:5500/api/performance/operation/complex" -o ./data/resultadosComplex.json`
+// Ejecucion de script .yml      -->    `artillery run ./src/config.yml --output ./data/test01.json`
+// Generacion de reporte .html   -->    `artillery report test01.json -o ./data/resultUser.html` (opcional)

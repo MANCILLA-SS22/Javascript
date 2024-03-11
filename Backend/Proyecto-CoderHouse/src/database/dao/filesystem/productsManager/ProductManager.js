@@ -31,7 +31,7 @@ export default class ProductManager{
             }
 
         } catch (error) {
-            console.log(error);
+            return error;
         }
     }
 
@@ -58,7 +58,7 @@ export default class ProductManager{
             }
 
         } catch (error) {
-            console.log(error);
+            return error;
         }
     }
 
@@ -86,7 +86,7 @@ export default class ProductManager{
             }            
 
         } catch (error) {
-            console.log(error);
+            return error;
         }
     }
 

@@ -44,7 +44,7 @@ async function register(req, username, password, done){
     try {
         const exist  = await userService.findUser({userDto}); //Validamos si el usuario existe en la base de datos
         if(exist){
-            console.log("El usuario ya existe!")
+            req.logger.error("El usuario ya existe!");
             done(null, false); //Como el usuario ya existe (no es un error), no se va a registrar. El segundo parametro es falso porque no se retornara ningun usuario porque ya existe
         }
 
@@ -59,7 +59,7 @@ async function register(req, username, password, done){
         }
 
         const result = await userService.createUser(user);
-        console.log(result)
+        // console.log(result)
         return done(null, result) //El primer parametro es null porque no se genera un error, sino que se genera de forma correcta.
 
     } catch (error) {
@@ -79,9 +79,10 @@ async function login(req, username, password, done){
 }; 
 
 async function github(accessToken, refreshToken, profile, done){
-    console.log("Profile obtenido del usuario de Github", profile);
+    //console.log("Profile obtenido del usuario de Github", profile);
     try {
-        const user = await userService.findUser({email: profile._json.email});    console.log("Usuario encontrado para login: ", user);
+        const user = await userService.findUser({email: profile._json.email});    
+        //console.log("Usuario encontrado para login: ", user);
         if(!user){ //Al no existir el usuario, lo agregamos a la base de datos
             console.warn("User doesn't exists with username: " + profile._json.email);
             let newUser = {
