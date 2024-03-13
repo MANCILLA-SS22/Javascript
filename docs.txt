@@ -39,13 +39,17 @@ https://guides.rubyonrails.org/getting_started.html
 https://spring.io       https://docs.spring.io/spring-framework/docs/current/reference/html/     
 https://nextjs.org/docs/getting-started 
 
+https://docs.docker.com/storage/volumes/#volumes     -->    https://learn.microsoft.com/en-us/windows/wsl/install
+https://hub.docker.com   
+https://kubernetes.io/docs/home/       -->     https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/
+https://minikube.sigs.k8s.io/docs/start/
+
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/values
 https://www.w3schools.com/jsref/jsref_class_super.asp#gsc.tab=0&gsc.q=unhandledRejection
 https://www.geeksforgeeks.org/javascript-array-findindex-method/
 https://nodejs.org/en/about/ 
 https://nextui.org  
 https://docs.nestjs.com 
-https://docs.docker.com/storage/volumes/#volumes   https://hub.docker.com   https://learn.microsoft.com/en-us/windows/wsl/install
 https://axios-http.com/docs/intro  
 https://socket.io/docs/v4/tutorial/introduction 
 https://www.mongodb.com/docs/manual/
@@ -184,7 +188,7 @@ https://leafletjs.com/index.html --> This works for setting up maps
 https://fakerjs.dev/api/
 https://usehooks.com 
 https://www.apollographql.com/docs/react/ 
-https://pandao.github.io/editor.md/en.html     https://readme.so 
+https://pandao.github.io/editor.md/en.html
 
 
 npm i eslint prettier eslint-config-prettier eslint-plugin-prettier eslint-config-airbnb eslint-plugin-node eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react --save-dev

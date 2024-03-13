@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ejercicios-de-backend-kubernetes-service
+spec:
+  selector:
+    app: ejercicios-de-backend-kubernetes
+  ports:
+    - port: 8080
+      targetPort: 9090
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ejercicios-de-backend-kubernetes-deploy
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: ejercicios-de-backend-kubernetes
+  template:
+    metadata:
+      labels:
+        app: ejercicios-de-backend-kubernetes
+    spec:
+      containers:
+      - name: ejercicios-de-backend-kubernetes
+        image: germanss22/ejercicios-de-backend-kubernetes:1.0.1-test
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+          - containerPort: 9090
+        env:
+          #TODO: Create a kubernetes manifiest for MongoDB to deploy properly 
+          - name: MONGO_URL
+            value: mongodb+srv://xxeltiradorxx:coder1234@cluster0.hkcpkdd.mongodb.net/login?retryWrites=true&w=majority
+        imagePullPolicy: Always

@@ -2533,19 +2533,62 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   
 - Maquina virtual: 
 
-- Kernel: 
+- Kernel: El Kernel o núcleo, es una parte fundamental del sistema operativo que se encarga de conceder el acceso al hardware de forma segura para todo el software que lo solicita, el Kernel es una pequeña e invisible parte del sistema 
+  operativo, pero la más importante, ya que sin esta no podría funcionar. Todos los sistemas operativos tienen un Kernel, incluso Windows 10, pero quizá el más famoso es el Kernel de Linux. Este núcleo de los sistemas operativos se ejecuta 
+  en modo privilegiado con acceso especial a los recursos del sistema para poder realizar las peticiones de acceso que le va pidiendo el software que lo necesita, además como los recursos no son ilimitados, también hace de arbitro a la hora 
+  de asignarlos, decidiendo el orden de las peticiones recibidas según la prioridad e importancia de estas. Una gestión muy importante y fundamental que en la mayoría de las ocasiones pasa desapercibida aún siendo un trabajo esencial para 
+  coordinar todo el hardware con el software.
+  
+  El Kernel o núcleo de un sistema operativo sirve para administrar los recursos de hardware solicitados por los diferentes elementos de software y hacer de intermediario decidiendo a que y cuando se concede este acceso evitando así 
+  sobrecarga del sistema, recursos innecesarios y acceso a software malicioso al propio Kernel y llegar a poder controlar así todo el sistema. De este modo el Kernel sirve como elemento de seguridad teniendo que pasar por varias capas antes 
+  de poder tener acceso, además tiene que distribuir los recursos de manera eficiente y ordenada para que el Hardware trabaje junto al Software de la mejor manera posible.
+  Aunque usualmente relacionamos un Kernel o un núcleo del sistema operativo a un PC, también está presente y sirve para hacer funcionar todos los computadores que podemos encontrar hoy en día, como por ejemplo un ordenador de a bordo de un 
+  coche o un barco, una raspberry PI que ejecuta una versión adaptada de Linux Debian o los dispositivos móviles con Android e iOS, que  también disponen de un Kernel basado en Linux / Unix.
+  Tiene también como trabajo conceder acceso a todos los periféricos que tengamos conectados e interactuar con el software que los solicite, aunque no sean los usuales con los que trabajamos. Por ejemplo si ocasionalmente conectamos un móvil 
+  para usarlo como webcam con DroidCam, este Kernel se encarga de conceder los permisos necesarios al software para gestionar y poder tener la imagen y el audio para poder usarla en algún software de videoconferencia o reuniones si por 
+  ejemplo teletrabajamos desde casa o cualquier otro lugar.       --> https://salesystems.es/que-es-un-kernel/#:~:text=El%20kernel%20es%20el%20componente,o%20núcleo%20del%20sistema%20operativo.
+  El Kernel es el encargado de hacer funcionar básicamente todo, tiene que ser capaz de arrancar, por ejemplo, un PC desde que lo encendemos hasta que vemos visible el escritorio, todo esto comunicándose con los elementos hardware que 
+  dispone el PC y que también son necesarios para hacerlo funcionar, una vez que tengamos el escritorio deberá ser capaz de hacer funcionar los programas que nosotros queramos abrir y hacerlos funcionar en nuestro PC.
   
 - Docker: Docker es una plataforma gestora de contenedores. Nos permitirá entonces empaquetar en un contenedor nuestro aplicativo, y posteriormente compartirlo a algún lado, para que al momento en el que tenga que ejecutarse, este pueda 
   hacerlo dentro del contenedor aislado y asegurar que la ejecución será satisfactoria siempre. La lógica de Docker se basa en tres pasos generales: 
     1) Un dockerfile: Este cuenta con las instrucciones paso a paso para que nuestro proyecto genere una imagen
     2) Una imagen es el equivalente de una clase, pero con un proyecto completo. Cuando generamos la imagen de una aplicación, significa que podemos generar múltiples contenedores a partir de esa aplicación (como instancias) 
     3) Contenedor: El punto final en el que ejecutamos el aplicativo, pero esta vez desde un entorno cerrado.  
+    
+- DockerHub: Dockerhub es una librería, o repositorio de imágenes en la nube. Cuando hemos finalizado con el mantenimiento de nuestro aplicativo, necesitamos compartir la imagen resultante con nuestro equipo (Y enviar la imagen por correo 
+  electrónico no resulta óptimo). Al subir nuestra imagen en la nube, todos los miembros autorizados podrán descargarla y utilizarla. Existen múltiples razones para tener nuestra imagen en un repositorio (nube):
+    > Podemos compartir nuestra imagen con nuestro equipo de desarrollo.
+    > Tenemos un sistema mejor controlado de nuestra imagen, ya que cada cambio de ésta puede significar una nueva tag con otra versión.
+    > Permite que otros softwares descarguen la imagen La razón de que éste se encuentre en la nube y permita que otros softwares lo descarguen, significa que al momento de configurar procesos más complejos (como deployment), podemos obtener 
+      la imagen directamente, sin necesidad de tener que estar cambiando el archivo local. 
 
 - Imagen base: Escribimos en nuestro código --> FROM node. Esto significa que estaremos tomand una imagen base del entorno de node, para poder configurar nuestra app. 
 
 - Contenedor: Un contenedor es un entorno de ejecución para un aplicativo en particular, el cual tiene todas las dependencias que necesita dicha aplicación para poder correr sin problemas de compatibilidad. La clave de un contenedor es el 
   concepto del aislamiento, esto indicando que podemos tener múltiples contenedores, con diferentes entornos, con diferentes dependencias, y nunca habrá conflictos porque la instalación y uso de las dependencias se hace de manera interna. 
   Además, ya que el entorno no ocupa utilizar todo el sistema operativo (sólo el kernel), se vuelven realmente livianos en comparación con mover todo un sistema operativo en cada aplicativo.
+
+- Clusterización: 
+  
+- Orquestación: Es un término muy similar a la clusterización (a veces tomados por iguales), sin embargo, en esta clase haremos una ligera distinción. Al realizar una clusterización, estamos instanciando un modelo Primary-worker, en la cual 
+  los procesos workers pueden reiniciarse una vez caídos. ¿Y la orquestación? también se trata de tener un proceso principal, el cual se encargue de cargar con workers, sólo que ésta vez cada worker será en esencia un contenedor por sí solo.
+  La diferencia entre este termino y el anterior es que en que la orquestación es un proceso más profundo, ya que no sólo se trata de hacer la división, sino que permite realizar la gestión de éstos de manera más controlada, permitiendo
+    ✓ Control de reinicio para contenedores que presenten algún fallo
+    ✓ Balanceador de carga, el cual permitirá que las peticiones puedan llegar a los contenedores de manera más distribuida, a diferencia de en cola (como lo hace la clusterización base).
+    ✓ Manejo de rollout updates, los cuales nos permiten seguir un flujo organizado para poder actualizar o reconfigurar contenedores en un cluster.
+    
+- Kubernetes: Kubernetes es una tecnología de orquestamiento de contenedores. En esencia, se trata de una plataforma que sirve para administrar cargas de trabajos y servicios. Kubernetes tomará un conjunto de instrucciones y las ejecutará 
+  para poder distribuir pods, donde cada pod puede tener n contenedores, de esta forma todos los contenedores que pertenezcan a un pod, podrán funcionar como una entidad única para intercomunicarse. Kubernetes está pensado para poder ser 
+  desplegado, eso quiere decir que podemos hacerlo desde alguna plataforma en la nube, aunque en este caso, por cuestión de costos, lo utilizaremos de manera local. Hay múltiples posibilidades para poder correr un repositorio local:
+    ✓ Minikube
+    ✓ MicroK8s
+    ✓ k3s
+    
+- Minikube: Es un software que permite levantar un cluster local de kubernetes, permitiendo hacer las pruebas que necesitemos dentro de nuestro contenedor de docker. Para poder ejecutar el instalador, bastará con descargarlo de este link 
+  (https://minikube.sigs.k8s.io/docs/start/). No hace falta gran configuración, todo se instalará directamente en la computadora. Para comenzar a trabajar con Minikube, bastará con corre el comando "minikube start".
+  Recuerda haber instalado previamente kubectl, ya que al momento de iniciar minikube, buscará si está instalado, de otra forma lo tendremos que configurar manual
+     
 
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
