@@ -17,9 +17,9 @@ import Handlebars from "handlebars";
 import { allowInsecurePrototypeAccess } from "@handlebars/allow-prototype-access";
 import cors from 'cors';
 import morgan from "morgan";
-import {Server} from "socket.io"
 import compression from "express-compression";
 import cookieParser from "cookie-parser";
+import {Server} from "socket.io"
 
 import {__dirname} from './dirname.js';
 import { errorHandlerMiddleware, logger } from "./middlewares/middlewares.js";
@@ -55,7 +55,6 @@ import { clusters } from "./methods/clusters.method.js";
 import { indexation1, indexation2, indexation3 } from "./methods/indexation.js";
 import { aggregation1, aggregation2 } from "./methods/aggregation.js";
 import { socket1, socket2, socket3, socket4 } from "./sockets/sockets.js";
-
 // import { addLogger } from "./config/logger_BASE.js";    //Logger 1
 // import { addLogger } from "./config/logger_CUSTOM.js";  //Logger 2
 
@@ -75,8 +74,16 @@ function backend(){
         handlebars: allowInsecurePrototypeAccess(Handlebars)
     };
 
+    function listenFunction(){
+        console.log("Server listening on port " + SERVER_PORT);
+        listens(); // ****** Uso de listeners ******       
+        tests(); // ****** Uso de tests ******
+    }
+
+    mongoInstance(); // ****** Uso de REPOSITORTY (comentar lo referente a "factory" para que esto funcione) ****** 
     initialPassport();
     
+    app.listen(SERVER_PORT, listenFunction);
     app.set("views", `${__dirname}/views`); // Seteamos nuestro motor. Con app.set("views", ruta) indicamos en que parte del proyecto estaran las vistas. Recordar utilizar rutas absolutas para evitar asuntos de ruteo relativo.
     app.engine("hbs", handlebars.engine(stencil)); //Finalmente, con este app.set() indicamos que, el motor que ya inicializamos arriba, es el que queremos utilizar. Es importante saber que, cuando digamos al servidor que renderice, sepa que tiene que hacerlo con el motor de hbs.
     app.set("view engine", "hbs");
@@ -110,18 +117,6 @@ function backend(){
     app.use("/api/performance", performanceRouter)
     app.use("/compression", compressionRouter);
     app.use("/logger", loggerRouter); //Al usar esta ruta, hay que COMENTAR los middlewares Logger 1 y Logger 2 para ver el resultado
-    app.listen(SERVER_PORT, function(){
-        console.log("Server listening on port " + SERVER_PORT);
-
-        // ****** Uso de listeners ******
-        listens();    
-        
-        // ****** Uso de tests ******         
-        tests();      
-    });
-
-    // ****** Uso de REPOSITORTY (comentar lo referente a "factory" para que esto funcione) ****** 
-    mongoInstance(); 
 
     // ****** Uso Websockets (Si usamos esto, DESCOMENTAR las 4 lineas de abajo y comentar "app.listen(SERVER_PORT, function(){}") ****** 
     // const httpServer = app.listen(SERVER_PORT, () => console.log(`Server listening on port ${SERVER_PORT}`));
@@ -139,14 +134,12 @@ function backend(){
     // ****** Uso de aggregation con mongoDB (Utilizar uno a la vez) ****** 
     // aggregation1();
     // aggregation2();
-
 };
 backend();
-export {backend}
+export {backend};
 
 // ****** Uso de clusters (Para trabajar con clusters, HABILITAR la linea de abajo y COMENTAR "backend();". Si no, entonces comentarla y habilidar "backend()" ****** 
 // clusters();
-
 
 // ****** Uso de Artillery (Ejecutar en consola) ****** 
 //   --count: Especifica el número de usuarios virtuales que se crearán para hacer las peticiones

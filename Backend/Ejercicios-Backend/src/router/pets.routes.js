@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { PetsService } from "../services/dao/mongo/pets.service.js";
+import { PetsService } from "../database/dao/mongo/services/pets.service.js";
 
 const router = Router();
 const petsService = new PetsService();

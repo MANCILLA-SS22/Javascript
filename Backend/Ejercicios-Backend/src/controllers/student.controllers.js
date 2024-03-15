@@ -1,7 +1,7 @@
-import { studentService } from '../services/service.js'; // Para trabajar Repository
-// import { studentService } from '../services/factory.js'; // Para trabajar Factory
+import { studentService } from '../database/service.js'; // Para trabajar Repository
+// import { studentService } from '../database/factory.js'; // Para trabajar Factory
 
-import { StudentsDto } from '../services/dto/student.dto.js';
+import { StudentsDto } from '../database/dto/student.dto.js';
 
 async function getAllStudents(req, res) {
     try {

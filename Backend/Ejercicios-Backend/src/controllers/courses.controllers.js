@@ -1,5 +1,5 @@
-import { coursesService } from '../services/service.js'; // Para trabajar Repository
-// import { coursesService } from '../services/factory.js'; // Para trabajar Factory
+import { coursesService } from '../database/service.js'; // Para trabajar Repository
+// import { coursesService } from '../database/factory.js'; // Para trabajar Factory
 
 async function getAllCourses(req, res) {
     try {

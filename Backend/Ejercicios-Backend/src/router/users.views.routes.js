@@ -1,23 +1,9 @@
 import { Router } from 'express';
 import passport from 'passport';
-
 import { authToken, passportCall, authorization } from '../dirname.js';
-import { userModel } from '../services/dao/mongo/models/users.model.js';
+import { userModel } from '../database/dao/mongo/models/users.model.js';
 
 const router = Router();
-
-
-router.get("/login", function(req, res){
-    res.render('login')
-});
-
-router.get("/register", function(req, res){
-    res.render('register')
-});
-
-router.get("/error", function(req, res){
-    res.render("error");
-});
 
 // (COMENTAR TODOS LOS METODOS MENOS EL QUE SE VA A UTILIZAR)
 
@@ -27,16 +13,21 @@ router.get("/error", function(req, res){
 // });
 
 //Metodo 2: Usando JWT por Cookie
-router.get("/", passport.authenticate('jwt', { session: false }), function(req, res){  //Colocamos session:false debido a que no necesitamos express-session para estos procesos.
-    res.render('profile', {user: req.user});
-});
+// router.get("/", passport.authenticate('jwt', { session: false }), function(req, res){  //Colocamos session:false debido a que no necesitamos express-session para estos procesos.
+//     res.render('profile', {user: req.user});
+// });
 
 //Metodo 3: Usando passport-JWT por Cookie mediante customCall, y middleware de autorización
 // router.get("/", passportCall('jwt'), authorization('admin'), function(req, res){ 
 //     res.render('profile', {user: req.user});
 // });
 
-//Metodo 4: Usando Authorization Bearer Token
+//Metodo 4: Usando middleware de autorización
+// router.get("/", authorization('admin'), function(req, res){ 
+//     res.render('profile', {user: req.user});
+// });
+
+//Metodo 5: Usando Authorization Bearer Token
 // router.get("/", function(req, res){
 //     res.render('profile', {user: req.user});
 // });
@@ -51,5 +42,17 @@ router.get("/", passport.authenticate('jwt', { session: false }), function(req, 
 //         console.error("Error consultando el usuario con ID: " + userId);
 //     }
 // });
+
+router.get("/login", function(req, res){
+    res.render('login')
+});
+
+router.get("/register", function(req, res){
+    res.render('register')
+});
+
+router.get("/error", function(req, res){
+    res.render("error");
+});
 
 export default router;

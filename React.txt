@@ -90,9 +90,9 @@ npm start
 - Render de un único elemento: Los componentes deben retornar un solo elemento o componente, pero este elemento o componente sí puede tener más de un elemento o componente hijo. En caso de no necesitar que el elemento padre forme parte del 
   árbol del DOM, se puede utilizar React.Fragment, o lo que es lo mismo utilizar un tag sin tipo <></>.
   
-- States: El concepto más importante hoy en día para entender el funcionamiento de React es el de estados. Los estados de un componente en React se utilizan para representar la información que puede cambiar durante la vida útil del 
-  componente y afectar su representación en la interfaz de usuario. Todo cambio de estado va inicializar el proceso de render a partir del nodo donde se produjo el cambio de estado y así se generará el nuevo Virtual DOM que luego será 
-  reconciliado. Los estados son un concepto de React, no de JavaScript, por lo que para implementarlo vamos a necesitar de los Hooks de React.
+- States: Los estados de un componente en React se utilizan para representar la información que puede cambiar durante la vida útil del componente y afectar su representación en la interfaz de usuario. Todo cambio de estado va inicializar el 
+  proceso de render a partir del nodo donde se produjo el cambio de estado y así se generará el nuevo Virtual DOM que luego será reconciliado. Los estados son un concepto de React, no de JavaScript, por lo que para implementarlo vamos a 
+  necesitar de los Hooks de React.
   
   El estado en React es una de las maneras en las que se procesan datos. Desde el punto de vista de los datos que React puede manejar, tenemos el objeto props, con el que podemos insertar todo tipo de 
   propiedades a un elemento, y tenemos los estados. El estado es un objeto que contiene datos que pueden cambiar en el tiempo. En React, el estado se usa para controlar los cambios en la interfaz.
@@ -187,7 +187,7 @@ npm start
   Para completar este array de dependencias la pregunta que debo hacerme es: ¿Con que estados debo sincronizar este efecto?
      useEffect(fn) // Con todos los estados
      useEffect(fn, []) // Con ningún estado
-     useEffect(fn, [esos, estados])
+     useEffect(fn, [esos, estados]) //Se recomienda generalmente usar props o estados dentro de la variable de de penedencia
          
   1) useEffect hook without mentioning any dependency array like.. useEffect(someCallbackFuction); runs for every render of the functional component in which its included..
   2) useEffect hook with an empty dependency array like this..  useEffect(callbackFunc , [] ) is executed only for the the initial render of the the functional component. And then it will not run in the further renders of the same
@@ -234,8 +234,8 @@ npm start
     ` Takes an (optional) initializer function that can be used to initialize state as the third argument. 
     ` And returns an array containing the current state value and a dispatch() function that can be used to trigger state changes by dispatching actions to the reducer.
 
-                    const [state, dispatch] = useReducer(reducer, initialArg, init?)    or    const [state, dispatch] = useReducer(state, action)
-
+                    const [state, dispatch] = useReducer(reducer, initialArg, init?);
+                    
   > Parameters
     + state: It's the current state.
     + reducer: The reducer function that specifies how the state gets updated. It must be pure, should take the state and action as arguments, and should return the next state. State and action can be of any types.
@@ -254,14 +254,15 @@ npm start
     be), this should not affect your logic. The result from one of the calls is ignored. 
     
   > dispatch function 
-    The dispatch function returned by useReducer lets you update the state to a different value and trigger a re-render. You need to pass the action as the only argument to the dispatch function.
-    React will set the next state to the result of calling the reducer function you’ve provided with the current state and the action you’ve passed to dispatch.      
-      
+    The dispatch function returned by useReducer lets you update the state to a different value and trigger a re-render. You need to pass the action as the only argument to the dispatch function. (The dispatch function will basically run the 
+    "reducer" function"). React will set the next state to the result of calling the reducer function you’ve provided with the current state and the action you’ve passed to dispatch. Now, by calling "reducer" we'll get the next function.
+    It's important to remmind that the "state" parameter always needs to be returned.
+    
+                    function reducer(state, action){};      
       
       
 - useContext: El contexto permite a un componente recibir información de padres lejanos sin pasarlas como props. Por ejemplo, el componente en el nivel superior de tu aplicación puede pasar el actual tema de la UI a todos los 
-  componentes dentro, sin importar la profundidad dentro del componente.  
-    
+  componentes dentro, sin importar la profundidad dentro del componente.     
     
     
 - useRef: This allows you to persist values between renders.This allows us to get access to other DOM elements and work with them. We can set up a connection between a HTML element which is being rendered in the end, and our JS code. 

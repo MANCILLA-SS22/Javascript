@@ -1,4 +1,4 @@
-import {UserService} from "../services/dao/mongo/users.service.js"
+import {UserService} from "../database/dao/mongo/services/users.service.js"
 import {createHash, validateHash} from '../dirname.js';
 
 const userServiceDao = new UserService();

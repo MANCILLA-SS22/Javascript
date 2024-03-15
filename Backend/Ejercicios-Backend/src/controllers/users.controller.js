@@ -1,8 +1,8 @@
 import { faker } from "@faker-js/faker";
 import { generateUser } from "../utils/faker.js";
-import CustomError from "../services/errors/CustomError.js";
-import { generateUserErrorInfo } from "../services/errors/messages/user-creation-error.message.js";
-import {EErrors} from "../services/errors/errors-enum.js";
+import CustomError from "../database/errors/CustomError.js";
+import { generateUserErrorInfo } from "../database/errors/messages/user-creation-error.message.js";
+import {EErrors} from "../database/errors/errors-enum.js";
 
 const users = [];
 

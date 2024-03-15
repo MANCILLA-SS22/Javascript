@@ -1,7 +1,7 @@
-import { personModel } from "../services/dao/mongo/models/person.model.js";
-import { courseModel } from "../services/dao/mongo/models/matricula.model.js";
-import { alumnoModel } from "../services/dao/mongo/models/alumno.model.js";
-import { materiaModel } from "../services/dao/mongo/models/materia.model.js";
+import { personModel } from "../database/dao/mongo/models/person.model.js";
+import { courseModel } from "../database/dao/mongo/models/matricula.model.js";
+import { alumnoModel } from "../database/dao/mongo/models/alumno.model.js";
+import { materiaModel } from "../database/dao/mongo/models/materia.model.js";
 
 async function indexation1(){
     const result1 = await personModel.find({ first_name: "Celia" }).explain("executionStats"); 

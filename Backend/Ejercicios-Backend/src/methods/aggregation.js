@@ -3,10 +3,10 @@
 // ✓ Primero, una stage para filtrar las pizzas por su tamaño, ya que sólo nos interesa la campaña de pizzas medianas.
 // ✓ Segundo, agrupar las pizzas por sabor para corroborar cuántos ejemplares se vendieron de dichos sabores.
 
-import orderModel from "../services/dao/mongo/models/order.model.js";
+import orderModel from "../database/dao/mongo/models/order.model.js";
 import { meals } from "../../data/arrays.data.js";
 
-import { estudianteModel } from "../services/dao/mongo/models/estudiante.model.js";
+import { estudianteModel } from "../database/dao/mongo/models/estudiante.model.js";
 // import { studentsData } from "../../data/students.json";
 
 async function aggregation1(){ 

@@ -19,7 +19,11 @@ function validateHash(user, password){ //Validamos el hash.
 }
 
 //JSON Web Tokens JWT --> Generate token JWT usando jwt.sign: Primer argumento: objeto a cifrar dentro del JWT Segundo argumento: La llave privada a firmar el token. Tercer argumento: Tiempo de expiración del token.
-function generateJWToken(user){ //Generamos el token
+function generateJWToken(user){ 
+     // Generate token JWT usando jwt.sign
+     // Primer argumento: objeto a cifrar dentro del JWT
+     // Segundo argumento: La llave privada a firmar el token.
+     // Tercer argumento: Tiempo de expiración del token.
     return jwt.sign({ user }, PRIVATE_KEY, { expiresIn: '60s' })
 };
 
@@ -41,16 +45,14 @@ function authToken(req, res, next){ //El JWT token se guarda en los headers de a
 
 //LocalStorage_Cookies_PassportJWT
 function passportCall(strategy){ // para manejo de errores
-
     return async function(req, res, next){
         console.log("Entrando a llamar strategy: ", strategy);
 
-        passport.authenticate(strategy, authJWT)(req, res, next); //Colocamos (req, res, next) para que se incoque la funcion a si misma sin necesidad de llamarla desde otro medio.
+        passport.authenticate(strategy, authJWT)(req, res, next); //Colocamos (req, res, next) para que se invoque la funcion a si misma sin necesidad de llamarla desde otro medio.
 
         function authJWT(err, user, info){ //La funcion interna en passport.authenticate(), por defecto tiene tres parametros que representan el error, el usuario y la informacion.
-            console.log("err", err)
-            console.log("user", user)
-            console.log("info", info)
+            console.log("err", err); console.log("user", user); console.log("info", info);
+
             if (err) return next(err); // will generate a 500 error
             if (!user) return res.status(401).send({ error: info.messages ? info.messages : info.toString() }); // Generate a JSON response reflecting authentication status
 

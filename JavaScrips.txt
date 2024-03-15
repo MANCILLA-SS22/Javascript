@@ -1954,15 +1954,20 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 - Archivos: La información se guarda en un fichero que permite persistir la información, aun cuando el programa se reinicie o apague.
 - Base de datos: Permite que no solo se pueda almacenar información, sino también facilita la aplicación de un CRUD de manera rápida y segura. Es la persistencia por excelencia.
 
-- El patrón DAO (persistencia aislada): consiste en separar la lógica de acceso a la fuente de datos en un archivo. Éste contará con métodos homologados de manera que, si en algún momento necesitamos cambiar el acceso a los datos, el DAO de 
-  la nueva fuente de datos tenga exactamente el mismo nombre de métodos que el anterior, evitando así que haya conflictos al acceder a la información. Así, podemos tener un MemoryDAO, un fileDAO, un databaseDAO según sea el caso, e
-  intercambiarlos sin problema.
-
 - DAO: Se encargará de conectar con nuestra fuente de datos según la hayamos programado, habrá DAOs programados para hacer CRUD en memoria, DAOs para hacer CRUD en archivos, etc. Así, en la lógica de negocio sólo se necesita importar el DAO 
   a trabajar y utilizarlo. Si en algún momento necesitamos cambiar de persistencia, bastará con cambiar el DAO
 
+- El patrón DAO (persistencia aislada): consiste en separar la lógica de acceso a la fuente de datos en un archivo. Éste contará con métodos homologados de manera que, si en algún momento necesitamos cambiar el acceso a los datos, el DAO de 
+  la nueva fuente de datos tenga exactamente el mismo nombre de métodos que el anterior, evitando así que haya conflictos al acceder a la información. Así, podemos tener un MemoryDAO, un fileDAO, un databaseDAO según sea el caso, e
+  intercambiarlos sin problema
+  
 - Patrón Factory: La idea del patrón Factory, es basarse en una variable de entorno o configuración por argumentos, la cual tomará para decidir qué tipo de persistencia manejar. Esta “Fábrica” se encargará de devolver sólo el DAO que 
   necesitemos acorde con lo solicitado en el entorno o los argumentos. 
+  
+- Patron repository: 
+
+- Patron service: 
+
 
 - Data Transfer Object: DTOs or Data Transfer Objects are objects that carry data between processes in order to reduce the number of methods calls. The pattern’s main purpose is to reduce roundtrips to the server by batching up multiple 
   parameters in a single call. This reduces the network overhead in such remote operations. Another benefit is the encapsulation of the serialization’s logic (the mechanism that translates the object structure and data to a specific format 

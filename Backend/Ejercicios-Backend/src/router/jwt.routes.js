@@ -9,7 +9,6 @@ router.post('/login', passport.authenticate("login", {failureRedirect: "api/jwt/
 router.get("/logout", logout);
 router.get("/fail-register", failRegister);
 router.get("/fail-login", failLogin);
-
 router.get('/github', passport.authenticate("github", { session:false, scope: ['user:email'] }), async function(req, res){});  //Este primer link es el que mandamos a llamar desde el front. Al entrar, pasa por el middleware de passport-github, lo ual pedira autorizacion para acceder al perfil. En cuando se pueda acceder al perfil, passport enviara la info hacia el callback especificado. scope: [ 'user:email' ] se usa por defecto al trabajar con passport-github
 router.get("/githubcallback", passport.authenticate('github', { session:false, failureRedirect: '/github/error' }), githubcallback); 
 
