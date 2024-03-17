@@ -186,7 +186,7 @@ npm start
    
   Para completar este array de dependencias la pregunta que debo hacerme es: ¿Con que estados debo sincronizar este efecto?
      useEffect(fn) // Con todos los estados
-     useEffect(fn, []) // Con ningún estado
+     useEffect(fn, []) // Con ningún estado (Se ejecutara solo una vez sin importar que los estados cambien simultaneamente)
      useEffect(fn, [esos, estados]) //Se recomienda generalmente usar props o estados dentro de la variable de de penedencia
          
   1) useEffect hook without mentioning any dependency array like.. useEffect(someCallbackFuction); runs for every render of the functional component in which its included..
@@ -264,21 +264,73 @@ npm start
 - useContext: El contexto permite a un componente recibir información de padres lejanos sin pasarlas como props. Por ejemplo, el componente en el nivel superior de tu aplicación puede pasar el actual tema de la UI a todos los 
   componentes dentro, sin importar la profundidad dentro del componente.     
     
+    > useContext(SomeContext): Call useContext at the top level of your component to read and subscribe to context.
+      ~ SomeContext: The context that you’ve previously created with createContext. The context itself does not hold the information, it only represents the kind of information you can provide or read from components.
+      
+    > Returns: useContext returns the context value for the calling component. It is determined as the value passed to the closest SomeContext.Provider above the calling component in the tree. If there is no such provider, then the returned 
+      value will be the defaultValue you have passed to createContext for that context. The returned value is always up-to-date. React automatically re-renders components that read some context if it changes.
+      
+    > Caveats: 
+      ~ useContext() call in a component is not affected by providers returned from the same component. The corresponding <Context.Provider> needs to be above the component doing the useContext() call.
+      ~ React automatically re-renders all the children that use a particular context starting from the provider that receives a different value. The previous and the next values are compared with the Object.is comparison. Skipping re-renders 
+        with memo does not prevent the children receiving fresh context values.
+      ~ If your build system produces duplicates modules in the output (which can happen with symlinks), this can break context. Passing something via context only works if SomeContext that you use to provide context and SomeContext that you 
+        use to read it are exactly the same object, as determined by a === comparison.
+    
+
     
 - useRef: This allows you to persist values between renders.This allows us to get access to other DOM elements and work with them. We can set up a connection between a HTML element which is being rendered in the end, and our JS code. 
   In difference with useState, useRef doesn't trigger a render and re-render of the component. It is not used for something that we're rendering, it's a hook that is used for values that are not needded for rendering.
   Se utiliza para crear una referencia mutable. Este hook retorna un objeto con una propiedad current la cual apuntará a un valor y podremos mutar. Se utiliza a menudo para acceder a elementos del DOM y modificarlos directamente. Esto 
   puede ser especialmente útil cuando se trabaja con librerías de terceros que requieren acceso directo a elementos del DOM. Es recomendable, siempre que sea posible, dejarle a React la responsabilidad de manejar el DOM. Además, useRef 
   también puede ser utilizado para mantener valores persistentes en el componente, lo que puede ser útil para realizar cálculos o para almacenar datos temporales que no deben ser expuestos al estado del componente. Es decir, cuando 
-  actualizamos un estado, modificamos todo el contenido del componente, pero no los pertenecientes a useRef().
+  actualizamos un estado o modificamos todo el contenido del componente, pero no los pertenecientes a useRef(). Esto es de gran ayuda porque en ocaciones dichas variables se pueden llegar a perder con los cambios de estado, y al utilizar 
+  useRef(), esas variables siempre seguiran existiendo y con el mismo valor que le asignamos en un principio. Pero, si nosotros cambiamos el nombre de esa varaible, nuestra aplicacion no volvera a renderizarse, o sea, no se vera reflejado el 
+  cambio en nuestra aplicacion pero si podriamos verlo en un console.log(), ya que internamente si cambiara. Pero, si el estado cambia o se actualiza la aplicacion, ahi SI se vera reflejado el cambio en esa variable de useref().
          
   const refObject = useRef( initialValue ); //initial value: pass the initial value to the useRef hook    //ref: React returns an object with a current property
+  
+  > Parameters 
+    ~ initialValue: The value you want the ref object’s current property to be initially. It can be a value of any type. This argument is ignored after the initial render.
+
+  > Returns: useRef returns an object with a single property:
+    ~ current: Initially, it’s set to the initialValue you have passed. You can later set it to something else. If you pass the ref object to React as a ref attribute to a JSX node, React will set its current property.
+      On the next renders, useRef will return the same object.
+
+  > Caveats 
+    ~ You can mutate the ref.current property. Unlike state, it is mutable. However, if it holds an object that is used for rendering (for example, a piece of your state), then you shouldn’t mutate that object.
+    ~ When you change the ref.current property, React does not re-render your component. React is not aware of when you change it because a ref is a plain JavaScript object.
+    ~ Do not write or read ref.current during rendering, except for initialization. This makes your component’s behavior unpredictable.
+    ~ In Strict Mode, React will call your component function twice in order to help you find accidental impurities. This is development-only behavior and does not affect production. Each ref object will be created twice, but one of the 
+      versions will be discarded. If your component function is pure (as it should be), this should not affect the behavior.
         
 
+- useCallback: permite guardar en caché una función definida antes de pasarla a un componente optimizado. useCallback is a React Hook that lets you cache a function definition between re-renders.
+        
+                                                   const cachedFn = useCallback(fn, dependencies)
+        
+  > Parameters 
+    ~ fn: The function value that you want to cache. It can take any arguments and return any values. React will return (not call!) your function back to you during the initial render. On next renders, React will give you the same function 
+      again if the dependencies have not changed since the last render. Otherwise, it will give you the function that you have passed during the current render, and store it in case it can be reused later. React will not call your function. 
+      The function is returned to you so you can decide when and whether to call it.
+      
+    ~ dependencies: The list of all reactive values referenced inside of the fn code. Reactive values include props, state, and all the variables and functions declared directly inside your component body. If your linter is configured for 
+      React, it will verify that every reactive value is correctly specified as a dependency. The list of dependencies must have a constant number of items and be written inline like [dep1, dep2, dep3]. React will compare each dependency 
+      with its previous value using the Object.is comparison algorithm.
+    
+  > Returns: 
+    On the initial render, useCallback returns the fn function you have passed. During subsequent renders, it will either return an already stored fn  function from the last render (if the dependencies haven’t changed), or return the fn 
+    function you have passed during this render.
+    
+  > Caveats 
+    ~ useCallback is a Hook, so you can only call it at the top level of your component or your own Hooks. You can’t call it inside loops or conditions. If you need that, extract a new component and move the state into it.
+      React will not throw away the cached function unless there is a specific reason to do that. For example, in development, React throws away the cache when you edit the file of your component. Both in development and in production, React 
+      will throw away the cache if your component suspends during the initial mount. In the future, React may add more features that take advantage of throwing away the cache—for example, if React adds built-in support for virtualized lists 
+      in the future, it would make sense to throw away the cache for items that scroll out of the virtualized table viewport. This should match your expectations if you rely on useCallback as a performance optimization. Otherwise, a state 
+      variable or a ref may be more appropriate.
+        
+        
 - useMemo: permite guardar en caché los resultados de un cálculo costoso de una funcion, y dicha funcion se volvera a ejecutar cuando una de sus dependencias (las cuales nosotros mismos definimos) cambie.
-        
-- useCallback: permite guardar en caché una función definida antes de pasarla a un componente optimizado.
-
 
         
 - useImperativeHandle permite personalizar la ref expuesta por tu componente. Esto rara vez se usa. 

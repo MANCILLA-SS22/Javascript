@@ -6,9 +6,7 @@ function ClicksCounter() {
   useEffect(() => {
     function handleClick(){
       console.log("HandleClick");
-      setClicks(function(prevClicks){
-        return prevClicks + 1;
-      });
+      setClicks(prevClicks => prevClicks + 1);
     };
 
     document.addEventListener("click", handleClick);
@@ -20,11 +18,12 @@ function ClicksCounter() {
   }, []);
 
   return <h1>{clicks}</h1>
-}
+};
 
 function App(){
   const [show, setShow] = useState(true);
 
+  console.log("Render!!")
   return (
     <div>
       {show && <ClicksCounter/>}
