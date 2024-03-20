@@ -1,13 +1,14 @@
-import { SECRET_KEY, EXPIRES_IN } from "./config/dotenvMain/env.config.js";
+import { SECRET_KEY, EXPIRES_IN, SERVICE, PORT_NODEMAILER, EMAIL_USER, EMAIL_PASSWORD, PRIVATE_KEY } from "./config/dotenvMain/env.config.js";
 import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken';
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import passport from "passport";
+import nodemailer from 'nodemailer';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const secretKey = process.env.PRIVATE_KEY;//JSON Web Tokens JWT --> Generate token JWT usando jwt.sign: Primer argumento: objeto a cifrar dentro del JWT Segundo argumento: La llave privada a firmar el token. Tercer argumento: Tiempo de expiración del token.
+const secretKey = PRIVATE_KEY;//JSON Web Tokens JWT --> Generate token JWT usando jwt.sign: Primer argumento: objeto a cifrar dentro del JWT Segundo argumento: La llave privada a firmar el token. Tercer argumento: Tiempo de expiración del token.
 
 function createHash(password){ //Generamos el hash.
     return bcrypt.hashSync(password, bcrypt.genSaltSync(10)); //genSaltSync genera un Salt de 10 caracteres. Un Salt es un string random que hace que el proceso de hasheo se realice de manera impredecible. Devuelve un string con el password hasheado. El proceso es irreversible
@@ -63,4 +64,14 @@ function authorization(role){ // para manejo de Auth
     }
 };
 
-export { __dirname, createHash, validateHash, generateJWToken, authToken, passportCall, authorization, secretKey };
+//Transporter de Node Mailer
+const transporter = nodemailer.createTransport({
+    service: SERVICE,
+    port: PORT_NODEMAILER,
+    auth: {
+        user: EMAIL_USER,
+        pass: EMAIL_PASSWORD
+    },
+});
+
+export { __dirname, createHash, validateHash, generateJWToken, authToken, passportCall, authorization, secretKey, transporter };

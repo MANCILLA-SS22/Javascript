@@ -1,16 +1,24 @@
-// 1. Manejo de cookies
-// 2. Uso de passport avanzado con cookies y localstorage (sin sessions)
-// 3. Uso de process, variables de entorno (dotenv) y child process. 
-// 4. Arquitectura de capas, servidor, diseno y persistencia. 
-// 5. Patron Singleton (para una sola instancia en una clase)
-// 6. Comunicación entre Frontend y Backend. Uso de "factory", "service" y DAO.
-// 7. Mailer y mensajeria
-// 8. Test y Mocks
-// 9. Optimizacion (gzip y brotli, error handling)
-// 10. Logging y testing de performance 
+// 1. Express
+// 2. Multer
+// 3. Uso de plantillas con handlebars
+// 4. Websockets
+// 5. MongoDB & Mongoose
+// 6. Mongo avanzado (indexation, aggregation & pagination)
+// 6. Mongoose avanzado (index properties, virtual properties, document middlewares, query middlewares aggregation middlewares, instance methods, static methods)
+// 8. Manejo de cookies
+// 9. Uso de passport avanzado con cookies y localstorage (sin sessions)
+// 10. Uso de process, variables de entorno (dotenv) y child process. 
+// 11. Arquitectura de capas, servidor, diseno y persistencia. 
+// 12. Patron Singleton (para una sola instancia en una clase)
+// 13. Comunicación entre Frontend y Backend. Uso de "factory", "service" y DAO.
+// 14. Mailing y mensajeria
+// 15. Test y Mocks
+// 16. Optimizacion (gzip y brotli, error handling)
+// 17. Logging y testing de performance 
+// 18. Clusters, process, child process, path with NodeJS
 
 // nodemon src/backend.js --mode prod   -->   Servidor escuchando por el puerto: 3001
-// nodemon src/backend.js --mode dev   -->   Servidor escuchando por el puerto: 5500
+//    -->   Servidor escuchando por el puerto: 5500
 import express from "express";
 import handlebars from "express-handlebars";
 import Handlebars from "handlebars";

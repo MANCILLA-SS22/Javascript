@@ -11,7 +11,7 @@ class UserServiceMongo{
 
     async findUser(parameter){
         try {
-            return await userModel.findOne(parameter);
+            return await userModel.findOne({email: parameter});
         } catch (error) {
             throw new Error(error)
         }
@@ -28,8 +28,23 @@ class UserServiceMongo{
     async updateUser (_id, user){
         try {
             return await userModel.findByIdAndUpdate(_id, user);
-
         }catch (error) {
+            return error;
+        }
+    };
+
+    async updatePassword(email, newPassword){
+        try {
+            return await userModel.findOneAndUpdate({email: email}, {password: newPassword})
+        } catch (error) {
+            return error;
+        }
+    }
+
+    async updateRole(email, newRole){
+        try {
+            return await userModel.findOneAndUpdate({ email }, { role: newRole });
+        } catch (error) {
             return error;
         }
     }    

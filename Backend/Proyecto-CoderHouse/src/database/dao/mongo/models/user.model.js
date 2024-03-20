@@ -12,7 +12,7 @@ const userSchema = new Schema({
             ref: "carts"
         }
     ],
-    role: {type: String, default: 'USER', enum: ['USER', 'ADMIN', "PREMIUM"]}
+    role: {type: String, default: 'USER', enum: ['USER', 'ADMIN', "PREMIUM"]} //PREMIUM estará habilitado para crear productos
 });
 
 

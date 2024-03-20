@@ -4,12 +4,12 @@ import Route from "../../router/class.routes.js"
 // import { productService } from "../../database/factory.js";
 import { productService } from "../../database/service.js";
 import { ProductDto } from "../../database/dto/Product.dto.js";
-import {productError}  from "../../database/errors/product/product.error.js";
-import { generateMock } from "../../database/mocks/productMocks.js";
+import { generateMock } from "../../mocks/productMocks.js";
+import { productError } from "../../errors/product/product.error.js";
 
 class ProductRouter extends Route{
     init(){
-        this.get("/", ['PUBLIC'], async function(req, res){
+        this.get("/", ['PUBLIC'], passport.authenticate('jwt', { session: false }), async function(req, res){
             try {
                 // Copiar y pegar en barra de navegacion --> http://localhost:5500/api/products?page=1&limit=3&sort=asc&stock=8&category=New
                 let {category, stock, limit, page, sort} = req.query;
@@ -67,6 +67,7 @@ class ProductRouter extends Route{
                 products.hasPrevPage === false ? prevLink = null : prevLink = link + "?"+ `page=${products.prevPage}`+ `&limit=${numLimit}&sort=${prevSort}$`;
                 products.hasNextPage === false ? nextLink = null : nextLink = link + "?"+ `page=${products.nextPage}`+ `&limit=${numLimit}&sort=${prevSort}$`;
 
+                console.log(req.user)
         
                 const respuestaInfo = {
                     status: "success",                 //success/error
@@ -166,7 +167,7 @@ class ProductRouter extends Route{
             }
         });
         
-        this.delete("/:id", ['ADMIN'], async function(req, res){
+        this.delete("/:id", ['ADMIN', 'PREMIUM'], async function(req, res){
             try {
                 const {id} = req.params;
                 const verificarId = await productService.getProductById(id);

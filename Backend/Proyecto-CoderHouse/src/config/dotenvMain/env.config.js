@@ -14,18 +14,9 @@ const EXPIRES_IN = process.env.EXPIRES_IN;
 const clientID_github = process.env.clientID_github;
 const clientSecret_github = process.env.clientSecret_github
 const PERSISTENCE = program.opts().persist;
+const SERVICE = process.env.SERVICE;
+const PORT_NODEMAILER = process.env.PORT_NODEMAILER;
+const EMAIL_USER = process.env.EMAIL_USER;
+const EMAIL_PASSWORD = process.env.EMAIL_PASSWORD;
 
-
-export { 
-    MONGO_URL, 
-    PORT, 
-    COOKIE_CODE, 
-    SECRETKEY, 
-    PRIVATE_KEY, 
-    SECRET_KEY, 
-    EXPIRES_IN, 
-    clientID_github, 
-    clientSecret_github, 
-    PERSISTENCE,
-    environment
-}
+export { MONGO_URL, PORT, COOKIE_CODE, SECRETKEY, PRIVATE_KEY, SECRET_KEY, EXPIRES_IN, clientID_github, clientSecret_github, PERSISTENCE, environment, SERVICE,PORT_NODEMAILER, EMAIL_USER, EMAIL_PASSWORD }

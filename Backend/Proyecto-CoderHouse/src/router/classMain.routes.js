@@ -17,7 +17,7 @@ const sessionsController = new SessionsController();
 
 function routerMain(app){
 
-    app.use(addLogger)
+    // app.use(addLogger);
     app.use("/realTimeProduct", realTimeProductsController.getRouter());
     
     app.use("/api/carts", routerCarts.getRouter());

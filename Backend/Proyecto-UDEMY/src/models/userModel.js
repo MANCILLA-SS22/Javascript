@@ -68,7 +68,7 @@ userSchema.pre("/^find/", function(next){
     next();
 });
 
-//INSTANCE METHOD: It's a method that it's gonna be available on all documents of a certain collection
+//INSTANCE METHODS: It's a method that it's gonna be available on all documents of a certain collection
 userSchema.methods.correctPassword = async function(candidatePassword, userPassword){
     return await bcrypt.compare(candidatePassword, userPassword);
 }

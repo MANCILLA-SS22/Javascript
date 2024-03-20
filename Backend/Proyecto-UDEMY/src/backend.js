@@ -22,7 +22,6 @@ const app = express();
 
 // console.log(process.env); //process.env now has the keys and values you defined in your .env file
 if(process.env.NODE_ENV === "development"){ //process.env.NODE_ENV === "development" or app.get('env') are the same. //In express, app.get('env') returns 'development' if NODE_ENV is not defined in "config.env". So you don't need the line to test its existence and set default.
-    // console.log("1")
     app.use(morgan("dev"));
 }
 

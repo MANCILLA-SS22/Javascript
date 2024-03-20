@@ -30,6 +30,7 @@ function res(data){
 }
 
 function procesarDatos(data){
+    console.log(data.user)
     header.innerHTML = `
         <h1>¡Bienvenido/a ${data.user.name}!</h1> <h3>Eres: ${data.user.role}</h3>
         <button class="btn btn-dark" onclick="res('${data.prevLink}')">Previous Link</button>

@@ -48,8 +48,8 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 https://www.w3schools.com/jsref/jsref_class_super.asp#gsc.tab=0&gsc.q=unhandledRejection
 https://www.geeksforgeeks.org/javascript-array-findindex-method/
 https://nodejs.org/en/about/ 
-https://nextui.org  
-https://docs.nestjs.com 
+https://nextui.org
+https://docs.nestjs.com
 https://axios-http.com/docs/intro  
 https://socket.io/docs/v4/tutorial/introduction 
 https://www.mongodb.com/docs/manual/

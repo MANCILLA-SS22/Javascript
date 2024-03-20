@@ -1,3 +1,4 @@
+import passport from "passport";
 import Route from "../../router/class.routes.js";
 
 function verifyLoggin(req, res, next){
@@ -28,6 +29,23 @@ class LoginRegister extends Route {
             }
         });
 
+        this.get("/passwordForget", ['PUBLIC'], function(req, res){
+            try {
+                res.status(200).render('passwordForget');
+            } catch (error) {
+                res.sendServerError(`something went wrong ${error}`)
+            }
+        });
+        
+        this.get("/passwordReset/:id", ['PUBLIC'], passport.authenticate('passwordUpdate', { session: false }), function(req, res){
+            try {
+                const expirationTime = new Date().getTime();
+                (req.user.email && req.user.expirationTime && expirationTime > req.user.expirationTime) ? redirect('/passwordForget'): res.status(200).render('passwordReset');
+            } catch (error) {
+                res.sendServerError(`something went wrong ${error}`);
+            }
+        });        
+
         this.get("/github/login", ['PUBLIC'], function(req, res){
             try {
                 res.render("github-login");
@@ -43,6 +61,14 @@ class LoginRegister extends Route {
         this.get("/register", ['PUBLIC'], function(req, res){
             res.render('register');
         });  
+
+        this.get("/waitting", ['PUBLIC'], function(req, res){
+            try {
+                res.status(200).render('waitting');
+            } catch (error) {
+                res.sendServerError(`something went wrong ${error}`)
+            }
+        });
 
         this.get("/profile", ['USER'], function(req, res){
             try {

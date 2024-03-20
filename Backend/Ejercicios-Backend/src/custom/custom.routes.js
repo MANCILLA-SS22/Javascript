@@ -87,10 +87,10 @@ class CustomRouter { //Esta es la clase padre, y CustomRouter es la clase que he
     };
 
     applyCallbacks(callbacks) { // (3)
-        const val = callbacks.map(function(callback){ // (4)
+        const val = callbacks.map(function(event){ // (4)
             return async function(...params){ // (5)
                 try {                    
-                    await callback.apply(this, params); // (6)
+                    await event.apply(this, params); // (6)
                 } catch (error) {
                     console.error(error);                
                     params[1].status(500).send(error); //params[1] hace referencia al res. Si usamos params[0], haremos referencia al req.

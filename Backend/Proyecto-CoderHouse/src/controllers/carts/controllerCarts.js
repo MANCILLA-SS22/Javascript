@@ -180,7 +180,7 @@ class CartRouter extends Route{
             }
         });
         
-        this.delete("/:cid", ['PUBLIC'], verify, async function(requset, res){ //deberá eliminar todos los productos del carrito
+        this.delete("/:cid", ['ADMIN'], verify, async function(requset, res){ //deberá eliminar todos los productos del carrito
             try {
                 const {cid} = requset.params;
                 const deleteProduct = await cartService.deleteProductsById(cid);

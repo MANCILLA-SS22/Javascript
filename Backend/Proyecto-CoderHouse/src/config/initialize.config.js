@@ -22,6 +22,7 @@ const ExtractJWT = jwtStrategy.ExtractJwt;
 
 function initialPassport(){ 
     passport.use('jwt', new JwtStrategy( {jwtFromRequest: ExtractJWT.fromExtractors([cookieExtractor]), secretOrKey: toString(PRIVATE_KEY) }, jwt ));
+    passport.use('passwordUpdate', new JwtStrategy( {jwtFromRequest: ExtractJWT.fromExtractors([cookieExtractorEmail]), secretOrKey: toString(PRIVATE_KEY) }, jwt ));
     passport.use("register", new localStrategy( {passReqToCallback: true, usernameField: 'email'}, register ));
     passport.use("login", new localStrategy( {passReqToCallback: true, usernameField: 'email'}, login ));
     passport.use("github", new GitHubStrategy( {clientID: clientID_github, clientSecret: clientSecret_github, callbackUrl: "http://localhost:5500/api/auth/githubcallback"}, github ));
@@ -32,7 +33,7 @@ function initialPassport(){
 async function jwt(jwt_payload, done){
     // console.log("Entrando a passport Strategy con JWT");
     try {
-        // console.log("JWT obtenido del Payload: ", jwt_payload);
+        console.log("JWT obtenido del Payload: ", jwt_payload);
         return done(null, jwt_payload.user);
     } catch (error) {
         return done(error)
@@ -76,7 +77,7 @@ async function login(req, username, password, done){
     } catch (error) {
         return done(error);
     } 
-}; 
+};
 
 async function github(accessToken, refreshToken, profile, done){
     //console.log("Profile obtenido del usuario de Github", profile);
@@ -111,6 +112,12 @@ function cookieExtractor(req){
         token = req.cookies['jwtCookieToken'];
     }
     // console.log("Token obtenido desde Cookie: ", token);
+    return token;
+};
+
+function cookieExtractorEmail(req){
+    let token = null;
+    if (req && req.cookies) token = req.cookies['emailCookieToken'];
     return token;
 };
 
