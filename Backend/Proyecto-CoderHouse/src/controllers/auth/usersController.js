@@ -9,7 +9,7 @@ const userServiceMongo = new UserServiceMongo();
 
 class AuthRouter extends Route {
     init(){
-        this.post('/login', ['PUBLIC'], passport.authenticate("login", {session:false, failureRedirect: "fail-failLogin"}), login); // Eliminar "session:false" si se trabaja con passport. Agregar "session:false" si se trabaja con JWT
+        this.post('/login', ['PUBLIC'], passport.authenticate("login", {session:false, failureRedirect: "fail-login"}), login); // Eliminar "session:false" si se trabaja con passport. Agregar "session:false" si se trabaja con JWT
         this.post('/register', ['PUBLIC'], passport.authenticate("register", {session:false, failureRedirect: "fail-register"}), register);
         this.post("/passwordReset", ["PUBLIC"], reset);
         this.post("/passwordUpdate", ["PUBLIC"], passport.authenticate('passwordUpdate', { session: false }), update);
@@ -72,6 +72,7 @@ class AuthRouter extends Route {
                 };
     
                 const emailSend = await sendNotification(email, mensaje);
+                console.log("emailSend", emailSend)
                 res.json({emailSend});
             } catch (error) {
                 res.sendServerError(`something went wrong ${error}`)
@@ -82,7 +83,6 @@ class AuthRouter extends Route {
             try {
                 const {email} = req.body;
                 const user = await userServiceMongo.findUser(email);
-                console.log("user --> ", user);
                 if(req.user.role === 'USER'){
                     await userServiceMongo.updateRole(email, "PREMIUM");
                     res.json({message: "Usuario actualizado a PREMIUM"})
@@ -104,7 +104,6 @@ class AuthRouter extends Route {
                 const {pw2} = req.body;
                 const email = req.user.email;
                 const user = await userServiceMongo.findUser(email);
-                // console.log("User --> ", user)
                 if(pw1 === pw2){
                     if(validateHash(user, pw1)){
                         res.json({message: "Las nueva y anterior son iguales. Favor de introducir una diferente!!"});
@@ -154,7 +153,7 @@ class AuthRouter extends Route {
         }
         
         function failLogin(req, res){
-            res.status(401).send({ error: "Failed to process login!" });
+            res.status(401).send({ error: "Password or username are incorrect. Please verify!" });
         }
     }
 }

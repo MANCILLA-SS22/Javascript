@@ -8,9 +8,9 @@ const router = Router();
 // (COMENTAR TODOS LOS METODOS MENOS EL QUE SE VA A UTILIZAR)
 
 //Metodo 1: Usando Authorization Bearer Token (USAR POSTMAN O NO FUNCIONARA)
-// router.get("/", authToken, function(req, res){
-//     res.render('profile', {user: req.user});
-// });
+router.get("/", authToken, function(req, res){
+    res.render('profile', {user: req.user});
+});
 
 //Metodo 2: Usando JWT por Cookie
 // router.get("/", passport.authenticate('jwt', { session: false }), function(req, res){  //Colocamos session:false debido a que no necesitamos express-session para estos procesos.

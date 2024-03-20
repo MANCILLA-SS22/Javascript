@@ -7,9 +7,10 @@ import { ProductDto } from "../../database/dto/Product.dto.js";
 import { generateMock } from "../../mocks/productMocks.js";
 import { productError } from "../../errors/product/product.error.js";
 
+
 class ProductRouter extends Route{
     init(){
-        this.get("/", ['PUBLIC'], passport.authenticate('jwt', { session: false }), async function(req, res){
+        this.get("/", ['USER'], passport.authenticate('jwt', { session: false }), async function(req, res){
             try {
                 // Copiar y pegar en barra de navegacion --> http://localhost:5500/api/products?page=1&limit=3&sort=asc&stock=8&category=New
                 let {category, stock, limit, page, sort} = req.query;
@@ -118,9 +119,10 @@ class ProductRouter extends Route{
             }
         });
         
-        this.post("/", ['ADMIN'], async function(req, res){
+        this.post("/", ['ADMIN'], passport.authenticate('jwt', { session: false }), async function(req, res){
             try {
-                const productDto = new ProductDto(req.body);
+
+                const productDto = new ProductDto(req.body, req.user.email);
 
                 if (productDto.title !== undefined && productDto.description !== undefined && productDto.price !== undefined && productDto.thumbnail !== undefined && productDto.code !== undefined && productDto.stock !== undefined && productDto.status !== undefined && productDto.category !== undefined) {
                     const crearProducto = await productService.addProduct(productDto);
