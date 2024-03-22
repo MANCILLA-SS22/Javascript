@@ -4,7 +4,7 @@
 // 4. Websockets
 // 5. MongoDB & Mongoose
 // 6. Mongo avanzado (indexation, aggregation & pagination)
-// 6. Mongoose avanzado (index properties, virtual properties, document middlewares, query middlewares aggregation middlewares, instance methods, static methods)
+// 7. Mongoose avanzado (index properties, virtual properties, document middlewares, query middlewares aggregation middlewares, instance methods, static methods)
 // 8. Manejo de cookies
 // 9. Uso de passport avanzado con cookies y localstorage (sin sessions)
 // 10. Uso de process, variables de entorno (dotenv) y child process. 
@@ -18,7 +18,7 @@
 // 18. Clusters, process, child process, path with NodeJS
 
 // nodemon src/backend.js --mode prod   -->   Servidor escuchando por el puerto: 3001
-//    -->   Servidor escuchando por el puerto: 5500
+// nodemon src/backend.js --mode dev    -->   Servidor escuchando por el puerto: 5500
 import express from "express";
 import handlebars from "express-handlebars";
 import Handlebars from "handlebars";

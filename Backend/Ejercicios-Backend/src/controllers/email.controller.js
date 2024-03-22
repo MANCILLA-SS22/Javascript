@@ -81,7 +81,7 @@ function sendEmailWithAttachments(req, res){
 
 const mailOptionsToReset = {
     from: config.gmailAccount,
-    // to: config.gmailAccount,
+    to: config.gmailAccount,
     subject: "Reset password",
 }
 
@@ -94,22 +94,19 @@ function sendEmailToResetPassword(req, res){
         
         // Generamos un token/idrandom
         const token = v4();
-        const link = `http://localhost:9090/api/email/reset-password/${token}`
+        const link = `http://localhost:5500/api/email/reset-password/${token}`
 
-        tempDbMails[token] = {
+        tempDbMails[token] = { // Esto es igual a --> tempDbMails.token
             email,
-            expirationTime: new Date(Date.now() + 1 * 60 * 1000) //Esto representa una hora en milisegundos. Multiplicando 60 (segundos) por 60 (minutos) y luego por 1000 (milisegundos), obtenemos el equivalente a una hora en milisegundos.
+            expirationTime: new Date(Date.now() + 1*60*1000) //Esto representa una hora en milisegundos. Multiplicando 60 (segundos) por 60 (minutos) y luego por 1000 (milisegundos), obtenemos el equivalente a una hora en milisegundos.
         }
         console.log(tempDbMails);
 
         mailOptionsToReset.to = email
         mailOptionsToReset.html = `To reset your password, click on the following link: <a href="${link}"> Reset Password</a>`
 
-        transporter.sendMail(mailOptionsToReset, (error, info) => {
-            if (error) {
-                console.log(error);
-                res.status(500).send({ message: "Error", payload: error });
-            }
+        transporter.sendMail(mailOptionsToReset, function(error, info){
+            if (error) res.status(500).send({ message: "Error", payload: error });
             console.log('Message sent: %s', info.messageId);
             res.send({ message: "Success", payload: info })
         })
@@ -120,7 +117,7 @@ function sendEmailToResetPassword(req, res){
 }
 
 function resetPassword(req, res){
-    const token = req.params.token;
+    const {token} = req.params;
     const email = tempDbMails[token];
     console.log(email);
 
@@ -134,7 +131,6 @@ function resetPassword(req, res){
         return res.redirect('/send-email-to-reset')
     }
 
-    // Hacemos toda la logica de Update de Password contra la DB
     res.send('<h1>Start Reset Password Porcess</h1>')
 
 }

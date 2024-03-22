@@ -1,6 +1,6 @@
 import { Router } from "express";
 import {getUsers, saveUser, fakeUser } from '../controllers/users.controller.js';
-import { errorHandler } from "../database/errors/middlewares/index.js";
+import { errorHandler } from "../errors/middlewares/index.js";
 
 const router = Router();
 
