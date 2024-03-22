@@ -71,7 +71,7 @@ async function register(req, username, password, done){
 async function login(req, username, password, done){
     try {
         const user = await userService.findUser(username);
-        console.log("user --> ", user);
+        // console.log("user --> ", user);
         if (!user) return done(null, false);
         if (!validateHash(user, password)) return done(null, false);
         return done(null, user);

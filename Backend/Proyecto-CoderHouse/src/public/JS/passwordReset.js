@@ -1,5 +1,6 @@
 const form = document.getElementById('form');
 const respuesta = document.getElementById("res");
+const login = document.getElementById("login")
 
 form.addEventListener('submit', function(e){
     e.preventDefault();
@@ -15,4 +16,6 @@ form.addEventListener('submit', function(e){
     .then(res => res.json())
     .then(function(data){respuesta.innerHTML = `<h1>Mensaje: ${data.message}</h1>`})
     .catch(error => console.log(error));
+
+    setTimeout(()=>{login.click()}, 2000);
 });

@@ -1,6 +1,6 @@
 const form = document.getElementById('form');
 const respuesta = document.getElementById("res");
-const waiting = document.getElementById("waiting")
+const waiting = document.getElementById("waitting")
 
 form.addEventListener('submit', function(e){
     e.preventDefault();
@@ -13,7 +13,8 @@ form.addEventListener('submit', function(e){
         body: JSON.stringify(obj),
         headers: { 'Content-Type': 'application/json' }
     })
+    .then(data => console.log(data))
     .catch(error => console.log(error));
 
-    // setTimeout(()=>{waiting.click()}, 1000);
+    setTimeout(()=>{waiting.click()}, 2000);
 });

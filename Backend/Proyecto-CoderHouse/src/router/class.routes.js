@@ -44,12 +44,14 @@ class CustomRouter { //Esta es la clase padre, y CustomRouter es la clase que he
                 if (!user) return res.status(401).send({ error: info.messages ? info.messages : info.toString() }); // Generate a JSON response reflecting authentication status
                 // console.log("user.role", user.role.toUpperCase());
                 // console.log("user.role", policies[0])
-                if (user.role.toUpperCase() !== policies[0]) return res.status(403).send({ error: "Forbidden. You don`t have enough permissions" });
+                // if (user.role.toUpperCase() !== policies[0]) return res.status(403).send({ error: "Forbidden. You don`t have enough permissions" });
+                if( !policies.includes(user.role.toUpperCase()) )return res.status(401).send({error: "El usuario no tiene privilegios, revisa tus roles!"});
 
                 // console.log("Usuario obtenido del strategy: ", user);
                 req.user = user;
                 next();
             }
+
         // Diferentes metodos de autenticacion con passport
         // Metodo 1: Usando Authorization Bearer Token (USAR POSTMAN O NO FUNCIONARA)
         // this.get("/", ['PUBLIC'], authToken, async function(req, res){
@@ -74,7 +76,6 @@ class CustomRouter { //Esta es la clase padre, y CustomRouter es la clase que he
         //     const allProducts = await productManager.getProducts();
         //     res.render('profile', {user: req.user, data: allProducts});
         // }); 
-
         }
     }
 

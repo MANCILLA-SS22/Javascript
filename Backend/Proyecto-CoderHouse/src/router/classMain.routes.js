@@ -16,16 +16,13 @@ const authController = new AuthController();
 const sessionsController = new SessionsController();
 
 function routerMain(app){
-
     // app.use(addLogger);
-    app.use("/realTimeProduct", realTimeProductsController.getRouter());
-    
+    app.use("/", viewsController.getRouter());
     app.use("/api/carts", routerCarts.getRouter());
     app.use("/api/products", routerProducts.getRouter());   
-    
-    app.use("/", viewsController.getRouter());
     app.use("/api/auth", authController.getRouter());
     app.use("/api/sessions", sessionsController.getRouter());
+    app.use("/realTimeProduct", realTimeProductsController.getRouter());
 }
 
 export default routerMain;

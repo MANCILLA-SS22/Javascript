@@ -1,20 +1,10 @@
 const productos = document.getElementById("productos");
 const header = document.getElementById("header");
 
-let page = 1;
-let limit = 4;
-let sort = "asc";
-let stock = 1;
-let category = "Old";
-let id;
-let link = `http://localhost:5500/api/products?page=${page}&limit=${limit}&sort=${sort}&stock=${stock}&category=${category}`
-// let linkDelete = `http://localhost:5500/api/products/${id}`
-
-// const searchParams = new URLSearchParams(window.location.search);
-// console.log(searchParams)
+let link = `http://localhost:5500/api/products/`;
 
 window.onload = function(){
-    fetch(`${link}`) 
+    fetch(link) 
     .then(response => response.json())
     .then(data => procesarDatos(data.payload))
     .catch(error => console.log(error));
@@ -22,21 +12,23 @@ window.onload = function(){
 
 function myFunc(){
     alert("Has cerrado sesion")
-}
+};
 
-function res(data){
-    fetch(`${data}`) 
+function res(id){
+    fetch(`${link}${id}`, {
+        method: "DELETE",
+        body: "Producto eliminado",
+        headers: { 'Content-Type': 'application/json' }
+    })
     .then(response => response.json())
-    .then(data => procesarDatos(data.payload))
-    .catch(error => console.log(error));
+    .then(json => data => procesarDatos(data.payload))
+    .catch(error => console.log(error));    
 }
 
 function procesarDatos(data){
-    console.log(data.user)
+    console.log(data)
     header.innerHTML = `
         <h1>¡Bienvenido/a ${data.user.name}!</h1> <h3>Eres: ${data.user.role}</h3>
-        <button class="btn btn-dark" onclick="res('${data.prevLink}')">Previous Link</button>
-        <button class="btn btn-dark" onclick="res('${data.nextLink}')">Next Link</button>
         <button onclick="myFunc()" class="btn btn-dark"><a class="text-decoration-none text-light" href="/api/auth/logout"> Logout </a></button>
     `;
     
@@ -51,7 +43,7 @@ function procesarDatos(data){
                     <button class="btn btn-dark">
                         <a class="text-decoration-none text-light" href='/product/${val._id}'>Product details</a>
                     </button>
-                    <button class="btn btn-dark">Add to card</button>
+                    <button class="btn btn-dark" onclick="res('${val._id}')">Delete Product</button>
                 </div>
             </div>
         `);

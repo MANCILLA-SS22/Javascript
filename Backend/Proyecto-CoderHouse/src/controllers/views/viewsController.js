@@ -160,7 +160,16 @@ class LoginRegister extends Route {
             } catch (error) {
                 res.sendServerError(`something went wrong ${error}`);
             }
-        })
+        });
+
+        this.get('/productsModify', ['ADMIN'], function(req, res){
+            try {
+                res.status(200).render('productsModify');
+            }
+            catch (error) {
+                res.sendServerError(`something went wrong ${error}`)
+            }
+        });        
     } 
 }
 

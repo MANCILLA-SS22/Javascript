@@ -17,11 +17,9 @@ import { ProductDto } from "../../database/dto/Product.dto.js";
 //     }
 // }
 
-const verify = passport.authenticate('jwt', { session: false });
-
 class CartRouter extends Route{
     init(){
-        this.get("/", ['PUBLIC'], verify, async function(req, res){
+        this.get("/", ['PUBLIC'], async function(req, res){
             try {
                 const allCarts = await cartService.getCart();
                 allCarts ? res.sendSuccess(allCarts) : res.sendClientError({message: "Not cars found"});
@@ -30,7 +28,7 @@ class CartRouter extends Route{
             }
         });
 
-        this.post("/", ['USER'], verify, async function(req, res){ //En el endpoint POST '/' del controller cart estas creando el cart como un objeto vacío. El formato correcto debe incluir una key "products" con un array vacío.
+        this.post("/", ['USER'], async function(req, res){ //En el endpoint POST '/' del controller cart estas creando el cart como un objeto vacío. El formato correcto debe incluir una key "products" con un array vacío.
             try {
                 const cart = {product: []}
                 const createdCart = await cartService.addCart(cart);
@@ -41,7 +39,7 @@ class CartRouter extends Route{
             }
         });
 
-        this.get("/:id", ['PUBLIC'], verify, async function(req, res){
+        this.get("/:id", ['PUBLIC'], async function(req, res){
             try {
                 const {id} = req.params;
                 const getId = await cartService.getCartById(id);  
@@ -52,7 +50,7 @@ class CartRouter extends Route{
             }
         });
 
-        this.get("/:cid/purchase/:uid/user", ['USER'], verify, async function(req, res){
+        this.get("/:cid/purchase/:uid/user", ['USER'], async function(req, res){
             const {cid, uid} = req.params;
             const cart = await cartService.getCartById(cid); //Filtramos el carrito con los productos dentro de el
             const products = cart.products; //Almacenamos los productos pertenecientes al carrito (estos productos vienen en formato array)
@@ -79,7 +77,7 @@ class CartRouter extends Route{
             res.sendSuccess(newTicket);
         });
 
-        this.post("/:cid/products/:pid", ['PUBLIC'], verify, async function(req, res){ 
+        this.post("/:cid/products/:pid", ['PUBLIC'], async function(req, res){ 
             try {
                 const {cid} = req.params;
                 const {pid} = req.params;
@@ -117,7 +115,7 @@ class CartRouter extends Route{
             }
         });
 
-        this.delete("/:cid/products/:pid", ['USER'], verify, async function(requset, res){ //deberá eliminar del carrito el producto seleccionado.
+        this.delete("/:cid/products/:pid", ['USER'], async function(requset, res){ //deberá eliminar del carrito el producto seleccionado.
             try {
                 const {cid} = requset.params;
                 const {pid} = requset.params;
@@ -139,7 +137,7 @@ class CartRouter extends Route{
             }
         });
 
-        this.put("/:cid", ['PUBLIC'], verify, async function(req, res){ //  deberá actualizar el carrito con un arreglo de productos con el formato especificado arriba.
+        this.put("/:cid", ['PUBLIC'], async function(req, res){ //  deberá actualizar el carrito con un arreglo de productos con el formato especificado arriba.
             try {
                 const productDto = new ProductDto(req.body);
                 const {cid} = req.params;
@@ -150,7 +148,7 @@ class CartRouter extends Route{
             }
         });
         
-        this.put("/:cid/products/:pid", ['USER'], verify, async function(req, res){ //deberá poder actualizar SÓLO la cantidad de ejemplares del producto por cualquier cantidad pasada desde req.body
+        this.put("/:cid/products/:pid", ['USER'], async function(req, res){ //deberá poder actualizar SÓLO la cantidad de ejemplares del producto por cualquier cantidad pasada desde req.body
             try {
                 const {quantity} = req.body;
                 const {cid} = req.params;
@@ -180,7 +178,7 @@ class CartRouter extends Route{
             }
         });
         
-        this.delete("/:cid", ['ADMIN'], verify, async function(requset, res){ //deberá eliminar todos los productos del carrito
+        this.delete("/:cid", ['ADMIN'], async function(requset, res){ //deberá eliminar todos los productos del carrito
             try {
                 const {cid} = requset.params;
                 const deleteProduct = await cartService.deleteProductsById(cid);
