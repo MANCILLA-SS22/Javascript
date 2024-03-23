@@ -27,7 +27,9 @@ import cors from 'cors';
 import morgan from "morgan";
 import compression from "express-compression";
 import cookieParser from "cookie-parser";
-import {Server} from "socket.io"
+import {Server} from "socket.io";
+import swaggerJsdoc from "swagger-jsdoc"; //Nos permitirá escribir nuestro archivo .yaml o .json, y a partir de ahí generará un apidoc 
+import swaggerUIExpress  from "swagger-ui-express"; //Nos permitirá linkear una interfaz gráfica que represente la documentación a partir de una ruta de nuestro servidor de express.
 
 import {__dirname} from './dirname.js';
 import { errorHandlerMiddleware, logger } from "./middlewares/middlewares.js";
@@ -56,6 +58,10 @@ import whatsappRouter from './router/whatsapp.routes.js';
 import compressionRouter from './router/compression.routes.js';
 import loggerRouter from "./router/logger.routes.js";
 import performanceRouter from "./router/performance-test.routes.js";
+import usuariosRouter from "./router/usuarios.routes.js";
+import mascotasRouter from "./router/mascotas.routes.js";
+import adopcionesRouter from "./router/adopciones.routes.js";
+import sesionesRouter from "./router/sesiones.routes.js";
 import { tests } from "./methods/test.method.js";
 import { listens } from "./methods/listens.method.js";
 import { mongoInstance } from "./methods/mongoInstance.method.js";
@@ -63,8 +69,8 @@ import { clusters } from "./methods/clusters.method.js";
 import { indexation1, indexation2, indexation3 } from "./methods/indexation.js";
 import { aggregation1, aggregation2 } from "./methods/aggregation.js";
 import { socket1, socket2, socket3, socket4 } from "./sockets/sockets.js";
-// import { addLogger } from "./config/logger_BASE.js";    //Logger 1
-// import { addLogger } from "./config/logger_CUSTOM.js";  //Logger 2
+import { addLogger } from "./config/logger_CUSTOM.js";  //Logger 1
+// import { addLogger } from "./config/logger_BASE.js"; //Logger 2
 
 function backend(){
     const app = express();
@@ -81,6 +87,17 @@ function backend(){
         defaultLayout: "main", //Plantilla principal
         handlebars: allowInsecurePrototypeAccess(Handlebars)
     };
+    const swaggerOptions = {
+        definition: {
+            openapi: "3.0.1", //Sirve para especificar las reglas específicas que seguirá la openapi generada.
+            info: {
+                title: "Documentacion API Adopme", //Título de la API que estamos documentando.
+                description: "Documentacion para uso de swagger" //Descripción de la API que estamos documentando.
+            }
+        },
+        apis: [`./src/docs/**/*.yaml`] //Aquí especificamos la ruta a los archivos que contendrán la documentación. la sintaxis utilizada indica que utilizaremos una carpeta docs, la cual contendrá subcarpetas con cada módulo a documentar
+    }
+    const specs = swaggerJsdoc(swaggerOptions);
 
     function listenFunction(){
         console.log("Server listening on port " + SERVER_PORT);
@@ -114,17 +131,23 @@ function backend(){
     app.use("/github", githubLoginViewRouter);
     app.use("/api/jwt", jwtRouter);
     app.use("/api/pets", petsRouter);
+    app.use("/api/users", usersRouter);
+    app.use("/api/session", sessionRouter);
     app.use("/api/extend/users", usersExtendRouter.getRouter());
     app.use("/api/students", studentRouter);
     app.use("/api/courses", coursesRouter);
     app.use("/api/email", emailRouter);
-    app.use("/api/users", usersRouter);
-    app.use("/api/session", sessionRouter);
     app.use("/api/sms", smsRouter);
     app.use("/api/whatsapp", whatsappRouter);
     app.use("/api/performance", performanceRouter)
     app.use("/compression", compressionRouter);
     app.use("/logger", loggerRouter); //Al usar esta ruta, hay que COMENTAR los middlewares Logger 1 y Logger 2 para ver el resultado
+    
+    app.use('/apidocs', swaggerUIExpress.serve, swaggerUIExpress.setup(specs)) // Declaramos la Api donde vamos a tener la parte grafica
+    app.use('/api/usuarios', usuariosRouter);
+    app.use('/api/mascotas', mascotasRouter);
+    app.use('/api/adopciones', adopcionesRouter);
+    app.use('/api/sesiones', sesionesRouter);
 
     // ****** Uso Websockets (Si usamos esto, DESCOMENTAR las 4 lineas de abajo y comentar "app.listen(SERVER_PORT, function(){}") ****** 
     // const httpServer = app.listen(SERVER_PORT, () => console.log(`Server listening on port ${SERVER_PORT}`));
@@ -136,7 +159,7 @@ function backend(){
 
     // ****** Uso de indexacion con mongoDB (Utilizar uno a la vez) ****** 
     // indexation1();
-    // indexation2();
+    indexation2();
     // indexation3();
 
     // ****** Uso de aggregation con mongoDB (Utilizar uno a la vez) ****** 

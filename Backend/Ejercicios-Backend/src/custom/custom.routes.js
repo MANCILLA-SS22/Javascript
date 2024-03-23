@@ -1,6 +1,6 @@
 import { Router } from "express";
 import jwt from "jsonwebtoken";
-import { PRIVATE_KEY } from '../dirname.js';
+import { PRIVATE_KEY } from "../utils/jwt.js";
 
 class CustomRouter { //Esta es la clase padre, y CustomRouter es la clase que hereda de esta misma clase.
     constructor() {

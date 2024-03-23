@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { generateJWToken } from '../dirname.js';
+import { generateJWToken } from '../utils/jwt.js';
 import passport from 'passport';
 
 const router = Router();

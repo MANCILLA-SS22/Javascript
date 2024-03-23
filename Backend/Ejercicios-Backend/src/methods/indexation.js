@@ -27,16 +27,16 @@ async function indexation2(){
     });
 
     //Parte 1: Utilizando metodos de busqueda y actualizacion en los indices
-    const course = await courseModel.findById("659a64eed08fb8d59ebce94e"); //Descomentamos esta linea y la siguiente para luego encontrar el curso segun si id. Importante recordar que aqui recivimos un objeto con los parametros establecidos
-    course.students.push("6582cc50da03636ef84f3beb"); //Una vez obtenido el objeto segun su id, ahora debemos agregar, al arreglo "students" que inicialmente esta vacio, el id 6582cc50da03636ef84f3beb. Pero hasta aqui, solo lo hemos agregado al objeto y NO a la base de datos.
-    const result = await courseModel.findByIdAndUpdate( {_id: course._id}, course ); //Finalmente, actualizamos la informacion en la base de datos. 
-    console.log("Result ", result); console.log("Course ", course);
+    // const course = await courseModel.findById("65fe8b72567514f9fb613997"); //Descomentamos esta linea y la siguiente para luego encontrar el curso segun si id. Importante recordar que aqui recivimos un objeto con los parametros establecidos
+    // course.students.push("6582cc50da03636ef84f3beb"); //Una vez obtenido el objeto segun su id, ahora debemos agregar, al arreglo "students" que inicialmente esta vacio, el id 6582cc50da03636ef84f3beb. Pero hasta aqui, solo lo hemos agregado al objeto y NO a la base de datos.
+    // const result = await courseModel.findByIdAndUpdate( {_id: course._id}, course ); //Finalmente, actualizamos la informacion en la base de datos. 
+    // console.log("Result ", result); console.log("Course ", course);
 
     //Parte 2: Incorporacion de population
-    // const course = await courseModel.findById("659a64eed08fb8d59ebce94e");
-    // console.log(JSON.stringify(course, null, 2)); 
-    // const coursePopulate1 = await courseModel.findById("659a64eed08fb8d59ebce94e").populate("students");
-    // console.log(JSON.stringify(coursePopulate1, null, 2));
+    const course = await courseModel.findById("65fe8b72567514f9fb613997");
+    console.log(JSON.stringify(course, null, 2)); 
+    const coursePopulate1 = await courseModel.findById("65fe8b72567514f9fb613997").populate("students");
+    console.log(JSON.stringify(coursePopulate1, null, 2));
 
     //Parte 3: Utilizando middlewares
     // const coursePopulate2 = await courseModel.find(); //Con este linea recuperamos toda la informacion perteneciente "students", perteneciente a la base de datos (ver el archivo course.model.js).

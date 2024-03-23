@@ -3,7 +3,8 @@ import passportLocal from "passport-local"
 import GitHubStrategy from "passport-github"
 import jwtStrategy from 'passport-jwt';
 import { userModel } from '../database/dao/mongo/models/users.model.js';
-import { PRIVATE_KEY, createHash, validateHash } from '../dirname.js';
+import { PRIVATE_KEY } from '../utils/jwt.js';
+import { createHash, validateHash } from '../utils/bcrypt.js';
 
 const localStrategy = passportLocal.Strategy; //Declaramos estrategia
 const JwtStrategy = jwtStrategy.Strategy;

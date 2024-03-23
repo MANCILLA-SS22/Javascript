@@ -1,5 +1,6 @@
 import {UserService} from "../database/dao/mongo/services/users.service.js"
-import {createHash, validateHash} from '../dirname.js';
+import { validateHash, createHash } from "../utils/bcrypt.js";
+import { generateJWToken } from "../utils/jwt.js";
 
 const userServiceDao = new UserService();
 
@@ -22,7 +23,7 @@ async function loginUser(req, res) {
             age: user.age,
             role: user.role
         };
-        //const access_token = generateJWToken(tokenUser); //No tokens for now.
+        // const access_token = generateJWToken(tokenUser); //No tokens for now.
         //console.log(access_token);
         //Con Cookie
         /*res.cookie('jwtCookieToken', access_token, {  //No cookies for now.

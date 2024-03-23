@@ -1,6 +1,7 @@
 import CustomRouter from "./custom.routes.js";
 import { UserService } from "../database/dao/mongo/services/users.service.js";
-import { createHash, validateHash, generateJWToken } from "../dirname.js"
+import { createHash,  validateHash } from "../utils/bcrypt.js";
+import { generateJWToken } from "../utils/jwt.js";
 
 
 class UsersExtendRouter extends CustomRouter { //Se exteinde la clase. Es decir, heredar de una clase. O sea, este clase puede acceder a las propiedades de la clase padre, tales como getRouter(). 

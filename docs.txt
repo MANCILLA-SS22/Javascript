@@ -48,22 +48,22 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 https://www.w3schools.com/jsref/jsref_class_super.asp#gsc.tab=0&gsc.q=unhandledRejection
 https://www.geeksforgeeks.org/javascript-array-findindex-method/
 https://nodejs.org/en/about/ 
-https://nextui.org
-https://docs.nestjs.com
-https://axios-http.com/docs/intro  
-https://socket.io/docs/v4/tutorial/introduction 
-https://www.mongodb.com/docs/manual/
-https://www.mongodb.com/docs/atlas/
-https://cloud.mongodb.com/v2/655f1475ba7fe502fcda39da#/clusters
-https://mongoosejs.com/docs/api/model.html#Model.updateOne()
+https://nodejs.org/api/process.html#process
+https://nodejs.org/api/child_process.html
+https://nodejs.org/api/os.html
 https://expressjs.com/en/guide/routing.html
 https://expressjs.com/en/resources/middleware.html
 https://expressjs.com/en/resources/middleware/cookie-parser.html
 https://expressjs.com/en/resources/middleware/cors.html
 https://expressjs.com/en/advanced/best-practice-performance.html#use-gzip-compression
-https://nodejs.org/api/process.html#process
-https://nodejs.org/api/child_process.html
-https://nodejs.org/api/os.html
+https://www.mongodb.com/docs/manual/
+https://www.mongodb.com/docs/atlas/
+https://cloud.mongodb.com/v2/655f1475ba7fe502fcda39da#/clusters
+https://mongoosejs.com/docs/api/model.html#Model.updateOne()
+https://nextui.org
+https://docs.nestjs.com
+https://axios-http.com/docs/intro  
+https://socket.io/docs/v4/tutorial/introduction 
 https://github.com/facebook/regenerator/tree/main
 https://github.com/zloirock/core-js
 https://github.com/typicode/json-server
@@ -99,6 +99,8 @@ https://github.com/stripe/stripe-node
 https://github.com/Marak/colors.js
 https://github.com/winstonjs/winston
 https://github.com/artilleryio/artillery
+https://github.com/Surnet/swagger-jsdoc
+https://github.com/scottie1984/swagger-ui-express
 
 https://www.passportjs.org/packages/
 https://bcrypt-generator.com/
@@ -112,7 +114,10 @@ https://stripe.com/en-mx
 https://docs.stripe.com/payments
 https://docs.stripe.com/payments/checkout/how-checkout-works
 https://docs.stripe.com/api/
-https://docs.stripe.com/js
+https://docs.stripe.com/js/
+
+https://swagger.io/docs/specification/about/
+https://owasp.org
 
 https://getbootstrap.com/docs/5.3/utilities/spacing/#margin-and-padding 
 https://mui.com/material-ui/getting-started/overview/ 
