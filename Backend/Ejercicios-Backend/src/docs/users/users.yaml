@@ -1,4 +1,6 @@
-paths:
+# Una documentación como mínimo debe contar con los siguientes elementos: Schemas, Routes, Inputs, Responses
+
+paths: #sirve para colocar cada ruta que se encuentre en nuestro respectivo router. Ésta contendrá, de manera indentada, todos los métodos que estén relacionados con esa ruta. Cada método puede tener una breve descripción de la intención del endpoint, así también como una etiqueta para agrupar en la documentación. 
   /api/users:
     get:
       summary: Obtiene todos los usuarios de la App.
@@ -44,8 +46,6 @@ paths:
         "500":
           description: Error inesperado en el servidor, no se pudo manejar el proceso.
 
-
-
 components:
   schemas:
     User:
@@ -80,4 +80,5 @@ components:
         password: $2b$10$jo8EM4kblYt2BXI/K5t12OsScO6fTAgjlMFxLJVAnWO6xn4tmd7T2
         role: user
         pets: []
+    
     # Pets:

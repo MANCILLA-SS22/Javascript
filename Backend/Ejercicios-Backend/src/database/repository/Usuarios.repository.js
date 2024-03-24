@@ -4,7 +4,7 @@ class UsuarioRepository extends GenericRepository{
     constructor(dao){
         super(dao);
     }
-    
+
     getUserByEmail(email){
         return this.getBy({email});
     }

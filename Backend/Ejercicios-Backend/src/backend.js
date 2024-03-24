@@ -21,20 +21,13 @@
 // nodemon src/backend.js --mode dev    -->   Servidor escuchando por el puerto: 5500
 import express from "express";
 import handlebars from "express-handlebars";
-import Handlebars from "handlebars";
-import { allowInsecurePrototypeAccess } from "@handlebars/allow-prototype-access";
 import cors from 'cors';
 import morgan from "morgan";
 import compression from "express-compression";
 import cookieParser from "cookie-parser";
 import {Server} from "socket.io";
-import swaggerJsdoc from "swagger-jsdoc"; //Nos permitirá escribir nuestro archivo .yaml o .json, y a partir de ahí generará un apidoc 
 import swaggerUIExpress  from "swagger-ui-express"; //Nos permitirá linkear una interfaz gráfica que represente la documentación a partir de una ruta de nuestro servidor de express.
 
-import {__dirname} from './dirname.js';
-import { errorHandlerMiddleware, logger } from "./middlewares/middlewares.js";
-import { loggerDate } from "./middlewares/loggerDate.js";
-import { initialPassport } from "./config/passport.config.js";
 import config from './config/config.js';
 import helloRouter from "./router/hello.routes.js";
 import paginationRouter from "./router/pagination.routes.js";
@@ -62,6 +55,13 @@ import usuariosRouter from "./router/usuarios.routes.js";
 import mascotasRouter from "./router/mascotas.routes.js";
 import adopcionesRouter from "./router/adopciones.routes.js";
 import sesionesRouter from "./router/sesiones.routes.js";
+import {__dirname} from './dirname.js';
+import { errorHandlerMiddleware, logger } from "./middlewares/middlewares.js";
+import { loggerDate } from "./middlewares/loggerDate.js";
+import { initialPassport } from "./config/passport.config.js";
+import { stencil } from "./specs/handlebars.specs.js";
+import { corsOptions } from "./specs/cors.specs.js";
+import { specs } from "./specs/swagger.specs.js";
 import { tests } from "./methods/test.method.js";
 import { listens } from "./methods/listens.method.js";
 import { mongoInstance } from "./methods/mongoInstance.method.js";
@@ -76,28 +76,6 @@ function backend(){
     const app = express();
     const usersExtendRouter = new UsersExtendRouter();
     const SERVER_PORT = config.port;
-    const corsOptions = { // Configura el middleware cors con opciones personalizadas
-        origin: 'http://localhost:5500', // Permitir solo solicitudes desde un cliente específico
-        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Configura los métodos HTTP permitidos    
-        allowedHeaders: 'Content-Type,Authorization', // Configura las cabeceras permitidas
-        credentials: true, // Configura si se permiten cookies en las solicitudes
-    };
-    const stencil = { // Inicializamos el motor con app.engine, para indicar que motor usaremos. En este caso, handlebars.engine
-        extname: "hbs", //index.hbs
-        defaultLayout: "main", //Plantilla principal
-        handlebars: allowInsecurePrototypeAccess(Handlebars)
-    };
-    const swaggerOptions = {
-        definition: {
-            openapi: "3.0.1", //Sirve para especificar las reglas específicas que seguirá la openapi generada.
-            info: {
-                title: "Documentacion API Adopme", //Título de la API que estamos documentando.
-                description: "Documentacion para uso de swagger" //Descripción de la API que estamos documentando.
-            }
-        },
-        apis: [`./src/docs/**/*.yaml`] //Aquí especificamos la ruta a los archivos que contendrán la documentación. la sintaxis utilizada indica que utilizaremos una carpeta docs, la cual contendrá subcarpetas con cada módulo a documentar
-    }
-    const specs = swaggerJsdoc(swaggerOptions);
 
     function listenFunction(){
         console.log("Server listening on port " + SERVER_PORT);
@@ -159,7 +137,7 @@ function backend(){
 
     // ****** Uso de indexacion con mongoDB (Utilizar uno a la vez) ****** 
     // indexation1();
-    indexation2();
+    // indexation2();
     // indexation3();
 
     // ****** Uso de aggregation con mongoDB (Utilizar uno a la vez) ****** 

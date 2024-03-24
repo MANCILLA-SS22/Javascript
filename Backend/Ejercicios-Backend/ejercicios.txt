@@ -125,4 +125,12 @@ Con base en lo aprendido de los loggers
 ✓ Crear además un logger (prodLogger) para que cuente con un transporte Console a nivel http y un transporte File a nivel warn
 ✓ Configurar el middleware que setea el logger en el objeto req, para que coloque el devLogger, o el prodLogger según sea el entorno.
 ✓ Corroborar los logs en múltiples entornos y analizar el comportamiento.
+
+Proceso de adopción desde Swagger
+¿Cómo lo hacemos? Se crearán los endpoints correspondientes en la documentación para llevar a cabo un proceso de adopción
+✓ Definir la documentación para mascotas, sólo es necesario definir el método get y el post para crear y ver las mascotas.
+✓ Definir la documentación para procesar el método “register” que se encargará de crear un usuario. No es necesario implementar el login, sólo el registro.
+✓ Definir la documentación de adopción, la cual deberá recibir doble parámetro para poder llevar a cabo el proceso de adopción.
+✓ Corroborar en la base de datos que las entidades se estén creando correctamente.
+
 */
