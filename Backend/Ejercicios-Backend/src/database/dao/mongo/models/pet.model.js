@@ -1,11 +1,12 @@
 import { Schema, model } from "mongoose";
 
 const schema = new Schema({
-    name: String,
+    name: { type: String, index: true },
     type: String,
-    isAdopted: Boolean
+    isAdopted: Boolean,
 });
 
-const petsModel = model('pets' ,schema);
+schema.index({name: 1, type: 1}, { unique: true, dropDups: true })
+const petsModel = model('pets', schema);
 
 export {petsModel};

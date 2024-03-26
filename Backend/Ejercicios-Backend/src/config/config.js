@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import program from './process.js';
+import { listeners } from './listeners.js';
 
 const environment = program.opts().mode;
 dotenv.config({ path: environment === "prod" ? "./src/config/.env.production" : "./src/config/.env.development" });
@@ -12,6 +13,7 @@ dotenv.config({ path: environment === "prod" ? "./src/config/.env.production" : 
 const config = {
     port: process.env.PORT,
     mongoUrl: process.env.MONGO_URL,
+    mongoUrlTest: process.env.MONGO_URL_TEST,
     persistence: program.opts().persist,
     mode: environment,
     runTests: program.opts().test,
@@ -27,6 +29,8 @@ const config = {
     twilioWhatsappNumber: process.env.TWILIO_WHATSAPP_NUMBER,
     twilioToWhatsappNumber: process.env.TWILIO_TO_WHATSAPP_NUMBER
 };
+
+listeners();
 
 // console.log("config: ", config);
 

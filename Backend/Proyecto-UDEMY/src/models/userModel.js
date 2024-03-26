@@ -60,7 +60,8 @@ userSchema.pre("save", function(next){
     next();
 });
 
-userSchema.pre("/^find/", function(next){
+//QUERY MIDDLEWARES: They allow us to run functions before or after a certain query is executed. Here, the "this" keyword will now point at the current query and NOT at the current document because we're not processing any document.
+userSchema.pre(/^find/, function(next){
     this.find({
         active: {$ne: false} //We write {$ne: false} instead of active: true, because the other users don't have explicitly the "active" property set to "true".
     });

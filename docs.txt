@@ -60,7 +60,7 @@ https://expressjs.com/en/advanced/best-practice-performance.html#use-gzip-compre
 https://www.mongodb.com/docs/manual/
 https://www.mongodb.com/docs/atlas/
 https://cloud.mongodb.com/v2/655f1475ba7fe502fcda39da#/clusters
-https://mongoosejs.com/docs/api/model.html#Model.updateOne()
+https://mongoosejs.com/docs/middleware.html   https://mongoosejs.com/docs/guide.html#methods
 https://nextui.org
 https://docs.nestjs.com
 https://axios-http.com/docs/intro  
@@ -104,6 +104,8 @@ https://github.com/Surnet/swagger-jsdoc
 https://github.com/scottie1984/swagger-ui-express
 https://github.com/jsdoc/jsdoc
 https://github.com/eemeli/yaml
+https://github.com/mochajs/mocha
+https://github.com/chaijs/chai?tab=readme-ov-file
 
 https://www.passportjs.org/packages/
 https://bcrypt-generator.com/

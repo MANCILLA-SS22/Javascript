@@ -15,7 +15,7 @@ class GenericRepository {
         return this.dao.save(doc);
     }
 
-    update(id,doc){
+    update(id, doc){
         return this.dao.update(id,doc);
     }
 

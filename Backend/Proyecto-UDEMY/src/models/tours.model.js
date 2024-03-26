@@ -108,6 +108,7 @@ const tourSchema = new Schema({
 });
 
 //INDEX PROPERTIES: This will help the database engine to scan through the needed documents and not all of them.
+// tourSchema.index({ price: -1});
 tourSchema.index({ price: 1, ratingsAverage: -1 });
 tourSchema.index({ slug: 1 });
 tourSchema.index({ startLocation: "2dsphere" }); //For geospatial data, this index needs to be a 2D sphere index id the data describes real points on the earth like spheres. Or insted we can also use a @D index if we're using fictional points on a simple two dimensional plane.

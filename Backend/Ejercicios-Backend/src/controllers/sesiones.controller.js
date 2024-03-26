@@ -10,12 +10,7 @@ async function register (req, res){
         const exists = await usuarioService.getUserByEmail(email);
         if (exists) return res.status(400).send({ status: "error", error: "User already exists" });
         const hashedPassword = await createHash(password);
-        const user = {
-            first_name,
-            last_name,
-            email,
-            password: hashedPassword
-        }
+        const user = { first_name, last_name, email, password: hashedPassword }
         let result = await usuarioService.create(user);
         console.log(result);
         res.send({ status: "success", payload: result._id });

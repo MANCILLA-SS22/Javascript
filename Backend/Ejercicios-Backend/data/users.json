@@ -1,0 +1,50 @@
+[
+    {   
+        "first_name": "Elmira",
+        "last_name": "Keeling",
+        "email": "Gilbert37@hotmail.com",
+        "age": 84,
+        "password": "$2b$10$xqypr5VvobNXNb2aI8J5NeiG4/lg75oTJv0EzSZwmKSWCgUS/yuCq",
+        "role": "user"
+    },
+    {
+        "first_name": "Laurie",
+        "last_name": "Mitchell",
+        "email": "Alison1@gmai,com",
+        "age": 20,
+        "password": "$2b$10$t50y693065lm/eaDPfF2peg1UOBvbhbdW68VsyMKQSPuYlGp5MJdi",
+        "role": "user"
+    },
+    {
+        "first_name": "Julia",
+        "last_name": "Thiel",
+        "email": "Mathilde_Kunde@hotmail.com",
+        "age": 36,
+        "password": "$2b$10$FO0R5c1e6zf0GnFoFekiHuIUhw2QzQnWN8CGxRnECaTntQNvUO3oG",
+        "role": "user"
+    },
+    {
+        "first_name": "Maryjane",
+        "last_name": "Dare",
+        "email": "Edward89@hotmail.com",
+        "age": 78,
+        "password": "$2b$10$wV9GXtwTNsrw8qSy/a8iye2avGyLhc.dNTokT9z95K8bEaQVUjE2.",
+        "role": "user"
+    },
+    {
+        "first_name": "Jimmie",
+        "last_name": "Hartmann",
+        "email": "Frieda69@yahoo.com",
+        "age": 87,
+        "password": "$2b$10$TVhg4ZNQbJ0NGT16bZPYFu0c17M8RaEY9Fyi8wtpj1BTc7JwHVYRi",
+        "role": "user"
+    },
+    {
+        "first_name": "Ignatius",
+        "last_name": "Strosin",
+        "email": "Velda.Kohler@gmail.com",
+        "age": 58,
+        "password": "$2b$10$G3gZHSwB9w0wAqEyvsgPGu4s/rHeVgwr.09cmlmfRBFm5KxpCoNHO",
+        "role": "user"
+    }               
+]

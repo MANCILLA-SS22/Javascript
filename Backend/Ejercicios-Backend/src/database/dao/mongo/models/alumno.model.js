@@ -19,10 +19,13 @@ const alumnoSchema = new Schema({
     }
 });
 
+alumnoSchema.index({first_name: 1, last_name: -1}, { unique: true, dropDups: true })
+
 // alumnoSchema.pre("find", function(){
 //     this.populate("courses.course");
 // });
 
 alumnoSchema.plugin(mongoosePaginate);
 const alumnoModel = model("alumnos", alumnoSchema);
+
 export { alumnoModel };

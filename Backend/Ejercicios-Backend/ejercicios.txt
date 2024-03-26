@@ -96,7 +96,7 @@ Utilizando argumentos con dotenv
 
 Ejemplo en vivo
 ✓ Se creará una función llamada “listNumbers” el cual recibirá un número indefinido de argumentos (...numbers)
-✓ Si se pasa un argumento no numérico, entonces deberá mostrar por consola un error indicando “Invalid parameters” seguido de una lista con los tipos de dato (para [1,2,”a”,true], el error mostrará [number,number,string,boolean]
+✓ Si se pasa un argumento no numérico, entonces deberá mostrar por consola un error indicando “Invalid parameters” seguido de una lista con los tipos de dato (para [1,2,”a”,true], el error mostrará [number,number,string,boolean])
 ✓ Escapar del proceso con un código -4. Utilizando un listener, obtener el código de escape del error y mostrar un mensaje “Proceso finalizado por argumentación inválida en una función”
 
 Cálculo bloqueante con contador
@@ -132,5 +132,13 @@ Proceso de adopción desde Swagger
 ✓ Definir la documentación para procesar el método “register” que se encargará de crear un usuario. No es necesario implementar el login, sólo el registro.
 ✓ Definir la documentación de adopción, la cual deberá recibir doble parámetro para poder llevar a cabo el proceso de adopción.
 ✓ Corroborar en la base de datos que las entidades se estén creando correctamente.
+
+Test de más elementos aislados del proyecto
+Con base en el proyecto que tenemos de Adoptme, se nos solicita realizar un proceso de testing para las utilidades de bcrypt y la funcionalidad del DTO Los elementos que nos solicitan validar son:
+✓ El servicio debe realizar un hasheo efectivo de la contraseña (debe corroborarse que el resultado sea diferente a la contraseña original).
+✓ El hasheo realizado debe poder compararse de manera efectiva con la contraseña original (la comparación debe resultar en true)
+✓ Si la contraseña hasheada se altera, debe fallar en la comparación de la contraseña original.
+✓ Por parte del DTO de usuario: Corroborar que el DTO unifique el nombre y apellido en una única propiedad. (Recuerda que puedes evaluar múltiples expects)
+✓ Por parte del DTO de usuario: El DTO debe eliminar las propiedades innecesarias como password, first_name, last_name.
 
 */

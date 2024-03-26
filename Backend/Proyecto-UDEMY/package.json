@@ -81,7 +81,7 @@
   },
   "scripts": {
     "debug": "node --inspect backend.js",
-    "start": "nodemon src/backend.js",
+    "start": "nodemon src/server.js",
     "start:dev": "SET NODE_ENV=development&&nodemon Ejercicio-0-UDEMY/src/server.js",
     "start:prod": "SET NODE_ENV=production&&nodemon Ejercicio-0-UDEMY/src/server.js",
     "build:js": "parcel build ./Ejercicio-0-UDEMY/src/public/js/index.js --dist-dir ./Ejercicio-0-UDEMY/src/public/js/bundled",

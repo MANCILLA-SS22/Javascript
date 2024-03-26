@@ -6,7 +6,7 @@ const petsService = new PetsService();
 
 router.get("/", async function(req, res){
     try {
-        const pets = await petsService.getAll();
+        const pets = await petsService.getAll()
         if (!pets) res.status(202).json({ message: "No pets found: " });
         res.json(pets);
     } catch (error) {

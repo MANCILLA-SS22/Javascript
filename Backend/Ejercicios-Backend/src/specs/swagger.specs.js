@@ -8,7 +8,7 @@ const swaggerOptions = {
             description: "Documentacion para uso de swagger" //Descripción de la API que estamos documentando.
         }
     },
-    apis: [`./src/docs/**/*.yaml`] //Aquí especificamos la ruta a los archivos que contendrán la documentación. la sintaxis utilizada indica que utilizaremos una carpeta docs, la cual contendrá subcarpetas con cada módulo a documentar
+    apis: [`./docs/**/*.yaml`] //Aquí especificamos la ruta a los archivos que contendrán la documentación. la sintaxis utilizada indica que utilizaremos una carpeta docs, la cual contendrá subcarpetas con cada módulo a documentar
 }
 
 const specs = swaggerJsdoc(swaggerOptions);

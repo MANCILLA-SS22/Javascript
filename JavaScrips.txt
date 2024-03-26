@@ -1667,9 +1667,23 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
    es repetido.
 ✓ db.collection.deleteMany({key:val}) : Elimina todos los documentos que cumplan con el criterio, se usa cuando sabemos que más de un valor va a contar con ese valor y necesitamos hacer una limpieza general.  
 
-- Mongoose (indexing): Técnica utilizada para colocarse en una propiedad de un documento, permite realizar búsquedas más rápidas cuando se involucra a dicha propiedad
-  Es un recurso utilizado en MongoDB para poder hacer consultas mucho más rápidas. Éste nos permitirá tener una referencia previa al momento de buscar un documento, con el fin de evitar recorrer toda la colección, 
-  documento por documento, hasta encontrar dicho valor. El índice se asocia a un atributo del documento y permite que las búsquedas se hagan desde puntos específicos, evitando el recorrido completo de la colección.
+
+- Mongoose (population): Operación que permite transformar la referencia de un documento en su documento correspondiente en la colección indicada.
+  Una population implica obtener un documento referenciado dentro de otro documento, con el fin de obtener ambos en una sola búsqueda. Consiste en almacenar el id de un documento, como propiedad de otro documento. A esto se le     
+  conoce como “referencia”. Populate hace referencia a “poblar” de un id a un documento completo. (referencia a la población humana).
+  Algunas cosas a considerar antes de comenzar con su uso:
+    ✓ populate es un método propio de mongoose, por lo que tenemos que instalarlo.
+    ✓ Hay que tener siempre claro el nombre de la propiedad dentro del objeto, así también como la referencia de la colección, para poder hacer un populate efectivo.
+    ✓ Recuerda no guardar directamente el valor a referenciar en el _id, sino asignarle otro nombre (se profundizará en el ejemplo).
+
+- Mongoose (indexing): Indexes support the efficient execution of queries in MongoDB. Without indexes, MongoDB must perform a collection scan, i.e. scan every document in a collection, to select those documents that match the query 
+  statement. If an appropriate index exists for a query, MongoDB can use the index to limit the number of documents it must inspect.
+  Es un recurso utilizado en MongoDB para poder hacer consultas mucho más rápidas al colocarse en una propiedad de un documento. Éste nos permitirá tener una referencia previa al momento de buscar un documento, con el fin de evitar recorrer 
+  toda la colección, documento por documento, hasta encontrar dicho valor. El índice se asocia a un atributo del documento y permite que las búsquedas se hagan desde puntos específicos, evitando el recorrido completo de la colección.
+  Prever un buen plan de indexación evitará problemas de lentitud en las consultas y se considera una práctica necesaria a nivel enterprise, al momento de configurar los schemas de nuestros distintos modelos
+  
+  Un índice no debe ser utilizado en todos los campos, sólo deben ser utilizados en los campos que sepamos tienen repercusión en nuestras búsquedas. Colocar un índice en cada campo de cada documento, significa alentar procesos de escritura 
+  en cada insert, así también como generar un almacenamiento adicional e innecesario en la base de datos.
   
   > Tipos de indices: Prever un buen plan de indexación evitará problemas de lentitud en las consultas y se considera una práctica necesaria a nivel enterprise, al momento de configurar los schemas de nuestros distintos modelos.
      ✓ compound: Se utiliza cuando requerimos utilizar más de una indexación y queremos definir el orden con el cual se realiza el ordenamiento (ordenando con 1 para ascendente y -1 para descendente, igual que un sort: {campo: 1 , campo: -1}
@@ -1687,11 +1701,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
   > Configurando una population por default: Para poder “poblar” el resultado de la operación find() del estudiante y obtener los cursos, fue necesario llamar a “populate” después de la operación. Sin embargo, tener que colocar el populate 
     puede resultar molesto si utilizamos constantemente el modelo de estudiante. Mongoose tiene la posibilidad de definir “middlewares” para sus documentos y modelos con el fin de automatizar operaciones que consideremos recurrentes. 
-
-    En esta ocasión utilizaremos un middleware conocido como “pre”. ¿Qué hacer antes de devolver la data?
-    Middleware utilizado para realizar una operación “antes” de devolver el resultado de la operación principal. Se ejecutará antes de finalizar el procesado y entrega de la operación. Éste es compatible con la operación find que 
-    acostumbramos utilizar, y se entenderá como: ¿Qué deseo que se haga con este documento antes de devolver el resultado de la búsqueda? En nuestro caso particular, lo que buscamos es realizar una population antes de recibir el documento. 
-    
 
 - Mongoose (aggregation): Consiste en la realización de múltiples operaciones, eneralmente sobre múltiples documentos. ueden utilizarse para:              https://stackoverflow.com/questions/24714166/full-text-search-with-weight-in-mongoose
     ✓ Agrupar documentos con base en un criterio específico.
@@ -1745,7 +1754,22 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     ✓ prevPage: Página anterior en la búsqueda.
     ✓ pagingCounter: Número de documento en relación con la página actual      
     
+- Mongoose (properties)
+   > index: This will help the database engine to scan through the needed documents and not all of them.
+   > virtual: Virtuals are document properties that you can get and set but that do not get persisted to MongoDB. The getters are useful for formatting or combining fields, while setters are useful for de-composing a single value into 
+     multiple values for storage.
 
+- Mongoose (middlewares)
+   > document: Document middleware is specific to individual documents (instances of a model). It’s triggered during actions like save, validate, remove, updateOne, and deleteOne.
+   > model: Model middleware operates on entire collections of documents. It’s triggered during actions like insertMany.
+   > query: Aggregate middleware is for operations performed using MyModel.aggregate(). It allows you to modify aggregation pipelines.
+   > aggregation: Query middleware lets you modify queries before or after they are executed. It’s triggered during actions like find, findOne, update, and remove.
+
+- Mongoose (functions): Database logic should be encapsulated within the data model. Mongoose provides 2 ways of doing this, methods and statics. Methods adds an instance method to documents whereas Statics adds static "class" methods to the 
+  Models itself.
+   > methods: It's a method that it's gonna be available on all documents of a certain collection
+   > statics: statics are the methods defined on the Model. Those functions are only used ONLY in the model and that exist ONLY in the model. 
+   
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        
 
                                                                                                                    Cookies, auth, JWT
@@ -2190,31 +2214,33 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     ✓ ¿A qué endpoint debo apuntar para la tarea que necesito?
     ✓ ¿Qué método debo utilizar para ese recurso?
     ✓ ¿Qué información debo enviar para realizar correctamente mi petición? 
-    
-  1) REST: Ya tenemos las reglas para comunicarse, ¿Pero qué tal la estructura del mensaje? Cuando hacemos una petición o cuando recibimos una respuesta, ésta debe tener un formato. REST (REpresentational State Transfer) permite definir la 
-     estructura que deben tener los datos para poder transferirse. La API respondía a preguntas sobre cómo comunicarse correctamente, sin embargo, REST define cómo debe ser el cuerpo del mensaje a transmitir. (puedes llegar a hablar con el 
-     presidente si cumples con el protocolo (HTTP) y las reglas (API), pero ¿de qué nos servirá si la forma en que estructuramos nuestro mensaje (REST) no es correcta?).
-     Los dos formatos más importan tes son JSON y XML. La utilización de la estructura dependerá de las necesidades del proyecto. Nosotros utilizaremos JSON. Como otarás, ¡un JSON parece un objeto! así que es mucho más amigable la sintaxis.
-  2) API REST es: Un modelo completo para tener perfectamente estipulados los protocolos, las reglas, e incluso la estructura de la información, con el fin de poder hacer un sistema de comunicación completo entre las computadoras.
-  3) Características debe tener una API REST: Estas son las caracteristicas mas importantes de una API REST
-     a) Arquitectura Cliente-Servidor sin estado: 
-        ~ Cada mensaje HTTP contiene toda la información necesaria para comprender la petición. 
-        ~ Como resultado, ni el cliente ni el servidor necesitan recordar ningún estado de las comunicaciones entre mensajes.
-        ~ Esta restricción mantiene al cliente y al servidor débilmente acoplados: el cliente no necesita conocer los detalles de implementación del servidor y el servidor se “despreocupa” de cómo son usados los datos que envía al cliente.
-     b) Cacheable: 
-        ~ Debe admitir un sistema de almacenamiento en caché.  
-        ~ La infraestructura de red debe soportar una caché de varios niveles. 
-        ~ Este almacenamiento evita repetir varias conexiones entre el servidor y el cliente, en casos en que peticiones idénticas fueran a generar la misma respuesta.
-     c) Operaciones comunes:
-        ~ Todos los recursos detrás de nuestra API deben poder ser consumidos mediante peticiones HTTP, preferentemente sus principales (POST, GET, PUT y DELETE).
-        ~ Con frecuencia estas operaciones se equiparan a las operaciones CRUD en bases de datos (en inglés: Create, Read, Update, Delete, en español: Alta, Lectura, Modificación, y Baja).  
-        ~ Al tratarse de peticiones HTTP, éstas deberán devolver con sus respuestas los correspondientes códigos de estado, informando el resultado de las mismas. 
-     d) Interfaz uniforme: 
-        ~ En un sistema REST, cada acción (más correctamente, cada recurso) debe contar con una URI (Uniform Resource Identifier), un identificador único.  
-        ~ Ésta nos facilita el acceso a la información, tanto para consultarla, como para modificarla o eliminarla, pero también para compartir su ubicación exacta a terceros.
-     e) Utilización de hipermedios: 
-        ~ Cada vez que se hace una petición al servidor y este devuelve una respuesta, parte de la información devuelta pueden ser también hipervínculos de navegación asociada a otros recursos del cliente.
-        ~ Como resultado de esto, es posible navegar de un recurso REST a muchos otros, simplemente siguiendo enlaces sin requerir el uso de registros u otra infraestructura adicional
+
+- Api rest: Una API REST es una interfaz de comunicación entre sistemas de información que usa el protocolo de transferencia de hipertexto (hypertext transfer protocol o HTTP, por su siglas en inglés) para obtener datos o ejecutar 
+  operaciones sobre dichos datos en diversos formatos, como pueden ser XML o JSON.     
+    1) REST: Ya tenemos las reglas para comunicarse, ¿Pero qué tal la estructura del mensaje? Cuando hacemos una petición o cuando recibimos una respuesta, ésta debe tener un formato. REST (REpresentational State Transfer) permite definir la 
+       estructura que deben tener los datos para poder transferirse. La API respondía a preguntas sobre cómo comunicarse correctamente, sin embargo, REST define cómo debe ser el cuerpo del mensaje a transmitir. (puedes llegar a hablar con el 
+       presidente si cumples con el protocolo (HTTP) y las reglas (API), pero ¿de qué nos servirá si la forma en que estructuramos nuestro mensaje (REST) no es correcta?).
+       Los dos formatos más importan tes son JSON y XML. La utilización de la estructura dependerá de las necesidades del proyecto. Nosotros utilizaremos JSON. Como otarás, ¡un JSON parece un objeto! así que es mucho más amigable la sintaxis
+    2) API REST es: Un modelo completo para tener perfectamente estipulados los protocolos, las reglas, e incluso la estructura de la información, con el fin de poder hacer un sistema de comunicación completo entre las computadoras.
+    3) Características debe tener una API REST: Estas son las caracteristicas mas importantes de una API REST
+       a) Arquitectura Cliente-Servidor sin estado: 
+          ~ Cada mensaje HTTP contiene toda la información necesaria para comprender la petición. 
+          ~ Como resultado, ni el cliente ni el servidor necesitan recordar ningún estado de las comunicaciones entre mensajes.
+          ~ Esta restricción mantiene al cliente y al servidor débilmente acoplados: el cliente no necesita conocer los detalles de implementación del servidor y el servidor se “despreocupa” de cómo son usados los datos que envía al cliente.
+       b) Cacheable: 
+          ~ Debe admitir un sistema de almacenamiento en caché.  
+          ~ La infraestructura de red debe soportar una caché de varios niveles. 
+          ~ Este almacenamiento evita repetir varias conexiones entre el servidor y el cliente, en casos en que peticiones idénticas fueran a generar la misma respuesta.
+       c) Operaciones comunes:
+          ~ Todos los recursos detrás de nuestra API deben poder ser consumidos mediante peticiones HTTP, preferentemente sus principales (POST, GET, PUT y DELETE).
+          ~ Con frecuencia estas operaciones se equiparan a las operaciones CRUD en bases de datos (en inglés: Create, Read, Update, Delete, en español: Alta, Lectura, Modificación, y Baja).  
+          ~ Al tratarse de peticiones HTTP, éstas deberán devolver con sus respuestas los correspondientes códigos de estado, informando el resultado de las mismas. 
+       d) Interfaz uniforme: 
+          ~ En un sistema REST, cada acción (más correctamente, cada recurso) debe contar con una URI (Uniform Resource Identifier), un identificador único.  
+          ~ Ésta nos facilita el acceso a la información, tanto para consultarla, como para modificarla o eliminarla, pero también para compartir su ubicación exacta a terceros.
+       e) Utilización de hipermedios: 
+          ~ Cada vez que se hace una petición al servidor y este devuelve una respuesta, parte de la información devuelta pueden ser también hipervínculos de navegación asociada a otros recursos del cliente.
+          ~ Como resultado de esto, es posible navegar de un recurso REST a muchos otros, simplemente siguiendo enlaces sin requerir el uso de registros u otra infraestructura adicional
      
   
   Generalmente, nos comunicamos con aplicaciones de este tipo y es la tendencia actual de desarrollo. La ventaja de este modelo es que está orientado a recursos y define métodos claros para solicitar y enviar información. Una API
@@ -2230,7 +2256,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   tienen. Con ello, no será necesario tener que reinventar la rueda con cada servicio que se crea, ya que podrás utilizar piezas o funciones que otros ya han creado. Imagínate que cada tienda online tuviera que tener su propio sistema de 
   pago, para los usuarios normales es mucho más cómodo poder hacerlo con los principales servicios que casi todos utilizan. También son útiles para cuando lo único que se quiere es utilizar deliberadamente las funciones de determinado 
   servicio para ofrecer ventajas a sus usuarios o atraer a los usuarios de ese servicio a que utilicen tu aplicación.
-  
+   
 - Peticiones HTTP: El mecanismo por el cual se piden y proveen datos a través de internet es HTTP (Hypertext Transfer Protocol). Cuando emitimos una orden al navegador, hace una petición (o request) HTTP a algún servidor. Luego, la recibirá, 
   procesará y nos devolverá una respuesta con información que utilizaremos en la aplicación. Estas peticiones que debemos hacer están definidas por varias partes
   

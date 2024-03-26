@@ -1,13 +1,13 @@
-// 1. Express
-// 2. Multer
-// 3. Uso de plantillas con handlebars
-// 4. Websockets
-// 5. MongoDB & Mongoose
-// 6. Mongo avanzado (indexation, aggregation & pagination)
-// 7. Mongoose avanzado (index properties, virtual properties, document middlewares, query middlewares aggregation middlewares, instance methods, static methods)
-// 8. Manejo de cookies
-// 9. Uso de passport avanzado con cookies y localstorage (sin sessions)
-// 10. Uso de process, variables de entorno (dotenv) y child process. 
+// 1.  Express
+// 2.  Multer
+// 3.  Uso de plantillas con handlebars
+// 4.  Websockets
+// 5.  MongoDB & Mongoose
+// 6.  Mongo avanzado (poplation, indexation, aggregation & pagination)
+// 7.  Mongoose avanzado (index and virtual properties, document, model, query and aggregate middlewares, methods and statics encapsulation methods)
+// 8.  Manejo de cookies
+// 9.  Uso de passport avanzado con cookies y localstorage (sin sessions)
+// 10. Uso variables de entorno (dotenv), process, listeners y child process. 
 // 11. Arquitectura de capas, servidor, diseno y persistencia. 
 // 12. Patron Singleton (para una sola instancia en una clase)
 // 13. Comunicación entre Frontend y Backend. Uso de "factory", "service" y DAO.
@@ -16,6 +16,9 @@
 // 16. Optimizacion (gzip y brotli, error handling)
 // 17. Logging y testing de performance 
 // 18. Clusters, process, child process, path with NodeJS
+// 19. Seguridad
+// 20. Documentacion con Swagger
+// 21. Testing
 
 // nodemon src/backend.js --mode prod   -->   Servidor escuchando por el puerto: 3001
 // nodemon src/backend.js --mode dev    -->   Servidor escuchando por el puerto: 5500
@@ -25,8 +28,8 @@ import cors from 'cors';
 import morgan from "morgan";
 import compression from "express-compression";
 import cookieParser from "cookie-parser";
-import {Server} from "socket.io";
 import swaggerUIExpress  from "swagger-ui-express"; //Nos permitirá linkear una interfaz gráfica que represente la documentación a partir de una ruta de nuestro servidor de express.
+import {Server} from "socket.io";
 
 import config from './config/config.js';
 import helloRouter from "./router/hello.routes.js";
@@ -63,8 +66,8 @@ import { stencil } from "./specs/handlebars.specs.js";
 import { corsOptions } from "./specs/cors.specs.js";
 import { specs } from "./specs/swagger.specs.js";
 import { tests } from "./methods/test.method.js";
-import { listens } from "./methods/listens.method.js";
 import { mongoInstance } from "./methods/mongoInstance.method.js";
+import { listens } from "./methods/listens.method.js";
 import { clusters } from "./methods/clusters.method.js";
 import { indexation1, indexation2, indexation3 } from "./methods/indexation.js";
 import { aggregation1, aggregation2 } from "./methods/aggregation.js";

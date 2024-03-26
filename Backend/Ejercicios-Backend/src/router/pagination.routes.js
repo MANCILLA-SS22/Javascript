@@ -21,4 +21,9 @@ router.get("/students", async function(req, res){
     res.render("students", {students}); // res.json(students);
 });
 
+router.get("/getAll", async function(req, res){
+    const alumno = await alumnoModel.find();
+    res.json(alumno);
+})
+
 export default router;

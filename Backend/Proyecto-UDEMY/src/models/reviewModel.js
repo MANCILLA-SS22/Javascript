@@ -60,6 +60,7 @@ reviewSchema.statics.calcAverageRatings = async function(tourId){ //statics are 
     }
 };
 
+//DOCUMENT MIDDLEWARES: "pre" middlewares functions are gonna run before .save() and .create() command. "post" middlewares functions are executed after all the "pre" middleware functions have complited. "this" is gonna point to the currently processed document
 reviewSchema.post("save", function(){ //In this kind of middleware, the "this" keyword points to the document that is currently being saved
     //In Mongoose, a "document" generally means an instance of a model, or other word: model creates document. So when we call `this.constructor` in middleware `pre("save", fn)`, the `constructor` prop will return a reference to Model constructor that create the current document (in this case)
     console.log("this.constructor", this.constructor); // --> Model { Review }

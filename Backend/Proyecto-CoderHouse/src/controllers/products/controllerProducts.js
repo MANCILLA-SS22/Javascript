@@ -12,7 +12,7 @@ class ProductRouter extends Route{
     init(){
         this.get("/", ['ADMIN', 'USER'], async function(req, res){
             try {
-                console.log("req.user", req.user);
+                // console.log("req.user", req.user);
                 // Copiar y pegar en barra de navegacion --> http://localhost:5500/api/products?page=1&limit=3&sort=asc&stock=8&category=New
                 let {category, stock, limit, page, sort} = req.query;
                 let numLimit, numPage, filter, numSort, prevSort, nextLink, prevLink;
@@ -48,22 +48,27 @@ class ProductRouter extends Route{
                     numLimit = limit;
                 }
 
-                if(sort == "asc"){
+                if(sort === "asc"){
                     prevSort = "asc";
                     numSort = 1;
-                }else if(sort == "desc"){
+                }else if(sort === "desc"){
                     prevSort = "desc";
                     numSort = -1;
-                }else if(sort == undefined){
+                }else if(sort === undefined){
                     prevSort = "asc";
                     numSort = 1;
-                }        
+                }
+
+                console.log("sort", sort/* ?.slice(0, -1) */);
+                console.log("category", category)                
         
                 let conditionalQuery = {
                     page: numPage,
                     limit: numLimit,
-                    numSort: {price: numSort}
+                    sort: {price: 1 }
                 };
+
+                console.log(conditionalQuery)
         
                 const products = await productService.getProductsNew(filter, conditionalQuery); // Model.paginate([filter], [options], [callback])
                 products.hasPrevPage === false ? prevLink = null : prevLink = link + "?"+ `page=${products.prevPage}`+ `&limit=${numLimit}&sort=${prevSort}$`;

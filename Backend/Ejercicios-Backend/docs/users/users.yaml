@@ -22,16 +22,33 @@ paths: #sirve para colocar cada ruta que se encuentre en nuestro respectivo rout
   
   /api/users/{uid}:
     get:
-      summary: Obtiene un usuario de la App kbuscando por uid.
+      summary: Obtiene un usuario de la App buscando por uid.
       tags: 
         - Users
       parameters:
-        - name: uid
-          in: path
-          required: true
-          description: id del usuario que se desea solicitar.
-          schema:
+      - name: uid
+        in: path
+        required: true
+        description: id del usuario que se desea solicitar.
+        schema:
+          $type: String
+    put:
+      summary: Actualiza un usuario de la App buscando por uid.
+      tags: 
+        - Users
+      parameters:
+      - name: uid
+        in: path
+        required: true
+        description: id del usuario que se desea solicitar.
+        schema:
             $type: String
+        requestBodies:
+          required: true
+          content:
+            application/json:
+              schema: '#components/requestBodies/User'
+
       responses:
         "200":
           description: respuesta exitosa! se retorna un arreglo con los usuarios.
@@ -40,7 +57,7 @@ paths: #sirve para colocar cada ruta que se encuentre en nuestro respectivo rout
               schema:
                 type: array
                 items:
-                  $ref: '#components/schemas/User'
+                  $ref: '#components/schemas/updateUser'
         "400":
           description: Se envio un dato no valido.
         "500":
@@ -81,4 +98,27 @@ components:
         role: user
         pets: []
     
+  requestBodies: 
+    updateUser: #updateUser entonces representará el usuario que llega por req.body, para poder hacer la actualización.
+      type: object
+      properties:
+        first_name:
+          type: String
+          description: Nombre del usuario
+        last_name:
+          type: String
+          description: Apellido del usuario
+        email:
+          type: String
+          description: Correo del usuario este campo es unico
+        password:
+          type: String
+          description: Contrasena del usuario, posteriormente sera hasheada
+      example:
+        first_name: German
+        last_name: Mancilla
+        email: coder@gmail.com
+        password: res
+
+
     # Pets:

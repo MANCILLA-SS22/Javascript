@@ -4,14 +4,15 @@ import { alumnoModel } from "../database/dao/mongo/models/alumno.model.js";
 import { materiaModel } from "../database/dao/mongo/models/materia.model.js";
 
 async function indexation1(){
-    const result1 = await personModel.find({ first_name: "Celia" }).explain("executionStats"); 
-    console.log("Compound indexes", result1); 
+    // const result1 = await personModel.find({ first_name: "Celia" }).explain("executionStats");
+    // const result1 = await personModel.find({ first_name: "Celia" });
+    // console.log("Compound indexes", result1); 
 
     const result2 = await personModel.find({ $text: {$search: "@unesco"} });
     console.log(result2);  
 
-    const result3 = await personModel.find();
-    console.log(result3);  
+    // const result3 = await personModel.find();
+    // console.log(result3);  
 }
 
 async function indexation2(){

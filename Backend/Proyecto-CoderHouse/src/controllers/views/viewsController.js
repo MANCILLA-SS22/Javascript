@@ -70,7 +70,7 @@ class LoginRegister extends Route {
             }
         });
 
-        this.get("/profile", ['USER'], function(req, res){
+        this.get("/profile", ['USER', 'ADMIN'], function(req, res){
             try {
                 res.status(200).render('profile');
             }
