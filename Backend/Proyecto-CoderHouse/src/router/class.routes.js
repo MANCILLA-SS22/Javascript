@@ -79,8 +79,7 @@ class CustomRouter { //Esta es la clase padre, y CustomRouter es la clase que he
         }
     }
 
-    //es una función que agregará al objeto res, métodos adicionales de envío de información, donde seteamos status específicos, cuerpos específicos e intenciones específicas. 
-    generateCustomRespones(){
+    generateCustomRespones(){ //es una función que agregará al objeto res, métodos adicionales de envío de información, donde seteamos status específicos, cuerpos específicos e intenciones específicas.
         return function(req, res, next){
 
             res.sendSuccess = function(payload){

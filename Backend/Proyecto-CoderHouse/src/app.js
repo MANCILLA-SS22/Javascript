@@ -5,11 +5,13 @@ import mongoConfig from "./config/mongodb/mongodb.config.js";
 import handlebarsConfig from "./config/handlebars/handlebars.config.js";
 import passportConfig from "./config/passport/passport.config.js";
 import middlewares from "./middlewares/middlewares.config.js"
+import { swaggerConfig } from "./config/swagger/swagger.specs.js";
 
 mongoConfig();
 passportConfig(app);
 middlewares(app, express);
 routerMain(app);
 handlebarsConfig(app);
+swaggerConfig(app)
 
 httpServer.listen(PORT, () => console.log(`Server listening on ${PORT}`));

@@ -1,12 +1,12 @@
-import { PRIVATE_KEY, clientID_github, clientSecret_github } from "./dotenvMain/env.config.js";
+import { PRIVATE_KEY, clientID_github, clientSecret_github } from "../dotenvMain/env.config.js";
 import passport from "passport";
 import passportLocal from "passport-local";
 import jwtStrategy from 'passport-jwt';
 import GitHubStrategy from "passport-github"
 
-import { validateHash, createHash } from "../utils.js"
-import { userService } from "../database/service.js";
-import { UserDto } from "../database/dto/User.dto.js";
+import { validateHash, createHash } from "../../utils.js"
+import { userService } from "../../database/service.js";
+import { UserDto } from "../../database/dto/User.dto.js";
 
 const localStrategy = passportLocal.Strategy; //Declaramos estrategia
 const JwtStrategy = jwtStrategy.Strategy;
@@ -41,9 +41,9 @@ async function jwt(jwt_payload, done){
 }
 
 async function register(req, username, password, done){
-    const userDto = new UserDto(req.body);
     try {
-        const exist  = await userService.findUser({userDto}); //Validamos si el usuario existe en la base de datos
+        const userDto = new UserDto(req.body);     //console.log("userDto", userDto.email)
+        const exist  = await userService.findUser(userDto.email); //Validamos si el usuario existe en la base de datos
         if(exist){
             req.logger.error("El usuario ya existe!");
             done(null, false); //Como el usuario ya existe (no es un error), no se va a registrar. El segundo parametro es falso porque no se retornara ningun usuario porque ya existe
@@ -57,21 +57,20 @@ async function register(req, username, password, done){
             password: createHash(userDto.password),
             cart: userDto.cart,
             role: userDto.role
-        }
+        };
 
         const result = await userService.createUser(user);
-        // console.log(result)
         return done(null, result) //El primer parametro es null porque no se genera un error, sino que se genera de forma correcta.
 
     } catch (error) {
-        return done("Error registrando el usuario"+ error.cause)
+        return done("Error registrando el usuario --> "+ error.cause)
     }
 };
 
 async function login(req, username, password, done){
     try {
         const user = await userService.findUser(username);
-        // console.log("user --> ", user);
+        console.log("user --> ", user); 
         if (!user) return done(null, false);
         if (!validateHash(user, password)) return done(null, false);
         return done(null, user);

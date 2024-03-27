@@ -1,0 +1,216 @@
+paths: 
+  /api/products:
+    get: 
+      tags: 
+        - Products      
+      summary: Obtiene todos los productos de la app
+      description: Muestra todos los productos disponibles
+      responses: 
+        "200":
+          description:
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: "#components/schemas/Product"
+        "400":
+          description: Bad request
+        "401":
+          description: Not authenticated
+        "403":
+          description: Forbidden, user not authorized
+        "500":
+          description: Server error
+    post:
+      summary: Agrega un nuevo producto a la app
+      description: Agregar un producto que quieres ver
+      tags: 
+        - Products
+      requestBodies:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/requestBodies/Product'  
+  /api/products/{pid}:
+    get: 
+      tags: 
+        - Products      
+      summary: Obtiene un producto de la app por id
+      description: Muestra todos un producto disponible segun su id.
+      parameters:
+      - name: pid
+        in: path
+        required: true
+        description: id del producto que se desea solicitar.
+        schema:
+          $type: String        
+      responses: 
+        "200":
+          description:
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: "#components/schemas/Product"
+        "400":
+          description: Bad request
+        "401":
+          description: Not authenticated
+        "403":
+          description: Forbidden, user not authorized
+        "500":
+          description: Server error
+    put: 
+      tags: 
+        - Products      
+      summary: Actualiza un producto de la app por id
+      description: Actualiza todos un producto disponible segun su id.
+      parameters:
+      - name: pid
+        in: path
+        required: true
+        description: id del producto que se desea solicitar.
+        schema:
+          $type: String       
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#components/requestBodies/Product"       
+      responses: 
+        "200":
+          description:
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: "#components/schemas/Product"
+        "400":
+          description: Bad request
+        "401":
+          description: Not authenticated
+        "403":
+          description: Forbidden, user not authorized
+        "500":
+          description: Server error      
+    delete: 
+      tags: 
+        - Products      
+      summary: Elimina un producto de la app por id
+      description: Elimina todos un producto disponible segun su id.
+      parameters:
+      - name: pid
+        in: path
+        required: true
+        description: id del producto que se desea solicitar.
+        schema:
+          $type: String       
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#components/requestBodies/Product"       
+      responses: 
+        "200":
+          description:
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: "#components/schemas/Product"
+        "400":
+          description: Bad request
+        "401":
+          description: Not authenticated
+        "403":
+          description: Forbidden, user not authorized
+        "500":
+          description: Server error  
+  /api/products/mockingproducts:
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties: 
+        _id: 
+          type: ObjectId
+          description: Id autogenerado de Mongo.
+        title:
+          type: string
+          description: Nombre del producto
+        description:
+          type: string
+          description: Descripcion del producto
+        price:
+          type: integer
+          description: Precio del producto
+        thumbail:
+          type: string
+          description: Url de imagen del producto
+        code:
+          type: integer
+          description: Codigo del producto
+        stock:
+          type: integer
+          description: Stock del producto
+        status:
+          type: string
+          enum:
+            - true
+            - false
+          description: Status del producto
+        category:
+          type: string
+          description: Categoria del producto
+        owner:
+          type: string
+          description: Propietario del producto
+      example: 
+        _id: 66024acb40aff040a158b251
+        title: Saiga-12
+        description: Shotgun
+        price: 800
+        thumbail: ["http://dissidentarms.com/wp-content/uploads/2016/12/20210201_181025-scaled.jpg"]
+        code: SS2000
+        stock: 1
+        status: true
+        category: New
+        owner: xxcodigo.rojoxx@gmail.com
+  requestBodies:
+    Product:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        thumbail:
+          type: string
+        code:
+          type: number
+        stock:
+          type: number
+        status:
+          type: boolean 
+        category:
+          type: string
+      example:
+        title: Saiga-12
+        description: Shotgun
+        price: 800
+        thumbail: ["http://dissidentarms.com/wp-content/uploads/2016/12/20210201_181025-scaled.jpg"]
+        code: SS2000
+        stock: 1
+        status: true
+        category: New
+        owner: xxcodigo.rojoxx@gmail.com

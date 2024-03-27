@@ -5,8 +5,8 @@ class UserDto {
         this.email = user.email;
         this.age = user.age;
         this.password = user.password;
-        this.cart = user.cart;
-        this.role = user.role;
+        this.cart = user?.cart;
+        this.role = user?.role;
     }
 };
 

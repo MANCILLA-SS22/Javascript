@@ -1,4 +1,4 @@
-import program from "../../process.js";
+import program from "./process.js";
 import dotenv from "dotenv";
 
 const environment = program.opts().mode;

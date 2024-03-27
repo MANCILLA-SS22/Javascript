@@ -16,7 +16,8 @@ form.addEventListener('submit', function(e){
         if (result.status === 200){
             result.json().then(function(json){
                 // console.log("Cookies generadas: ", document.cookie);
-                window.location.replace('/products');
+                // window.location.replace('/products');
+                window.location.replace('/profile');
             })
         }
     })

@@ -1,4 +1,3 @@
-import passport from "passport";
 import Route from "../../router/class.routes.js"
 
 // import { productService } from "../../database/factory.js";
@@ -67,14 +66,10 @@ class ProductRouter extends Route{
                     limit: numLimit,
                     sort: {price: 1 }
                 };
-
-                console.log(conditionalQuery)
         
                 const products = await productService.getProductsNew(filter, conditionalQuery); // Model.paginate([filter], [options], [callback])
                 products.hasPrevPage === false ? prevLink = null : prevLink = link + "?"+ `page=${products.prevPage}`+ `&limit=${numLimit}&sort=${prevSort}$`;
                 products.hasNextPage === false ? nextLink = null : nextLink = link + "?"+ `page=${products.nextPage}`+ `&limit=${numLimit}&sort=${prevSort}$`;
-
-                console.log(req.user)
         
                 const respuestaInfo = {
                     status: "success",                 //success/error
@@ -104,27 +99,6 @@ class ProductRouter extends Route{
         
         });
 
-        this.get("/mockingproducts", ['PUBLIC'], async function(req, res){
-            try {
-                const products = generateMock(100);
-                res.sendSuccess(products);
-            } catch (error) {
-                console.error(error);
-                res.status(500).send({ error: error, message: "No se pudo obtener la info" });
-            }
-        })
-        
-        this.get("/:pid", ['PUBLIC'], async function(req, res){
-            try {
-                const {pid} = req.params;
-                const getById = await productService.getProductById(pid);
-                getById ? res.sendSuccess(getById) : res.sendClientError({message: "Not product found by ID"})
-            } catch (error) {
-                req.logger.error("Poductos no encontrados");
-                res.sendServerError(`something went wrong ${error}`);
-            }
-        });
-        
         this.post("/", ['ADMIN'], async function(req, res){
             try {
                 const productDto = new ProductDto(req.body, req.user.email);
@@ -147,6 +121,17 @@ class ProductRouter extends Route{
                 console.log("error.cause.toString() --> ", error.cause.toString())
                 req.logger.error(error.cause.toString().toString());
                 res.sendServerError(`something went wrong ${error.cause.toString()}`)
+            }
+        });
+        
+        this.get("/:pid", ['PUBLIC'], async function(req, res){
+            try {
+                const {pid} = req.params;
+                const getById = await productService.getProductById(pid);
+                getById ? res.sendSuccess(getById) : res.sendClientError({message: "Not product found by ID"})
+            } catch (error) {
+                req.logger.error("Poductos no encontrados");
+                res.sendServerError(`something went wrong ${error}`);
             }
         });
         
@@ -174,21 +159,31 @@ class ProductRouter extends Route{
             }
         });
         
-        this.delete("/:id", ['ADMIN', 'PREMIUM'], async function(req, res){
+        this.delete("/:pid", ['ADMIN', 'PREMIUM'], async function(req, res){
             try {
-                const {id} = req.params;
-                const verificarId = await productService.getProductById(id);
+                const {pid} = req.params;
+                const verificarId = await productService.getProductById(pid);
                 if(!verificarId){
                     res.sendClientError({message: "Not found id."});
                 }else{
-                    const eliminarProducto = await productService.deleteProduct(id);
+                    const eliminarProducto = await productService.deleteProduct(pid);
                     res.sendSuccess(eliminarProducto);
                 }
             } catch (error) {
                 res.sendServerError(`something went wrong ${error}`)
             }
         });
-    }
-}
+
+        this.get("/mockingproducts", ['PUBLIC'], async function(req, res){
+            try {
+                const products = generateMock(100);
+                res.sendSuccess(products);
+            } catch (error) {
+                console.error(error);
+                res.status(500).send({ error: error, message: "No se pudo obtener la info" });
+            }
+        });        
+    };
+};
 
 export default ProductRouter;

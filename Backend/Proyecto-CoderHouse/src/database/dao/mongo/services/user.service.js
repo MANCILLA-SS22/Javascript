@@ -11,6 +11,7 @@ class UserServiceMongo{
 
     async findUser(parameter){
         try {
+            console.log("parameter", parameter)
             return await userModel.findOne({email: parameter});
         } catch (error) {
             throw new Error(error)

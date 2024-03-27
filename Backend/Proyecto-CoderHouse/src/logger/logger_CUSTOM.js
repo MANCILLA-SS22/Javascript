@@ -1,6 +1,5 @@
 import winston from "winston";
 import { environment } from "../config/dotenvMain/env.config.js";
-import { __dirname } from "../utils.js";
 
 const customLevelsOptions = { //Creating our logger:
     levels: { fatal: 0, error: 1, warning: 2, http: 3, info: 4, debug: 5 },
@@ -18,7 +17,7 @@ const logger = winston.createLogger({
             )
         }),
         new winston.transports.File({
-            filename: environment === "dev" ? `${__dirname}/files/errors-dev.log`: `${__dirname}/files/errors-prod.log`,
+            filename: environment === "dev" ? `./files/errors-dev.log`: `$./files/errors-prod.log`,
             level: "error",
             format: winston.format.simple()
         })

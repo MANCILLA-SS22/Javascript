@@ -11,7 +11,7 @@ form.addEventListener('submit', function(e){
         headers: { 'Content-Type': 'application/json' }
     })
     .then(function(result){
-        if (result.status === 201) window.location.replace('/login');
+        if (result.status === 200) window.location.replace('/login');
     })
     .catch(err => console.log(err));
 });

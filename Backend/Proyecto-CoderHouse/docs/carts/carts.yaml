@@ -1,0 +1,257 @@
+paths:
+  /api/carts:
+    get:
+      tags:
+        - Carts
+      summary: Obtener todos los carritos
+      description: Muestra todos los carritos
+      responses:
+        "200":
+          description: All carts were delivered
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/Cart' 
+        "400":
+          description: Bad request
+        "401":
+          description: Not authenticated
+        "403":
+          description: Forbidden, user not authorized
+        "500":
+          description: Server error
+    post:
+      tags:
+      - Carts
+      summary: Crear un nuevo carrito
+      description: Crear carritos que se desean visualizar
+  /api/carts/{pid}:
+    get:
+      tags:
+        - Carts
+      summary: Obtener carrito segun su id
+      description: Obtener unicamente un carrito segun su id
+      parameters:
+      - name: pid
+        in: path
+        required: true
+        description: Id del carrito a identificar
+        schema:
+          $type: String
+      responses:
+        "200":
+          description: El carrito fue encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/Cart"
+        "400":
+          description: Bad request
+        "401":
+          description: Not authenticated
+        "403":
+          description: Forbidden, user not authorized
+        "500":
+          description: Server error
+    put:
+      tags:
+        - Carts
+      summary: Actualizar un carrito
+      description: Actualizar un carrito segun su id
+      parameters:
+      - name: pid
+        in: path
+        required: true
+        description: Id del carrito a actualizar
+        schema:
+          $type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#components/requestBodies/Cart"
+      responses:
+        "200":
+          description: El carrito fue actualizado
+          content:
+            application/json:
+              schema:
+        "400":
+          description: Bad request
+        "401":
+          description: Not authenticated
+        "403":
+          description: Forbidden, user not authorized
+        "500":
+          description: Server error
+    delete:
+      tags:
+        - Carts
+      summary: Eliminar carrito
+      description: Eliminar carrito segun id
+      parameters:
+      - name: pid
+        in: path
+        required: true
+        description: Carrito encontrado para ser eliminado
+        schema:
+          $type: string
+      responses:
+        "200":
+          description: El carrito fue eliminado
+        "400":
+          description: Bad request
+        "401":
+          description: Not authenticated
+        "403":
+          description: Forbidden, user not authorized
+        "500":
+          description: Server error
+  /api/carts/{cid}/products/{pid}:
+    post:
+      tags:
+        - Carts
+      summary: Obtener carrito segun su id
+      description: Mostrar carrito segun su id
+      parameters:
+      - name: pid
+        in: path
+        required: true
+        description: Id del producto a buscar
+        schema:
+          $type: String
+      - name: cid
+        in: path
+        required: true
+        description: Id del carrito a buscar
+        schema:
+          $type: String
+      responses:
+        "200":
+          description: El carrito fue creado
+        "400":
+          description: Bad request
+        "401":
+          description: Not authenticated
+        "403":
+          description: Forbidden, user not authorized
+        "500":
+          description: Server error
+    put:
+      tags:
+        - Carts
+      summary: Actualizar carrito
+      description: Actualizar carrito segun su id
+      parameters:
+      - name: pid
+        in: path
+        required: true
+        description: Id del producto a buscar
+        schema:
+          $type: String
+      - name: cid
+        in: path
+        required: true
+        description: Carito encontrado por id
+        schema:
+          $type: String
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#components/requestBodies2/Cart"
+      responses:
+        "200":
+          description: El carrito fue actualizado
+          content:
+            application/json:
+              schema:
+        "400":
+          description: Bad request
+        "401":
+          description: Not authenticated
+        "403":
+          description: Forbidden, user not authorized
+        "500":
+          description: Server error
+    delete:
+      tags:
+        - Carts
+      summary: Eliminar carrito
+      description: Eliminar carrito segun su id
+      parameters:
+      - name: pid
+        in: path
+        required: true
+        description: Id del producto a encontrar
+        schema:
+          $type: String
+      - name: cid
+        in: path
+        required: true
+        description: Id del carrito a buscar
+        schema:
+          $type: String
+      responses:
+        "200":
+          description: El carrito fue eliminado
+        "400":
+          description: Bad request
+        "401":
+          description: Not authenticated
+        "403":
+          description: Forbidden, user not authorized
+        "500":
+          description: Server error
+  /api/carts/{cid}/purchase:
+    get:
+      tags:
+        - Carts
+      summary: Obtener ticket de compra segun el id del carrito
+      description: Mostrar ticket de compra segun el id del carrito
+      responses:
+        "200":
+          description: El ticket fue enviado
+        "400":
+          description: Bad request
+        "401":
+          description: Not authenticated
+        "403":
+          description: Forbidden, user not authorized
+        "500":
+          description: Server error
+
+components:
+  schemas:
+    Cart:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+        products:
+          type: array
+        __v:
+          type: integer
+          example: 0
+      example: 
+        _id: 63f937f964537d9ae62d015b
+        products: [{"product": {"_id": "66024acb40aff040a158b251","title": "Saiga-12","price": 800},"quantity": 1,"_id": "63f9478872009f99292ea711"},{"product": {"_id": "66024acb40aff040a158b252","title": "RPG","price": 1000},"quantity": 5,"_id": "63fa384e570a009fcdf61bf6"}]
+        __v: 0
+  requestBodies:
+    Cart:
+      type: object
+      properties:
+        products:
+          type: aray
+          example: [{"product": "63ed6ef62c4930c20f2e046e","quantity": 1},{"product": "66024acb40aff040a158b251","quantity": 1},{"product": "63ed6f672c4930c20f2e0490","quantity": 1}]
+  requestBodies2:
+    Cart:
+      type: object
+      properties:
+        quantity:
+          type: integer
+          example: 500

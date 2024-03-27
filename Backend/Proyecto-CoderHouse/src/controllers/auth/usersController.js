@@ -122,11 +122,11 @@ class AuthRouter extends Route {
         
         async function register(req, res){
             try {
-                // console.log("Registrando usuario");
-                req.logger.info("Nuevo usuario registrado")
-                res.status(201).send({ status: "success", message: "Usuario creado con extito." });
+                console.log("Registrando usuario");
+                // req.logger.info("Nuevo usuario registrado");
+                res.sendSuccess({ status: "success", message: "Usuario creado con extito." });
             } catch (error) {
-                res.status(500).json({ error: 'Internal server error' })
+                res.sendServerError(500).json({ error: 'Internal server error' })
             }
         };
         

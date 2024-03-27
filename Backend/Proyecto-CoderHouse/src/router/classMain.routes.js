@@ -1,8 +1,6 @@
 import RealTimeProductsController from "../controllers/realTimeProducts/controllerRealProducts.js";
-
 import RouterCarts from "../controllers/carts/controllerCarts.js";
 import RouterProducts from "../controllers/products/controllerProducts.js";
-
 import ViewsController from "../controllers/views/viewsController.js";
 import AuthController from "../controllers/auth/usersController.js";
 import SessionsController from "../controllers/sessions/sessionsController.js"

@@ -39,42 +39,36 @@ class CartRouter extends Route{
             }
         });
 
-        this.get("/:id", ['PUBLIC'], async function(req, res){
+        this.get("/:cid", ['PUBLIC'], async function(req, res){
             try {
-                const {id} = req.params;
-                const getId = await cartService.getCartById(id);  
+                const {cid} = req.params;
+                const getId = await cartService.getCartById(cid);  
                 //console.log(getId);
                 !getId ? res.sendClientError({message: "Cart not found"}) : res.sendSuccess(getId);
             } catch (error) {
                 res.sendServerError(`something went wrong ${error}`)
             }
         });
+        
+        this.put("/:cid", ['PUBLIC'], async function(req, res){ //  deberá actualizar el carrito con un arreglo de productos con el formato especificado arriba.
+            try {
+                const productDto = new ProductDto(req.body);
+                const {cid} = req.params;
+                const getCartId = await cartService.updateOneCart(cid, productDto);
+                res.sendSuccess(getCartId);
+            } catch (error) {
+                res.sendServerError(`something went wrong ${error}`)
+            }
+        });
 
-        this.get("/:cid/purchase/:uid/user", ['USER'], async function(req, res){
-            const {cid, uid} = req.params;
-            const cart = await cartService.getCartById(cid); //Filtramos el carrito con los productos dentro de el
-            const products = cart.products; //Almacenamos los productos pertenecientes al carrito (estos productos vienen en formato array)
-            const purchaseAvailable = products.filter(event => event.product.stock !== 0);   //Filtramos los productos con un valor diferente de 0 en stock
-            const purchaseUnavailable = products.filter(event => event.product.stock < event.quantity); //Filtramos los productos del carrito que tengan un valor mayor al del stock
-
-            purchaseAvailable.forEach(async function(event){
-                const productsToSell = await productService.updateProductgetProductById(event.product._id);
-                productsToSell.stock =- event.quantity;
-                await productService.updateProduct({_id: event.product._id}, productsToSell);
-            });
-
-            const ticket = {
-                code: uuidv4(),
-                purchaseDate: new Date().toLocaleString(),
-                amount: purchaseAvailable.reduce((acc, cur) => acc + cur.product.price * cur.quantity, 0),
-                owner: req.user.email
-            };
-
-            const newTicket = await ticketModel.create(ticket);
-            if(newTicket) await cartService.updateOneCart(cid, purchaseUnavailable); //Mantenemos en el carrito los productos no comprados por falta de stock
-            await userService.updateUser(uid, {cart: purchaseAvailable}); //Almacenamos el carrito en el usuario actual
-
-            res.sendSuccess(newTicket);
+        this.delete("/:cid", ['ADMIN'], async function(requset, res){ //deberá eliminar todos los productos del carrito
+            try {
+                const {cid} = requset.params;
+                const deleteProduct = await cartService.deleteProductsById(cid);
+                res.sendSuccess(deleteProduct);
+            } catch (error) {
+                res.sendServerError(`something went wrong ${error}`)
+            }
         });
 
         this.post("/:cid/products/:pid", ['PUBLIC'], async function(req, res){ 
@@ -137,17 +131,6 @@ class CartRouter extends Route{
             }
         });
 
-        this.put("/:cid", ['PUBLIC'], async function(req, res){ //  deberá actualizar el carrito con un arreglo de productos con el formato especificado arriba.
-            try {
-                const productDto = new ProductDto(req.body);
-                const {cid} = req.params;
-                const getCartId = await cartService.updateOneCart(cid, productDto);
-                res.sendSuccess(getCartId);
-            } catch (error) {
-                res.sendServerError(`something went wrong ${error}`)
-            }
-        });
-        
         this.put("/:cid/products/:pid", ['USER'], async function(req, res){ //deberá poder actualizar SÓLO la cantidad de ejemplares del producto por cualquier cantidad pasada desde req.body
             try {
                 const {quantity} = req.body;
@@ -178,14 +161,31 @@ class CartRouter extends Route{
             }
         });
         
-        this.delete("/:cid", ['ADMIN'], async function(requset, res){ //deberá eliminar todos los productos del carrito
-            try {
-                const {cid} = requset.params;
-                const deleteProduct = await cartService.deleteProductsById(cid);
-                res.sendSuccess(deleteProduct);
-            } catch (error) {
-                res.sendServerError(`something went wrong ${error}`)
-            }
+        this.get("/:cid/purchase/:uid/user", ['USER'], async function(req, res){
+            const {cid, uid} = req.params;
+            const cart = await cartService.getCartById(cid); //Filtramos el carrito con los productos dentro de el
+            const products = cart.products; //Almacenamos los productos pertenecientes al carrito (estos productos vienen en formato array)
+            const purchaseAvailable = products.filter(event => event.product.stock !== 0);   //Filtramos los productos con un valor diferente de 0 en stock
+            const purchaseUnavailable = products.filter(event => event.product.stock < event.quantity); //Filtramos los productos del carrito que tengan un valor mayor al del stock
+
+            purchaseAvailable.forEach(async function(event){
+                const productsToSell = await productService.updateProductgetProductById(event.product._id);
+                productsToSell.stock =- event.quantity;
+                await productService.updateProduct({_id: event.product._id}, productsToSell);
+            });
+
+            const ticket = {
+                code: uuidv4(),
+                purchaseDate: new Date().toLocaleString(),
+                amount: purchaseAvailable.reduce((acc, cur) => acc + cur.product.price * cur.quantity, 0),
+                owner: req.user.email
+            };
+
+            const newTicket = await ticketModel.create(ticket);
+            if(newTicket) await cartService.updateOneCart(cid, purchaseUnavailable); //Mantenemos en el carrito los productos no comprados por falta de stock
+            await userService.updateUser(uid, {cart: purchaseAvailable}); //Almacenamos el carrito en el usuario actual
+
+            res.sendSuccess(newTicket);
         });
     }
 }
