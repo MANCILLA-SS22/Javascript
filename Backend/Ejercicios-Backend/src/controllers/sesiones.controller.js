@@ -32,10 +32,9 @@ async function login (req, res){
 }
 
 async function current(req, res){
-    const cookie = req.cookies['coderCookie']
+    const cookie = req.cookies['coderCookie'];
     const user = jwt.verify(cookie, 'tokenSecretJWT');
-    if (user)
-        return res.send({ status: "success", payload: user })
+    if (user) return res.send({ status: "success", payload: user });
 }
 
 async function unprotectedLogin(req, res){

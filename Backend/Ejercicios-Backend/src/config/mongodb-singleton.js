@@ -16,9 +16,9 @@ class MongoSingleton {
         return this.#instance; //Retorna la instancia creada del objeto, en el cual, dentro del constructor se iniciliza (y ejecuta) la funcion "#connectMongoDB", la cual permitira que haga la coneccion con mongodb.
     }
 
-    async #connectMongoDB(message){
+    #connectMongoDB(message){
         try {
-            await mongoose.connect(config.mongoUrl, {});
+            mongoose.connect(config.mongoUrl, {});
             console.log(message);
         } catch (error) {
             console.error("No se pudo conectar a la BD usando Moongose: " + error);

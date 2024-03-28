@@ -10,11 +10,11 @@ mongoose.connect(config.mongoUrlTest);
 const assert = Assert.strict; //Assert: módulo nativo de nodejs que nos permitirá hacer validaciones de manera estricta y podremos hacer las operaciones que determinarán si un test pasa o no.
 
 describe('Testing User Dao', function(){ //describe: función utilizada para definir diferentes contextos de testeo, podemos tener la cantidad de contextos que deseemos en un flujo de testing, siempre y cuando reflejen intenciones diferentes.
-    before(function () { //before: Función que nos permite inicializar elementos antes de comenzar con todo el contexto de testeo.
+    before(function () { //before: Función que nos permite inicializar elementos antes de comenzar con todo el contexto de testeo. Generalmente se inicializa una vez afectando UNICAMENTE a los "it" que estan fuera de los describe
         this.usuarioServiceMongo = new UsuarioServiceMongo();
     });
 
-    beforeEach(function () { //beforeEach: Función que nos permite inicializar elementos antes de comenzar cada test dentro de un contexto particular
+    beforeEach(function () { //beforeEach: Función que nos permite inicializar elementos antes de comenzar cada test dentro de un contexto particular. Se ejecuta justo antes de ejecutar los "it"
         this.timeout(5000) // time de espera ya que estamos usando una DB
         mongoose.connection.collections.usuarios.drop(); //Permitira limpiar la base de datos en la coleccion "usuarios" cada vez que se ejecute el test.
     });

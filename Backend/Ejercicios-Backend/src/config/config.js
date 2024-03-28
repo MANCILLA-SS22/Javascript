@@ -5,6 +5,8 @@ import { listeners } from './listeners.js';
 const environment = program.opts().mode;
 dotenv.config({ path: environment === "prod" ? "./src/config/.env.production" : "./src/config/.env.development" });
 
+const test = program.opts().test;
+dotenv.config({ path: "./src/config/.env.development" });
 
 // console.log(process);
 // console.log(process.argv); // npm run start
@@ -12,11 +14,10 @@ dotenv.config({ path: environment === "prod" ? "./src/config/.env.production" : 
 
 const config = {
     port: process.env.PORT,
-    mongoUrl: process.env.MONGO_URL,
+    mongoUrl: test === true ? process.env.MONGO_URL_TEST : process.env.MONGO_URL,
     mongoUrlTest: process.env.MONGO_URL_TEST,
     persistence: program.opts().persist,
     mode: environment,
-    runTests: program.opts().test,
 
     adminName: process.env.ADMIN_NAME,
     adminPassword: process.env.ADMIN_PASSWORD,
