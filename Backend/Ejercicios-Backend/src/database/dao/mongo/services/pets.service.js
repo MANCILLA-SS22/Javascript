@@ -2,7 +2,7 @@ import { petsModel } from "../models/pet.model.js";
 
 class PetsService {
     constructor(){
-        console.log("Calling pets model using a service.");
+        // console.log("Calling pets model using a service.");
     };  
 
     async getAll(){

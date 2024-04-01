@@ -11,7 +11,7 @@ const alumnoSchema = new Schema({
             {
                 course: {
                     type: Schema.Types.ObjectId,
-                    ref: "materias" // const materiaModel = model("materias", materiaSchema);    Este “ref” es el que utilizamos para saber que haremos un populate a la colección indicada. 
+                    ref: "matriculas" // const materiaModel = model("materias", materiaSchema);    Este “ref” es el que utilizamos para saber que haremos un populate a la colección indicada. 
                 }
             }
         ],

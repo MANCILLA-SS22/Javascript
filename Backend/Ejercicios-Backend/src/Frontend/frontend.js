@@ -1,7 +1,5 @@
 // node src/Frontend/frontend.js
 
-
-
 //         $$$$$$$$$$$$$$$ Funciones $$$$$$$$$$$$$$$
 
 
@@ -8462,3 +8460,24 @@ console.log("lastPost", lastPost);
 const lastPost2 = await getLastPost();
 console.log("lastPost2", lastPost2); */
 
+// Ejemplo 35: Cookies
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// node src/Frontend/frontend.js

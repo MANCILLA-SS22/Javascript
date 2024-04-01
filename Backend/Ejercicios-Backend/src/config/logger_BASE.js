@@ -17,15 +17,3 @@ function addLogger(req, res, next){ // Declaramos a middleware
 }
 
 export {addLogger};
-
-
-//Este es el orden de los loggers mediante la libreria de Winston
-// {
-//     error: 0,
-//     warn: 1,
-//     info: 2,
-//     http: 3,
-//     verbose: 4,
-//     debug: 5,
-//     silly: 6
-// }

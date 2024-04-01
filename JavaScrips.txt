@@ -1863,7 +1863,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
                                                                                                                    Process & Child Process
                                                                                                                    
-- Sobre los entornos: Seguramente, a estas alturas del desarrollo entenderás que un código no puede simplemente hacerse y llegar al cliente. Para que un código esté listo para llegar al cliente, es necesario que pase por diferentes fases.
+- Sobre los entornos: Para que un código esté listo para llegar al cliente, es necesario que pase por diferentes fases.
   Sin embargo, para que estas fases se encuentren aisladas de las otras fases (no queremos que la fase de desarrollo tenga datos de producción, o que haya datos de producción en staging), necesitaremos crear entornos específicos para estas 
   fases. Nuestras variables cambiarán según el entorno.
   El primer uso radica en que una variable cambie según el entorno donde se esté corriendo, esto permite que pueda apuntar a una base de datos prueba o a una base de datos productiva con sólo cambiar el apuntador de dónde se está corriendo.
@@ -1884,9 +1884,24 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     ✓ process.argv : Muestra los argumentos pasados por CLI (Los argumentos permiten iniciar la ejecución de un programa a partir de ciertos elementos iniciales)
     ✓ process.version : Muestra la versión del proceso (node en este caso)
     ✓ process.on() : Permite setear un listener de evento. Permitirá poner a nuestro proceso principal a la escucha de algún evento para poder ejecutar alguna acción en caso de que algo ocurra. (Listeners)
-      ~ process.on('exit'); // Para ejecutar un código justo antes de la finalización del proceso.
-      ~ process.on('uncaughtException'); //  Para atrapar alguna excepción que no haya sido considerada en algún catch
-      ~ process.on('message'); // para poder comunicarse con otro proceso
+      ~ process.on('exit'); //Para ejecutar un código justo antes de la finalización del proceso.
+      ~ process.on("warning"); //The 'warning' event is emitted whenever Node.js emits a process warning. A process warning is similar to an error in that it describes exceptional conditions that are being brought to the user's attention.
+      ~ process.on('message'); //para poder comunicarse con otro proceso      
+
+      ~ process.on("beforeExit"); //This event is emitted when node empties its event loop and has nothing else to schedule. Normally, the node exits when there is no work scheduled, but a listener for 'beforeExit' can make asynchronous 
+        calls, and cause the node to continue.
+        
+      ~ process.on("rejectionHandled"); //The 'rejectionHandled' event is emitted whenever a Promise has been rejected and an error handler was attached to it (using promise.catch(), for example) later than one turn of the Node.js event 
+        loop. The Promise object would have previously been emitted in an 'unhandledRejection' event, but during the course of processing gained a rejection handler.
+
+      ~ process.on('uncaughtException'); It is emitted when an uncaught JavaScript exception bubbles all the way back to the event loop. By default, Node.js handles 
+        such exceptions by printing the stack trace to stderr and exiting with code 1, overriding any previously set process.exitCode. Adding a handler for the 'uncaughtException' event overrides this default behavior. Alternatively, change 
+        the process.exitCode in the 'uncaughtException' handler which will result in the process exiting with the provided exit code. Otherwise, in the presence of such handler the process will exit with 0.
+        Para atrapar alguna excepción que no haya sido considerada en algún catch.
+        
+      ~ process.on("unhandledRejection"); //The 'unhandledRejection' event is emitted whenever a Promise is rejected and no error handler is attached to the promise within a turn of the event loop. When programming with Promises, exceptions 
+        are encapsulated as "rejected promises". Rejections can be caught and handled using promise.catch() and are propagated through a Promise chain. The 'unhandledRejection' event is useful for detecting and keeping track of promises that 
+        were rejected whose rejections have not yet been handled.               
 
     ✓ process.exit() : Permite salir del proceso. Cuando ejecutamos una salida con process.exit() como argumento, podemos enviar un código que sirve como identificador para el desarrollador sobre la razón de la salida
       Hay que conocer los códigos de salida para aber cómo utilizarlos. También podemos rear nuestros propios códigos. Algunos de los códigos importantes son:
@@ -1900,17 +1915,36 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     ✓ Limitar sólo las flags configuradas (cualquier otra impide el procesamiento del programa)
     ✓ Colocar argumentos predeterminados.
       
-- Child process: Existen casos en los que un proceso de node necesitará crear otro proceso para poder resolver una función de gran complejidad. Algunas operaciones requieren mucho procesamiento, como:
+- Child process: Single-threaded, non-blocking performance in Node.js works great for a single process. But eventually, one process in one CPU is not going to be enough to handle the increasing workload of your application. No matter how 
+  powerful your server may be, a single thread can only support a limited load. The fact that Node.js runs in a single thread does not mean that we can’t take advantage of multiple processes and, of course, multiple machines as well.
+  Using multiple processes is the best way to scale a Node application. Node.js is designed for building distributed applications with many nodes. This is why it’s named Node. Scalability is baked into the platform and it’s not something you 
+  start thinking about later in the lifetime of an application.
+  
+  We can easily spin a child process using Node’s child_process module and those child processes can easily communicate with each other with a messaging system. The child_process module enables us to access Operating System functionalities 
+  by running any system command inside a, well, child process. We can control that child process input stream, and listen to its output stream. We can also control the arguments to be passed to the underlying OS command, and we can do 
+  whatever we want with that command’s output. We can, for example, pipe the output of one command as the input to another as all inputs and outputs of these commands can be presented to us using Node.js streams.
+
+  Existen casos en los que un proceso de node necesitará crear otro proceso para poder resolver una función de gran complejidad. Algunas operaciones requieren mucho procesamiento, como:
     ✓ Lectura de archivos enormes
     ✓ Consultas a bases muy complejas 
   Por lo que, para no bloquear las tareas actuales de, un servidor, por ejemplo, ocupamos separar esa tarea en otro subproceso.
-  Existen diferentes formas para que un proceso de node pueda ejecutar otro proceso, hay cuatro operadores que pueden ser utilizados y manipulados de diferentes formas 
-  https://www.freecodecamp.org/news/node-js-child-processes-everything-you-need-to-know-e69498fe970a/
-    > fork(): 
-    > spawn():
-    > exec():
-    > execFile():
+  Existen diferentes formas para que un proceso de node pueda ejecutar otro proceso, hay cuatro operadores que pueden ser utilizados y manipulados de diferentes formas
+    --> https://www.freecodecamp.org/news/node-js-child-processes-everything-you-need-to-know-e69498fe970a/
+   
+    > fork(): The fork function is a variation of the spawn function for spawning node processes. The biggest difference between spawn and fork is that a communication channel is established to the child process when using fork, so we 
+      can use the send function on the forked process along with the global process object itself to exchange messages between the parent and forked processes. We do this through the EventEmitter module interface.
+      Se utiliza para ejecutar scripts Node.js en procesos secundarios y comunicarse con ellos.
+          
+    > spawn(): The spawn function launches a command in a new process and we can use it to pass that command any arguments. For example, here’s code to spawn a new process that will execute the pwd command.
+      Esta función se utiliza para ejecutar un comando en un nuevo proceso. Permite especificar el comando a ejecutar y los argumentos que se le pasarán. También proporciona una interfaz para interactuar con la entrada, salida y 
+      error estándar del proceso secundario en tiempo real. 
+      Se utiliza para ejecutar comandos del sistema operativo.
+   
+    > exec(): It is used to test for the match in a string. If there is a match this method returns the first match else it returns NULL. Esta función se utiliza para ejecutar un comando en un subproceso con una shell. Es útil cuando se 
+      necesita ejecutar comandos de shell con funcionalidades como expansión de comodines.
     
+    > execFile(): 
+        
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        
 
                                                                                                                    Arquitectura de capas
@@ -1951,27 +1985,61 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
                                                                                                                    Patrones de diseño reconocidos en Expressjs
                                                                                                                    
-> Cadena de responsabilidades: Permite que, cuando algún elemento envía información (sender) y existe alguien que lo reciba (receiver), a esa petición puedan recibirla y procesarla múltiples objetos (o funciones). Esto permite tener un mejor 
+- Cadena de responsabilidades: Permite que, cuando algún elemento envía información (sender) y existe alguien que lo reciba (receiver), a esa petición puedan recibirla y procesarla múltiples objetos (o funciones). Esto permite tener un mejor 
   control de la petición, agregar filtros y reenviar el objeto con sus respectivas alteraciones.   
   Express popularizó enormemente el concepto de un Middleware, que al final es una variante de la inyección de dependencias, donde al recibir un request, éste puede pasar por diferentes lógicas en cada middleware, al final, un middleware 
   responde para recibirse por otro middleware, y así sucesivamente hasta llegar al endpoint principal.
   
-> Decorador: Permite mantener un objeto inicial genérico para poder procesar información, pero al ser utilizado éste está abierto a ser transformado a lo largo del flujo del proceso. De no querer que un objeto tenga añadiduras nuevas, 
+- Decorador: Permite mantener un objeto inicial genérico para poder procesar información, pero al ser utilizado éste está abierto a ser transformado a lo largo del flujo del proceso. De no querer que un objeto tenga añadiduras nuevas, 
   podemos congelar el objeto con “Object.freeze()”, sin embargo, rompería con el patrón decorador al no permitir que se le cambie.
   Cuando recibimos un request, el objeto request está predefinido con ciertas propiedades, sin embargo, podemos procesar n middlewares para transformar el request. Al usar multer, por ejemplo, a nuestro endpoint llega una propiedad req.file 
   o req.files, cosa que no teníamos antes del middleware.
   
-> Proxy: También conocido como Proxy routing o simplemente Routing pattern, implica tener un sustituto (surrogate), el cual reciba una petición y controlar el acceso hacia otro objeto (subject). El sustituto recibirá todas las peticiones, 
+- Proxy: También conocido como Proxy routing o simplemente Routing pattern, implica tener un sustituto (surrogate), el cual reciba una petición y controlar el acceso hacia otro objeto (subject). El sustituto recibirá todas las peticiones, 
   para después corroborar a quién debería corresponder dicha petición y enviársela. El sustituto y el objeto final deben contar con la misma interfaz. Cuando creamos un nuevo router en la aplicación principal de Express, y conectamos el 
   middleware de router con app.use(), éste se convierte en un sustituto que definirá a cuál router redirigir la información. Es el patrón más común que se puede reconocer en Express, pues son los primeros pasos que damos al comenzar a usarlo
 
-> Patrón MVC: Es un patrón que ya se ha platicado ampliamente en las últimas clases, éste consistiendo en la separación de capas de modelo (persistencia), Vista (presentación) y Controlador (Negocio). Recordemos que al final el objetivo es 
+- Patrón MVC: Es un patrón que ya se ha platicado ampliamente en las últimas clases, éste consistiendo en la separación de capas de modelo (persistencia), Vista (presentación) y Controlador (Negocio). Recordemos que al final el objetivo es 
   mantener un flujo con actividades bien delegadas y así poder tener mejor control sobre el código.
 
-> Patrón Singleton: Es un patrón utilizado para tener una instancia global a nivel aplicación. En ocasiones, se requiere que la aplicación tenga una única instancia de dicha clase (Por ejemplo, al abrir una conexión en base de datos). El 
+- Singleton Pattern: Es un patrón utilizado para tener una instancia global a nivel aplicación. En ocasiones, se requiere que la aplicación tenga una única instancia de dicha clase (Por ejemplo, al abrir una conexión en base de datos). El 
   patrón singleton corrobora si ya existe una instancia de esta clase. En caso de que sí, devolverá la instancia, caso contrario creará la instancia.
+  Singleton is a design pattern that ensures that a class has only one immutable instance. Said simply, the singleton pattern consists of an object that can't be copied or modified. It's often useful when we want to have some immutable
+  single point of truth for our application.
+  
+- Null Object Design Pattern: This Pattern wraps up the null into its own object. Instead of having a null reference for some object, we wrap it into a NULL version of that object which will implement the same interface that of the object, 
+  i.e. same methods and properties. The intent of a NULL OBJECT is to encapsulate the absence of an object by providing a substitutable alternative that offers suitable default do-nothing-behavior. In short, a design where “nothing will come 
+  of nothing”. We can use this pattern whenever we have the NULL object returned or checked against before accessing the properties of the object. It has a kind of do-nothing behavior on its methods.
 
+- Facade Design Pattern: Facade design pattern is a Structural design pattern that allows users to create a simple interface that hides the complex implementation details of the system making it easier to use. This pattern intends to create 
+  a simplified and unified interface for a set of interfaces hiding the implementation details making it less complex to use. The components of the Facade design pattern include:
+    > Subsystem: The Subsystem is a class or group of classes or interfaces that handles the entire complex logic and implementation.
+    > Facade: The Facade is the class or object that serves as an entry point to the Subsystem’s implementation hiding the complex implementation details.
+    > Client: The Client interacts with the simplified Interface provided by Facade to perform operations without knowing the internal implementation details.
 
+- Builder Pattern: This pattern is used to create objects in "steps". Normally we will have functions or methods that add certain properties or methods to our object. The cool thing about this pattern is that we separate the creation of 
+  properties and methods into different entities. If we had a class or a factory function, the object we instantiate will always have all the properties and methods declared in that class/factory. But using the builder pattern, we can create 
+  an object and apply to it only the "steps" we need, which is a more flexible approach.
+
+- Command Pattern: With the Command Pattern, we can decouple objects that execute a certain task from the object that calls the method. The Command Pattern is a behavioral design pattern that converts requests or simple operations into 
+  objects. The key idea here is that it encapsulates a request as an object, thereby letting us parameterize clients with queues, requests, operations, and also allows us to support undoable operations.
+  The essence of this pattern involves three main components:
+   > The Command: This is an interface that specifies how to carry out a given operation.
+   > The Invoker: This is a component that uses the command to carry out a given operation.
+   > The Receiver: This is the component that knows how to perform the operations associated with the command.
+   
+- Prototype Pattern: The Prototype pattern allows you to create an object using another object as a blueprint, inheriting its properties and methods. It is a useful way to share properties among many objects of the same type. The prototype 
+  is an object that’s native to JavaScript, and can be accessed by objects through the prototype chain. In our applications, we often have to create many objects of the same type. A useful way of doing this is by creating multiple instances 
+  of an ES6 class.
+
+- Factory Method Pattern: The Factory method pattern provides an interface for creating objects that can be modified after creation. The cool thing about this is that the logic for creating our objects is centralized in a single place, 
+  simplifying and better organizing our code. This pattern is used a lot and can also be implemented in two different ways, via classes or factory functions (functions that return an object).
+  
+- Abstract Factory Pattern: This pattern allows us to produce families of related objects without specifying concrete classes. It's useful in situations where we need to create objects that share only some properties and methods.
+  The way it works is by presenting an abstract factory the client interacts with. That abstract factory calls the corresponding concrete factory given the corresponding logic. And that concrete factory is the one that returns the end 
+  object. Basically it just adds an abstraction layer over the factory method pattern, so that we can create many different types of objects, but still interact with a single factory function or class.
+  
+  
                                                                                                                    Arquitectura del servidor: Persistencia
                                                                                                                    
 - Memoria: La información persiste sólo durante el ciclo de vida del programa, si se reinicia, la información desaparece.
@@ -1991,7 +2059,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 - Patron repository: 
 
 - Patron service: 
-
 
 - Data Transfer Object: DTOs or Data Transfer Objects are objects that carry data between processes in order to reduce the number of methods calls. The pattern’s main purpose is to reduce roundtrips to the server by batching up multiple 
   parameters in a single call. This reduces the network overhead in such remote operations. Another benefit is the encapsulation of the serialization’s logic (the mechanism that translates the object structure and data to a specific format 
@@ -2165,10 +2232,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 - Hoisting: Es el proceso de mover todas las declaraciones de variables a la parte superior de la función o del entorno. El concepto de hoisting de JavaScript determina que el valor de una variable declarada con var puede subir al 
   principio del scope de la función dentro de la que está declarada. Esto puede ser peligroso, porque puedes terminar con un valor de tipo undefined a pesar de haberle otorgado valor a tus variables. Es decir, la palabra clave var a veces 
   nos sorprende con valores indefinidos en variables definidas. El hoisting de JavaScript raras veces genera este comportamiento en variables declaradas con const y con let. Aunque puede suceder, el desarrollador web casi que tiene que 
-  generar este comportamiento a propósito para que suceda.  
-  
-- Asincrónia: La programación asíncrona nos da la capacidad de “diferir” la ejecución de una función a la espera de que se complete una operación, normalmente de I/O (red, disco duro, …), y así evitar bloquear la ejecución hasta que se haya 
-  completado la tarea en cuestión. Esto es posible gracias a que las funciones son ciudadanos de primer nivel (first-class citizens) y pueden ser pasadas como argumentos de otras funciones tal cual lo haríamos con las variables.                                                                                                                   
+  generar este comportamiento a propósito para que suceda.                                                                                                                
   
 -  Node JS: Node.js es un entorno de ejecución de JavaScript, que le permite al código en js ser ejecutado en nuestra computadora. Podemos darle a node un archivo de js y éste puede ejecutarlo, y darle acceso a recursos de nuestra 
    computadora (IO, Network, Etc). El “Node” de java es conocido como la JVM.
@@ -2214,35 +2278,10 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     ✓ ¿A qué endpoint debo apuntar para la tarea que necesito?
     ✓ ¿Qué método debo utilizar para ese recurso?
     ✓ ¿Qué información debo enviar para realizar correctamente mi petición? 
-
-- Api rest: Una API REST es una interfaz de comunicación entre sistemas de información que usa el protocolo de transferencia de hipertexto (hypertext transfer protocol o HTTP, por su siglas en inglés) para obtener datos o ejecutar 
-  operaciones sobre dichos datos en diversos formatos, como pueden ser XML o JSON.     
-    1) REST: Ya tenemos las reglas para comunicarse, ¿Pero qué tal la estructura del mensaje? Cuando hacemos una petición o cuando recibimos una respuesta, ésta debe tener un formato. REST (REpresentational State Transfer) permite definir la 
-       estructura que deben tener los datos para poder transferirse. La API respondía a preguntas sobre cómo comunicarse correctamente, sin embargo, REST define cómo debe ser el cuerpo del mensaje a transmitir. (puedes llegar a hablar con el 
-       presidente si cumples con el protocolo (HTTP) y las reglas (API), pero ¿de qué nos servirá si la forma en que estructuramos nuestro mensaje (REST) no es correcta?).
-       Los dos formatos más importan tes son JSON y XML. La utilización de la estructura dependerá de las necesidades del proyecto. Nosotros utilizaremos JSON. Como otarás, ¡un JSON parece un objeto! así que es mucho más amigable la sintaxis
-    2) API REST es: Un modelo completo para tener perfectamente estipulados los protocolos, las reglas, e incluso la estructura de la información, con el fin de poder hacer un sistema de comunicación completo entre las computadoras.
-    3) Características debe tener una API REST: Estas son las caracteristicas mas importantes de una API REST
-       a) Arquitectura Cliente-Servidor sin estado: 
-          ~ Cada mensaje HTTP contiene toda la información necesaria para comprender la petición. 
-          ~ Como resultado, ni el cliente ni el servidor necesitan recordar ningún estado de las comunicaciones entre mensajes.
-          ~ Esta restricción mantiene al cliente y al servidor débilmente acoplados: el cliente no necesita conocer los detalles de implementación del servidor y el servidor se “despreocupa” de cómo son usados los datos que envía al cliente.
-       b) Cacheable: 
-          ~ Debe admitir un sistema de almacenamiento en caché.  
-          ~ La infraestructura de red debe soportar una caché de varios niveles. 
-          ~ Este almacenamiento evita repetir varias conexiones entre el servidor y el cliente, en casos en que peticiones idénticas fueran a generar la misma respuesta.
-       c) Operaciones comunes:
-          ~ Todos los recursos detrás de nuestra API deben poder ser consumidos mediante peticiones HTTP, preferentemente sus principales (POST, GET, PUT y DELETE).
-          ~ Con frecuencia estas operaciones se equiparan a las operaciones CRUD en bases de datos (en inglés: Create, Read, Update, Delete, en español: Alta, Lectura, Modificación, y Baja).  
-          ~ Al tratarse de peticiones HTTP, éstas deberán devolver con sus respuestas los correspondientes códigos de estado, informando el resultado de las mismas. 
-       d) Interfaz uniforme: 
-          ~ En un sistema REST, cada acción (más correctamente, cada recurso) debe contar con una URI (Uniform Resource Identifier), un identificador único.  
-          ~ Ésta nos facilita el acceso a la información, tanto para consultarla, como para modificarla o eliminarla, pero también para compartir su ubicación exacta a terceros.
-       e) Utilización de hipermedios: 
-          ~ Cada vez que se hace una petición al servidor y este devuelve una respuesta, parte de la información devuelta pueden ser también hipervínculos de navegación asociada a otros recursos del cliente.
-          ~ Como resultado de esto, es posible navegar de un recurso REST a muchos otros, simplemente siguiendo enlaces sin requerir el uso de registros u otra infraestructura adicional
-     
-  
+    
+    https://www.ibm.com/topics/api
+    https://stoplight.io/api-types#web-apis
+    
   Generalmente, nos comunicamos con aplicaciones de este tipo y es la tendencia actual de desarrollo. La ventaja de este modelo es que está orientado a recursos y define métodos claros para solicitar y enviar información. Una API
   suele tener una URL base (el dominio donde está alojada la aplicación) y luego puede tener varios endpoints, es decir, distintas secciones a las que podemos acceder. A la vez, se pueden hacer peticiones con distintos métodos al mismo 
   endpoint y obtener distintos resultados. Generalmente, similar a cuando queremos incorporar una librería, al momento de consumir una API debemos revisar su documentación. Allí se definen los distintos endpoints disponibles, los métodos a 
@@ -2256,6 +2295,62 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   tienen. Con ello, no será necesario tener que reinventar la rueda con cada servicio que se crea, ya que podrás utilizar piezas o funciones que otros ya han creado. Imagínate que cada tienda online tuviera que tener su propio sistema de 
   pago, para los usuarios normales es mucho más cómodo poder hacerlo con los principales servicios que casi todos utilizan. También son útiles para cuando lo único que se quiere es utilizar deliberadamente las funciones de determinado 
   servicio para ofrecer ventajas a sus usuarios o atraer a los usuarios de ese servicio a que utilicen tu aplicación.
+  
+- API protocols: Understanding what protocol an API uses is just as important as knowing what type it is. The protocol defines how your API connects to the internet and how it communicates information. The protocol you choose will determine 
+  how you design and build your API, as well as what’s required to maintain it, so it’s important to understand the advantages and drawbacks of each choice.  
+
+ > Api rest: Una API REST es una interfaz de comunicación entre sistemas de información que usa el protocolo de transferencia de hipertexto (hypertext transfer protocol o HTTP, por su siglas en inglés) para obtener datos o ejecutar 
+   operaciones sobre dichos datos en diversos formatos, como pueden ser XML o JSON.     
+     1) REST: Ya tenemos las reglas para comunicarse, ¿Pero qué tal la estructura del mensaje? Cuando hacemos una petición o cuando recibimos una respuesta, ésta debe tener un formato. REST (REpresentational State Transfer) permite definir 
+        la estructura que deben tener los datos para poder transferirse. La API respondía a preguntas sobre cómo comunicarse correctamente, sin embargo, REST define cómo debe ser el cuerpo del mensaje a transmitir. (puedes llegar a hablar 
+        con el  presidente si cumples con el protocolo (HTTP) y las reglas (API), pero ¿de qué nos servirá si la forma en que estructuramos nuestro mensaje (REST) no es correcta?).
+       Los dos formatos más importan tes son JSON y XML. La utilización de la estructura dependerá de las necesidades del proyecto. Nosotros utilizaremos JSON. Como otarás, ¡un JSON parece un objeto! así que es mucho más amigable la sintaxis
+     2) API REST es: Un modelo completo para tener perfectamente estipulados los protocolos, las reglas, e incluso la estructura de la información, con el fin de poder hacer un sistema de comunicación completo entre las computadoras.
+     3) Características debe tener una API REST: Estas son las caracteristicas mas importantes de una API REST
+        a) Arquitectura Cliente-Servidor sin estado: 
+           ~ Cada mensaje HTTP contiene toda la información necesaria para comprender la petición. 
+           ~ Como resultado, ni el cliente ni el servidor necesitan recordar ningún estado de las comunicaciones entre mensajes.
+           ~ Esta restricción mantiene al cliente y al servidor débilmente acoplados: el cliente no necesita conocer los detalles de implementación del servidor y el servidor se “despreocupa” de cómo son usados los datos que envía al cliente
+        b) Cacheable: 
+           ~ Debe admitir un sistema de almacenamiento en caché.  
+           ~ La infraestructura de red debe soportar una caché de varios niveles. 
+           ~ Este almacenamiento evita repetir varias conexiones entre el servidor y el cliente, en casos en que peticiones idénticas fueran a generar la misma respuesta.
+        c) Operaciones comunes:
+           ~ Todos los recursos detrás de nuestra API deben poder ser consumidos mediante peticiones HTTP, preferentemente sus principales (POST, GET, PUT y DELETE).
+           ~ Con frecuencia estas operaciones se equiparan a las operaciones CRUD en bases de datos (en inglés: Create, Read, Update, Delete, en español: Alta, Lectura, Modificación, y Baja).  
+           ~ Al tratarse de peticiones HTTP, éstas deberán devolver con sus respuestas los correspondientes códigos de estado, informando el resultado de las mismas. 
+        d) Interfaz uniforme: 
+           ~ En un sistema REST, cada acción (más correctamente, cada recurso) debe contar con una URI (Uniform Resource Identifier), un identificador único.  
+           ~ Ésta nos facilita el acceso a la información, tanto para consultarla, como para modificarla o eliminarla, pero también para compartir su ubicación exacta a terceros.
+        e) Utilización de hipermedios: 
+           ~ Cada vez que se hace una petición al servidor y este devuelve una respuesta, parte de la información devuelta pueden ser también hipervínculos de navegación asociada a otros recursos del cliente.
+           ~ Como resultado de esto, es posible navegar de un recurso REST a muchos otros, simplemente siguiendo enlaces sin requerir el uso de registros u otra infraestructura adicional
+   
+ > SOAP API: The Simple Object Access Protocol (SOAP) is another major API protocol. A SOAP API can communicate over other major internet communication protocols, such as TCP and SMTP, in addition to HTTP. In that regard, it is more flexible 
+   than REST, but in most ways, SOAP is more restrictive. SOAP APIs can only work with XML data and have much more rigid requirements for requests. SOAP requests also generally require more bandwidth than REST, and building and maintaining 
+   SOAP code is more complex.
+   One major advantage of SOAP is that it requires metadata files describing requests, which makes exchanges more predictable. It also enables stateful requests, unlike REST, which is stateless. Having a more standardized protocol allows    
+   SOAP APIs to communicate more complex data reliably, and to deliver it over more channels than just HTTP. SOAP’s use of service interfaces instead of simple URL-based organization can also lead to greater discoverability for knowledgeable 
+   users. In general, SOAP is a better fit for more sophisticated applications, where reliability is more important than speed or usability by a public audience. As a result, it’s widely used in financial services and in large enterprise 
+   applications like Salesforce.
+
+ > RPC API: The Remote Procedure Call (RPC) protocol can return XML or JSON responses. It differs from SOAP and REST APIs in a few key ways. As the name suggests, this protocol calls a method rather than a data resource. While a RESTful API 
+   returns a document, the response from an RPC server is confirmation that the function was triggered, or an error indicating why it failed to run. In other words, a REST API works with resources, while an RPC API works with actions.
+   Another key difference is that a REST API shows the server and the query parameters in its routes, while an RPC’s URI identifies only the server. RPC APIs are rarely public APIs; triggering methods on remote servers is not something most 
+   companies want to allow for the general public. Calling an RPC server actually changes the state of the server, so it goes beyond the stateless/stateful distinction between REST and SOAP. As a result, RPC APIs must have a high level of 
+   security and trust between producers and consumers, which is why they are most often private APIs. Discoverability and predictability are thus less important for RPC APIs than they are for REST or SOAP APIs, while reliability and 
+   performance are more important.
+   One of the most common use cases for RPC APIs is distributed client-server applications. Payloads are light and limited to parameters for the methods being called, and front-end developers can access server methods without worrying about 
+   details like opening and closing connections or parsing inputs. Methods can be called from remote locations, meaning client applications can be hosted entirely separately from the remote backend server that hosts the functions and data. 
+   Task threading is also simplified, compared to calling methods locally, because a multi-threaded process can run on the remote server without impacting the client application.   
+   
+ > GraphQL API: While GraphQL isn’t really a separate protocol, it is a distinct query language, with best practices for its use. GraphQL uses HTTP, similar to a REST API, transmitting text data in the payload of each request, but its 
+   approach is different. A REST API has multiple endpoints, each representing a different data schema. To get the information you need, you must map your requirements to the existing schema and call the appropriate endpoints. GraphQL APIs 
+   typically have a single endpoint, but effectively unlimited data schemas available at that endpoint. The API user must know what data fields are available, but they can write a query that combines those fields in whatever order they want. 
+   Queries are sent in the payload of an HTTP POST request, and data is returned in the shape of the schema specified by the query.
+   GraphQL provides users a lot of flexibility within a single query, compared to a REST API’s strict routing requirements. It can also make caching data a challenge and makes the API consumer responsible for maintaining consistent query 
+   syntax to get comparable data. Additionally, to use a GraphQL API, the user must know what fields exist in order to write a query. For users to get the most out of a GraphQL API, you will have to provide more extensive custom 
+   documentation than for a comparable REST API, and there are fewer tools available to automate the process. If speed is a priority, either for deployment or integration, it may make sense to stick with a more formulaic protocol like REST.   
    
 - Peticiones HTTP: El mecanismo por el cual se piden y proveen datos a través de internet es HTTP (Hypertext Transfer Protocol). Cuando emitimos una orden al navegador, hace una petición (o request) HTTP a algún servidor. Luego, la recibirá, 
   procesará y nos devolverá una respuesta con información que utilizaremos en la aplicación. Estas peticiones que debemos hacer están definidas por varias partes
@@ -2320,14 +2415,32 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
      ~ RECURSOS/RESTFUL: Cuando se crea y provee un servicio basado y pensado en términos de recursos, y se respetan las convenciones de verbo/método y código de respuesta, estamos frente a un diseño arquitectural de tipo REST.
        Si además transferimos javascript o xml, es conocido como AJAX
 
-
-
 - Query: Es una solicitud pero con ciertos parametros de busqueda. Se entiende por query o consulta cualquier petición de datos hacia un servicio que los devuelva, como puede ser una base de datos. Dentro de las bases de datos, Query hace 
   referencia a la repetición de datos que se encuentran almacenados. Por otra parte, Query también es el término de consulta que deriva en una SERP dentro de los buscadores. De esta manera, esta herramienta tiene como objetivo facilitar los 
   resultados arrojados a una solicitud. Query en bases de datos SQL y NoSQL es una técnica para obtener esos datos que se planea analizar. Por ejemplo, podrás pedir todos los datos del usuario y, además, podrás seleccionar la tabla o pedir 
   una hoja específica donde se encuentren las direcciones.
+
+- Asincrónia: La programación asíncrona nos da la capacidad de “diferir” la ejecución de una función a la espera de que se complete una operación, normalmente de I/O (red, disco duro, …), y así evitar bloquear la ejecución hasta que se haya 
+  completado la tarea en cuestión. Esto es posible gracias a que las funciones son ciudadanos de primer nivel (first-class citizens) y pueden ser pasadas como argumentos de otras funciones tal cual lo haríamos con las variables.    
+  Asynchronous means that the the Web Application could send and receive data from the Web Server without refreshing the page. This background process of sending and receiving data from the server along with updating different sections of a 
+  web page defines Asynchronous property/feature of AJAX.      
     
-- AJAX (Asynchronous JavaScript and XML): Es un conjunto de técnicas de desarrollo que permiten que las aplicaciones web funcionen de forma asincrónica para procesar tareas en segundo plano. En consecuencia, cualquier app o web que emplee 
+- AJAX (Asynchronous JavaScript and XML): Asynchronous JavaScript and XML (AJAX) is a combination of web application development technologies that make web applications more responsive to user interaction. Whenever your users interact with a 
+  web application, such as when they click buttons or checkmark boxes, the browser exchanges data with the remote server. Data exchange can cause pages to reload and interrupt the user experience. With AJAX, web applications can send and 
+  receive data in the background so that only small portions of the page refresh as required. 
+  AJAX uses JavaScript and XML to enable asynchronous calls when browsers and servers exchange data. Next, we explain how browsers traditionally exchange data and compare it to data exchange with AJAX.
+  
+  > Data exchange without AJAX: In a conventional model, the browser sends an HTTP request to the server side when the user performs an action. The web server receives and processes the request and sends the updated data to the browser. 
+    Then, the browser refreshes the webpage with the new data. In this approach, the browser reloads the entire page even if the requested data consists of minor changes. Moreover, the browser might send frequent requests, which load the web 
+    server software. 
+  
+  > Data exchange with AJAX: Instead of updating the whole page, AJAX uses a JavaScript function to create an XMLHttpRequest object on the browser. Then, it compiles the page information in XML format, which the XMLHttpRequest object sends 
+    to the web server. The web server processes the request and responds with the requested data. Lastly, the browser updates the current screen with the latest data without refreshing the page. 
+  
+  > Why is AJAX more efficient?: Despite similarities in data exchange and information flow, AJAX is more efficient than conventional web requests. With AJAX, the browser only updates specific web content based on the requested data. It 
+    doesn't make unnecessary refreshes on other content on the page. This makes AJAX applications faster and more responsive than conventional web applications. 
+
+  Es un conjunto de técnicas de desarrollo que permiten que las aplicaciones web funcionen de forma asincrónica para procesar tareas en segundo plano. En consecuencia, cualquier app o web que emplee 
   AJAX puede enviar y recibir datos sin volver a cargar toda la página, evitando la interrupción de acciones realizadas por el usuario, añadiendo interactividad y dinamismo a nuestra aplicación. El objetivo principal de AJAX es hacer que los 
   sitios y las aplicaciones web sean más fáciles de usar, más rápidos y con mayor capacidad de respuesta. AJAX tiene ciertas ventajas indiscutibles como:
     > Facilita la navegación, ya que la información se actualiza continuamente y las interacciones entre el usuario y las páginas web se vuelven más rápidas.
@@ -2550,7 +2663,13 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 - Router & firewall: 
 
-- Compresion: 
+- Compresion: Cuando el servidor se está comunicando con el cliente en el navegador, parte de esta comunicación implica revisar si hay algún archivo comprimido que necesite descomprimirse, y en caso de que así sea, cuál sería el algoritmo de 
+  descompresión a utilizar para poder obtener la información correctamente. Los navegadores modernos pueden aceptar contenido codificado en tres algoritmos principales: 
+    ✓ Deflate: 
+    ✓ Gzip (Deflate + algunas cosas adicionales): Gzip es el primer y más conocido modelo de compresión, es altamente utilizado y sencillo de utilizar. La compresión se puede colocar a nivel middleware en nuestro servidor para poder 
+      corroborar la diferencia de transferencia ntre una respuesta con y sin compresión.
+    ✓ Brotli: Brotli es conocido como una alternativa “moderna” de Gzip. Éste fue desarrollado por Google y ofrece un algoritmo cuya compresión puede resultar hasta 30% más efectiva que la compresión de Gzip . 
+
 
 - Escalamiento vertical: Mi servidor necesita ser más potente y necesito mejorar el hardware para tener un servidor más potente. Básicamente, significa mejorar el hardware del servidor, para que sea más potente, mucho más rápido y pueda 
   atender una mayor cantidad de peticiones y, por lo tanto, mejorar el performance de los aplicativos. El escalamiento vertical requiere de grandes inversiones de recursos por parte de las empresas para poder contar con los equipos más 
@@ -2561,6 +2680,9 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   significa utilizar múltiples servidores, conocidos como nodos, los cuales trabajarán en equipo para resolver un problema en particular. A esta red de nodos trabajando juntos, se le conoce como cluster, haciendo referencia a que estos 
   múltiples servidores se encuentran en un contexto general donde todos conocen cómo ayudarse a las tareas más complejas. Así, la diferencia radica en que, cuando necesitamos más recursos, no hace falta tirar el servidor que ya tenemos a la 
   basura para comprar uno mejor, sino que podemos conectar otra instancia de otro servidor para que se una a la red de nodos y forme parte del cluster.
+
+- Cluster: Es un módulo nativo de node js que nos permitirá ejecutar este concepto de clusterización que recién comentamos, donde podremos tener a un proceso principal contando con un grupo de procesos trabajadores. Estos trabajadores van a 
+  trabajar en conjunto para resolver el problema de las situaciones de las peticiones.
   
 - Maquina virtual: 
 

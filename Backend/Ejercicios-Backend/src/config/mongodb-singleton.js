@@ -11,7 +11,7 @@ class MongoSingleton {
     };
 
     // Implementacon Singleton
-    static getInstance() {
+    static getInstance(){
         this.#instance ? console.log("Ya se ha abierto una conexion a MongoDB.") : this.#instance = new MongoSingleton();
         return this.#instance; //Retorna la instancia creada del objeto, en el cual, dentro del constructor se iniciliza (y ejecuta) la funcion "#connectMongoDB", la cual permitira que haga la coneccion con mongodb.
     }
@@ -28,3 +28,9 @@ class MongoSingleton {
 };
 
 export default MongoSingleton;
+
+//Pasos
+// 1) Primero se manda a llamar la funcion getInstance desde el archivo "mongoInstance"
+// 2) La funcion revisa si la variable "this.#instance" tiene algo almacenado. Si no existe nada, entocnes se crea una instancia del a clase misma "MongoSingleton"
+// 3) Una creada una instancia y almacenada en dicha variable, se inicializa el constructor (recordar que al crear una instancia de una clase, el constructor es el primero en ejectutar lo que tiene adentro)
+// 4) Finalmente, dentro del contructor se manada a llamar la funcion privada "connectMongoDB" en donde ahi mismo se inicializara la coneccion con mongoose.

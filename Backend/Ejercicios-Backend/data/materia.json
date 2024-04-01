@@ -1,0 +1,30 @@
+[
+    {
+        "title": "Curso de Backend",
+        "description": "Es un curso de programacion para desarrollar servidores",
+        "difficulty": 5,
+        "topics": ["Javascript", "Servidores", "Frameworks", "Middlewares", "Base de datos"],
+        "professor": "German"
+    },
+    {
+        "title": "Curso de Frontend",
+        "description": "Es un curso de programacion para desarrollar paginas web",
+        "difficulty": 5,
+        "topics": ["Javascript", "HTML", "Frameworks", "CSS", "React"],
+        "professor": "Mancilla"
+    },
+    {
+        "title": "Curso de cyber security",
+        "description": "Es un curso de programacion para sistemas de seguridad",
+        "difficulty": 5,
+        "topics": ["Python", "Java", "C++", "Frameworks"],
+        "professor": "German"
+    },
+    {
+        "title": "Curso de mobile apps",
+        "description": "Es un curso de programacion para desarrollar aplicaciones para celulares",
+        "difficulty": 5,
+        "topics": ["Javascript", "Java", "C#", "Base de datos"],
+        "professor": "Mancilla"
+    }
+]

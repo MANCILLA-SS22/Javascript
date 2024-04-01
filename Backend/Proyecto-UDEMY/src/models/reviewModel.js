@@ -90,11 +90,10 @@ reviewSchema.pre(/^find/, function(next){
     next();
 });
 
-reviewSchema.pre(/^findOneAnd/, async function(next){ //The "this" keyword in here stands for the current query.
-    
+reviewSchema.pre(/^findOneAnd/, async function(next){ 
+    //The "this" keyword in here stands for the current query.
     //"this.rev" variable is pointing to query object in pre middleware that is going to execute and it is an object so we can define any property on it like any other object so we did this.rev, this will create a new property on this(query object) and 
-    // it is nothing to do with the schema because we are using query object.
-
+    //it is nothing to do with the schema because we are using query object.
     //In mongoose, when you use findOne() in a pre or post hook middleware, Mongoose automatically sets the query conditions based on the document being processed. You don't need to specify the ID explicitly because Mongoose uses the values from the current
     //document to create the query. "this" refers to the current query being executed. this.findOne() is used to fetch the current document based on the conditions of the current query. The conditions are automatically derived from the document being 
     //processed, and Mongoose uses the _id or any other unique identifier to locate the document.

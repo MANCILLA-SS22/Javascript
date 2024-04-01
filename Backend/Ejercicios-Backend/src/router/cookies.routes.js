@@ -7,7 +7,7 @@ const router = Router();
 router.use(coockieParser("coder1234"));
 
 router.get("/", function(req, res){
-    res.render("cookiesIndex", {})
+    res.render("cookiesIndex", {});
 });
 
 router.get("/setcookie", function(req, res){

@@ -7,10 +7,8 @@ function globalErrorHandler(err, req, res, next){ //Express recognizes an error 
     err.status = err.status || "error";
     // console.log("Error -->" ,err); //err.stack shows where the error is happening. The "err" parameter receives the error handling coming from, let's say, catchFunc() function. 
 
-    if(process.env.NODE_ENV === "development"){
-        sendErrorDev(err, req, res);
-        
-    }else if(process.env.NODE_ENV === "production"){
+    if(process.env.NODE_ENV === "development") sendErrorDev(err, req, res);
+    if(process.env.NODE_ENV === "production"){
         // let error = {...err};                         // Option 1
         // let error = { ...err, name: err.name };       // Option 2
         // let error = JSON.parse(JSON.stringify(err));  // Option 3
@@ -25,8 +23,7 @@ function globalErrorHandler(err, req, res, next){ //Express recognizes an error 
         if(error.name === "TokenExpiredError: jwt expired") error = handleJWTexpired();
 
         sendErrorProd(error, req, res);
-    }
-
+    };
 
     function sendErrorDev(err, req, res){
         // console.error("Error 💣", err);
@@ -35,8 +32,34 @@ function globalErrorHandler(err, req, res, next){ //Express recognizes an error 
         }
 
         return res.status(err.statusCode).render("error", {title: "Something went wrong", msg: err.message});
-    }
-    
+    };
+
+    function handleCastErrorDb(err){
+        const message = `Invalid ${err.path}: ${err.value}`;
+        return new AppError(message, 400);
+    };
+
+    function handleDuplicateFieldsDB(err){
+        const value = err.errmsg.match(/(["'])(\\?.)*?\1/)[0]; // "errmsg" is equal to "message". To prove this, look at the JSON message in postman
+        // const value = err.keyValue.name;                    // This is equal to the line above.
+        const message = `Duplicate field value: ${value}. Please use another value!`;
+        return new AppError(message, 400);
+    };
+
+    function handleValidationErrorDB(err){
+        const errors = Object.values(err.errors).map(event => event.message);
+        const message = `Invalid input data. ${errors.join(". ")}`;
+        return new AppError(message, 400)
+    };
+
+    function handleError(){
+        new AppError("Invalid token. Please login again!", 401);
+    };
+
+    function handleJWTexpired(){
+        new AppError("Your token has expired. Please log in again!", 401)
+    };
+
     function sendErrorProd(err, req, res){
         console.error("Error 💣", err)
         if(req.originalUrl.startsWith("/api")){
@@ -54,34 +77,7 @@ function globalErrorHandler(err, req, res, next){ //Express recognizes an error 
         console.error("Error 💣", err)
         return res.status(err.statusCode).json({status: 'error', message: "Something went very wrong!"})
         
-    }
-    
-    function handleCastErrorDb(err){
-        const message = `Invalid ${err.path}: ${err.value}`;
-        return new AppError(message, 400);
-    }
-    
-    function handleDuplicateFieldsDB(err){
-        const value = err.errmsg.match(/(["'])(\\?.)*?\1/)[0]; // "errmsg" is equal to "message". To prove this, look at the JSON message in postman
-        // const value = err.keyValue.name;                    // This is equal to the line above.
-        const message = `Duplicate field value: ${value}. Please use another value!`;
-        return new AppError(message, 400);
-    }
-    
-    function handleValidationErrorDB(err){
-        const errors = Object.values(err.errors).map(event => event.message);
-        const message = `Invalid input data. ${errors.join(". ")}`;
-        return new AppError(message, 400)
-    }    
-
-    function handleError(){
-        new AppError("Invalid token. Please login again!", 401);
-    }
-
-    function handleJWTexpired(){
-        new AppError("Your token has expired. Please log in again!", 401)
-    }
-
+    };
 }
 
 export {globalErrorHandler}

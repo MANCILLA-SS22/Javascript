@@ -1,5 +1,8 @@
 import { usuarioService, mascotaService, adopcionService } from "../database/service.js";
 
+// process.exit(5);
+// console(); // Exception no capturada: TypeError: console is not a function
+
 async function getAllAdoptions(req, res){
     const result = await adopcionService.getAll();
     res.send({status:"success",payload:result})

@@ -28,9 +28,12 @@ function clusters(){
 
 export {clusters};
 
-//1. La palabra fork será clave para hacer referencia a que un proceso nuevo surgirá, pero se mantendrá ligado al proceso que lo generó.
+//0. Cuando un proceso se ejecuta, este tiene dentro de sus características principales una propiedad conocida como pid. Este processId es muy importante para poder trabajar con otros procesos. 
+//   Cuando un proceso padre instanciaba un proceso hijo, este mantiene una referencia a partir del pid, haciéndole saber que ese proceso es parte de él.
+//1. La palabra fork será clave para hacer referencia a que un proceso nuevo surgirá, pero se mantendrá ligado al proceso que lo generó. Anteriormente, llamábamos global process al proceso padre que
+//   forkeaba al proceso hijo. Sin embargo, esta vez conoceremos al proceso principal como Primary process (anteriormente llamado Master), mientras que a las múltiples instancias que se generen se llamarán workers.
 //2. "isPrimary" Esta propiedad nos ayuda a corroborar si el proceso es el principal, o viene forkeado de algún proceso superior. 
-//3. Sabemos que el procesamiento de nuestro servidor será siempre single-threaded. Al realizar nuestros primeros forkeos, estamos comenzando a romper el paradigma que implica. Para levantar múltiples instancias, sin que afecte demasiado en tamaño, 
-//   lo primero debería ser determinar el número de hilos que podrán procesar estos multiprocesamientos, esto lo conseguiremos con ayuda de "cpus". En este caso, existen unicamente 4.
+//3. Sabemos que el procesamiento de nuestro servidor será siempre single-threaded. Al realizar nuestros primeros forkeos, estamos comenzando a romper el paradigma que implica. Para levantar múltiples 
+//   instancias, sin que afecte demasiado en tamaño, lo primero debería ser determinar el número de hilos que podrán procesar estos multiprocesamientos, esto lo conseguiremos con ayuda de "cpus". En este caso, existen unicamente 4.
 //4. Cuando un proceso se ejecuta, este tiene dentro de sus características principales una propiedad conocida como pid. Este processId es muy importante para poder trabajar con otros procesos. Cuando un proceso padre instanciaba un proceso hijo, 
 //   este mantiene una referencia a partir del pid, haciéndole saber que ese proceso es parte de él.

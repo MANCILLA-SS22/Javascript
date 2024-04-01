@@ -28,7 +28,6 @@ https://www.postgresql.org/docs/current/
 https://docs.oracle.com/database/121/SQLRF/toc.htm 
 https://docs.github.com/en/get-started/getting-started-with-git/associating-text-editors-with-git 
 https://react.dev   https://legacy.reactjs.org  https://create-react-app.dev  
-https://redux-toolkit.js.org  https://redux-saga.js.org 
 https://jquery.com/download/ 
 https://angular.io/start 
 https://www.php.net/manual/en/
@@ -62,6 +61,7 @@ https://www.mongodb.com/docs/atlas/
 https://cloud.mongodb.com/v2/655f1475ba7fe502fcda39da#/clusters
 https://mongoosejs.com/docs/middleware.html   https://mongoosejs.com/docs/guide.html#methods
 https://nextui.org
+https://react-redux.js.org  https://redux-toolkit.js.org  https://redux-saga.js.org 
 https://docs.nestjs.com
 https://axios-http.com/docs/intro  
 https://socket.io/docs/v4/tutorial/introduction 
@@ -69,12 +69,18 @@ https://github.com/facebook/regenerator/tree/main
 https://github.com/zloirock/core-js
 https://github.com/typicode/json-server
 https://github.com/expressjs/multer
+https://github.com/davidbanham/express-async-errors
+https://github.com/prettymuchbryce/http-status-codes
 https://github.com/motdotla/dotenv
 https://github.com/expressjs/morgan
 https://github.com/simov/slugify
 https://github.com/jquense/yup
 https://github.com/moment/moment/
 https://github.com/moment/luxon/?tab=readme-ov-file
+https://github.com/mde/ejs
+https://github.com/express-handlebars/express-handlebars
+https://github.com/expressjs/compression
+https://github.com/foliojs/brotli.js?tab=readme-ov-file
 https://github.com/validatorjs/validator.js
 https://github.com/aravindnc/mongoose-paginate-v2?tab=readme-ov-file
 https://github.com/jdesboeufs/connect-mongo
@@ -87,6 +93,7 @@ https://github.com/Psifi-Solutions/csrf-csrf
 https://github.com/mikenicholson/passport-jwt
 https://github.com/tj/commander.js
 https://github.com/helmetjs/helmet
+https://github.com/colinhacks/zod
 https://github.com/fiznool/express-mongo-sanitize
 https://github.com/leizongmin/js-xss
 https://github.com/YahooArchive/xss-filters
@@ -138,7 +145,7 @@ https://github.com/facebook/react
 https://github.com/facebook/create-react-app
 https://vitejs.dev 
 https://react-bootstrap.github.io  
-https://react-redux.js.org  
+https://react-redux.js.org  https://redux-toolkit.js.org  https://redux-saga.js.org 
 https://reactrouter.com/en/main   
 https://www.npmjs.com/package/react-router-dom 
 https://formik.org/   
@@ -156,7 +163,10 @@ https://tobiasahlin.com/spinkit/
 https://animate.style  
 https://swiperjs.com/get-started
 
-https://swr.vercel.app 
+https://swr.vercel.app
+https://vercel.com/docs/getting-started-with-vercel
+https://vercel.com/mancillass22s-projects
+ 
 https://parceljs.org/docs/
 https://babeljs.io/docs/babel-polyfill#installation
 https://readme.so/editor

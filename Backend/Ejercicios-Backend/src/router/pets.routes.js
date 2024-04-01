@@ -86,7 +86,6 @@ Cuantificadores:
 
 +: El operador "+" sirve para limitar el numero de coincidencias. Por ejemplo, en la url, si el primer parametro no coincide, entonces se seguira buscando en los demas parametros si existe alguna coincidencia. 
     Por otro lado, si no se utiliza, entonces cuando el primer parametro no cumpla ninguna coincidencia, automaticamente se descartara el resto y se ira a router.get("*", function(req, res){}
-    
     Para limitar el número de coincidencias en una expresión regular, puedes utilizar cuantificadores específicos en lugar de "+" que indiquen un rango específico de repeticiones. Algunos cuantificadores comunes son:
 
 *: Significa "cero o más veces". Puedes usarlo si deseas permitir ninguna aparición o varias apariciones del elemento.

@@ -25,8 +25,8 @@ const courseSchema = new Schema({
 });
 
 // courseSchema.pre("find", function () {
-//   this.populate("students");
+//     this.populate("students");
 // });
 
-const courseModel = model("matricula", courseSchema);
+const courseModel = model("matriculas", courseSchema);
 export { courseModel };
