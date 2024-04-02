@@ -9,7 +9,8 @@ import { productError } from "../../errors/product/product.error.js";
 
 class ProductRouter extends Route{
     init(){
-        this.get("/", ['ADMIN', 'USER'], async function(req, res){
+        //this.get("/", ['ADMIN', 'USER'], async function(req, res){
+        this.get("/", ['PUBLIC'], async function(req, res){
             try {
                 // console.log("req.user", req.user);
                 // Copiar y pegar en barra de navegacion --> http://localhost:5500/api/products?page=1&limit=3&sort=asc&stock=8&category=New
@@ -99,6 +100,22 @@ class ProductRouter extends Route{
         
         });
 
+        this.get("/mockingproducts", ['PUBLIC'], function(req, res){
+            const products = generateMock(100);
+            res.sendSuccess(products);
+        });  
+
+        this.get("/:pid", ['PUBLIC'], async function(req, res){
+            try {
+                const {pid} = req.params;
+                const getById = await productService.getProductById(pid);
+                getById ? res.sendSuccess(getById) : res.sendClientError({message: "Not product found by ID"});
+            } catch (error) {
+                req.logger.error("Poductos no encontrados");
+                res.sendServerError(`something went wrong ${error}`);
+            }
+        });
+
         this.post("/", ['ADMIN'], async function(req, res){
             try {
                 const productDto = new ProductDto(req.body, req.user.email);
@@ -123,18 +140,7 @@ class ProductRouter extends Route{
                 res.sendServerError(`something went wrong ${error.cause.toString()}`)
             }
         });
-        
-        this.get("/:pid", ['PUBLIC'], async function(req, res){
-            try {
-                const {pid} = req.params;
-                const getById = await productService.getProductById(pid);
-                getById ? res.sendSuccess(getById) : res.sendClientError({message: "Not product found by ID"})
-            } catch (error) {
-                req.logger.error("Poductos no encontrados");
-                res.sendServerError(`something went wrong ${error}`);
-            }
-        });
-        
+
         this.put("/:pid", ['ADMIN'], async function(req, res){
             try {
                 const {pid} = req.params;
@@ -174,15 +180,6 @@ class ProductRouter extends Route{
             }
         });
 
-        this.get("/mockingproducts", ['PUBLIC'], async function(req, res){
-            try {
-                const products = generateMock(100);
-                res.sendSuccess(products);
-            } catch (error) {
-                console.error(error);
-                res.status(500).send({ error: error, message: "No se pudo obtener la info" });
-            }
-        });        
     };
 };
 

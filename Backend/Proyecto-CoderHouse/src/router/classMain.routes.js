@@ -20,7 +20,7 @@ function routerMain(app){
     app.use("/api/products", routerProducts.getRouter());   
     app.use("/api/auth", authController.getRouter());
     app.use("/api/sessions", sessionsController.getRouter());
-    app.use("/realTimeProduct", realTimeProductsController.getRouter());
+    app.use("/api/realTimeProduct", realTimeProductsController.getRouter());
 }
 
 export default routerMain;

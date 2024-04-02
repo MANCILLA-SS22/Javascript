@@ -1,7 +1,7 @@
 import handlebars from "express-handlebars";
 import Handlebars from "handlebars";
 import { allowInsecurePrototypeAccess } from "@handlebars/allow-prototype-access";
-import {__dirname} from "../../utils.js";
+import {__dirname} from "../../dirname.js";
 
 function handlebarsConfig(app){
     const stencil = handlebars.engine({// Inicializamos el motor con app.engine, para indicar que motor usaremos. En este caso, handlebars.engine

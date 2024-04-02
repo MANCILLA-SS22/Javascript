@@ -1,11 +1,9 @@
-import { MONGO_URL } from "../dotenvMain/env.config.js";
-import mongoose from "mongoose";
+import {MongoSingleton} from "./mongodb-singleton.js"
 
 function mongoConfig(){
     async function connectMongo(){
         try {
-            console.log("DB connected")
-            await mongoose.connect(MONGO_URL)
+            await MongoSingleton.getInstance();
         } catch (error) {
             console.log(error);
             process.exit();

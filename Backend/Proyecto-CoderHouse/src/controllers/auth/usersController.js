@@ -1,11 +1,10 @@
 import Route from "../../router/class.routes.js"
 import passport from "passport";
-import { createHash, generateJWToken, validateHash } from "../../utils.js";
+import { createHash, validateHash } from "../../utils/bcrypt.js";
+import { generateJWToken } from "../../utils/jwt.js";
 import { sendNotification } from "../../config/adapter/NodemailerAdapter.js";
-import { UserServiceMongo } from "../../database/dao/mongo/services/user.service.js";
+import { userService } from "../../database/service.js";
 import { v4 } from 'uuid';
-
-const userServiceMongo = new UserServiceMongo();
 
 class AuthRouter extends Route {
     init(){
@@ -82,12 +81,12 @@ class AuthRouter extends Route {
         async function change_rol(req, res){
             try {
                 const {email} = req.body;
-                const user = await userServiceMongo.findUser(email);
+                const user = await userService.findUser(email);
                 if(req.user.role === 'USER'){
-                    await userServiceMongo.updateRole(email, "PREMIUM");
+                    await userService.updateRole(email, "PREMIUM");
                     res.json({message: "Usuario actualizado a PREMIUM"})
                 }else if(req.user.role === 'PREMIUM'){
-                    await userServiceMongo.updateRole(email, "USER");
+                    await userService.updateRole(email, "USER");
                     res.json({message: "Usuario actualizado a USER"})
                 }else{
                     res.json({message: "Sin cambios"})
@@ -103,12 +102,12 @@ class AuthRouter extends Route {
                 const {pw1} = req.body;
                 const {pw2} = req.body;
                 const email = req.user.email;
-                const user = await userServiceMongo.findUser(email);
+                const user = await userService.findUser(email);
                 if(pw1 === pw2){
                     if(validateHash(user, pw1)){
                         res.json({message: "Las nueva y anterior son iguales. Favor de introducir una diferente!!"});
                     }else{
-                        await userServiceMongo.updatePassword(email, createHash(pw1));
+                        await userService.updatePassword(email, createHash(pw1));
                         res.json({message: "La contrasena ha sido actualizada!!"})
                     }
                 }else{

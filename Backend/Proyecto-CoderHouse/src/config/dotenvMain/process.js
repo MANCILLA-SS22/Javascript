@@ -1,17 +1,15 @@
-import { Command } from 'commander';
+import process from "node:process";
 
-const program = new Command();
+function processFunc(){
+    process.on("exit", function(code){ //Termina el proceso cuando hay un error
+        console.log("Este codigo se ejecuta antes de salir del proceso.");
+        console.log("Codigo de salida del proceso: " + code);
+    });
+    
+    process.on("uncaughtException", function(exception){ // NO termina el proceso aun cuando hay un error
+        console.log("Esta exception no fue capturada, o controlada.");
+        console.log(`Exception no capturada: ${exception}`)
+    });
+};
 
-//primero va la variable, luego la descripcion y al final puede ir un valor por defecto.
-program
-.option('--test', 'Variable para correr los test', false)
-.option('-d', 'Varaible para debug', false) 
-.option('-p <port>', 'Puerto del servidor', 5500)
-.option('--persist <persist>', 'Modo de persistencia', "mongodb")
-.option('--mode <mode>', 'Modo de trabajo', 'dev')
-.option('-1, --letters [letters...', 'specify letters')
-.requiredOption('-u <user>', 'Usuario que va a utilizar el aplicativo.', 'No se ha declarado un usuario.');//RequireOption usa un mensaje por defecto si no está presente la opción.
-
-program.parse(); //Parsea los comandos y valida si son correctos.
-
-export default program;
+export {processFunc};

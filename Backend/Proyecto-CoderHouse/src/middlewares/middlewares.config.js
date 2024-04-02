@@ -1,5 +1,5 @@
 import { COOKIE_CODE } from "../config/dotenvMain/env.config.js";
-import { __dirname } from "../utils.js";
+import { __dirname } from "../dirname.js";
 import morgan from "morgan";
 import cors from "cors";
 import cookieParser from "cookie-parser";

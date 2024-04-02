@@ -4,21 +4,13 @@ import passportLocal from "passport-local";
 import jwtStrategy from 'passport-jwt';
 import GitHubStrategy from "passport-github"
 
-import { validateHash, createHash } from "../../utils.js"
+import { validateHash, createHash } from "../../utils/bcrypt.js";
 import { userService } from "../../database/service.js";
 import { UserDto } from "../../database/dto/User.dto.js";
 
 const localStrategy = passportLocal.Strategy; //Declaramos estrategia
 const JwtStrategy = jwtStrategy.Strategy;
 const ExtractJWT = jwtStrategy.ExtractJwt;
-
-
-// Inicializando la estrategia local, username sera para nosotros email. Done será nuestro callback
-// Este sera un middleware (por eso usamos el use). Se necesitaran dos "passport", uno para register y otro para login.
-// passReqToCallback: para convertirlo en un callback de request, para asi poder iteracturar con la data que viene del cliente
-// usernameField: renombramos el username
-// done representa el error, si pasamos done(null) indicamos que no hay error, y el segundo parametro representa el usuario o la informacion que enviamos
-// serializeUser y deserializeUser permiten a Passport.js manejar la información del usuario durante el proceso de autenticación, serializando y deserializando los usuarios para almacenar y recuperar información de la sesión. Son esenciales cuando se implementa la autenticación de usuarios en una aplicación Node.js utilizando Passport.js
 
 function initialPassport(){ 
     passport.use('jwt', new JwtStrategy( {jwtFromRequest: ExtractJWT.fromExtractors([cookieExtractor]), secretOrKey: toString(PRIVATE_KEY) }, jwt ));
@@ -136,3 +128,11 @@ async function deserialize(id, done){
 }
 
 export {initialPassport};
+
+// Inicializando la estrategia local, username sera para nosotros email. Done será nuestro callback
+// Este sera un middleware (por eso usamos el use). Se necesitaran dos "passport", uno para register y otro para login.
+// passReqToCallback: para convertirlo en un callback de request, para asi poder iteracturar con la data que viene del cliente
+// usernameField: renombramos el username
+// "done" representa el error, si pasamos done(null) indicamos que no hay error, y el segundo parametro representa el usuario o la informacion que enviamos
+// serializeUser y deserializeUser permiten a Passport.js manejar la información del usuario durante el proceso de autenticación, serializando y deserializando los usuarios para almacenar y
+// recuperar información de la sesión. Son esenciales cuando se implementa la autenticación de usuarios en una aplicación Node.js utilizando Passport.js.

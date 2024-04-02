@@ -10,8 +10,8 @@ function generateMock(num){
             description: faker.commerce.productDescription(),
             price: faker.commerce.price(),
             thumbail: faker.image.avatar(),
-            code: faker.datatype.number(),
-            stock: faker.datatype.number(),
+            code: faker.number.int(1),
+            stock: faker.number.int(1),
             status: true,
             category: faker.commerce.product()
         }

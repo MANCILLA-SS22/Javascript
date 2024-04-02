@@ -1,4 +1,4 @@
-import { transporter } from "../../utils.js";
+import { transporter } from "../../utils/nodeMailer.js";
 import { EMAIL_USER } from "../dotenvMain/env.config.js";
 
 async function sendNotification(email, mensaje){

@@ -5,7 +5,7 @@ class MongoSingleton {
     static #instance; //Decimos que es un metodo privado porque no queremos que no sea accesible desde afuera. Es decir, que sea solo ejecutado por la clase principal y no por las clases heredadas
 
     constructor() {
-        this.#connectMongoDB("Conectado con exito a MongoDB usando Moongose."); 
+        this.#connectMongoDB("DB connected"); 
     };
 
     // Implementacon Singleton
@@ -17,7 +17,7 @@ class MongoSingleton {
     async #connectMongoDB(message){
         try {
             await mongoose.connect(MONGO_URL);
-            // console.log(message);
+            console.log(message);
         } catch (error) {
             console.error("No se pudo conectar a la BD usando Moongose: " + error);
             process.exit();

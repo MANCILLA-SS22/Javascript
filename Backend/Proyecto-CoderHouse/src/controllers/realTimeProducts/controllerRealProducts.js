@@ -6,7 +6,6 @@ class RealTimeProduct extends CustomRouter{
             const {title, description, price, thumbnail, code, stock} = req.body;
             const product = [];
             product.push({title, description, price, thumbnail, code, stock});
-            res.render("realTimeProducts", {title: "Form example",fileCss: "styles.css", allProducts: product})
         })
     }
 }

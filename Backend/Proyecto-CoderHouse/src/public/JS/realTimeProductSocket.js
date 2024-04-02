@@ -36,7 +36,8 @@ socket.on("product_list", function(data){
                 <p>thumbnail${e.thumbnail}</p>
                 <p>code${e.code}</p>
                 <p>stock${e.stock}</p>
-                <p>status${e.status}</p>`
+                <p>status${e.status}</p>
+            `
         }
     );
 });

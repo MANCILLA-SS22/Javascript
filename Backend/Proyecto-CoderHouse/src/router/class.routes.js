@@ -2,7 +2,8 @@ import { Router } from "express";
 import passport from "passport";
 // import jwt from "jsonwebtoken";
 // import { SECRET_KEY } from "../config/dotenvMain/env.config.js";
-// import { authToken, passportCall, authorization } from "../utils.js";
+// import { authToken } from "../utils/jwt.js";
+// import { passportCall, authorization } from "../utils/passport.js";
 
 class CustomRouter { //Esta es la clase padre, y CustomRouter es la clase que hereda de esta misma clase.
     constructor() {

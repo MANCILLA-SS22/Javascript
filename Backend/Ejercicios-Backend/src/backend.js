@@ -141,13 +141,13 @@ function backend(){
     app.use('/api/mascotas', mascotasRouter);
     app.use('/api/adopciones', adopcionesRouter);
     app.use('/api/sesiones', sesionesRouter);
-    app.listen(SERVER_PORT, console.log("Server listening on port " + SERVER_PORT));
+    // app.listen(SERVER_PORT, console.log("Server listening on port " + SERVER_PORT));
 
     // ****** Uso Websockets (Si usamos esto, DESCOMENTAR las 4 lineas de abajo y comentar "app.listen(SERVER_PORT, function(){}") ****** 
-    // const httpServer = app.listen(SERVER_PORT, () => console.log(`Server listening on port ${SERVER_PORT}`));
-    // const io = new Server(httpServer); //Instanciar websocket    
+    const httpServer = app.listen(SERVER_PORT, () => console.log(`Server listening on port ${SERVER_PORT}`));
+    const io = new Server(httpServer); //Instanciar websocket    
     // socket1(io);
-    // socket2(io);
+    socket2(io);
     // socket3(io);
     // socket4(io);
 

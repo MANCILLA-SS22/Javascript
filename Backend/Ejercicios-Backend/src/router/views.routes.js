@@ -1,21 +1,20 @@
 import { Router } from "express";
 const router = Router();
 
+const data = {
+    title: "Ejercicio",
+    name: "German",
+    fileCss: "styles.css",
+}
+
 router.get("/", function(req, res){
-    res.render("welcome", {
-        title: "Ejercicio",
-        name: "German",
-        fileCss: "styles.css",
-    });
+    res.render("welcome", data);
 });
 
 
 // Pertenece a --> socket1(io);
 router.get("/form", function(req, res){
-    res.render("form", {
-        title: "Form example",
-        fileCss: "styles.css",
-    });
+    res.render("form", data);
 });
 
 router.post("/user", function(req, res){
@@ -34,20 +33,12 @@ router.get("/realtimeposts", function(req, res){
 
 // Pertenece a --> socket3(io);
 router.get("/chat", function(req, res){
-    res.render("chat", {
-        title: "Ejercicio",
-        name: "German",
-        fileCss: "styles.css",
-    });
+    res.render("chat", data);
 });
 
 // Pertenece a --> socket4(io);
 router.get("/room", function(request, response){
-    response.render("room", {
-        title: "Ejercicio",
-        name: "German",
-        fileCss: "styles.css",
-    });
+    response.render("room", data);
 });
 
 export default router;

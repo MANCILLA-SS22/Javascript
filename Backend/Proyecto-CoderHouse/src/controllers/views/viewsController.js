@@ -75,7 +75,7 @@ class LoginRegister extends Route {
                 res.status(200).render('profile');
             }
             catch (error) {
-                res.sendServerError(`something went wrong ${error}`)
+                res.sendServerError(`something went wrong ${error}`);
             }
         });         
         
@@ -83,9 +83,17 @@ class LoginRegister extends Route {
             try {
                 res.render("chat");
             } catch (error) {
-                res.status(500).send({ error: "Error consultando el chat", message: error });
+                res.sendServerError(`something went wrong ${error}`);
             }
         });
+
+        this.get("/realTimeProducts", ['USER'], function(req, res){
+            try {
+                res.render("realTimeProducts", {title: "Form example",fileCss: "styles.css", allProducts: product});
+            } catch (error) {
+                res.sendServerError(`something went wrong ${error}`);
+            }
+        });        
 
         this.get('/products', ['USER'], function(req, res){
             try {
