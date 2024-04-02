@@ -1,17 +1,21 @@
-# Desafio 13 (Documentacion)
+
+# Desafio 14 (Testing)
 
 ## Descripcion
 
-1. Se debe tener documentado el módulo de productos.
+1. Se deben incluir por lo menos 3 tests desarrollados para:
 
-2. Se debe tener documentado el módulo
+    - Router de products.
+    - Router de carts.
+    - Router de sessions.
 
-3. No realizar documentación de sesiones
+2. No desarrollar únicamente tests de status, la idea es trabajar lo mejor desarrollado posible las validaciones de testing.
 
 ## Metodologia
 
-Dentro de la carpeta config se encuentra otra carpeta de nombre "swagger", en la cual se encuentra un archivo que cuenta con la inmportacion de las librerias de swagger, la ruta con el endpoint deseado (localhost:5500/apidocs) y la exportacion de una funcion, la cual sera importada en el archivo app.js. (Recordar que se debe iniciar sesion para evaluar los metodos).
+Se creo una carpeta "tests", en la cual se encuetra un solo archivo para testing. En el, se crearon los 3 test de desarrollo solicitados.
 
-Por otro lado, los archivos .yaml se encuentran fuera del archivo src, en una carpeta llamada "docs".
+Para trabajar con supertest tendremos que trabajar con dos terminales, la perteneciente a la base de datos principal (Server) y una para pruebas (Testing).
 
-El resto de la metodologia consiste en realizar pruebas desde la UI que nos brinda la libreria de suagger.
+- La primera estará pensada para ejecutar el servidor y dejarlo escuchando, listo para recibir las peticiones de nuestro test.     --> nodemon src/app.js --mode dev
+- La otra terminal servirá para ejecutar el comando de test las veces que sean necesarias hasta finalizar con el flujo de pruebas. --> npx mocha tests/supertest.test.js
