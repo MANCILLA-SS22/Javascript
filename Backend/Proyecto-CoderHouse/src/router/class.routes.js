@@ -84,7 +84,7 @@ class CustomRouter { //Esta es la clase padre, y CustomRouter es la clase que he
         return function(req, res, next){
 
             res.sendSuccess = function(payload){
-                res.status(200).send({status: "Success", payload})
+                res.status(200).send({status: "Success", payload: payload})
             }
 
             res.sendServerError = function(error){

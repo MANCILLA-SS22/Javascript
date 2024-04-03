@@ -214,44 +214,45 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
    //`obj1` doesn't have a property called 'b', so JavaScript checks  its `[[prototype]]`. Its `[[prototype]]` is the same as `ObjMaker.prototype` `ObjMaker.prototype` has a property called 'b' with value 'second' returns 'second'
 
   > this: Se refiere al elemento actual en el que se está escribiendo el código. Cuando se emplea un función constructora para crear un objeto (con la palabra clave new), this está enlazado al nuevo objeto instanciado. This es muy útil para 
-      asegurar que se emplean las propiedades del objeto actual. El puntero this es una variable predefinida para todas las funciones u operadores miembro de una clase. Este puntero contiene la dirección del objeto concreto de la clase al 
-      que se está aplicando la función o el operador miembro. Se puede decir que *this es un alias del objeto correspondiente. Conviene tener en cuenta que cuando una función miembro se aplica a un objeto de su clase (su argumento 
-      implícito), accede directamente a las variables miembro (sin utilizar el operador punto o flecha), pero no tiene forma de referirse al objeto como tal, pues no le ha sido pasado explícitamente como argumento. Ojo, que hace referencia 
-      al objeto instanciado y no a la clase.
-      
-      this en JavaScript es una palabra clave muy utilizada dentro de funciones y clases, pues tiene un valor flexible. This hace referencia al objeto en cuestión. Es decir, si estamos creando cualquier función, la palabra clave this se 
-      usará para representar o llamar al objeto que dicha función está modificando. ES5 introdujo el método bind() para establecer el valor de la función this independientemente de como es llamada.
-      this es una referencia que se crea cuando una función es invocada, no declarada. El valor de esa referencia depende al 100% del lugar en la que esa invocación se realice, llamado call-site. Ese lugar de llamada es la invocación en sí a 
-      la función. Es decir, el momento justo en que es llamada (no declarada, no referenciada) esa función. El valor de this puede cambiar dependiendo del contexto en el que se invoca una función o método. Hay cuatro contextos principales en 
-      los que se puede utilizar this en JavaScript:
-        + En una función global: En una función que se ejecuta en el contexto global, this hace referencia al objeto window, que es el objeto global en JavaScript.
-      
-        + En una función dentro de un objeto: Cuando se invoca una función dentro de un objeto, this hace referencia al objeto que contiene la función.
-       
-        + El método call() o apply(): Son métodos que permiten invocar una función con un objeto diferente de this. Esto significa que se puede cambiar el contexto de this mediante la llamada a una de estas do funciones.
-          ~ call ();  Permite que una función/método que pertenece a un objeto, ser asignada y llamada para un objeto diferente. Provee un nuevo valor de this a la función/método. Podemos escribir un método ona vez y heredarlo a otro objeto, 
-                      sin tener que reescribir el método en el nuevo objeto. No recive una lista de argumentos despues del this.
-                      You can write a method that can be used on different objects. It takes arguments separately. It can be used to invoke (call) a method with an owner object as an argument (parameter). 
-                      With call(), an object can use a method belonging to another object. 
-          ~ apply (); Con apply , puede escribirse un método una vez y heredarlo a otro objeto, sin necesidad de reescribir el método para adecuarlo al nuevo objeto. apply es muy similar a call() , excepto por el tipo de argumentos que 
-                      soporta. Puede utilizarse un arreglo de parámetros en lugar de un conjunto de pares nombre-valor. You can write a method that can be used on different objects. It takes arguments as an array.
-          ~ bind (); El método bind() crea una nueva función, que cuando es llamada, asigna a su operador this el valor entregado, con una secuencia de argumentos dados precediendo a cualquiera entregados cuando la función es llamada. El 
-                     valor de this es ignorado cuando la función es llamada con el operador new.
-                     Allows us to manually set "this" for any function call. With the bind() method, an object can borrow a method from another object. Bind doesn't immediately call the function. Instead, it returns a new function where the 
-                     "this" is bound. So it's set to whatever value we pass into bind. Sometimes the bind() method has to be used to prevent losing this.
+    asegurar que se emplean las propiedades del objeto actual. El puntero this es una variable predefinida para todas las funciones u operadores miembro de una clase. Este puntero contiene la dirección del objeto concreto de la clase al 
+    que se está aplicando la función o el operador miembro. Se puede decir que *this es un alias del objeto correspondiente. Conviene tener en cuenta que cuando una función miembro se aplica a un objeto de su clase (su argumento implícito), 
+    accede directamente a las variables miembro (sin utilizar el operador punto o flecha), pero no tiene forma de referirse al objeto como tal, pues no le ha sido pasado explícitamente como argumento. Ojo, que hace referencia al objeto 
+    instanciado y no a la clase.
+
+     this en JavaScript es una palabra clave muy utilizada dentro de funciones y clases, pues tiene un valor flexible. This hace referencia al objeto en cuestión. Es decir, si estamos creando cualquier función, la palabra clave this se 
+     usará para representar o llamar al objeto que dicha función está modificando. ES5 introdujo el método bind() para establecer el valor de la función this independientemente de como es llamada.
+     this es una referencia que se crea cuando una función es invocada, no declarada. El valor de esa referencia depende al 100% del lugar en la que esa invocación se realice, llamado call-site. Ese lugar de llamada es la invocación en sí a 
+     la función. Es decir, el momento justo en que es llamada (no declarada, no referenciada) esa función. El valor de this puede cambiar dependiendo del contexto en el que se invoca una función o método. Hay cuatro contextos principales en 
+     los que se puede utilizar this en JavaScript:
+       + En una función global: En una función que se ejecuta en el contexto global, this hace referencia al objeto window, que es el objeto global en JavaScript.
+       + En una función dentro de un objeto: Cuando se invoca una función dentro de un objeto, this hace referencia al objeto que contiene la función.
+       + El método call() o apply(): Son métodos que permiten invocar una función con un objeto diferente de this. Esto significa que se puede cambiar el contexto de this mediante la llamada a una de estas do funciones.
+       + Con el operador new: Cuando se invoca una función con el operador new, this hace referencia al objeto que se está creando.
         
-        + Con el operador new: Cuando se invoca una función con el operador new, this hace referencia al objeto que se está creando.
-        
-      In JavaScript, the this keyword refers to an object. Which object depends on how this is being invoked (used or called). The this keyword refers to different objects depending on how it is used:
-         ~ In an object method, this refers to the object.
-         ~ Alone, this refers to the global object.
-         ~ In a function, this refers to the global object.
-         ~ In a function, in strict mode, this is undefined.
-         ~ In an event, this refers to the element that received the event.
-         ~ Methods like call(), apply(), and bind() can refer this to any object.  
+     In JavaScript, the this keyword refers to an object. Which object depends on how this is being invoked (used or called). The this keyword refers to different objects depending on how it is used:
+        ~ In an object method, this refers to the object.
+        ~ Alone, this refers to the global object.
+        ~ In a function, this refers to the global object.
+        ~ In a function, in strict mode, this is undefined.
+        ~ In an event, this refers to the element that received the event.
+        ~ Methods like call(), apply(), and bind() can refer this to any object.  
       
-      En resumen, this se utiliza para hacer referencia al objeto en el contexto actual, y su valor puede cambiar dependiendo del contexto en el que se invoca una función o método. Conocer cómo funciona this en diferentes contextos es 
-      esencial para escribir código efectivo en JavaScript.       https://www.freecodecamp.org/espanol/news/la-guia-completa-sobre-this-en-javascript/   https://www.programiz.com/javascript/this
+     En resumen, this se utiliza para hacer referencia al objeto en el contexto actual, y su valor puede cambiar dependiendo del contexto en el que se invoca una función o método. Conocer cómo funciona this en diferentes contextos es 
+     esencial para escribir código efectivo en JavaScript.       https://www.freecodecamp.org/espanol/news/la-guia-completa-sobre-this-en-javascript/   https://www.programiz.com/javascript/this
+
+  > call ();  Permite que una función/método que pertenece a un objeto, ser asignada y llamada para un objeto diferente. Provee un nuevo valor de this a la función/método. Podemos escribir un método ona vez y heredarlo a otro objeto, 
+    sin tener que reescribir el método en el nuevo objeto. No recive una lista de argumentos despues del this. 
+    You can write a method that can be used on different objects. It takes arguments separately. It can be used to invoke (call) a method with an owner object as an argument (parameter). With call(), an object can use a method belonging to 
+    another object. 
+          
+  > apply (); Con apply, puede escribirse un método una vez y heredarlo a otro objeto, sin necesidad de reescribir el método para adecuarlo al nuevo objeto. apply es muy similar a call(), excepto por el tipo de argumentos que soporta. 
+    Puede utilizarse un arreglo de parámetros en lugar de un conjunto de pares nombre-valor. 
+    You can write a method that can be used on different objects. It takes arguments as an array.
+
+  > bind (); El método bind() crea una nueva función, que cuando es llamada, asigna a su operador this el valor entregado, con una secuencia de argumentos dados precediendo a cualquiera entregados cuando la función es llamada. El 
+    valor de this es ignorado cuando la función es llamada con el operador new. 
+    Allows us to manually set "this" for any function call. With the bind() method, an object can borrow a method from another object. Bind doesn't immediately call the function. Instead, it returns a new function where the "this" is bound. 
+    So it's set to whatever value we pass into bind. Sometimes the bind() method has to be used to prevent losing this.
 
   > super: The super keyword is used to call the constructor of its parent class to access the parent's properties and methods, to access properties on an object literal or class's [[Prototype]], or invoke a superclass's constructor.
     When we extend a parent class, we call "super" in order to call the parent constructor.
@@ -312,188 +313,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-- Conceptos y definiciones de POO
-    
-  > Objeto: los objetos tienen propiedas especificas, tales como posicion, tamano, color, etc., que definen su estado. Los objetos tambien tienen ciertos comportamientos que los hacen diferentes 
-    de otros objetos. Cada objeto forsozamente debe tener tanto atributos como metodos, y se debe crear siempre despues de las clases. Los objetos poseen: 
-    + Atributos (Caracteristica, datos o miembros de la clase): Son las descripciones que posee dicho objeto. Es decir, su informacion. Tambien, es una característica de un objeto, que ayuda a definir su estructura y permite diferenciarlo de
-      otros objetos. Se define con un identificador y un tipo, el cual indica los valores que puede almacenar. El conjunto de valores de los campos  definen el estado del objeto. En codigo, son unicamente los nombres de algo, como por 
-      ejemplo, el color, altura, velocidad, peso o precio, y son de tipo int, string, float, etc.
-    + Metodos (acciones, funcionalidades o parametros): Son las acciones o tareas que estas pueden desempenar, como lo son sumar(), encender(), abrir() etc. Se debe crear en un archivo deferente al que se uso para crear una clase. Tambien, 
-      son los comportamientos o conductas de un objeto y permite identificar la forma en que actúa respecto a su entorno o respecto a otros objetos. Además, representa una operación o función que un objeto realiza. El conjunto de los métodos 
-      de un objeto determinan el comportamiento general del objeto. En codigo, los metodos son las funciones que ejecutaran una accion, por ejemplo: los metodos seters, geters, fucniones void, o aquellas que retornan un valor
 
-  > Clase: Es un conjunto de objetos que comparten una estructura y comporamiento comunes. Una clase se debe crear antes que los objetos. Y debe tener el metodo constructor. Se debe crear en un archivo deferente al que se uso para crear una 
-    metodo. Se puede crear una clase usando la palabra clave struct, la diferencia es que con struct los miembros se hacen públicos por defecto, mientras que con class se hacen privados por defecto. 
-    + De instancia: Son aquellas que se declaran dentro de una clase y que no existen hasta que se hace una instancia de esa clase (se crea un objeto) nombre [ = ];
-    + De referencia: Son aquellas que hace referencia a otra clase. Esto se puede definir mejor diciendo que es una variable del tipo de otra clase, y cuando se haga la instancia tendremos: un objeto dentro de otro objeto. nombre [ = ];
-    + De clase: Estas variables se declaran antemoniendo la palabra static a su declaración, y a diferencia de las variables de instancia, éstas no necesitan que se haga una instancia (que se cree un objeto), existen desde que se crea la 
-      clase.static nombre [ = ];
-      
-    + clases abstractas: A veces es posible que nos interese que una clase sea abstracta. Con esto lo que queremos decir es que a veces no tiene finalidad alguna crear un objeto de una clase que no tenga funcionalidad pero represente un 
-     concepto de clase útil. Se utilizan solo como clase base, y a traves de ella van a derivar 1 o varias clases para tener clases hijas. NO SE PUEDEN ISNTANCIAR (CREAR) OBJETOS EN ESA CLASE, sino que solamente serviran para crear clases 
-     derivadas. Sirven para proporcionar una clase base apropiada a partir de la cual heredan otras clases. Es decir, se le pueden sacar clase derivadas y no se pueden crear objetos.     
-    + Clases derivadas: Es la relacion que existe entre dos clases, en la que una clase denominada hija o clase derivada se crea a partir de otra ya existente, denominada clase padre o clase base. Para crear una clase derivada, tras el 
-      nombre de la clase, se pondrán dos puntos y el nombre de la clase que se quiere tomar como base. Además, deberemos especificar el tipo de herencia, lo cual se especificará delante del nombre de la clase base. Las clases derivadas 
-      pueden acceder a todo lo de la clase principal.
-    + Clase padre: La clase de la cual otra deriva directamente. Decimos que la clase A es padre de la clase B si B deriva directamente de A (está conectada directamente en el árbol de jerarquías de las clases).
-    + Clase hija: Clase que es derivada directamente de otra. Decimos que la clase B es hija de la clase A si B deriva directamente de A (está conectada directamente en el árbol de jerarquías de las clases).
-    + Clase base: Llamamos así a la clase que se halla al inicio del árbol de las jerarquías de clases. La raíz de ese árbol es la clase base o superclase.
-    + Clases compuestas: Es aquella clase que entre sus atributos tiene objetos que derivan de otras clases. Es decir, no tienen ningun parentezco ninguna ni otra.
-    + Clase contenedora: Al hecho de crear nuevas clases utilizando otras clases como componentes, se le llama composición, y a la clase compuesta se le llama contenedora. Es decir, si alguno de los datos de una clase es a su vez una 
-      instancia de otra clase (o de sí misma) a la clase se le llama contenedoras y a las clases albergadas contenidas.
-      
-  > Encapsulación (visualizacion de los miembros de la clase): Este concepto permite tener un control de acceso selectivo tanto a los miembros como a los métodos, de tal forma que desde fuera del objeto sólo se pueda acceder a los métodos e 
-    identificadores que permita el creador del objeto.
-    
-    This principle states that all important information is contained inside an object and only select information is exposed. The implementation and state of each object are privately held inside a defined class. Other objects do not have 
-    access to this class or the authority to make changes. They are only able to call a list of public functions or methods. This characteristic of data hiding provides greater program security and avoids unintended data corruption.
-
-  
-  > Abstracción: Son las características especificas de un objeto, aquellas que lo distinguen de los demás tipos de objetos y que logran definir límites conceptuales respecto a quien está haciendo dicha abstracción del objeto. Una 
-    abstracción se enfoca en la visión externa de un objeto, separa el comportamiento específico de un objeto, a esta división que realiza se le conoce como la barrera de abstracción, la cuál se consigue aplicando el principio de mínimo 
-    compromiso. La abstracción es el proceso por el cual se descarta toda aquella información que no resulta relevante en un contexto en particular enfatizando algunos de los detalles o propiedades de los objetos. Depende principalmente del 
-    interés del observador, permitiendo abstracciones muy diferentes de la misma realidad, debido a esto algunos la clasifican un tanto subjetiva. Y consiste en captar las características y funcionalidades que un objeto desempeña y estos son
-    representados en clases por medio de atributos y métodos de dicha clase.
-    
-      + principio de mínimo compromiso: Se refiere al proceso por el cuál la interfaz de un objeto muestra su comportamientoespecífico y nada más, absolutamente nada más.
-      + Interfaz: Una interfaz de objeto permite crear código con el cuál se específica que métodos serán implementados por una clase sin necesidad de definir que harán estos métodos, dichos métodos deben ser públicos.
-      + Abstracción de Entidades: Es un objeto que representa un modelo útil de una entidad que se desea.
-      + Abstracción de Acciones: Un objeto que representa un conjunto de operaciones y todas ellas desempeñan funciones del mismo tipo.
-      + Abstracción de Máquinas virtuales: Un objeto que agrupa operaciones, todas ellas virtuales, utilizadas por algún nivel superior de control u operaciones.
-      + Abstracción de coincidencia: Un objeto que almacena un conjunto de operaciones que no tienen relación entre sí.
-          
-    Abstraction is a process which displays only the information needed and hides the unnecessary information. We can say that the main purpose of abstraction is data hiding. Abstraction means selecting data from a large number of data to 
-    show the information needed, which helps in reducing programming complexity and efforts.  
-    There are also abstract classes and abstract methods. An abstract class is a type of class that declares one or more abstract methods. An abstract method is a method that has a method definition but not implementation. Once we have 
-    modelled our object using data abstraction, the same sets of data can also be used in different applications—abstract classes, generic types of behaviours and object-oriented programming hierarchy. Abstract methods are used when two or 
-    more subclasses do the same task in different ways and through different implementations. An abstract class can have both methods, i.e., abstract methods and regular methods.
-
-  
-  > Herencia: Permite la reutilización y la extensión del código. Permite diseñar nuevas clases a partir de otras ya existentes, pudiéndose además extender sus métodos (cambiar su semántica en la  clase que hereda). Aqui, una clase base o 
-    hija, se crea a partir de otra ya existente, las llamadas clase padre o base. La herencia define relaciones jerárquicas entre clases, de forma que atributos y métodos comunes puedan ser reutilizados. Las clases principales extienden 
-    atributos y comportamientos a las clases secundarias. A través de la definición en una clase de los atributos y comportamientos básicos, se pueden crear clases secundarias, ampliando así la funcionalidad de la clase principal y 
-    agregando atributos y comportamientos adicionales.La herencia es una de las características fundamentales de la Programación Orientada a Objetos por la que, tomando como base una clase ya existente, es posible derivar una nueva, que 
-    heredará todos sus miembros, teniendo posibilidad de sobrecargarlos, crear unos nuevos o utilizarlos. La idea básica por tanto, es reutilizar las clases existentes y extender o modificar su semántica.
-    
-      + Herencia publica: En general, significa que una clase derivada tiene acceso a los elementos protegidos y publicos de su clase base. Los elementos publicos se heredan como elementos publicos; los elementos protegidos permanecen 
-        protegidos; los elementos privados no se heredan.
-      + Herencia privada: Los miembros publicos y protegidos de la clase base se vuelven miembros privados de la clase derivada. En efecto, los usuarios de la clase derivada no tiene acceso a las facilidades proportcionadas por la clase 
-        base. Los miembros privados de la clase base son inaccesibles a las funciones miembro de la clase derivada. 
-      + Herencia protegida: Todos los miembros públicos de la clase base adquieren el nivel de acceso protegido en las clases derivadas, mientras que los miembros 
-        protegidos conservan su nivel de acceso. Lo anterior indica que una clase derivada puede luego heredar a otra clase los miembros protegidos que heredó de su clase base.
-      + Herencia multiple: Es un tipo de herencia en la que una clase hereda los miembros de mas de una clase base. Es decir, existen multiples clases base (padres) para la clase derivada (hija). Esta herencia plantea diferentes problemas 
-        tales como la ambiguedad por el uso de nombres identicos en diferentes clases base. Los problemas que se pueden presentar cuando se danan clases con herencia multiple son:
-        ~ colisiones de nombres: de diferentes clases base (dos o mas clases base tiene el mismo identificador para algun elemento de su interfaz. Se resuelve con el operador de ambito ::)
-        ~ Herencia repetida de una misma clase base (una clase puede heredar indirectamente dos copias de una clase base. Se resuelve con el operador de resolucion de ambito ::)
-        
-     
-     Inheritance is a method in which one object acquires/inherits another object’s properties, and inheritance also supports hierarchical classification. The idea behind this is that we can create new classes built on existing classes, 
-     i.e., when you inherit from an existing class, we can reuse methods and fields of the parent class. Inheritance represents the parent-child relationship. For example, a whale is a part of the classification of marine animals, which is 
-     part of class mammal, which is under that class of animal. We use hierarchical classification, i.e., top-down classification. If we want to describe a more specific class of animals such as mammals, they would have more specific 
-     attributes such as teeth; cold-blooded, warm-blooded, etc. This comes under the subclass of animals whereas animals come under the superclass. The subclass is a class which inherits properties of the superclass. This is also called a 
-     derived class. A superclass is a base class or parental class from which a subclass inherits properties.
-  
-  > Polimorfismo: Es la posibilidad de definir clases diferentes que tienen métodos o atributos denominados de forma idéntica, pero que se comportan de manera distinta al mismo mensaje. Esto hace referencia al hecho de que varios objetos de 
-    diferentes clases, pero con una base común, se pueden usar de manera indistinta, sin tener que saber de qué clase exacta son para poder hacerlo. 
-    
-    *El concepto de polimorfismo se puede aplicar tanto a funciones como a tipos de datos. Así nacen los conceptos de funciones polimórficas y tipos polimórficos. Las primeras son aquellas funciones que pueden evaluarse o ser aplicadas a 
-     diferentes tipos de datos de forma indistinta; los tipos polimórficos, por su parte, son aquellos tipos de datos que contienen al menos un elemento cuyo tipo no está especificado. Permite tratar de forma genérica objetos de distintas 
-    clases, ahorrando así código y proporcionando simplicidad. Por tanto, trata de forma genérica objetos de distintos tipos derivados de una misma clase  de objetos.    
-     
-    *Es la capacidad que tienen ciertos lenguajes para hacer que, al enviar el mismo mensaje (o, en otras palabras, invocar al mismo método) desde distintos objetos, cada uno de esos objetos pueda 
-     responder a ese mensaje (o a esa invocación) de forma distinta.     
-    
-    *Tambien es la capacidad que tienen los objetos de comportarse de múltiples formas sin olvidar que para esto se  requiere de la herencia, en si consiste en hacer referencia a objetos de una clase que puedan tomar comportamientos de 
-     objetos descendientes de esta. Con el polimorfismo usamos la generalización olvidando los detalles concretos de los objetos para centrarnos en un punto en común mediante una clase padre.    
-    
-    *El concepto de polimorfismo se puede aplicar tanto a funciones como a tipos de datos. Así nacen los conceptos de funciones polimórficas y tipos polimórficos. Las primeras son aquellas funciones que pueden evaluarse o ser aplicadas a 
-     diferentes tipos de datos de forma indistinta; los tipos polimórficos, por su parte, son aquellos tipos de datos que contienen al menos un elemento cuyo tipo no está especificado.
-    
-    *En lenguajes basados en clases y con un sistema de tipos de datos fuerte (independientemente de si la verificación se realiza en tiempo de compilación o de ejecución), es posible que el único modo de poder utilizar objetos de manera 
-     polimórfica sea que compartan una raíz común, es decir, una jerarquía de clases, ya que esto proporciona la compatibilidad de tipos de datos necesaria para que sea posible utilizar una misma variable de referencia (que podrá apuntar a 
-     objetos de diversas subclases de dicha jerarquía) para enviar el mismo mensaje (o un grupo de mensajes) al grupo de objetos que se tratan de manera polimórfica.
-    
-    El polimorfismo adquiere su maxima potencia cuando se utiliza en union de herencia. Para poder utilizar polimorfismo en C++ se debe tomar en cuenta lo siguiente:
-     + Crear una jerarquia de clases con las operaciones importantes definidas por las funciones miembro declaradas como virtuales en la clase base
-     + Las implementaciones especificas de las funciones virtuales se deben hacer en las clases derivadas. Cada clase derivada puede tener su propia version de las funciones.
-     
-    Polymorphism refers to many forms, or it is a process that performs a single action in different ways. It occurs when we have many classes related to each other by inheritance. Polymorphism is of two different types, i.e., compile-time 
-    polymorphism and runtime polymorphism. One of the examples of Compile time polymorphism is that when we overload a static method in java. Run time polymorphism also called a dynamic method dispatch is a method in which a call to an 
-    overridden method is resolved at run time rather than compile time. In this method, the overridden method is always called through the reference variable. By using method overloading and method overriding, we can perform polymorphism. 
-    Generally, the concept of polymorphism is often expressed as one interface, and multiple methods. This reduces complexity by allowing the same interface to be used as a general class of action. 
-     
-  > this: Se refiere al elemento actual en el que se está escribiendo el código. Cuando se emplea un función constructora para crear un objeto (con la palabra clave new), this está enlazado al nuevo objeto instanciado. This es muy útil para 
-    asegurar que se emplean las propiedades del objeto actual. El puntero this es una variable predefinida para todas las funciones u operadores miembro de una clase. Este puntero contiene la dirección del objeto concreto de la clase al 
-    que se está aplicando la función o el operador miembro. Se puede decir que *this es un alias del objeto correspondiente. Conviene tener en cuenta que cuando una función miembro se aplica a un objeto de su clase (su argumento 
-    implícito), accede directamente a las variables miembro (sin utilizar el operador punto o flecha), pero no tiene forma de referirse al objeto como tal, pues no le ha sido pasado explícitamente como argumento. Ojo, que hace referencia 
-    al objeto instanciado y no a la clase.
-    
-    This hace referencia al objeto actual de la clase, es decir, a una instancia concreta de la clase y nos sirve para usar los métodos y atributos de esa clase desde alguno de sus métodos, para llamar a otro de sus constructores o 
-    simplemente para pasarle el objeto completo a algún otro método u objeto.
-      
-         
-  > instanciacion: La instanciacion no es mas que la creacion de un objeto a partir de una clase o a la derivacion de un objeto con otro, la cual se crea desde un inicio. Un objeto creado de una clase tambien de denomina instancia de una
-    clase. De esta forma, todos los objetos son instancias de algún otro, menos la clase Object que es la madre de todas. Cuando usted declara una clase, no se reserva memoria para la clase hasta que usted crea un objeto de la clase.
-    Por ejemplo, si creamos una clase para un objeto que es para un carro, el cual tenga "velocidad", "potencia" y "color", entonces a partir de eso, podemos definir nuestro primer objeto, digamos "Carro_1", el cual posee las 3 
-    caracteristicas mencionadas arriba. Ahora, si queremos instanciar, entonces debemos crear otro objeto, digamos "Carro_2", debera tener exactamente los mismas 3 caracteristicas definidas en un principio. Esto es la instanciacion.
-  
-  > Diferencia entre crear objetos e instanciar objetos: De una clase abstracta no se pueden instanciar objetos pero si crear. A continuacion un ejemplo de la sintaxis de cada uno:
-   + NombreDeVariable *NombreDeVariable[2]; - Creamos un objeto
-   + NombreDeVariable[0] = new OtraVariable(7,4); - instanciamos 2 objeto a partir del arreglo de objetos creado. Dicha instanciacion se crea a partir de la clase derivada, no de la clase base.
-     Instancia significa simplemente crear una referencia(copia) o a la derivacion de un objeto con otro, mientras que crear un objeto (o instanciar una clase) significa cuando le damos vida a una clase que acabamos de crear utilizando la 
-     palabra reservada "new", y que la ubicación de la memoria está asociada con el objeto (es una entidad en tiempo de ejecución de la clase) mediante el uso del nuevo operador. En palabras simples, Instancia se refiere a la copia del 
-     objeto en un momento particular, mientras que objeto se refiere a la dirección de memoria de la clase.
-
-  > CONSTRUCTOR: El constructor de un objeto es una función que usamos para crear un nuevo objeto cada vez que sea necesario. Con función constructora podemos inicializar las propiedades del objeto al momento de ser instanciado con new.
-     Es un método que se ejecuta automáticamente cuando se define o se crea un objeto, y su función es inicializar el objeto y prepararlo para realizar las operaciones necesarias. Debe tener el mismo nombre de la clase y servira 
-     para inicializar los atributos que la misma clase tenga. Las funciones constructoras son una técnica para crear objetos personalizados con valores predeterminados y métodos específicos. Al contrario de la notación de objetos literales,
-     las funciones constructoras deben ser llamadas con la palabra clave "new" para asegurar que se está creando un nuevo objeto. Con las funciones constructoras podemos crear varios objetos a partir de una sola función y cada uno podrá 
-     tener valores diferentes, algo que no es posible con los objetos literales. Además, las funciones constructoras nos permiten crear métodos específicos para los objetos creados a partir de ellas, lo que nos permite tener un mejor control 
-     sobre el comportamiento de los objetos.
-
-  > Miembros static de una clase: Miembros estaticos (static): Un dato declarado estático en una clase es un dato de una sola instancia, se crea al definir la clase y sólo existirá uno, independientemente del número de objetos que se creen. 
-    Esto es bueno cuando todos los objetos van a compartir una misma variable. Los atributos de tipo "static" NO SE PUEDEN INICIALIZAR DENTRO DE LA CLASE, SINO FUERA DE ELLA. Los atributos pertenecen a la clase y no a los objetos, similar a 
-    las  variables locales y globales. Es decir, se crea un atributo estatico y todos los objetos tendran el mismo valor para el mismo atributo. En el caso de los metodos de tipo "static" sucede exactamente lo mismo. Los miembros YA NO le
-    pertenecen a los objetos instanciados, sino a la clase. Los métodos estáticos son llamados sin instanciar su clase. Son habitualmente utilizados para crear funciones para una aplicación.
-    Permite el acceso a métodos y variables de clase sin la necesidad de instanciar un objeto de dicha clase, permitiendo la inicialización de forma cómoda y durante la carga de clase.
-    
-    El hecho de no poder disponer de "this" dentro de un método estático es debido a que el método no se invoca con relación a ningún objeto. Como has visto, usamos el nombre de la clase para invocarlo y no un objeto instanciado. Como sabes, 
-    "this" tiene una referencia al objeto donde se lanzó un mensaje (el objeto sobre el que se invocó un método). Como no existe tal objeto de invocación, no existe un objeto en "this". En principio podríamos pensar que "this" entonces 
-    valdrá "undefined", pero lo que hay en realidad es el código de la propia clase.
-    
-    The static keyword defines a static method or field for a class, or a static initialization block. Static properties cannot be directly accessed on instances of the class. Instead, they're accessed on the class itself.
-    Static methods are often utility functions, such as functions to create or clone objects, whereas static properties are useful for caches, fixed-configuration, or any other data you don't need to be replicated across instances.
-
-
-  > Modificadores de acceso
-    + Publico (public: ) = Un miembro público es accesible en cualquier lugar en el que exista un objeto de la clase. El modificador public ofrece la máxima visibilidad, una variable, método o clase con modificador public será visible desde 
-      cualquier clase, aunque estén en paquetes distintos 
-    + Protegidos (protected:) = Un miembro protegido sólo es accesible desde las clases que se hereden de la clase que lo contiene. Es visible para las clases que se encuentren en el mismo paquete y para cualquier subclase de esta aunque 
-      este en otro paquete. Este modificador es utilizado normalmente para Herencias, así que lo estudiaremos más a fondo cuando lleguemos a las Herencias.
-    + Privados (private: ) = Es miembro privado sólo es accesible por los métodos de la clase a la que pertenece. Cuando un método o atributo (variable) es declarada como private, su uso         
-      queda restringido al interior de la misma clase, no siendo visible para el resto. Una clase no puede ser Private, sólo atributos y métodos.
-
-     Puede ser accedido desde:	                     public       protected       default      private 
-     Su misma clase                                   SI	          SI	         SI            SI
-     Cualquier clase que esté en el mismo paquete     SI	          SI             SI            NO
-     Cualquier subclase que esté en otro paquete      SI             SI	         NO            NO
-     Cualquier otra clase que esté en otro paquete    SI	          NO             NO            NO
-
-   > DESTRUCTOR: [ ~NombreDeVariable(); ] es un método que se ejecuta automáticamente cuando un objeto queda fuera del ámbito en el que se creó, y su función es destruir el objeto, liberando cualquier asignación dinámica de memoria que se 
-     haga. Sirve para liberar memoria utilizada al crear los objetos cuando el programa finaliza. Esto cuando nosotros creamos nuestras clases e instanciamos muchos objetos de esas mismas clases y se utiliza mucha memoria en la computadora. 
-     El no utilizar el constructor por defecto, puede no afectar nuestro programa, pero cuando manejamos con programas muy largos, es de suma recomendacion utilizarlos. Es un método de una clase cuyo fin es eliminar un objeto de una clase.
-     El objeto puede tener o no definidos explícitamente el constructor y el destructor, o tener varios constructores.
-     
-   > Constructor por defecto: Es aquel en el cual no existe ningun tipo de paramateros y no contiene nada dentro. Tambien inicia todos los atributos con ceros binarios (o bien, no se inicializan). SE UTILIZA PARA LA CREACION DE OBJETOS 
-     DINAMICOS. Cuando trabajamos con este tipo de objetos dinamicos, es correcto el usar o no ningun constructor, puesto que, no inicializamos los atributos directamente cuando se crea el arreglo en la funcion principal.
-     
-   > Destructor por defecto: Al igual que existe un constructor por defecto, existe un destructor por defecto. Este método, elimina de memoria el objeto al terminarse el ámbito de la variable que lo contiene, recuperando para su uso la 
-     porción de memoria que el objeto ocupaba.
-     
-     
-     
-$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
      
 - JavaScript Object Reference
     > constructor	Returns the function that created an object's prototype
@@ -1944,6 +1764,12 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       necesita ejecutar comandos de shell con funcionalidades como expansión de comodines.
     
     > execFile(): 
+    
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        
+
+                                                                                                                   Nestjs
+    
+    
         
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        
 

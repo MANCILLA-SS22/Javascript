@@ -5,10 +5,13 @@ const productShema = new Schema({
     title: String,
     description: String,
     price: {type: Number, index: true},
-    thumbnail: Array,
+    thumbnail: String,
     code: String,
     stock: Number,
-    status: Boolean,
+    status: {
+        type: Boolean,
+        default: true
+    },
     category: String,
     owner: {
         type: String,

@@ -1,31 +1,19 @@
-import CustomRouter from "../../router/class.routes.js"
+import CustomRouter from "../../router/class.routes.js";
+import { productService } from "../../database/service.js";
+import { io } from "../../socket/socketServer.js";
 
 class RealTimeProduct extends CustomRouter{
     init(){
-        this.get("/", ["PUBLIC"], function(req, res){
-            const {title, description, price, thumbnail, code, stock} = req.body;
-            const product = [];
-            product.push({title, description, price, thumbnail, code, stock});
+        this.get("/", ["ADMIN"], async function(req, res){
+            try {
+                const product = await productService.getProducts();
+                io.emit("product_list", product); //Persistencia de archivos: El almacenamiento persistente se refiere a la retención de datos de forma no volátil, de modo que sigan estando disponibles incluso después de que un dispositivo o aplicación se apague o reinicie
+                res.sendSuccess(product);
+            } catch (error) {
+                res.sendServerError(`something went wrong ${error}`);
+            }
         })
     }
 }
 
-export default RealTimeProduct; 
-
-
-/* 
-import { Router } from "express";
-import ProductManager from "../classManagers/ProductManager.js";
-
-const router = Router();
-const Product = new ProductManager("src/data/products.json");
-
-
-router.get("/", function(request, response){
-    const allProducts = Product.getProducts();
-    global.io.emit("productList", allProducts);
-    response.render("realTimeProducts", {allProducts});
-});
-
-export default router; 
-*/
+export default RealTimeProduct;

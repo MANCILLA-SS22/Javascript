@@ -39,7 +39,7 @@ https://spring.io       https://docs.spring.io/spring-framework/docs/current/ref
 https://nextjs.org/docs/getting-started 
 
 https://docs.docker.com/storage/volumes/#volumes     -->    https://learn.microsoft.com/en-us/windows/wsl/install
-https://hub.docker.com   
+https://hub.docker.com/repositories/germanss22 
 https://kubernetes.io/docs/home/       -->     https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/
 https://minikube.sigs.k8s.io/docs/start/
 https://yaml.org    https://eemeli.org/yaml/#yaml
@@ -47,6 +47,7 @@ https://yaml.org    https://eemeli.org/yaml/#yaml
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/values
 https://www.w3schools.com/jsref/jsref_class_super.asp#gsc.tab=0&gsc.q=unhandledRejection
 https://www.geeksforgeeks.org/javascript-array-findindex-method/
+https://devdocs.io/javascript-array/
 https://nodejs.org/en/about/ 
 https://nodejs.org/api/process.html#process
 https://nodejs.org/api/child_process.html
@@ -58,11 +59,11 @@ https://expressjs.com/en/resources/middleware/cors.html
 https://expressjs.com/en/advanced/best-practice-performance.html#use-gzip-compression
 https://www.mongodb.com/docs/manual/
 https://www.mongodb.com/docs/atlas/
-https://cloud.mongodb.com/v2/655f1475ba7fe502fcda39da#/clusters
+https://cloud.mongodb.com/v2/659f6888d6b3930477e154ec#/overview
 https://mongoosejs.com/docs/middleware.html   https://mongoosejs.com/docs/guide.html#methods
+https://docs.nestjs.com
 https://nextui.org
 https://react-redux.js.org  https://redux-toolkit.js.org  https://redux-saga.js.org 
-https://docs.nestjs.com
 https://axios-http.com/docs/intro  
 https://socket.io/docs/v4/tutorial/introduction 
 https://github.com/facebook/regenerator/tree/main
@@ -163,6 +164,7 @@ https://tobiasahlin.com/spinkit/
 https://animate.style  
 https://swiperjs.com/get-started
 
+https://console.cloudinary.com/console/c-4023da8b6dcc56f76f0f9fd2aef6e2/media_library/search?q=&view_mode=grid
 https://swr.vercel.app
 https://vercel.com/docs/getting-started-with-vercel
 https://vercel.com/mancillass22s-projects
@@ -212,6 +214,8 @@ https://fakerjs.dev/api/
 https://usehooks.com 
 https://www.apollographql.com/docs/react/ 
 https://pandao.github.io/editor.md/en.html
+https://eslint.org
+https://prettier.io
 
 
 npm i eslint prettier eslint-config-prettier eslint-plugin-prettier eslint-config-airbnb eslint-plugin-node eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react --save-dev

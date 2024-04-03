@@ -22,8 +22,8 @@ class ProductServiceMongo{
         try {
             const verifyExistence = await productModel.findOne({code: product.code}); //Verificamos que el codigo de cada producto sea igual. Si son iguales, entonces el producto ya existe y no es necesario agreagarlo
             if (!verifyExistence){
-                await productModel.create(product);
-                return "Product added successfully";
+                const productCreated = await productModel.create(product);
+                return productCreated;
             }else{
                 return "Product already in stock";
             }

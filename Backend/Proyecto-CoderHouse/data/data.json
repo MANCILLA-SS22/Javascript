@@ -208,6 +208,25 @@
         "stock": 15,
         "status": true,
         "category": "Old"
+    },
+    {
+        "title": "PKP Pecheneg",
+        "description": "Light machine gun",
+        "price": 2300,
+        "thumbnail": "https://roe.ru/upload/resize_cache/iblock/5c2/2743_1435_1e3cd68611aa859771f9d287689e58ce0/5c2c7c47659187a82e2a61de32ad4535.jpg",
+        "code": "SS2010",
+        "stock": 2,
+        "status": true,
+        "category": "Medium"
+    },
+    {
+        "title": "Makarov",
+        "description": "Handgun",
+        "price": 270,
+        "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Makarov_%2828034065%29.jpeg/450px-Makarov_%2828034065%29.jpeg",
+        "code": "SS2021",
+        "stock": 12,
+        "status": true,
+        "category": "New"
     }
-
 ]

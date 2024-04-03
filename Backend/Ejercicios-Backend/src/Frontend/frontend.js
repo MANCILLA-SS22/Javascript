@@ -313,51 +313,15 @@ greetArr('Hey')('there'); */
 
 /* // Ejemplo 6.5: The call() method
 const arr = [1,2,3,4,5]
-Object.prototype.toString.call(arr) // returns "[object Array]"
+const res1 = Object.prototype.toString.call(arr) // returns "[object Array]"
+console.log("res1", res1)
 
 const str = 'test'
 str.toString() // returns 'test'
-Object.prototype.toString.call(str) // returns "[object String]" */
-
-/* // Ejemplo 6.5: The call() method
-const lufthansa = {
-    airline: 'Lufthansa',
-    iataCode: 'LH',
-    bookings: [],
-    book: function(flightNum, name) {
-        console.log(`${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`);
-        this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
-    }
-};
-
-const eurowings = {airline: 'Eurowings',iataCode: 'EW',bookings: []};
-const swiss = {airline: 'Swiss Air Lines',iataCode: 'LX',bookings: []};
-
-lufthansa.book(239, 'Jonas Schmedtmann');
-lufthansa.book(635, 'John Smith');
-console.log(lufthansa);
-
-// Call method: You can write a method that can be used on different objects. It takes arguments separately. No recive una lista de argumentos despues del this. Permitira que la palabra recerbada this apunte a eurowings.
-const book = lufthansa.book; //Al hacer esto, ahora la funcion (metodo) del objeto lufthansa pasa a ser una funcion global, por lo que, no pudemos utilizarla asi nada mas y mandarle valores ya que esta funcion tiene "this", los cuales pertenecian al objeto lufthansa.
-book.call(eurowings, 23, 'German mancilla'); 
-book.call(lufthansa, 514, 'Chavez german');
-// book(23, "res"); Esto NO funciona */
-
-/* // Ejemplo 6.6: The apply() Method
-// Apply method: You can write a method that can be used on different objects. It takes arguments as an array.
-const flightData = [583, 'George Cooper'];
-book.apply(swiss, flightData);
-book.call(swiss, ...flightData);
-console.log(swiss);
-
-const bookEW = book.bind(eurowings); // Bind method: Allows us to manually set "this" for any function call. With the bind() method, an object can borrow a method from another object.
-bookEW(23, "German Mancilla Chavez");
-
-const bookEWX = book.bind(eurowings, 23);
-bookEWX("German Mancilla Chavez"); */
+const res2 = Object.prototype.toString.call(str) // returns "[object String]"
+console.log("res2", res2) */
 
 /* // Ejemplo 6.7: The bind() Method
-
 const lufthansa = {
     airline: 'Lufthansa',
     iataCode: 'LH',bookings: [],
@@ -406,6 +370,42 @@ const addTaxRate = function (rate) {
 };
 const addVAT2 = addTaxRate(0.23);
 console.log("The result of addVAT is: "+addVAT2(100)); */
+
+/* // Ejemplo 6.5: The call(), apply() and bind() method
+const lufthansa = {
+    airline: 'Lufthansa',
+    iataCode: 'LH',
+    bookings: [],
+    book: function(flightNum, name) {
+        console.log(`${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`);
+        this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
+    }
+};
+
+const eurowings = {airline: 'Eurowings',iataCode: 'EW',bookings: []};
+const swiss = {airline: 'Swiss Air Lines',iataCode: 'LX',bookings: []};
+
+lufthansa.book(239, 'Jonas Schmedtmann');
+lufthansa.book(635, 'John Smith');
+console.log(lufthansa);
+
+// Call method: You can write a method that can be used on different objects. It takes arguments separately. No recive una lista de argumentos despues del this. Permitira que la palabra recerbada this apunte a eurowings.
+const book = lufthansa.book; //Al hacer esto, ahora la funcion (metodo) del objeto lufthansa pasa a ser una funcion global, por lo que, no pudemos utilizarla asi nada mas y mandarle valores ya que esta funcion tiene "this", los cuales pertenecian al objeto lufthansa.
+book.call(eurowings, 23, 'German mancilla'); 
+book.call(lufthansa, 514, 'Chavez german');
+// book(23, "res"); Esto NO funciona
+
+// Apply method: You can write a method that can be used on different objects. It takes arguments as an array.
+const flightData = [583, 'George Cooper'];
+book.apply(swiss, flightData);
+book.call(swiss, ...flightData);
+console.log(swiss);
+
+const bookEW = book.bind(eurowings); // Bind method: Allows us to manually set "this" for any function call. With the bind() method, an object can borrow a method from another object.
+bookEW(23, "German Mancilla Chavez");
+
+const bookEWX = book.bind(eurowings, 23);
+bookEWX("German Mancilla Chavez"); */
 
 /* // Ejemplo 6.8: Excercise with functions
 // A poll has a question, an array of options from which people can choose, and an array with the number of replies for each option. This data is stored in the starter 'poll' object below. Your tasks:

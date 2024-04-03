@@ -87,9 +87,9 @@ class LoginRegister extends Route {
             }
         });
 
-        this.get("/realTimeProducts", ['USER'], function(req, res){
+        this.get("/realTimeProduct", ['USER', 'ADMIN'], function(req, res){
             try {
-                res.render("realTimeProducts", {title: "Form example",fileCss: "styles.css", allProducts: product});
+                res.render("realTimeProducts", {title: "Form example",fileCss: "styles.css"});
             } catch (error) {
                 res.sendServerError(`something went wrong ${error}`);
             }

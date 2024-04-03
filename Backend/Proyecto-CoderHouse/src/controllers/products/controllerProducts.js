@@ -5,6 +5,7 @@ import { productService } from "../../database/service.js";
 import { ProductDto } from "../../database/dto/Product.dto.js";
 import { generateMock } from "../../mocks/productMocks.js";
 import { productError } from "../../errors/product/product.error.js";
+import { io } from "../../socket/socketServer.js";
 
 
 class ProductRouter extends Route{
@@ -120,13 +121,16 @@ class ProductRouter extends Route{
             try {
                 const productDto = new ProductDto(req.body, req.user.email);
 
-                if (productDto.title !== undefined && productDto.description !== undefined && productDto.price !== undefined && productDto.thumbnail !== undefined && productDto.code !== undefined && productDto.stock !== undefined && productDto.status !== undefined && productDto.category !== undefined) {
+                if (productDto.title !== undefined && productDto.description !== undefined && productDto.price !== undefined && productDto.thumbnail !== undefined && productDto.code !== undefined && productDto.stock !== undefined && productDto.category !== undefined) {
                     const crearProducto = await productService.addProduct(productDto);
 
-                    if(crearProducto?.error) {
+                    if(crearProducto?.error){
                         res.status(409).json({error: crearProducto.error})
                         return;
-                    }
+                    };
+
+                    const getAll = await productService.getProducts();
+                    io.emit("product_list", getAll);
                     res.sendSuccess(crearProducto);
                 
                 }else{
@@ -135,8 +139,8 @@ class ProductRouter extends Route{
                 }
 
             } catch (error) {
-                console.log("error.cause.toString() --> ", error.cause.toString())
-                req.logger.error(error.cause.toString().toString());
+                // console.log("error.cause.toString() --> ", error.cause.toString())
+                // req.logger.error(error.cause.toString().toString());
                 res.sendServerError(`something went wrong ${error.cause.toString()}`)
             }
         });
@@ -153,6 +157,10 @@ class ProductRouter extends Route{
                     const verifyExistenceUndefined = Object.values(productDto).indexOf(undefined);
                     if (verifyExistenceUndefined == -1) {
                         const actualizarProducto = await productService.updateProduct(pid, productDto);
+                        
+                        const getAll = await productService.getProducts();
+                        io.emit("product_list", getAll);
+
                         res.sendSuccess(actualizarProducto);
                     }else{
                         productError(productDto);
@@ -173,6 +181,10 @@ class ProductRouter extends Route{
                     res.sendClientError({message: "Not found id."});
                 }else{
                     const eliminarProducto = await productService.deleteProduct(pid);
+
+                    const getAll = await productService.getProducts();
+                    io.emit("product_list", getAll);
+
                     res.sendSuccess(eliminarProducto);
                 }
             } catch (error) {

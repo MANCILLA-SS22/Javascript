@@ -28,8 +28,8 @@ import morgan from "morgan";
 import compression from "express-compression";
 import cookieParser from "cookie-parser";
 import swaggerUIExpress  from "swagger-ui-express"; //Nos permitirá linkear una interfaz gráfica que represente la documentación a partir de una ruta de nuestro servidor de express.
-// import brotli from "brotli"
 import {Server} from "socket.io";
+import brotli from "brotli"
 import session from "express-session";
 import passport from "passport";
 
@@ -147,7 +147,7 @@ function backend(){
     const httpServer = app.listen(SERVER_PORT, () => console.log(`Server listening on port ${SERVER_PORT}`));
     const io = new Server(httpServer); //Instanciar websocket    
     // socket1(io);
-    socket2(io);
+    // socket2(io);
     // socket3(io);
     // socket4(io);
 

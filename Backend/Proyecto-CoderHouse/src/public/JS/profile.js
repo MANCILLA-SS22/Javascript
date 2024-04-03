@@ -11,8 +11,8 @@ window.onload = function(e){
 function procesarDatos(data){
     console.log(data)
     profile.innerHTML =  (`
-        <p>Name: ${data.name}</p>
         <h2>Profile</h2>
+        <p>Name: ${data.name}</p>
         <p>Age: ${data.age}</p>
         <p>Email: ${data.email}</p>
         <p>Role: ${data.role}</p>
