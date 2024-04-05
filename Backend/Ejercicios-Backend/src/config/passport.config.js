@@ -5,16 +5,20 @@ import jwtStrategy from 'passport-jwt';
 import { userModel } from '../database/dao/mongo/models/users.model.js';
 import { PRIVATE_KEY } from '../utils/jwt.js';
 import { createHash, validateHash } from '../utils/bcrypt.js';
+import config from "./config.js";
 
 const localStrategy = passportLocal.Strategy; //Declaramos estrategia
 const JwtStrategy = jwtStrategy.Strategy;
 const ExtractJWT = jwtStrategy.ExtractJwt;
+const clientId = config.clientID;
+const clientsecret = config.clientSecret;
+const callbackUrl = config.callbackUrl;
 
 function initialPassport(){ //Estrategia de obtener Token JWT por Cookie
     passport.use('jwt', new JwtStrategy({ jwtFromRequest: ExtractJWT.fromExtractors([cookieExtractor]), secretOrKey: PRIVATE_KEY }, jwt ));
     passport.use('login', new localStrategy({ passReqToCallback: true, usernameField: 'email' }, login ));
     passport.use('register', new localStrategy({ passReqToCallback: true, usernameField: 'email' }, register ));
-    passport.use("github", new GitHubStrategy( {clientID: "Iv1.0acfc2218d4d0aed",clientSecret: "0a1fcc18fba775b5dc5f86fab2d2ecc45acea1f0",callbackUrl: "http://localhost:5500/api/jwt/githubcallback"}, github ));
+    passport.use("github", new GitHubStrategy( { clientID: clientId, clientSecret: clientsecret, callbackUrl: callbackUrl }, github ));
     passport.serializeUser(serialize); //Estas funciones permiten a Passport.js manejar la información del usuario durante el proceso de autenticación, serializando y deserializando los usuarios para almacenar y recuperar información de la sesión. Son esenciales cuando se implementa la autenticación de usuarios en una aplicación Node.js utilizando Passport.js
     passport.deserializeUser(deserialize);
 };
@@ -22,7 +26,7 @@ function initialPassport(){ //Estrategia de obtener Token JWT por Cookie
 async function login(req, username, password, done){
     try {
         const user = await userModel.findOne({ email: username });
-        // console.log("Usuario encontrado para login:", user);
+        console.log("Usuario encontrado para login:", user);
 
         if (!user) return done(null, false);
         if (!validateHash(user, password)) return done(null, false)
@@ -74,7 +78,7 @@ async function register(req, username, password, done){
             last_name,
             email,
             age,
-            password: createHash(password),
+            password: await createHash(password),
             loggedBy: 'form'
         };
 

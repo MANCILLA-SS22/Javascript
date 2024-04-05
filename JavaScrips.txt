@@ -756,8 +756,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     
    
     > reduceRight()   Reduce the values of an array to a single value (going right-to-left)
-    
-    > reverse()	      Reverses the order of the elements in an array. Invierte el orden de los elementos dentro de un array. (es destructivo, o sea que modifica el array original, al igual que los métodos para agregar o quitar elementos).
+        > reverse()	      Reverses the order of the elements in an array. Invierte el orden de los elementos dentro de un array. (es destructivo, o sea que modifica el array original, al igual que los métodos para agregar o quitar elementos).
     
     > shift()	      Removes the first element of an array, and returns that element. Si queremos eliminar el primer elemento del array utilizamos el método shift();
     
@@ -798,8 +797,40 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
    
                                                                                                            JSON & storage
                                                                                                            
-   > storage: El objeto Storage (API de almacenamiento web) permite almacenar datos de manera local en el navegador sin necesidad de realizar ninguna conexión con el servidor. De esta manera, cada cliente puede preservar información de la 
-     aplicación. El navegador nos ofrece dos tipos de storage: localStorage y sessionStorage.
+- storage: El objeto Storage (API de almacenamiento web) permite almacenar datos de manera local en el navegador sin necesidad de realizar ninguna conexión con el servidor. De esta manera, cada cliente puede preservar información de la 
+  aplicación. El navegador nos ofrece dos tipos de storage: localStorage y sessionStorage.
+     
+- localstorage: This read-only interface property provides access to the document’s local storage object; the stored data is stored across browser sessions. Similar to sessionStorage, except that sessionStorage data gets cleared when the 
+  page session ends—that is, when the page is closed. It is cleared when the last “private” tab of a browser is closed (localStorage data for a document loaded in a private browsing or incognito session).
+  DOMStrings are storage formats that use UTF-16 to encode data, which uses two bytes per character. Strings are automatically generated from integer keys, just as they are for objects. The data stored in LocalStorage is specific to a 
+  protocol in the document. If the site is loaded over HTTP (e.g., http://example.com), localStorage returns a different object than if it is loaded over HTTPS (e.g., https://abc.com).
+  If a document is loaded from a file URL (that is, directly from the user’s local file system instead of being loaded from the server), the requirements for behavior are undefined and may vary among different browsers. Each file appears to 
+  be returned a different object by localStorage in all current browsers: URL. Essentially, it seems to be the case that each URL file has its own unique local storage area.
+  This behavior cannot be guaranteed because, as mentioned above, the file URL requirements remain unclear. As such, there’s a possibility that browsers may change how they handle files at any time. The way browsers handle it has evolved.
+
+- sessionStorage: The read-only sessionStorage property accesses a session Storage object for the current origin. sessionStorage is similar to localStorage; the difference is that while data in localStorage doesn't expire, data in 
+  sessionStorage is cleared when the page session ends.
+    > Whenever a document is loaded in a particular tab in the browser, a unique page session gets created and assigned to that particular tab. That page session is valid only for that particular tab.
+    > A page session lasts as long as the tab or the browser is open, and survives over page reloads and restores.
+    > Opening a page in a new tab or window creates a new session with the value of the top-level browsing context, which differs from how session cookies work.
+    > Opening multiple tabs/windows with the same URL creates sessionStorage for each tab/window.
+    > Duplicating a tab copies the tab's sessionStorage into the new tab.
+    > Closing a tab/window ends the session and clears objects in sessionStorage.
+  A unique page session gets created once a document is loaded in a browser tab. Page sessions are valid for only one tab at a time. Pages are only saved for the amount of time that the tab or the browser is open; they do not persist after 
+  the page reloads and restores. A new session is created each time a tab or window is opened; this is different from session cookies. Each tab/window that is opened with the same URL creates its own sessionStorage.When you duplicate a tab, 
+  the sessionStorage from the original tab is copied to the duplicated tab. Closing a window/tab ends the session and clears sessionStorage objects.
+  A page’s protocol determines what data is stored in sessionStorage. Particularly, data stored by scripts accessed through HTTP (for example, http://abc.com) is stored in a separate object from the same site accessed through HTTPS (for 
+  instance, https://abc.com). A DOMString number is two bytes per character in UTF-16 DOMString format. Strings are automatically generated from integer keys just as they are for objects.
+  
+- The term “cookie” refers to just the textual information about a website. In order to recognize you and show you results according to your preferences, this website saves some information in your local system when you visit a particular 
+  website. The history of the internet has long been marked by the use of cookies. A website visitor asks the server for a web page when they visit it. Every request for a server is unique. Likewise, if you visit a hundred times, each 
+  request will be considered unique by the server. Since a server receives many requests every second, storing every user’s information on a server doesn’t seem logical and obvious. The same information may not be needed again if you don’t 
+  return. Therefore, a cookie is sent and stored on your local machine to uniquely identify you. You will receive a response from the same server the next time you hit it since it recognizes you. Almost every server uses this cookie (some 
+  exceptions exist today because of advertisements). Therefore, although you might have many cookies in your system, such cookies will be recognized by a server and analyzed.
+  When cookies were first developed, they were used to better the developer’s experience. Consider visiting a website in a language other than your native one (let’s say English). You can select English as your language from the website’s 
+  language section. It might be necessary to switch languages five times a day if you visit the same website five times. These details are therefore stored in a cookie on your system. This ensures that the server knows that you wish to view 
+  the website in English the next time you send a request. Cookies are vital in this regard. The scale cookies used today are much smaller than the example above.
+     
    > localstorage.Setitem(); Los datos almacenados en localStorage (variable global preexistente) se almacenan en el navegador de forma indefinida (o hasta que se borren los datos de navegación del browser). La información persiste reinicio 
      de navegador y hasta del sistema operativo.
    > Clave-valor: La información almacenada en el Storage se guarda en la forma de clave-valor. Similar al tratamiento de objetos, definimos claves en el storage donde almacenamos valores.
@@ -1677,7 +1708,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     request that requires authentication, the client sends the JWT in the request headers. The server validates the token by checking the signature and decoding the payload to ensure the user’s authenticity and authorization.
     
   > Secret key: The secret key is combined with the header and the payload to create a unique hash. You are only able to verify this hash if you have the secret key. Secret key used for signing and verifying JWTs. It must be replaced with a 
-   strong secret key in production
+   strong secret key in production 
    
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        
 
@@ -1768,7 +1799,10 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        
 
                                                                                                                    Nestjs
-    
+
+- Definicion: Es un framework que permite crear Server Side Applications, de una manera eficiente y escalable. Está desarrollado con una base sólida de Typescript y brinda la posibilidad de seguir utilizando plain javascript. 
+  Permite implementar paradigmas combinados de Programación Orientada a Objetos, Programación Funcional, y Programación Funcional reactiva. 
+  Es un framework que está basado internamente en Express, y está pensado principalmente para construir aplicaciones monolíticas y microservicios.     
     
         
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        

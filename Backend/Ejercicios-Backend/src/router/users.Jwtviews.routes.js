@@ -45,11 +45,11 @@ router.get("/", authToken, function(req, res){
 // });
 
 router.get("/login", function(req, res){
-    res.render('login')
+    res.render('loginJwt')
 });
 
 router.get("/register", function(req, res){
-    res.render('register')
+    res.render('registerJwt')
 });
 
 router.get("/error", function(req, res){

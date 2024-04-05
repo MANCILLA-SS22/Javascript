@@ -29,9 +29,9 @@ import compression from "express-compression";
 import cookieParser from "cookie-parser";
 import swaggerUIExpress  from "swagger-ui-express"; //Nos permitirá linkear una interfaz gráfica que represente la documentación a partir de una ruta de nuestro servidor de express.
 import {Server} from "socket.io";
-import brotli from "brotli"
 import session from "express-session";
 import passport from "passport";
+import brotli from "brotli"
 
 import config from './config/config.js';
 import helloRouter from "./router/hello.routes.js";
@@ -39,9 +39,10 @@ import paginationRouter from "./router/pagination.routes.js";
 import socketViewsRouter from "./router/views.routes.js";
 import postRouter from "./router/post.routes.js"
 import expressRouter from "./router/express.routes.js"
-import multerRouter from "../src/router/multer.routes.js"
+import multerRouter from "./router/multer.routes.js"
 import cookieRouter from "./router/cookies.routes.js";
-import usersViewRouter from "./router/users.views.routes.js";
+import usersJwtViewRouter from "./router/users.Jwtviews.routes.js";
+import usersSessionViewRouter from "./router/users.Sessionviews.routes.js";
 import githubLoginViewRouter from "./router/github-login.views.routes.js";
 import jwtRouter from "./router/jwt.routes.js";
 import petsRouter from "./router/pets.routes.js";
@@ -51,7 +52,7 @@ import studentRouter from './router/students.routes.js';
 import coursesRouter from './router/courses.routes.js';
 import emailRouter from './router/email.routes.js';
 import usersRouter from "./router/users.routes.js";
-import sessionRouter from "./router/sessions.routes.js"
+import sessionRouter from "./router/sessions.routes.js";
 import smsRouter from './router/sms.routes.js';
 import whatsappRouter from './router/whatsapp.routes.js';
 import compressionRouter from './router/compression.routes.js';
@@ -61,6 +62,12 @@ import usuariosRouter from "./router/usuarios.routes.js";
 import mascotasRouter from "./router/mascotas.routes.js";
 import adopcionesRouter from "./router/adopciones.routes.js";
 import sesionesRouter from "./router/sesiones.routes.js";
+
+import accountRouter from "./router/account.routes.js";
+import authRouter from "./router/auth.routes.js";
+import authSessionRouter from "./router/auth_session.routes.js";
+import authTokenRouter from "./router/auth_token.routes.js";
+
 import {__dirname} from './dirname.js';
 import { mongoInstance } from "./methods/mongoInstance.method.js";
 import { errorHandlerMiddleware, logger } from "./middlewares/middlewares.js";
@@ -83,19 +90,15 @@ import { aggregation1, aggregation2 } from "./methods/aggregation.js";
 import { socket1, socket2, socket3, socket4 } from "./sockets/sockets.js";
 import { clusters } from "./methods/clusters.method.js";
 import { addLogger } from "./config/logger_CUSTOM.js";  //import { addLogger } from "./config/logger_BASE.js";
-import { initialPassportSession } from "./config/passportSessions.config.js";
 import { mongoStoreObj } from "./specs/mongoStore.specs.js";
 import { connectMongo } from "./methods/mongoStore.method.js";
 
-function backend(){
+function app(){
     const app = express();
     const usersExtendRouter = new UsersExtendRouter();
     const SERVER_PORT = config.port;
 
-    // connectMongo(); // ****** Uso de SESSIONS (comentar lo referente a "mongoInstance" y "factory" para que esto funcione) ****** 
-    // initialPassportSession();
-
-    mongoInstance(); // ****** Uso de REPOSITORTY (comentar lo referente a "factory" para que esto funcione) ****** 
+    mongoInstance(); // ****** Uso de REPOSITORTY (comentar lo referente a "factory" y connectMongo() para que esto funcione) ****** 
     initialPassport();
 
     app.set("views", `${__dirname}/views`); // Seteamos nuestro motor. Con app.set("views", ruta) indicamos en que parte del proyecto estaran las vistas. Recordar utilizar rutas absolutas para evitar asuntos de ruteo relativo.
@@ -106,11 +109,12 @@ function backend(){
     app.use(compression({brotli: { enabled: true, zlib: {} } })); //Con esta opción, se reconocerá un tipo de compresión “br” (brotli) al momento de enviar la información. La razón por la que colocamos un objeto zlib vacío se debe a que el módulo de express-compression cuenta con una dependencia interna “zlib”, la cual le permite ejecutar diferentes niveles de compresión.
     app.use(cors(corsOptions)); //Si utilizamos unicamente cors(), quiere decir que cualquiera podra acceder al servidor. Pero al mandarle un objeto cors(corsOptions), este contiene la info de quien o quienes pueden acceder.
     app.use(express.json()); //This is a built-in middleware function in Express. It parses incoming requests with JSON payloads and is based on body-parser.
+    app.use(express.text());
     app.use(express.urlencoded({ extended: true, limit: 1000 })); //It parses incoming requests with urlencoded payloads and is based on body-parser. Returns middleware that only parses urlencoded bodies and only looks at requests where the Content-Type header matches the type option. This parser accepts only UTF-8 encoding of the body and supports automatic inflation of gzip and deflate encodings.
     app.use(express.static(`${__dirname}/public`)); // Public. Sentamos de manera estatica la carpeta public
-    // app.use(session (mongoStoreObj)); //Linea pertenecien al uso de SESSIONS
-    // app.use(passport.initialize()); //Linea pertenecien al uso de SESSIONS
-    // app.use(passport.session()); //Linea pertenecien al uso de SESSIONS
+    // app.use(session (mongoStoreObj)); ****** Uso de SESSIONS (comentar lo referente a "factory" para que esto funcione) ****** 
+    // app.use(passport.initialize());
+    // app.use(passport.session());
 
     // app.use(addLogger); //Este es un middleware de nivel de aplicación, que contiene los loggers, el cual se ejecutara antes de los routers de abajo.
     app.use("/", logger, errorHandlerMiddleware, helloRouter); //"logger" representa un middleware de nivel de endpoint. Ejecutamos primero la ruta "/", despues se ejecuta la funcion middleware y, si todo sale bien, se ejecuta la funcion next, y pasamos al siguiente middleware, que es el Middleware de manejo de errores. Y finalmente, si todo sale bien nuevamente, pasamos a la ultima funcion.
@@ -118,21 +122,30 @@ function backend(){
     app.use("/pagination", paginationRouter);
     app.use("/fork", forkRouter);
     app.use("/express", expressRouter);
-    app.use("/cookie", cookieRouter);
-    app.use('/users', usersViewRouter);
     app.use("/socket", socketViewsRouter);
     app.use("/api/post", loggerDate, postRouter);
+
+    app.use("/account", accountRouter);
+    app.use("/auth", authRouter);
+    app.use("/auth-token", authTokenRouter);
+    app.use("/auth-session", authSessionRouter);
+    app.use("/cookie", cookieRouter);
     app.use("/github", githubLoginViewRouter);
     app.use("/api/jwt", jwtRouter);
+    app.use('/usersJwt', usersJwtViewRouter);
+    app.use("/api/session", sessionRouter);
+    app.use('/usersSession', usersSessionViewRouter);
+
     app.use("/api/pets", petsRouter);
     app.use("/api/users", usersRouter);
-    app.use("/api/session", sessionRouter);
     app.use("/api/extend/users", usersExtendRouter.getRouter());
     app.use("/api/students", studentRouter);
     app.use("/api/courses", coursesRouter);
+
     app.use("/api/email", emailRouter);
     app.use("/api/sms", smsRouter);
     app.use("/api/whatsapp", whatsappRouter);
+
     app.use("/api/performance", performanceRouter)
     app.use("/compression", compressionRouter);
     app.use("/logger", loggerRouter); //Al usar esta ruta, hay que COMENTAR los middlewares Logger 1 y Logger 2 para ver el resultado
@@ -141,11 +154,11 @@ function backend(){
     app.use('/api/mascotas', mascotasRouter);
     app.use('/api/adopciones', adopcionesRouter);
     app.use('/api/sesiones', sesionesRouter);
-    // app.listen(SERVER_PORT, console.log("Server listening on port " + SERVER_PORT));
+    app.listen(SERVER_PORT, console.log("Server listening on port " + SERVER_PORT));
 
     // ****** Uso Websockets (Si usamos esto, DESCOMENTAR las 4 lineas de abajo y comentar "app.listen(SERVER_PORT, function(){}") ****** 
-    const httpServer = app.listen(SERVER_PORT, () => console.log(`Server listening on port ${SERVER_PORT}`));
-    const io = new Server(httpServer); //Instanciar websocket    
+    // const httpServer = app.listen(SERVER_PORT, () => console.log(`Server listening on port ${SERVER_PORT}`));
+    // const io = new Server(httpServer); //Instanciar websocket    
     // socket1(io);
     // socket2(io);
     // socket3(io);
@@ -176,8 +189,8 @@ function backend(){
     // tests();
 
 };
-backend();
-export {backend};
+app();
+export {app};
 
 // ****** Uso de clusters (Para trabajar con clusters, HABILITAR la linea de abajo y COMENTAR "backend();". Si no, entonces comentarla y habilidar "backend()" ****** 
 // clusters();

@@ -21,6 +21,7 @@ https://docs.jupyter.org/en/latest/use/using.html
 https://flask.palletsprojects.com/en/3.0.x/
 https://docs.djangoproject.com/en/5.0/
 https://javascript.info  https://lenguajejs.com 
+https://www.typescriptlang.org
 https://go.dev/learn/
 https://doc.rust-lang.org/rust-by-example/meta/doc.html 
 https://dev.mysql.com/doc/refman/8.0/en/dynindex-statement.html 
@@ -82,16 +83,25 @@ https://github.com/mde/ejs
 https://github.com/express-handlebars/express-handlebars
 https://github.com/expressjs/compression
 https://github.com/foliojs/brotli.js?tab=readme-ov-file
+https://github.com/Kikobeats/compress-brotli
 https://github.com/validatorjs/validator.js
 https://github.com/aravindnc/mongoose-paginate-v2?tab=readme-ov-file
 https://github.com/jdesboeufs/connect-mongo
-https://github.com/kelektiv/node.bcrypt.js
-https://github.com/auth0/node-jsonwebtoken
-https://github.com/jaredhanson/passport-local
-https://github.com/cfsghost/passport-github
 https://github.com/express-rate-limit/express-rate-limit
 https://github.com/Psifi-Solutions/csrf-csrf
+https://github.com/kelektiv/node.bcrypt.js
+https://github.com/ai/nanoid
+https://github.com/auth0/node-jsonwebtoken
+https://www.npmjs.com/package/jwt-decode
+https://github.com/panva/jose
+https://github.com/jaredhanson/passport-local
+https://github.com/cfsghost/passport-github
 https://github.com/mikenicholson/passport-jwt
+https://github.com/ajv-validator/ajv
+https://github.com/ajv-validator/ajv-keywords
+https://github.com/ajv-validator/ajv-formats
+https://github.com/ajv-validator/ajv-errors
+https://github.com/sinclairzx81/typebox
 https://github.com/tj/commander.js
 https://github.com/helmetjs/helmet
 https://github.com/colinhacks/zod
@@ -118,6 +128,7 @@ https://github.com/chaijs/chai?tab=readme-ov-file
 https://www.passportjs.org/packages/
 https://bcrypt-generator.com/
 https://jwt.io    https://auth0.com/docs/secure/tokens/json-web-tokens    https://oauth.net/2/
+https://ajv.js.org
 https://nodemailer.com
 https://www.twilio.com/docs/libraries/reference/twilio-node/5.0.0-rc.1/
 https://sendgrid.com/en-us
@@ -217,6 +228,9 @@ https://pandao.github.io/editor.md/en.html
 https://eslint.org
 https://prettier.io
 
+
+https://www.w3resource.com/javascript-exercises/javascript-array-exercises.php
+https://www.w3resource.com/cpp-exercises/array/index.php
 
 npm i eslint prettier eslint-config-prettier eslint-plugin-prettier eslint-config-airbnb eslint-plugin-node eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react --save-dev
 - Its kind of interesting how animal like we are

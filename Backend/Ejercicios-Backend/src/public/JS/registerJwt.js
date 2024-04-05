@@ -15,7 +15,7 @@ form.addEventListener('submit', function(e){
         if (result.status === 201){
             result.json();
             alert("Usuario creado con exito!");            
-            window.location.replace('/users/login');
+            window.location.replace('/usersJwt/login');
         }else{
             alert("No se pudo crear el usuario!");
         }

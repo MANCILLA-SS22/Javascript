@@ -1,6 +1,6 @@
 import cluster from "node:cluster";
 import { cpus } from "os";
-import { backend } from "../backend.js";
+import { app } from "../app.js";
 
 function clusters(){
     console.log("Preguntar si es el cluster es primario: ", cluster.isPrimary);

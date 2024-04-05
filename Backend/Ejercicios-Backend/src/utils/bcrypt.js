@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 
 async function createHash(password){ //Generamos el hash.
-    const salts = await bcrypt.genSalt(10);
+    const salts = bcrypt.genSaltSync(10);
     return bcrypt.hashSync(password, salts); //genSaltSync genera un Salt de 10 caracteres. Un Salt es un string random que hace que el proceso de hasheo se realice de manera impredecible. Devuelve un string con el password hasheado. El proceso es irreversible
 }
 
