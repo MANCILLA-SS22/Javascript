@@ -91,17 +91,17 @@ https://github.com/express-rate-limit/express-rate-limit
 https://github.com/Psifi-Solutions/csrf-csrf
 https://github.com/kelektiv/node.bcrypt.js
 https://github.com/ai/nanoid
-https://github.com/auth0/node-jsonwebtoken
-https://www.npmjs.com/package/jwt-decode
+https://github.com/auth0/node-jsonwebtoken   https://jwt.io
+https://github.com/auth0/jwt-decode
 https://github.com/panva/jose
 https://github.com/jaredhanson/passport-local
 https://github.com/cfsghost/passport-github
 https://github.com/mikenicholson/passport-jwt
-https://github.com/ajv-validator/ajv
+https://github.com/sinclairzx81/typebox
+https://github.com/ajv-validator/ajv   https://ajv.js.org
 https://github.com/ajv-validator/ajv-keywords
 https://github.com/ajv-validator/ajv-formats
 https://github.com/ajv-validator/ajv-errors
-https://github.com/sinclairzx81/typebox
 https://github.com/tj/commander.js
 https://github.com/helmetjs/helmet
 https://github.com/colinhacks/zod
@@ -127,8 +127,7 @@ https://github.com/chaijs/chai?tab=readme-ov-file
 
 https://www.passportjs.org/packages/
 https://bcrypt-generator.com/
-https://jwt.io    https://auth0.com/docs/secure/tokens/json-web-tokens    https://oauth.net/2/
-https://ajv.js.org
+https://auth0.com/docs/secure/tokens/json-web-tokens    https://oauth.net/2/
 https://nodemailer.com
 https://www.twilio.com/docs/libraries/reference/twilio-node/5.0.0-rc.1/
 https://sendgrid.com/en-us

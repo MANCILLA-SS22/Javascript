@@ -124,6 +124,16 @@
     clase. De esta forma, todos los objetos son instancias de algún otro, menos la clase Object que es la madre de todas. Cuando usted declara una clase, no se reserva memoria para la clase hasta que usted crea un objeto de la clase.
     Por ejemplo, si creamos una clase para un objeto que es para un carro, el cual tenga "velocidad", "potencia" y "color", entonces a partir de eso, podemos definir nuestro primer objeto, digamos "Carro_1", el cual posee las 3 
     caracteristicas mencionadas arriba. Ahora, si queremos instanciar, entonces debemos crear otro objeto, digamos "Carro_2", debera tener exactamente los mismas 3 caracteristicas definidas en un principio. Esto es la instanciacion.
+    
+  > Interfaces: Las interfaces permiten definir contratos que las clases deben cumplir, asegurando que ciertos métodos estén presentes y promoviendo una abstracción adecuada. Una interfaz es un contrato entre dos entidades, esto quiere decir 
+    que una interfaz provee un servicio a una clase consumidora. Por ende, la interfaz solo nos muestra la declaración de los métodos que esta posee, no su implementación, permitiendo así su encapsulamiento. 
+    Al utilizar interfaces, se fomenta la abstracción, permitiendo que diferentes implementaciones se adhieran a un contrato común.
+    
+    An interface is a programming structure/syntax that allows the computer to enforce certain properties on an object (class). For example, say we have a car class and a scooter class and a truck class. Each of these three classes should 
+    have a start_engine() action. How the "engine is started" for each vehicle is left to each particular class, but the fact that they must have a start_engine action is the domain of the interface
+    
+  > Paquetes: Los paquetes son mecanismos para organizar clases y otros elementos relacionados en un espacio de nombres. La utilización adecuada de paquetes es esencial para proyectos escalables y mantenibles.
+    La adopción de interfaces y paquetes en la programación fomenta la escritura de código más limpio y organizado.
   
   > Diferencia entre crear objetos e instanciar objetos: De una clase abstracta no se pueden instanciar objetos pero si crear. A continuacion un ejemplo de la sintaxis de cada uno:
    + NombreDeVariable *NombreDeVariable[2]; - Creamos un objeto
@@ -495,7 +505,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
      ~ If you leave and return, you can get the “coat” with your “ticket”. When you revisit the website, your browser gives the website the cookie back. The website then reads the unique ID in the cookie to assemble your activity data,
        bringing you back to where you were when you first visited, as if you never left.
   3. First-party cookies: First-party cookies are from websites you directly visit in your browser and are used to improve your online user experience. They often store information relevant to the website such as what you’ve viewed in the 
-    past or your settings preferences. As long as you are visiting authentic and reputable websites, first-party cookies are usually harmless and make it easier to browse your favorite websites.
+     past or your settings preferences. As long as you are visiting authentic and reputable websites, first-party cookies are usually harmless and make it easier to browse your favorite websites.
   4. Third-party cookies: Third-party cookies are probably the most controversial type of cookie in terms of data privacy. They usually track your behavior for advertising purposes and aren't a direct part of the websites you visit. Instead, 
      they’re usually embedded in ads, videos, or web banners. Even a Facebook "like" button uses third-party cookies.
   5. Zombie cookies: Also known as supercookies, zombie cookies are a type of third-party cookie. However, they aren't stored in the same place as regular cookies. So even if a person deletes cookies, zombie cookies will rise from the dead 
@@ -512,7 +522,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       and functionality. Some site features may not be available without functional cookies.    
   11. Advertising cookies: Third-party persistent cookies are often used for advertising purposes. Advertising cookies (also called targeting cookies) build a profile on you based on your interests, search history, and items you view. They 
       then share that information with other websites, so they can advertise relevant products and services to you.
-    For example, maybe you searched for gym shoes recently. Don't be too surprised later when you see an ad on social media for gym shoes or relevant items such as socks.
+      For example, maybe you searched for gym shoes recently. Don't be too surprised later when you see an ad on social media for gym shoes or relevant items such as socks.
 
       
    > What Are Cookies Used For: Websites use HTTP cookies to streamline your web experiences. Without cookies, you’d have to login every time you leave a site or rebuild your shopping cart if you accidentally closed the page. Making cookies 
@@ -557,6 +567,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   In authentication, when the user successfully logs in using their credentials, a JSON Web Token will be returned. Since tokens are credentials, great care must be taken to prevent security issues. In general, you should not keep tokens 
   longer than required.       --> https://jwt.io/introduction
   
+- Stateless:   
   
 - Application logic vs Business logic: 
   
@@ -810,7 +821,11 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   Los buffer son datos crudos en hexadecimal optimizados para ser transportados de un punto de memoria a otro. Formalmente, se conocen como streams de datos binarios, pero almacenan los datos en hexadecimal, por lo que cada espacio tiene dos 
   dígitos. Las ventajas de trabajar con buffer radica en que nos permite trabajar con los datos en crudo y por ello quien envía los datos conoce de entrada el tipo de datos y quien recibe los datos también conoce el tipo de datos que contiene
   
-  
+- Drivers: 
+
+- Query builder: 
+
+- ORM/ODM:   
   
   
   

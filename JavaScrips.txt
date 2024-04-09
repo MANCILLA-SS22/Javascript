@@ -256,11 +256,27 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
   > super: The super keyword is used to call the constructor of its parent class to access the parent's properties and methods, to access properties on an object literal or class's [[Prototype]], or invoke a superclass's constructor.
     When we extend a parent class, we call "super" in order to call the parent constructor.
+    The super() method refers to the parent class. By calling the super() method in the constructor method, we call the parent's constructor method and gets access to the parent's properties and methods.
 
   > extends: The extends keyword is used to create a child class of another class (parent). The child class inherits all the methods from another class. Inheritance is useful for code reusability: reuse properties and methods of an existing 
     class when you create a new class. 
-    Note: From the example above; The super() method refers to the parent class. By calling the super() method in the constructor method, we call the parent's constructor method and gets access to the parent's properties and methods.
-    Extends is used to denote the parent class that the child class will inherit its methods from, and super is used to reference the parent classes constructor method.
+    Extends is used to denote the parent class that the child class will inherit its methods from, and super is used to reference the parent classes constructor method. In other words, it is used to create a subclass (the new class is a 
+    child) that inherits all the properties and methods from another class (or parent) or to extend a type by including properties from another type, and It can override some of these and implement new ones, but the parent stuff is included.
+     ~ Inheritance: Extends is used for class inheritance. It allows a class to inherit properties and methods from another class.
+     ~ Multiple Inheritance: A class can extend only one class
+     ~ Implementation of Methods: No direct implementation of methods.
+     ~ Code Reusability: Promotes code reusability
+     ~ Abstract Classes: Can extend abstract classes
+
+  > implements: It is used in a class to indicate that the class is going to implement a particular interface. It ensures that the class includes all the properties and methods specified by the interface.
+    In Typescript an implements clause can be used to verify that a class conforms to a specific interface. If a class fails to implement an interface correctly, an error will be generated. Classes can implement a single 
+    interface or multiple interfaces at once. 
+    implements means that The new class can be treated as the same "shape", but it is not a child. It could be passed to any method where Person is required, regardless of having a different parent than Person.
+     ~ Inheritance: Implements is used for interface implementation. It enables a class to provide specific implementations for the methods defined in an interface.
+     ~ Multiple Inheritance: A class can implement multiple interfaces
+     ~ Implementation of Methods: Requires the class to provide concrete implementations for all methods declared in the interface.
+     ~ Code Reusability: Promotes code reusability and abstraction through interfaces.
+     ~ Abstract Classes: Cannot extend abstract classes but can implement abstract methods.
       
   > Constructor: El constructor de un objeto es una función que usamos para crear un nuevo objeto cada vez que sea necesario. Con función constructora podemos inicializar las propiedades del objeto al momento de ser instanciado con new.
     El constructor ejecutara asi mismo las funciones y/o variables que esten dentro de el UNICAMENTE cuando se cree una nueva instancia del objeto.
@@ -1619,8 +1635,9 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 - Mongoose (functions): Database logic should be encapsulated within the data model. Mongoose provides 2 ways of doing this, methods and statics. Methods adds an instance method to documents whereas Statics adds static "class" methods to the 
   Models itself.
    > methods: It's a method that it's gonna be available on all documents of a certain collection
-   > statics: statics are the methods defined on the Model. Those functions are only used ONLY in the model and that exist ONLY in the model. 
-   
+   > statics: statics are the methods defined on the Model. Those functions are only used ONLY in the model and that exist ONLY in the model.
+
+
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        
 
                                                                                                                    Cookies, auth, JWT
@@ -1631,7 +1648,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   nos visitan, se utilizan las cookies.
   Una cookie es un pequeñísimo archivo de texto donde podremos almacenar información dentro del navegador, de manera que pueda viajar entre las peticiones y sirva como un ligero contenedor de información necesaria para poder procesar ciertas 
   peticiones. Las cookies viven en el navegador, por lo que son fácilmente accesibles por múltiples elementos externos. Por ningún motivo guardamos información sensible en una cookie. Nunca guardamos información de métodos de pago, 
-  contraseñas, ni cualquier dato que pudiera comprometer la seguridad del cliente. Algunos de los datos que se suelen guardar en una cookie son:
+  contraseñas, ni cualquier dato que pudiera comprometer la seguridad del clie nte. Algunos de los datos que se suelen guardar en una cookie son:
     ✓ Nombres de usuario
     ✓ IDs de sesiones (que abarcaremos más adelante)
     ✓ Preferencias de navegación para tu página. 
@@ -1672,15 +1689,18 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       ○ Si pasamos done(null, false) indicamos que no hay error, pero el usuario no estará disponible.
     ✓ Cada estrategia que queramos configurar en passport es un middleware por sí solo, así que utilizaremos el elemento passport.use() para configurar diferentes middlewares/estrategias
 
-  > Serializar y deserializar: //Estas funciones permiten a Passport.js manejar la información del usuario durante el proceso de autenticación, serializando y deserializando los usuarios para almacenar y recuperar información de la sesión. 
-    Son esenciales cuando se implementa la autenticación de usuarios en una aplicación Node.js utilizando Passport.js
-    ✓ Para restaurar el estado de autenticación a través de solicitudes HTTP, Passport necesita serializar usuarios y deserializarlos fuera de la sesión. Esto se hace de modo que cada solicitud subsiguiente no contenga las credenciales del 
-      usuario anterior.
-    ✓ Se suele implementar proporcionando el ID de usuario al serializar y consultando el registro de usuario por ID de la base de datos al deserializar. 
-    ✓ Los métodos que proporciona Passport para esto son serializeUser y deserializeUser.
-    ✓ El código ejemplo de ambos métodos se muestra a continuación.
-    ✓ Se puede ver que el método serializeUser utiliza el ID del usuario y el deserializeUser utiliza el objeto de usuario, como lo mencionamos antes.
-    
+  > Serializar y deserializar: Estas funciones permiten a Passport.js manejar la información del usuario durante el proceso de autenticación, serializando y deserializando los usuarios para almacenar y recuperar información de la sesión. 
+    Permiten que la aplicación web gestione la autenticación de usuarios y recuerde la identidad del usuario autenticado entre las solicitudes HTTP.
+    ~ Serializar (Serialize): significa convertir el objeto de usuario en una forma que pueda ser almacenada y posteriormente recuperada. Esencialmente, esto implica tomar los datos de usuario relevantes (como el ID de usuario) y 
+      convertirlos en una representación que pueda ser almacenada, generalmente en una cookie de sesión o en una base de datos. Durante el proceso de serialización, Passport.js guarda el identificador único del usuario en la sesión del 
+      usuario actual. Esto permite que la aplicación recuerde que el usuario está autenticado entre las solicitudes, incluso cuando las solicitudes individuales HTTP son independientes entre sí.
+      En resumen, la serialización en Passport.js proporciona una forma de "recordar" la identidad del usuario autenticado entre las solicitudes HTTP.
+      
+    ~ Deserializar (Deserialize): Significa tomar la identificación del usuario que se almacenó durante la serialización y utilizarla para obtener los datos de usuario completos y autenticados.
+      Durante el proceso de deserialización, Passport.js recupera los datos del usuario basados en el identificador almacenado en la sesión y los proporciona a la aplicación para que pueda realizar operaciones con el usuario autenticado, 
+      como mostrar su perfil, permitirle acceder a recursos protegidos, etc. 
+      En resumen, la deserialización en Passport.js permite a la aplicación recuperar los datos del usuario completo y autenticado a partir del identificador almacenado durante la serialización.
+      
 - JsonWebToken (JWT): Es un estándar que soluciona el problema de consultas y escalabilidad que presenta session. Este se basa en encriptar la información del usuario en un token que se guardará del lado del cliente, y el cliente lo enviará 
     al servidor en cada consulta, para poder desencriptar y obtener la información de usuario interna.
     Es mecanismo para poder propagar entre dos partes, y de forma segura, la identidad de un determinado usuario, además con una serie de claims o privilegios. Estos privilegios están codificados en objetos de tipo JSON, que se incrustan 

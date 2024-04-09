@@ -4,8 +4,8 @@ import passport from 'passport';
 
 const router = Router();
 
-router.post('/register', passport.authenticate("register", {failureRedirect: "api/jwt/fail-register"}), register);
-router.post('/login', passport.authenticate("login", {failureRedirect: "api/jwt/fail-login"}), login);
+router.post('/register', passport.authenticate("register", {session:false, failureRedirect: "api/jwt/fail-register"}), register);
+router.post('/login', passport.authenticate("login", {session:false, failureRedirect: "api/jwt/fail-login"}), login);
 router.get("/logout", logout);
 router.get("/fail-register", failRegister);
 router.get("/fail-login", failLogin);
@@ -43,12 +43,11 @@ router.get("/githubcallback", passport.authenticate('github', { session:false, f
 //     }
 // };
 
-async function login(req, res){
+async function login(req, res){ 
     try {
-        console.log("Hola")
         if(!req.user) return res.status(400).json({message: "Invalid credentials"});
 
-        console.log("User found to login:", req.user);    
+        console.log("User found to login:", req.isAuthenticated());    
         const user = req.user;
 
         const tokenUser = {
@@ -65,7 +64,7 @@ async function login(req, res){
 
         // 2do con Cookies
         res.cookie('jwtCookieToken', access_token, { maxAge: 60000, httpOnly: true } ) //Aqui se almacena la cookie
-        res.send({ message: "Login success!!", access_token: access_token });
+        res.send({ message: "Login success!!", access_token: access_token, id: user._id });
 
     } catch (error) {
         console.error(error);
@@ -85,7 +84,7 @@ async function githubcallback(req, res){
     const access_token = generateJWToken(tokenUser); 
     console.log(access_token)
     res.cookie('jwtCookieToken', access_token, { maxAge: 60000, httpOnly: false } ) //Aqui se almacena la cookie
-    res.redirect("/");
+    res.redirect("/usersJwt");
 };
 
 async function register(req, res){

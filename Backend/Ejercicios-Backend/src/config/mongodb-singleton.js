@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import config from "./config.js";
+import {mongoUrl} from "./config.js";
 
 // Singleton nos ayuda a que la base de datos NO se ejecute mas de 1 vez. Si lo intentmaos, obtendremos un mensaje de error.
 
@@ -18,7 +18,7 @@ class MongoSingleton {
 
     #connectMongoDB(message){
         try {
-            mongoose.connect(config.mongoUrl, {});
+            mongoose.connect(mongoUrl, {});
             console.log(message);
         } catch (error) {
             console.error("No se pudo conectar a la BD usando Moongose: " + error);

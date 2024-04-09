@@ -1,12 +1,12 @@
-import config from "../config/config.js";
+import {twilioAccountSID, twilioAuthToken, twilioWhatsappNumber, twilioToWhatsappNumber} from "../config/config.js";
 import twilio from 'twilio';
 
-const twlioClient = twilio(config.twilioAccountSID, config.twilioAuthToken);
+const twlioClient = twilio(twilioAccountSID, twilioAuthToken);
 
 const twilioWHATSAPPoptions = {
     body: "Este es un mensaje SMS de prueba usando twilio desde CoderHouse!!",
-    from: config.twilioWhatsappNumber,
-    to: config.twilioToWhatsappNumber
+    from: twilioWhatsappNumber,
+    to: twilioToWhatsappNumber
 };
 
 async function sendWhatsapp(req, res){

@@ -6,6 +6,10 @@ router.get("/login", function(req, res){
     res.render('loginSession')
 });
 
+router.get("/loginGithub", function(req, res){
+    res.render("github-login");
+});
+
 router.get("/register", function(req, res){
     res.render('registerSession')
 });
@@ -21,6 +25,8 @@ router.get("/logout", function(req, res){
     })
 });
 
+
+
 router.get("/session", function(req, res){
     if(req.session.counter){
         req.session.counter++;
@@ -31,7 +37,7 @@ router.get("/session", function(req, res){
     }
 });
 
-router.get("/login", function(req, res){
+router.get("/loginData", function(req, res){
     const {username, password} = req.query;
     if(username !== "german" || password !== "ss22"){
         return res.status(401).send("Login failed, check your credentials");
@@ -45,7 +51,6 @@ router.get("/login", function(req, res){
 router.get("/private", auth, function(req, res){
     res.send("Si estas viendo es porque estas autorizado a este recurso!")
 });
-
 
 function auth(req, res, next){
     if(req.session.user === "german" && req.session.admin){

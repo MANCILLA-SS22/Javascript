@@ -1,6 +1,6 @@
 import { Router } from "express";
 import jwt from "jsonwebtoken";
-import { PRIVATE_KEY } from "../utils/jwt.js";
+import {privateKey} from "../config/config.js";
 
 class CustomRouter { //Esta es la clase padre, y CustomRouter es la clase que hereda de esta misma clase.
     constructor() {
@@ -46,7 +46,7 @@ class CustomRouter { //Esta es la clase padre, y CustomRouter es la clase que he
             const token = authHeader.split(' ')[1]//Se hace el split para retirar la palabra Bearer.
 
             //Validamos si es un token valido
-            jwt.verify(token, PRIVATE_KEY, function(error, credential){
+            jwt.verify(token, privateKey, function(error, credential){
                 if(error) return res.status(403).send({error: "Token invalid, Unauthorized!"})
                 
                 const user = credential.user;
@@ -56,7 +56,7 @@ class CustomRouter { //Esta es la clase padre, y CustomRouter es la clase que he
 
                 // si el user.role se encuentra dentro de policies, podes ingresar
                 req.user = user;
-                console.log(req.user);
+                console.log("req.user", req.user);
                 next();
             });
         }

@@ -12,7 +12,16 @@ router.get("/", function(req, res){
 });
 
 router.get("/setcookie", function(req, res){
-    res.cookie("cooderCookie", "Esta es una cookie con firma!!", {maxAge: 30000, signed: true}).send("Cookie asignada con exito")
+    const cookieObj = {
+        maxAge: 5000, 
+        expires: new Date().getTime() + (1 * 3600 * 1000),
+        httpOnly: true,
+        secure: true,
+        signed: true,
+        domain: "local:host",
+        sameSite: "lax"
+    }
+    res.cookie("cooderCookie", "Esta es una cookie con firma!!", cookieObj).send("Cookie asignada con exito")
 });
 
 router.get("/getcookie", function(req, res){

@@ -1,4 +1,4 @@
-import config from '../config/config.js';
+import {persistence} from '../config/config.js';
 import MongoSingleton from '../config/mongodb-singleton.js';
 
 let studentService;
@@ -14,7 +14,7 @@ async function initializeMongoService() {
     }
 }
 
-switch (config.persistence) {
+switch (persistence) {
     case 'mongodb':
         initializeMongoService();
         const { default: StudentServiceMongo } = await import('./dao/mongo/students.service.js');
@@ -33,7 +33,7 @@ switch (config.persistence) {
         break;
 
     default:
-        console.error("Persistencia no válida en la configuración:", config.persistence);
+        console.error("Persistencia no válida en la configuración:", persistence);
         process.exit(1); // Salir con código de error
 }
 

@@ -34,7 +34,7 @@ class UsersExtendRouter extends CustomRouter { //Se exteinde la clase. Es decir,
             const { email, password } = req.body;
             try {
                 const user = await userService.findByUsername(email);
-                console.log("Usuario encontrado para login: ", user);
+                // console.log("Usuario encontrado para login: ", user);
                 
                 if (!user) {
                     console.warn("User doesn't exists with username: " + email);

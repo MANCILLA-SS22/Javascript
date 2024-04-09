@@ -1,8 +1,8 @@
-import config from "../config/config.js";
+import {test} from "../config/config.js";
 import { escenario1, escenario2, escenario3, escenario4 } from "../utils/escenarios.js";
 
 function tests(){
-    const executeTest = config.runTests; //Ejecutar --> nodemon run start --test true en la terminal 
+    const executeTest = test; //Ejecutar --> nodemon run start --test true en la terminal 
     if (executeTest) {
         console.log("Ejecutando set de pruebas de func suma()");
 

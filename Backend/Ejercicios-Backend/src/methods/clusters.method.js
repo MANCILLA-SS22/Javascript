@@ -22,7 +22,7 @@ function clusters(){
 
     }else{ //Si es un proceso trabajador, entonces indica que eres trabajador y procede a realizar las tareas que corresponden.
         console.log(`Soy un proceso worker con el id: ${process.pid}`);
-        backend();
+        app();
     }    
 };
 

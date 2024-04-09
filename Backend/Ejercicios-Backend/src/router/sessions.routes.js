@@ -54,5 +54,4 @@ function failLogin(req, res){
     res.status(401).send({ error: "Failed to process login!" });
 }
 
-
 export default router;

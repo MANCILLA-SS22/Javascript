@@ -1,14 +1,9 @@
 import jwt from 'jsonwebtoken';
-
-const PRIVATE_KEY = "CoderhouseBackendCourseSecretKeyJWT"; //Esta sirve para utilizarse al momento de hacer el cifrado del token  --> https://stackoverflow.com/questions/31309759/what-is-secret-key-for-jwt-based-authentication-and-how-to-generate-it
+import {privateKey} from "../config/config.js";
 
 //JSON Web Tokens JWT --> Generate token JWT usando jwt.sign: Primer argumento: objeto a cifrar dentro del JWT Segundo argumento: La llave privada a firmar el token. Tercer argumento: Tiempo de expiración del token.
 function generateJWToken(user){ 
-     // Generate token JWT usando jwt.sign
-     // Primer argumento: objeto a cifrar dentro del JWT
-     // Segundo argumento: La llave privada a firmar el token.
-     // Tercer argumento: Tiempo de expiración del token.
-    return jwt.sign({ user }, PRIVATE_KEY, { expiresIn: '60s' })
+    return jwt.sign({ user }, privateKey, { expiresIn: '60s' }); //Esta sirve para utilizarse al momento de hacer el cifrado del token  --> https://stackoverflow.com/questions/31309759/what-is-secret-key-for-jwt-based-authentication-and-how-to-generate-it
 };
 
 function authToken(req, res, next){ //El JWT token se guarda en los headers de autorización.
@@ -18,13 +13,17 @@ function authToken(req, res, next){ //El JWT token se guarda en los headers de a
     if (!authHeader) return res.status(401).send({ error: "User not authenticated or missing token." });
 
     const token = authHeader.split(' ')[1]; //Se hace el split para retirar la palabra Bearer.
-
-    jwt.verify(token, PRIVATE_KEY, function(error, credentials){ //Validar token
-        if (error) return res.status(403).send({ error: "Token invalid, Unauthorized!" });
+    jwt.verify(token, privateKey, function(error, credentials){ //Validar token
+        if (error) return res.status(403).send({ error  });
         req.user = credentials.user;
         console.log("req.user", req.user);
         next();
     })
 };
 
-export {generateJWToken, authToken, PRIVATE_KEY}
+export {generateJWToken, authToken};
+
+// 1)  Generate token JWT usando jwt.sign
+// 2)  Primer argumento: objeto a cifrar dentro del JWT
+// 3)  Segundo argumento: La llave privada a firmar el token.
+// 4)  Tercer argumento: Tiempo de expiración del token

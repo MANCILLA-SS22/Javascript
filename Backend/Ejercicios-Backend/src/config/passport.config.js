@@ -1,25 +1,21 @@
 import passport from 'passport';
 import passportLocal from "passport-local"
-import GitHubStrategy from "passport-github"
+import GitHubStrategy from "passport-github2"
 import jwtStrategy from 'passport-jwt';
 import { userModel } from '../database/dao/mongo/models/users.model.js';
-import { PRIVATE_KEY } from '../utils/jwt.js';
 import { createHash, validateHash } from '../utils/bcrypt.js';
-import config from "./config.js";
+import {clientID, clientSecret, callbackUrl, privateKey} from "../config/config.js"
 
 const localStrategy = passportLocal.Strategy; //Declaramos estrategia
 const JwtStrategy = jwtStrategy.Strategy;
 const ExtractJWT = jwtStrategy.ExtractJwt;
-const clientId = config.clientID;
-const clientsecret = config.clientSecret;
-const callbackUrl = config.callbackUrl;
 
 function initialPassport(){ //Estrategia de obtener Token JWT por Cookie
-    passport.use('jwt', new JwtStrategy({ jwtFromRequest: ExtractJWT.fromExtractors([cookieExtractor]), secretOrKey: PRIVATE_KEY }, jwt ));
+    passport.use('jwt', new JwtStrategy({ jwtFromRequest: ExtractJWT.fromExtractors([cookieExtractor]), secretOrKey: privateKey }, jwt ));
     passport.use('login', new localStrategy({ passReqToCallback: true, usernameField: 'email' }, login ));
     passport.use('register', new localStrategy({ passReqToCallback: true, usernameField: 'email' }, register ));
-    passport.use("github", new GitHubStrategy( { clientID: clientId, clientSecret: clientsecret, callbackUrl: callbackUrl }, github ));
-    passport.serializeUser(serialize); //Estas funciones permiten a Passport.js manejar la información del usuario durante el proceso de autenticación, serializando y deserializando los usuarios para almacenar y recuperar información de la sesión. Son esenciales cuando se implementa la autenticación de usuarios en una aplicación Node.js utilizando Passport.js
+    passport.use("github", new GitHubStrategy( { clientID: clientID, clientSecret: clientSecret, callbackUrl: callbackUrl }, github ));
+    passport.serializeUser(serialize);
     passport.deserializeUser(deserialize);
 };
 
@@ -131,4 +127,5 @@ export {initialPassport};
 // passReqToCallback: para convertirlo en un callback de request, para asi poder iteracturar con la data que viene del cliente
 // usernameField: renombramos el username
 // done representa el error, si pasamos done(null) indicamos que no hay error, y el segundo parametro representa el usuario o la informacion que enviamos
-// serializeUser y deserializeUser permiten a Passport.js manejar la información del usuario durante el proceso de autenticación, serializando y deserializando los usuarios para almacenar y recuperar información de la sesión. Son esenciales cuando se implementa la autenticación de usuarios en una aplicación Node.js utilizando Passport.js
+// serializeUser y deserializeUser permiten a Passport.js manejar la información del usuario durante el proceso de autenticación, serializando y deserializando los usuarios para almacenar y 
+// recuperar información de la sesión. Son esenciales cuando se implementa la autenticación de usuarios en una aplicación Node.js utilizando Passport.js

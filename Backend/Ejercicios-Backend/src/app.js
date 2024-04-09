@@ -6,7 +6,8 @@
 // 6.  MongoDB avanzado (poplation, indexation, aggregation & pagination)
 // 7.  Mongoose avanzado (index and virtual properties, document, model, query and aggregate middlewares, methods and statics encapsulation methods)
 // 8.  Manejo de cookies
-// 9.  Uso de passport avanzado con cookies y localstorage (sin sessions)
+// 9.  Manejo de session y JWT (con cookies y localstorage)
+// 9.  Uso de autenticacion con passport avanzado
 // 10. Uso variables de entorno (dotenv), clusters, process, child process, listeners, path with NodeJS
 // 11. Arquitectura de capas, servidor, diseno y persistencia.
 // 12. Patrones de diseno (Singleton, Facade, Builder, Command, Null object)
@@ -28,12 +29,13 @@ import morgan from "morgan";
 import compression from "express-compression";
 import cookieParser from "cookie-parser";
 import swaggerUIExpress  from "swagger-ui-express"; //Nos permitirá linkear una interfaz gráfica que represente la documentación a partir de una ruta de nuestro servidor de express.
-import {Server} from "socket.io";
 import session from "express-session";
+import flash from "express-flash";
+import methodOverride from 'method-override';
 import passport from "passport";
+import {Server} from "socket.io";
 import brotli from "brotli"
 
-import config from './config/config.js';
 import helloRouter from "./router/hello.routes.js";
 import paginationRouter from "./router/pagination.routes.js";
 import socketViewsRouter from "./router/views.routes.js";
@@ -63,19 +65,16 @@ import mascotasRouter from "./router/mascotas.routes.js";
 import adopcionesRouter from "./router/adopciones.routes.js";
 import sesionesRouter from "./router/sesiones.routes.js";
 
-import accountRouter from "./router/account.routes.js";
-import authRouter from "./router/auth.routes.js";
-import authSessionRouter from "./router/auth_session.routes.js";
-import authTokenRouter from "./router/auth_token.routes.js";
-
 import {__dirname} from './dirname.js';
-import { mongoInstance } from "./methods/mongoInstance.method.js";
 import { errorHandlerMiddleware, logger } from "./middlewares/middlewares.js";
 import { loggerDate } from "./middlewares/loggerDate.js";
 import { initialPassport } from "./config/passport.config.js";
 import { stencil } from "./specs/handlebars.specs.js";
 import { corsOptions } from "./specs/cors.specs.js";
 import { specs } from "./specs/swagger.specs.js";
+import { connectMongo } from "./config/mongodb.config.js";
+import { mongoStoreObj } from "./specs/mongoStore.specs.js";
+import { mongoInstance } from "./methods/mongoInstance.method.js";
 import { execFunc } from "./childe_process/exec.js";
 import { execFileFunc } from "./childe_process/exec_file.js";
 import { spawnFunc } from "./childe_process/spawn.js";
@@ -90,21 +89,20 @@ import { aggregation1, aggregation2 } from "./methods/aggregation.js";
 import { socket1, socket2, socket3, socket4 } from "./sockets/sockets.js";
 import { clusters } from "./methods/clusters.method.js";
 import { addLogger } from "./config/logger_CUSTOM.js";  //import { addLogger } from "./config/logger_BASE.js";
-import { mongoStoreObj } from "./specs/mongoStore.specs.js";
-import { connectMongo } from "./methods/mongoStore.method.js";
 
 function app(){
     const app = express();
     const usersExtendRouter = new UsersExtendRouter();
-    const SERVER_PORT = config.port;
 
-    mongoInstance(); // ****** Uso de REPOSITORTY (comentar lo referente a "factory" y connectMongo() para que esto funcione) ****** 
+    // mongoInstance(); // ****** Uso de REPOSITORTY (comentar lo referente a "factory" y connectMongo() para que esto funcione) ******
+    connectMongo(app); 
     initialPassport();
 
     app.set("views", `${__dirname}/views`); // Seteamos nuestro motor. Con app.set("views", ruta) indicamos en que parte del proyecto estaran las vistas. Recordar utilizar rutas absolutas para evitar asuntos de ruteo relativo.
     app.engine("hbs", handlebars.engine(stencil)); //Finalmente, con este app.set() indicamos que, el motor que ya inicializamos arriba, es el que queremos utilizar. Es importante saber que, cuando digamos al servidor que renderice, sepa que tiene que hacerlo con el motor de hbs.
     app.set("view engine", "hbs"); //app.set("view engine", "ejs");
     app.use(morgan('dev'));
+    
     app.use(cookieParser("CoderS3cr3tC0d3")); //colocamos la inicialización de nuestro passport, la inicialización de passport y cookieParser también para que el servidor pueda reconocer correctamente las cookies. 
     app.use(compression({brotli: { enabled: true, zlib: {} } })); //Con esta opción, se reconocerá un tipo de compresión “br” (brotli) al momento de enviar la información. La razón por la que colocamos un objeto zlib vacío se debe a que el módulo de express-compression cuenta con una dependencia interna “zlib”, la cual le permite ejecutar diferentes niveles de compresión.
     app.use(cors(corsOptions)); //Si utilizamos unicamente cors(), quiere decir que cualquiera podra acceder al servidor. Pero al mandarle un objeto cors(corsOptions), este contiene la info de quien o quienes pueden acceder.
@@ -112,7 +110,9 @@ function app(){
     app.use(express.text());
     app.use(express.urlencoded({ extended: true, limit: 1000 })); //It parses incoming requests with urlencoded payloads and is based on body-parser. Returns middleware that only parses urlencoded bodies and only looks at requests where the Content-Type header matches the type option. This parser accepts only UTF-8 encoding of the body and supports automatic inflation of gzip and deflate encodings.
     app.use(express.static(`${__dirname}/public`)); // Public. Sentamos de manera estatica la carpeta public
-    // app.use(session (mongoStoreObj)); ****** Uso de SESSIONS (comentar lo referente a "factory" para que esto funcione) ****** 
+    // app.use(flash()); //****** Uso de SESSIONS (comentar lo referente a "factory" y mongoInstance() para que esto funcione) ******
+    // app.use(methodOverride('_method'))
+    // app.use(session(mongoStoreObj));  
     // app.use(passport.initialize());
     // app.use(passport.session());
 
@@ -125,12 +125,7 @@ function app(){
     app.use("/socket", socketViewsRouter);
     app.use("/api/post", loggerDate, postRouter);
 
-    app.use("/account", accountRouter);
-    app.use("/auth", authRouter);
-    app.use("/auth-token", authTokenRouter);
-    app.use("/auth-session", authSessionRouter);
     app.use("/cookie", cookieRouter);
-    app.use("/github", githubLoginViewRouter);
     app.use("/api/jwt", jwtRouter);
     app.use('/usersJwt', usersJwtViewRouter);
     app.use("/api/session", sessionRouter);
@@ -150,11 +145,11 @@ function app(){
     app.use("/compression", compressionRouter);
     app.use("/logger", loggerRouter); //Al usar esta ruta, hay que COMENTAR los middlewares Logger 1 y Logger 2 para ver el resultado
     app.use('/apidocs', swaggerUIExpress.serve, swaggerUIExpress.setup(specs)) // Declaramos la Api donde vamos a tener la parte grafica
+
     app.use('/api/usuarios', usuariosRouter);
     app.use('/api/mascotas', mascotasRouter);
     app.use('/api/adopciones', adopcionesRouter);
     app.use('/api/sesiones', sesionesRouter);
-    app.listen(SERVER_PORT, console.log("Server listening on port " + SERVER_PORT));
 
     // ****** Uso Websockets (Si usamos esto, DESCOMENTAR las 4 lineas de abajo y comentar "app.listen(SERVER_PORT, function(){}") ****** 
     // const httpServer = app.listen(SERVER_PORT, () => console.log(`Server listening on port ${SERVER_PORT}`));
@@ -190,9 +185,10 @@ function app(){
 
 };
 app();
+
 export {app};
 
-// ****** Uso de clusters (Para trabajar con clusters, HABILITAR la linea de abajo y COMENTAR "backend();". Si no, entonces comentarla y habilidar "backend()" ****** 
+// ****** Uso de clusters (Para trabajar con clusters, HABILITAR la linea de abajo y COMENTAR "app();". Si no, entonces comentarla y habilidar "app()" ****** 
 // clusters();
 
 // ****** Uso de Artillery (Ejecutar en consola) ****** 
@@ -213,5 +209,6 @@ export {app};
 // MongoDB avanzado (poplation, indexation, aggregation & pagination)
 // Mongoose avanzado (index and virtual properties, document, model, query and aggregate middlewares, methods and statics encapsulation methods)
 // Manejo de cookies
-// Uso de passport avanzado con cookies y localstorage (sin sessions)
+// Manejo de session y JWT (con cookies y localstorage)
+// Uso de autenticacion con passport avanzado
 // Clusters, process, child process, listeners, path with NodeJS

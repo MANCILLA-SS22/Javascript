@@ -1,7 +1,7 @@
 function llamarApi() {
     console.log("Llamando api users!!!");
     const get = JSON.parse(localStorage.getItem("data"));
-    fetch(`/users/${get.id}`, {
+    fetch(`/usersJwt/${get.id}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
