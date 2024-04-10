@@ -1,10 +1,10 @@
-import config from '../configs/configs.js'
-import NoticiasFactoryDAO from './model/daos/NoticiasFactory.js';
-import Noticias from './model/models/Noticias.js';
+import { tipo_persistencia } from '../../../../config/config.js';
+import NoticiasFactoryDAO from '../daos/NoticiasFactory.js';
+import Noticias from '../models/noticias.model.js';
 
 class ServicioNoticias {
     constructor() {
-        this.noticiasDAO = NoticiasFactoryDAO.get(config.TIPO_PERSISTENCIA);
+        this.noticiasDAO = NoticiasFactoryDAO.get(tipo_persistencia);
     }
 
     static validarNoticia(noticia, requerido) {

@@ -1,6 +1,6 @@
 import faker from 'faker'
 
-faker.locale = "en";
+faker.locale = "es";
 
 const generarNoticia = () => ({
     titulo: faker.hacker.phrase(),

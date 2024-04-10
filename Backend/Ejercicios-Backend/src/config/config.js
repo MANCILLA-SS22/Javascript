@@ -15,6 +15,7 @@ const persistence = program.opts().persist;
 const mode = environment;
 const adminName = process.env.ADMIN_NAME;
 const adminPassword = process.env.ADMIN_PASSWORD;
+const tipo_persistencia = process.env.TIPO_PERSISTENCIA;
 const privateKey = process.env.PRIVATE_KEY;
 const clientID = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
@@ -39,6 +40,7 @@ export {
     mode,
     adminName,
     adminPassword,
+    tipo_persistencia,
     privateKey,
     clientID,
     clientSecret,

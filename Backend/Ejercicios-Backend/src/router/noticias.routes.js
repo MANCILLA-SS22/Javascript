@@ -1,7 +1,7 @@
-import express from 'express';
+import {Router} from 'express';
 import ControladorNoticias from '../controllers/noticias.controller.js';
 
-const router = express.Router();
+const router = Router();
 
 class RouterNoticias {
     constructor() {

@@ -1,4 +1,4 @@
-import ServicioNoticias from '../services/noticias.model.js';
+import ServicioNoticias from '../database/dao/mongo/services/noticias.service.js';
 
 class ControladorNoticias {
     constructor() {

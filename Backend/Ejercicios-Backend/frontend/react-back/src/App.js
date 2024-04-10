@@ -1,5 +1,5 @@
 import './App.css';
-import Noticias from './componentes/Noticias.js';
+import Noticias from './componentes/Noticias';
 
 function App() {
   return (

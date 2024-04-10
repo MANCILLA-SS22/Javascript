@@ -21,10 +21,7 @@ class Noticias {
         });
 
         const { error } =  NoticiasSchema.validate(noticia);
-
-        if (error) {
-            throw error;
-        }
+        if (error) throw error;
     }
 }
 

@@ -54,6 +54,7 @@ import UsersExtendRouter from "./custom/users.extend.routes.js";
 import forkRouter from "./router/fork.routes.js";
 import studentRouter from './router/students.routes.js';
 import coursesRouter from './router/courses.routes.js';
+import RouterNoticias from "./router/noticias.routes.js";
 import emailRouter from './router/email.routes.js';
 import usersRouter from "./router/users.routes.js";
 import sessionRouter from "./router/sessions.routes.js";
@@ -96,6 +97,7 @@ import { addLogger } from "./config/logger_CUSTOM.js";  //import { addLogger } f
 export function app(){
     const app = express();
     const usersExtendRouter = new UsersExtendRouter();
+    const routerNoticias = new RouterNoticias();
 
     // mongoInstance(); // ****** Uso de REPOSITORTY (comentar lo referente a "factory" y connectMongo() para que esto funcione) ******
     connectMongo(app); 
@@ -139,6 +141,8 @@ export function app(){
     app.use("/api/extend/users", usersExtendRouter.getRouter());
     app.use("/api/students", studentRouter);
     app.use("/api/courses", coursesRouter);
+
+    app.use('/noticias', routerNoticias.start()); // ****** Creacion de ruteos y controladores utilizando OOP ****** 
 
     app.use("/api/email", emailRouter);
     app.use("/api/sms", smsRouter);
