@@ -16,9 +16,11 @@
 // 15. Test y Mocks
 // 16. Optimizacion (gzip y brotli, error handling)
 // 17. Seguridad
-// 18. Logging y testing de performance 
-// 19. Documentacion con Swagger
-// 20. Testing con Mocha Assert (NodeJS) y Chai
+// 18. Uso de Docker y Kubernetes
+// 19. NestJS y typescript
+// 20. Logging y testing de performance 
+// 21. Documentacion con Swagger
+// 22. Testing con Mocha Assert (NodeJS) y Chai
 
 // nodemon src/backend.js --mode prod   -->   Servidor escuchando por el puerto: 3001
 // nodemon src/backend.js --mode dev    -->   Servidor escuchando por el puerto: 5500
@@ -75,9 +77,9 @@ import { specs } from "./specs/swagger.specs.js";
 import { connectMongo } from "./config/mongodb.config.js";
 import { mongoStoreObj } from "./specs/mongoStore.specs.js";
 import { mongoInstance } from "./methods/mongoInstance.method.js";
-import { execFunc } from "./childe_process/exec.js";
-import { execFileFunc } from "./childe_process/exec_file.js";
-import { spawnFunc } from "./childe_process/spawn.js";
+import { execFunc } from "./nodejs/childe_process/exec.js";
+import { execFileFunc } from "./nodejs/childe_process/exec_file.js";
+import { spawnFunc } from "./nodejs/childe_process/spawn.js";
 import { tests } from "./methods/test.method.js";
 import { singletonDesignPatternX1 } from "./DesignPatterns/Singleton Pattern/Patron_Singleton_x1/index.js";
 import { singletonDesignPatternX2 } from "./DesignPatterns/Singleton Pattern/Patron_Singleton_x2/index.js";
@@ -87,10 +89,11 @@ import { builderDesignPattern } from "./DesignPatterns/Builder Pattern/after_tra
 import { indexation1, indexation2, indexation3 } from "./methods/indexation.js";
 import { aggregation1, aggregation2 } from "./methods/aggregation.js";
 import { socket1, socket2, socket3, socket4 } from "./sockets/sockets.js";
-import { clusters } from "./methods/clusters.method.js";
+import { clusters } from "./nodejs/clusters.method.js";
+import { pathNodejs } from "./nodejs/path.js";
 import { addLogger } from "./config/logger_CUSTOM.js";  //import { addLogger } from "./config/logger_BASE.js";
 
-function app(){
+export function app(){
     const app = express();
     const usersExtendRouter = new UsersExtendRouter();
 
@@ -173,6 +176,9 @@ function app(){
     // execFileFunc();
     // spawnFunc();
 
+    // ****** path & url  ****** 
+    // pathNodejs();
+
     // ****** Uso de patrones de diseno (Utilizar uno a la vez) ****** 
     // singletonDesignPatternX1(); singletonDesignPatternX2();
     // fecadeDesignPattern();
@@ -185,8 +191,6 @@ function app(){
 
 };
 app();
-
-export {app};
 
 // ****** Uso de clusters (Para trabajar con clusters, HABILITAR la linea de abajo y COMENTAR "app();". Si no, entonces comentarla y habilidar "app()" ****** 
 // clusters();
@@ -208,7 +212,5 @@ export {app};
 // Websockets
 // MongoDB avanzado (poplation, indexation, aggregation & pagination)
 // Mongoose avanzado (index and virtual properties, document, model, query and aggregate middlewares, methods and statics encapsulation methods)
-// Manejo de cookies
-// Manejo de session y JWT (con cookies y localstorage)
-// Uso de autenticacion con passport avanzado
-// Clusters, process, child process, listeners, path with NodeJS
+// Uso de Docker y Kubernetes
+// NestJS y typescript

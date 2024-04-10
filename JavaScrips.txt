@@ -772,7 +772,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     
    
     > reduceRight()   Reduce the values of an array to a single value (going right-to-left)
-        > reverse()	      Reverses the order of the elements in an array. Invierte el orden de los elementos dentro de un array. (es destructivo, o sea que modifica el array original, al igual que los métodos para agregar o quitar elementos).
+
+    > reverse()       Reverses the order of the elements in an array. Invierte el orden de los elementos dentro de un array. (es destructivo, o sea que modifica el array original, al igual que los métodos para agregar o quitar elementos)
     
     > shift()	      Removes the first element of an array, and returns that element. Si queremos eliminar el primer elemento del array utilizamos el método shift();
     
@@ -1051,6 +1052,13 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 - JSON: It is a format for storing and transporting data. JSON is text, and text can be transported anywhere, and read by any programming language.   
    > JSON.parse();          Parses a JSON string and returns a JavaScript object. Recibe un texto JSON como parámetro, y devuelve el objeto JavaScript correspondiente. Podemos transformar string en formato JSON a objeto JavaScript.
    > JSON.stringify();      Convert a JavaScript object to a JSON string. acepta un objeto como parámetro, y devuelve la forma de texto JSON equivalente. Podemos transformar un objeto JavaScript a un string en formato JSON. 
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        
+
+
+                                                                                                                   Nodejs
+
    
 - fs en Nodejs: fs es la abreviación utilizada para FileSystem, el cual, como indica el nombre, es un sistema de manejador de archivos que nos proporcionará node para poder crear, leer, actualizar o eliminar un archivo, sin tener que hacerlo 
      nosotros desde cero. Así, crear un archivo con contenido será tan fácil como escribir un par de líneas de código, en lugar de tener que lidiar con los datos binarios y transformaciones complejas y de un nivel más bajo en la computadora.
@@ -1080,6 +1088,13 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       ✓ fs.promises.appendFile
       ✓ fs.promises.unlink    
 
+- Crypto: 
+- Process: 
+- Child process
+- Listeners: 
+- Path: 
+- Cluster: 
+- OS: 
 
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        
 

@@ -822,11 +822,19 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   dígitos. Las ventajas de trabajar con buffer radica en que nos permite trabajar con los datos en crudo y por ello quien envía los datos conoce de entrada el tipo de datos y quien recibe los datos también conoce el tipo de datos que contiene
   
 - Drivers: 
+  
+- Nucleo: 
+
+- CPU: 
+
+- Hilos:   
+
+- Microservicios:
+
+- GraphQL: 
 
 - Query builder: 
 
 - ORM/ODM:   
-  
-  
   
   

@@ -5,7 +5,7 @@ import { app } from "../app.js";
 function clusters(){
     console.log("Preguntar si es el cluster es primario: ", cluster.isPrimary);
     
-    if (cluster.isPrimary) { //Si eres un proceso primario, entonces indica que eres el principal y forkea a un trabajador
+    if (cluster.isPrimary){ //Si eres un proceso primario, entonces indica que eres el principal y forkea a un trabajador
         console.log("Identificamos el ProcessID Padre:" + process.pid); 
         console.log("Soy proceso primario y voy delegar el trabajo a un Worker.");
         console.log("Numero de CPUs en mi maquina es de ", cpus().length, "y los CPU's son: ", cpus());

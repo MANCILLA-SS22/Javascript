@@ -28,6 +28,8 @@ https://dev.mysql.com/doc/refman/8.0/en/dynindex-statement.html
 https://www.postgresql.org/docs/current/ 
 https://docs.oracle.com/database/121/SQLRF/toc.htm 
 https://docs.github.com/en/get-started/getting-started-with-git/associating-text-editors-with-git 
+https://us-west-1.console.aws.amazon.com/console/home?region=us-west-1
+https://learn.microsoft.com/en-us/azure/?product=popular&source=docs
 https://react.dev   https://legacy.reactjs.org  https://create-react-app.dev  
 https://jquery.com/download/ 
 https://angular.io/start 
@@ -71,6 +73,7 @@ https://github.com/facebook/regenerator/tree/main
 https://github.com/zloirock/core-js
 https://github.com/typicode/json-server
 https://github.com/expressjs/multer
+https://github.com/richardgirges/express-fileupload
 https://github.com/davidbanham/express-async-errors
 https://github.com/prettymuchbryce/http-status-codes
 https://github.com/motdotla/dotenv
@@ -98,6 +101,8 @@ https://github.com/jaredhanson/passport-local
 https://github.com/cfsghost/passport-github
 https://github.com/mikenicholson/passport-jwt
 https://github.com/sinclairzx81/typebox
+https://github.com/typestack/class-validator
+https://github.com/express-validator/express-validator
 https://github.com/ajv-validator/ajv   https://ajv.js.org
 https://github.com/ajv-validator/ajv-keywords
 https://github.com/ajv-validator/ajv-formats
