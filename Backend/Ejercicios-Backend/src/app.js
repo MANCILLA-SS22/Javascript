@@ -92,7 +92,7 @@ import { aggregation1, aggregation2 } from "./methods/aggregation.js";
 import { socket1, socket2, socket3, socket4 } from "./sockets/sockets.js";
 import { clusters } from "./nodejs/clusters.method.js";
 import { pathNodejs } from "./nodejs/path.js";
-import { addLogger } from "./config/logger_CUSTOM.js";  //import { addLogger } from "./config/logger_BASE.js";
+import { addLogger } from "./config/logger.js";
 
 export function app(){
     const app = express();
@@ -106,8 +106,7 @@ export function app(){
     app.set("views", `${__dirname}/views`); // Seteamos nuestro motor. Con app.set("views", ruta) indicamos en que parte del proyecto estaran las vistas. Recordar utilizar rutas absolutas para evitar asuntos de ruteo relativo.
     app.engine("hbs", handlebars.engine(stencil)); //Finalmente, con este app.set() indicamos que, el motor que ya inicializamos arriba, es el que queremos utilizar. Es importante saber que, cuando digamos al servidor que renderice, sepa que tiene que hacerlo con el motor de hbs.
     app.set("view engine", "hbs"); //app.set("view engine", "ejs");
-    app.use(morgan('dev'));
-    
+    app.use(morgan('dev'));    
     app.use(cookieParser("CoderS3cr3tC0d3")); //colocamos la inicialización de nuestro passport, la inicialización de passport y cookieParser también para que el servidor pueda reconocer correctamente las cookies. 
     app.use(compression({brotli: { enabled: true, zlib: {} } })); //Con esta opción, se reconocerá un tipo de compresión “br” (brotli) al momento de enviar la información. La razón por la que colocamos un objeto zlib vacío se debe a que el módulo de express-compression cuenta con una dependencia interna “zlib”, la cual le permite ejecutar diferentes niveles de compresión.
     app.use(cors(corsOptions)); //Si utilizamos unicamente cors(), quiere decir que cualquiera podra acceder al servidor. Pero al mandarle un objeto cors(corsOptions), este contiene la info de quien o quienes pueden acceder.
@@ -121,7 +120,7 @@ export function app(){
     // app.use(passport.initialize());
     // app.use(passport.session());
 
-    // app.use(addLogger); //Este es un middleware de nivel de aplicación, que contiene los loggers, el cual se ejecutara antes de los routers de abajo.
+    app.use(addLogger); //Este es un middleware de nivel de aplicación, que contiene los loggers, el cual se ejecutara antes de los routers de abajo.
     app.use("/", logger, errorHandlerMiddleware, helloRouter); //"logger" representa un middleware de nivel de endpoint. Ejecutamos primero la ruta "/", despues se ejecuta la funcion middleware y, si todo sale bien, se ejecuta la funcion next, y pasamos al siguiente middleware, que es el Middleware de manejo de errores. Y finalmente, si todo sale bien nuevamente, pasamos a la ultima funcion.
     app.use("/multer", multerRouter);
     app.use("/pagination", paginationRouter);

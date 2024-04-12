@@ -1,5 +1,6 @@
 const profile = document.getElementById("profile");
 const header = document.getElementById("header");
+const logout = document.getElementById("logout");
 
 window.onload = function(e){
     fetch(`http://localhost:5500/api/sessions/current`)
@@ -8,8 +9,18 @@ window.onload = function(e){
     .catch(error => console.log(error));
 }
 
+logout.addEventListener("click", function(event){ //   /api/auth/logout
+    event.preventDefault();
+
+    async function logout(){
+        const res = await fetch("http://localhost:5500/api/auth/logout");
+        window.location.replace(res.url)
+        console.log("Logout --> ", res)
+    }
+    logout();
+});
+
 function procesarDatos(data){
-    console.log(data)
     profile.innerHTML =  (`
         <h2>Profile</h2>
         <p>Name: ${data.name}</p>

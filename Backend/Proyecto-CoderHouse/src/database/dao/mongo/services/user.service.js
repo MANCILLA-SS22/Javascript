@@ -50,6 +50,13 @@ class UserServiceMongo{
         }
     }    
 
+    async updateConnection(email, newConnection){
+        try {
+            return await userModel.findOneAndUpdate({email}, {last_connection: newConnection});
+        } catch (error) {
+            return error;
+        }
+    }
 }
 
 export {UserServiceMongo};

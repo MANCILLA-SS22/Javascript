@@ -16,6 +16,18 @@ class UsersRepository {
 
     updateUser(_id, user){
         return this.dao.updateUser(_id, user);
+    };
+
+    updatePassword(email, newPassword){
+        return this.dao.updatePassword(email, newPassword);
+    }
+
+    updateRole(email, newRole){
+        return this.dao.updateRole(email, newRole);
+    }    
+
+    updateConnection(email, newConnection){
+        return this.dao.updateConnection (email, newConnection);
     }    
 };
 

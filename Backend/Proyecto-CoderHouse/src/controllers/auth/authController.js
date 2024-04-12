@@ -12,12 +12,11 @@ class AuthRouter extends Route {
         this.post('/register', ['PUBLIC'], passport.authenticate("register", {session:false, failureRedirect: "fail-register"}), register);
         this.post("/passwordReset", ["PUBLIC"], reset);
         this.post("/passwordUpdate", ["PUBLIC"], passport.authenticate('passwordUpdate', { session: false }), update);
-        this.get('/logout', ['PUBLIC'],  logout);
+        this.get('/logout', ['PUBLIC'], logout);
         this.get('/github', ['PUBLIC'], passport.authenticate("github", {session:false, scope: ['user:email'] }), async function(req, res){});  //Este primer link es el que mandamos a llamar desde el front. Al entrar, pasa por el middleware de passport-github, lo ual pedira autorizacion para acceder al perfil. En cuando se pueda acceder al perfil, passport enviara la info hacia el callback especificado. scope: [ 'user:email' ] se usa por defecto al trabajar con passport-github
         this.get("/githubcallback", ['PUBLIC'], passport.authenticate('github', { session:false, failureRedirect: '/github/error' }), githubcallback); //Este callback TIENE QUE COINCIDIR con el que fijamos en la app de Hithub. Este se encargara de hacer la redireccion final a la ventana de home, una vez que el login haya logrado establecer la secion.
         this.get("/fail-register", ['PUBLIC'], failRegister);
         this.get("/fail-login", ['PUBLIC'], failLogin);
-        this.get("/premium/:email", ['PUBLIC'], change_rol);
         
         async function login(req, res){
             try {
@@ -30,11 +29,16 @@ class AuthRouter extends Route {
         
                 //Trabajando con JWT
                 const tokenUser = { // creamos un usuario con un token generado (Metodo 2)
-                    name: `${user.first_name} ${user.last_name}`,
+                    first_name: user.first_name,
+                    last_name: user.last_name,
                     email: user.email,
                     age: user.age,
-                    role: user.role
+                    role: user.role,
+                    last_connection: user.last_name
                 };
+
+                const date = new Date();
+                await userService.updateConnection(req.user.email, date);
         
                 const access_token = generateJWToken(tokenUser); 
                 res.cookie('jwtCookieToken', access_token, { maxAge: 24*60*60*1000, httpOnly: false } ) //Aqui se almacena la cookie
@@ -76,26 +80,7 @@ class AuthRouter extends Route {
             } catch (error) {
                 res.sendServerError(`something went wrong ${error}`)
             }
-        }
-
-        async function change_rol(req, res){
-            try {
-                const {email} = req.body;
-                const user = await userService.findUser(email);
-                if(req.user.role === 'USER'){
-                    await userService.updateRole(email, "PREMIUM");
-                    res.json({message: "Usuario actualizado a PREMIUM"})
-                }else if(req.user.role === 'PREMIUM'){
-                    await userService.updateRole(email, "USER");
-                    res.json({message: "Usuario actualizado a USER"})
-                }else{
-                    res.json({message: "Sin cambios"})
-                }
-            } catch (error) {
-                res.sendServerError(`something went wrong ${error}`)
-            }
-
-        }
+        };
 
         async function update(req, res){
             try {
@@ -117,8 +102,8 @@ class AuthRouter extends Route {
                 console.log("Algo salio mal!!")
                 res.sendServerError(`something went wrong ${error}`)
             }
-        }        
-        
+        };
+
         async function register(req, res){
             try {
                 console.log("Registrando usuario");
@@ -128,7 +113,7 @@ class AuthRouter extends Route {
                 res.sendServerError(500).json({ error: 'Internal server error' })
             }
         };
-        
+
         async function githubcallback(req, res){ 
             // console.log("GitHub")
             const user = req.user;
@@ -138,22 +123,27 @@ class AuthRouter extends Route {
                 age: user.age,
                 role: user.role
             };
+
+            const date = new Date();
+            await userService.updateConnection(req.user.email, date);            
+
             const access_token = generateJWToken(tokenUser); 
             res.cookie('jwtCookieToken', access_token, { maxAge: 60000, httpOnly: false } ) //Aqui se almacena la cookie
             res.redirect("/");
-        }
-        
+        };
+
         function logout(req,res){ //http://localhost:5500/api/auth/logout
-            res.clearCookie("jwtCookieToken").redirect("/login");
-        }
+            res.clearCookie("jwtCookieToken");
+            res.redirect("/login");
+        };
 
         function failRegister(req, res){
             res.status(401).send({ error: "Failed to process register!" });
-        }
-        
+        };
+
         function failLogin(req, res){
             res.status(401).send({ error: "Password or username are incorrect. Please verify!" });
-        }
+        };
     }
 }
 

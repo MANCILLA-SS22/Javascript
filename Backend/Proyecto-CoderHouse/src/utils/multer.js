@@ -1,8 +1,18 @@
 import multer from "multer";
+import fs from "fs";
 import { __dirname } from "../dirname.js";
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb){
+
+        const destination = {
+            profile: "profiles",
+            product: "products",
+            document: "documents",
+            comprobanteDeDomicilio: "documents",
+            comprobanteDeCuenta: "documents"
+        }
+
         cb(null,`${__dirname}/../public/img`);
     },
     filename: function(req, file, cb){
@@ -10,7 +20,7 @@ const storage = multer.diskStorage({
     }
 });
 
-const loader = multer({
+const uploader = multer({
     storage,
     onError: function (err, next) {
         console.log(err);
@@ -18,4 +28,4 @@ const loader = multer({
     }
 });
 
-export {loader};
+export {uploader};

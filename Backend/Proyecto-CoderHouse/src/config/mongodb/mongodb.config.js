@@ -1,15 +1,15 @@
-import {MongoSingleton} from "./mongodb-singleton.js"
+import mongoose from "mongoose";
+import { PORT, MONGO_URL } from "../dotenvMain/env.config.js";
 
-function mongoConfig(){
-    async function connectMongo(){
-        try {
-            await MongoSingleton.getInstance();
-        } catch (error) {
-            console.log(error);
-            process.exit();
-        }
+async function configMongo(httpServer){
+    try {
+        const server = httpServer.listen(PORT, () => console.log(`Server listening on ${PORT}`));
+        console.log("DB connected")
+        await mongoose.connect(MONGO_URL);
+        server.on('error', error => console.log('Servidor express con error', error));
+    } catch (error) {
+        console.log(error);
+        process.exit();
     }
-    connectMongo();    
 }
-
-export default mongoConfig;
+export {configMongo};
