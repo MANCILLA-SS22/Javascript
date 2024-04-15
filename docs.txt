@@ -29,6 +29,7 @@ https://www.postgresql.org/docs/current/
 https://docs.oracle.com/database/121/SQLRF/toc.htm 
 https://docs.github.com/en/get-started/getting-started-with-git/associating-text-editors-with-git 
 https://us-west-1.console.aws.amazon.com/console/home?region=us-west-1
+https://cloud.google.com/docs
 https://learn.microsoft.com/en-us/azure/?product=popular&source=docs
 https://react.dev   https://legacy.reactjs.org  https://create-react-app.dev  
 https://jquery.com/download/ 

@@ -3,19 +3,20 @@ import { __dirname } from "../dirname.js";
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb){
-        cb(null,`${__dirname}/../public/img`);
+        console.log("file", file)
+        cb(null,`${__dirname}/../src/public/images`);
     },
     filename: function(req, file, cb){
         cb(null, `${Date.now()}-${file.originalname}`);
     }
 });
 
-const loader = multer({
-    storage,
+const uploader = multer({
+    storage: storage,
     onError: function (err, next) {
         console.log(err);
         next();
     }
 });
 
-export {loader};
+export {uploader};

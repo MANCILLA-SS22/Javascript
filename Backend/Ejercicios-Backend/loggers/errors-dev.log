@@ -8402,3 +8402,5 @@
 {"level":"error","message":"GET en /api/user/test - at 3/5/2024 - 12:16:55 AM"}
 {"level":"warning","message":"GET en /api/user/test - at 3/5/2024 - 12:16:55 AM"}
 {"level":"error","message":"GET en /api/user/test - at 3/5/2024 - 12:16:55 AM"}
+{"level":"warning","message":"POST en /multer - at 4/12/2024 - 12:18:25 AM"}
+{"level":"error","message":"POST en /multer - at 4/12/2024 - 12:18:25 AM"}

@@ -120,7 +120,7 @@ export function app(){
     // app.use(passport.initialize());
     // app.use(passport.session());
 
-    app.use(addLogger); //Este es un middleware de nivel de aplicación, que contiene los loggers, el cual se ejecutara antes de los routers de abajo.
+    // app.use(addLogger); //Este es un middleware de nivel de aplicación, que contiene los loggers, el cual se ejecutara antes de los routers de abajo.
     app.use("/", logger, errorHandlerMiddleware, helloRouter); //"logger" representa un middleware de nivel de endpoint. Ejecutamos primero la ruta "/", despues se ejecuta la funcion middleware y, si todo sale bien, se ejecuta la funcion next, y pasamos al siguiente middleware, que es el Middleware de manejo de errores. Y finalmente, si todo sale bien nuevamente, pasamos a la ultima funcion.
     app.use("/multer", multerRouter);
     app.use("/pagination", paginationRouter);

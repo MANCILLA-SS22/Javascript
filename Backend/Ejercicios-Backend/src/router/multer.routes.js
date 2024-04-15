@@ -1,8 +1,9 @@
 import { Router } from "express";
-import { loader } from "../utils/multer.js";
+import { uploader } from "../utils/multer.js";
 const router = Router();
 
-router.post("/", loader.single("file"), function(req, res){
+router.post("/", uploader.single("MyFile"), function(req, res){
+    console.log("req.file", req.file); 
     if(!req.file) return res.status(500).json({error: "Hubo un error al subir el archivo"}); 
     return res.json({message: "El archivo se subio correctamente"});
 });

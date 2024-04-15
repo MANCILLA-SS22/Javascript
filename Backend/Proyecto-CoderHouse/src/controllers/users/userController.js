@@ -8,15 +8,16 @@
 // En caso de llamar al endpoint, si no se ha terminado de cargar la documentación, devolver un error indicando que el usuario no ha terminado de procesar su documentación.
 // (Sólo si quiere pasar de user a premium, no al revés)
 
-import Route from "../../router/class.routes.js"
+import Route from "../../router/class.routes.js";
+import fs from "fs"
 import { userService } from "../../database/service.js";
 import { uploader } from "../../utils/multer.js";
 
 class UserRouter extends Route {
     init(){
-        this.post("/documents/:uid", ['USER', 'ADMIN', 'PREMIUM'], uploader.any(), documents); //loader.any --> Accepts all files that comes over the wire. An array of files will be stored in req.files
         this.get("/premium/:email", ['PUBLIC'], change_rol);
-        this.put("/premium/:uid", ['PUBLIC'], modify);
+        this.put("/premium", ['USER', 'PREMIUM'], modify);
+        this.post("/documents", ['USER', 'ADMIN', 'PREMIUM'], uploader.any(), documents); //loader.any --> Accepts all files that comes over the wire. An array of files will be stored in req.files
 
         async function change_rol(req, res){
             try {
@@ -47,7 +48,22 @@ class UserRouter extends Route {
         }
 
         async function modify(req, res){
+            try {
+                if(req.user.role === "USER"){
+                    const path = `${process.cwd()}/src/files/documents/${req.user.email}`;
+                    if(!fs.existsSync(path)) return res.sendClientError("No se ha completado la documentacion!");
+                };
 
+                const roleChange = {
+                    USER: "PREMIUM",
+                    PREMIUM: "USER"
+                }
+
+                const newRole = roleChange[req.user.role];
+                await userService.updateRole(req.user.email, newRole)
+            }catch (error){
+                res.sendServerError(`something went wrong ${error}`);
+            }
         }        
     }
 }

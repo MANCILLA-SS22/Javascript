@@ -458,6 +458,35 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   > Servidor de base de datos: provee servicios de base de datos a otros programas u otras computadoras, como es definido por el modelo cliente-servidor. También puede hacer referencia a aquellas computadoras (servidores) dedicadas a 
     ejecutar esos programas, prestando el servicio.
      
+- Microservicio: Los microservicios son un enfoque arquitectónico y organizativo para el desarrollo de software donde el software está compuesto por pequeños servicios independientes que se comunican a través de API bien definidas. Los 
+  propietarios de estos servicios son equipos pequeños independientes. Las arquitecturas de microservicios hacen que las aplicaciones sean más fáciles de escalar y más rápidas de desarrollar. Esto permite la innovación y acelera el tiempo de 
+  comercialización de las nuevas características.
+  Los microservicios son tanto un estilo de arquitectura como un modo de programar software. Con los microservicios, las aplicaciones se dividen en sus elementos más pequeños e independientes entre sí. A diferencia del enfoque tradicional y 
+  monolítico de las aplicaciones, en el que todo se compila en una sola pieza, los microservicios son elementos independientes que funcionan en conjunto para llevar a cabo las mismas tareas. Cada uno de esos elementos o procesos es un 
+  microservicio. Este enfoque de desarrollo de software valora el nivel de detalle, la sencillez y la capacidad para compartir un proceso similar en varias aplicaciones. Es un elemento fundamental de la optimización del desarrollo de ap
+  licaciones hacia un modelo nativo de la nube.
+  Sin embargo, el mayor interrogante es cuáles son las ventajas de utilizar una infraestructura de microservicios. En pocas palabras, el objetivo es distribuir software de calidad con mayor rapidez. Si bien esto se puede lograr con los 
+  microservicios, se deben considerar otras cuestiones. Dividir las aplicaciones en microservicios no es suficiente; es necesario administrarlos, coordinarlos y gestionar los datos que crean y modifican.
+
+- Libreria: Las librerías de programación son conjuntos de archivos de código que se utilizan para desarrollar software. Su objetivo es facilitar la programación, al proporcionar funcionalidades comunes, que ya han sido resueltas previamente 
+  por otros programadores. Como curiosidad, el término proviene de una mala traducción de la palabra inglesa library, que en realidad significa biblioteca. Las librerías (o bibliotecas) son un componente esencial para que los desarrolladores 
+  puedan programar de forma sencilla, evitando la duplicidad de código y minimizando errores. También permiten una mayor agilidad, al reducir el tiempo de desarrollo, así como los costes. A diferencia de un framework, una librería no aporta 
+  la estructura sobre cómo realizar el desarrollo, sino que proporciona funcionalidades comunes, que ya han sido resueltas previamente por otros programadores y evitan la duplicidad de código. Además reducen el tiempo de desarrollo y 
+  aumentan la calidad del mismo.
+   > Librerías estáticas: Estas se graban en un programa como ejecutables. Sirven exclusivamente para esto; después, podemos borrarlas sin problemas, ya que el programa seguirá funcionando con la función necesaria.  
+   > Librerías dinámicas: Son distintas a las estáticas en tanto en cuanto no se copian en el programa al compilarlas. Las subrutinas son cargadas en tiempo de ejecución, en vez de enlazarse en tiempo de compilación.  
+
+- Framework: Es un marco de trabajo que tiene como objetivo facilitar la solución de problemas que pueden surgir al programar. Los frameworks aceleran el proceso de programar facilitando tareas como la organización del código o 
+  el trabajo en equipo dentro de un proyecto, por ejemplo. En otras palabras, el objetivo de un framework en programación es facilitar la tarea de los programadores.
+  También hay que destacar que muchos de estos frameworks no sólo facilitan la organización del trabajo, sino que también ofrecen recursos desarrollados por otros programadores. Estos recursos pueden ser informes o códigos que pueden usarse 
+  para solucionar los problemas más habituales que se dan al llevar a cabo determinadas tareas.
+    > Frameworks para software development: Los frameworks para aplicaciones generales se utilizan para mejorar la estructura de una aplicación. Su objetivo es proporcionar una estructura base para los desarrolladores de software con la que 
+      puedan organizar sus proyectos. Eso sí, siempre dentro de un sistema operativo determinado. 
+    > Frameworks para desarrollo web: Al estar relacionados con el diseño web, es evidente que existen diferentes frameworks para los diferentes lenguajes de programación que se utilizan. Un desarrollador backend y uno de frontend usarán 
+      marcos de trabajo distintos, aunque existen algunos ideales para los full stack developers como ReactJS.
+    > Marco de gestión de contenido: De nuevo, un tipo de frameworks relacionados con el diseño web. Aun así, en este caso se trata de interfaces diseñadas para personalizar un CMS. En consecuencia, existen una gran cantidad de CMFs, ideales 
+      para diferentes lenguajes e incluso para diferentes tareas dentro de un lenguajes.      
+     
 - codigo de estado: Cuando realizamos alguna petición al servidor mediante el protocolo HTTP, el servidor debe respondernos no sólo con información, sino con un estado del proceso. Este es un código que nos permitirá saber cómo se encuentra 
   el proceso, o cómo finalizó.    
   
@@ -821,6 +850,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   Los buffer son datos crudos en hexadecimal optimizados para ser transportados de un punto de memoria a otro. Formalmente, se conocen como streams de datos binarios, pero almacenan los datos en hexadecimal, por lo que cada espacio tiene dos 
   dígitos. Las ventajas de trabajar con buffer radica en que nos permite trabajar con los datos en crudo y por ello quien envía los datos conoce de entrada el tipo de datos y quien recibe los datos también conoce el tipo de datos que contiene
   
+- VPN:   
+  
 - Drivers: 
   
 - Nucleo: 
@@ -828,8 +859,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 - CPU: 
 
 - Hilos:   
-
-- Microservicios:
 
 - GraphQL: 
 

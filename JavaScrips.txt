@@ -277,9 +277,13 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
      ~ Implementation of Methods: Requires the class to provide concrete implementations for all methods declared in the interface.
      ~ Code Reusability: Promotes code reusability and abstraction through interfaces.
      ~ Abstract Classes: Cannot extend abstract classes but can implement abstract methods.
+
+  > readonly: It is used to prevent compile-time reassignment, however, it makes no guarantee that your code is “safe” and cannot be reassigned elsewhere.
+    se utiliza para declarar propiedades de solo lectura en una clase o en un tipo de objeto. Esto significa que una vez que se inicializa una propiedad con la palabra clave "readonly", su valor no puede ser modificado posteriormente fuera 
+    del constructor de la clase.
       
   > Constructor: El constructor de un objeto es una función que usamos para crear un nuevo objeto cada vez que sea necesario. Con función constructora podemos inicializar las propiedades del objeto al momento de ser instanciado con new.
-    El constructor ejecutara asi mismo las funciones y/o variables que esten dentro de el UNICAMENTE cuando se cree una nueva instancia del objeto.
+    El constructor es una funcion que ejecutara las funciones y/o variables que esten dentro de el tan pronto como se cree una nueva instancia del objeto.
     
     Constructor is a "special" prop returns a reference to the Object constructor function that created the instance object.
     A constructor is a special function (prop) that creates and initializes an object instance of a class. It returns a reference to the Object constructor function that created the instance object. In JavaScript, a constructor gets called 
@@ -302,6 +306,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       ~ Utilidades compartidas: los métodos estáticos se utilizan a menudo para implementar utilidades compartidas que no dependen del estado de una instancia en particular.
       ~ Rendimiento mejorado: al utilizar métodos estáticos en lugar de métodos de instancia, puedes reducir el uso de memoria y mejorar el rendimiento de tu aplicación.
     Sin embargo, es importante tener en cuenta que el uso excesivo de propiedades y métodos estáticos puede derivar en un código menos flexible y acoplado.
+  
+  > interface: 
 
     The static keyword defines a static method or field for a class, or a static initialization block. Static properties cannot be directly accessed on instances of the class. Instead, they're accessed on the class itself. 
     Static methods are often utility functions, such as functions to create or clone objects, whereas static properties are useful for caches, fixed-configuration, or any other data you don't need to be replicated across instances.
@@ -1837,8 +1843,10 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 - Definicion: Es un framework que permite crear Server Side Applications, de una manera eficiente y escalable. Está desarrollado con una base sólida de Typescript y brinda la posibilidad de seguir utilizando plain javascript. 
   Permite implementar paradigmas combinados de Programación Orientada a Objetos, Programación Funcional, y Programación Funcional reactiva. 
-  Es un framework que está basado internamente en Express, y está pensado principalmente para construir aplicaciones monolíticas y microservicios.     
-    
+  Es un framework que está basado internamente en Express, y está pensado principalmente para construir aplicaciones monolíticas y microservicios.
+  
+- Instalación y primer proyecto: npm i -g @nestjs/cli  --> nest new <nombre de proyecto>
+- Creacion de un modulo: nest g resource <nombre del modulo>    
         
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        
 
@@ -1926,6 +1934,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 - Prototype Pattern: The Prototype pattern allows you to create an object using another object as a blueprint, inheriting its properties and methods. It is a useful way to share properties among many objects of the same type. The prototype 
   is an object that’s native to JavaScript, and can be accessed by objects through the prototype chain. In our applications, we often have to create many objects of the same type. A useful way of doing this is by creating multiple instances 
   of an ES6 class.
+  
+- Service: Es un archivo que va a contener todos los metodos que podemos llamar desde cualquier parte de la aplicacion.
 
 - Factory Method Pattern: The Factory method pattern provides an interface for creating objects that can be modified after creation. The cool thing about this is that the logic for creating our objects is centralized in a single place, 
   simplifying and better organizing our code. This pattern is used a lot and can also be implemented in two different ways, via classes or factory functions (functions that return an object).

@@ -13,12 +13,19 @@ const storage = multer.diskStorage({
             comprobanteDeCuenta: "documents"
         }
 
-        cb(null,`${__dirname}/../public/img`);
+        const folderLocation = destination[file.fieldname];
+        const {email} = req.user;
+        const path = `${process.cwd()}/src/files/${folderLocation}`;
+
+        if(!fs.existsSync(path)) fs.mkdirSync(path);
+        if(!fs.existsSync(`${path}/${email}`)) fs.mkdirSync(`${path}/${email}`);
+
+        cb(null,`${path}/${email}`);
     },
     filename: function(req, file, cb){
-        cb(null, `${Date.now()}-${file.originalname}`);
+        cb(null, `${Date.now()}-${file.originalname.split(".")[1]}`);
     }
-});
+}); 
 
 const uploader = multer({
     storage,

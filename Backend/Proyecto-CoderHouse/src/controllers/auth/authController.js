@@ -28,7 +28,7 @@ class AuthRouter extends Route {
                 res.clearCookie("jwtCookieToken");
         
                 //Trabajando con JWT
-                const tokenUser = { // creamos un usuario con un token generado (Metodo 2)
+                const tokenUser = { // creamos un usuario con un token generado
                     first_name: user.first_name,
                     last_name: user.last_name,
                     email: user.email,
