@@ -1,12 +1,11 @@
-// ✓  Crear un endpoint en el router de usuarios api/users/:uid/documents con el método POST que permita subir uno o múltiples archivos. Utilizar el middleware de Multer para poder
-//    recibir los documentos que se carguen y actualizar en el usuario su status para hacer saber que ya subió algún documento en particular.
-// ✓ El middleware de multer deberá estar modificado para que pueda guardar en diferentes carpetas los diferentes archivos que se suban.
-//    ○ Si se sube una imagen de perfil, deberá guardarlo en una carpeta profiles, en caso de recibir la imagen de un producto, deberá guardarlo en una carpeta products, 
-//      mientras que ahora al cargar un documento, multer los guardará en una carpeta documents.
-// ✓ Modificar el endpoint /api/users/premium/:uid para que sólo actualice al usuario a premium si ya ha cargado los siguientes documentos:
-//    ○ Identificación, Comprobante de domicilio, Comprobante de estado de cuenta
-// En caso de llamar al endpoint, si no se ha terminado de cargar la documentación, devolver un error indicando que el usuario no ha terminado de procesar su documentación.
-// (Sólo si quiere pasar de user a premium, no al revés)
+// Desde el router de /api/users, crear tres rutas:
+// ✓ GET / deberá obtener todos los usuarios, éste sólo debe devolver los datos principales como nombre, correo, tipo de cuenta (rol)
+// ✓ DELETE / deberá limpiar a todos los usuarios que no hayan tenido conexión en los últimos 2 días. (puedes hacer pruebas con los últimos 30 minutos, por ejemplo). 
+//    Deberá enviarse un correo indicando al usuario que su cuenta ha sido eliminada por inactividad
+
+// Crear una vista para poder visualizar, modificar el rol y eliminar un usuario. Esta vista únicamente será accesible para el administrador del ecommerce
+// Modificar el endpoint que elimina productos, para que, en caso de que el producto pertenezca a un usuario premium, le envíe un correo indicándole que el producto fue eliminado.
+
 
 import Route from "../../router/class.routes.js";
 import fs from "fs"
@@ -16,8 +15,8 @@ import { uploader } from "../../utils/multer.js";
 class UserRouter extends Route {
     init(){
         this.get("/premium/:email", ['PUBLIC'], change_rol);
-        this.put("/premium", ['USER', 'PREMIUM'], modify);
-        this.post("/documents", ['USER', 'ADMIN', 'PREMIUM'], uploader.any(), documents); //loader.any --> Accepts all files that comes over the wire. An array of files will be stored in req.files
+        this.put("/premium/:id", ['USER', 'PREMIUM'], modify);
+        this.post("/:id/documents", ['USER', 'ADMIN', 'PREMIUM'], uploader.any(), documents); //loader.any --> Accepts all files that comes over the wire. An array of files will be stored in req.files
 
         async function change_rol(req, res){
             try {
@@ -40,6 +39,15 @@ class UserRouter extends Route {
 
         async function documents(req, res){
             try {
+                console.log("req.files", req.files);
+                const { id } = req.params;
+                const updateUser = await userService.updateUser(id, {
+                    $push: {
+                        documents: {name: req.files[0].fieldname, reference: req.files[0].destination}
+                    }
+                });
+
+                console.log(updateUser)
                 if(req.user.role === "PREMIUM") return res.sendSuccess("Ya eres un usuario PREMIUM!");
                 res.sendSuccess(`Los archivos ${req.files[0].filename} se han enviado correctamente!`)
             } catch (error) {

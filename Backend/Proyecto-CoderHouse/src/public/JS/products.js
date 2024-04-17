@@ -5,6 +5,13 @@ const header = document.getElementById("header");
 // console.log(searchParams)
 
 window.onload = function(){
+    // let page = 1;
+    // let limit = 4;
+    // let stock = 1;
+    // let sortInput = "asc";
+    // let modelInput = "Old";
+    // let link =`http://localhost:5500/api/products?page=${page}&limit=${limit}&sort=${sortInput}&stock=${stock}&category=${modelInput}`;
+
     let link = `http://localhost:5500/api/products`;
     fetchData(link);
 }
@@ -17,8 +24,9 @@ function fetchData(link){
 };
 
 function procesarDatos(data){
+    console.log("data", data)
     header.innerHTML = `
-        <h1>¡Bienvenido/a ${data.user.name}!</h1> <h3>Eres: ${data.user.role}</h3>
+        <h1>¡Bienvenido/a ${data.user.first_name} ${data.user.last_name}!</h1> <h3>Eres: ${data.user.role}</h3>
         <button onclick="myFunc()" class="btn btn-dark"><a class="text-decoration-none text-light" href="/api/auth/logout"> Logout </a></button>
         <button class="btn btn-dark" onclick="fetchData('${data.prevLink}')">Previous Link</button>
         <button class="btn btn-dark" onclick="fetchData('${data.nextLink}')">Next Link</button>
@@ -45,8 +53,8 @@ function procesarDatos(data){
         let page = 1;
         let limit = 4;
         let stock = 1;
-        // let sort = "asc";
-        // let category = "Old";
+        // let sortInput = "asc";
+        // let modelInput = "Old";
         let linkFilter = `http://localhost:5500/api/products?page=${page}&limit=${limit}&sort=${sortInput}&stock=${stock}&category=${modelInput}`;
         fetchData(linkFilter);
     });
@@ -62,7 +70,8 @@ function render(data){
                 <h2>${val.title}</h2>
                 <p>description: ${val.description}</p>
                 <p>price: $${val.price}</p>
-                <img src="${val.thumbnail[0]}" alt="img"  width="200" height="150">
+                <p>Category: ${val.category}</p>
+                <img src="${val.thumbnail}" alt="img"  width="200" height="150">
                 <div class="container">
                     <button class="btn btn-dark">
                         <a class="text-decoration-none text-light" href='/product/${val._id}'>Product details</a>

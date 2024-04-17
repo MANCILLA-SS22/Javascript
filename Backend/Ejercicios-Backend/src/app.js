@@ -206,14 +206,3 @@ app();
 // Artillery                     -->    `artillery quick --count 40 --num 50 "http://localhost:5500/api/performance/operation/complex" -o ./data/resultadosComplex.json`
 // Ejecucion de script .yml      -->    `artillery run ./src/config.yml --output ./data/test01.json`
 // Generacion de reporte .html   -->    `artillery report test01.json -o ./data/resultUser.html` (opcional)
-
-
-
-
-
-// Express
-// Websockets
-// MongoDB avanzado (poplation, indexation, aggregation & pagination)
-// Mongoose avanzado (index and virtual properties, document, model, query and aggregate middlewares, methods and statics encapsulation methods)
-// Uso de Docker y Kubernetes
-// NestJS y typescript

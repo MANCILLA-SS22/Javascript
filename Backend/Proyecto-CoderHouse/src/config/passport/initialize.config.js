@@ -35,6 +35,7 @@ async function jwt(jwt_payload, done){
 async function register(req, username, password, done){
     try {
         const userDto = new UserDto(req.body);     //console.log("userDto", userDto.email)
+        console.log("userDto", userDto)
         const exist  = await userService.findUser(userDto.email); //Validamos si el usuario existe en la base de datos
         if(exist){
             req.logger.error("El usuario ya existe!");
@@ -48,9 +49,12 @@ async function register(req, username, password, done){
             age: userDto.age,
             password: createHash(userDto.password),
             cart: userDto.cart,
-            role: userDto.role
+            role: userDto.role,
+            last_connection: userDto.last_connection,
+            documents: userDto.documents
         };
 
+        console.log("user", user)
         const result = await userService.createUser(user);
         return done(null, result) //El primer parametro es null porque no se genera un error, sino que se genera de forma correcta.
 

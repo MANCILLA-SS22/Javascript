@@ -10,8 +10,8 @@ import { io } from "../../socket/socketServer.js";
 
 class ProductRouter extends Route{
     init(){
-        //this.get("/", ['ADMIN', 'USER'], async function(req, res){
-        this.get("/", ['PUBLIC'], async function(req, res){
+        // this.get("/", ['PUBLIC'], async function(req, res){
+            this.get("/", ['ADMIN', 'USER'], async function(req, res){
             try {
                 // console.log("req.user", req.user);
                 // Copiar y pegar en barra de navegacion --> http://localhost:5500/api/products?page=1&limit=3&sort=asc&stock=8&category=New
@@ -20,34 +20,12 @@ class ProductRouter extends Route{
 
                 let link = req.protocol+"://"+req.get("host")+'/api/products'; //Obtenemos el link original
         
-                if(category == undefined && stock == undefined){
-                    filter = {
-                        category: {$regex: "Old"},
-                        stock: {$gte: 1}                        
-                    }
-                    //filter = {};
-                }else if(category == undefined && stock != undefined){
-                    filter = { stock: {$gte: stock} };
-                }else if(category != undefined && stock == undefined){
-                    filter = { category: {$regex: category} };
-                }else{
-                    filter = { 
-                        category: {$regex: category},  //$regex --> Selects documents where values match a specified regular expression.
-                        stock: {$gte: stock}           //$gte --> Matches values that are greater than or equal to a specified value.
-                    };
-                }
-        
-                if (page === undefined) {
-                    numPage = 1
-                } else {
-                    numPage = page
-                }
-
-                if (limit === undefined) {
-                    numLimit = 10
-                } else {
-                    numLimit = limit;
-                }
+                if(category == undefined && stock == undefined)   filter = { category: {$regex: "Old"}, stock: {$gte: 1} }
+                if(category === undefined && stock !== undefined) filter = { stock: {$gte: stock} };
+                if(category !== undefined && stock === undefined) filter = { category: {$regex: category} };
+                if(category !== undefined && stock !== undefined) filter = { category: {$regex: category}, stock: {$gte: stock} }; //$regex --> Selects documents where values match a specified regular expression. $gte --> Matches values that are greater than or equal to a specified value.
+                page === undefined ? numPage = 1 : numPage = page
+                limit === undefined ? numLimit = 10 : numLimit = limit;
 
                 if(sort === "asc"){
                     prevSort = "asc";
@@ -60,18 +38,18 @@ class ProductRouter extends Route{
                     numSort = 1;
                 }
 
-                console.log("sort", sort/* ?.slice(0, -1) */);
+                console.log("sort", sort);
                 console.log("category", category)                
         
                 let conditionalQuery = {
                     page: numPage,
                     limit: numLimit,
-                    sort: {price: 1 }
+                    sort: {price: numSort }
                 };
         
                 const products = await productService.getProductsNew(filter, conditionalQuery); // Model.paginate([filter], [options], [callback])
-                products.hasPrevPage === false ? prevLink = null : prevLink = link + "?"+ `page=${products.prevPage}`+ `&limit=${numLimit}&sort=${prevSort}$`;
-                products.hasNextPage === false ? nextLink = null : nextLink = link + "?"+ `page=${products.nextPage}`+ `&limit=${numLimit}&sort=${prevSort}$`;
+                products.hasPrevPage === false ? prevLink = null : prevLink = link + "?"+ `page=${products.prevPage}`+ `&limit=${numLimit}&sort=${prevSort}&category=${category}`;
+                products.hasNextPage === false ? nextLink = null : nextLink = link + "?"+ `page=${products.nextPage}`+ `&limit=${numLimit}&sort=${prevSort}&category=${category}`;
         
                 const respuestaInfo = {
                     status: "success",                 //success/error
@@ -87,11 +65,7 @@ class ProductRouter extends Route{
                     nextLink: nextLink,                //Link directo a la página siguiente (null si hasNextPage=false)
                     link: link,                        //http://localhost:5500/products?page=1&limit=3&sort=asc&stock=8&category=New
                     user: req.user
-                };
-
-                // console.log("products --> ", respuestaInfo)
-
-                // res.status(200).render('products',{respuestaInfo}); 
+                }; console.log("products --> ", respuestaInfo)
                 res.sendSuccess(respuestaInfo);
         
             } catch (error) {

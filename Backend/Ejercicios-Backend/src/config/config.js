@@ -8,7 +8,7 @@ dotenv.config({ path: environment === "prod" ? "./src/config/.env.production" : 
 const test = program.opts().test;
 dotenv.config({ path: "./src/config/.env.development" });
 
-const port = process.env.PORT;
+const port = process.env.PORT || 9090;
 const mongoUrl = test === true ? process.env.MONGO_URL_TEST : process.env.MONGO_URL;
 const mongoUrlTest = process.env.MONGO_URL_TEST;
 const persistence = program.opts().persist;

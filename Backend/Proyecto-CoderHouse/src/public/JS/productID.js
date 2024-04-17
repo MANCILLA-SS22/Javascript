@@ -18,7 +18,7 @@ function procesarDatos(data){
     product.innerHTML = (`
         <div class="product-info container">
             <h2>${data.title}</h2>
-            <img src="${data.thumbnail[0]}" alt="img"  width="400" height="350">
+            <img src="${data.thumbnail}" alt="img"  width="400" height="350">
             <p>description: ${data.description}</p>
             <p>category: ${data.category}</p>
             <p>code: ${data.code}</p>

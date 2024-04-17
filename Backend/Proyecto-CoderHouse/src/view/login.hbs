@@ -7,19 +7,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
     <title>Document</title>
 </head>
-<body>
-    <div>
-        <h1>Login</h1>
-        <form id="loginForm">
-            <label>Email</label>
-            <input name="email">
-            <br />
-            <label>Contraseña</label>
-            <input name="password">
-            <input type="submit">
-        </form>
-        <p>¿No estás registrado? <a href="/register">Regístrate aquí</a></p>
-        <p>¿Tienes cuenta de Github? <a href="/github/login">Haz login por Github</a></p>
+<body class="bodyLogin">
+    <div class="login-page">
+        <div class="formLogin">
+            <form id="loginForm">
+                <input type="text" name="email" placeholder="name" />
+                <input type="password" name="password" placeholder="password" />
+                <input class="button" type="submit">
+                <p class="message">¿No estás registrado? <a href="/register">Regístrate aquí</a></a></p>
+                <p class="message">Tienes cuenta de GutHub? <a href="/github/login">Haz login por Github</a></p>
+            </form>
+        </div>
     </div>
 
 <script src="/JS/login.js"></script>
