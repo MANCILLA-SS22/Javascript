@@ -6,6 +6,10 @@ class UsersRepository {
         return this.dao.createUser(parameter);
     }
 
+    getAllUsers(){
+        return this.dao.getAllUsers();
+    }    
+
     findUser(parameter){
         return this.dao.findUser(parameter);
     }

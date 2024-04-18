@@ -155,10 +155,8 @@ class ProductRouter extends Route{
                     res.sendClientError({message: "Not found id."});
                 }else{
                     const eliminarProducto = await productService.deleteProduct(pid);
-
                     const getAll = await productService.getProducts();
                     io.emit("product_list", getAll);
-
                     res.sendSuccess(eliminarProducto);
                 }
             } catch (error) {

@@ -1,5 +1,4 @@
 // Desde el router de /api/users, crear tres rutas:
-// ✓ GET / deberá obtener todos los usuarios, éste sólo debe devolver los datos principales como nombre, correo, tipo de cuenta (rol)
 // ✓ DELETE / deberá limpiar a todos los usuarios que no hayan tenido conexión en los últimos 2 días. (puedes hacer pruebas con los últimos 30 minutos, por ejemplo). 
 //    Deberá enviarse un correo indicando al usuario que su cuenta ha sido eliminada por inactividad
 
@@ -14,9 +13,20 @@ import { uploader } from "../../utils/multer.js";
 
 class UserRouter extends Route {
     init(){
+        this.get("/", ['PUBLIC'], getAll)
+        this.delete("delete", ['ADMIN'], deleteAll)
         this.get("/premium/:email", ['PUBLIC'], change_rol);
         this.put("/premium/:id", ['USER', 'PREMIUM'], modify);
         this.post("/:id/documents", ['USER', 'ADMIN', 'PREMIUM'], uploader.any(), documents); //loader.any --> Accepts all files that comes over the wire. An array of files will be stored in req.files
+
+        async function getAll(req, res){
+            const allUsers = await userService.getAllUsers();
+            allUsers ? res.sendSuccess(allUsers) : res.sendClientError({message: "Not users found"});            
+        }
+
+        async function deleteAll(req, res){
+            
+        }
 
         async function change_rol(req, res){
             try {

@@ -9,6 +9,14 @@ class UserServiceMongo{
         }
     }
 
+    async getAllUsers(){
+        try {
+            return await userModel.find({}).select('first_name last_name email role' );
+        } catch (error) {
+            throw new Error(error)
+        }
+    }
+
     async findUser(parameter){
         try {
             console.log("parameter", parameter)

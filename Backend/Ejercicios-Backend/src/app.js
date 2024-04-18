@@ -67,6 +67,8 @@ import usuariosRouter from "./router/usuarios.routes.js";
 import mascotasRouter from "./router/mascotas.routes.js";
 import adopcionesRouter from "./router/adopciones.routes.js";
 import sesionesRouter from "./router/sesiones.routes.js";
+import clientsRouter from "./router/clients.routes.js"
+import paymentsRouter from "./router/payments.routes.js"
 
 import {__dirname} from './dirname.js';
 import { errorHandlerMiddleware, logger } from "./middlewares/middlewares.js";
@@ -156,6 +158,9 @@ export function app(){
     app.use('/api/mascotas', mascotasRouter);
     app.use('/api/adopciones', adopcionesRouter);
     app.use('/api/sesiones', sesionesRouter);
+
+    app.use("/api/users", clientsRouter);
+    app.use("/api/payments", paymentRouter);    
 
     // ****** Uso Websockets (Si usamos esto, DESCOMENTAR las 4 lineas de abajo y comentar "app.listen(SERVER_PORT, function(){}") ****** 
     // const httpServer = app.listen(SERVER_PORT, () => console.log(`Server listening on port ${SERVER_PORT}`));
