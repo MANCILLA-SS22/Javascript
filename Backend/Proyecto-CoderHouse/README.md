@@ -32,7 +32,7 @@ No es necesario crear un nuevo modelo de Mongoose para éste.
 
 Revisar los la carpeta src/controllers/users. En donde se espefician los edpoints que se deben evaluar mediane postman
 
-1. El primer punto, debe evaluar el link mediante un GET: http://localhost:5500/users/premium/modify/661ef29e277276477df27e1e 
+1. El primer punto, debe evaluar el link mediante un PUT: http://localhost:5500/users/premium/661ef29e277276477df27e1e 
 Aqui, se verificara si, primeramente es un 'USER'. Si no lo es, se enviara un mensaje de "ya eres un usuario PREMIUM". Despues se verificara si existen los documentos documents, comprobanteDeCuenta y comprobanteDeDomicilio. Si uno de los 3 no existen, aparecera un mensaje de error. De lo contrario, el rol de usuario cambiara a PREMIUM.
 
 2. El segundo punto evaluara el siguiente link mediante un POST: http://localhost:5500/users/6621ef3316d858690f660602/documents
