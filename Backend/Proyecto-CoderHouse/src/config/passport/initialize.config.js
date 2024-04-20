@@ -59,7 +59,7 @@ async function register(req, username, password, done){
         return done(null, result) //El primer parametro es null porque no se genera un error, sino que se genera de forma correcta.
 
     } catch (error) {
-        return done("Error registrando el usuario --> "+ error.cause)
+        return done("Error registrando el usuario --> "+ error)
     }
 };
 

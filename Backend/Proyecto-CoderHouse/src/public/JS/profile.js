@@ -1,5 +1,4 @@
 const profile = document.getElementById("profile");
-const header = document.getElementById("header");
 const logout = document.getElementById("logout");
 
 window.onload = function(e){

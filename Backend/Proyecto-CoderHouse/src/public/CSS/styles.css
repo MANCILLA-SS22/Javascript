@@ -22,10 +22,6 @@
   box-sizing: border-box;
 }
 
-html {
-  background-color: #ecf9ff;
-}
-
 body {
   color: #272727;
   background: #2f354d;
@@ -152,7 +148,7 @@ h1 {
   z-index: 1;
   background: #FFFFFF;
   max-width: 360px;
-  margin: 0 auto 400px;
+  margin-block-end: 600px; 
   padding: 45px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
@@ -197,6 +193,7 @@ h1 {
 .formLogin #register-form {
   display: none;
 }
+
 .bodyLogin {
   /* background: #090947; */
   /* background: rgb(141,194,111); */

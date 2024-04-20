@@ -7,7 +7,7 @@ import passportConfig from "./config/passport/passport.config.js";
 import middlewares from "./middlewares/middlewares.config.js"
 import { swaggerConfig } from "./config/swagger/swagger.specs.js";
 
-// configMongoSingleton(); //
+// configMongoSingleton(); 
 configMongo(httpServer);
 passportConfig(app);
 middlewares(app, express);

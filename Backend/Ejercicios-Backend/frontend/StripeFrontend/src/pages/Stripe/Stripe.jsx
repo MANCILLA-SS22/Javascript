@@ -10,7 +10,7 @@ import PaymentService from '../../services/paymentService';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
 
-const Stripe = () => {
+function Stripe() {
     const [currentProduct, setCurrentProduct] = useState(null);
     const [clientSecret,setClientSecret] = useState(null);
 
@@ -23,21 +23,22 @@ const Stripe = () => {
     ]
 
     useEffect(() => {
-        const getClientSecret = async () => {
+        async function getClientSecret (){
             console.log(currentProduct);
             const service = new PaymentService();
-            service.createPaymentIntent({productId:currentProduct,callbackSuccess:callbackSuccessPaymentIntent,callbackError:callbackErrorPaymentIntent})
+            service.createPaymentIntent({productId: currentProduct, callbackSuccess: callbackSuccessPaymentIntent, callbackError: callbackErrorPaymentIntent})
         }
-        currentProduct&&getClientSecret();
-    }, [currentProduct])
+        currentProduct && getClientSecret();
+    }, [currentProduct]);
 
-    const callbackSuccessPaymentIntent = (res) =>{
+    function callbackSuccessPaymentIntent(res){
         setClientSecret(res.data.payload.client_secret)
     }
 
-    const callbackErrorPaymentIntent = err => {
+    function callbackErrorPaymentIntent(err) {
         console.log(err);
     }
+
     return (<>
         <div className={styles.container}>
             <h1 className={styles.title}>Stripe</h1>

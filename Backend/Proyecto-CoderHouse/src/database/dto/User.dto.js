@@ -7,7 +7,7 @@ class UserDto {
         this.password = user.password;
         this.cart = user?.cart;
         this.role = user?.role;
-        this.last_connection = ""
+        this.last_connection = new Date();
         this.documents = []
     }
 };

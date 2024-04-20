@@ -1,23 +1,43 @@
-<div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
     <h1>Registro</h1>
-    <form id="form">
-        <label>Nombre</label>
-        <input name="first_name">
-        <br />
-        <label>Apellido</label>
-        <input name="last_name">
-        <br />
-        <label>Email</label>
-        <input name="email">
-        <br />
-        <label>Edad</label>
-        <input name="age">
-        <br />
-        <label>Contraseña</label>
-        <input name="password">
+    <div class="d-flex justify-content-center">
+    
+        <form id="form" class="w-25">
+            <div class="mb-3">
+                <label for="exampleInputFirstName" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="exampleInputFirstName" aria-describedby="emailHelp"
+                    name="first_name">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputLastNmae" class="form-label">Apellido</label>
+                <input type="text" class="form-control" id="exampleInputLastNmae" aria-describedby="emailHelp"
+                    name="last_name">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Correo electronico</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputAge" class="form-label">Edad</label>
+                <input type="number" class="form-control" id="exampleInputAge" aria-describedby="emailHelp" name="age">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+            </div>
+            <p>¿Ya tienes una cuenta? <a href="/">Ingresa aquí</a></p>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
 
-        <input type="submit">
-    </form>
-    <p>¿Ya tienes una cuenta? <a href="/">Ingresa aquí</a></p>
-</div>
 <script src="/JS/register.js"></script>
+</body>
+</html>

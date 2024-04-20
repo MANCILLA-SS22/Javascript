@@ -14,8 +14,7 @@ No es necesario crear un nuevo modelo de Mongoose para éste.
     
 3.  Además, agregar una propiedad al usuario llamada “last_connection”, la cual deberá modificarse cada vez que el usuario realice un proceso de login y logout
      
-4. Crear un endpoint en el router de usuarios api/users/:uid/
-     documents con el método POST que permita subir uno o 
+4. Crear un endpoint en el router de usuarios api/users/:uid/documents con el método POST que permita subir uno o 
      múltiples archivos. Utilizar el middleware de Multer para 
      poder recibir los documentos que se carguen y actualizar en 
      el usuario su status para hacer saber que ya subió algún 
@@ -32,3 +31,12 @@ No es necesario crear un nuevo modelo de Mongoose para éste.
 ## Metodologia
 
 Revisar los la carpeta src/controllers/users. En donde se espefician los edpoints que se deben evaluar mediane postman
+
+1. El primer punto, debe evaluar el link mediante un GET: http://localhost:5500/users/premium/modify/661ef29e277276477df27e1e 
+Aqui, se verificara si, primeramente es un 'USER'. Si no lo es, se enviara un mensaje de "ya eres un usuario PREMIUM". Despues se verificara si existen los documentos documents, comprobanteDeCuenta y comprobanteDeDomicilio. Si uno de los 3 no existen, aparecera un mensaje de error. De lo contrario, el rol de usuario cambiara a PREMIUM.
+
+2. El segundo punto evaluara el siguiente link mediante un POST: http://localhost:5500/users/6621ef3316d858690f660602/documents
+Aqui se deberan cargar (uno por uno) los siguientes documentos con las key "profile", "product", "document", "comprobanteDeDomicilio', "comprobanteDeCuenta" respectivamente. Los archivos se cargaran en un array de objetos cuyo parametro es "documents".
+
+3. Para la propiedad "last_connection", esta fue agregada en el endpoint de "login" en el archivo authController. Dicha propiedad inicialmente se creo en el user.model.js y es de tipo string. 
+Volviendo al enpoint login, este se actualizara cada que el usuario inicie y cierre sesion.

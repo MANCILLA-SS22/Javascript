@@ -1,13 +1,13 @@
 import Stripe from 'stripe';
-import config from '../config/config.js';
+import { stripSecretKey } from '../../../../config/config.js';
 
 class PaymentService {
     constructor() {
-        this.stripe = new Stripe(config.stripeSecretKey)
+        this.stripe = new Stripe(stripSecretKey);
     }
 
     createPaymentIntent = async (data) => {
-        const paymentIntent = this.stripe.paymentIntents.create(data)
+        const paymentIntent = this.stripe.paymentIntents.create(data);
         console.log("Stripe result: ", paymentIntent);
         return paymentIntent
     }

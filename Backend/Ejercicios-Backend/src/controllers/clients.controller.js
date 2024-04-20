@@ -1,4 +1,4 @@
-import {generateUser} from '../utils.js'
+import { generateUser } from "../utils/faker.js";
 
 async function getClients(req, res){
     try {

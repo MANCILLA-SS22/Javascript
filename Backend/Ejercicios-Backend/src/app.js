@@ -21,7 +21,7 @@
 // 20. Logging y testing de performance 
 // 21. Documentacion con Swagger
 // 22. Testing con Mocha Assert (NodeJS) y Chai
-
+// 42:35
 // nodemon src/backend.js --mode prod   -->   Servidor escuchando por el puerto: 3001
 // nodemon src/backend.js --mode dev    -->   Servidor escuchando por el puerto: 5500
 import express from "express";
@@ -67,8 +67,7 @@ import usuariosRouter from "./router/usuarios.routes.js";
 import mascotasRouter from "./router/mascotas.routes.js";
 import adopcionesRouter from "./router/adopciones.routes.js";
 import sesionesRouter from "./router/sesiones.routes.js";
-import clientsRouter from "./router/clients.routes.js"
-import paymentsRouter from "./router/payments.routes.js"
+import paymentRouter from "./router/payments.routes.js"
 
 import {__dirname} from './dirname.js';
 import { errorHandlerMiddleware, logger } from "./middlewares/middlewares.js";
@@ -111,7 +110,7 @@ export function app(){
     app.use(morgan('dev'));    
     app.use(cookieParser("CoderS3cr3tC0d3")); //colocamos la inicialización de nuestro passport, la inicialización de passport y cookieParser también para que el servidor pueda reconocer correctamente las cookies. 
     app.use(compression({brotli: { enabled: true, zlib: {} } })); //Con esta opción, se reconocerá un tipo de compresión “br” (brotli) al momento de enviar la información. La razón por la que colocamos un objeto zlib vacío se debe a que el módulo de express-compression cuenta con una dependencia interna “zlib”, la cual le permite ejecutar diferentes niveles de compresión.
-    app.use(cors(corsOptions)); //Si utilizamos unicamente cors(), quiere decir que cualquiera podra acceder al servidor. Pero al mandarle un objeto cors(corsOptions), este contiene la info de quien o quienes pueden acceder.
+    app.use(cors(/* corsOptions */)); //Si utilizamos unicamente cors(), quiere decir que cualquiera podra acceder al servidor. Pero al mandarle un objeto cors(corsOptions), este contiene la info de quien o quienes pueden acceder.
     app.use(express.json()); //This is a built-in middleware function in Express. It parses incoming requests with JSON payloads and is based on body-parser.
     app.use(express.text());
     app.use(express.urlencoded({ extended: true, limit: 1000 })); //It parses incoming requests with urlencoded payloads and is based on body-parser. Returns middleware that only parses urlencoded bodies and only looks at requests where the Content-Type header matches the type option. This parser accepts only UTF-8 encoding of the body and supports automatic inflation of gzip and deflate encodings.
@@ -159,7 +158,6 @@ export function app(){
     app.use('/api/adopciones', adopcionesRouter);
     app.use('/api/sesiones', sesionesRouter);
 
-    app.use("/api/users", clientsRouter);
     app.use("/api/payments", paymentRouter);    
 
     // ****** Uso Websockets (Si usamos esto, DESCOMENTAR las 4 lineas de abajo y comentar "app.listen(SERVER_PORT, function(){}") ****** 

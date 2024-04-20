@@ -28,7 +28,6 @@ const twilioSmsNumber = process.env.TWILIO_SMS_NUMBER;
 const twilioToSmsNumber = process.env.TWILIO_TO_SMS_NUMBER;
 const twilioWhatsappNumber = process.env.TWILIO_WHATSAPP_NUMBER;
 const twilioToWhatsappNumber = process.env.TWILIO_TO_WHATSAPP_NUMBER;
-const stripPublictKey = process.env.STRIPE_APP_PUBLICT_KEY;
 const stripSecretKey = process.env.STRIPE_APP_SECRET_KEY;
 
 processFunc(); // ****** Uso de listeners ******
@@ -55,6 +54,5 @@ export {
     twilioToSmsNumber,
     twilioWhatsappNumber,
     twilioToWhatsappNumber,
-    stripPublictKey,
     stripSecretKey
 };
