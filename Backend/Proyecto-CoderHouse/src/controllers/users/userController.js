@@ -16,7 +16,7 @@ class UserRouter extends Route {
         this.get("/", ['PUBLIC'], getAll);
         this.delete("delete", ['ADMIN'], deleteAll);
 
-        this.get("/premium/modify/:uid", ['USER', 'PREMIUM'], modify);
+        this.put("/premium/:uid", ['USER', 'PREMIUM'], modify);
         this.get("/premium/:email", ['PUBLIC'], change_rol);
 
         this.post("/:id/documents", ['USER', 'ADMIN', 'PREMIUM'], uploader.any(), documents); //loader.any --> Accepts all files that comes over the wire. An array of files will be stored in req.files
