@@ -6377,9 +6377,9 @@ const options = {
     weekday: "long"
 }
 
-const locale = navigator.language;
-const res = new Intl.DateTimeFormat(locale, options).format(now);
-// const res = new Intl.DateTimeFormat("pt-PT", options).format(now);
+// const locale = navigator.language;
+// const res = new Intl.DateTimeFormat(locale, options).format(now);
+const res = new Intl.DateTimeFormat("pt-PT", options).format(now);
 console.log(res); */
 
 /* //Ejemplo 10: Internationalizing Numbers (Intl)
@@ -8519,7 +8519,4 @@ console.log("lastPost2", lastPost2); */
 
 
 
-
-
-
-// node src/Frontend/frontend.js
+// node src/Ejercicios/ejercicios.js

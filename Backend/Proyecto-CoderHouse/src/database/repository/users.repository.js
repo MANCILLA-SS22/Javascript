@@ -32,7 +32,11 @@ class UsersRepository {
 
     updateConnection(email, newConnection){
         return this.dao.updateConnection (email, newConnection);
-    }    
+    }
+
+    deleteUsers(id){
+        return this.dao.deleteUsers(id);
+    }
 };
 
 export {UsersRepository}

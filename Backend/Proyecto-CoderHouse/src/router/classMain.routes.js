@@ -18,8 +18,8 @@ const sessionsController = new SessionsController();
 function routerMain(app){
     // app.use(addLogger);
     app.use("/", viewsController.getRouter());
-    app.use("/users", userController.getRouter());
     app.use("/api/auth", authController.getRouter());
+    app.use("/api/users", userController.getRouter());
     app.use("/api/carts", routerCarts.getRouter());
     app.use("/api/products", routerProducts.getRouter());   
     app.use("/api/sessions", sessionsController.getRouter());

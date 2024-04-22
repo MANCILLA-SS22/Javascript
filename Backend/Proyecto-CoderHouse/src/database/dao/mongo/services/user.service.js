@@ -11,7 +11,7 @@ class UserServiceMongo{
 
     async getAllUsers(){
         try {
-            return await userModel.find({}).select('first_name last_name email role' );
+            return await userModel.find({}).select('first_name last_name email role last_connection' );
         } catch (error) {
             throw new Error(error)
         }
@@ -61,6 +61,14 @@ class UserServiceMongo{
     async updateConnection(email, newConnection){
         try {
             return await userModel.findOneAndUpdate({email}, {last_connection: newConnection});
+        } catch (error) {
+            return error;
+        }
+    }
+
+    async deleteUsers(id){
+        try {
+            return await userModel.findByIdAndDelete(id)
         } catch (error) {
             return error;
         }

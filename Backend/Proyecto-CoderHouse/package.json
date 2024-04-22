@@ -88,8 +88,8 @@
     "main": false
   },
   "scripts": {
-    "debug": "node --inspect backend.js",
-    "start": "nodemon src/backend.js"
+    "debug": "node --inspect app.js",
+    "start": "nodemon src/app.js"
   },
   "repository": {
     "type": "git",

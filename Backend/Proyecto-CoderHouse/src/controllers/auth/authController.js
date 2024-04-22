@@ -75,7 +75,7 @@ class AuthRouter extends Route {
                 };
     
                 const emailSend = await sendNotification(email, mensaje);
-                console.log("emailSend", emailSend)
+                console.log("emailSend", emailSend);
                 res.json({emailSend});
             } catch (error) {
                 res.sendServerError(`something went wrong ${error}`)
