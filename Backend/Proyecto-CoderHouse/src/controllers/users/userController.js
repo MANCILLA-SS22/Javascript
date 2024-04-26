@@ -44,7 +44,6 @@ class UserRouter extends Route {
                         console.log(`El usuario ${event.email} aun no excede el tiempo limite!`);
                     }
                 });
-
                 res.sendSuccess("Informacion actualizada correctamente");
             } catch (error) {
                 res.sendServerError(`something went wrong ${error}`);
