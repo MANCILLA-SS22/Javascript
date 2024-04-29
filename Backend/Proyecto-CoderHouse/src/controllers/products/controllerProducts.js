@@ -10,8 +10,13 @@ import { io } from "../../socket/socketServer.js";
 
 class ProductRouter extends Route{
     init(){
-        // this.get("/", ['PUBLIC'], async function(req, res){
-            this.get("/", ['ADMIN', 'USER'], async function(req, res){
+
+        this.get("/mockingproducts", ['PUBLIC'], function(req, res){
+            const products = generateMock(100);
+            res.sendSuccess(products);
+        });
+
+        this.get("/", ['ADMIN', 'USER'], async function(req, res){
             try {
                 // console.log("req.user", req.user);
                 // Copiar y pegar en barra de navegacion --> http://localhost:5500/api/products?page=1&limit=3&sort=asc&stock=8&category=New
@@ -74,11 +79,6 @@ class ProductRouter extends Route{
             } 
         
         });
-
-        this.get("/mockingproducts", ['PUBLIC'], function(req, res){
-            const products = generateMock(100);
-            res.sendSuccess(products);
-        });  
 
         this.get("/:pid", ['PUBLIC'], async function(req, res){
             try {
@@ -146,7 +146,7 @@ class ProductRouter extends Route{
                 res.sendServerError(`something went wrong ${error}`);
             }
         });
-        
+
         this.delete("/:pid", ['ADMIN', 'PREMIUM'], async function(req, res){
             try {
                 const {pid} = req.params;
@@ -163,7 +163,6 @@ class ProductRouter extends Route{
                 res.sendServerError(`something went wrong ${error}`)
             }
         });
-
     };
 };
 

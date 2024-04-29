@@ -1,0 +1,39 @@
+@import "resets";
+@import "variables";
+@import "mixins";
+
+body {
+  background-color: $primary-color;
+  color: $text-color;
+}
+
+.content {
+  @include flexCenter(column);
+  width: 80%;
+  margin: 0 auto;
+
+  &__paragraph--intro {
+    font-weight: map-get($font-weights, bold);
+
+    &:hover {
+      color: yellow;
+    }
+  }
+
+  &__paragraph {
+    @extend .content__paragraph--intro;
+
+    &:hover {
+      color: red;
+    }
+  }
+  
+  /*funciona como una media query*/
+  @include mobile {
+    flex-direction: row;
+  }
+}
+
+.light {
+  @include theme(false);
+}

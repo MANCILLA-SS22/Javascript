@@ -2,7 +2,11 @@ import productModel from "../models/products.model.js"
 
 class ProductServiceMongo{
     async getProducts (){
-        return  await productModel.find();
+        try {
+            return  await productModel.find();
+        } catch (error) {
+            return error;
+        }
     }
 
     async getProductsNew (filter, conditionalQuery){

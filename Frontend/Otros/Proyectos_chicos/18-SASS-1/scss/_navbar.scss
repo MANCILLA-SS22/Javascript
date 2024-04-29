@@ -1,0 +1,25 @@
+nav {
+    height: 10vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    ul{
+    list-style: none;
+    display: flex;
+    
+        li{
+            margin-right: 2.5rem;
+
+            a{
+                text-decoration: none;
+                color: #707070;
+
+                &:hover{
+                    color: red;
+                }
+            }
+        }
+    }
+}

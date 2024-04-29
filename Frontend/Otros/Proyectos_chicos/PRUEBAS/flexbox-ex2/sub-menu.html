@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      ul {
+        list-style: none;
+        font-size: 0; /* truco por el uso de inline-block*/
+      }
+      li {
+        display: inline-block;
+        width: 25%;
+        position: relative;
+        font-size: 14px;
+      }
+      ul ul {
+        position: absolute;
+        display: none;
+        background-color: aqua;
+      }
+      ul ul li {
+        display: block;
+      }
+      ul li:hover ul {
+        display: block;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <ul>
+      <li><a href="">Item</a></li>
+      <li><a href="">Item</a></li>
+      <li>
+        <a href="">Item</a>
+        <ul>
+          <li><a href="">Subitem</a></li>
+          <li><a href="">Subitem</a></li>
+        </ul>
+      </li>
+      <li><a href="">Item</a></li>
+    </ul>
+  </body>
+</html>

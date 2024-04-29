@@ -14,8 +14,8 @@ function CartItem(props){
   function addItemHandler(){
     dispatch(cartActions.addItemToCart({
       id: id, 
-      tital: title, 
-      price: title, 
+      title: title, 
+      price: price, 
     }));
   }
 

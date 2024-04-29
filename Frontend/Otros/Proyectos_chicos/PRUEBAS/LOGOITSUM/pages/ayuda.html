@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,700;0,800;0,900;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="shortcut icon"
+      href="../imgs/chat-icon.png"
+      type="image/x-icon"
+    />
+    <title>Logoipsum | Ayuda</title>
+  </head>
+  <body>
+    <!--HEADER-->
+    <header>
+      <!--NAV BAR-->
+      <div class="container">
+        <div class="row">
+          <a href="/">
+            <img src="../imgs/logoipsum-white.svg" alt="Logoipsum" />
+          </a>
+          <nav class="menu">
+            <ul class="nav-list">
+              <li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
+              <li class="nav-item">
+                <a class="nav-link" href="servicios.html">Funciones</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="faq.html">Faq</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="galeria.html">Nosotros</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="ayuda.html">Ayuda</a>
+              </li>
+              <li class="nav-item">
+                <button type="button" class="nav-link btn-rounded">
+                  DOWNLOAD <span><i class="fas fa-download"></i></span>
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <section class="intro-section">
+      <div class="container">
+        <div class="row">
+          <h1>Ayuda</h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate
+            quod nisi sunt quaerat perspiciatis!
+          </p>
+        </div>
+        <form action="">
+          <label for="nombre">Nombre:</label>
+          <input
+            type="text"
+            name="nombre"
+            id="nombre"
+            placeholder="ponga su nombre"
+            required
+          />
+          <br />
+          <label for="apellido">Apellido:</label>
+          <input type="text" name="apellido" id="apellido" />
+          <br />
+          <label for="mensaje">Mensaje</label>
+          <br />
+          <textarea name="mensaje" id="mensaje" cols="30" rows="10"></textarea>
+          <br />
+          <input type="submit" value="ENVIAR" />
+          <input type="reset" value="BORRAR" />
+        </form>
+      </div>
+    </section>
+    <!--COMIENZA EL FOOTER-->
+    <footer class="footer">
+      <div class="footer-sm">
+        <div class="container">
+          <div class="row footer-up">
+            <div class="col-lg-5 col-md-6 md-4 mb-md-0">
+              Buscanos en las redes
+            </div>
+            <div class="col">
+              <a href="#"><i class="fab fa-facebook"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="container">
+          <div class="row footer-copy">
+            <div class="col">
+              <div class="footer-bottom__copy">
+                &copy; Copyright 2021 <a href="#">Logoipsum</a> | Creada por
+                <a href="https://cgldev.github.io/">CGLDev</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

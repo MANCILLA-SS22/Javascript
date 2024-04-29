@@ -1,0 +1,135 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+}
+
+.box_uno {
+  background-color: #4285f4;
+  width: 360px;
+  /* Ancho de 360*/
+  height: 720px;
+}
+
+.box_dos {
+  background-color: #33d374;
+  height: 1440px;
+  width: 720px;
+}
+
+/*CONDICIONALES*/
+/* Mi constante */
+p {
+  color: green;
+}
+
+/*BUCLES*/
+.clase-1 {
+  width: 2em;
+  height: 720px;
+  background-color: #33d374;
+  margin-left: 2rem;
+}
+
+.clase-2 {
+  width: 4em;
+  height: 720px;
+  background-color: #33d374;
+  margin-left: 4rem;
+}
+
+.clase-3 {
+  width: 6em;
+  height: 720px;
+  background-color: #33d374;
+  margin-left: 6rem;
+}
+
+/*EACH*/
+.puma-icon {
+  background-image: url("/img/puma.jpg");
+  width: 640px;
+  height: 720px;
+}
+
+.leon-icon {
+  background-image: url("/img/leon.jpg");
+  width: 640px;
+  height: 720px;
+}
+
+.elefante-icon {
+  background-image: url("/img/elefante.jpg");
+  width: 640px;
+  height: 720px;
+}
+
+/*animal tendrá los valores de cada uno */
+/*MAPS*/
+/*Declaramos nuestro mapa*/
+/*Creamos el bucle para usar los valores del mapa*/
+.btn--twitter {
+  background-color: #9fa0a1;
+  cursor: pointer;
+  padding: 1rem 3rem;
+}
+
+.btn--facebook {
+  background-color: #3a5795;
+  cursor: pointer;
+  padding: 1rem 3rem;
+}
+
+.btn--send-mail {
+  background-color: #c25e30;
+  cursor: pointer;
+  padding: 1rem 3rem;
+}
+
+/*EXTEND*/
+.redsocial, .redsocial--nueva {
+  border: 1px #f00;
+  background-color: #fdd;
+}
+
+.redsocial--nueva {
+  border-width: 3px;
+}
+
+/*MIXINS*/
+.box {
+  width: 500px;
+  height: 50px;
+  background-color: red;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.box2 {
+  width: 250px;
+  height: 100px;
+  background-color: blue;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.box3 {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+
+.box4 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+
+/*# sourceMappingURL=style.css.map */

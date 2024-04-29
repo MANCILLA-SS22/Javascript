@@ -1,0 +1,20 @@
+{
+  "name": "preentrega_mancillachavezgerman",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile": "sass --watch scss:css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SOLDADO-DE-LA-SS/PreEntrega_MancillaChavezGerman.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SOLDADO-DE-LA-SS/PreEntrega_MancillaChavezGerman/issues"
+  },
+  "homepage": "https://github.com/SOLDADO-DE-LA-SS/PreEntrega_MancillaChavezGerman#readme"
+}

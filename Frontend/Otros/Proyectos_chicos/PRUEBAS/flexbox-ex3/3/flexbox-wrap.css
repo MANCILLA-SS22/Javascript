@@ -1,0 +1,12 @@
+.padre {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.hijo {
+  flex: 0 1 300px;
+  border: 1px solid red;
+  background: lightpink;
+  font-size: 2rem;
+  text-align: center;
+}

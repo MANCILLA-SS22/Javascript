@@ -1,0 +1,21 @@
+@mixin transition-ease {
+  transition: all 0.5s ease-in-out;
+}
+
+@mixin media-md {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin media-lg {
+  @media (min-width: 992px) {
+    @content;
+  }
+}
+
+@mixin media-xxl {
+  @media (min-width: 1400px) {
+    @content;
+  }
+}

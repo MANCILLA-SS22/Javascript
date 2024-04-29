@@ -1,0 +1,14 @@
+{
+  "name": "clase12",
+  "version": "1.0.0",
+  "description": "Ejemplos de SASS",
+  "main": "index.js",
+  "scripts": {
+    "compile:sass": "sass --watch scss/style.scss css/style.css"
+  },
+  "keywords": [
+    "sass"
+  ],
+  "author": "Cesar Gimenez Lascano",
+  "license": "ISC"
+}

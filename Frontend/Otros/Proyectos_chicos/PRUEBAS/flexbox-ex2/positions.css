@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.padre {
+  background-color: cadetblue;
+  padding: 10px;
+  /* margin-top: 30px; */
+  height: 200vh;
+}
+
+.hijo {
+  padding: 5px;
+}
+
+.hijo1 {
+  background-color: crimson;
+  position: sticky;
+  top: 0px;
+}
+
+.hijo2 {
+  background-color: blue;
+}
+
+.hijo3 {
+  background-color: green;
+}

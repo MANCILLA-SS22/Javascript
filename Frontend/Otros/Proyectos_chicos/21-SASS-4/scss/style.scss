@@ -1,0 +1,120 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+}
+
+$ancho: 720px;
+$alto: 720px;
+$blue: #4285f4;
+$green: #33d374;
+
+.box_uno {
+  background-color: $blue;
+  width: $ancho/2; /* Ancho de 360*/
+  height: $alto;
+}
+.box_dos {
+  background-color: $green;
+  height: $alto * 2;
+  width: $ancho;
+}
+
+/*CONDICIONALES*/
+$animal: caballo; /* Mi constante */
+p {
+  @if $animal == gato {
+    color: blue;
+  } @else if $animal == perro {
+    color: red;
+  } @else if $animal == caballo {
+    color: green;
+  } @else {
+    color: black;
+  }
+}
+
+/*BUCLES*/
+
+$columnas: 3;
+
+@for $i from 1 through $columnas {
+  .clase-#{$i} {
+    width: 2em * $i;
+    height: $alto; //variable global
+    background-color: $green; //variable global
+    margin-left: $i * 2rem;
+  }
+}
+
+/*EACH*/
+
+@each $animal in puma, leon, elefante {
+  .#{$animal}-icon {
+    background-image: url("/img/#{$animal}.jpg");
+    width: 640px;
+    height: 720px;
+  }
+} /*animal tendrá los valores de cada uno */
+
+/*MAPS*/
+
+/*Declaramos nuestro mapa*/
+$redes: (
+  twitter: #9fa0a1,
+  facebook: #3a5795,
+  send-mail: #c25e30,
+);
+
+/*Creamos el bucle para usar los valores del mapa*/
+@each $redsocial, $color in $redes {
+  .btn--#{$redsocial} {
+    background-color: $color;
+    cursor: pointer;
+    padding: 1rem 3rem;
+  }
+}
+
+/*EXTEND*/
+.redsocial {
+  border: 1px #f00;
+  background-color: #fdd;
+}
+.redsocial--nueva {
+  @extend .redsocial;
+  border-width: 3px;
+}
+
+/*MIXINS*/
+@mixin caja($width, $height, $background) {
+  width: $width;
+  height: $height;
+  background-color: $background;
+  margin-top: 10px;
+  padding: 10px;
+}
+.box {
+  @include caja(500px, 50px, red);
+}
+.box2 {
+  @include caja(250px, 100px, blue);
+}
+
+@mixin flex($direction, $justify) {
+  display: flex;
+  justify-content: $justify;
+  align-items: center;
+  flex-direction: $direction;
+}
+
+.box3 {
+  @include flex(column, space-around);
+}
+
+.box4 {
+  @include flex(row, space-between);
+}

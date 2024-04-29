@@ -1,3 +1,5 @@
+// nodemon src/app.js --mode dev
+
 import {app, httpServer, express} from "./socket/socketServer.js";
 import { configMongoSingleton } from "./config/mongodb/mongoInstance.method.js";
 import {configMongo} from "./config/mongodb/mongodb.config.js"

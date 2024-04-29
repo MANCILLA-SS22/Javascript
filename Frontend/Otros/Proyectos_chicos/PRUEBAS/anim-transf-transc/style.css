@@ -1,0 +1,989 @@
+/* 1. ########################################################################### */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    background-color: gray;
+    margin: 20px 20px;
+}
+
+.animated-text {
+    --bg-size: 400%;
+    --color-one: hsl(10 90% 55%);
+    --color-two: hsl(40 90% 55%);
+    font-size: clamp(3rem, 25vmin, 12rem);
+    background: linear-gradient(90deg,
+            var(--color-one),
+            var(--color-two),
+            var(--color-one)) 0 0 / var(--bg-size) 100%;
+    animation: move-bg 4s infinite linear;
+    color: transparent;
+    -webkit-background-clip: text;
+}
+
+@keyframes move-bg {
+    to {
+        background-position: var(--bg-size) 0;
+    }
+}
+
+/* 2. ########################################################################### */
+
+.animated-text2 {
+    font-size: 11rem;
+    background: linear-gradient(90deg, red, yellow, red) 0 0 / 400% 100%;
+    animation: move-bg2 4s infinite linear;
+    color: transparent;
+    -webkit-background-clip: text;
+}
+
+@keyframes move-bg2 {
+    to {
+        background-position: 400% 0;
+    }
+}
+
+/* 3. ########################################################################### */
+
+.letter {
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.letter li {
+    list-style: none;
+    color: #484848;
+    font-size: 80px;
+    letter-spacing: 15px;
+    animation: iluminar 1.4s linear infinite;
+}
+
+@keyframes iluminar {
+    0% {
+        color: #484848;
+        text-shadow: none;
+    }
+
+    90% {
+        color: #484848;
+        text-shadow: none;
+    }
+
+    100% {
+        color: #fff900;
+        text-shadow: 0 0 7px #fff900, 0 0 50px #ff6c00;
+    }
+}
+
+.letter li:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.letter li:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.letter li:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.letter li:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.letter li:nth-child(5) {
+    animation-delay: 0.4s;
+}
+
+.letter li:nth-child(6) {
+    animation-delay: 0.5s;
+}
+
+.letter li:nth-child(7) {
+    animation-delay: 0.6s;
+}
+
+.letter li:nth-child(8) {
+    animation-delay: 0.7s;
+}
+
+/* 4. ########################################################################### */
+
+.icon {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    background-color: #ff6c00;
+    opacity: 0.9999;
+}
+
+.icon li {
+    list-style: none;
+    width: 120px;
+    height: 120px;
+    margin: 0 20px;
+    border: 2px solid green;
+    border-radius: 50%;
+    transition: all 0.5s;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon li i {
+    font-size: 48px;
+    color: green;
+    transition: all 0.5s;
+}
+
+.icon li:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: green;
+    border-radius: 50%;
+    z-index: -1;
+    transition: all 0.5s;
+    opacity: 0;
+}
+
+.icon li:hover:before {
+    opacity: 1;
+    transform: scale(0.8);
+}
+
+.icon li:hover i {
+    color: white;
+}
+
+.icon li:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border-radius: 50%;
+    z-index: -1;
+    transition: all 0.5s;
+    opacity: 0;
+    border: 2px dashed lightgreen;
+    box-sizing: border-box;
+}
+
+@keyframes rotar {
+    0% {
+        transform: scale(0.92) rotate(0deg);
+    }
+
+    100% {
+        transform: scale(0.92) rotate(360deg);
+    }
+}
+
+li:hover:after {
+    opacity: 1;
+    animation: rotar 10s linear infinite;
+}
+
+/* 5. ########################################################################### */
+
+.loading {
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    border-radius: 12px;
+    animation: loading 2s linear infinite;
+}
+
+@keyframes loading {
+    0% {
+        transform: rotateX(0deg) rotateY(0deg);
+    }
+
+    50% {
+        transform: rotateX(0deg) rotateY(180deg);
+    }
+
+    100% {
+        transform: rotateX(180deg) rotateY(180deg);
+    }
+}
+
+/* 6. ########################################################################### */
+
+.welcome {
+    color: white;
+    font-family: arial;
+    font-size: 4rem;
+    letter-spacing: 15px;
+    text-shadow: 4px 4px 5px #cdcdcd;
+    animation: flotar 3s linear infinite alternate;
+}
+
+@keyframes flotar {
+    form {
+        transform: rotate(5deg);
+    }
+
+    to {
+        transform: rotate(-5deg);
+    }
+    
+}
+
+
+/* 7. ########################################################################### */
+
+.boton1 {
+    padding: 20px 40px;
+    text-decoration: none;
+    text-transform: uppercase;
+    background-color: orange;
+    color: white;
+    font-size: 20px;
+    letter-spacing: 2px;
+    position: relative;
+    margin-top: 20px;
+}
+
+.boton1:before {
+    content: "botón";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotateX(270deg);
+    transform-origin: top;
+    transition: all 0.5s;
+}
+
+.boton1:hover:before,
+.boton1:hover:after {
+    transform: rotatex(0);
+}
+
+.boton1:after {
+    content: "botón";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotateX(270deg);
+    transform-origin: top;
+    transition: all 0.5s;
+    transition-delay: 0.25s;
+}
+
+/* 8. ########################################################################### */
+
+.boton2 {
+    text-decoration: none;
+    color: white;
+    font-family: sans-serif;
+    font-size: 40px;
+    border: 3px solid white;
+    padding: 40px 80px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.boton2:hover {
+    background-color: red;
+}
+
+.boton2:before {
+    content: "";
+    background-color: white;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    position: absolute;
+    transform: translatex(-100%) rotate(45deg);
+    transition: all 0.3s;
+}
+
+.boton2:hover:before {
+    transform: translatex(100%) rotate(45deg);
+}
+
+/* 9. ########################################################################### */
+
+.boton3 {
+    text-decoration: none;
+    background-color: black;
+    font-family: sans-serif;
+    font-size: 40px;
+    border: 4px solid black;
+    padding: 40px 80px;
+    position: relative;
+    color: transparent;
+    overflow: hidden;
+}
+
+.boton3:before {
+    content: "Hover Me";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: yellow;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s;
+}
+
+.boton3:after {
+    content: "Hover Me";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: yellow;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s;
+    transform: translate(-100%, 100%);
+}
+
+.boton3:hover:before {
+    transform: translate(100%, -100%)
+}
+
+.boton3:hover:after {
+    transform: translate(0, 0);
+}
+
+/* 10. ########################################################################## */
+
+
+.boton4 {
+    text-decoration: none;
+    color: black;
+    font-family: sans-serif;
+    font-size: 40px;
+    border: 3px solid red;
+    padding: 40px 80px;
+    position: relative;
+    overflow: hidden;
+    background-color: white;
+}
+
+.boton4:before {
+    content: "Hover Me";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: scale(5);
+    opacity: 0;
+    transition: all 0.5s;
+}
+
+.boton4:hover:before {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* 11. ########################################################################## */
+
+.boton0 {
+    border: 2px solid tomato;
+    background: none;
+    color: tomato;
+    cursor: pointer;
+    font-size: 25px;
+    text-transform: uppercase;
+    padding: 20px 40px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s;
+    background-color: wheat;
+    margin-top: 20px;
+}
+
+.boton0:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 0%;
+    width: 100%;
+    background-color: tomato;
+    z-index: -1;
+    border-radius: 0 0 50% 50%;
+    transition: all 0.5s;
+}
+
+.boton0:hover:before {
+    height: 190%
+}
+
+.boton0:hover {
+    color: white;
+}
+
+/* 12. ########################################################################## */
+
+.boton5{
+    padding: 20px 40px;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 4px;
+    color: transparent;
+    border: 3px solid yellow;
+    font-size: 30px;
+    position: relative;
+    margin-top: 20px;
+}
+
+.boton5:before {
+    content: "Boton";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    color: yellow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s;
+}
+
+.boton5:hover:before {
+    left: 100%;
+    transform: scale(0) rotateY(360deg);
+    opacity: 0;
+}
+
+.boton5:after {
+    content: "Boton";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    color: yellow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s;
+    transform: scale(0) rotateY(0deg);
+    opacity: 0;
+}
+
+.boton5:hover:after {
+    left: 0;
+    transform: scale(1) rotateY(360deg);
+    opacity: 1;
+}
+
+/* 13. ########################################################################## */
+
+.spinner {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    overflow: hidden;
+    position: relative;
+    animation: text-color 2s ease-in-out infinite alternate;
+}
+
+.spinner-sector {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 15px solid transparent;
+    mix-blend-mode: overlay;
+    animation: rotate 1.5s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.spinner-sector-red {
+    border-top-color: lightcoral;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-in-out;
+}
+
+.spinner-sector-blue {
+    border-left-color: lightblue;
+    animation-duration: 2s;
+    animation-timing-function: ease-in;
+}
+
+.spinner-sector-green {
+    border-right-color: lightgreen;
+    animation-duration: 2.5s;
+    animation-timing-function: ease-out;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes text-color {
+    0% {
+        color: rgba(0, 0, 0, 1);
+    }
+
+    50% {
+        color: rgba(0, 0, 0, 0.5);
+    }
+
+    100% {
+        color: rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* 14. ########################################################################## */
+
+.boton6 {
+    padding: 40px 80px;
+    font-family: sans-serif;
+    text-decoration: none;
+    color: white;
+    font-size: 40px;
+    border: 3px solid white;
+    position: relative;
+    transition: all 1s;
+    overflow: hidden;
+}
+
+.boton6:before {
+    content: "¡HOLA!";
+    color: white;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: red;
+    transform: translateY(-100%);
+    transition: all 1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.boton6:hover:before {
+    transform: translateY(0%);
+}
+
+.boton6:hover {
+    color: white;
+}
+
+/* 15. ########################################################################## */
+
+.boton7 {
+    text-decoration: none;
+    padding: 40px 80px;
+    color: red;
+    border: 3px solid red;
+    text-transform: uppercase;
+    font-size: 40px;
+    font-family: "roboto";
+    font-weight: 300;
+    letter-spacing: -2px;
+    transition: all 0.5s;
+}
+
+.boton7:hover {
+    font-weight: 900;
+    letter-spacing: 10px;
+    border: 7px solid red;
+}
+
+/* 16. ########################################################################## */
+
+.boton8 {
+    padding: 40px 80px;
+    font-family: sans-serif;
+    text-decoration: none;
+    color: violet;
+    font-size: 40px;
+    border: 3px solid violet;
+    position: relative;
+    transition: all 1s;
+    overflow: hidden;
+}
+
+.boton8:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: violet;
+    z-index: -1;
+    transform: translatex(-100%);
+    transition: all 1s;
+}
+
+.boton8:hover:before {
+    transform: translatex(0%);
+}
+
+.boton8:hover {
+    color: white;
+}
+
+/* 17. ########################################################################## */
+
+.boton9 {
+    padding: 40px 80px;
+    font-family: sans-serif;
+    text-decoration: none;
+    color: black;
+    font-size: 45px;
+    letter-spacing: 2px;
+    border: 5px solid black;
+    position: relative;
+    transition: 1s;
+}
+
+.boton9:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    transition: 1s;
+    transform: rotatex(90deg);
+    z-index: -1;
+}
+
+.boton9:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    transition: 1s;
+    transform: rotatey(90deg);
+    z-index: -1;
+}
+
+.boton9:hover:before {
+    transform: rotatex(0deg)
+}
+
+.boton9:hover:after {
+    transform: rotatey(0deg)
+}
+
+.boton9:hover {
+    color: white;
+}
+
+/* 18. ########################################################################## */
+
+.boton10 {
+    text-decoration: none;
+    color: black;
+    font-family: sans-serif;
+    font-size: 45px;
+    border: 5px solid black;
+    padding: 40px 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+.boton10:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: darkblue;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    transform-origin: bottom left;
+    transform: rotate(-90deg);
+    transition: transform 1s;
+}
+
+.boton10:hover:before {
+    transform: rotate(0deg);
+}
+
+/* 19. ########################################################################## */
+
+.circle{
+    margin-top: 30px;
+    margin-left: 20px;
+    width: 150px;
+    height: 150px;
+    background: cornflowerblue;
+    border-radius: 50%;
+    animation: mover 2s 2s alternate infinite;
+}
+
+@keyframes mover {
+    0%{
+        transform: translate(0);
+        background-color: crimson;
+    }
+
+    25%{
+        transform: translate(100%, 0);
+        background-color: salmon;
+    }
+
+    50%{
+        transform: translate(100%, 100%);
+        background-color: slateblue;
+    }
+
+    75%{
+        transform: translate(0, 100%);
+        background-color: teal;
+    }
+}
+
+
+/* 20. ########################################################################## */
+
+.btn-12 {
+    position: relative;
+    background-color: transparent;
+    right: 20px;
+    bottom: 20px;
+    border: none;
+    box-shadow: none;
+    width: 130px;
+    height: 40px;
+    margin-top: 80px;
+    line-height: 42px;
+    -webkit-perspective: 230px;
+    perspective: 230px;
+}
+
+.btn-12 span {
+    background: rgb(0, 172, 238);
+    background: linear-gradient(0deg, rgba(0, 172, 238, 1) 0%, rgba(2, 126, 251, 1) 100%);
+    display: block;
+    position: absolute;
+    width: 130px;
+    height: 40px;
+    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+        7px 7px 20px 0px rgba(0, 0, 0, .1),
+        4px 4px 5px 0px rgba(0, 0, 0, .1);
+    border-radius: 5px;
+    margin: 0;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+}
+
+.btn-12 span:nth-child(1) {
+    box-shadow:
+        -7px -7px 20px 0px #fff9,
+        -4px -4px 5px 0px #fff9,
+        7px 7px 20px 0px #0002,
+        4px 4px 5px 0px #0001;
+    -webkit-transform: rotateX(90deg);
+    -moz-transform: rotateX(90deg);
+    transform: rotateX(90deg);
+    -webkit-transform-origin: 50% 50% -20px;
+    -moz-transform-origin: 50% 50% -20px;
+    transform-origin: 50% 50% -20px;
+}
+
+.btn-12 span:nth-child(2) {
+    -webkit-transform: rotateX(0deg);
+    -moz-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+    -webkit-transform-origin: 50% 50% -20px;
+    -moz-transform-origin: 50% 50% -20px;
+    transform-origin: 50% 50% -20px;
+}
+
+.btn-12:hover span:nth-child(1) {
+    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+        7px 7px 20px 0px rgba(0, 0, 0, .1),
+        4px 4px 5px 0px rgba(0, 0, 0, .1);
+    -webkit-transform: rotateX(0deg);
+    -moz-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+}
+
+.btn-12:hover span:nth-child(2) {
+    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+        7px 7px 20px 0px rgba(0, 0, 0, .1),
+        4px 4px 5px 0px rgba(0, 0, 0, .1);
+    color: transparent;
+    -webkit-transform: rotateX(-90deg);
+    -moz-transform: rotateX(-90deg);
+    transform: rotateX(-90deg);
+}
+
+/* 21. ########################################################################## */
+
+input#darkmode {
+    float: right;
+    visibility: hidden;
+}
+
+input#darkmode:checked+main {
+    --color-main: #e7e8eb;
+    --bg-main: #2d2d2d;
+    --bg-switch: rgba(240, 246, 252, 0.15);
+    --content-switch-after: " Light Mode ☀️"
+}
+
+#switch {
+    cursor: pointer;
+    user-select: none;
+    background: var(--bg-switch, rgba(27, 31, 35, 0.05));
+    padding: 0.5rem;
+    border-radius: 6px;
+}
+
+#switch::after {
+    content: var(--content-switch-after, " Dark Mode 🌙");
+}
+
+main {
+    height: 100%;
+    padding: 1.5rem clamp(1rem, 5%, 3rem);
+    color: var(--color-main, #24292e);
+    background-color: var(--bg-main, #fff);
+    font-family: sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-bottom: 2.25rem;
+}
+
+/* 23. ########################################################################## */
+
+ul{
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+}
+
+ul li{
+    list-style: none;
+}
+
+ul li .a{
+    width: 80px;
+    height: 80px;
+    background-color: #fff;
+    text-align: center;
+    line-height: 80px;
+    font-size: 35px;
+    margin: 0 10px;
+    display: block;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    border: 3px solid #fff;
+    z-index: 1;
+}
+
+ul li .a .icons{
+    position: relative;
+    color: #262626;
+    transition: 0.5s;
+    z-index: 3;
+}
+
+ul li .a:hover .icons{
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f00;
+    transition: 0.5s;
+    z-index: 2;
+}
+
+ul li .a:hover::before{
+    top: 0;
+}
+
+ul li:nth-child(1) .a:before{
+    background: #3b5999;
+}
+
+ul li:nth-child(2) .a:before{
+    background: #55acee;
+}
+
+ul li:nth-child(3) .a:before{
+    background: #0077b5;
+}
+
+ul li:nth-child(4) .a:before{
+    background: #dd4b39;
+}

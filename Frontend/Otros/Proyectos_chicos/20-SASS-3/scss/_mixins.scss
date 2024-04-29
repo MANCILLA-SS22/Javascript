@@ -1,0 +1,19 @@
+@mixin flexCenter($direction) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: $direction;
+}
+
+@mixin theme($light-theme: true) {
+  @if $light-theme {
+    background-color: $text-color;
+    color: $primary-color;
+  }
+}
+
+@mixin mobile {
+  @media (min-width: $mobile) {
+    @content;
+  }
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flexbox</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      .padre {
+        height: 100vh;
+        border: 20px solid black;
+        display: flex;
+      }
+      .hijo1 {
+        width: 150px;
+        height: 150px;
+        background: blueviolet;
+
+        flex-grow: 2;
+      }
+      .hijo2 {
+        width: 150px;
+        height: 150px;
+        background: brown;
+        flex-grow: 1;
+      }
+      .hijo3 {
+        width: 150px;
+        height: 150px;
+        background: cadetblue;
+        flex-grow: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="padre">
+      <div class="hijo1"><h2>UNO</h2></div>
+      <div class="hijo2"><h2>DOS</h2></div>
+      <div class="hijo3"><h2>TRES</h2></div>
+    </div>
+  </body>
+</html>

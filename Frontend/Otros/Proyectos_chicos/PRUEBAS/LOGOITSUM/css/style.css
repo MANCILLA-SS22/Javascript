@@ -1,0 +1,364 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
+img {
+  max-width: 100%;
+}
+
+img,
+svg {
+  vertical-align: middle;
+}
+
+.container {
+  width: 95%;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+header {
+  background: linear-gradient(to right, #55ae36, #88e169);
+  padding: 0.5rem 0;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  text-align: center;
+}
+
+.col {
+  width: 100%;
+}
+
+.heading-line::before {
+  content: "";
+  width: 10rem;
+  height: 0.2rem;
+  display: block;
+  margin: 0 auto;
+  background-color: #55ae36;
+}
+
+.heading-line--download {
+  margin-bottom: 3rem;
+}
+
+.nav {
+  width: 100%;
+  visibility: hidden;
+  height: 0;
+  position: absolute;
+  font-size: 1rem;
+}
+
+.nav-toggle {
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 3rem;
+  height: 3rem;
+  padding: 0em;
+  border-radius: 0.25rem;
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.55);
+  transition: opacity 250ms ease;
+  position: absolute;
+  left: 0;
+}
+
+.nav-toggle:focus, .nav-toggle:hover {
+  opacity: 0.75;
+}
+
+.hamburger {
+  width: 50%;
+  position: relative;
+}
+
+.hamburger, .hamburger::before, .hamburger::after {
+  display: block;
+  margin: 0 auto;
+  height: 3px;
+  background: white;
+}
+
+.hamburger::before, .hamburger::after {
+  content: "";
+  width: 100%;
+}
+
+.hamburger::before {
+  transform: translateY(-6px);
+}
+
+.hamburger::after {
+  transform: translateY(3px);
+}
+
+.nav--visible {
+  visibility: visible;
+  height: auto;
+  position: relative;
+}
+
+.nav__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav__list--primary {
+  margin-bottom: 2rem;
+}
+
+.nav__item {
+  margin-top: 0.75rem;
+}
+
+.nav__link {
+  color: white;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.nav__link:hover, .nav__link:focus {
+  opacity: 0.65;
+}
+
+.logo {
+  margin-right: 1rem;
+}
+
+.nav__link--button {
+  display: none;
+  position: relative;
+  background: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 0.93rem 3.3rem 0.93rem 1.2rem;
+  font-weight: 700;
+  border: 0.1rem solid white;
+  border-radius: 50rem;
+  cursor: pointer;
+  z-index: 1;
+  overflow: hidden;
+  transition: all 0.5s;
+}
+
+.nav__link--button span {
+  position: absolute;
+  background-color: #55ae36;
+  width: 2.5rem;
+  height: 2.5rem;
+  top: 50%;
+  right: 5px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+}
+
+.nav__link--button span i {
+  color: white;
+  font-size: 1rem;
+  line-height: 2.5rem;
+}
+
+.nav__link--button:hover {
+  color: white;
+}
+
+.nav__link--button:hover span {
+  background-color: rgba(#000, 0.6);
+}
+
+.nav__link--button:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 0;
+  width: 100%;
+  background: linear-gradient(to right, #55ae36, #88e169);
+  z-index: -1;
+  border-radius: 0 0 50% 50%;
+  transition: all 0.5s;
+}
+
+.nav__link--button:hover:before {
+  height: 190%;
+}
+
+.intro-section {
+  background: linear-gradient(to right, #55ae36, #88e169);
+  padding: 8rem 0 0 0;
+  height: 100%;
+  width: 100%;
+}
+
+.display-2 {
+  margin-bottom: 1rem;
+  text-transform: capitalize;
+  color: white;
+  font-size: 2.5rem;
+  font-weight: 300;
+}
+
+.display-2--intro {
+  display: inline-block;
+  font-weight: 700;
+}
+
+.display-2--description {
+  display: block;
+  font-size: 1rem;
+  margin-top: 1.2rem;
+  text-transform: none;
+}
+
+.img-box {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.img-box img {
+  animation: from-right 2s ease;
+}
+
+.download {
+  padding: 0 0 5rem 0;
+}
+
+.download__title {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.download__logo-box {
+  margin-bottom: 2rem;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+/*ESTILOS FOOTER*/
+.footer {
+  padding-top: 1rem;
+  background-color: black;
+}
+
+.footer-sm {
+  background-color: #212121;
+  color: white;
+}
+
+.footer-sm a {
+  color: white;
+}
+
+.footer-sm a i {
+  font-size: 1rem;
+  margin-left: 1rem;
+}
+
+.footer-sm__icons {
+  text-align: center;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  margin: 0 auto;
+}
+
+.footer-bottom {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.footer-bottom__copyright {
+  justify-content: center;
+  text-align: center;
+  color: gray;
+  font-weight: 400;
+}
+
+.footer-bottom__copyright a {
+  color: gray;
+  text-decoration: none;
+}
+
+.footer-bottom__copyright a:hover {
+  color: #72c755;
+  text-decoration: underline;
+}
+
+/*ANIMACION APARECER DESDE LA DERECHA*/
+
+@keyframes from-right {
+  0% {
+    opacity: 0;
+    transform: translateX(80px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+/*MEDIA QUERIES*/
+
+@media (min-width: 768px) {
+  .container {
+    width: 80%;
+  }
+  .nav-toggle {
+    display: none;
+  }
+  .nav {
+    visibility: visible;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: auto;
+    position: relative;
+  }
+  .nav__list {
+    display: flex;
+    margin: 0;
+  }
+  .nav__item {
+    margin: 0 0 0 1.5rem;
+  }
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .img-box {
+    margin-top: 0;
+    text-align: right;
+  }
+  .display-2 {
+    font-size: 3.4rem;
+  }
+  .display-2--description {
+    font-size: 1rem;
+    display: inline-block;
+  }
+}
+
+@media (min-width: 1024px) {
+  .display-2 {
+    font-size: 4.5rem;
+  }
+
+  .display-2--description {
+    font-size: 1.4rem;
+    display: inline-block;
+  }
+  .nav__link--button {
+    display: block;
+  }
+}

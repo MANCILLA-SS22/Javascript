@@ -1,0 +1,10 @@
+h2,h3,h4,h5{
+    color: #088178;
+    margin-bottom: 0;
+}
+
+h1 {
+    @extend h2,h3,h4,h5;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+}

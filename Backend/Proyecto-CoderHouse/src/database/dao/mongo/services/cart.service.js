@@ -47,7 +47,7 @@ class CartServiceMongo{
             const deleteProduct = await cartModel.findByIdAndUpdate(id, {products: newArrayProducts});
             return "Product deleted from cart"
         } catch (error) {
-            
+            return error;
         }
     }
 
@@ -66,7 +66,7 @@ class CartServiceMongo{
             const res = await cartModel.findByIdAndUpdate(cid, cart);
             return res;
         } catch (error) {
-            
+            return error;
         }
     }
 
@@ -75,7 +75,7 @@ class CartServiceMongo{
             await cartModel.findByIdAndDelete(id);
             return "Cart deleted successfuly!";
         } catch (error) {
-            
+            return error;
         }
     }
     

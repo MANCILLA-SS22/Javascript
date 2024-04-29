@@ -1,0 +1,16 @@
+$ColorBHover:#4d4c4c;
+$ColorPHover:#ffffff;
+
+.tarjeta:hover{
+    transform: scale(1.2); 
+    transition-duration: 500ms;
+}
+
+.nav-link{
+    p:hover{        
+        background-color: $ColorBHover; 
+        color: $ColorPHover;
+        padding: 5px;
+        @extend .tarjeta;   
+    }
+}

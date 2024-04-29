@@ -1,0 +1,96 @@
+$colores: (
+    color_nav:#E4F9F5,
+    color_multiple1:#2a7da2,
+    color_habilidades_info:#61fff3,
+    color_navbar_dark:transparent,
+    color_facebook:#1c1cdc,
+    color_multiple2:black,
+    color_linkedin:#0e76a8,
+    color_exp:rgb(226, 162, 84),
+    color_cont1:rgb(207 171 124),
+    color_cont2:rgb(225, 221, 191),
+    color_cont3:rgb(104 185 172),
+    color_hr:#adf1f1,
+    color_multiple3:#fff,
+    color_content:rgba(0, 0, 0, 0.4),
+    color_right_bars: rgb(23, 2, 2),
+    color_right_bars_before:crimson,
+    color_tarj1:#31384A,
+    color_form:rgba(0, 0, 0, 0.4)
+);
+
+.h1-hab, main form h2, .h1_index, .h2_index, main h1{
+    color: map-get($colores, color_habilidades_info);
+}
+
+nav{
+    background-color: map-get($colores, color_nav);
+}
+
+#navbarSupportedContent .nav-link p, .intro, .btn, .sect1 p{
+    color: map-get($colores, color_multiple1);
+}
+
+.navbar-dark .navbar-toggler {
+    color: map-get($colores, color_navbar_dark);
+}
+
+.fa-facebook {
+    color: map-get($colores, color_facebook);
+}
+
+.fa-github {
+    color: map-get($colores, color_multiple2);
+}
+
+.fa-linkedin {
+    color: map-get($colores, color_linkedin);
+}
+
+.exp {
+    background-color: map-get($colores, color_exp);
+}
+
+.cont1 {
+    background-color: map-get($colores, color_cont1);
+}
+
+.cont2 {
+    background-color: map-get($colores, color_cont2);
+}
+
+.cont3 {
+    background-color: map-get($colores, color_cont3);
+}
+
+hr {
+    color: map-get($colores, color_hr);
+}
+
+.skills p, .right .info span {
+    color: map-get($colores, color_multiple3);
+}
+
+.content {
+    background-color: map-get($colores, color_content);
+}
+
+.right .bars {
+    background-color: map-get($colores, color_right_bars);
+}
+
+.right .bars::before {
+    background-color: map-get($colores, color_right_bars_before);
+}
+
+.tarj1 {
+    background-color: map-get($colores, color_tarj1);
+}
+
+.col a {
+    background-color: map-get($colores, color_multiple2);
+}
+
+form {
+    background-color: map-get($colores, color_form);
+}

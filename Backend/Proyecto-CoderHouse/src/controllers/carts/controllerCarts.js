@@ -1,20 +1,9 @@
 import Route from "../../router/class.routes.js"
 import { v4 as uuidv4 } from "uuid";
-
-import { productService } from "../../database/service.js";
-import { cartService } from "../../database/service.js";
-import { userService } from "../../database/service.js";
+import { productService, cartService, userService } from "../../database/service.js";
 import { ticketModel } from '../../database/dao/mongo/models/ticket.model.js';
 import { ProductDto } from "../../database/dto/Product.dto.js";
-
-// function logger(req, res, next){
-//     if (!req.cookies.jwtCookieToken){
-//         // return res.redirect("/login");
-//         return res.send("No estas registrado!!");
-//     }else{
-//         next();
-//     }
-// }
+import { sendNotification } from "../../config/adapter/NodemailerAdapter.js";
 
 class CartRouter extends Route{
     init(){
@@ -27,7 +16,7 @@ class CartRouter extends Route{
             }
         });
 
-        this.post("/", ['USER'], async function(req, res){ //En el endpoint POST '/' del controller cart estas creando el cart como un objeto vacío. El formato correcto debe incluir una key "products" con un array vacío.
+        this.post("/", ['USER', 'PREMIUM'], async function(req, res){ //En el endpoint POST '/' del controller cart estas creando el cart como un objeto vacío. El formato correcto debe incluir una key "products" con un array vacío.
             try {
                 const cart = {product: []}
                 const createdCart = await cartService.addCart(cart);
@@ -49,7 +38,7 @@ class CartRouter extends Route{
             }
         });
         
-        this.put("/:cid", ['PUBLIC'], async function(req, res){ //  deberá actualizar el carrito con un arreglo de productos con el formato especificado arriba.
+        this.put("/:cid", ['USER'], async function(req, res){ //  deberá actualizar el carrito con un arreglo de productos con el formato especificado arriba.
             try {
                 const productDto = new ProductDto(req.body);
                 const {cid} = req.params;
@@ -60,9 +49,9 @@ class CartRouter extends Route{
             }
         });
 
-        this.delete("/:cid", ['ADMIN'], async function(requset, res){ //deberá eliminar todos los productos del carrito
+        this.delete("/:cid", ['USER'], async function(req, res){ //deberá eliminar todos los productos del carrito
             try {
-                const {cid} = requset.params;
+                const {cid} = req.params;
                 const deleteProduct = await cartService.deleteProductsById(cid);
                 res.sendSuccess(deleteProduct);
             } catch (error) {
@@ -70,7 +59,7 @@ class CartRouter extends Route{
             }
         });
 
-        this.post("/:cid/products/:pid", ['PUBLIC'], async function(req, res){ 
+        this.post("/:cid/products/:pid", ['USER', 'PREMIUM'], async function(req, res){ 
             try {
                 const {cid} = req.params;
                 const {pid} = req.params;
@@ -78,53 +67,51 @@ class CartRouter extends Route{
                 const getProductId = await productService.getProductById(pid);
                 let cartIdProducts = getCartId?.products;
             
-                if (!getCartId){
-                    res.sendClientError({message: "Not found cart id."});
-                }else{
-                    if (!getProductId){
-                        res.sendClientError({message: "Not found product id."});
-                    }else{
-                        const verificarCartProduct = cartIdProducts.find((event) => event.product._id.toString() === pid);
-                        if (verificarCartProduct === undefined){
-                            const newObject = {
-                                product: pid,
-                                quantity: 1
-                            }
-                            // cartIdProducts.push(getProductId, newObject);
-                            cartIdProducts.push(newObject);
-                            const updateCartProducts = await cartService.updateCartProductsId(cid, cartIdProducts);
-                            res.sendSuccess(updateCartProducts);
-                        }else{
-                            const productsArrayPosition = cartIdProducts.findIndex(event => event.product._id.toString() === pid);
-                            cartIdProducts[productsArrayPosition].quantity += 1;
-            
-                            const updateCartProducts = await cartService.updateCartProductsId(cid, cartIdProducts);
-                            res.sendSuccess(updateCartProducts);
-                        }
+                if (!getCartId) res.sendClientError({message: "Not found cart id."});
+                if (!getProductId) res.sendClientError({message: "Not found product id."});
+                
+                const verificarCartProduct = cartIdProducts.find((event) => event.product._id.toString() === pid);
+                if (verificarCartProduct === undefined){
+                    const newObject = {
+                        product: pid,
+                        quantity: 1
                     }
-                }
+                    // cartIdProducts.push(getProductId, newObject);
+                    cartIdProducts.push(newObject);
+                    const updateCartProducts = await cartService.updateCartProductsId(cid, cartIdProducts);
+                    res.sendSuccess(updateCartProducts);
+                }else{
+                    const productsArrayPosition = cartIdProducts.findIndex(event => event.product._id.toString() === pid);
+                    cartIdProducts[productsArrayPosition].quantity += 1;
+                    const updateCartProducts = await cartService.updateCartProductsId(cid, cartIdProducts);
+                    res.sendSuccess(updateCartProducts);
+                }                
             } catch (error) {
                 res.sendServerError(`something went wrong ${error}`)
             }
         });
 
-        this.delete("/:cid/products/:pid", ['USER'], async function(requset, res){ //deberá eliminar del carrito el producto seleccionado.
+        this.delete("/:cid/products/:pid", ['USER', 'PREMIUM'], async function(req, res){ //deberá eliminar del carrito el producto seleccionado.
             try {
-                const {cid} = requset.params;
-                const {pid} = requset.params;
+                const {cid} = req.params;
+                const {pid} = req.params;
                 const getCartId = await cartService.getCartById(cid);
-                const verify = getCartId.products.find(event => event.product._id.toString() === pid);
-            
-                if(verify){
-                    const productPosition = getCartId.products.findIndex(event => event.product._id.toString() === pid); //Buscamos la posicion del producto a eliminar
-                    getCartId.products.splice(productPosition, 1) //Una vez encontrado, eliminamos el producto (con la posicion obtenida)
-                    const newArray = getCartId.products;
-                    const deleteProduct = await cartService.deleteProductInCarById(cid, newArray);
-                    res.sendSuccess(deleteProduct);
-            
-                }else{
-                    res.sendClientError({messaje: "Product not found"});
-                }
+                const productInCar = getCartId.products.find(event => event.product._id.toString() === pid);
+                
+                if(!getCartId) return res.sendClientError({messaje: "Cart not found"});
+                if(!productInCar) return res.sendClientError({messaje: "Product not found"});
+                
+                const productPosition = getCartId.products.findIndex(event => event.product._id.toString() === pid); //Buscamos la posicion del producto a eliminar
+                getCartId.products.splice(productPosition, 1) //Una vez encontrado, eliminamos el producto (con la posicion obtenida)
+                const newArray = getCartId.products;
+                const deleteProduct = await cartService.deleteProductInCarById(cid, newArray);
+                if(req.user.role === "PREMIUM"){
+                    await sendNotification(req.user.email, {
+                        message: `Lo sentimos. Hemos eliminado el producto "${productInCar.product.title}" ha sido borrado :(`,
+                        subject: "Eliminacion de producto"
+                    });
+                }                
+                res.sendSuccess(deleteProduct);
             } catch (error) {
                 res.sendServerError(`something went wrong ${error}`)
             }

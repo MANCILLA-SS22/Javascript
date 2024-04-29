@@ -1,8 +1,8 @@
 Documentaciones:                                                                  ñ
-https://developer.mozilla.org/en-US/docs/Web/API/Event/target 
-https://devdocs.io/html/ 
-https://www.w3schools.com/html/html_formatting.asp 
-https://www.geeksforgeeks.org/stdfind_if-stdfind_if_not-in-c/?ref=gcse 
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/values    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
+https://www.w3schools.com/jsref/jsref_class_super.asp#gsc.tab=0&gsc.q=unhandledRejection
+https://www.geeksforgeeks.org/javascript-array-findindex-method/
+https://devdocs.io/javascript-array/
 https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/rand?view=msvc-170 
 https://cplusplus.com/reference/ 
 https://www.programiz.com/cpp-programming/library-function 
@@ -15,11 +15,11 @@ https://docs.oracle.com/javase/tutorial/  https://docs.oracle.com/javase/specs/ 
 https://www.tutorialspoint.com/java/java_arrays.htm       
 https://www.programiz.com/java-programming 
 https://www.javatpoint.com/java-for-loop 
+https://spring.io   https://docs.spring.io/spring-framework/docs/current/reference/html/  https://hibernate.org/orm/documentation/6.5/  https://www.gwtproject.org   https://www.playframework.com/documentation/3.0.x/Home
+https://struts.apache.org/getting-started/   https://maven.apache.org/guides/index.html   https://kafka.apache.org/documentation/  https://junit.org/junit5/docs/current/user-guide/  https://grails.org/documentation.html  
 https://docs.python.org/3/library/index.html     https://docs.python.org/3/reference/ 
-https://docs.spyder-ide.org/current/index.html
-https://docs.jupyter.org/en/latest/use/using.html
-https://flask.palletsprojects.com/en/3.0.x/
-https://docs.djangoproject.com/en/5.0/
+https://docs.spyder-ide.org/current/index.html  https://docs.jupyter.org/en/latest/use/using.html  https://flask.palletsprojects.com/en/3.0.x/  https://docs.djangoproject.com/en/5.0/  
+https://fastapi.tiangolo.com  https://trypyramid.com/documentation.html    https://www.tornadoweb.org/en/stable/  https://www.riverbankcomputing.com/static/Docs/PyQt5/   https://pypi.org/project/PySide/
 https://javascript.info  https://lenguajejs.com 
 https://www.typescriptlang.org
 https://go.dev/learn/
@@ -27,31 +27,21 @@ https://doc.rust-lang.org/rust-by-example/meta/doc.html
 https://dev.mysql.com/doc/refman/8.0/en/dynindex-statement.html 
 https://www.postgresql.org/docs/current/ 
 https://docs.oracle.com/database/121/SQLRF/toc.htm 
-https://docs.github.com/en/get-started/getting-started-with-git/associating-text-editors-with-git 
 https://us-west-1.console.aws.amazon.com/console/home?region=us-west-1
 https://cloud.google.com/docs
 https://learn.microsoft.com/en-us/azure/?product=popular&source=docs
-https://react.dev   https://legacy.reactjs.org  https://create-react-app.dev
 https://jquery.com/download/ 
+https://react.dev   https://legacy.reactjs.org  https://create-react-app.dev
 https://angular.io/start 
+https://vuejs.org/guide/introduction.html#what-is-vue 
 https://www.php.net/manual/en/
 https://docs.flutter.dev       
 https://dart.dev/guides 
-https://vuejs.org/guide/introduction.html#what-is-vue 
-https://guides.rubyonrails.org/getting_started.html  
-https://spring.io       https://docs.spring.io/spring-framework/docs/current/reference/html/     
-https://nextjs.org/docs/getting-started 
-
+https://guides.rubyonrails.org/getting_started.html   
 https://docs.docker.com/storage/volumes/#volumes     -->    https://learn.microsoft.com/en-us/windows/wsl/install
-https://hub.docker.com/repositories/germanss22 
 https://kubernetes.io/docs/home/       -->     https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/
 https://minikube.sigs.k8s.io/docs/start/
-https://yaml.org    https://eemeli.org/yaml/#yaml
 
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/values
-https://www.w3schools.com/jsref/jsref_class_super.asp#gsc.tab=0&gsc.q=unhandledRejection
-https://www.geeksforgeeks.org/javascript-array-findindex-method/
-https://devdocs.io/javascript-array/
 https://nodejs.org/en/about/ 
 https://nodejs.org/api/process.html#process
 https://nodejs.org/api/child_process.html
@@ -64,9 +54,9 @@ https://expressjs.com/en/advanced/best-practice-performance.html#use-gzip-compre
 https://www.mongodb.com/docs/manual/
 https://www.mongodb.com/docs/atlas/
 https://cloud.mongodb.com/v2/659f6888d6b3930477e154ec#/overview
+https://hub.docker.com/repositories/germanss22 
 https://mongoosejs.com/docs/middleware.html   https://mongoosejs.com/docs/guide.html#methods
 https://docs.nestjs.com
-https://nextui.org
 https://react-redux.js.org  https://redux-toolkit.js.org  https://redux-saga.js.org 
 https://axios-http.com/docs/intro  
 https://socket.io/docs/v4/tutorial/introduction 
@@ -140,12 +130,7 @@ https://sendgrid.com/en-us
 https://app.brevo.com/settings/keys/smtp
 https://mailsac.com/inbox/german%40mailsac.com
 https://stripe.com/en-mx     
-https://docs.stripe.com/payments
-https://docs.stripe.com/payments/checkout/how-checkout-works
-https://docs.stripe.com/api/
-https://docs.stripe.com/js/
-https://docs.stripe.com/testing
-
+https://docs.stripe.com/payments  https://docs.stripe.com/payments/checkout/how-checkout-works  https://docs.stripe.com/api/  https://docs.stripe.com/js/  https://docs.stripe.com/testing
 https://swagger.io/docs/specification/about/
 https://app.swaggerhub.com/home
 https://editor.swagger.io
@@ -162,7 +147,8 @@ https://getuikit.com/docs/introduction
 https://github.com/facebook/react
 https://github.com/facebook/create-react-app
 https://vitejs.dev 
-https://react-bootstrap.github.io  
+https://react-bootstrap.github.io
+https://nextjs.org/docs/getting-started 
 https://react-redux.js.org  https://redux-toolkit.js.org  https://redux-saga.js.org 
 https://reactrouter.com/en/main   
 https://www.npmjs.com/package/react-router-dom 
@@ -185,13 +171,13 @@ https://console.cloudinary.com/console/c-4023da8b6dcc56f76f0f9fd2aef6e2/media_li
 https://swr.vercel.app
 https://vercel.com/docs/getting-started-with-vercel
 https://vercel.com/mancillass22s-projects
- 
 https://parceljs.org/docs/
 https://babeljs.io/docs/babel-polyfill#installation
 https://readme.so/editor
 
 GitHub: 
 https://github.com     
+https://docs.github.com/en/get-started/getting-started-with-git/associating-text-editors-with-git 
 https://training.github.com/downloads/github-git-cheat-sheet/ 
 https://git-scm.com/docs 
 https://dzone.com/articles/top-20-git-commands-with-examples 

@@ -1,0 +1,19 @@
+@mixin medida1($relleno_izq, $relleno_der) {
+    padding-left: $relleno_izq;
+    padding-right: $relleno_der;
+}
+
+.container, .container-sm{
+    @include medida1(0,0);
+}
+
+@mixin medida2($marginTop, $marginBottom, $marginLeft, $marginRight) {
+    margin-top: $marginTop;
+    margin-bottom: $marginBottom;
+    margin-left: $marginLeft;
+    margin-right: $marginRight;
+}
+
+.container-fluid {
+    @include medida2(0,0, 20px, 20px);
+}

@@ -1,0 +1,25 @@
+body {
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+    padding: 1em;
+}
+
+#main {
+    flex: 1;
+    display: flex;
+}
+
+article, nav, aside, header, footer {
+    flex: 1;
+    padding: 1rem;
+    margin: 1px;
+}
+
+article, nav, aside {
+    background-color: pink;
+}
+
+header,footer {
+    background-color: grey;
+}

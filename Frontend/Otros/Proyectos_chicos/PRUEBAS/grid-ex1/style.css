@@ -1,0 +1,40 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: lightgray;
+}
+
+.grid-container {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 200px 250px;
+  grid-auto-rows: 150px;
+  grid-gap: 20px;
+  justify-content: space-around;
+  align-content: center;
+  height: 100vh;
+  justify-items: center;
+  align-items: center;
+}
+
+.grid-item {
+  font-size: 1.5rem;
+  padding: 50px 20px 20px 20px;
+  background-color: lightblue;
+  color: black;
+  border: 1px solid white;
+}
+
+.grid-item-1 {
+  align-self: start;
+  justify-self: end;
+}

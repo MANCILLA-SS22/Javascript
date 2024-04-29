@@ -1,0 +1,47 @@
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  font-family: sans-serif;
+}
+
+body {
+  background-color: aqua;
+  margin: 0;
+  padding: 1rem;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 12rem 1fr;
+  min-height: 100vh;
+  grid-template-areas:
+    "header header"
+    "nav main"
+    "nav footer";
+}
+
+header,
+nav,
+main,
+footer {
+  background: black;
+  color: white;
+  padding: 1rem;
+}
+
+header {
+  grid-area: header;
+}
+
+nav {
+  grid-area: nav;
+}
+
+main {
+  grid-area: main;
+}
+
+footer {
+  grid-area: footer;
+}

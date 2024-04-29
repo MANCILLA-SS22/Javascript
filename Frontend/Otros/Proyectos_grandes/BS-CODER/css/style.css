@@ -1,0 +1,10 @@
+/*evito que la nav pise el contenido de la primer seccion*/
+body {
+  padding-top: 4.5rem;
+}
+
+@media (min-width: 768px) {
+  .ofertas-input {
+    width: 50%;
+  }
+}
