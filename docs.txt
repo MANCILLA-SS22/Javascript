@@ -142,7 +142,8 @@ https://mui.com/material-ui/getting-started/overview/
 https://tailwindcss.com/docs/installation 
 https://bulma.io/documentation/ 
 https://sass-lang.com/documentation/style-rules#nesting 
-https://getuikit.com/docs/introduction 
+https://getuikit.com/docs/introduction
+https://materializecss.com 
 
 https://github.com/facebook/react
 https://github.com/facebook/create-react-app
@@ -207,7 +208,6 @@ Otros:
 https://cdnjs.com                   (para agregar librerías de fontawsome y otros) 
 https://www.npmjs.com   
 https://www.sitepoint.com/beginners-guide-node-package-manager/ 
-https://materializecss.com 
 https://get.foundation 
 https://dashboard.emailjs.com/admin 
 https://lodash.com

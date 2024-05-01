@@ -65,8 +65,8 @@ async function register(req, username, password, done){
 
 async function login(req, username, password, done){
     try {
-        const user = await userService.findUser(username);
-        console.log("user --> ", user); 
+        const user = await userService.findUser({email: username});
+        // console.log("user --> ", user); 
         if (!user) return done(null, false);
         if (!validateHash(user, password)) return done(null, false);
         return done(null, user);
@@ -76,10 +76,10 @@ async function login(req, username, password, done){
 };
 
 async function github(accessToken, refreshToken, profile, done){
-    //console.log("Profile obtenido del usuario de Github", profile);
+    // console.log("Profile obtenido del usuario de Github", profile);
     try {
         const user = await userService.findUser({email: profile._json.email});    
-        //console.log("Usuario encontrado para login: ", user);
+        console.log("Usuario encontrado para login: ", user);
         if(!user){ //Al no existir el usuario, lo agregamos a la base de datos
             console.warn("User doesn't exists with username: " + profile._json.email);
             let newUser = {
@@ -88,7 +88,8 @@ async function github(accessToken, refreshToken, profile, done){
                 age: 28,
                 email: profile._json.email,
                 password: '',
-                loggedBy: "GitHub"
+                loggedBy: "GitHub",
+                last_connection: new Date()
             };
             
             const result = await userService.createUser(newUser);

@@ -10,7 +10,6 @@ import { io } from "../../socket/socketServer.js";
 
 class ProductRouter extends Route{
     init(){
-
         this.get("/mockingproducts", ['PUBLIC'], function(req, res){
             const products = generateMock(100);
             res.sendSuccess(products);

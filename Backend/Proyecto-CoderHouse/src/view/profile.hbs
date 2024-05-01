@@ -1,23 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div class="d-flex flex-column justify-content-center mb-3">
-        <div id="profile">
-    
-        </div>
-        <div>
-            <a href="/products">Ver productos</a>
-        </div>
-        <div>
-            <button class="btn btn-dark" id="logout">Logout</a></button>
-        </div>
-    </div>
+<header>
+    <nav class="navbar navbar-expand-sm fixed-top" id="navbar">
+        <div class="container-fluid">
 
+            <a class="navbar-brand " href="#"><img src="./img/github-svgrepo-com.svg" alt="GitHub" width="50"></a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="#navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="50" fill="black"
+                    class="bi bi-lightbulb-fill m-2" viewBox="0 0 16 16">
+                    <path
+                        d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13h-5a.5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm3 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1-.5-.5z" />
+                </svg>
+            </button>
+
+            <!-- <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarSupportedContent"> -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto d-flex align-items-center">
+                    <li class="nav-item m-2"><a class="nav-link" href="#">
+                            <p>Inicio</p>
+                        </a></li>
+                    <li class="nav-item m-2"><a class="nav-link" href="./pages/experiencia.html">
+                            <p>Experiencia</p>
+                        </a></li>
+                    <li class="nav-item m-2"><a class="nav-link" href="./pages/habilidades.html">
+                            <p>Habilidades</p>
+                        </a></li>
+                    <li class="nav-item m-2"><a class="nav-link" href="./pages/metas.html">
+                            <p>Metas</p>
+                        </a></li>
+                    <li class="nav-item m-2"><a class="nav-link" href="./pages/informacion.html">
+                            <p>Contactame</p>
+                        </a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <div class="d-flex justify-content-center align-items-center m-3">
+        <div id="profile"></div>
+    </div>
+</main>
 <script src="/JS/profile.js"></script>
-</body>
-</html>
+

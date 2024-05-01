@@ -20,6 +20,16 @@ class CartRouter extends Route{
             try {
                 const cart = {product: []}
                 const createdCart = await cartService.addCart(cart);
+                console.log("createdCart", createdCart)
+                const user = req.user;
+
+                const updateUser = await userService.updateUser(user._id, {
+                    $push: {
+                        cart: createdCart
+                    }
+                });                
+                console.log("updateUser", updateUser);
+
                 res.sendSuccess(createdCart);
             } 
             catch (error) {
@@ -72,12 +82,8 @@ class CartRouter extends Route{
                 
                 const verificarCartProduct = cartIdProducts.find((event) => event.product._id.toString() === pid);
                 if (verificarCartProduct === undefined){
-                    const newObject = {
-                        product: pid,
-                        quantity: 1
-                    }
-                    // cartIdProducts.push(getProductId, newObject);
-                    cartIdProducts.push(newObject);
+                    const newObject = { product: pid, quantity: 1 }
+                    cartIdProducts.push(newObject); // cartIdProducts.push(getProductId, newObject);
                     const updateCartProducts = await cartService.updateCartProductsId(cid, cartIdProducts);
                     res.sendSuccess(updateCartProducts);
                 }else{

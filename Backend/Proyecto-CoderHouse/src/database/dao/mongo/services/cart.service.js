@@ -11,8 +11,8 @@ class CartServiceMongo{
 
     async addCart(cart){
         try {
-            const newProduct = await cartModel.create(cart);
-            return "Cart added successfully";
+            return await cartModel.create(cart);
+            // return "Cart added successfully";
         } catch (error) {
             return error;
         }
@@ -20,13 +20,8 @@ class CartServiceMongo{
 
     async getCartById(id){
         try {
-            // return await cartModel.findById(id);
-
-            //Populate (traditional way)
-            return await cartModel.findById({_id: id}).populate("products.product", "title description price stock");
-
-            //Populate in middleware
-            // return await cartModel.findOne({_id: id});
+            return await cartModel.findById({_id: id}).populate("products.product", "title description price stock"); //Populate (traditional way)
+            // return await cartModel.findOne({_id: id}); //Populate in middleware
             
         } catch (error) {
             return error

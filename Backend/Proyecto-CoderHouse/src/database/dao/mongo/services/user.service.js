@@ -11,7 +11,7 @@ class UserServiceMongo{
 
     async getAllUsers(){
         try {
-            return await userModel.find({}).select('first_name last_name email role last_connection' );
+            return await userModel.find({}).select('_id first_name last_name email role last_connection' );
         } catch (error) {
             throw new Error(error)
         }
@@ -19,8 +19,7 @@ class UserServiceMongo{
 
     async findUser(parameter){
         try {
-            console.log("parameter", parameter)
-            return await userModel.findOne({email: parameter});
+            return await userModel.findOne(parameter);
         } catch (error) {
             throw new Error(error)
         }

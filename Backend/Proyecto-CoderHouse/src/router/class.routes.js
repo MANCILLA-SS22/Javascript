@@ -8,7 +8,7 @@ import passport from "passport";
 class CustomRouter { //Esta es la clase padre, y CustomRouter es la clase que hereda de esta misma clase.
     constructor() {
         this.router = Router();
-        this.init(); //Esto sirve para inicializar la funcion init proveniente de users.extend.routes.js
+        this.init(); //Esto sirve para inicializar la funcion init proveniente de otros controladores
     };
     
     init(){}; //Esta tipo de inicialilzacion se usa para las clases heredadas.
@@ -44,9 +44,9 @@ class CustomRouter { //Esta es la clase padre, y CustomRouter es la clase que he
                 if (err) return next(err); // will generate a 500 error
                 if (!user) return res.status(401).send({ error: info.messages ? info.messages : info.toString() }); // Generate a JSON response reflecting authentication status
                 // console.log("user.role", user.role.toUpperCase());
-                // console.log("user.role", policies[0])
+                // console.log("user.role", policies)
                 // if (user.role.toUpperCase() !== policies[0]) return res.status(403).send({ error: "Forbidden. You don`t have enough permissions" });
-                if( !policies.includes(user.role.toUpperCase()) )return res.status(401).send({error: "El usuario no tiene privilegios, revisa tus roles!"});
+                if(!policies.includes(user.role.toUpperCase())) return res.status(401).send({error: "El usuario no tiene privilegios, revisa tus roles!"});
 
                 // console.log("Usuario obtenido del strategy: ", user);
                 req.user = user;

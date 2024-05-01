@@ -7,7 +7,8 @@ import { sendNotification } from "../../config/adapter/NodemailerAdapter.js";
 class UserRouter extends Route {
     init(){
         this.get("/", ['ADMIN'], getAll);
-        this.delete("/delete", ['ADMIN'], deleteAll);
+        this.delete("/deleteAll", ['ADMIN'], deleteAll);
+        this.delete("/deleteOne/:uid", ['ADMIN'], deleteOne);
         this.put("/premium/:uid", ['USER', 'PREMIUM'], modify);
         this.post("/:id/documents", ['USER', 'PREMIUM'], uploader.any(), documents); //loader.any --> Accepts all files that comes over the wire. An array of files will be stored in req.files
         
@@ -49,6 +50,18 @@ class UserRouter extends Route {
                 res.sendServerError(`something went wrong ${error}`);
             }
         };
+
+        async function deleteOne(req, res){
+            try {
+                const {uid} = req.params;
+                const getId = await userService.findById(uid);
+                if(!getId) res.sendClientError({message: "Not user found"});
+                await userService.deleteUsers(getId._id);
+                res.sendSuccess("Usuario eliminado correctamente");
+            } catch (error) {
+                res.sendServerError(`something went wrong ${error}`);
+            }
+        };        
 
         async function modify(req, res){
             try {

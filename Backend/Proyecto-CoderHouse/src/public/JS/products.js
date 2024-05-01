@@ -73,9 +73,7 @@ function render(data){
                 <p>Category: ${val.category}</p>
                 <img src="${val.thumbnail}" alt="img"  width="200" height="150">
                 <div class="container">
-                    <button class="btn btn-dark">
-                        <a class="text-decoration-none text-light" href='/product/${val._id}'>Product details</a>
-                    </button>
+                    <button class="btn btn-dark"> <a class="text-decoration-none text-light" href='/product/${val._id}'>Product details</a> </button>
                     <button class="btn btn-dark">Add to card</button>
                 </div>
             </div>

@@ -47,7 +47,6 @@ import multerRouter from "./router/multer.routes.js"
 import cookieRouter from "./router/cookies.routes.js";
 import usersJwtViewRouter from "./router/users.Jwtviews.routes.js";
 import usersSessionViewRouter from "./router/users.Sessionviews.routes.js";
-import githubLoginViewRouter from "./router/github-login.views.routes.js";
 import jwtRouter from "./router/jwt.routes.js";
 import petsRouter from "./router/pets.routes.js";
 import UsersExtendRouter from "./custom/users.extend.routes.js";
@@ -74,9 +73,9 @@ import { errorHandlerMiddleware, logger } from "./middlewares/middlewares.js";
 import { loggerDate } from "./middlewares/loggerDate.js";
 import { initialPassport } from "./config/passport.config.js";
 import { stencil } from "./specs/handlebars.specs.js";
-import { corsOptions } from "./specs/cors.specs.js";
 import { specs } from "./specs/swagger.specs.js";
 import { connectMongo } from "./config/mongodb.config.js";
+import { corsOptions } from "./specs/cors.specs.js";
 import { mongoStoreObj } from "./specs/mongoStore.specs.js";
 import { mongoInstance } from "./methods/mongoInstance.method.js";
 import { execFunc } from "./nodejs/childe_process/exec.js";

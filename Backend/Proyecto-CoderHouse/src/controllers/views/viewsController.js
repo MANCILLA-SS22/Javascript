@@ -2,11 +2,8 @@ import passport from "passport";
 import Route from "../../router/class.routes.js";
 
 function verifyLoggin(req, res, next){
-    if (req.cookies.jwtCookieToken){
-        return res.redirect("/profile");
-    }else{
-        next();
-    }
+    if (req.cookies.jwtCookieToken) return res.redirect("/profile");
+    next();
 }
 
 class LoginRegister extends Route {        
@@ -70,7 +67,7 @@ class LoginRegister extends Route {
             }
         });
 
-        this.get("/profile", ['USER', 'ADMIN'], function(req, res){
+        this.get("/profile", ['USER', 'PREMIUM', 'ADMIN'], function(req, res){
             try {
                 res.status(200).render('profile');
             }
@@ -95,7 +92,7 @@ class LoginRegister extends Route {
             }
         });        
 
-        this.get('/products', ['USER'], function(req, res){
+        this.get('/products', ['USER', 'ADMIN'], function(req, res){
             try {
                 res.status(200).render('products');
             }
@@ -104,7 +101,7 @@ class LoginRegister extends Route {
             }
         });
 
-        this.get("/product/:pid", ['USER'], function(req, res){
+        this.get("/product/:pid", ['USER', 'ADMIN'], function(req, res){
             try {
                 const {id} = req.params;
                 res.status(200).render('productID', {id}); 
@@ -170,9 +167,9 @@ class LoginRegister extends Route {
             }
         });
 
-        this.get('/productsModify', ['ADMIN'], function(req, res){
+        this.get('/usersModify', ['ADMIN'], function(req, res){
             try {
-                res.status(200).render('productsModify');
+                res.status(200).render('usersModify');
             }
             catch (error) {
                 res.sendServerError(`something went wrong ${error}`)

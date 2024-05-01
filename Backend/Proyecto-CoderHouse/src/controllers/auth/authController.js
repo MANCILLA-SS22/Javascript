@@ -29,6 +29,7 @@ class AuthRouter extends Route {
         
                 //Trabajando con JWT
                 const tokenUser = { // creamos un usuario con un token generado
+                    _id: user._id,
                     first_name: user.first_name,
                     last_name: user.last_name,
                     email: user.email,
@@ -36,6 +37,8 @@ class AuthRouter extends Route {
                     role: user.role,
                     last_connection: user.last_name
                 };
+
+                console.log("tokenUser", tokenUser)
 
                 const date = new Date();
                 await userService.updateConnection(req.user.email, date);
@@ -121,8 +124,10 @@ class AuthRouter extends Route {
                 name: `${user.first_name} ${user.last_name}`,
                 email: user.email,
                 age: user.age,
-                role: user.role
+                role: user.role,
+                last_connection: user.last_name
             };
+            console.log("tokenUser", tokenUser);
 
             const date = new Date();
             await userService.updateConnection(req.user.email, date);            
