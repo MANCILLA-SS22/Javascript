@@ -1,4 +1,4 @@
-Documentaciones:                                                                  ñ
+Documentaciones:
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/values    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
 https://www.w3schools.com/jsref/jsref_class_super.asp#gsc.tab=0&gsc.q=unhandledRejection
 https://www.geeksforgeeks.org/javascript-array-findindex-method/
@@ -31,7 +31,7 @@ https://us-west-1.console.aws.amazon.com/console/home?region=us-west-1
 https://cloud.google.com/docs
 https://learn.microsoft.com/en-us/azure/?product=popular&source=docs
 https://jquery.com/download/ 
-https://react.dev   https://legacy.reactjs.org  https://create-react-app.dev
+https://react.dev   https://legacy.reactjs.org  https://create-react-app.dev                                              ñ
 https://angular.io/start 
 https://vuejs.org/guide/introduction.html#what-is-vue 
 https://www.php.net/manual/en/
@@ -123,6 +123,7 @@ https://github.com/chaijs/chai?tab=readme-ov-file
 
 https://www.passportjs.org/packages/
 https://bcrypt-generator.com/
+https://auth0.com/docs/get-started/identity-fundamentals/authentication-and-authorization
 https://auth0.com/docs/secure/tokens/json-web-tokens    https://oauth.net/2/
 https://nodemailer.com
 https://www.twilio.com/docs/libraries/reference/twilio-node/5.0.0-rc.1/

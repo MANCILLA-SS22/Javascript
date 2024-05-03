@@ -1,15 +1,7 @@
 import fs from 'node:fs/promises';
-import { v4 as generateId } from 'uuid';
 import { NotFoundError } from'../util/errors.js';
-
-async function readData() {
-  const data = await fs.readFile('events.json', 'utf8');
-  return JSON.parse(data);
-}
-
-async function writeData(data) {
-  await fs.writeFile('events.json', JSON.stringify(data));
-}
+import { v4 as generateId } from 'uuid';
+import { readData, writeData } from './util.js';
 
 async function getAll() {
   const storedData = await readData();

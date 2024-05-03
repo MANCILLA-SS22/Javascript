@@ -1,10 +1,12 @@
 import {Router} from "express";
 import { getAll, get, add, replace, remove } from '../data/event.js';
+import { checkAuthMiddleware } from '../util/auth.js';
 import { isValidText, isValidDate, isValidImageUrl } from '../util/validation.js';
 
 const router = Router();
 
 router.get('/', async function (req, res, next){
+  // console.log(req.token);
   try {
     const events = await getAll();
     res.json({ events: events });
@@ -22,33 +24,18 @@ router.get('/:id', async function (req, res, next){
   }
 });
 
-router.post('/', async function (req, res, next){
-  const data = req.body;
+router.use(checkAuthMiddleware);
 
+router.post('/', async function (req, res, next){
+  // console.log(req.token);
+  const data = req.body;
   let errors = {};
 
-  if (!isValidText(data.title)) {
-    errors.title = 'Invalid title.';
-  }
-
-  if (!isValidText(data.description)) {
-    errors.description = 'Invalid description.';
-  }
-
-  if (!isValidDate(data.date)) {
-    errors.date = 'Invalid date.';
-  }
-
-  if (!isValidImageUrl(data.image)) {
-    errors.image = 'Invalid image.';
-  }
-
-  if (Object.keys(errors).length > 0) {
-    return res.status(422).json({
-      message: 'Adding the event failed due to validation errors.',
-      errors,
-    });
-  }
+  if (!isValidText(data.title)) errors.title = 'Invalid title.';
+  if (!isValidText(data.description)) errors.description = 'Invalid description.';
+  if (!isValidDate(data.date)) errors.date = 'Invalid date.';
+  if (!isValidImageUrl(data.image)) errors.image = 'Invalid image.';
+  if (Object.keys(errors).length > 0) return res.status(422).json({ message: 'Adding the event failed due to validation errors.', errors: errors});
 
   try {
     await add(data);
@@ -60,31 +47,13 @@ router.post('/', async function (req, res, next){
 
 router.patch('/:id', async function (req, res, next){
   const data = req.body;
-
   let errors = {};
 
-  if (!isValidText(data.title)) {
-    errors.title = 'Invalid title.';
-  }
-
-  if (!isValidText(data.description)) {
-    errors.description = 'Invalid description.';
-  }
-
-  if (!isValidDate(data.date)) {
-    errors.date = 'Invalid date.';
-  }
-
-  if (!isValidImageUrl(data.image)) {
-    errors.image = 'Invalid image.';
-  }
-
-  if (Object.keys(errors).length > 0) {
-    return res.status(422).json({
-      message: 'Updating the event failed due to validation errors.',
-      errors,
-    });
-  }
+  if (!isValidText(data.title)) errors.title = 'Invalid title.';
+  if (!isValidText(data.description)) errors.description = 'Invalid description.';
+  if (!isValidDate(data.date)) errors.date = 'Invalid date.';
+  if (!isValidImageUrl(data.image)) errors.image = 'Invalid image.';
+  if (Object.keys(errors).length > 0) return res.status(422).json({ message: 'Updating the event failed due to validation errors.', errors: errors });
 
   try {
     await replace(req.params.id, data);

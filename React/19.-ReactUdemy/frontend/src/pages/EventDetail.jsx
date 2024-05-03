@@ -1,7 +1,8 @@
 import React, { Suspense } from 'react'
 import { Await, defer, json, redirect, useRouteLoaderData } from 'react-router-dom'
-import EventItem from '../components/EventItem';
-import EventsList from '../components/EventsList';
+import EventItem from '../components/EventItem.jsx';
+import EventsList from '../components/EventsList.jsx';
+import { getAuthToken } from '../utils/auth.jsx';
 
 function EventDetailPage(){
     //We get an error when we use useLoaderData because it searches for the closest available loader data, and the highest level at which it looks for data is the route definition of the route for which
@@ -53,8 +54,10 @@ async function EventDetailLoader({request, params}){
 
 async function actionEventDetail({ request, params }){
     const {id} = params;
+    const token = getAuthToken();
     const response = await fetch("http://localhost:8080/events/"+id, {
-        method: request.method
+        method: request.method,
+        headers: { "Autorization": "Bearer"+ token }
     });
     if(!response.ok) throw json({message: "Could not delete event!", status: 500});
     return redirect("/events")

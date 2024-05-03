@@ -1,10 +1,30 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import MainNavigation from '../components/MainNavigation.jsx';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLoaderData, useSubmit } from 'react-router-dom';
+import { getTokenDuration } from '../utils/auth.jsx';
 
 function RootLayout(){
+    const token = useLoaderData();
+    const submit = useSubmit(); //It gives us a submit function which we can use to programmatically submit a form. Here we wanna basically submit that logout form which we have in MainNavigation. We wanna send that logout request.
+    
+    useEffect(() => {
+        if(!token) return;
+        if(token === "EXPIRED"){
+            submit(null, {action: "/logout", method: "post"});
+            return;
+        }
+        const tokenDuration = getTokenDuration();
+        console.log(tokenDuration)
+
+        setTimeout(() => {
+            submit(null, {action: "/logout", method: "post"}); //the first argument in "submit" is the data that we wanna submit. And that data will be wrapped in a form data object which we could extract.
+        }, tokenDuration);
+        
+    }, [token, submit]);
+
     return <>
         <MainNavigation/>
+        {/* {navigation.state === 'loading' && <p>Loading...</p>} */}
         <main>
             <Outlet/>
         </main>

@@ -5,4 +5,11 @@ class NotFoundError {
   }
 }
 
-export {NotFoundError}
+class NotAuthError {
+  constructor(message) {
+    this.message = message;
+    this.status = 401;
+  }
+}
+
+export {NotFoundError, NotAuthError};

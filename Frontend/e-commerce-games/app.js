@@ -116,39 +116,33 @@ stockProductos.forEach((evento) => {
   }
 });
 
-if (vaciarCarrito) {
-  vaciarCarrito.addEventListener("click", vaciar)
-}
+if (vaciarCarrito) vaciarCarrito.addEventListener("click", vaciar);
+if (procesarCompra) procesarCompra.addEventListener("click", alerta);
+if (activarFuncion) activarFuncion.addEventListener("click", procesarPedido);
+if (formulario) formulario.addEventListener("submit", enviarPedido);
 
-if (procesarCompra) {
-  procesarCompra.addEventListener("click", alerta)
-}
+console.log("vaciarCarrito", vaciarCarrito);
+console.log("procesarCompra", procesarCompra);
+console.log("activarFuncion", activarFuncion);
+console.log("formulario", formulario);
 
-if (activarFuncion) {
-  activarFuncion.addEventListener("click", procesarPedido);
-}
-
-if (formulario) {
-  formulario.addEventListener("submit", enviarPedido)
-}
 
 document.addEventListener("DOMContentLoaded", () => {
   carrito = JSON.parse(localStorage.getItem("CarritoCompras")) || [];
   mostrarCarrito();
-    document.getElementById("activarFuncion").click(procesarPedido);
-})
+  document.getElementById("activarFuncion").click(procesarPedido);
+});
 
 function alerta(){
   if (carrito.length === 0) {
-      Swal.fire({
-        title: "Tu carrito esta vacio!",
-        text: "Compra algo para continuar con la compra",
-        icon: "error",
-        confirmButtonText: "Aceptar"
-      })
-    }else{
-      location.href = "compra.html";
-    }
+    Swal.fire({
+      title: "Tu carrito esta vacio!",
+      text: "Compra algo para continuar con la compra",
+      icon: "error",
+      confirmButtonText: "Aceptar"
+    })
+  }
+  location.href = "compra.html";
 }
 
 function agregarProducto(num){
@@ -161,16 +155,14 @@ function agregarProducto(num){
         evento.cantidad++;
       }
     })
-  } else{
-    let item = stockProductos.find((evento) => evento.num === num); //Verificamos si existe algo en el carrito. De ser asi, el metodo find retorna el objeto donde se encuentra lo que estamos buscando.
-    carrito.push(item);
-  }
-  
+  } 
+
+  let item = stockProductos.find((evento) => evento.num === num); //Verificamos si existe algo en el carrito. De ser asi, el metodo find retorna el objeto donde se encuentra lo que estamos buscando.
+  carrito.push(item);
   mostrarCarrito();
 }
 
 function mostrarCarrito (){
-  
   if (modalBody) {
     modalBody.innerHTML = "";
     if (carrito.length === 0) {
@@ -195,13 +187,8 @@ function mostrarCarrito (){
     }
   }
 
-  if (carritoContenedor) {
-    carritoContenedor.textContent = carrito.length;
-  }
-
-  if (precioTotal) {
-    precioTotal.innerHTML = carrito.reduce((acumulador, unProducto) => (acumulador + (unProducto.cantidad*unProducto.precio)), 0);
-  }
+  if (carritoContenedor) carritoContenedor.textContent = carrito.length;
+  if (precioTotal) precioTotal.innerHTML = carrito.reduce((acumulador, unProducto) => (acumulador + (unProducto.cantidad*unProducto.precio)), 0);
   guardarStorage();
 }
 
@@ -234,10 +221,7 @@ function procesarPedido(){
     }
   });
   
-  if (totalProceso) {
-    totalProceso.innerHTML = carrito.reduce((acumulador, unProducto) => (acumulador + (unProducto.cantidad*unProducto.precio)), 0);
-  }
-  
+  if (totalProceso) totalProceso.innerHTML = carrito.reduce((acumulador, unProducto) => (acumulador + (unProducto.cantidad*unProducto.precio)), 0);
 }
 
 function enviarPedido(evento) {
@@ -293,27 +277,3 @@ function enviarPedido(evento) {
 function guardarStorage(){
   localStorage.setItem("CarritoCompras", JSON.stringify(carrito));
 }
-
-
-
-
-//NOTA: Cuando trabajamos con dos HTML o mas, al momento de trabajr con el DOM y mandamos a llamar a una funcion desde un HTML diferente al que se encuentra esta funcion, 
-//entonces obtendremos un error puesto que JS buscara y jamas encontrara esa funcion porque no existe. Para ello, debemos usar el if y dentro de el ira la variable del DOM 
-//como se muestra a continuacion:  if (modalBody).
-
-
-//Esto es igual a la linea  
-/* stockProductos.forEach((evento) => { Esta linea es lo mismo que lo de abajo pero de diferente sintaxis
-  //const {id, nombre, precio, desc, img, cantidad} = evento;
-  contenedor.innerHTML += `
-    <div class="card" style="width: 18rem;">
-      <img class="card-img-top" src="${evento.img}" mt-2  alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">${evento.nombre}</h5>
-        <p class="card-text">Precio: ${evento.precio}</p>
-        <p class="card-text">Descripcion: ${evento.desc}</p>
-        <p class="card-text">Cantidad: ${evento.cantidad}</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>`
-}); */

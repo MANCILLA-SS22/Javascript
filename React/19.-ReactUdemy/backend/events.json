@@ -1,1 +1,39 @@
-{"events":[{"title":"Saiga 12","image":"https://www.collectorsfirearms.com/975133/izhmash-saiga-12-shotgun-12-gauge-s15045.jpg","date":"2024-05-01","description":"Shotgun","id":"95607b39-396e-486a-b40d-42e2c857382e"},{"title":"CoderHouse!!","image":"https://www.reachcapital.com/wp-content/uploads/2022/06/83b.jpg","date":"2024-04-29","description":"Programacion","id":"14cd5f03-ea67-4e2b-8da2-30ab7763e3f7"},{"title":"Test","image":"https://i.dugun.com/gallery/81353/preview_kukki-event_zfGrrfnt.jpeg","date":"2024-04-30","description":"Hello world","id":"151e2e28-3fca-4bbb-b091-14e1b91e38e5"},{"id":"e1","title":"A dummy event","date":"2023-02-22","image":"https://blog.hubspot.de/hubfs/Germany/Blog_images/Optimize_Marketing%20Events%20DACH%202021.jpg","description":"Join this amazing event and connect with fellow developers."}]}
+{
+	"events": [
+		{
+			"title": "Saiga 12",
+			"image": "https://www.collectorsfirearms.com/975133/izhmash-saiga-12-shotgun-12-gauge-s15045.jpg",
+			"date": "2024-05-01",
+			"description": "Shotgun",
+			"id": "95607b39-396e-486a-b40d-42e2c857382e"
+		},
+		{
+			"title": "CoderHouse!!",
+			"image": "https://www.reachcapital.com/wp-content/uploads/2022/06/83b.jpg",
+			"date": "2024-04-29",
+			"description": "Programacion",
+			"id": "14cd5f03-ea67-4e2b-8da2-30ab7763e3f7"
+		},
+		{
+			"title": "Test",
+			"image": "https://i.dugun.com/gallery/81353/preview_kukki-event_zfGrrfnt.jpeg",
+			"date": "2024-04-30",
+			"description": "Hello world",
+			"id": "151e2e28-3fca-4bbb-b091-14e1b91e38e5"
+		},
+		{
+			"id": "e1",
+			"title": "A dummy event",
+			"date": "2023-02-22",
+			"image": "https://blog.hubspot.de/hubfs/Germany/Blog_images/Optimize_Marketing%20Events%20DACH%202021.jpg",
+			"description": "Join this amazing event and connect with fellow developers."
+		}
+	],
+	"users": [
+		{
+			"email": "xxcodigo.rojoxx@gmail.com",
+			"password": "$2b$12$gZaMzBG0Af0vUNJuZXZ92eDtUSJAB9IKyqszCbOtmD076bfeuARiW",
+			"id": "a79a847e-bd24-4218-9265-8e40c7b20b63"
+		}
+	]
+}

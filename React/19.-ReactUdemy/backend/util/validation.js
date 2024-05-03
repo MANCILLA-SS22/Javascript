@@ -1,14 +1,18 @@
-function isValidText(value){
-  return value && value.trim().length > 0;
+function isValidText(value, minLength = 1) {
+  return value && value.trim().length >= minLength;
 }
 
-function isValidDate(value){
+function isValidDate(value) {
   const date = new Date(value);
   return value && date !== 'Invalid Date';
 }
 
-function isValidImageUrl(value){
+function isValidImageUrl(value) {
   return value && value.startsWith('http');
 }
 
-export {isValidText, isValidDate, isValidImageUrl};
+function isValidEmail(value) {
+  return value && value.includes('@');
+}
+
+export {isValidText, isValidDate, isValidImageUrl, isValidEmail};

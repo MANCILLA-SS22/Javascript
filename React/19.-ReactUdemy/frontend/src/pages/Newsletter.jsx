@@ -9,7 +9,7 @@ function NewsletterPage() {
   );
 };
 
-async function newsletteraction({ request }) {
+async function newsletterAction({ request }) {
   const data = await request.formData();
   const email = data.get('email');
 
@@ -18,4 +18,4 @@ async function newsletteraction({ request }) {
   return { message: 'Signup successful!' };
 };
 
-export {NewsletterPage, newsletteraction}
+export {NewsletterPage, newsletterAction}
