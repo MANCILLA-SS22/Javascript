@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
         }
         
         const folderLocation = destination[file.fieldname];
-        console.log("folderLocation", folderLocation)
+        // console.log("folderLocation", folderLocation);
         const {email} = req.user;
         const path = `${process.cwd()}/src/files/${folderLocation}/`;
 

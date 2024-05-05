@@ -53,9 +53,10 @@ https://expressjs.com/en/resources/middleware/cors.html
 https://expressjs.com/en/advanced/best-practice-performance.html#use-gzip-compression
 https://www.mongodb.com/docs/manual/
 https://www.mongodb.com/docs/atlas/
-https://cloud.mongodb.com/v2/659f6888d6b3930477e154ec#/overview
+https://account.mongodb.com/account/login?nds=true
 https://hub.docker.com/repositories/germanss22 
 https://mongoosejs.com/docs/middleware.html   https://mongoosejs.com/docs/guide.html#methods
+https://www.typescriptlang.org/docs/handbook/2/typeof-types.html?
 https://docs.nestjs.com
 https://react-redux.js.org  https://redux-toolkit.js.org  https://redux-saga.js.org 
 https://axios-http.com/docs/intro  
@@ -149,11 +150,12 @@ https://materializecss.com
 https://github.com/facebook/react
 https://github.com/facebook/create-react-app
 https://vitejs.dev 
+https://react.dev/reference/react
 https://react-bootstrap.github.io
 https://nextjs.org/docs/getting-started 
 https://react-redux.js.org  https://redux-toolkit.js.org  https://redux-saga.js.org 
-https://reactrouter.com/en/main   
-https://www.npmjs.com/package/react-router-dom 
+https://reactrouter.com/en/main
+https://tanstack.com/query/v3/docs/framework/react/overview
 https://formik.org/   
 https://react-hook-form.com    
 https://react.useanimations.com
@@ -168,7 +170,10 @@ https://popper.js.org/docs/v2/
 https://tobiasahlin.com/spinkit/
 https://animate.style  
 https://swiperjs.com/get-started
+https://usehooks.com 
+https://www.apollographql.com/docs/react/ 
 
+https://leafletjs.com/index.html --> This works for setting up maps
 https://console.cloudinary.com/console/c-4023da8b6dcc56f76f0f9fd2aef6e2/media_library/search?q=&view_mode=grid
 https://swr.vercel.app
 https://vercel.com/docs/getting-started-with-vercel
@@ -185,41 +190,6 @@ https://git-scm.com/docs
 https://dzone.com/articles/top-20-git-commands-with-examples 
 https://www.atlassian.com/git/glossary  
 https://docs.github.com/es/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax 
-
-Api’s: 
-https://github.com/public-apis/public-apis 
-https://jsonplaceholder.typicode.com 
-https://http.cat 
-https://academia-lab.com/enciclopedia/transferencia-de-estado-representacional-rest/ 
-https://www.freecodecamp.org/espanol/news/tutorial-de-fetch-api-en-javascript-con-ejemplos-de-js-fetch-post-y-header/ 
-https://pokeapi.co/docs/v2 
-https://mockapi.io 
-https://rapidapi.com/hub 
-https://www.weatherapi.com 
-https://fakestoreapi.com 
-https://cloud.google.com/docs/authentication/api-keys 
-https://swapi.dev 
-https://kinsta.com/es/blog/microservicios-vs-api/ 
-https://dev.to/ruppysuppy/7-free-public-apis-you-will-love-as-a-developer-166p 
-https://blog.hubspot.es/website/que-es-api-rest 
-https://firebaseopensource.com/projects/rakannimer/react-firebase/ 
-https://firebase.google.com/docs/firestore/manage-data/add-data 
-
-Otros:
-https://cdnjs.com                   (para agregar librerías de fontawsome y otros) 
-https://www.npmjs.com   
-https://www.sitepoint.com/beginners-guide-node-package-manager/ 
-https://get.foundation 
-https://dashboard.emailjs.com/admin 
-https://lodash.com
-https://security.stackexchange.com/questions/17207/recommended-of-rounds-for-bcrypt/17238#17238
-https://leafletjs.com/index.html --> This works for setting up maps
-https://fakerjs.dev/api/
-https://usehooks.com 
-https://www.apollographql.com/docs/react/ 
-https://pandao.github.io/editor.md/en.html
-https://eslint.org
-https://prettier.io
 
 
 https://www.w3resource.com/javascript-exercises/javascript-array-exercises.php

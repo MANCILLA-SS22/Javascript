@@ -26,7 +26,6 @@ function res(id){
 }
 
 function procesarDatos(data){
-    console.log(data)
     header.innerHTML = `
         <h1>¡Bienvenido/a ${data.user.name}!</h1> <h3>Eres: ${data.user.role}</h3>
         <button onclick="myFunc()" class="btn btn-dark"><a class="text-decoration-none text-light" href="/api/auth/logout"> Logout </a></button>

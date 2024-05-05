@@ -38,7 +38,7 @@ class AuthRouter extends Route {
                     last_connection: user.last_name
                 };
 
-                console.log("tokenUser", tokenUser)
+                // console.log("tokenUser", tokenUser);
 
                 const date = new Date();
                 await userService.updateConnection(req.user.email, date);
@@ -78,7 +78,6 @@ class AuthRouter extends Route {
                 };
     
                 const emailSend = await sendNotification(email, mensaje);
-                console.log("emailSend", emailSend);
                 res.json({emailSend});
             } catch (error) {
                 res.sendServerError(`something went wrong ${error}`)
@@ -102,7 +101,6 @@ class AuthRouter extends Route {
                     res.json({message: "Las contrasenas no coinciden!!"})
                 }
             } catch (error) {
-                console.log("Algo salio mal!!")
                 res.sendServerError(`something went wrong ${error}`)
             }
         };
@@ -118,7 +116,6 @@ class AuthRouter extends Route {
         };
 
         async function githubcallback(req, res){ 
-            // console.log("GitHub")
             const user = req.user;
             const tokenUser = { // creamos un usuario con un token generado (Metodo 2)
                 name: `${user.first_name} ${user.last_name}`,
@@ -127,7 +124,7 @@ class AuthRouter extends Route {
                 role: user.role,
                 last_connection: user.last_name
             };
-            console.log("tokenUser", tokenUser);
+            // console.log("tokenUser", tokenUser);
 
             const date = new Date();
             await userService.updateConnection(req.user.email, date);            

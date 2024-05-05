@@ -25,5 +25,5 @@ async function logout(){
     const res = await fetch("http://localhost:5500/api/auth/logout");
     alert("Has cerrado sesion")
     window.location.replace(res.url)
-    console.log("Logout --> ", res)
+    // console.log("Logout --> ", res)
 }

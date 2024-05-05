@@ -24,7 +24,6 @@ function fetchData(link){
 };
 
 function procesarDatos(data){
-    console.log("data", data)
     header.innerHTML = `
         <h1>¡Bienvenido/a ${data.user.first_name} ${data.user.last_name}!</h1> <h3>Eres: ${data.user.role}</h3>
         <button onclick="myFunc()" class="btn btn-dark"><a class="text-decoration-none text-light" href="/api/auth/logout"> Logout </a></button>

@@ -7,7 +7,7 @@ import { sendNotification } from "../../config/adapter/NodemailerAdapter.js";
 
 class CartRouter extends Route{
     init(){
-        this.get("/", ['PUBLIC'], async function(req, res){
+        this.get("/", ['USER', 'PREMIUM'], async function(req, res){
             try {
                 const allCarts = await cartService.getCart();
                 allCarts ? res.sendSuccess(allCarts) : res.sendClientError({message: "Not cars found"});
@@ -16,11 +16,11 @@ class CartRouter extends Route{
             }
         });
 
-        this.post("/", ['USER', 'PREMIUM'], async function(req, res){ //En el endpoint POST '/' del controller cart estas creando el cart como un objeto vacío. El formato correcto debe incluir una key "products" con un array vacío.
+        this.post("/", ['USER', 'PREMIUM'], async function(req, res){
             try {
                 const cart = {product: []}
                 const createdCart = await cartService.addCart(cart);
-                console.log("createdCart", createdCart)
+                // console.log("createdCart", createdCart)
                 const user = req.user;
 
                 const updateUser = await userService.updateUser(user._id, {
@@ -28,7 +28,7 @@ class CartRouter extends Route{
                         cart: createdCart
                     }
                 });                
-                console.log("updateUser", updateUser);
+                // console.log("updateUser", updateUser);
 
                 res.sendSuccess(createdCart);
             } 
@@ -37,18 +37,17 @@ class CartRouter extends Route{
             }
         });
 
-        this.get("/:cid", ['PUBLIC'], async function(req, res){
+        this.get("/:cid", ['USER', 'PREMIUM'], async function(req, res){
             try {
                 const {cid} = req.params;
                 const getId = await cartService.getCartById(cid);  
-                //console.log(getId);
                 !getId ? res.sendClientError({message: "Cart not found"}) : res.sendSuccess(getId);
             } catch (error) {
                 res.sendServerError(`something went wrong ${error}`)
             }
         });
         
-        this.put("/:cid", ['USER'], async function(req, res){ //  deberá actualizar el carrito con un arreglo de productos con el formato especificado arriba.
+        this.put("/:cid", ['USER', 'PREMIUM'], async function(req, res){
             try {
                 const productDto = new ProductDto(req.body);
                 const {cid} = req.params;
@@ -59,7 +58,7 @@ class CartRouter extends Route{
             }
         });
 
-        this.delete("/:cid", ['USER'], async function(req, res){ //deberá eliminar todos los productos del carrito
+        this.delete("/:cid", ['USER', 'PREMIUM'], async function(req, res){
             try {
                 const {cid} = req.params;
                 const deleteProduct = await cartService.deleteProductsById(cid);
@@ -97,7 +96,7 @@ class CartRouter extends Route{
             }
         });
 
-        this.delete("/:cid/products/:pid", ['USER', 'PREMIUM'], async function(req, res){ //deberá eliminar del carrito el producto seleccionado.
+        this.delete("/:cid/products/:pid", ['USER', 'PREMIUM'], async function(req, res){
             try {
                 const {cid} = req.params;
                 const {pid} = req.params;
@@ -123,7 +122,7 @@ class CartRouter extends Route{
             }
         });
 
-        this.put("/:cid/products/:pid", ['USER'], async function(req, res){ //deberá poder actualizar SÓLO la cantidad de ejemplares del producto por cualquier cantidad pasada desde req.body
+        this.put("/:cid/products/:pid", ['USER', 'PREMIUM'], async function(req, res){
             try {
                 const {quantity} = req.body;
                 const {cid} = req.params;
@@ -153,7 +152,7 @@ class CartRouter extends Route{
             }
         });
         
-        this.get("/:cid/purchase/:uid/user", ['USER'], async function(req, res){
+        this.get("/:cid/purchase/:uid/user", ['USER', 'PREMIUM'], async function(req, res){
             const {cid, uid} = req.params;
             const cart = await cartService.getCartById(cid); //Filtramos el carrito con los productos dentro de el
             const products = cart.products; //Almacenamos los productos pertenecientes al carrito (estos productos vienen en formato array)

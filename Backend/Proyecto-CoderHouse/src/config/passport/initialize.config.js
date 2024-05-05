@@ -35,8 +35,7 @@ async function jwt(jwt_payload, done){
 async function register(req, username, password, done){
     try {
         const userDto = new UserDto(req.body);     //console.log("userDto", userDto.email)
-        console.log("userDto", userDto)
-        const exist  = await userService.findUser(userDto.email); //Validamos si el usuario existe en la base de datos
+        const exist  = await userService.findUser({email: userDto.email}); //Validamos si el usuario existe en la base de datos
         if(exist){
             req.logger.error("El usuario ya existe!");
             done(null, false); //Como el usuario ya existe (no es un error), no se va a registrar. El segundo parametro es falso porque no se retornara ningun usuario porque ya existe
@@ -79,7 +78,7 @@ async function github(accessToken, refreshToken, profile, done){
     // console.log("Profile obtenido del usuario de Github", profile);
     try {
         const user = await userService.findUser({email: profile._json.email});    
-        console.log("Usuario encontrado para login: ", user);
+        // console.log("Usuario encontrado para login: ", user);
         if(!user){ //Al no existir el usuario, lo agregamos a la base de datos
             console.warn("User doesn't exists with username: " + profile._json.email);
             let newUser = {

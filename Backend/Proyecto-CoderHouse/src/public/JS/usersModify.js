@@ -9,7 +9,6 @@ window.onload = function(e){
 }
 
 function procesarDatos(data){
-    console.log(data);
     perfil.innerHTML = "";
     data.forEach(function(event){
         let record = document.createElement("div")

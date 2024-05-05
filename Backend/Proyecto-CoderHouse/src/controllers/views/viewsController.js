@@ -113,9 +113,6 @@ class LoginRegister extends Route {
         this.get('/carts', ['USER'], function(req, res){
             try {
                 res.status(200).render('carts');
-                // const cars = CartJSON.getCart();
-                // console.log(cars);
-                // res.status(200).render('carts', {cars});
             }
             catch (error) {
                 res.sendServerError(`something went wrong ${error}`)

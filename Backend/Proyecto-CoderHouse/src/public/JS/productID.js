@@ -12,7 +12,6 @@ window.onload = function(e){
 }
 
 function procesarDatos(data){
-    console.log(data)
     header.innerHTML = `<h1>La informacion del producto es la siguiente</h3>`;
 
     product.innerHTML = (`

@@ -90,7 +90,6 @@ routerProducts.put("/:id", async function(request, response){
 routerProducts.delete("/:id", async function(request, response){
     const {id} = request.params;
     const deleteProduct = await Product.deleteProduct(+id);
-    console.log("Array actualizado", deleteProduct);
     deleteProduct === "0" ? response.status(404).json("res 1") : response.status(200).json({"Message": deleteProduct});
 });
 

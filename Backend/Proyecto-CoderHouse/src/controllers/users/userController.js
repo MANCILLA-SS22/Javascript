@@ -67,7 +67,6 @@ class UserRouter extends Route {
             try {
                 const {uid} = req.params;
                 const getId = await userService.findById(uid);
-                // console.log("getId", uid); console.log("getId", getId);
 
                 if(getId.role === "USER"){
                     const pathDocuments = `${process.cwd()}/src/files/documents/${getId.email}`;
@@ -87,7 +86,7 @@ class UserRouter extends Route {
 
         async function documents(req, res){
             try {
-                console.log("req.files", req.files);
+                // console.log("req.files", req.files);
                 const { id } = req.params;
                 const updateUser = await userService.updateUser(id, {
                     $push: {
@@ -95,7 +94,7 @@ class UserRouter extends Route {
                     }
                 });
 
-                console.log(updateUser)
+                // console.log(updateUser);
                 if(req.user.role === "PREMIUM") return res.sendSuccess("Ya eres un usuario PREMIUM!");
                 res.sendSuccess(`Los archivos ${req.files[0].filename} se han enviado correctamente!`);
             } catch (error) {

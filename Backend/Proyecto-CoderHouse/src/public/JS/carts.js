@@ -8,7 +8,6 @@ window.onload = function(e){
 }
 
 function dataProcess(data){
-    console.log(data[0])
     let render = data.map(function(val){
         return (`
             <div class="product-info container">

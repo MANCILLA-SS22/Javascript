@@ -48,7 +48,6 @@ class ProductServiceMongo{
     async updateProduct (_id, product){
         try {
             return await productModel.findByIdAndUpdate(_id, product);
-
         }catch (error) {
             return error;
         }
