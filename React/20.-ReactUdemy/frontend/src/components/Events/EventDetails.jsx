@@ -21,9 +21,9 @@ function EventDetails(){
   const {mutate, isPending: isPendingDeletion, isError: isErrorDeletion, error: deleteError} = useMutation({ //"mutate" is a function we can call to trigger this mutation function.
     mutationFn: deleteEvent,
     onSuccess: function(){
-      queryClient.invalidateQueries({//We also wanna invalidate our queries, my event related queries, because since we deleted an event of course, all that data should be marked as outdated and React Query should be forced to fetch data again.
-        queryKey: ["events"], //I set the queryKey of the query that should be invalidated to just events. So to an array that contains a single string that says events, because all event related queries should be invalidated because they're all affected by the fact that an event has been deleted.
-        refetchType: "none" //Here, you can set the re fetch type to none, which makes sure that when you call invalidate queries, these existing queries will not automatically be triggered again immediately. Instead, they will just be invalidated and the next time they are required, they will run again. But they will not be re-triggered immediately which otherwise would be the default behavior.
+      queryClient.invalidateQueries({
+        queryKey: ["events"], 
+        refetchType: "none" 
       }); 
       return navigate("/events")
     }
@@ -124,12 +124,21 @@ export default EventDetails;
 //The second element should be the actual ID for which we're executing this query because when this EventDetails component is rendered for different IDs, so for different events, We of course wanna 
 //fetch different data for different events. So we need different keys so that we're not caching and reusing the same data for the same single event all the time.
 
-//queryFn?
+//queryFn
 //remember that "signal" is provided bu react-query and the "id" will be available in the EventDetails component because it is loaded through react-router.
+
+
 
 //useMutation()
 //Here we of course have a mutation because we're not fetching or getting any data, instead we're sending a DELETE request. We are trying to change, to mutate, data on the backend. Hence we now also
 //need useMutation from React Query.
+
+//queryClient.invalidateQueries
+//We also wanna invalidate our queries, our event related queries, because since we deleted an event of course, all that data should be marked as outdated and React Query should be forced to fetch data again.
+
+//queryKey:
+//I set the queryKey of the query that should be invalidated to just events. So to an array that contains a single string that says events, because all event related queries should be invalidated because 
+//they're all affected by the fact that an event has been deleted.
 
 //refetchType: "none"
 //After deleting an event, we invalidated all event related queries. We still were on that page. And therefore, technically, since we invalidated all queries. React Query went ahead and immediately 

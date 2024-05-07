@@ -1,6 +1,249 @@
-                                                                                                       Conceptos y definiciones
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$                                                                                                       
+                                                                                                       Conceptos de informatica, computacion y programacion
                                                                                                        
-- Conceptos y definiciones de POO
+- URL: 
+  > https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/What_is_a_URL
+  > https://www.hostinger.com/tutorials/what-is-a-url
+
+- URI: 
+  > https://www.hypr.com/security-encyclopedia/uniform-resource-identifier-uri#:~:text=Uniform%20Resource%20Identifier%20(URI),-A%20Uniform%20Resource&text=URIs%20enable%20the%20protocols%20over,connected%20devices%20and%20other%20resources.
+  > https://www.geeksforgeeks.org/uri-full-form/
+  > https://en.wikipedia.org/wiki/Uniform_Resource_Identifier
+  
+- URN: 
+  > https://en.wikipedia.org/wiki/Uniform_Resource_Name#:~:text=A%20Uniform%20Resource%20Name%20(URN,to%20exist%20or%20becomes%20unavailable.
+  > https://www.geeksforgeeks.org/uniform-resource-name-urn-in-transport-layer/
+
+- Protocolo: 
+  > https://www.techopedia.com/definition/4528/protocol
+  > https://www.cloudflare.com/learning/network-layer/what-is-a-protocol/
+  > https://www.imagar.com/blog-desarrollo-web/que-es-el-protocolo-en-informatica/
+      
+- Servidor: 
+  > https://www.paessler.com/it-explained/server
+  > https://www.geeksforgeeks.org/what-is-server/
+  > https://en.wikipedia.org/wiki/Server_(computing)
+  > https://www.zenarmor.com/docs/network-basics/types-of-servers
+  > https://www.ionos.es/digitalguide/servidores/know-how/que-es-un-servidor-un-concepto-dos-definiciones/
+  
+- Microservices:
+  > https://aws.amazon.com/microservices/
+  > https://www.geeksforgeeks.org/microservices/
+  > https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/microservices
+  > https://www.redhat.com/es/topics/microservices
+  > https://www.ibm.com/mx-es/topics/microservices
+  > https://kinsta.com/es/blog/microservicios-vs-api/
+
+- Compresion: 
+  Cuando el servidor se está comunicando con el cliente en el navegador, parte de esta comunicación implica revisar si hay algún archivo comprimido que necesite descomprimirse, y en caso de que así sea, cuál sería el algoritmo de 
+  descompresión a utilizar para poder obtener la información correctamente. Los navegadores modernos pueden aceptar contenido codificado en tres algoritmos principales: 
+    ✓ Deflate: 
+    ✓ Gzip (Deflate + algunas cosas adicionales): Gzip es el primer y más conocido modelo de compresión, es altamente utilizado y sencillo de utilizar. La compresión se puede colocar a nivel middleware en nuestro servidor para poder 
+      corroborar la diferencia de transferencia ntre una respuesta con y sin compresión.
+    ✓ Brotli: Brotli es conocido como una alternativa “moderna” de Gzip. Éste fue desarrollado por Google y ofrece un algoritmo cuya compresión puede resultar hasta 30% más efectiva que la compresión de Gzip . 
+
+- storage:
+  > https://en.wikipedia.org/wiki/Computer_data_storage 
+  > https://www.ibm.com/topics/data-storage
+  > https://www.techopedia.com/definition/1115/storage
+
+- localStorage and sessionStorage: 
+  > https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage
+  > https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+  > https://www.freecodecamp.org/news/web-storage-localstorage-vs-sessionstorage-in-javascript/
+  > https://www.loginradius.com/blog/engineering/guest-post/local-storage-vs-session-storage-vs-cookies/
+  > https://www.freecodecamp.org/news/how-web-storage-works/
+
+- Cookies: 
+  > https://usa.kaspersky.com/resource-center/definitions/cookies
+  > https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies
+  > https://en.wikipedia.org/wiki/HTTP_cookie#:~:text=Cookies%20are%20arbitrary%20pieces%20of,into%20otherwise%20stateless%20HTTP%20transactions.
+  > https://secureprivacy.ai/blog/session-cookies-vs-persistent-cookies#:~:text=Session%20cookies%20are%20temporary%20and%20are%20used%20to%20maintain%20information,accessed%20across%20multiple%20browsing%20sessions.
+  > https://allaboutcookies.org/what-is-a-cookie#:~:text=4.-,Third-party%20cookies,%2C%20videos%2C%20or%20web%20banners.
+  > https://www.geeksforgeeks.org/difference-between-local-storage-session-storage-and-cookies/
+  > https://www.cookiescan.com/what-are-website-cookies-and-where-are-they-stored/#:~:text=one%20is%20removed.-,What%20Are%20Cookies%20Used%20For%3F,part%20of%20the%20internet%20experience.
+  
+- Autenticacion y autorizacion: 
+
+- JsonWebToken (JWT): 
+
+- Hoisting:
+  > https://www.hostinger.com/tutorials/what-is-web-hosting/
+  > https://www.techopedia.com/definition/29023/web-hosting
+  > https://www.ibm.com/topics/web-hosting
+  > https://www.webempresa.com/hosting/hosting-que-es-como-funciona.html
+                                                                                                       
+- Kernel: 
+  > https://en.wikipedia.org/wiki/Kernel_(operating_system)
+  > https://www.baeldung.com/cs/os-kernel
+  > https://www.geeksforgeeks.org/kernel-in-operating-system/
+  > https://www.geeknetic.es/Kernel/que-es-y-para-que-sirve
+  > https://salesystems.es/que-es-un-kernel/#:~:text=El%20kernel%20es%20el%20componente,o%20núcleo%20del%20sistema%20operativo.
+  
+- Maquina virtual:   
+                                                                                                       
+- Proxy: 
+  > https://www.varonis.com/blog/what-is-a-proxy-server
+  > https://www.fortinet.com/resources/cyberglossary/proxy-server
+  > https://cybernews.com/resources/what-is-a-proxy-server/
+  > https://www.xataka.com/basics/que-es-un-proxy-y-como-puedes-utilizarlo-para-navegar-de-forma-mas-anonima
+  > https://www.mcafee.com/blogs/es-es/privacy-identity-protection/que-es-un-proxy//
+  > https://kinsta.com/es/base-de-conocimiento/que-es-un-proxy/
+        
+- Router: 
+ > https://us.norton.com/blog/iot/smarter-home-what-is-router
+ > https://www.cisco.com/c/en/us/solutions/small-business/resource-center/networking/how-does-a-router-work.html
+ > https://www.cloudflare.com/es-es/learning/network-layer/what-is-a-router/
+    
+- firewall: 
+  > https://www.cisco.com/c/en/us/products/security/firewalls/what-is-a-firewall.html
+  > https://www.forcepoint.com/cyber-edu/firewall
+  > https://latam.kaspersky.com/resource-center/definitions/firewall
+
+- Ancho de banda: Teoricamente, es la longitud de la extensión de frecuencias, medida en hercios (Hz), en la que se concentra la mayor potencia de la señal.
+  Es la máxima cantidad de datos transmitidos a través de una conexión a internet en cierta cantidad de tiempo. El ancho de banda por lo general se confunde con la velocidad de internet cuando en realidad es el volumen de información que se 
+  puede enviar a través de una conexión en una cantidad medida de megabits por segundo (Mbps).
+  Tambien se conoce como la cantidad máxima de datos que pueden ser transmitidos a través de una conexión a Internet en un tiempo determinado. Normalmente, el ancho de banda se representa en el número de bits, kilobits, megabits o 
+  gigabits que se pueden transmitir en 1 segundo.
+  Los términos velocidad de internet y ancho de banda suelen confundirse, pero aquí encontrarás la diferencia. La velocidad se refiere al ritmo al que se pueden transmitir los datos, mientras que el ancho de banda es la capacidad de esa 
+  velocidad. Utilizando una analogía, imagina una carretera, la velocidad dependerá del vehículo y el ancho de banda de cuantos vehículos pueden transitar al mismo tiempo por ella durante un tiempo determinado.
+  
+- Velocidad: Es la velocidad es cuán rápido esa información se recibe o descarga. Tambien se define como la velocidad de dígitos binarios transmitidos y se da en bits por segundo (bps).
+
+- Rendimiento: es la cantidad de información que se entrega con éxito en una determinada cantidad de tiempo.
+
+- Latencia: La latencia a veces se refiere a una demora o tasa de ping. Es la demora que experimentas mientras esperas que algo se cargue. Si el ancho de banda es la cantidad de información enviada por segundo, la demora es la cantidad de 
+  tiempo que demora esa información en ir de la fuente hasta ti.
+
+- Transmicion: El rendimiento es cómo la información realmente se entrega en una determinada cantidad de tiempo. De modo que si el ancho de banda es la cantidad máxima de datos, el rendimiento es cuántos de esos datos llegan a su destino, 
+  teniendo en cuenta la latencia, velocidad de red, pérdida de paquete y otros factores.
+
+- Frecuencia: La frecuencia es la magnitud física que mide las veces por unidad de tiempo en que se repite un ciclo de una señal periódica. Una señal periódica de una sola frecuencia tiene un ancho de banda mínimo. En general, si la señal 
+  periódica tiene componentes en varias frecuencias, su ancho de banda es mayor, y su variación temporal depende de sus componentes frecuenciales.
+
+- Hertz: Los microprocesadores manejan velocidades de proceso de datos en el sistema, y eso se llama Hertz. Esta velocidad es la velocidad de reloj y a medida que va subiendo el nivel de velocidad, es mejor el rendimiento del microprocesador.
+  Unidad de medida de la frecuencia electromagnética. Se utiliza para medir la velocidad de los procesadores. Equivale a un ciclo por segundo. En informática se utiliza para dar una idea de la velocidad del microprocesador, indicando cual es 
+  la frecuencia de su clock (componente de los microprocesadores que genera una señal cuya frecuencia es utilizada para enmarcar el funcionamiento del procesador: a mayor frecuencia mayor velocidad).
+
+- Frecuencia de refresco: representa el número de veces que se actualiza la imagen completa que vemos en la pantalla en cada segundo. Así, una frecuencia de 60 Hz significa que en realidad el monitor está mostrando 60 imágenes en un solo 
+  segundo, si hablamos de 144 Hz entonces este lo hará 144 veces, uno de 240 Hz lo hará 240 veces. Si hablamos en términos comunes esto viene a significar lo suaves que son las transiciones de imágenes en la pantalla, ya que cuantas más 
+  imágenes se generen por segundo, menos «saltos» de imagen veremos y más suave irá la acción del juego. Cuando hablamos de tasa de refresco nos estamos refiriendo a algo que es relativo al hardware (del monitor).
+
+- Cache: Una memoria caché puede ser usada a veces como un búfer, y viceversa. Sin embargo, una caché opera con el supuesto de que los mismos datos van a ser utilizados múltiples veces, que los datos escritos serán leídos en un periodo corto    
+  de tiempo, o teniendo en cuenta la posibilidad de múltiples lecturas o escrituras para formar un único bloque más grande. Su premisa básica es reducir los accesos a los almacenamientos de nivel más bajo, los cuales son bastante lentos. La 
+  caché también es normalmente una capa de abstracción que está diseñada para ser invisible.
+  Una caché de disco o archivo de caché guarda las estadísticas de los datos almacenados en él y proporciona datos con un tiempo máximo de espera en modos de escritura en diferido. Un búfer, por el contrario, no hace nada de esto, sino que es 
+  utilizado normalmente en entrada, salida y a veces, almacenamiento temporal de datos que se enrutan entre distintos dispositivos o que van a ser modificados de manera no secuencial antes de ser escritos o leídos de manera secuencial.
+
+- Buffer: Un buffer es un espacio en memoria en el que se almacenan datos de manera temporal. Su principal función es evitar que el programa o recurso que los requiere, ya sea hardware o software, se quede sin datos durante una transferencia 
+  (entrada/salida) de datos irregular o por la velocidad del proceso. 
+  Normalmente los datos se almacenan en un búfer mientras son transferidos desde un dispositivo de entrada (como un ratón o mouse) o justo antes de enviarlos a un dispositivo de salida (por ejemplo: altavoces). También puede utilizarse para 
+  transferir datos entre procesos, de una forma parecida a los búferes utilizados en telecomunicaciones. Un ejemplo de esto último ocurre en una comunicación telefónica, en la que al realizar una llamada esta se almacena, se disminuye su 
+  calidad y el número de bytes a ser transferidos, y luego se envían estos datos modificados al receptor.
+  
+  Un buffer se basa en respuestas rápidas. Sirve para optimizar el proceso de transferencia de datos entre un software y otro o entre un hardware y un software. Ese dato se guarda en el almacenamiento buffer para que, mientras se realiza el 
+  proceso de conexión, éste no se vea afectado. Los buffer suelen ser implementados por software (aunque también puede ser físico) y pueden ser utilizados para todo tipo de sistemas digitales, como vídeos, música, etc.
+  No hay que confundir el buffer con la caché del ordenador, aunque ambas cosas tienen un funcionamiento parecido. La diferencia principal es que la caché opera con la premisa de que los datos serán utilizados muchas veces mientras el buffer 
+  sirve para un almacenamiento temporal de los datos, es decir, que almacena la información pero sin mantenerla más del tiempo que tarda ésta en enviarse.
+  Su función principal es paliar la diferencia de velocidad de transmisión o procesamiento entre dos dispositivos o procesos, y por eso se encuentran por todas partes en un ordenador: disco duro, RAM, impresora, procesador, etc.
+  
+  Los buffer son datos crudos en hexadecimal optimizados para ser transportados de un punto de memoria a otro. Formalmente, se conocen como streams de datos binarios, pero almacenan los datos en hexadecimal, por lo que cada espacio tiene dos 
+  dígitos. Las ventajas de trabajar con buffer radica en que nos permite trabajar con los datos en crudo y por ello quien envía los datos conoce de entrada el tipo de datos y quien recibe los datos también conoce el tipo de datos que contiene
+  
+- VPN:   
+  
+- Drivers: 
+  
+- Nucleo: 
+
+- CPU: 
+
+- Hilos:   
+
+- GraphQL: 
+
+- Query builder: 
+
+- ORM/ODM:   
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$                                                                                                       
+                                                                                                       
+                                                                                                       Librerias y frameworks  
+                                                                                                       
+                                                                                                       
+- Libreria: Las librerías de programación son conjuntos de archivos de código que se utilizan para desarrollar software. Su objetivo es facilitar la programación, al proporcionar funcionalidades comunes, que ya han sido resueltas previamente 
+  por otros programadores. Como curiosidad, el término proviene de una mala traducción de la palabra inglesa library, que en realidad significa biblioteca. Las librerías (o bibliotecas) son un componente esencial para que los desarrolladores 
+  puedan programar de forma sencilla, evitando la duplicidad de código y minimizando errores. También permiten una mayor agilidad, al reducir el tiempo de desarrollo, así como los costes. A diferencia de un framework, una librería no aporta 
+  la estructura sobre cómo realizar el desarrollo, sino que proporciona funcionalidades comunes, que ya han sido resueltas previamente por otros programadores y evitan la duplicidad de código. Además reducen el tiempo de desarrollo y 
+  aumentan la calidad del mismo.
+   > Librerías estáticas: Estas se graban en un programa como ejecutables. Sirven exclusivamente para esto; después, podemos borrarlas sin problemas, ya que el programa seguirá funcionando con la función necesaria.  
+   > Librerías dinámicas: Son distintas a las estáticas en tanto en cuanto no se copian en el programa al compilarlas. Las subrutinas son cargadas en tiempo de ejecución, en vez de enlazarse en tiempo de compilación.  
+
+- Framework: 
+  > https://www.codecademy.com/resources/blog/what-is-a-framework/
+  > https://www.geeksforgeeks.org/what-is-a-framework/
+  > https://www.freecodecamp.org/news/what-is-a-framework-software-frameworks-definition/
+  > https://aws.amazon.com/what-is/framework/
+  > https://assemblerinstitute.com/blog/framework-programacion/                                                                                                      
+  
+- NPM (Node Packager Manager): 
+   > https://docs.npmjs.com/about-npm
+   > https://www.freecodecamp.org/news/what-is-npm-a-node-package-manager-tutorial-for-beginners/
+  
+- React: 
+
+- Redux: 
+
+- React-Router: 
+
+- React-query (TanStack): 
+   
+- NextJS:    
+  
+- Node JS: 
+   > https://nodejs.org/en/learn/getting-started/introduction-to-nodejs
+   > https://www.freecodecamp.org/news/what-is-node-js/   
+   
+- Express: 
+
+- MongoDB: 
+
+- Socket.io: 
+
+- Passport: 
+
+- Stripe: 
+
+- Typescrypt:
+
+- NestJS:   
+  
+- Docker: 
+  > https://docs.docker.com/get-started/overview/
+  > https://www.ibm.com/topics/docker
+  > https://aws.amazon.com/docker/
+  > https://www.redhat.com/es/topics/containers/what-is-docker
+
+- DockerHub:
+  > https://www.docker.com/products/docker-hub/
+  > https://docs.docker.com/docker-hub/
+  > https://www.geeksforgeeks.org/what-is-docker-hub/
+  > https://apuntes.de/docker-certificacion-dca/docker-hub/#gsc.tab=0
+  
+- Kubernetes: 
+  > https://kubernetes.io/docs/concepts/overview/
+  > https://kubernetes.io/es/docs/concepts/overview/what-is-kubernetes/
+  > https://www.ibm.com/topics/kubernetes
+    
+- Minikube: 
+  > https://minikube.sigs.k8s.io/docs/start/
+  > https://sysdig.com/learn-cloud-native/kubernetes-101/what-is-minikube/#:~:text=This%20tool%20provides%20an%20easy,with%20and%20test%20Kubernetes%20deployments.
+  > https://www2.deloitte.com/es/es/pages/technology/articles/minikube.html
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$                                                                                                                                                                                                           
+                                                                                                   Conceptos y definiciones de POO
     
   > Objeto: los objetos tienen propiedas especificas, tales como posicion, tamano, color, etc., que definen su estado. Los objetos tambien tienen ciertos comportamientos que los hacen diferentes 
     de otros objetos. Cada objeto forsozamente debe tener tanto atributos como metodos, y se debe crear siempre despues de las clases. Los objetos poseen: 
@@ -193,300 +436,52 @@
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$                                                                                                       
 
                                                                                                                    
-- Callback function: Aseguran que una función no se va a ejecutar antes de que se complete una tarea, sino que se ejecutará justo después de que la tarea se haya completado. Nos ayuda a desarrollar código JavaScript asíncrono y nos 
-  mantiene a salvo de problemas y errores. Una función callback es aquella que es pasada como argumento a otra función para que sea "llamada de nuevo" (call back) en un momento posterior. Una función que acepta otras funciones como 
-  argumentos es llamada función de orden-superior (High-Order), y contiene la lógica para determinar cuándo se ejecuta la función callback. Es la combinación de estas dos la que nos permite ampliar nuestra funcionalidad. La forma de crear 
-  una función callback es pasándola como parámetro a otra función, y luego llamarla de vuelta justo después de que haya ocurrido algo o se haya completado alguna tarea.
+- Callback function: 
+  > https://developer.mozilla.org/en-US/docs/Glossary/Callback_function
+  > https://www.geeksforgeeks.org/javascript-callbacks/
+  > https://www.freecodecamp.org/espanol/news/funciones-callback-en-javascript-que-son-los-callback-en-js-y-como-usarlos/#:~:text=Los%20callbacks%20aseguran%20que%20una,salvo%20de%20problemas%20y%20errores.
   
-  A callback function is a function passed into another function as an argument, which is then invoked inside the outer function to complete some kind of routine or action.
-  Callbacks make sure that a function is not going to run before a task is completed but will run right after the task has completed. It helps us develop asynchronous JavaScript code and keeps us safe from problems and errors.
-  In JavaScript, the way to create a callback function is to pass it as a parameter to another function, and then to call it back right after something has happened or some task is completed. 
-
-- fetch: Fetch is the retrieval of data by a software program, script, or hardware device. After being retrieved, the data is moved to an alternate location or displayed on a screen.
-
-- Hoisting: Es el proceso de mover todas las declaraciones de variables a la parte superior de la función o del entorno. El concepto de hoisting de JavaScript determina que el valor de una variable declarada con var puede subir al 
-  principio del scope de la función dentro de la que está declarada. Esto puede ser peligroso, porque puedes terminar con un valor de tipo undefined a pesar de haberle otorgado valor a tus variables. Es decir, la palabra clave var a veces 
-  nos sorprende con valores indefinidos en variables definidas. El hoisting de JavaScript raras veces genera este comportamiento en variables declaradas con const y con let. Aunque puede suceder, el desarrollador web casi que tiene que 
-  generar este comportamiento a propósito para que suceda.                                                                                                                
-  
--  Node JS: Node.js es un entorno de ejecución de JavaScript, que le permite al código en js ser ejecutado en nuestra computadora. Podemos darle a node un archivo de js y éste puede ejecutarlo, y darle acceso a recursos de nuestra 
-   computadora (IO, Network, Etc). El “Node” de java es conocido como la JVM.
-   
--  NPM (Node Packager Manager): Cuando usamos Node.js, rápidamente tenemos que instalar módulos nuevos (librerías), ya que al ser un sistema fuertemente modular viene prácticamente “vacío”. Por lo tanto, para utilizar una funcionalidad de 
-   alguna librería publicada, deberemos instalar módulos adicionales. Esta operación se realiza de forma muy sencilla con la herramienta npm (Node Package Manager).
-   Esta herramienta funciona de dos formas:
-     ✓ Como un repositorio ampliamente utilizado para la publicación de proyectos Node.js de código abierto.
-     ✓ Como una herramienta de línea de comandos. Esta utilidad ayuda a instalar y desinstalar paquetes, gestionar versiones y gestionar dependencias necesarias para ejecutar un proyecto.
-
-- JSON (JavaScript Object Notation): It is a format for storing and transporting data. JSON is text, and text can be transported anywhere, and read by any programming language. Es un formato basado en texto plano de intercambio de datos 
-  totalmente independiente del lenguaje de programación, para representar datos estructurados con la sintaxis de objetos de JavaScript. Es comúnmente utilizado para enviar y almacenar datos o información estructurada en aplicaciones web, 
-  entre un servidor y un cliente. Aunque es muy parecido a la sintaxis de JavaScript, puede ser utilizado independientemente de JavaScript, y muchos entornos de programación poseen la capacidad de leer (convertir; parsear) y generar JSON. 
-  JSON es un string con un formato específico. Otros puntos a tener en cuenta son:
-  
-     ~ Los datos contenidos en un archivo en formato JSON deben estructurarse por medio de una colección de pares con nombre y valor o deben ser una lista ordenada de valores. Sus elementos tienen que contener:
-        + Clave: corresponde al identificador del contenido. Por eso, debe ser una string delimitada por comillas.
-        + Valor: representa el contenido correspondiente y puede contener los siguientes tipos de datos: string, array, object, number, boolean o null.
-     ~ Las datos en formato JSON se pueden almacenar en archivos externos .json. Exemplo: datos.json 
-     ~ JSON es sólo un formato de datos - contiene sólo propiedades, no métodos.
-     ~ A diferencia del código JavaScript en que las propiedades del objeto pueden no estar entre comillas, en JSON sólo las cadenas entre comillas pueden ser utilizadas como propiedades.
-     ~ JSON es solo un formato de datos.
-     ~ Requiere usar comillas dobles para las cadenas y los nombres de propiedades. Las comillas simples no son válidas. 
-     ~ Puede tomar la forma de cualquier tipo de datos que sea válido para ser incluido en un JSON, no solo arreglos u objetos. Así, por ejemplo, una cadena o un número único podrían ser objetos JSON válidos.
-     ~ A diferencia del código JavaScript, en el que las propiedades del objeto pueden no estar entre comillas, en JSON solo las cadenas entre comillas pueden ser utilizadas como propiedades.
-      
-  La transferencia de datos entre aplicaciones es realizada por medio de API —Application Programming Interface— que, entre otros formatos, utiliza la notación JSON para estructurar la información enviada.
-  El archivo JSON también se usa para realizar requisiciones AJAX en sitios web, en que se hacen diferentes interacciones con bancos de datos, como el MySql, para realizar operaciones como consulta, inclusión y exclusión de registros.
-  
-  Principales casos de uso para JSON:
-     ~ Generación de un objeto JSON a partir de datos generados por el usuario: JSON es perfecto para el almacenamiento de datos temporales. Por ejemplo, los datos temporales pueden ser generados por el usuario, como un formulario enviado en 
-       un sitio web. JSON también se puede utilizar como formato de datos para cualquier lenguaje de programación a fin de incrementar el nivel de interoperabilidad.
-     ~ Tansferencia de datos entre sistemas: Una base de datos de sitio web tiene la dirección postal de un cliente, pero la dirección debe verificarse a través de una API para garantizar su validez. Envío de los datos de dirección en 
-       formato JSON a la API de servicio de validación de direcciones.
-     ~ Configuración de datos para aplicaciones: Al desarrollar aplicaciones, cada aplicación necesita las credenciales para conectarse a una base de datos, así como una ruta de acceso al archivo log. Las credenciales y la ruta de acceso al 
-       archivo se pueden especificar en un archivo JSON que sea legible y que esté siempre disponible.
-     ~ Simplificación de modelos de datos complejos: JSON simplifica los documentos complejos hasta los componentes que se han identificado como significativos mediante la conversión del proceso de extracción de datos en un archivo JSON 
-       predecible y legible por humanos.
+- fetch: 
+  > https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
+  > https://www.computerhope.com/jargon/f/fetch.htm
+  > https://www.geeksforgeeks.org/javascript-fetch-method/
+  > https://www.freecodecamp.org/news/javascript-fetch-api-for-beginners/
      
-- API (Application Programming Interfaces): que en español significa interfaz de programación de aplicaciones. Es una aplicación web construida en base a la arquitectura API REST, a la cual podemos solicitar y enviar información desde el 
-  cliente. Tambien, se define como un conjunto de definiciones y reglas que permiten que dos equipos puedan integrarse para trabajar juntos. La mejor analogía que hay para comprender ésto es que una API funge como un “contrato” entre el 
-  front y el back. La API permite entonces que se respondan preguntas como:
-    ✓ ¿A qué endpoint debo apuntar para la tarea que necesito?
-    ✓ ¿Qué método debo utilizar para ese recurso?
-    ✓ ¿Qué información debo enviar para realizar correctamente mi petición? 
-    
-    https://www.ibm.com/topics/api
-    https://stoplight.io/api-types#web-apis
-    
-  Generalmente, nos comunicamos con aplicaciones de este tipo y es la tendencia actual de desarrollo. La ventaja de este modelo es que está orientado a recursos y define métodos claros para solicitar y enviar información. Una API
-  suele tener una URL base (el dominio donde está alojada la aplicación) y luego puede tener varios endpoints, es decir, distintas secciones a las que podemos acceder. A la vez, se pueden hacer peticiones con distintos métodos al mismo 
-  endpoint y obtener distintos resultados. Generalmente, similar a cuando queremos incorporar una librería, al momento de consumir una API debemos revisar su documentación. Allí se definen los distintos endpoints disponibles, los métodos a 
-  utilizar para hacer una petición y qué se nos ofrecerá en respuesta.
-  Se trata de un conjunto de definiciones y protocolos que se utiliza para desarrollar e integrar el software de las aplicaciones, permitiendo la comunicación entre dos aplicaciones de software a través de un conjunto de reglas. Así pues, 
-  podemos hablar de una API como una especificación formal que establece cómo un módulo de un software se comunica o interactúa con otro para cumplir una o muchas funciones. Todo dependiendo de las aplicaciones que las vayan a utilizar, y de 
-  los permisos que les dé el propietario de la API a los desarrolladores de terceros.
-  
-  Una de las principales funciones de las API es poder facilitarle el trabajo a los desarrolladores y ahorrarles tiempo y dinero. Por ejemplo, si estás creando una aplicación que es una tienda online, no necesitarás crear desde cero un 
-  sistema de pagos u otro para verificar si hay stock disponible de un producto. Podrás utilizar la API de un servicio de pago ya existente, por ejemplo PayPal, y pedirle a tu distribuidor una API que te permita saber el stock que ellos 
-  tienen. Con ello, no será necesario tener que reinventar la rueda con cada servicio que se crea, ya que podrás utilizar piezas o funciones que otros ya han creado. Imagínate que cada tienda online tuviera que tener su propio sistema de 
-  pago, para los usuarios normales es mucho más cómodo poder hacerlo con los principales servicios que casi todos utilizan. También son útiles para cuando lo único que se quiere es utilizar deliberadamente las funciones de determinado 
-  servicio para ofrecer ventajas a sus usuarios o atraer a los usuarios de ese servicio a que utilicen tu aplicación.
-  
-- API protocols: Understanding what protocol an API uses is just as important as knowing what type it is. The protocol defines how your API connects to the internet and how it communicates information. The protocol you choose will determine 
-  how you design and build your API, as well as what’s required to maintain it, so it’s important to understand the advantages and drawbacks of each choice.  
-
- > Api rest: Una API REST es una interfaz de comunicación entre sistemas de información que usa el protocolo de transferencia de hipertexto (hypertext transfer protocol o HTTP, por su siglas en inglés) para obtener datos o ejecutar 
-   operaciones sobre dichos datos en diversos formatos, como pueden ser XML o JSON.     
-     1) REST: Ya tenemos las reglas para comunicarse, ¿Pero qué tal la estructura del mensaje? Cuando hacemos una petición o cuando recibimos una respuesta, ésta debe tener un formato. REST (REpresentational State Transfer) permite definir 
-        la estructura que deben tener los datos para poder transferirse. La API respondía a preguntas sobre cómo comunicarse correctamente, sin embargo, REST define cómo debe ser el cuerpo del mensaje a transmitir. (puedes llegar a hablar 
-        con el  presidente si cumples con el protocolo (HTTP) y las reglas (API), pero ¿de qué nos servirá si la forma en que estructuramos nuestro mensaje (REST) no es correcta?).
-       Los dos formatos más importan tes son JSON y XML. La utilización de la estructura dependerá de las necesidades del proyecto. Nosotros utilizaremos JSON. Como otarás, ¡un JSON parece un objeto! así que es mucho más amigable la sintaxis
-     2) API REST es: Un modelo completo para tener perfectamente estipulados los protocolos, las reglas, e incluso la estructura de la información, con el fin de poder hacer un sistema de comunicación completo entre las computadoras.
-     3) Características debe tener una API REST: Estas son las caracteristicas mas importantes de una API REST
-        a) Arquitectura Cliente-Servidor sin estado: 
-           ~ Cada mensaje HTTP contiene toda la información necesaria para comprender la petición. 
-           ~ Como resultado, ni el cliente ni el servidor necesitan recordar ningún estado de las comunicaciones entre mensajes.
-           ~ Esta restricción mantiene al cliente y al servidor débilmente acoplados: el cliente no necesita conocer los detalles de implementación del servidor y el servidor se “despreocupa” de cómo son usados los datos que envía al cliente
-        b) Cacheable: 
-           ~ Debe admitir un sistema de almacenamiento en caché.  
-           ~ La infraestructura de red debe soportar una caché de varios niveles. 
-           ~ Este almacenamiento evita repetir varias conexiones entre el servidor y el cliente, en casos en que peticiones idénticas fueran a generar la misma respuesta.
-        c) Operaciones comunes:
-           ~ Todos los recursos detrás de nuestra API deben poder ser consumidos mediante peticiones HTTP, preferentemente sus principales (POST, GET, PUT y DELETE).
-           ~ Con frecuencia estas operaciones se equiparan a las operaciones CRUD en bases de datos (en inglés: Create, Read, Update, Delete, en español: Alta, Lectura, Modificación, y Baja).  
-           ~ Al tratarse de peticiones HTTP, éstas deberán devolver con sus respuestas los correspondientes códigos de estado, informando el resultado de las mismas. 
-        d) Interfaz uniforme: 
-           ~ En un sistema REST, cada acción (más correctamente, cada recurso) debe contar con una URI (Uniform Resource Identifier), un identificador único.  
-           ~ Ésta nos facilita el acceso a la información, tanto para consultarla, como para modificarla o eliminarla, pero también para compartir su ubicación exacta a terceros.
-        e) Utilización de hipermedios: 
-           ~ Cada vez que se hace una petición al servidor y este devuelve una respuesta, parte de la información devuelta pueden ser también hipervínculos de navegación asociada a otros recursos del cliente.
-           ~ Como resultado de esto, es posible navegar de un recurso REST a muchos otros, simplemente siguiendo enlaces sin requerir el uso de registros u otra infraestructura adicional
-   
- > SOAP API: The Simple Object Access Protocol (SOAP) is another major API protocol. A SOAP API can communicate over other major internet communication protocols, such as TCP and SMTP, in addition to HTTP. In that regard, it is more flexible 
-   than REST, but in most ways, SOAP is more restrictive. SOAP APIs can only work with XML data and have much more rigid requirements for requests. SOAP requests also generally require more bandwidth than REST, and building and maintaining 
-   SOAP code is more complex.
-   One major advantage of SOAP is that it requires metadata files describing requests, which makes exchanges more predictable. It also enables stateful requests, unlike REST, which is stateless. Having a more standardized protocol allows    
-   SOAP APIs to communicate more complex data reliably, and to deliver it over more channels than just HTTP. SOAP’s use of service interfaces instead of simple URL-based organization can also lead to greater discoverability for knowledgeable 
-   users. In general, SOAP is a better fit for more sophisticated applications, where reliability is more important than speed or usability by a public audience. As a result, it’s widely used in financial services and in large enterprise 
-   applications like Salesforce.
-
- > RPC API: The Remote Procedure Call (RPC) protocol can return XML or JSON responses. It differs from SOAP and REST APIs in a few key ways. As the name suggests, this protocol calls a method rather than a data resource. While a RESTful API 
-   returns a document, the response from an RPC server is confirmation that the function was triggered, or an error indicating why it failed to run. In other words, a REST API works with resources, while an RPC API works with actions.
-   Another key difference is that a REST API shows the server and the query parameters in its routes, while an RPC’s URI identifies only the server. RPC APIs are rarely public APIs; triggering methods on remote servers is not something most 
-   companies want to allow for the general public. Calling an RPC server actually changes the state of the server, so it goes beyond the stateless/stateful distinction between REST and SOAP. As a result, RPC APIs must have a high level of 
-   security and trust between producers and consumers, which is why they are most often private APIs. Discoverability and predictability are thus less important for RPC APIs than they are for REST or SOAP APIs, while reliability and 
-   performance are more important.
-   One of the most common use cases for RPC APIs is distributed client-server applications. Payloads are light and limited to parameters for the methods being called, and front-end developers can access server methods without worrying about 
-   details like opening and closing connections or parsing inputs. Methods can be called from remote locations, meaning client applications can be hosted entirely separately from the remote backend server that hosts the functions and data. 
-   Task threading is also simplified, compared to calling methods locally, because a multi-threaded process can run on the remote server without impacting the client application.   
-   
- > GraphQL API: While GraphQL isn’t really a separate protocol, it is a distinct query language, with best practices for its use. GraphQL uses HTTP, similar to a REST API, transmitting text data in the payload of each request, but its 
-   approach is different. A REST API has multiple endpoints, each representing a different data schema. To get the information you need, you must map your requirements to the existing schema and call the appropriate endpoints. GraphQL APIs 
-   typically have a single endpoint, but effectively unlimited data schemas available at that endpoint. The API user must know what data fields are available, but they can write a query that combines those fields in whatever order they want. 
-   Queries are sent in the payload of an HTTP POST request, and data is returned in the shape of the schema specified by the query.
-   GraphQL provides users a lot of flexibility within a single query, compared to a REST API’s strict routing requirements. It can also make caching data a challenge and makes the API consumer responsible for maintaining consistent query 
-   syntax to get comparable data. Additionally, to use a GraphQL API, the user must know what fields exist in order to write a query. For users to get the most out of a GraphQL API, you will have to provide more extensive custom 
-   documentation than for a comparable REST API, and there are fewer tools available to automate the process. If speed is a priority, either for deployment or integration, it may make sense to stick with a more formulaic protocol like REST.   
-   
-- Peticiones HTTP: El mecanismo por el cual se piden y proveen datos a través de internet es HTTP (Hypertext Transfer Protocol). Cuando emitimos una orden al navegador, hace una petición (o request) HTTP a algún servidor. Luego, la recibirá, 
-  procesará y nos devolverá una respuesta con información que utilizaremos en la aplicación. Estas peticiones que debemos hacer están definidas por varias partes
-  
-  > Una URL o dirección: Cuando nos comunicamos con un servidor para pedir información lo hacemos a través de una URL, ya que éste es un programa alojado en algún host y nos comunicamos con él a través de la dirección correcta
-  
-  > MÉTODO (method): Un método es una definición que forma parte del protocolo HTTP, el cual nos sirve para canalizar el tipo de petición queestoy realizando sobre un cierto endpoint. De esta manera, el cliente puede llamar al mismo 
-    endpoint, pero con diferentes métodos, indicando qué operación quiere realizar con dicho recurso.
-    Cada petición que hacemos está acompañada por un verbo que indica al servidor cuál es nuestra intención. El servidor tiene la capacidad de escuchar distintas peticiones en la misma URL, decidir a cuál responder y cómo.     
-    Son 4 los verbos más utilizados, aunque hay muchos más: Get, Post, Put & Delete. Las peticiones de tipo POST y PUT van acompañadas de un body (cuerpo de la request) donde se definen los datos o información a enviar al servidor. GET o 
-    DELETE, por su parte, no tienen body ya que no necesitan enviar datos adjuntos.
-   
-    ~ GET: Para obtener información (o recurso) del servidor. Suelen ser las más utilizadas.
-   
-    ~ POST: Para enviar información al servidor para crear algún recurso.  Significa que el método de la petición será POST Si no lo modificamos será de tipo GET por defecto. Sirve para “crear” recursos, POST se utiliza para operaciones 
-      donde no necesitamos obtener un recurso, sino añadir uno. Algunos de los casos donde se utilizan son: Registrar un usuario: Loguear un usuario, Crear un producto, Crear carrito de compra, Enviar información para un correoelectrónico. 
-      Se apoya del recurso req.body, donde el body representa la información que el cliente envía para crear. 
-    
-    ~ PUT: Para crear o modificar algún recurso en el servidor. En este caso se deben mandar todos los elementos contenidos en el objeto aunque solo se desee modificar unos solo. 
-      
-    ~ PATCH: quiero alterar parcialmente. Aqui, unicamente se puede enviar un elemento de todos los contenidos en el objeto. 
-    
-    ~ DELETE: Para eliminar algún recurso en el servidor
-    
-    Estos verbos Nos permiten definir una manera de explicarle al servidor la dirección y nuestras intenciones. Ningún verbo representa una seguridad y/u obligación. Pero si el servidor y el consumidor los respetan, se pueden lograr algunas 
-    mejoras como por ejemplo: El navegador sabe que un POST no debería ser cacheado, si hacemos un GET y fuera cacheable el navegador podrá cachearlo, pero nunca lo hará con un recurso con verbo POST
-    
-    ~ BODY: Es el espacio en la petición donde se definen los datos a enviar al servidor. Aquí se adjuntan los datos a enviar al servidor. En este caso se envía un objeto con la forma { title, body, userId }. 
-      El body debe enviarse en formato JSON, por eso lo vemos envuelto en un JSON.stringify(). Se utiliza para transferir piezas de información entre el cliente y el servidor.
-      
-    ~ HEADERS: Las cabeceras (headers) HTTP permiten al cliente y servidor enviar información sobre la petición y la respuesta. Los headers incluyen información sobre la petición para establecer una transferencia segura y clara, y de ser 
-      necesario se pueden modificar para agregar datos adicionales. No debemos confundir información sobre la petición (headers) con los datos que la petición puede transferir (body).
-      En este caso se agrega una propiedad ‘Content-type’, con el valor que nos indica la documentación de la API Si no se agrega la petición sería rechazada por el servidor.
-      Headers: Se usan para: Definir las respuestas soportadas, requeridas o preferidas. Agregar información extra. Auth tokens, cookies. Lenguaje preferido. Si acepta contenido cacheado. Lo que quieras en forma de texto.
-      
-    ~ Parámetros (Query Params o URL Params): Para especificar una petición, se puede enviar información adicional en la forma de parámetros a través de la URL. Tenemos dos formas de definir parámetros a través de la URL: 
-      ● Query params: Permite adjuntar en la URL una serie de parámetros en la forma de pares clave-valor. Por ejemplo, si queremos buscar algo por google, debemos enviarle un valor de búsqueda por el parámetro q, a través de la url. Se 
-        utiliza el símbolo ? para indicar el final de la parte de la dirección de la url y el comienzo del query. A partir de ahi, se escriben parámetros con la Forma clave=valor, pudiendo definir varios separándolos con el signo (&).
-      ● URL params: Esta sintaxis permite enviar parámetros directamente en la forma de segmentos de la URL, es decir separados por / . Por ejemplo, la PokeApi nos indica lo siguiente:     https://pokeapi.co/api/v2/pokemon/{id or name}/ 
-        Significa que ese {id or name} es un parámetro, un valor dinámico que insertamos en la URL, en este caso para obtener información sobre un pokemon según su ID o nombre. Para obtener aquel con id = 1, haríamos una petición GET a la
-        siguiente url:       https://pokeapi.co/api/v2/pokemon/1    
-        
-      Nos permiten incluir en la dirección información que se usa para especificarle al receptor parámetros para efectuar una búsqueda, son más comunes para buscar recursos que no tengo la seguridad de 
-      que existan. Se puede leer como:
-       + busca en google.com.ar
-       + utilizando https…
-       + el recurso search (resultados de búsqueda) …
-       + que contengan la palabra (q = query) ‘coderhouse’
-       + Se separa la URL de los parámetros utilizando un signo de pregunta ?
-       + Cada parámetro tendra key=value & key2=value2
-       + Cada parámetro se puede separar por &
-       + http://url.com/find?type=order&id=1234
-       
-  > Principios
-    ✓ Una aplicación RESTful requiere un enfoque de diseño distinto a la forma típica de pensar en un sistema: lo contrario a RPC
-    ✓ RPC (Remote Procedure Calls, llamadas a procedimientos remotos) basa su funcionamiento en las operaciones que puede realizar el sistema (acciones, usualmente verbos). Ej: getUsuario()
-    ✓ En REST, por el contrario, el énfasis se pone en los recursos (usualmente sustantivos), especialmente en los nombres que se le asigna a cada tipo de recurso. Ej. Usuarios.
-    ✓ Cada funcionalidad relacionada con este recurso tendría sus propios identificadores y peticiones en HTTP.
-       
-     ~ URL Params: Son una convención para incluir el identificador del recurso dentro de la misma url, son más comunes cuando ya se conoce el recurso específico que se buscará.
+- JSON (JavaScript Object Notation): 
+  > https://www.json.org/json-en.html
+  > https://www.oracle.com/database/what-is-json/
+  > https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON
+  > https://www.hostinger.es/tutoriales/que-es-json
+  > https://aws.amazon.com/es/compare/the-difference-between-json-xml/
      
-     ~ RECURSOS/RESTFUL: Cuando se crea y provee un servicio basado y pensado en términos de recursos, y se respetan las convenciones de verbo/método y código de respuesta, estamos frente a un diseño arquitectural de tipo REST.
-       Si además transferimos javascript o xml, es conocido como AJAX
-
-- Query: Es una solicitud pero con ciertos parametros de busqueda. Se entiende por query o consulta cualquier petición de datos hacia un servicio que los devuelva, como puede ser una base de datos. Dentro de las bases de datos, Query hace 
-  referencia a la repetición de datos que se encuentran almacenados. Por otra parte, Query también es el término de consulta que deriva en una SERP dentro de los buscadores. De esta manera, esta herramienta tiene como objetivo facilitar los 
-  resultados arrojados a una solicitud. Query en bases de datos SQL y NoSQL es una técnica para obtener esos datos que se planea analizar. Por ejemplo, podrás pedir todos los datos del usuario y, además, podrás seleccionar la tabla o pedir 
-  una hoja específica donde se encuentren las direcciones.
-
-- Asincrónia: 
-  > https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Introducing
-  > https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/
-  > https://www.freecodecamp.org/news/asynchronous-programming-in-javascript/
-  
-  La programación asíncrona nos da la capacidad de “diferir” la ejecución de una función a la espera de que se complete una operación, normalmente de I/O (red, disco duro, …), y así evitar bloquear la ejecución hasta que se haya 
-  completado la tarea en cuestión. Esto es posible gracias a que las funciones son ciudadanos de primer nivel (first-class citizens) y pueden ser pasadas como argumentos de otras funciones tal cual lo haríamos con las variables.    
-  Asynchronous means that the the Web Application could send and receive data from the Web Server without refreshing the page. This background process of sending and receiving data from the server along with updating different sections of a 
-  web page defines Asynchronous property/feature of AJAX.      
+- API (Application Programming Interfaces): 
+  > https://aws.amazon.com/what-is/api/#:~:text=API%20stands%20for%20Application%20Programming,other%20using%20requests%20and%20responses.
+  > https://www.mulesoft.com/resources/api/what-is-an-api
+  > https://www.ibm.com/topics/api
+  > https://stoplight.io/api-types#web-apis
+  > https://www.xataka.com/basics/api-que-sirve
+  > https://www.redhat.com/es/topics/api/what-are-application-programming-interfaces#:~:text=Una%20API%20o%20interfaz%20de,el%20software%20de%20las%20aplicaciones.
     
-- AJAX (Asynchronous JavaScript and XML): 
-  > https://aws.amazon.com/what-is/ajax/
-  > https://developer.mozilla.org/en-US/docs/Glossary/AJAX
-  > https://www.freecodecamp.org/news/ajax-tutorial/
-  > https://www.hostinger.es/tutoriales/que-es-ajax#:~:text=AJAX%20significa%20JavaScript%20asíncrono%20y,al%20servidor%20en%20segundo%20plano.
-  > https://www.ibm.com/docs/es/rational-soft-arch/9.6.1?topic=page-asynchronous-javascript-xml-ajax-overview
+- API protocols: 
+  > https://stoplight.io/api-types 
+  > https://apidog.com/blog/8-api-protocol-types/
+  > https://immune.institute/blog/que-es-la-api/
+
+- Api rest: 
+  > https://radixweb.com/blog/rest-vs-restful-api
+  > https://aws.amazon.com/what-is/restful-api/
+  > https://www.ibm.com/topics/rest-apis
+  > https://www.scrapingbee.com/blog/six-characteristics-of-rest-api/
+  > https://www.redhat.com/en/topics/api/what-is-a-rest-api
+  > https://blog.hubspot.es/website/que-es-api-rest   
+   
+- Peticiones y metodos HTTP (Hypertext Transfer Protocol): 
+  > https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
+  > https://www.codecademy.com/article/http-requests
+  > https://www.cloudflare.com/learning/ddos/glossary/hypertext-transfer-protocol-http/
+  > https://www.geeksforgeeks.org/different-kinds-of-http-requests/
+  > https://kinsta.com/es/base-de-conocimiento/que-es-una-peticion-http/
   
-  Es un conjunto de técnicas de desarrollo que permiten que las aplicaciones web funcionen de forma asincrónica para procesar tareas en segundo plano. En consecuencia, cualquier app o web que emplee 
-  AJAX puede enviar y recibir datos sin volver a cargar toda la página, evitando la interrupción de acciones realizadas por el usuario, añadiendo interactividad y dinamismo a nuestra aplicación. El objetivo principal de AJAX es hacer que los 
-  sitios y las aplicaciones web sean más fáciles de usar, más rápidos y con mayor capacidad de respuesta. AJAX tiene ciertas ventajas indiscutibles como:
-    > Facilita la navegación, ya que la información se actualiza continuamente y las interacciones entre el usuario y las páginas web se vuelven más rápidas.
-    > Reduce la carga en el servidor, aumentando su velocidad y capacidad, porque no se genera la información de la página completa, sino de una sola parte que debe actualizarse.
-    > Aumenta la interactividad porque los resultados de búsqueda aparecen inmediatamente, lo que optimiza el proceso de búsqueda y mejora la experiencia del usuario.
-
-  El modelo práctico de uso de AJAX tiene los siguientes pasos:
-    > Paso 1. En el navegador se crea una llamada de JavaScript que activa XMLHttpRequest.
-    > Paso 2. En segundo plano el navegador web crea una solicitud HTTP que va al servidor.
-    > Paso 3. El servidor recibe, recupera y manda los datos al navegador web.
-    > Paso 4. Los datos se reciben por la web y aparecen en la página sin que se recargue.
-    
-  En el modelo tradicional se crea una solicitud HTTP que va al servidor. El servidor procesa la solicitud y carga la página HTML sin que el usuario interactúe con la aplicación web. En el caso de AJAX, JS permite que el usuario interactúe 
-  con la aplicación web y modifique la página en segundo plano y solo sus partes necesarias. “En segundo plano” significa que mientras espera que se reciban los datos, el usuario puede hacer otras cosas en la página y optimizar este tiempo.
- 
-- Promesas (promise): Es un objeto de Javascript que representa un evento a futuro y permite representar y seguir el ciclo de vida de una tarea/operación (función). Es una acción asincrónica que se puede completar en algún momento y 
-  producir un valor, y notificar cuando esto suceda. Una promesa cuenta con tres estados posibles: pending, fulfilled y rejected. Las promesas pueden ser resueltas o rechazadas.
-  Podemos crear promesas a través de su constructor new Promise. Su sintaxis es algo compleja, ya que recibe una función por parámetro que a su vez recibe por parámetro las funciones de resolve y reject
-  
- 
-- XML (Extensible Markup Language): es un lenguaje de marcado que define un conjunto de reglas para la codificación de documentos. El lenguaje de marcado es un conjunto de códigos que se pueden aplicar en el análisis de datos o la lectura de 
-  textos creados por computadoras o personas. El lenguaje XML proporciona una plataforma para definir elementos para crear un formato y generar un lenguaje personalizado. XML admite el intercambio de información entre sistemas de 
-  computación, como sitios web, bases de datos y aplicaciones de terceros. Las reglas predefinidas facilitan la transmisión de datos como archivos XML a través de cualquier red, ya que el destinatario puede usar esas reglas para leer los 
-  datos de forma precisa y eficiente.
-  Un archivo XML se divide en dos partes: prolog y body. La parte prolog consiste en metadatos administrativos, como declaración XML, instrucción de procesamiento opcional, declaración de tipo de documento y comentarios. La parte del body se 
-  compone de dos partes: estructural y de contenido (presente en los textos simples). El diseño XML se centra en la simplicidad, la generalidad y la facilidad de uso y, por lo tanto, se utiliza para varios servicios web. Tanto es así que hay 
-  sistemas  destinados a ayudar en la definición de lenguajes basados ​​en XML, así como APIs que ayudan en el procesamiento de datos XML - que no deben confundirse con HTML.
-
-- Protocolo: Conjunto de estándares y normas que deben seguirse para poder llevar a cabo una comunicación correcta
-    
-- Servidor: Sistema que permite recibir peticiones de otras computadoras y devolver una respuesta a éstas.
-  Es un equipo informático que forma parte de una red y provee servicios a otros equipos. Es un aparato informático que almacena, distribuye y suministra información. Los servidores funcionan basándose en el modelo “cliente-servidor”. 
-  El cliente puede ser tanto un ordenador como una aplicación que requiere información del servidor para funcionar. Por tanto, un servidor ofrecerá la información demandada por el cliente siempre y cuando el cliente esté autorizado. Los 
-  servidores pueden ser físicos o virtuales.
-  > Servidor proxy: realiza un cierto tipo de funciones a nombre de otros clientes en la red para aumentar el funcionamiento de ciertas operaciones (p. ej., prefetching y depositar documentos u otros datos que se soliciten muy 
-    frecuentemente), también proporciona servicios de seguridad, o sea, incluye un cortafuegos.
-  > Servidor del acceso remoto (RAS): controla las líneas de módem de los monitores u otros canales de comunicación de la red para que las peticiones conecten con la red de una posición remota, responde llamadas telefónicas entrantes y 
-    reconoce la petición de la red.
-  > Servidor web: almacena documentos HTML, imágenes, archivos de texto, escrituras, y demás material Web compuesto por datos (conocidos colectivamente como contenido), y distribuye este contenido a clientes que la piden en la red.
-  > Servidor de base de datos: provee servicios de base de datos a otros programas u otras computadoras, como es definido por el modelo cliente-servidor. También puede hacer referencia a aquellas computadoras (servidores) dedicadas a 
-    ejecutar esos programas, prestando el servicio.
-     
-- Microservices:
-  > https://aws.amazon.com/microservices/
-  > https://www.geeksforgeeks.org/microservices/
-  > https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/microservices
-  > https://www.redhat.com/es/topics/microservices
-  > https://www.ibm.com/mx-es/topics/microservices
-  > https://kinsta.com/es/blog/microservicios-vs-api/
-
-- Libreria: Las librerías de programación son conjuntos de archivos de código que se utilizan para desarrollar software. Su objetivo es facilitar la programación, al proporcionar funcionalidades comunes, que ya han sido resueltas previamente 
-  por otros programadores. Como curiosidad, el término proviene de una mala traducción de la palabra inglesa library, que en realidad significa biblioteca. Las librerías (o bibliotecas) son un componente esencial para que los desarrolladores 
-  puedan programar de forma sencilla, evitando la duplicidad de código y minimizando errores. También permiten una mayor agilidad, al reducir el tiempo de desarrollo, así como los costes. A diferencia de un framework, una librería no aporta 
-  la estructura sobre cómo realizar el desarrollo, sino que proporciona funcionalidades comunes, que ya han sido resueltas previamente por otros programadores y evitan la duplicidad de código. Además reducen el tiempo de desarrollo y 
-  aumentan la calidad del mismo.
-   > Librerías estáticas: Estas se graban en un programa como ejecutables. Sirven exclusivamente para esto; después, podemos borrarlas sin problemas, ya que el programa seguirá funcionando con la función necesaria.  
-   > Librerías dinámicas: Son distintas a las estáticas en tanto en cuanto no se copian en el programa al compilarlas. Las subrutinas son cargadas en tiempo de ejecución, en vez de enlazarse en tiempo de compilación.  
-
-- Framework: Es un marco de trabajo que tiene como objetivo facilitar la solución de problemas que pueden surgir al programar. Los frameworks aceleran el proceso de programar facilitando tareas como la organización del código o 
-  el trabajo en equipo dentro de un proyecto, por ejemplo. En otras palabras, el objetivo de un framework en programación es facilitar la tarea de los programadores.
-  También hay que destacar que muchos de estos frameworks no sólo facilitan la organización del trabajo, sino que también ofrecen recursos desarrollados por otros programadores. Estos recursos pueden ser informes o códigos que pueden usarse 
-  para solucionar los problemas más habituales que se dan al llevar a cabo determinadas tareas.
-    > Frameworks para software development: Los frameworks para aplicaciones generales se utilizan para mejorar la estructura de una aplicación. Su objetivo es proporcionar una estructura base para los desarrolladores de software con la que 
-      puedan organizar sus proyectos. Eso sí, siempre dentro de un sistema operativo determinado. 
-    > Frameworks para desarrollo web: Al estar relacionados con el diseño web, es evidente que existen diferentes frameworks para los diferentes lenguajes de programación que se utilizan. Un desarrollador backend y uno de frontend usarán 
-      marcos de trabajo distintos, aunque existen algunos ideales para los full stack developers como ReactJS.
-    > Marco de gestión de contenido: De nuevo, un tipo de frameworks relacionados con el diseño web. Aun así, en este caso se trata de interfaces diseñadas para personalizar un CMS. En consecuencia, existen una gran cantidad de CMFs, ideales 
-      para diferentes lenguajes e incluso para diferentes tareas dentro de un lenguajes.      
-     
-- codigo de estado: Cuando realizamos alguna petición al servidor mediante el protocolo HTTP, el servidor debe respondernos no sólo con información, sino con un estado del proceso. Este es un código que nos permitirá saber cómo se encuentra 
-  el proceso, o cómo finalizó.    
-  
-- HTTP: Acrónimo para Hyper Text Transfer Protocol. Es el protocolo que nos permite comunicarnos a través de Internet  
-
 - HTTPS
 
 - TSL
@@ -494,55 +489,61 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 - SSL
   
 - DNS: 
-
-- HTTP response status codes: HTTP response status codes indicate whether a specific HTTP request has been successfully completed. Cuando el servidor responde con un código de estado, esto permite saber qué ocurrió con la consulta que 
-  estábamos haciendo, y da información al cliente sobre qué ha ocurrido.
-  ✓ 1xx: Status “informativo”
-  ✓ 2xx: Status “ok”. Indica que la petición se procesó correctamente. No hubo ningún tipo de inconveniente desde la consulta hasta la respuesta.
-  ✓ 3xx: Status de redirección. Hace referencia a redirecciones, cuando un recurso se ha movido o necesitamos apuntar a otro servicio.
-  ✓ 4xx: Status de error de cliente. Se utiliza cuando el cliente realiza alguna petición que no cumpla con las reglas de comunicación (una mala consulta, tal vez le faltó enviar un dato, o venía en un formato incorrecto).
-  ✓ 5xx: Status de error en servidor.
   
-  ~ 200: Indica que la petición se procesó correctamente. No hubo ningún tipo de inconveniente desde la consulta hasta la respuesta
-  ~ 300: Hace referencia a redirecciones, cuando un recurso se ha movido o necesitamos apuntar a otro servicio.
-  ~ 400: Se utiliza cuando el cliente realiza alguna petición que no cumpla con las reglas de comunicación (una mala consulta, tal vez le faltó enviar un dato, o venía en un formato incorrecto).
-  ~ 401: Se utiliza cuando el cliente no se ha identificado con el servidor bajo alguna credencial, no puede acceder al recurso
-  ~ 404: Se utiliza cuando el recurso no se ha encontrado, ya sea algún dato solicitado o incluso el endpoint mismo.
-  ~ 500: Se utiliza cuando algo ocurrió en el servidor, no necesariamente un error del cliente, sino un error o “detalle” que no haya considerado el servidor al tratar con algún caso
+- BODY, HEADERS & PARAMS
+  > https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers
+  > https://developer.mozilla.org/en-US/docs/Web/API/Request/body
+  > https://guides.emberjs.com/release/routing/query-params/
+  > https://www.branch.io/glossary/query-parameters/#:~:text=Query%20parameters%20are%20a%20defined,on%20the%20data%20being%20passed.
+  > https://www.botify.com/learn/basics/what-are-url-parameters#:~:text=URL%20parameters%20(also%20known%20as,by%20the%20%27%26%27%20symbol.
+
+- RPC (Remote Procedure Calls): 
+  >  
+   
+- Query: 
+  > https://www.techopedia.com/definition/5736/query
+  > https://www.macrometa.com/articles/what-are-queries
+  > https://aulacm.com/que-es/query-significado-definicion/
+
+- Asincrónia: 
+  > https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Introducing
+  > https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/
+  > https://www.freecodecamp.org/news/asynchronous-programming-in-javascript/
+  > https://lenguajejs.com/javascript/asincronia/que-es/
+  > https://www.freecodecamp.org/espanol/news/sincrono-vs-asincrono-en-javascript/ 
     
-- Cookies: 
-  > https://usa.kaspersky.com/resource-center/definitions/cookies
-  > https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies
-  > https://en.wikipedia.org/wiki/HTTP_cookie#:~:text=Cookies%20are%20arbitrary%20pieces%20of,into%20otherwise%20stateless%20HTTP%20transactions.
-  > https://secureprivacy.ai/blog/session-cookies-vs-persistent-cookies#:~:text=Session%20cookies%20are%20temporary%20and%20are%20used%20to%20maintain%20information,accessed%20across%20multiple%20browsing%20sessions.
-  > https://allaboutcookies.org/what-is-a-cookie#:~:text=4.-,Third-party%20cookies,%2C%20videos%2C%20or%20web%20banners.
-  > https://www.cookiescan.com/what-are-website-cookies-and-where-are-they-stored/#:~:text=one%20is%20removed.-,What%20Are%20Cookies%20Used%20For%3F,part%20of%20the%20internet%20experience.
-
-
-- JSON Web Token (JWT): It is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. This information can be verified and trusted because it is 
-  digitally signed. JWTs can be signed using a secret (with the HMAC algorithm) or a public/private key pair using RSA or ECDSA.
-  Although JWTs can be encrypted to also provide secrecy between parties, we will focus on signed tokens. Signed tokens can verify the integrity of the claims contained within it, while encrypted tokens hide those claims from other parties. 
-  When tokens are signed using public/private key pairs, the signature also certifies that only the party holding the private key is the one that signed it. When should you use JSON Web Tokens?
-    > Authorization: This is the most common scenario for using JWT. Once the user is logged in, each subsequent request will include the JWT, allowing the user to access routes, services, and resources that are permitted with that token. 
-      Single Sign On is a feature that widely uses JWT nowadays, because of its small overhead and its ability to be easily used across different domains.
-      
-    > Information Exchange: JSON Web Tokens are a good way of securely transmitting information between parties. Because JWTs can be signed—for example, using public/private key pairs—you can be sure the senders are who they say they are. 
-      Additionally, as the signature is calculated using the header and the payload, you can also verify that the content hasn't been tampered with.
-            
-  In its compact form, JSON Web Tokens consist of three parts separated by dots (.), which are:
-    > Header: The header typically consists of two parts: the type of the token, which is JWT, and the signing algorithm being used, such as HMAC SHA256 or RSA.
-    > Payload: The second part of the token is the payload, which contains the claims. Claims are statements about an entity (typically, the user) and additional data. There are three types of claims: registered, public, and private claims.
-        ~ Registered claims: These are a set of predefined claims which are not mandatory but recommended, to provide a set of useful, interoperable claims. Some of them are: iss (issuer), exp (expiration time), sub (subject), aud (audience).
-        ~ Public claims: These can be defined at will by those using JWTs. But to avoid collisions they should be defined in the IANA JSON Web Token Registry or be defined as a URI that contains a collision resistant namespace.
-        ~ Private claims: These are the custom claims created to share information between parties that agree on using them and are neither registered or public claims.
-    > Signature: To create the signature part you have to take the encoded header, the encoded payload, a secret, the algorithm specified in the header, and sign that. The signature is used to verify the message wasn't changed along the way, 
-      and, in the case of tokens signed with a private key, it can also verify that the sender of the JWT is who it says it is.
-    > Putting all together: The output is three Base64-URL strings separated by dots that can be easily passed in HTML and HTTP environments, while being more compact when compared to XML-based standards such as SAML.
+- AJAX (Asynchronous JavaScript and XML): 
+  > https://aws.amazon.com/what-is/ajax/
+  > https://developer.mozilla.org/en-US/docs/Glossary/AJAX
+  > https://www.freecodecamp.org/news/ajax-tutorial/
+  > https://www.hostinger.es/tutoriales/que-es-ajax#:~:text=AJAX%20significa%20JavaScript%20asíncrono%20y,al%20servidor%20en%20segundo%20plano.
+  > https://www.ibm.com/docs/es/rational-soft-arch/9.6.1?topic=page-asynchronous-javascript-xml-ajax-overview
+  > https://ebac.mx/blog/que-es-ajax
+ 
+- Promesas (promise): 
+  > https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+  > https://www.freecodecamp.org/news/guide-to-javascript-promises/
+  > https://www.geeksforgeeks.org/javascript-promise/
+  > https://lenguajejs.com/javascript/asincronia/promesas/
+  > https://es.javascript.info/promise-basics
   
-  In authentication, when the user successfully logs in using their credentials, a JSON Web Token will be returned. Since tokens are credentials, great care must be taken to prevent security issues. In general, you should not keep tokens 
-  longer than required.       --> https://jwt.io/introduction
+- XML (Extensible Markup Language): 
+  > https://aws.amazon.com/what-is/xml/#:~:text=Extensible%20Markup%20Language%20(XML)%20lets,%2C%20and%20third-party%20applications.
+  > https://developer.mozilla.org/en-US/docs/Web/XML/XML_introduction
+  > https://rockcontent.com/es/blog/que-es-xml/
+   
+- HTTP response status codes: 
+  > https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
+  > https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
   
-- Stateless:   
+- JSON Web Token (JWT): 
+  > https://jwt.io/introduction
+  > https://auth0.com/docs/secure/tokens/json-web-tokens
+    
+- Stateless and stateful:
+  > https://www.baeldung.com/cs/stateful-stateless-system
+  > https://www.geeksforgeeks.org/difference-between-stateless-and-stateful-protocol/
+  > https://www.tutorialspoint.com/difference-between-stateless-and-stateful-protocols
   
 - Application logic vs Business logic: 
   
@@ -557,29 +558,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 - Interpolation: 
 
-- Proxy: 
-  > https://www.varonis.com/blog/what-is-a-proxy-server
-  > https://www.fortinet.com/resources/cyberglossary/proxy-server
-  > https://cybernews.com/resources/what-is-a-proxy-server/
-  > https://www.xataka.com/basics/que-es-un-proxy-y-como-puedes-utilizarlo-para-navegar-de-forma-mas-anonima
-  > https://www.mcafee.com/blogs/es-es/privacy-identity-protection/que-es-un-proxy//
-  > https://kinsta.com/es/base-de-conocimiento/que-es-un-proxy/
-        
-- Router: Es un dispositivo de conexión en la red que sirve para encontrar la ruta más corta al entregar los paquetes de datos. Su principal propósito es conectar diferentes redes de manera simultánea. Al igual que el firewall, funciona en 
-  la capa de red, pero también funciona en la capa física y la capa de enlace de datos del modelo OSI. A diferencia del firewall, no incluye cifrado, por lo tanto, no protege la red ante amenazas aunque comparta la conexión a Internet entre 
-  las redes y los equipos.
-  
-- firewall: Es un sistema entre dos redes que implementa una política de control de acceso entre estas. Es decir, todos los paquetes de datos que ingresan o abandonan la red pasarán a través del firewall, y verifica si permite su paso o no. 
-  También funciona en la capa de red del modelo OSI, pero a diferencia del router, cifra los datos antes de su transmisión. Un firewall principalmente protegerá la red ante amenazas. Puede implementarse tanto en hardware como en software.
-
-- Compresion: Cuando el servidor se está comunicando con el cliente en el navegador, parte de esta comunicación implica revisar si hay algún archivo comprimido que necesite descomprimirse, y en caso de que así sea, cuál sería el algoritmo de 
-  descompresión a utilizar para poder obtener la información correctamente. Los navegadores modernos pueden aceptar contenido codificado en tres algoritmos principales: 
-    ✓ Deflate: 
-    ✓ Gzip (Deflate + algunas cosas adicionales): Gzip es el primer y más conocido modelo de compresión, es altamente utilizado y sencillo de utilizar. La compresión se puede colocar a nivel middleware en nuestro servidor para poder 
-      corroborar la diferencia de transferencia ntre una respuesta con y sin compresión.
-    ✓ Brotli: Brotli es conocido como una alternativa “moderna” de Gzip. Éste fue desarrollado por Google y ofrece un algoritmo cuya compresión puede resultar hasta 30% más efectiva que la compresión de Gzip . 
-
-
 - Escalamiento vertical: Mi servidor necesita ser más potente y necesito mejorar el hardware para tener un servidor más potente. Básicamente, significa mejorar el hardware del servidor, para que sea más potente, mucho más rápido y pueda 
   atender una mayor cantidad de peticiones y, por lo tanto, mejorar el performance de los aplicativos. El escalamiento vertical requiere de grandes inversiones de recursos por parte de las empresas para poder contar con los equipos más 
   actualizados posibles en el mundo de la tecnología. Además, llegará un punto en el que alcanzaremos un tope tecnológico, y tendremos que esperar a que se desarrollen mejores soluciones de hardware para poder comprarlas (un tiempo de espera 
@@ -593,43 +571,19 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 - Cluster: Es un módulo nativo de node js que nos permitirá ejecutar este concepto de clusterización que recién comentamos, donde podremos tener a un proceso principal contando con un grupo de procesos trabajadores. Estos trabajadores van a 
   trabajar en conjunto para resolver el problema de las situaciones de las peticiones.
   
-- Maquina virtual: 
+- container (docker):
+  > https://www.docker.com/resources/what-container/#:~:text=A%20Docker%20container%20image%20is,tools%2C%20system%20libraries%20and%20settings.
+  > https://docs.docker.com/guides/walkthroughs/what-is-a-container/
 
-- Kernel: El Kernel o núcleo, es una parte fundamental del sistema operativo que se encarga de conceder el acceso al hardware de forma segura para todo el software que lo solicita, el Kernel es una pequeña e invisible parte del sistema 
-  operativo, pero la más importante, ya que sin esta no podría funcionar. Todos los sistemas operativos tienen un Kernel, incluso Windows 10, pero quizá el más famoso es el Kernel de Linux. Este núcleo de los sistemas operativos se ejecuta 
-  en modo privilegiado con acceso especial a los recursos del sistema para poder realizar las peticiones de acceso que le va pidiendo el software que lo necesita, además como los recursos no son ilimitados, también hace de arbitro a la hora 
-  de asignarlos, decidiendo el orden de las peticiones recibidas según la prioridad e importancia de estas. Una gestión muy importante y fundamental que en la mayoría de las ocasiones pasa desapercibida aún siendo un trabajo esencial para 
-  coordinar todo el hardware con el software.
-  
-  El Kernel o núcleo de un sistema operativo sirve para administrar los recursos de hardware solicitados por los diferentes elementos de software y hacer de intermediario decidiendo a que y cuando se concede este acceso evitando así 
-  sobrecarga del sistema, recursos innecesarios y acceso a software malicioso al propio Kernel y llegar a poder controlar así todo el sistema. De este modo el Kernel sirve como elemento de seguridad teniendo que pasar por varias capas antes 
-  de poder tener acceso, además tiene que distribuir los recursos de manera eficiente y ordenada para que el Hardware trabaje junto al Software de la mejor manera posible.
-  Aunque usualmente relacionamos un Kernel o un núcleo del sistema operativo a un PC, también está presente y sirve para hacer funcionar todos los computadores que podemos encontrar hoy en día, como por ejemplo un ordenador de a bordo de un 
-  coche o un barco, una raspberry PI que ejecuta una versión adaptada de Linux Debian o los dispositivos móviles con Android e iOS, que  también disponen de un Kernel basado en Linux / Unix.
-  Tiene también como trabajo conceder acceso a todos los periféricos que tengamos conectados e interactuar con el software que los solicite, aunque no sean los usuales con los que trabajamos. Por ejemplo si ocasionalmente conectamos un móvil 
-  para usarlo como webcam con DroidCam, este Kernel se encarga de conceder los permisos necesarios al software para gestionar y poder tener la imagen y el audio para poder usarla en algún software de videoconferencia o reuniones si por 
-  ejemplo teletrabajamos desde casa o cualquier otro lugar.       --> https://salesystems.es/que-es-un-kernel/#:~:text=El%20kernel%20es%20el%20componente,o%20núcleo%20del%20sistema%20operativo.
-  El Kernel es el encargado de hacer funcionar básicamente todo, tiene que ser capaz de arrancar, por ejemplo, un PC desde que lo encendemos hasta que vemos visible el escritorio, todo esto comunicándose con los elementos hardware que 
-  dispone el PC y que también son necesarios para hacerlo funcionar, una vez que tengamos el escritorio deberá ser capaz de hacer funcionar los programas que nosotros queramos abrir y hacerlos funcionar en nuestro PC.
-  
-- Docker: Docker es una plataforma gestora de contenedores. Nos permitirá entonces empaquetar en un contenedor nuestro aplicativo, y posteriormente compartirlo a algún lado, para que al momento en el que tenga que ejecutarse, este pueda 
-  hacerlo dentro del contenedor aislado y asegurar que la ejecución será satisfactoria siempre. La lógica de Docker se basa en tres pasos generales: 
-    1) Un dockerfile: Este cuenta con las instrucciones paso a paso para que nuestro proyecto genere una imagen
-    2) Una imagen es el equivalente de una clase, pero con un proyecto completo. Cuando generamos la imagen de una aplicación, significa que podemos generar múltiples contenedores a partir de esa aplicación (como instancias) 
-    3) Contenedor: El punto final en el que ejecutamos el aplicativo, pero esta vez desde un entorno cerrado.  
-    
-- DockerHub: Dockerhub es una librería, o repositorio de imágenes en la nube. Cuando hemos finalizado con el mantenimiento de nuestro aplicativo, necesitamos compartir la imagen resultante con nuestro equipo (Y enviar la imagen por correo 
-  electrónico no resulta óptimo). Al subir nuestra imagen en la nube, todos los miembros autorizados podrán descargarla y utilizarla. Existen múltiples razones para tener nuestra imagen en un repositorio (nube):
-    > Podemos compartir nuestra imagen con nuestro equipo de desarrollo.
-    > Tenemos un sistema mejor controlado de nuestra imagen, ya que cada cambio de ésta puede significar una nueva tag con otra versión.
-    > Permite que otros softwares descarguen la imagen La razón de que éste se encuentre en la nube y permita que otros softwares lo descarguen, significa que al momento de configurar procesos más complejos (como deployment), podemos obtener 
-      la imagen directamente, sin necesidad de tener que estar cambiando el archivo local. 
+- dockerfile: 
+  > https://www.cloudbees.com/blog/what-is-a-dockerfile
+  > https://docs.docker.com/reference/dockerfile/
 
+- Image (docker): 
+  > https://www.geeksforgeeks.org/what-is-docker-image/
+  > https://docs.docker.com/guides/docker-concepts/the-basics/what-is-an-image/
+  
 - Imagen base: Escribimos en nuestro código --> FROM node. Esto significa que estaremos tomand una imagen base del entorno de node, para poder configurar nuestra app. 
-
-- Contenedor: Un contenedor es un entorno de ejecución para un aplicativo en particular, el cual tiene todas las dependencias que necesita dicha aplicación para poder correr sin problemas de compatibilidad. La clave de un contenedor es el 
-  concepto del aislamiento, esto indicando que podemos tener múltiples contenedores, con diferentes entornos, con diferentes dependencias, y nunca habrá conflictos porque la instalación y uso de las dependencias se hace de manera interna. 
-  Además, ya que el entorno no ocupa utilizar todo el sistema operativo (sólo el kernel), se vuelven realmente livianos en comparación con mover todo un sistema operativo en cada aplicativo.
 
 - Clusterización: 
   
@@ -639,82 +593,20 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     ✓ Control de reinicio para contenedores que presenten algún fallo
     ✓ Balanceador de carga, el cual permitirá que las peticiones puedan llegar a los contenedores de manera más distribuida, a diferencia de en cola (como lo hace la clusterización base).
     ✓ Manejo de rollout updates, los cuales nos permiten seguir un flujo organizado para poder actualizar o reconfigurar contenedores en un cluster.
-    
-- Kubernetes: Kubernetes es una tecnología de orquestamiento de contenedores. En esencia, se trata de una plataforma que sirve para administrar cargas de trabajos y servicios. Kubernetes tomará un conjunto de instrucciones y las ejecutará 
-  para poder distribuir pods, donde cada pod puede tener n contenedores, de esta forma todos los contenedores que pertenezcan a un pod, podrán funcionar como una entidad única para intercomunicarse. Kubernetes está pensado para poder ser 
-  desplegado, eso quiere decir que podemos hacerlo desde alguna plataforma en la nube, aunque en este caso, por cuestión de costos, lo utilizaremos de manera local. Hay múltiples posibilidades para poder correr un repositorio local:
-    ✓ Minikube
-    ✓ MicroK8s
-    ✓ k3s
-    
-- Minikube: Es un software que permite levantar un cluster local de kubernetes, permitiendo hacer las pruebas que necesitemos dentro de nuestro contenedor de docker. Para poder ejecutar el instalador, bastará con descargarlo de este link 
-  (https://minikube.sigs.k8s.io/docs/start/). No hace falta gran configuración, todo se instalará directamente en la computadora. Para comenzar a trabajar con Minikube, bastará con corre el comando "minikube start".
-  Recuerda haber instalado previamente kubectl, ya que al momento de iniciar minikube, buscará si está instalado, de otra forma lo tendremos que configurar manual.
+      
 
-- Ancho de banda: Teoricamente, es la longitud de la extensión de frecuencias, medida en hercios (Hz), en la que se concentra la mayor potencia de la señal.
-  Es la máxima cantidad de datos transmitidos a través de una conexión a internet en cierta cantidad de tiempo. El ancho de banda por lo general se confunde con la velocidad de internet cuando en realidad es el volumen de información que se 
-  puede enviar a través de una conexión en una cantidad medida de megabits por segundo (Mbps).
-  Tambien se conoce como la cantidad máxima de datos que pueden ser transmitidos a través de una conexión a Internet en un tiempo determinado. Normalmente, el ancho de banda se representa en el número de bits, kilobits, megabits o 
-  gigabits que se pueden transmitir en 1 segundo.
-  Los términos velocidad de internet y ancho de banda suelen confundirse, pero aquí encontrarás la diferencia. La velocidad se refiere al ritmo al que se pueden transmitir los datos, mientras que el ancho de banda es la capacidad de esa 
-  velocidad. Utilizando una analogía, imagina una carretera, la velocidad dependerá del vehículo y el ancho de banda de cuantos vehículos pueden transitar al mismo tiempo por ella durante un tiempo determinado.
   
-- Velocidad: Es la velocidad es cuán rápido esa información se recibe o descarga. Tambien se define como la velocidad de dígitos binarios transmitidos y se da en bits por segundo (bps).
-
-- Rendimiento: es la cantidad de información que se entrega con éxito en una determinada cantidad de tiempo.
-
-- Latencia: La latencia a veces se refiere a una demora o tasa de ping. Es la demora que experimentas mientras esperas que algo se cargue. Si el ancho de banda es la cantidad de información enviada por segundo, la demora es la cantidad de 
-  tiempo que demora esa información en ir de la fuente hasta ti.
-
-- Transmicion: El rendimiento es cómo la información realmente se entrega en una determinada cantidad de tiempo. De modo que si el ancho de banda es la cantidad máxima de datos, el rendimiento es cuántos de esos datos llegan a su destino, 
-  teniendo en cuenta la latencia, velocidad de red, pérdida de paquete y otros factores.
-
-- Frecuencia: La frecuencia es la magnitud física que mide las veces por unidad de tiempo en que se repite un ciclo de una señal periódica. Una señal periódica de una sola frecuencia tiene un ancho de banda mínimo. En general, si la señal 
-  periódica tiene componentes en varias frecuencias, su ancho de banda es mayor, y su variación temporal depende de sus componentes frecuenciales.
-
-- Hertz: Los microprocesadores manejan velocidades de proceso de datos en el sistema, y eso se llama Hertz. Esta velocidad es la velocidad de reloj y a medida que va subiendo el nivel de velocidad, es mejor el rendimiento del microprocesador.
-  Unidad de medida de la frecuencia electromagnética. Se utiliza para medir la velocidad de los procesadores. Equivale a un ciclo por segundo. En informática se utiliza para dar una idea de la velocidad del microprocesador, indicando cual es 
-  la frecuencia de su clock (componente de los microprocesadores que genera una señal cuya frecuencia es utilizada para enmarcar el funcionamiento del procesador: a mayor frecuencia mayor velocidad).
-
-- Frecuencia de refresco: representa el número de veces que se actualiza la imagen completa que vemos en la pantalla en cada segundo. Así, una frecuencia de 60 Hz significa que en realidad el monitor está mostrando 60 imágenes en un solo 
-  segundo, si hablamos de 144 Hz entonces este lo hará 144 veces, uno de 240 Hz lo hará 240 veces. Si hablamos en términos comunes esto viene a significar lo suaves que son las transiciones de imágenes en la pantalla, ya que cuantas más 
-  imágenes se generen por segundo, menos «saltos» de imagen veremos y más suave irá la acción del juego. Cuando hablamos de tasa de refresco nos estamos refiriendo a algo que es relativo al hardware (del monitor).
-
-- Cache: Una memoria caché puede ser usada a veces como un búfer, y viceversa. Sin embargo, una caché opera con el supuesto de que los mismos datos van a ser utilizados múltiples veces, que los datos escritos serán leídos en un periodo corto    
-  de tiempo, o teniendo en cuenta la posibilidad de múltiples lecturas o escrituras para formar un único bloque más grande. Su premisa básica es reducir los accesos a los almacenamientos de nivel más bajo, los cuales son bastante lentos. La 
-  caché también es normalmente una capa de abstracción que está diseñada para ser invisible.
-  Una caché de disco o archivo de caché guarda las estadísticas de los datos almacenados en él y proporciona datos con un tiempo máximo de espera en modos de escritura en diferido. Un búfer, por el contrario, no hace nada de esto, sino que es 
-  utilizado normalmente en entrada, salida y a veces, almacenamiento temporal de datos que se enrutan entre distintos dispositivos o que van a ser modificados de manera no secuencial antes de ser escritos o leídos de manera secuencial.
-
-- Buffer: Un buffer es un espacio en memoria en el que se almacenan datos de manera temporal. Su principal función es evitar que el programa o recurso que los requiere, ya sea hardware o software, se quede sin datos durante una transferencia 
-  (entrada/salida) de datos irregular o por la velocidad del proceso. 
-  Normalmente los datos se almacenan en un búfer mientras son transferidos desde un dispositivo de entrada (como un ratón o mouse) o justo antes de enviarlos a un dispositivo de salida (por ejemplo: altavoces). También puede utilizarse para 
-  transferir datos entre procesos, de una forma parecida a los búferes utilizados en telecomunicaciones. Un ejemplo de esto último ocurre en una comunicación telefónica, en la que al realizar una llamada esta se almacena, se disminuye su 
-  calidad y el número de bytes a ser transferidos, y luego se envían estos datos modificados al receptor.
   
-  Un buffer se basa en respuestas rápidas. Sirve para optimizar el proceso de transferencia de datos entre un software y otro o entre un hardware y un software. Ese dato se guarda en el almacenamiento buffer para que, mientras se realiza el 
-  proceso de conexión, éste no se vea afectado. Los buffer suelen ser implementados por software (aunque también puede ser físico) y pueden ser utilizados para todo tipo de sistemas digitales, como vídeos, música, etc.
-  No hay que confundir el buffer con la caché del ordenador, aunque ambas cosas tienen un funcionamiento parecido. La diferencia principal es que la caché opera con la premisa de que los datos serán utilizados muchas veces mientras el buffer 
-  sirve para un almacenamiento temporal de los datos, es decir, que almacena la información pero sin mantenerla más del tiempo que tarda ésta en enviarse.
-  Su función principal es paliar la diferencia de velocidad de transmisión o procesamiento entre dos dispositivos o procesos, y por eso se encuentran por todas partes en un ordenador: disco duro, RAM, impresora, procesador, etc.
   
-  Los buffer son datos crudos en hexadecimal optimizados para ser transportados de un punto de memoria a otro. Formalmente, se conocen como streams de datos binarios, pero almacenan los datos en hexadecimal, por lo que cada espacio tiene dos 
-  dígitos. Las ventajas de trabajar con buffer radica en que nos permite trabajar con los datos en crudo y por ello quien envía los datos conoce de entrada el tipo de datos y quien recibe los datos también conoce el tipo de datos que contiene
   
-- VPN:   
   
-- Drivers: 
   
-- Nucleo: 
-
-- CPU: 
-
-- Hilos:   
-
-- GraphQL: 
-
-- Query builder: 
-
-- ORM/ODM:   
+  
+  
+  
+  
+  
+  
+  
   
   

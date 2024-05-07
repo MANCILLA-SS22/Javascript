@@ -10,8 +10,7 @@ https://www.learncpp.com/cpp-tutorial/syntax-and-semantic-errors/
 https://cppguide.readthedocs.io/en/latest/ 
 https://www.programiz.com/csharp-programming/comments 
 https://www.tutorialspoint.com/csharp/index.htm 
-https://docs.oracle.com/javase/tutorial/java/TOC.html     https://dev.java 
-https://docs.oracle.com/javase/tutorial/  https://docs.oracle.com/javase/specs/    https://docs.oracle.com/en/java/javase/20/ 
+https://docs.oracle.com/javase/tutorial/java/TOC.html  https://docs.oracle.com/javase/tutorial/  https://docs.oracle.com/javase/specs/    https://docs.oracle.com/en/java/javase/20/   https://dev.java 
 https://www.tutorialspoint.com/java/java_arrays.htm       
 https://www.programiz.com/java-programming 
 https://www.javatpoint.com/java-for-loop 
@@ -38,8 +37,8 @@ https://www.php.net/manual/en/
 https://docs.flutter.dev       
 https://dart.dev/guides 
 https://guides.rubyonrails.org/getting_started.html   
-https://docs.docker.com/storage/volumes/#volumes     -->    https://learn.microsoft.com/en-us/windows/wsl/install
-https://kubernetes.io/docs/home/       -->     https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/
+https://docs.docker.com   https://docs.docker.com/guides/   https://docs.docker.com/storage/volumes/#volumes     -->    https://learn.microsoft.com/en-us/windows/wsl/install
+https://kubernetes.io/docs/home/                                                                                 -->     https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/
 https://minikube.sigs.k8s.io/docs/start/
 
 https://nodejs.org/en/about/ 
@@ -151,7 +150,6 @@ https://github.com/facebook/react
 https://github.com/facebook/create-react-app
 https://vitejs.dev 
 https://react.dev/reference/react
-https://react-bootstrap.github.io
 https://nextjs.org/docs/getting-started 
 https://react-redux.js.org  https://redux-toolkit.js.org  https://redux-saga.js.org 
 https://reactrouter.com/en/main
@@ -170,6 +168,7 @@ https://popper.js.org/docs/v2/
 https://tobiasahlin.com/spinkit/
 https://animate.style  
 https://swiperjs.com/get-started
+https://react-bootstrap.github.io
 https://usehooks.com 
 https://www.apollographql.com/docs/react/ 
 

@@ -63,6 +63,7 @@ export default FindEventSection;
 //that should only yield a couple of results, not all of them. So we need a different queryKey here so that this query works independently from this query. And the results
 //from this query in the NewEventsSection component are not used as results for this query in the FindEventSection component. Therefore here we should also include some 
 //other piece of information in that queryKey. And that other piece of information should be dynamic because it should be that search term for which we're looking.
+
 //It's important to mention that "searchElement.current.value" in search: "" isn't ideal because refs, unlike state in React don't cause this component function to 
 //re-execute which means that as the value entered into this input here changes, this query is not updated and not sent again. But of course we would wanna send it again 
 //to get new data if the user did enter a different search term. So that's why we must use useState. And our goal in handleSubmit is now to call setSearchTerm and to pass the 

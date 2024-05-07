@@ -16,9 +16,7 @@ function EventItem({ event }) {
           <p className="event-item-location">{event.location}</p>
         </div>
         <p>
-          <Link to={`/events/${event.id}`} className="button">
-            View Details
-          </Link>
+          <Link to={`/events/${event.id}`} className="button">View Details</Link>
         </p>
       </div>
     </article>

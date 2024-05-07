@@ -8,8 +8,8 @@ import { fetchEvents } from "../../utils/http.jsx";
 export default function NewEventsSection() {
   const {data, isPending, isError, error} = useQuery({ 
     queryKey: ['events', {max: 3}],
-    queryFn: function({signal, queryKey}){
-      return fetchEvents({signal, ...queryKey[1]});
+    queryFn: function({signal, queryKey}){ //Here, "queryKey" is the value coming from useQuery's key that has the same name. So the values are: 'events', {max: 3}. 
+      return fetchEvents({signal, ...queryKey[1]}); // ...queryKey[1] is the same as using "{max: 3}" buy we wanna aboid to duplicate same code.
     },
     staleTime: 5000,
     // gcTime: 30000
@@ -53,8 +53,15 @@ export {};
 // 2. queryKey  --> Every query or fetch request we are sending, so every get HTTP request we are sending, also should have such a queryQuey which will then internally be used
 //    by tancks-query to cache the data that's yielded by that request so that that response from that request could be used in the future if we're trying to send the same request 
 //    again. And we can configure how long data should be stored and reused. This basically will make sure that data can be shown to the user quicker if we already have it because
-//    it doesn't need to be refetched all the time. That's why queryKeyneed such a key and the key is actually an array of values which are then internally stored by react-query
+//    it doesn't need to be refetched all the time. That's why queryKey needs such a key and the key is actually an array of values which are then internally stored by react-query
 //    such that whenever we're using a similar array of fimilar values React Query sees that and is able to reuse existing data.
+
+//    Instead, React Query caches the response data you are getting back from your requests and it will reuse that data whenever it encounters a never useQuery execution with the same Query Key. 
+//    So for example, if we go back from other page to the one in NewEventsSection and therefore, this component function executes again, React-Query will see that the 'events' QueryKey has been used 
+//    before and that it did already cache data for that key. And it will then instantly yield that data, but at the same time, also send the fetchEvents request again Behind the Scenes to see if 
+//    updated data is available. And then it will kind of silently replace that data with the updated data so that after a couple of seconds or however long it takes to fetch that data, we do have the 
+//    updated data on the screen.
+
 // 3. queryFn   --> With this function we define the actial code that will be executed that wilk send the actual request. It returns a promise
 // 4. staleTime --> This controls after which time react-query will send such a behind the scenes request to get updated data if it found data in your cache. 0 means that it will use 
 //    data from the cache but it will then always also send such a Behind the Scenes request to get updated data. If you set staleTime to 5,000, for example, it will wait for 5,000 milliseconds.
