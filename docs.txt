@@ -1,3 +1,25 @@
+Accesos directos en Opera:
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/values    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
+https://www.w3schools.com/jsref/jsref_class_super.asp#gsc.tab=0&gsc.q=unhandledRejection
+https://www.geeksforgeeks.org/javascript-array-findindex-method/
+https://nodejs.org/api/process.html#process
+https://expressjs.com/en/5x/api.html#express
+https://www.mongodb.com/docs/manual/   https://www.mongodb.com/docs/atlas/
+https://account.mongodb.com/account/login?nds=true
+https://mongoosejs.com/docs/queries.html
+https://socket.io/docs/v4/
+https://www.typescriptlang.org/docs/handbook/2/typeof-types.html?
+https://docs.nestjs.com/recipes/prisma
+https://docs.docker.com/guides/   https://docs.docker.com/storage/volumes/#volumes
+https://hub.docker.com/repositories/germanss22
+https://kubernetes.io/docs/home/
+https://minikube.sigs.k8s.io/docs/start/
+https://react.dev/reference/react
+https://react-redux.js.org/introduction/getting-started
+https://reactrouter.com/en/main/hooks/use-submit
+https://tanstack.com/query/v5/docs/framework/react/reference/useQuery
+https://nextjs.org/docs/app/api-reference/file-conventions
+                                                                                                         ñ
 Documentaciones:
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/values    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
 https://www.w3schools.com/jsref/jsref_class_super.asp#gsc.tab=0&gsc.q=unhandledRejection
@@ -7,7 +29,9 @@ https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/rand?view=msvc
 https://cplusplus.com/reference/ 
 https://www.programiz.com/cpp-programming/library-function 
 https://www.learncpp.com/cpp-tutorial/syntax-and-semantic-errors/ 
-https://cppguide.readthedocs.io/en/latest/ 
+https://www.learncpp.com/cpp-tutorial/arrays-and-loops/
+https://cppguide.readthedocs.io/en/latest/
+https://en.cppreference.com/w/cpp/container/array 
 https://www.programiz.com/csharp-programming/comments 
 https://www.tutorialspoint.com/csharp/index.htm 
 https://docs.oracle.com/javase/tutorial/java/TOC.html  https://docs.oracle.com/javase/tutorial/  https://docs.oracle.com/javase/specs/    https://docs.oracle.com/en/java/javase/20/   https://dev.java 
@@ -20,45 +44,40 @@ https://docs.python.org/3/library/index.html     https://docs.python.org/3/refer
 https://docs.spyder-ide.org/current/index.html  https://docs.jupyter.org/en/latest/use/using.html  https://flask.palletsprojects.com/en/3.0.x/  https://docs.djangoproject.com/en/5.0/  
 https://fastapi.tiangolo.com  https://trypyramid.com/documentation.html    https://www.tornadoweb.org/en/stable/  https://www.riverbankcomputing.com/static/Docs/PyQt5/   https://pypi.org/project/PySide/
 https://javascript.info  https://lenguajejs.com 
-https://www.typescriptlang.org
+https://www.typescriptlang.org/docs/handbook/2/typeof-types.html?
 https://go.dev/learn/
-https://doc.rust-lang.org/rust-by-example/meta/doc.html 
+https://doc.rust-lang.org/rust-by-example/meta/doc.html
+https://www.r-project.org/other-docs.html
 https://dev.mysql.com/doc/refman/8.0/en/dynindex-statement.html 
 https://www.postgresql.org/docs/current/ 
 https://docs.oracle.com/database/121/SQLRF/toc.htm 
-https://us-west-1.console.aws.amazon.com/console/home?region=us-west-1
-https://cloud.google.com/docs
-https://learn.microsoft.com/en-us/azure/?product=popular&source=docs
 https://jquery.com/download/ 
-https://react.dev   https://legacy.reactjs.org  https://create-react-app.dev                                              ñ
+https://react.dev   https://legacy.reactjs.org  https://create-react-app.dev
 https://angular.io/start 
 https://vuejs.org/guide/introduction.html#what-is-vue 
 https://www.php.net/manual/en/
 https://docs.flutter.dev       
 https://dart.dev/guides 
-https://guides.rubyonrails.org/getting_started.html   
+https://guides.rubyonrails.org/getting_started.html
+https://us-west-1.console.aws.amazon.com/console/home?region=us-west-1
+https://cloud.google.com/docs
+https://learn.microsoft.com/en-us/azure/?product=popular&source=docs
 https://docs.docker.com   https://docs.docker.com/guides/   https://docs.docker.com/storage/volumes/#volumes     -->    https://learn.microsoft.com/en-us/windows/wsl/install
 https://kubernetes.io/docs/home/                                                                                 -->     https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/
 https://minikube.sigs.k8s.io/docs/start/
 
+https://www.w3resource.com/javascript-exercises/javascript-array-exercises.php   https://www.w3resource.com/cpp-exercises/array/index.php
+
 https://nodejs.org/en/about/ 
 https://nodejs.org/api/process.html#process
-https://nodejs.org/api/child_process.html
-https://nodejs.org/api/os.html
 https://expressjs.com/en/guide/routing.html
 https://expressjs.com/en/resources/middleware.html
-https://expressjs.com/en/resources/middleware/cookie-parser.html
-https://expressjs.com/en/resources/middleware/cors.html
 https://expressjs.com/en/advanced/best-practice-performance.html#use-gzip-compression
-https://www.mongodb.com/docs/manual/
-https://www.mongodb.com/docs/atlas/
+https://www.mongodb.com/docs/manual/   https://www.mongodb.com/docs/atlas/
 https://account.mongodb.com/account/login?nds=true
-https://hub.docker.com/repositories/germanss22 
 https://mongoosejs.com/docs/middleware.html   https://mongoosejs.com/docs/guide.html#methods
 https://www.typescriptlang.org/docs/handbook/2/typeof-types.html?
 https://docs.nestjs.com
-https://react-redux.js.org  https://redux-toolkit.js.org  https://redux-saga.js.org 
-https://axios-http.com/docs/intro  
 https://socket.io/docs/v4/tutorial/introduction 
 https://github.com/facebook/regenerator/tree/main
 https://github.com/zloirock/core-js
@@ -138,6 +157,7 @@ https://editor.swagger.io
 https://yaml.org    https://eemeli.org/yaml/#yaml
 https://owasp.org
 
+Frameworks de frontend:
 https://getbootstrap.com/docs/5.3/utilities/spacing/#margin-and-padding 
 https://mui.com/material-ui/getting-started/overview/ 
 https://tailwindcss.com/docs/installation 
@@ -145,12 +165,12 @@ https://bulma.io/documentation/
 https://sass-lang.com/documentation/style-rules#nesting 
 https://getuikit.com/docs/introduction
 https://materializecss.com 
-
 https://github.com/facebook/react
 https://github.com/facebook/create-react-app
 https://vitejs.dev 
 https://react.dev/reference/react
 https://nextjs.org/docs/getting-started 
+https://axios-http.com/docs/intro  
 https://react-redux.js.org  https://redux-toolkit.js.org  https://redux-saga.js.org 
 https://reactrouter.com/en/main
 https://tanstack.com/query/v3/docs/framework/react/overview
@@ -175,8 +195,6 @@ https://www.apollographql.com/docs/react/
 https://leafletjs.com/index.html --> This works for setting up maps
 https://console.cloudinary.com/console/c-4023da8b6dcc56f76f0f9fd2aef6e2/media_library/search?q=&view_mode=grid
 https://swr.vercel.app
-https://vercel.com/docs/getting-started-with-vercel
-https://vercel.com/mancillass22s-projects
 https://parceljs.org/docs/
 https://babeljs.io/docs/babel-polyfill#installation
 https://readme.so/editor
@@ -187,13 +205,5 @@ https://docs.github.com/en/get-started/getting-started-with-git/associating-text
 https://training.github.com/downloads/github-git-cheat-sheet/ 
 https://git-scm.com/docs 
 https://dzone.com/articles/top-20-git-commands-with-examples 
-https://www.atlassian.com/git/glossary  
+https://www.atlassian.com/git/glossary
 https://docs.github.com/es/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax 
-
-
-https://www.w3resource.com/javascript-exercises/javascript-array-exercises.php
-https://www.w3resource.com/cpp-exercises/array/index.php
-
-npm i eslint prettier eslint-config-prettier eslint-plugin-prettier eslint-config-airbnb eslint-plugin-node eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react --save-dev
-- Its kind of interesting how animal like we are
-- my sister still tells my dad how messed up that was of him to do. 
