@@ -4,6 +4,13 @@ import Image from 'next/image';
 import { getMeal } from '@/lib/meals';
 import { notFound } from 'next/navigation';
 
+//NOTE: The "metadata" object and "generateMetadata" function exports are only supported in Server Components.
+export async function generateMetadata({params}){ //When we wanna export dynamic metadata, we must use an async function
+    const meal = getMeal(params.mealSlug);
+    if (!meal) notFound();
+    return {title: meal.title, description: meal.summary};
+};
+
 function MealDetailsPage({params}){
     const meal = getMeal(params.mealSlug);
     if(!meal) notFound();
@@ -12,7 +19,7 @@ function MealDetailsPage({params}){
         <>
             <header className={classes.header}>
                 <div className={classes.image}>
-                    <Image src={meal.image} alt={meal.title} fill/>
+                    <Image src={`https://germanmancilla-nextjs-demo-users-image.s3.us-west-1.amazonaws.com/${meal.image}`} alt={meal.title} fill/>
                 </div>
                 <div className={classes.headerText}>
                     <h1>{meal.title}</h1>

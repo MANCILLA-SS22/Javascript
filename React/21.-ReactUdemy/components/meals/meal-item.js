@@ -8,7 +8,7 @@ export default function MealItem({ title, slug, image, summary, creator }) {
     <article className={classes.meal}>
       <header>
         <div className={classes.image}>
-          <Image src={image} alt={title} fill /> {/* A boolean that causes the image to fill the parent element, which is useful when the width and height are unknown. */}
+          <Image src={`https://germanmancilla-nextjs-demo-users-image.s3.us-west-1.amazonaws.com/${image}`} alt={title} fill />
         </div>
         <div className={classes.headerText}>
           <h2>{title}</h2>
