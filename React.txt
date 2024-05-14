@@ -88,6 +88,160 @@ npm start
 - Render de un único elemento: Los componentes deben retornar un solo elemento o componente, pero este elemento o componente sí puede tener más de un elemento o componente hijo. En caso de no necesitar que el elemento padre forme parte del 
   árbol del DOM, se puede utilizar React.Fragment, o lo que es lo mismo utilizar un tag sin tipo <></>.
   
+- map(): Creates a new array with the result of calling a function for each array element. El método map() crea un nuevo array con todos los elementos del original transformados según las operaciones de la función enviada por parámetro. 
+         Tiene la misma cantidad de elementos pero los almacenados son el return de la función. En el ejemplo, la función retorna la propiedad nombre de cada elemento y eso es lo que se almacena en el nuevo array nombres. Map() se utiliza 
+         mucho para transformación de arrays.
+         En REACT, debemos incluir en cada elemento la propiedad key, que marque la identidad del elemento. Es decir, debemos poner algo que se encuentre en el array u objeto pero que estemos seguros de que NO SE REPETIRA (lo mas 
+         recomendable seria el id, ya que este empieza desde 1 hasta un numero indefinido pero que siempre estara cambiando). Esto ayudará a react a optimizar el rendering ante cambios en el array. De no tenerla podemos auto-generarla con el 
+         index provisto por el segundo parámetro de map, pero sólo optimizará si hay adiciones al final del array.
+         Whenever the key changes on a component, even if that component is not part of a list, whenever it changes, REACT will destroy the old component instance and create a new one.
+   
+- Patrones: Hay formas de crear componentes que nos ayudan a reutilizar y mantener código. Dos de ellas son High Order Components (HOC) y Render Props. Ambas son técnicas avanzadas. 
+
+  > High Order Components: Este patrón permite reutilizar una funcionalidad común entre componentes. En pocas palabras, es una función que toma un componente como argumento y devuelve un nuevo componente con una funcionalidad adicional. Un 
+    ejemplo simple de High Order Component podría ser uno que agregue la funcionalidad de validación de formularios a cualquier formulario que lo necesite.
+  
+  > Render Props: Este patrón implica pasar una función como una prop al componente hijo con el propósito de permitir al componente hijo renderizar su contenido a través de la función. En otras palabras, un componente padre puede pasar una 
+    función como prop al componente hijo y el componente hijo puede llamar a esa función en su renderizado para obtener información o funcionalidad específica que necesita.
+    
+    El patrón de diseño Render Props puede ser útil en situaciones donde quieres crear un componente reutilizable que puede ser personalizado con diferentes funciones o comportamientos según las necesidades del usuario.
+    También es una alternativa al patrón de diseño HOC (Higher Order Component), que puede ser más complicado de entender y utilizar.
+    Por ejemplo, imagina un componente que muestra una lista de tareas y un componente de filtro que se utiliza para filtrar las tareas según su estado.
+    Podrías pasar una función como prop del componente de filtro, que devuelve la lista filtrada de tareas, y el componente de filtro llamaría a esta función cuando se produce un cambio en su estado para actualizar la lista de tareas que se 
+    muestra.
+    
+  > Diferencia entre Render Props y HOC: Tanto los Render Props como los High Order Components (HOC) son técnicas avanzadas en React que nos permiten reutilizar lógica y abstraer comportamientos comunes en nuestros componentes. La principal 
+    diferencia radica en que Render Props se basa en la idea de pasar una función de renderizado como una prop a un componente para que pueda renderizar información, mientras que los HOC son componentes de orden superior que envuelven otro 
+    componente y le agregan alguna funcionalidad.
+    En pocas palabras, los Render Props nos permiten compartir la lógica de un componente a través de una función de renderizado, mientras que los HOC nos permiten compartir la lógica de un componente a través de la composición de 
+    componentes. En cuanto a cuándo usar uno u otro, depende del caso de uso específico. Tanto los Render Props como los HOC son técnicas poderosas que nos permiten escribir componentes más reutilizables y mantenibles, por lo que es 
+    importante tenerlos en cuenta en nuestra caja de herramientas de React.
+ 
+  > Patrones (Componentes de presentación): Son aquellos que simplemente se limitan a mostrar datos y tienen poca o nula lógica asociada a manipulación del estado (por eso, también son llamados stateless components). Características:
+     ✓ Orientados al aspecto visual.
+     ✓ No tienen dependencia con fuentes de datos (por ejemplo: Llamadas a APIs, Redux).
+     ✓ Normalmente no tienen estado.
+    Los componentes de presentación usualmente no tienen estado. En caso de tenerlos serán para trabajar características visuales del componente pero no para almacenar datos de la aplicación, sino que reciben datos de aplicación por props.
+    La ventaja más evidente de estos componentes es la posibilidad de reutilizarlos siempre que queramos, sin tener que recurrir a escribir el mismo código una y otra vez.
+
+  > Patrones (Componentes contenedores): Tienen como propósito encapsular a otros componentes y proporcionarles las propiedades que necesitan. Se encargan de modificar el estado de la aplicación para que el usuario vea el cambio en los datos 
+  (por eso, también son llamados state components). Las Características son:
+    ✓ Orientados al funcionamiento de la aplicación.
+    ✓ Contienen componentes de presentación y/u otros contenedores.
+    ✓ Se comunican con las fuentes de datos. (API, Flux, etc)
+    ✓ Tienen estado para representar el cambio en los datos.
+
+- Diseño modular: Los componentes permiten separar la interfaz de usuario en piezas independientes, reutilizables y pensar en cada pieza de forma aislada. Al desarrollar crearemos componentes para resolver pequeños problemas, que son fáciles 
+  de visualizar y comprender. Luego, unos componentes se apoyarán en otros para solucionar problemas mayores y al final la aplicación será un conjunto de componentes trabajando entre sí. 
+  ✓ Favorece la separación de responsabilidades: cada componente debe tener una única tarea.
+  ✓ La aplicación es más fácil de entender.
+  ✓ Mejora el rendimiento de la aplicación.
+  ✓ Se simplifica la tarea de hacer pruebas unitarias.
+  
+- Children: Children es una manera que tiene react de permitirnos proyectar/transcluir uno o más componentes dentro otro. Es ideal cuando:
+  ✓ Necesitamos que un elemento quede dentro de otro, sin que sepan el uno del otro.
+  ✓ Necesitamos implementar patrones más complejos.
+  
+  El concepto de children es la forma en que React nos permite incluir un componente dentro de otro sin que al padre le importe exactamente qué componente o componentes hijos están siendo incluidos. Los elementos hijos son aquellos que se 
+  colocan dentro de la etiqueta de apertura y cierre del componente y la prop “children” se utiliza para acceder y manipular estos elementos hijos desde dentro del componente padre. 
+  De esta manera, podemos crear componentes más flexibles y reutilizables que acepten contenido personalizado y que puedan renderizarlo de manera dinámica.  
+  
+- Ciclos de vida: El ciclo de vida no es más que una serie de estados por los cuales pasa todo componente a lo largo de su existencia. Esos estados tienen correspondencia en diversos métodos, que podemos implementar para realizar acciones 
+  cuando se van produciendo.
+  > El montaje: Se produce la primera vez que un componente va a generarse, incluyéndose en el DOM.
+  > La actualización: Se produce cuando el componente ya generado se está actualizando.
+  > El desmontaje: Se produce cuando el componente se elimina del DOM.
+  > Métodos de ciclos de vida (class based):
+    + componentWillMount()*: este método del ciclo de vida es de tipo montaje. Se ejecuta justo antes del primer renderizado del componente. 
+    + componentDidMount(): método de montaje, que solo se ejecuta en el lado del cliente. Se produce justo después del primer renderizado. Una vez se invoca este método ya están disponibles los elementos asociados al componente en el DOM. 
+    + componentWillReceiveProps(): método de actualización que se invoca cuando las propiedades se van a actualizar, aunque no en el primer renderizado del componente, por lo tanto no se invocará antes de inicializar las propiedades por 
+      primera vez.
+
+- Render y efectos: El funcionamiento de React está estrechamente ligado al cambio de estados. Cuando se produce un cambio de estado, React ejecuta un nuevo proceso de renderizado para ese componente y, de manera recursiva, para todos sus 
+  componentes hijos. Durante este proceso React ejecuta de nuevo las funciones de los componentes para generar el nuevo árbol de elementos de la interfaz de usuario.  Dentro de los componentes podemos tener funciones para realizar diferentes 
+  tareas, como, por ejemplo, una llamada a una api para obtener datos. Si en cada render se ejecuta esta llamada a la API, quiere decir que un cambio de estado está provocando efectos secundarios y no controlarlos puede traernos problemas. 
+  
+
+- React router: Por defecto, React no viene con un mecanismo integrado de navegación. Esto es para mantener sus dependencias al mínimo y dado que no todo proyecto necesita routing, se maneja como una dependencia aparte. La version que se 
+  debe utilizar es la siguiente: react-router-dom => para routing en el browser.
+  El modulo que se debe importar desde react-router es: import {BrowserRouter, Routes, Route} from "react-router-dom".
+  Una vez realizado el import necesitamos configurar dos cosas: 
+  1. Wrappear (envolver) la aplicación en un BrowserRouter  2. Crear un Routes (donde proyectaremos las vistas navegadas) 3. Crear los Route’s de las distintas navegaciones con sus componentes asociados
+    
+    > Especificidad de match: Por defecto se matchean (coinciden) únicamente partes de la url, por lo tanto ‘/’ va a matchear ‘/cart’ o ‘/checkout’, a no ser que le digamos que use la propiedad exact:
+    > Navegar a una ruta: Ahora que tenemos todo configurado, podemos importar un link perteneciente a react-router-dom, en cualquier componente del sub-árbol del <BrowserRouter>
+      Usarlo para que al clickear, el BrowserRouter renderice ese Route que habíamos declarado dentro del Switch. Esto se hace de la siguiente manera: 
+         import { Link } from "react-router-dom"; 
+                         .
+                         .
+                         .
+         <li> <Link to="/category/urbanas">Urbanas</Link> </li>
+     
+    > Navegar a una ruta (con parámetros): Si hacemos la ruta dinámica (con parámetros), podremos navegarla idénticamente, pero de manera dinámica. Para hacer esto, se coloca "/:num_id". Esto indica que lo que dice 
+      num_id cambiara de nombre en la barra de navegacion, lo que represetna la parte dinamica. Como por ejemplo: 
+         <Route path='/itemDetail/:num_id' element={<ProductDetailContainer/>} /> 
+         
+         Se puede poner cualquier nombre pero cuando querramos usar el useParams en el JS, ahi forzosamente tendremos que usar el nombre de la variable que se utilizo en el HTML, qu en este caso es num_id.
+         const { num_id } = useParams()
+         
+         y finalmente, navegamos en la ruta pero ahora en lugar de poner /:num_id, ahora se cambiara por lo que queremos que sea la parte dinamica
+         <Link to={`/itemDetail/${evento.id}`}>  <Button variant="contained">Ver detalles</Button>  </Link>
+         
+    > Navegar a una ruta - navlink: Es un link con un estilo, está siempre detectando la ruta actual, y si coincide con la suya nos activa la clase que le demos para que el user sepa qué item de la lista corresponde con la vista actual.
+    
+    > Recibir parámetros por ruta: React router provee integración con Hooks. useParams:
+       ✓ Lo podemos utilizar para leer en js los parámetros de la ruta.
+       ✓ En combinación con un useEffect, nos sirve para obtener actualizaciones sobre los parámetros.
+
+- Evento: es un estímulo programático, que puede ser provocado de manera automática, o ser el resultado de una interacción del usuario con la UI
+
+- Event listener: Un Event Listener es un patrón de diseño que sirve, como su nombre lo indica, para escuchar cuando un algo ocurre en algún elemento, librería o API, y poder realizar una acción en consecuencia. 
+
+   > Agregando un event listener  window.addEventListener("resize", onResize);   "resize" = Nombre de evento que quiero escuchar    onResize = Referencia de la función a registrar       Nota: ¡guardar referencia para poder removerlo después!
+   > Removiendo un event listener:  return () => {                                           Nota: invocar el removeEventListener en la función de limpieza de nuestros hooks en donde los hayamos registrado.
+                                       console.log("On dismount");
+                                       window.removeEventListener(onResize);
+                                    }
+                                    
+   > Removiendo eventos: 
+     ✓ Se des-registran con el nombre y la referencia a la función con que los registramos (no alcanza únicamente el nombre).
+     ✓ Si registras manualmente un evento del DOM en tu componente de react hazlo dentro de un effect y asegúrate de de-registrarlo en la función de limpieza en el return del efecto.
+     ✓ Recordemos: Si dejamos event listeners sin des-registrar corremos riesgos de crear leaks de memoria o registrar un evento más de una vez ( se ejecutara una vez por cada register ).
+     
+     
+   > Declarando un evento: 
+     Algunos eventos como onKeyDown son cancelables, por ejemplo: evt.preventDefault()
+     Los eventos por default se ejecutan en el elemento, y en cada uno de sus ancestros. Si esto puede traer algún efecto secundario podemos cancelar la propagación (bubbling): evt.stopPropagation()
+   
+   
+- Synthetic events: Suelen tener algunas variaciones en el contenido de los eventos. Esto haría difícil utilizarlos de manera uniforme en cada plataforma. React es consciente de esto, y nos ayuda proveyendo esta abstracción. 
+    ✓ Sirven para normalizar/estandarizar eventos entre browsers.
+    ✓ Siempre que registre un evento vía React/Jsx con onClick, no obtendré el evento nativo, sino uno sintético.
+    ✓ Se destruyen al terminar la ejecución de la función vinculada (por performance).
+    ✓ Puedo acceder al evento nativo via evt.nativeEvent
+
+- Intercambiabilidad: Implementando componentes de manera eficiente, podremos generar intercambiabilidad, e intercambiar funcionalidades sin esfuerzo. Podemos generar variaciones del mismo componente, con distinto layout y el mismo comportam
+
+- Abstracción: 
+  (1) Sirve como estrategia para ocultar el comportamiento interno de rendering e implementación de change events
+  (2) El consumer sigue sin cambiar la firma de consumo
+
+- Orientación a eventos
+  ✓ Permite mover la lógica compleja a componentes de menor orden
+  ✓ Si ambos se comportan igual, el parent no lo sabrá aunque sus implementaciones sean distintas.
+  ✓ Permite que el parent se encargue del resultado final sin darle esa responsabilidad a sus children.
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
 - States: Los estados de un componente en React se utilizan para representar la información que puede cambiar durante la vida útil del componente y afectar su representación en la interfaz de usuario. Todo cambio de estado va inicializar el 
   proceso de render a partir del nodo donde se produjo el cambio de estado y así se generará el nuevo Virtual DOM que luego será reconciliado. Los estados son un concepto de React, no de JavaScript, por lo que para implementarlo vamos a 
   necesitar de los Hooks de React.
@@ -343,159 +497,4 @@ npm start
 - useDebugValue: permite personalizar la etiqueta que las Herramientas de Desarrollo de React muestran para tu Hook personalizado.
 - useId: permite que un componente se asocie un ID único. Normalmente, se utiliza con las APIs de accesibilidad.
 - useSyncExternalStore: permite que un componente se subscriba a un almacenamiento (store) externo.
-  
-  
-  
-- map(): Creates a new array with the result of calling a function for each array element. El método map() crea un nuevo array con todos los elementos del original transformados según las operaciones de la función enviada por parámetro. 
-         Tiene la misma cantidad de elementos pero los almacenados son el return de la función. En el ejemplo, la función retorna la propiedad nombre de cada elemento y eso es lo que se almacena en el nuevo array nombres. Map() se utiliza 
-         mucho para transformación de arrays.
-         En REACT, debemos incluir en cada elemento la propiedad key, que marque la identidad del elemento. Es decir, debemos poner algo que se encuentre en el array u objeto pero que estemos seguros de que NO SE REPETIRA (lo mas 
-         recomendable seria el id, ya que este empieza desde 1 hasta un numero indefinido pero que siempre estara cambiando). Esto ayudará a react a optimizar el rendering ante cambios en el array. De no tenerla podemos auto-generarla con el 
-         index provisto por el segundo parámetro de map, pero sólo optimizará si hay adiciones al final del array.
-         Whenever the key changes on a component, even if that component is not part of a list, whenever it changes, REACT will destroy the old component instance and create a new one.
-  
-  
-  
-- Patrones: Hay formas de crear componentes que nos ayudan a reutilizar y mantener código. Dos de ellas son High Order Components (HOC) y Render Props. Ambas son técnicas avanzadas. 
-
-  > High Order Components: Este patrón permite reutilizar una funcionalidad común entre componentes. En pocas palabras, es una función que toma un componente como argumento y devuelve un nuevo componente con una funcionalidad adicional. Un 
-    ejemplo simple de High Order Component podría ser uno que agregue la funcionalidad de validación de formularios a cualquier formulario que lo necesite.
-  
-  > Render Props: Este patrón implica pasar una función como una prop al componente hijo con el propósito de permitir al componente hijo renderizar su contenido a través de la función. En otras palabras, un componente padre puede pasar una 
-    función como prop al componente hijo y el componente hijo puede llamar a esa función en su renderizado para obtener información o funcionalidad específica que necesita.
-    
-    El patrón de diseño Render Props puede ser útil en situaciones donde quieres crear un componente reutilizable que puede ser personalizado con diferentes funciones o comportamientos según las necesidades del usuario.
-    También es una alternativa al patrón de diseño HOC (Higher Order Component), que puede ser más complicado de entender y utilizar.
-    Por ejemplo, imagina un componente que muestra una lista de tareas y un componente de filtro que se utiliza para filtrar las tareas según su estado.
-    Podrías pasar una función como prop del componente de filtro, que devuelve la lista filtrada de tareas, y el componente de filtro llamaría a esta función cuando se produce un cambio en su estado para actualizar la lista de tareas que se 
-    muestra.
-    
-  > Diferencia entre Render Props y HOC: Tanto los Render Props como los High Order Components (HOC) son técnicas avanzadas en React que nos permiten reutilizar lógica y abstraer comportamientos comunes en nuestros componentes. La principal 
-    diferencia radica en que Render Props se basa en la idea de pasar una función de renderizado como una prop a un componente para que pueda renderizar información, mientras que los HOC son componentes de orden superior que envuelven otro 
-    componente y le agregan alguna funcionalidad.
-    En pocas palabras, los Render Props nos permiten compartir la lógica de un componente a través de una función de renderizado, mientras que los HOC nos permiten compartir la lógica de un componente a través de la composición de 
-    componentes. En cuanto a cuándo usar uno u otro, depende del caso de uso específico. Tanto los Render Props como los HOC son técnicas poderosas que nos permiten escribir componentes más reutilizables y mantenibles, por lo que es 
-    importante tenerlos en cuenta en nuestra caja de herramientas de React.
  
-  > Patrones (Componentes de presentación): Son aquellos que simplemente se limitan a mostrar datos y tienen poca o nula lógica asociada a manipulación del estado (por eso, también son llamados stateless components). Características:
-     ✓ Orientados al aspecto visual.
-     ✓ No tienen dependencia con fuentes de datos (por ejemplo: Llamadas a APIs, Redux).
-     ✓ Normalmente no tienen estado.
-    Los componentes de presentación usualmente no tienen estado. En caso de tenerlos serán para trabajar características visuales del componente pero no para almacenar datos de la aplicación, sino que reciben datos de aplicación por props.
-    La ventaja más evidente de estos componentes es la posibilidad de reutilizarlos siempre que queramos, sin tener que recurrir a escribir el mismo código una y otra vez.
-
-  > Patrones (Componentes contenedores): Tienen como propósito encapsular a otros componentes y proporcionarles las propiedades que necesitan. Se encargan de modificar el estado de la aplicación para que el usuario vea el cambio en los datos 
-  (por eso, también son llamados state components). Las Características son:
-    ✓ Orientados al funcionamiento de la aplicación.
-    ✓ Contienen componentes de presentación y/u otros contenedores.
-    ✓ Se comunican con las fuentes de datos. (API, Flux, etc)
-    ✓ Tienen estado para representar el cambio en los datos.
-
-- Diseño modular: Los componentes permiten separar la interfaz de usuario en piezas independientes, reutilizables y pensar en cada pieza de forma aislada. Al desarrollar crearemos componentes para resolver pequeños problemas, que son fáciles 
-  de visualizar y comprender. Luego, unos componentes se apoyarán en otros para solucionar problemas mayores y al final la aplicación será un conjunto de componentes trabajando entre sí. 
-  ✓ Favorece la separación de responsabilidades: cada componente debe tener una única tarea.
-  ✓ La aplicación es más fácil de entender.
-  ✓ Mejora el rendimiento de la aplicación.
-  ✓ Se simplifica la tarea de hacer pruebas unitarias.
-  
-- Children: Children es una manera que tiene react de permitirnos proyectar/transcluir uno o más componentes dentro otro. Es ideal cuando:
-  ✓ Necesitamos que un elemento quede dentro de otro, sin que sepan el uno del otro.
-  ✓ Necesitamos implementar patrones más complejos.
-  
-  El concepto de children es la forma en que React nos permite incluir un componente dentro de otro sin que al padre le importe exactamente qué componente o componentes hijos están siendo incluidos. Los elementos hijos son aquellos que se 
-  colocan dentro de la etiqueta de apertura y cierre del componente y la prop “children” se utiliza para acceder y manipular estos elementos hijos desde dentro del componente padre. 
-  De esta manera, podemos crear componentes más flexibles y reutilizables que acepten contenido personalizado y que puedan renderizarlo de manera dinámica.  
-  
-- Ciclos de vida: El ciclo de vida no es más que una serie de estados por los cuales pasa todo componente a lo largo de su existencia. Esos estados tienen correspondencia en diversos métodos, que podemos implementar para realizar acciones 
-  cuando se van produciendo.
-  > El montaje: Se produce la primera vez que un componente va a generarse, incluyéndose en el DOM.
-  > La actualización: Se produce cuando el componente ya generado se está actualizando.
-  > El desmontaje: Se produce cuando el componente se elimina del DOM.
-  > Métodos de ciclos de vida (class based):
-    + componentWillMount()*: este método del ciclo de vida es de tipo montaje. Se ejecuta justo antes del primer renderizado del componente. 
-    + componentDidMount(): método de montaje, que solo se ejecuta en el lado del cliente. Se produce justo después del primer renderizado. Una vez se invoca este método ya están disponibles los elementos asociados al componente en el DOM. 
-    + componentWillReceiveProps(): método de actualización que se invoca cuando las propiedades se van a actualizar, aunque no en el primer renderizado del componente, por lo tanto no se invocará antes de inicializar las propiedades por 
-      primera vez.
-
-- Render y efectos: El funcionamiento de React está estrechamente ligado al cambio de estados. Cuando se produce un cambio de estado, React ejecuta un nuevo proceso de renderizado para ese componente y, de manera recursiva, para todos sus 
-  componentes hijos. Durante este proceso React ejecuta de nuevo las funciones de los componentes para generar el nuevo árbol de elementos de la interfaz de usuario.  Dentro de los componentes podemos tener funciones para realizar diferentes 
-  tareas, como, por ejemplo, una llamada a una api para obtener datos. Si en cada render se ejecuta esta llamada a la API, quiere decir que un cambio de estado está provocando efectos secundarios y no controlarlos puede traernos problemas. 
-  
-
-- React router: Por defecto, React no viene con un mecanismo integrado de navegación. Esto es para mantener sus dependencias al mínimo y dado que no todo proyecto necesita routing, se maneja como una dependencia aparte. La version que se 
-  debe utilizar es la siguiente: react-router-dom => para routing en el browser.
-  El modulo que se debe importar desde react-router es: import {BrowserRouter, Routes, Route} from "react-router-dom".
-  Una vez realizado el import necesitamos configurar dos cosas: 
-  1. Wrappear (envolver) la aplicación en un BrowserRouter  2. Crear un Routes (donde proyectaremos las vistas navegadas) 3. Crear los Route’s de las distintas navegaciones con sus componentes asociados
-    
-    > Especificidad de match: Por defecto se matchean (coinciden) únicamente partes de la url, por lo tanto ‘/’ va a matchear ‘/cart’ o ‘/checkout’, a no ser que le digamos que use la propiedad exact:
-    > Navegar a una ruta: Ahora que tenemos todo configurado, podemos importar un link perteneciente a react-router-dom, en cualquier componente del sub-árbol del <BrowserRouter>
-      Usarlo para que al clickear, el BrowserRouter renderice ese Route que habíamos declarado dentro del Switch. Esto se hace de la siguiente manera: 
-         import { Link } from "react-router-dom"; 
-                         .
-                         .
-                         .
-         <li> <Link to="/category/urbanas">Urbanas</Link> </li>
-     
-    > Navegar a una ruta (con parámetros): Si hacemos la ruta dinámica (con parámetros), podremos navegarla idénticamente, pero de manera dinámica. Para hacer esto, se coloca "/:num_id". Esto indica que lo que dice 
-      num_id cambiara de nombre en la barra de navegacion, lo que represetna la parte dinamica. Como por ejemplo: 
-         <Route path='/itemDetail/:num_id' element={<ProductDetailContainer/>} /> 
-         
-         Se puede poner cualquier nombre pero cuando querramos usar el useParams en el JS, ahi forzosamente tendremos que usar el nombre de la variable que se utilizo en el HTML, qu en este caso es num_id.
-         const { num_id } = useParams()
-         
-         y finalmente, navegamos en la ruta pero ahora en lugar de poner /:num_id, ahora se cambiara por lo que queremos que sea la parte dinamica
-         <Link to={`/itemDetail/${evento.id}`}>  <Button variant="contained">Ver detalles</Button>  </Link>
-         
-    > Navegar a una ruta - navlink: Es un link con un estilo, está siempre detectando la ruta actual, y si coincide con la suya nos activa la clase que le demos para que el user sepa qué item de la lista corresponde con la vista actual.
-    
-    > Recibir parámetros por ruta: React router provee integración con Hooks. useParams:
-       ✓ Lo podemos utilizar para leer en js los parámetros de la ruta.
-       ✓ En combinación con un useEffect, nos sirve para obtener actualizaciones sobre los parámetros.
-
-- Evento: es un estímulo programático, que puede ser provocado de manera automática, o ser el resultado de una interacción del usuario con la UI
-
-- Event listener: Un Event Listener es un patrón de diseño que sirve, como su nombre lo indica, para escuchar cuando un algo ocurre en algún elemento, librería o API, y poder realizar una acción en consecuencia. 
-
-   > Agregando un event listener  window.addEventListener("resize", onResize);   "resize" = Nombre de evento que quiero escuchar    onResize = Referencia de la función a registrar       Nota: ¡guardar referencia para poder removerlo después!
-   > Removiendo un event listener:  return () => {                                           Nota: invocar el removeEventListener en la función de limpieza de nuestros hooks en donde los hayamos registrado.
-                                       console.log("On dismount");
-                                       window.removeEventListener(onResize);
-                                    }
-                                    
-   > Removiendo eventos: 
-     ✓ Se des-registran con el nombre y la referencia a la función con que los registramos (no alcanza únicamente el nombre).
-     ✓ Si registras manualmente un evento del DOM en tu componente de react hazlo dentro de un effect y asegúrate de de-registrarlo en la función de limpieza en el return del efecto.
-     ✓ Recordemos: Si dejamos event listeners sin des-registrar corremos riesgos de crear leaks de memoria o registrar un evento más de una vez ( se ejecutara una vez por cada register ).
-     
-     
-   > Declarando un evento: 
-     Algunos eventos como onKeyDown son cancelables, por ejemplo: evt.preventDefault()
-     Los eventos por default se ejecutan en el elemento, y en cada uno de sus ancestros. Si esto puede traer algún efecto secundario podemos cancelar la propagación (bubbling): evt.stopPropagation()
-   
-   
-- Synthetic events: Suelen tener algunas variaciones en el contenido de los eventos. Esto haría difícil utilizarlos de manera uniforme en cada plataforma. React es consciente de esto, y nos ayuda proveyendo esta abstracción. 
-    ✓ Sirven para normalizar/estandarizar eventos entre browsers.
-    ✓ Siempre que registre un evento vía React/Jsx con onClick, no obtendré el evento nativo, sino uno sintético.
-    ✓ Se destruyen al terminar la ejecución de la función vinculada (por performance).
-    ✓ Puedo acceder al evento nativo via evt.nativeEvent
-
-- Intercambiabilidad: Implementando componentes de manera eficiente, podremos generar intercambiabilidad, e intercambiar funcionalidades sin esfuerzo. Podemos generar variaciones del mismo componente, con distinto layout y el mismo comportam
-
-- Abstracción: 
-  (1) Sirve como estrategia para ocultar el comportamiento interno de rendering e implementación de change events
-  (2) El consumer sigue sin cambiar la firma de consumo
-
-- Orientación a eventos
-  ✓ Permite mover la lógica compleja a componentes de menor orden
-  ✓ Si ambos se comportan igual, el parent no lo sabrá aunque sus implementaciones sean distintas.
-  ✓ Permite que el parent se encargue del resultado final sin darle esa responsabilidad a sus children.
-
-- 
-
-- 
-
-- 
-
-- 
-
