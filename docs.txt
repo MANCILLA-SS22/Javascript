@@ -20,6 +20,7 @@ https://react-redux.js.org/introduction/getting-started
 https://reactrouter.com/en/main/hooks/use-submit
 https://tanstack.com/query/v5/docs/framework/react/reference/useQuery
 https://nextjs.org/docs/app/api-reference/file-conventions
+https://www.framer.com/motion/
                                                                                                          ñ
 Documentaciones:
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/values    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
@@ -170,11 +171,12 @@ https://github.com/facebook/react
 https://github.com/facebook/create-react-app
 https://vitejs.dev 
 https://react.dev/reference/react
-https://nextjs.org/docs/getting-started 
 https://axios-http.com/docs/intro  
 https://react-redux.js.org  https://redux-toolkit.js.org  https://redux-saga.js.org 
 https://reactrouter.com/en/main
 https://tanstack.com/query/v3/docs/framework/react/overview
+https://nextjs.org/docs/getting-started
+https://www.framer.com/motion/
 https://formik.org/   
 https://react-hook-form.com    
 https://react.useanimations.com
