@@ -21,6 +21,7 @@ https://reactrouter.com/en/main/hooks/use-submit
 https://tanstack.com/query/v5/docs/framework/react/reference/useQuery
 https://nextjs.org/docs/app/api-reference/file-conventions
 https://www.framer.com/motion/
+https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/context/#basic-example
                                                                                                          ñ
 Documentaciones:
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/values    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
@@ -170,20 +171,19 @@ https://materializecss.com
 https://github.com/facebook/react
 https://github.com/facebook/create-react-app
 https://vitejs.dev 
-https://react.dev/reference/react
 https://axios-http.com/docs/intro  
+https://react.dev/reference/react
 https://react-redux.js.org  https://redux-toolkit.js.org  https://redux-saga.js.org 
 https://reactrouter.com/en/main
 https://tanstack.com/query/v3/docs/framework/react/overview
 https://nextjs.org/docs/getting-started
 https://www.framer.com/motion/
+https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/context/#basic-example
 https://formik.org/   
 https://react-hook-form.com    
 https://react.useanimations.com
 https://react-icons.github.io/react-icons/
-https://github.com/davidhu2000/react-spinners
-https://github.com/r5n-dev/vscode-react-javascript-snippets
-https://github.com/TanStack/query
+https://www.davidhu.io/react-spinners/
 https://chakra-ui.com/getting-started
 https://sweetalert2.github.io/#examples
 https://apvarun.github.io/toastify-js/#

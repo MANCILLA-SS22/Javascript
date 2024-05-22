@@ -57,13 +57,13 @@ function App() {
   const [userInput, setUserInput] = useState(null);
   // const yearlyData = [];
 
-  function calculateHandler(value){
+  function calculateHandler(value) {
     let currentSavings = Number(value.currentSavings);
     const yearlyContribution = Number(value.yearlyContribution);
     const expectedReturn = Number(value.expectedReturn / 100);
     const duration = Number(value.duration);
     // console.log(currentSavings, yearlyContribution, expectedReturn, duration);
-    
+
 
     for (let i = 0; i < duration; i++) {
       const yearlyInterest = currentSavings * expectedReturn;
@@ -74,7 +74,7 @@ function App() {
         savingsEndOfYear: currentSavings,
         yearlyContribution: yearlyContribution,
       });
-      
+
     }
     console.log(yearlyData);
     setUserInput(value);
@@ -82,9 +82,9 @@ function App() {
 
   return (
     <div>
-      <Header/>
-      <UserInput onCalculate={calculateHandler}/>
-      {!userInput ? <p>No investment calculated yet</p> : <ResultTable data={yearlyData} initialInvestment={userInput.currentSavings}/>}
+      <Header />
+      <UserInput onCalculate={calculateHandler} />
+      {!userInput ? <p>No investment calculated yet</p> : <ResultTable data={yearlyData} initialInvestment={userInput.currentSavings} />}
     </div>
   );
 }

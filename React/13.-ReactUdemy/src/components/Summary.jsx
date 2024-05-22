@@ -12,13 +12,9 @@ function Summary({userAnswers}) {
     const res = userAnswers.map(function(answer, index){
         let cssClass = "user-answer";
 
-        if(answer === null){
-            cssClass += " skipped";
-        }else if(answer === QUESTIONS[index].answers[0]){
-            cssClass += " correct";
-        }else{
-            cssClass += " wrong";
-        }
+        if (answer === null) cssClass += " skipped";
+        if (answer === QUESTIONS[index].answers[0]) cssClass += " correct";
+        cssClass += " wrong";
 
         return(
             <li key={index}>
