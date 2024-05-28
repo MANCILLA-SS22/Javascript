@@ -457,6 +457,8 @@ npm start
       versions will be discarded. If your component function is pure (as it should be), this should not affect the behavior.
         
 
+- useMemo:     permite guardar en caché los resultados de un cálculo costoso de una funcion, y dicha funcion se volvera a ejecutar cuando una de sus dependencias (las cuales nosotros mismos definimos) cambie.
+
 - useCallback: permite guardar en caché una función definida antes de pasarla a un componente optimizado. useCallback is a React Hook that lets you cache a function definition between re-renders.
         
                                                    const cachedFn = useCallback(fn, dependencies)
@@ -480,9 +482,6 @@ npm start
       will throw away the cache if your component suspends during the initial mount. In the future, React may add more features that take advantage of throwing away the cache—for example, if React adds built-in support for virtualized lists 
       in the future, it would make sense to throw away the cache for items that scroll out of the virtualized table viewport. This should match your expectations if you rely on useCallback as a performance optimization. Otherwise, a state 
       variable or a ref may be more appropriate.
-        
-        
-- useMemo: permite guardar en caché los resultados de un cálculo costoso de una funcion, y dicha funcion se volvera a ejecutar cuando una de sus dependencias (las cuales nosotros mismos definimos) cambie.
 
         
 - useImperativeHandle permite personalizar la ref expuesta por tu componente. Esto rara vez se usa. 

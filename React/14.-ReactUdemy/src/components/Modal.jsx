@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 function Modal({ open, children, onClose }) {
@@ -6,12 +6,12 @@ function Modal({ open, children, onClose }) {
 
   useEffect(() => {
     open ? dialog.current.showModal() : dialog.current.close();
-    
-  }, [open]);
+  }, [open])
+  
 
   return createPortal(
     <dialog className="modal" ref={dialog} onClose={onClose}>
-      {open ? children : null}
+      {open ? children : null} {/* We can use this line of code instead of the line 72 in App.jsx */}
     </dialog>,
     document.getElementById('modal')
   );

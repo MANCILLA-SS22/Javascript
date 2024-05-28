@@ -1,16 +1,24 @@
-import { Fragment } from 'react';
+import { DUMMY_PRODUCTS } from './dummy-products.js';
 import Header from './components/Header.jsx';
-import Quiz from './components/Quiz.jsx';
+import Shop from './components/Shop.jsx';
+import Product from './components/Product.jsx';
+import CartContextProvider from './store/shopping-cart-context.jsx';
 
 function App() {
-
+  
   return (
-    <Fragment>
+    <CartContextProvider>
       <Header />
-      <main>
-        <Quiz/>
-      </main>
-    </Fragment>
+      <Shop>
+        {
+          DUMMY_PRODUCTS.map(product => (
+            <li key={product.id}>
+              <Product {...product} />
+            </li>
+          ))
+        }
+      </Shop>
+    </CartContextProvider>
   );
 }
 

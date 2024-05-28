@@ -4,14 +4,12 @@ https://www.w3schools.com/jsref/jsref_class_super.asp#gsc.tab=0&gsc.q=unhandledR
 https://www.geeksforgeeks.org/javascript-array-findindex-method/
 https://nodejs.org/api/process.html#process
 https://expressjs.com/en/5x/api.html#express
-https://www.mongodb.com/docs/manual/   https://www.mongodb.com/docs/atlas/
-https://account.mongodb.com/account/login?nds=true
+https://www.mongodb.com/docs/manual/   https://www.mongodb.com/docs/atlas/                https://account.mongodb.com/account/login?nds=true
 https://mongoosejs.com/docs/queries.html
 https://socket.io/docs/v4/
 https://www.typescriptlang.org/docs/handbook/2/typeof-types.html?
 https://docs.nestjs.com/recipes/prisma
-https://docs.docker.com/guides/   https://docs.docker.com/storage/volumes/#volumes
-https://hub.docker.com/repositories/germanss22
+https://docs.docker.com/guides/   https://docs.docker.com/storage/volumes/#volumes        https://hub.docker.com/repositories/germanss22
 https://kubernetes.io/docs/home/
 https://minikube.sigs.k8s.io/docs/start/
 https://us-west-1.console.aws.amazon.com/console/services?region=us-west-1
@@ -153,7 +151,7 @@ https://sendgrid.com/en-us
 https://app.brevo.com/settings/keys/smtp
 https://mailsac.com/inbox/german%40mailsac.com
 https://stripe.com/en-mx     
-https://docs.stripe.com/payments  https://docs.stripe.com/payments/checkout/how-checkout-works  https://docs.stripe.com/api/  https://docs.stripe.com/js/  https://docs.stripe.com/testing
+https://docs.stripe.com/payments  https://docs.stripe.com/api/  https://docs.stripe.com/js/  https://docs.stripe.com/testing   https://docs.stripe.com/payments/checkout/how-checkout-works
 https://swagger.io/docs/specification/about/
 https://app.swaggerhub.com/home
 https://editor.swagger.io

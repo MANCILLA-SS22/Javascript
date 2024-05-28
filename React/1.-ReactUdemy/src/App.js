@@ -1,30 +1,46 @@
-import React, {useState} from "react"
-import NewExpense from "./components/NewExpense/NewExpense";
-import Expensive from "./components/Expenses/Expensive";
+import React, { useState } from 'react';
 
-const DUMMY_EXPENSES = [
-    {id: "e1",title: "SSSSSSSSSS",amount: 942.12, date: new Date()},
-    {id: "e2",title: "2222222222",amount: 594.12, date: new Date()},
-    {id: "e3",title: "ZZZZZZZZZZ",amount: 934.12, date: new Date()},
-    {id: "e4",title: "FFFFFFFFFF",amount: 829.25, date: new Date()}
-  ];
+import CourseGoalList from './components/CourseGoals/CourseGoalList/CourseGoalList';
+import CourseInput from './components/CourseGoals/CourseInput/CourseInput';
+import './App.css';
 
-function App() {
+function App(){
+  const [courseGoals, setCourseGoals] = useState([{text: 'Do all exercises!', id: 'g1' },{text: 'Finish the course!', id: 'g2'}]);
 
-  const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
-
-  function addExpenseHandler(expense){
-    setExpenses(function(prevExpenses){ 
-      return [...prevExpenses, expense]; //"prevExpenses" stands for the previous state and "expense" stands for the new one. In this case, at the beggining we'll get the DUMMY_EXPENSES object as "prevExpenses", then we'll get that object but with another element.
-    })
+  function addGoalHandler(enteredText){
+    setCourseGoals(function(prevGoals){
+      const updatedGoals = [...prevGoals];
+      updatedGoals.unshift({ text: enteredText, id: Math.random().toString() });
+      return updatedGoals;
+    });
   };
+
+  function deleteItemHandler(goalId){
+    setCourseGoals(function(prevGoals){
+      const updatedGoals = prevGoals.filter(goal => goal.id !== goalId);
+      return updatedGoals;
+    });
+  };
+
+  let content = (<p style={{ textAlign: 'center' }}>No goals found. Maybe add one?</p>);
+  if (courseGoals.length > 0) {
+    content = (<CourseGoalList items={courseGoals} onDeleteItem={deleteItemHandler} />);
+  }
+  
+  // const res = courseGoals.length > 0 && (<CourseGoalList items={courseGoals} onDeleteItem={deleteItemHandler} />);
+  // <p style={{ textAlign: 'center' }}>No goals found. Maybe add one?</p>
 
   return (
     <div>
-      <NewExpense onAddExpense={addExpenseHandler}/>
-      <Expensive items={expenses}/>
+      <section id="goal-form">
+        <CourseInput onAddGoal={addGoalHandler} />
+      </section>
+      <section id="goals">
+        {content}
+        {/* {res} */}
+      </section>
     </div>
   );
-}
+};
 
 export default App;
