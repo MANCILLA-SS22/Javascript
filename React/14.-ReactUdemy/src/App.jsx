@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-
 import Places from './components/Places.jsx';
 import { AVAILABLE_PLACES } from './data.js';
 import Modal from './components/Modal.jsx';
@@ -12,11 +11,7 @@ const storedIds =  JSON.parse(localStorage.getItem("selectedPlaces")) || []; //c
 //First, we use map so we can display all of the id's in the local storage. After that, based on teh fact that we can display all the information of the specific place selected, 
 //not only the id, we must "find" that place with the selected id in AVAILABLE_PLACES, and finally return it (display on the screen) .
 const storedPlaces = storedIds.map(function(id){
-  //console.log(id);
-  return AVAILABLE_PLACES.find(function(places){
-    //console.log(places);
-    return places.id === id;
-  });
+  return AVAILABLE_PLACES.find(places => places.id === id);  
 });
 
 function App() {

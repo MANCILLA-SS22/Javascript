@@ -1,15 +1,25 @@
 import CoreConcept from './CoreConcept.jsx';
 import { CORE_CONCEPTS } from '../data.js';
 
-export default function CoreConcepts() {
+function CoreConcepts() {
+  
+  function render(){
+    const res = CORE_CONCEPTS.map(function(event){
+      return <CoreConcept key={event.title} {...event} /> //Better way
+      // return <CoreConcept key={event.title} description={event.description} image={event.image} title={event.title} /> //Normal way
+    });
+
+    return res;
+  }
+
   return (
     <section id="core-concepts">
       <h2>Core Concepts</h2>
       <ul>
-        {CORE_CONCEPTS.map((conceptItem) => (
-          <CoreConcept key={conceptItem.title} {...conceptItem} />
-        ))}
+        {render()}
       </ul>
     </section>
   );
 }
+
+export default CoreConcepts;

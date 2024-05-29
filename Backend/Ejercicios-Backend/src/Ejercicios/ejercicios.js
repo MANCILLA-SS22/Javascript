@@ -638,7 +638,7 @@ console.log("Existe la propiedad obraSocial dentro del objeto?", {resultado: "ob
 
 for(const iter in paciente1){ //Despues del const podemos poner cualquier nombre, el cual servira para iterar y buscar todas las propiedades del objeto.
     console.log("La propiedad ("+iter + ") tiene el valor de: "+ paciente1[iter]);
-} */ 
+} */
 
 /* //Ejemplo 7: Ejemplo practico con objetos y funciones 
 
@@ -2698,8 +2698,8 @@ console.log(convertTitleCase('this is a LONG title but not too long')); */
 
 /* //Ejemplo 36: Mas ejemplos con arrays x2
 const objetos =  [
-	{manzanas:3, peras:2, carne:1, jugos:5, dulces:2},
-	{manzanas:1, sandias:1, huevos:6, jugos:1, panes:4}
+    {manzanas:3, peras:2, carne:1, jugos:5, dulces:2},
+    {manzanas:1, sandias:1, huevos:6, jugos:1, panes:4}
 ];
 
 const productos = [];
@@ -4559,10 +4559,10 @@ console.log(falsy) */
 
 //     while(x < arra.length){
 // 		y = x + 1; 
-		
+    	
 // 		if(y < arra.length){
 // 			for(z = y; z < arra.length; z++){
-				
+            	
 // 				if(arra[x] < arra[z]){
 // 					temp = arra[z];
 // 					arra[z] = arra[x];
@@ -4573,7 +4573,7 @@ console.log(falsy) */
 // 				}	
 // 			}					
 // 		}
-		
+    	
 // 		if(flag){
 // 			flag = false;
 // 		}else{
@@ -5208,7 +5208,7 @@ const usersWithProfiles = users.map(function(user){  // Look up the profiles by 
     return { ...user, profile: profilesByUserId[user.id]};
 });
 
-console.log(usersWithProfiles); */ 
+console.log(usersWithProfiles); */
 
 /* //Ejemplo 93: Write a JavaScript program to flatten an array of arrays with the Reduce 
 //Metodo 1
@@ -5407,6 +5407,24 @@ console.log(test(obj)); */
 //     return Object.values(tempObj);
 // }; */
 
+/* //Ejemplo 99: Creacion de la copia de un arreglo sin alterar el arreglo original
+const arr = [
+    [null, null, null],
+    [null, null, null],
+    [null, null, null],
+];
+
+//This method WON'T create a copy of "arr". Instead, it will mutate the original one.
+const a = [...arr];
+a[1][1] = "X";
+console.log(a);
+console.log(arr);
+
+//This method will create a copy of "arr" without muting it.
+const b = [...arr.map((innerArray) => [...innerArray])];
+b[1][1] = "X";
+console.log(b);
+console.log(arr); */
 
 //         $$$$$$$$$$$$$$$ STRINGS & MODERN OPERATORS $$$$$$$$$$$$$$$
 
@@ -5417,7 +5435,7 @@ console.log(test(obj)); */
 let num = 10;
 console.log("--> El valor actual del nùmero es " + num);
 num++;
-console.log("--> El valor actual del nùmero es", {num}); 
+console.log("--> El valor actual del nùmero es", {num});
 
 // Operador sustracción -- (en una sola unidad)
 let numB = 10;
@@ -5474,7 +5492,7 @@ console.log("" || "Falsy"); // Falsy
 console.log(null || "Falsy"); // Falsy
 console.log(undefined || "Falsy"); // Falsy
 console.log(NaN || "Falsy"); // Falsy
-console.log(false || "Falsy"); // Falsy 
+console.log(false || "Falsy"); // Falsy
 
 let numero = 15;
 const numerSelected = numero || 0 ;
@@ -5602,7 +5620,7 @@ const restaurant = {
         {id: 2, nombre: "mancilla"}
     ],
     fecharegistro: new Date(),
-    poseeTaarjetaCredito: false, 
+    poseeTaarjetaCredito: false,
     poseeVehiculo: true,
 
     openingHours: {
@@ -5624,17 +5642,17 @@ const restaurant = {
     }
 };
 
-const [first, , second] = restaurant.categories; 
+const [first, , second] = restaurant.categories;
 console.log("Desestructuracion de un array: ",first, second);
 
-const [starter, main] = restaurant.order(2,0); 
+const [starter, main] = restaurant.order(2,0);
 console.log("Desestructuracion usando funcion: ",starter, main);
 
 const nested = [2, 4, [5, 6]];
-const [i, , [j, k]] = nested; 
+const [i, , [j, k]] = nested;
 console.log("Desestructuracion con Nested: ", i, j, k);
 
-const [p=1, q=1, r=1] = [8, 9]; 
+const [p=1, q=1, r=1] = [8, 9];
 console.log("Desestructuracion con Default values: ", p, q, r);
 
 const {Name, categories, openingHours, openingHours:{ sat }, info} = restaurant;
@@ -5667,7 +5685,7 @@ desestructurar(restaurant);
 restaurant.orderDelivery({
     time: "22:30",
     address: "Tijuana, 22",
-    mainIndex:"2", 
+    mainIndex:"2",
     starterIndex:"2"
 });
 
@@ -5736,13 +5754,13 @@ const sound = 'roar';
 
 const res1 = {
     animal: sound,
-    ...animalSounds, 
-};   
+    ...animalSounds,
+};
 
 const res2 = {
     [animal]: sound,
-    ...animalSounds, 
-}; 
+    ...animalSounds,
+};
 
 console.log("res1", res1); // res1 {cat: 'meow', dog: 'bark', animal: 'roar'}
 console.log("res2", res2); // res2 {cat: 'meow', dog: 'bark', lion: 'roar'}
@@ -6033,7 +6051,7 @@ const game = {
         x: 3.25,
         team2: 6.5,
     }
-    
+
 };
 
 //1. Create one player array for each team (variables 'players1' and'players2')
@@ -6052,12 +6070,12 @@ const players1Final = ['Thiago', 'Coutinho', 'Perisic', ...players1]; //console.
 const {team1, x:draw, team2} = game.odds;   //console.log(team1, draw, team2);
 
 //6. Write a function ('printGoals') that receives an arbitrary number of player names (not an array) and prints each of them to the console, along with the number of goals that were scored in total (number of player names passed in)
-function printGoals(...players){ //Debemos desestructurar lo que mandamos a esta funcion tambien porque, al ser 4 elementos los que recibe, y si no hacemos eso, entonces unicamente se enviara el primer elemento y no los demas. 
+function printGoals(...players){ //Debemos desestructurar lo que mandamos a esta funcion tambien porque, al ser 4 elementos los que recibe, y si no hacemos eso, entonces unicamente se enviara el primer elemento y no los demas.
     //console.log(players, "and "+ `${players.length}` + " goals were scored");
 }
 printGoals(...game.scored);
 
-//7. The team with the lower odd is more likely to win. Print to the console which team is more likely to win, without using an if/else statement or the ternary operator. 
+//7. The team with the lower odd is more likely to win. Print to the console which team is more likely to win, without using an if/else statement or the ternary operator.
 let res = game.team2 > game.team1 && "Team 2 is more likely to win!!";  //console.log(res);
 let res2 = game.team2 < game.team1 && "Team 1 is more likely to win!!";  //console.log(res2);
 
@@ -6135,7 +6153,7 @@ for (const [key, value] of gameEvents) {
 // Hints:
 // § Remember which character defines a new line in the textarea
 // § The solution only needs to work for a variable made out of 2 words, like a_b
-// § Start without worrying about the ✅. Tackle that only after you have the variable name conversion working 
+// § Start without worrying about the ✅. Tackle that only after you have the variable name conversion working
 
 
 document.body.append(document.createElement('textarea'));
@@ -6192,16 +6210,16 @@ console.log(Number.isInteger(23));
 console.log(Number.isInteger(23.0));
 console.log(Number.isInteger(23 / 0)); */
 
-/* //Ejemplo 2: Acceso a propiedades del objeto Math, y metodo Min y Max. 
+/* //Ejemplo 2: Acceso a propiedades del objeto Math, y metodo Min y Max.
 console.log("--> euler: "+ Math.E);
 console.log("--> pi: "+ Math.PI);
 console.log("--> sqrt: "+ Math.sqrt(25));
 console.log("--> sqrt: "+ 25**(1/2));
 
-const numeros = [55, 13, -25, 93, 4]; 
+const numeros = [55, 13, -25, 93, 4];
 console.log("Los numeros SIN spread son: ",numeros);
 console.log("Los numeros CON spread son: ",...numeros); //... pasan de un array a cada numero separado de manera individual
-const minimo = Math.min(...numeros); 
+const minimo = Math.min(...numeros);
 const maximo = Math.max(...numeros);
 console.log("El menor es: ", minimo);
 console.log("El mayor es: ", maximo); */
@@ -6264,13 +6282,13 @@ for (let i = 0; i < 5; i++) {
 
 console.log("\n");
 
-for (let i = 0; i < 5; i++) { 
+for (let i = 0; i < 5; i++) {
     console.log(Math.random()*10);
 }
 
 console.log("\n");
 
-let limiteInferior = parseInt(0); 
+let limiteInferior = parseInt(0);
 let limiteSuperior = parseInt(10);
 
 for (let i = 0; i < 5; i++) {
@@ -6328,14 +6346,14 @@ console.log(11 / 3);   //It shows the number with decimals. */
 /* //Ejemplo 8: Obtener la fecha y hora actuales. Creacion de instancias de objetos Date con la clase date con fechas personalizadas. Y obtener datos de las fechas en formato STRING.
 let fechaActual = new Date();  console.log("La fecha actual del sistema es: ", fechaActual);
 let fecha1 = new Date(2023, 3, 22);  console.log("La fecha actual del sistema es: ", fecha1);
-let fecha2 = new Date(2023, 11, 24, 23, 59, 59);  console.log("La fecha actual de navidad es: ", fecha2); 
-let fecha3 = new Date("Aug 02 2023 18:05:41" );  console.log("La fecha actual de navidad es: ", fecha3); 
-let fecha4 = new Date("December 17, 2021" ); console.log("La fecha actual de navidad es: ", fecha4); 
+let fecha2 = new Date(2023, 11, 24, 23, 59, 59);  console.log("La fecha actual de navidad es: ", fecha2);
+let fecha3 = new Date("Aug 02 2023 18:05:41" );  console.log("La fecha actual de navidad es: ", fecha3);
+let fecha4 = new Date("December 17, 2021" ); console.log("La fecha actual de navidad es: ", fecha4);
 
 console.log("\n", "Los valores singulares de la fecha de navidad son: ",{
     year: fecha2.getFullYear(),
     month: fecha2.getMonth(),
-    date: fecha2.getDate(), 
+    date: fecha2.getDate(),
     week: fecha2.getDay(),
     hour: fecha2.getHours(),
     minute: fecha2.getMinutes(),
@@ -6473,7 +6491,7 @@ document.getElementById("apellidos").value = "Cual es tu apellido?"; */
 /* //Ejemplo 8: Uso de plantillas
 const producto = {id: 1001, nombre: "Carne asada", precio: 140};
 
-//Creamos un elemento div 
+//Creamos un elemento div
 let contenedor = document.createElement("div");
 
 //Definimos el innerHTML del elemento con una plantilla de texto
@@ -6706,24 +6724,24 @@ function validarFormulario(data) {
     document.getElementById("nombres").value = "";
     document.getElementById("ocupacion").value = "0";// el valor de este por default es 0 porque es la primera opciOn del combo de selecciOn
     document.getElementById("correo").value = "";
-    document.getElementById("participar").value = "off";// para bootstrap --> on: true y off: false 
+    document.getElementById("participar").value = "off";// para bootstrap --> on: true y off: false
 } */
 
 
 /* //Ejemplo 14: Finding coordenates and position, and use of scroll
 btnScrollTo.addEventListener("click", function(evento){
-    const s1coords = section1.getBoundingClientRect(); 
+    const s1coords = section1.getBoundingClientRect();
     console.log("Section position: ", s1coords);                              //Representa la posicion de la seccion
     console.log("Learn more botton position: ", evento.target.getBoundingClientRect()); //Representa la posicion del boton "learn more"
     console.log("Current scroll (X/Y): ", window.scrollX, window.scrollY);
     console.log("Height/width viewport: ", document.documentElement.clientHeight, document.documentElement.clientWidth);
-    
+
     //Scrolling (method 1)
     // window.scrollTo(s1coords.left + window.scrollX, s1coords.top + window.scrollY);
 
     //Scrolling (method 2)
     // window.scrollTo({
-    //     left: s1coords.left + window.scrollX, 
+    //     left: s1coords.left + window.scrollX,
     //     top: s1coords.top + window.scrollY,
     //     behavior: "smooth"
     // });
@@ -6803,13 +6821,13 @@ document.querySelector('.nav').addEventListener('click', function (e) {
 });
 
 document.querySelector('.nav__links').addEventListener('click', function (e) {
-    this.style.backgroundColor = randomColor(); 
+    this.style.backgroundColor = randomColor();
     console.log('CONTAINER e.target: ', e.target, );
     console.log('CONTAINER e.currentTarget:', e.currentTarget);
 });
 
 document.querySelector('.nav__link').addEventListener('click', function (e) {
-    this.style.backgroundColor = randomColor(); 
+    this.style.backgroundColor = randomColor();
     console.log('LINK e.target: ', e.target);
     console.log('LINK e.currentTarget: ', e.currentTarget);
 
@@ -6851,7 +6869,7 @@ h1.firstElementChild.style.color = 'white'; //Este se usa para recuperar (y/o mo
 h1.lastElementChild.style.color = 'orangered'; //Este se usa para recuperar (y/o modificar) el ultimo elemento hijo.
 
 // Going upwards: parents (parentNode y parentElement nos permiten acceder al elemento del elemento que estamos usando. En este caso, <div class="header__title"> es padre de h1.)
-console.log("h1.parentNode", h1.parentNode);  
+console.log("h1.parentNode", h1.parentNode);
 console.log("h1.parentElement", h1.parentElement);
 
 h1.closest('.header').style.background = 'var(--gradient-secondary)'; //closese() se usa para seleccionar el elemento mas cercano a h1, por lo general es lo inverso al querySelector, ya que en lugar de buscar los elementos hijos, este busca los elementos padres.
@@ -6878,7 +6896,7 @@ const tabsContent = document.querySelectorAll('.operations__content');
 
 tabsContainer.addEventListener('click', function (evento) {
     const clicked = evento.target.closest('.operations__tab');  console.log(clicked);
-    
+
     // Guard clause
     if (!clicked) return;
 
@@ -6890,20 +6908,20 @@ tabsContainer.addEventListener('click', function (evento) {
     clicked.classList.add('operations__tab--active');
 
     //Dependiendo del boton que se haya presionado, este realizara la animacion en el boton, y tambien se desplegara el contenido de texto del boton seleccionado.
-    document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active'); 
+    document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active');
 });
 
 //Debemos añadir el closest(), ya que operations__tab-container tiene de hijos tres elementos botones con un span cada uno. Por lo que al presionar el boton, especificamente
 //el texto (span), no funcionara correctamente el boton. Es por eso que agregamos el closest(), para que al presionar el boton, considere unicamente el elemento mas cercano
-//con el nombre operations__tab (incluyendo su hijo <span>). 
-//Cabe mencionar que, si precionamos donde esta el <div class="operations__tab-container"> entonces tendremos un null en consola, ya que no existe ningun elemento padre con el 
+//con el nombre operations__tab (incluyendo su hijo <span>).
+//Cabe mencionar que, si precionamos donde esta el <div class="operations__tab-container"> entonces tendremos un null en consola, ya que no existe ningun elemento padre con el
 //class ".operations__tab". Para eso usamos el Guard clause, para que al no haber un click en el botton, simplemente salga de la funcion y no ejecute las lineas siguientes. */
 
 /* // Ejemplo 20.1: Passing Arguments to Event Handlers (Method 1)
 
-// Menu fade animation 
+// Menu fade animation
 function handleHover(evento) {
-    
+
     //Recordar que cuando utilizamos bind(), la keyword "this" representa los parametros que le enviamos a la funcion, en este caso, 0.5 y 1.
     console.log(this, evento.currentTarget);
 
@@ -6924,7 +6942,7 @@ function handleHover(evento) {
 nav.addEventListener('mouseover', handleHover.bind(0.5));
 nav.addEventListener('mouseout', handleHover.bind(1)); */
 
-/* // Ejemplo 20.2: Passing Arguments to Event Handlers (Method 2) 
+/* // Ejemplo 20.2: Passing Arguments to Event Handlers (Method 2)
 // Menu fade animation
 function handleHover(evento, opacity) {
 
@@ -6968,9 +6986,9 @@ window.addEventListener('scroll', function () {
 
 const obsCallback = function(entries, observer){ //Whenever the first section (our target) is intersecting the viewport at 10%, the function will get called and that's no matter if we're scrolling up or down.
     entries.forEach(evento => console.log(evento));
-} 
+}
 
-const obsOptions = { 
+const obsOptions = {
     root: null,     //root is the element that the target is intersecting. We write null and we'll be able to observe our target element intersecting the entire wiewport (the entire rectangle which shows the current portion of the page)
     // threshold: 0.1,  //This is the percent of intersection at which the obersver callback will be called
     threshold: [0, 0.2] //0 means that our callback will trigger each time that the target element moves complitelly out of the view. and 1 when the 100% of the target is actually visible in the viewport.
@@ -7140,7 +7158,7 @@ window.addEventListener('beforeunload', function (evento) {
 /* // Ejemplo 1: setItem en localStorage para crear datos en el local storage. getItem para recuperar informacion almacenada. Y buscar si existe algo o no.
 localStorage.setItem("saludar", "Hola mundo");
 localStorage.setItem("existe", true);
-localStorage.setItem("cantidad", parseInt(155)); 
+localStorage.setItem("cantidad", parseInt(155));
 
 const mensaje = localStorage.getItem("saludar");
 const isExistente = localStorage.getItem("existe");
@@ -7189,7 +7207,7 @@ for (let i = 0; i < sessionStorage.length; i++) {
 } */
 
 /* // Ejemplo 5: eliminar elementos concretos, y tambien eliminar todos los elementos en local storage y el session storage.
-// localStorage.removeItem("nombre"); 
+// localStorage.removeItem("nombre");
 localStorage.clear();
 // sessionStorage.removeItem("Bienvenida")
 // sessionStorage.clear(); */
@@ -7199,7 +7217,7 @@ const nombre = "german";
 localStorage.setItem("saludar", nombre);
 sessionStorage.setItem("unNumero", 8); */
 
-/* // Ejemplo 7: Recibir los datos JSON 
+/* // Ejemplo 7: Recibir los datos JSON
 const cars = `[
     {
         "modelo": "Ford mustang",
@@ -7220,7 +7238,7 @@ const cars = `[
 
 //console.log(typeof cars);
 
-const jsonData = JSON.parse(cars); //Convertimos a un object con parse 
+const jsonData = JSON.parse(cars); //Convertimos a un object con parse
 const carrosNuevos = jsonData.filter((evento) => evento.production > 2010 && evento.millaje < 30000); //console.log(carrosNuevos);
 const newCars = JSON.stringify(carrosNuevos); //Convertimos a un string con stringify
 
@@ -7274,7 +7292,7 @@ let res = localStorage.getItem("carreras");
 
 console.log("Las carreras recuperadas en formato string (stringify) son: ", {res});
 
-//objeto recuperado de un JSON, en el cual no vamos a tener metodos. Ya que el JSON solo perciste atributos y valores, no metodos ni mucho menos los recupera. 
+//objeto recuperado de un JSON, en el cual no vamos a tener metodos. Ya que el JSON solo perciste atributos y valores, no metodos ni mucho menos los recupera.
 const convertido = JSON.parse(res);
 console.log("Las carreras recuperadas en formato object (parse) son: ", {convertido}); */
 
@@ -7312,7 +7330,7 @@ function getCookie(name){
     const cDecoded = decodeURIComponent(document.cookie);
     const cArray = cDecoded.split("; ");
     let result = null;
-    
+
     cArray.forEach(element => {
         if(element.indexOf(name) == 0){
             result = element.substring(name.length + 1)
@@ -7357,7 +7375,7 @@ console.log("Tarea 1");
 contador();
 console.log("Tarea 3"); */
 
-/* // Ejemplo 1: Creacion de una funcionalidad asincriona con setTimeout 
+/* // Ejemplo 1: Creacion de una funcionalidad asincriona con setTimeout
 
 const ingredients = ['olives', 'spinach', 'pepperoni'];
 const pizzaTimer = setTimeout(function (ing1, ing2, ing3){
@@ -7425,7 +7443,7 @@ const fin = setTimeout(() => {//Esta nunca se llega a ejecutar
 }, 2000);
 clearTimeout(fin); */
 
-/* // Ejemplo 6: Como conocer los estados de una promesa     
+/* // Ejemplo 6: Como conocer los estados de una promesa
 function eventoFuturo (){
     return new Promise( (resolve, reject) => {
 
@@ -7608,7 +7626,7 @@ console.log(error)
 })
 .finally( () => {
     console.log("Fin del proceso :)")
-});   
+});
 
 (async function() {
     let response = await fetch("https://jsonplaceholder.typicode.com/posts");
@@ -7738,7 +7756,7 @@ function recuperarPosteos() {
         .then((data) => {                      // Obtenemos la colección de posteos
             data.forEach((post) => {
             let record = document.createElement("tr");
-            record.innerHTML = 
+            record.innerHTML =
             `<tr>
             <td scope="row">${post.id}</td>
             <td scope="row">${post.title}</td>
@@ -7749,13 +7767,13 @@ function recuperarPosteos() {
     })
         .catch((error) => {
             let record = document.createElement("tr");
-            record.innerHTML = 
+            record.innerHTML =
             `<tr>
                 <td colspan="3" scope="row">Ocurrio un error al recuperar los datos</td>
             </tr>`;
             bodyTable.append(record);
         })
-        
+
         .finally(() => {
             toggleLoadingContainer(false);
         });
@@ -7774,9 +7792,9 @@ function toggleLoadingContainer(isLoading = false) {
 /* // Ejemplo 17: Uso de ASYNC/AWAIT para crear funciones asincrónas que se comportan como si fueran sincronas
 console.log("Previo a hacer la solicitud");
 async function pedirPosts(){
-    const respuesta = await fetch("./data/posts.json");  
+    const respuesta = await fetch("./data/posts.json");
     console.log("respuesta: ",respuesta);
-    const data = await respuesta.json();  
+    const data = await respuesta.json();
     console.log("Data: ",data);
 };
 
@@ -7919,7 +7937,7 @@ function getCountryData(country){
         console.log(neighbour);
 
         if (!neighbour) throw new Error("No neighbour found!");
-        
+
         //Country 2
         return getJSON(`https://restcountries.com/v3.1/alpha/${neighbour}`, "Country not found")
         .then(function(data){
@@ -7940,7 +7958,7 @@ function getJSON(url, errorMsc = "Something went wrong"){
     .then(function(response){
         console.log(response);
 
-        if(!response.ok) throw new Error(`${errorMsc} (${response.status})`); //When we use "throw" in any of our methods, means that it will terminate the currecnt function, and the promise will immediately reject. So, the proimse returned by this first ".then" will be a rejected promise. And that rejection will then propagate all the way down to the catch handler, which we already have set up right down. 
+        if(!response.ok) throw new Error(`${errorMsc} (${response.status})`); //When we use "throw" in any of our methods, means that it will terminate the currecnt function, and the promise will immediately reject. So, the proimse returned by this first ".then" will be a rejected promise. And that rejection will then propagate all the way down to the catch handler, which we already have set up right down.
         return response.json(); //json is a function that is available on all responses of the fetch method. json is an asyncronous function and it'll also return a new promise.
     })
 }
@@ -7975,22 +7993,22 @@ function renderError(msg){
 
 btn.addEventListener("click", function(){
     getCountryData("russia");
-    // getCountryData("australia"); 
+    // getCountryData("australia");
     // getCountryData("gtrgt"); //Line to execute an error
 }); */
 
 /* // Ejemplo 23 Excercise no. 1
 
-// In this challenge you will build a function 'whereAmI' which renders a country only based on GPS coordinates. For that, you will use a second API to geocode coordinates. 
+// In this challenge you will build a function 'whereAmI' which renders a country only based on GPS coordinates. For that, you will use a second API to geocode coordinates.
 // So in this challenge, you’ll use an API on your own for the first time. Your tasks:
 // 1. Create a function 'whereAmI' which takes as inputs a latitude value ('lat') and a longitude value ('lng') (these are GPS coordinates, examples are in test data below).
-// 2. Do “reverse geocoding” of the provided coordinates. Reverse geocoding means to convert coordinates to a meaningful location, like a city and country name. Use this API 
+// 2. Do “reverse geocoding” of the provided coordinates. Reverse geocoding means to convert coordinates to a meaningful location, like a city and country name. Use this API
 //    to do reverse geocoding: https://geocode.xyz/api. The AJAX call will be done to a URL with this format: https://geocode.xyz/52.508,13.381?geoit=json. Use the fetch API and
-//    promises to get the data. Do not use the 'getJSON' function we created, that is cheating 
-// 3. Once you have the data, take a look at it in the console to see all the attributes that you received about the provided location. Then, using this data, log a message 
+//    promises to get the data. Do not use the 'getJSON' function we created, that is cheating
+// 3. Once you have the data, take a look at it in the console to see all the attributes that you received about the provided location. Then, using this data, log a message
 //    like this to the console: “You are in Berlin, Germany”
 // 4. Chain a .catch method to the end of the promise chain and log errors to the console
-// 5. This API allows you to make only 3 requests per second. If you reload fast, you will get this error with code 403. This is an error with the request. Remember, fetch() 
+// 5. This API allows you to make only 3 requests per second. If you reload fast, you will get this error with code 403. This is an error with the request. Remember, fetch()
 //    does not reject the promise in this case. So create an error to reject the promise yourself, with a meaningful error message
 // 6. Now it's time to use the received data to render a country. So take the relevant attribute from the geocoding API result, and plug it into the countries API that we have been using.
 // 7. Render the country and catch any errors, just like we have done in the last lecture (you can even copy this code, no need to type the same code)
@@ -8053,7 +8071,7 @@ setTimeout(function(){ //This and the Promise.resolve() will be executed at the 
 //This allow us to build a promise, so to create a promise that is immediately resolved.
 Promise.resolve("Resolved promise 1")
 .then(function(res){
-    console.log(res);   
+    console.log(res);
 });
 
 Promise.resolve("Resolved promise 2")
@@ -8077,10 +8095,10 @@ lotteryPromise.then(function(res){console.log(res)}).catch(function(err){console
 
 /* // Ejemplo 26: Promisifying setTimeout
 function wait(seconds){
-    return new Promise(function(resolve){ //This doesn't need the reject function because it's impossible for the timer to fail. 
+    return new Promise(function(resolve){ //This doesn't need the reject function because it's impossible for the timer to fail.
         setTimeout(resolve, seconds);
     })
-} 
+}
 
 wait(1000)//This will create a promise that wait for one second at first, and after that second it will resolve.
 .then(function() {
@@ -8106,8 +8124,8 @@ const countriesContainer = document.querySelector('.countries');
 function getPosition(){
     return new Promise(function(resolve, reject){
         // navigator.geolocation.getCurrentPosition( //If getCurrentPosition automatically calls the pos function, and if it also automatically passes in the position, then we can simply do the next line.
-        //     pos => resolve(pos), 
-        //     err => reject(err)); 
+        //     pos => resolve(pos),
+        //     err => reject(err));
         navigator.geolocation.getCurrentPosition(resolve, reject);
     });
 };
@@ -8161,12 +8179,12 @@ function renderCountry(data){
 btn.addEventListener("click", whereAmI); */
 
 /* // Ejemplo 28: Excercise no. 2
-// 1. Create a function 'createImage' which receives 'imgPath' as an input. This function returns a promise which creates a new image (use document.createElement('img')) and 
-//    sets the .src attribute to the provided image path. When the image is done loading, append it to the DOM element with the 'images' class, and resolve the promise. 
+// 1. Create a function 'createImage' which receives 'imgPath' as an input. This function returns a promise which creates a new image (use document.createElement('img')) and
+//    sets the .src attribute to the provided image path. When the image is done loading, append it to the DOM element with the 'images' class, and resolve the promise.
 //    The fulfilled value should be the image element itself. In case there is an error loading the image (listen for the'error' event), reject the promise
 // 2. Consume the promise using .then and also add an error handler
 // 3. After the image has loaded, pause execution for 2 seconds using the 'wait' function we created earlier
-// 4. After the 2 seconds have passed, hide the current image (set display CSS property to 'none'), and load a second image (Hint: Use the image element returned by the 
+// 4. After the 2 seconds have passed, hide the current image (set display CSS property to 'none'), and load a second image (Hint: Use the image element returned by the
 //    'createImage' promise to hide the current image. You will need a global variable for that)
 // 5. After the second image has loaded, pause execution for 2 seconds again
 // 6. After the 2 seconds have passed, hide the current image
@@ -8191,10 +8209,10 @@ function createImage(imgPath){
 }
 
 function wait(seconds){
-    return new Promise(function(resolve){ //This doesn't need the reject function because it's impossible for the timer to fail. 
+    return new Promise(function(resolve){ //This doesn't need the reject function because it's impossible for the timer to fail.
         setTimeout(resolve, seconds);
     })
-} 
+}
 
 let currentImg;
 createImage("imgs/img-1.jpg")
@@ -8228,21 +8246,21 @@ async function whereAmI(country){
         //Geolocation
         const pos = await getPosition();
         const {latitude: lat, longitude: lng} = pos.coords;
-        
+
         //Revers geocoding
         const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
         if(!resGeo.ok) throw new Error("Problem getting location data");
         const dataGeo = await resGeo.json(); //This returns a new promise
         // console.log(resGeo);
         // console.log(dataGeo);
-    
+
         //Country data
         const res = await fetch(`https://restcountries.com/v3.1/name/${dataGeo.country}`); //This will return a promise. So, await will stop decode execution at this point of the function until the promise is fulfull, and so until the data has been fetched. This isn't blocking the main threat of execution. So, it isn't blocking the call stack.
         if(!res.ok) throw new Error("Problem getting location country");
         const data = await res.json(); //This returns a new promise
         // console.log(res);
         // console.log(data);
-    
+
         renderCountry(data[0]);
 
         return `You are in ${dataGeo.city}, ${dataGeo.country}`;
@@ -8251,7 +8269,7 @@ async function whereAmI(country){
         console.error(`${err} 😈`);
         renderError(`😈 ${err.message}`);
 
-        //Reject promise returned from async function 
+        //Reject promise returned from async function
         throw error;
     }
 };
@@ -8313,15 +8331,15 @@ async function get3Countries(c1, c2, c3){
 
         //This is a helper function on this promise constructor. So it's a static method. Now, this function takes in an array of promises and it will return a new promise (or also an array), which will then run all the promises in the array at the same time.
         const data = await Promise.all([
-            getJSON(`https://restcountries.com/v2/name/${c1}`), 
-            getJSON(`https://restcountries.com/v2/name/${c2}`), 
+            getJSON(`https://restcountries.com/v2/name/${c1}`),
+            getJSON(`https://restcountries.com/v2/name/${c2}`),
             getJSON(`https://restcountries.com/v2/name/${c3}`)
         ]);
         console.log(data.map(event => event[0].capital))
 
     } catch (err) {
         console.log(err);
-    }    
+    }
 }
 
 function getJSON(url, errorMsc = "Something went wrong"){
@@ -8329,7 +8347,7 @@ function getJSON(url, errorMsc = "Something went wrong"){
     .then(function(response){
         // console.log(response);
 
-        if(!response.ok) throw new Error(`${errorMsc} (${response.status})`); //When we use "throw" in any of our methods, means that it will terminate the currecnt function, and the promise will immediately reject. So, the proimse returned by this first ".then" will be a rejected promise. And that rejection will then propagate all the way down to the catch handler, which we already have set up right down. 
+        if(!response.ok) throw new Error(`${errorMsc} (${response.status})`); //When we use "throw" in any of our methods, means that it will terminate the currecnt function, and the promise will immediately reject. So, the proimse returned by this first ".then" will be a rejected promise. And that rejection will then propagate all the way down to the catch handler, which we already have set up right down.
         return response.json(); //json is a function that is available on all responses of the fetch method. json is an asyncronous function and it'll also return a new promise.
     })
 }
@@ -8353,7 +8371,7 @@ function getJSON(url, errorMsc = "Something went wrong"){
     .then(function(response){
         // console.log(response);
 
-        if(!response.ok) throw new Error(`${errorMsc} (${response.status})`); //When we use "throw" in any of our methods, means that it will terminate the currecnt function, and the promise will immediately reject. So, the proimse returned by this first ".then" will be a rejected promise. And that rejection will then propagate all the way down to the catch handler, which we already have set up right down. 
+        if(!response.ok) throw new Error(`${errorMsc} (${response.status})`); //When we use "throw" in any of our methods, means that it will terminate the currecnt function, and the promise will immediately reject. So, the proimse returned by this first ".then" will be a rejected promise. And that rejection will then propagate all the way down to the catch handler, which we already have set up right down.
         return response.json(); //json is a function that is available on all responses of the fetch method. json is an asyncronous function and it'll also return a new promise.
     });
 }
@@ -8389,7 +8407,7 @@ Promise.all([
 ])
 .then(res => console.log(res)).catch(err => console.error(err));
 
-// Promise.any() takes in an array of multiple promises and this one will then return the first fulfilled promise and it will simply ignore rejected promises. It's similar to Promise.race() with the difference that rejected promises are ignored, and so therefore the results of Promise.any() is always gonna be a fulfilled promise, unless of course all of them reject. 
+// Promise.any() takes in an array of multiple promises and this one will then return the first fulfilled promise and it will simply ignore rejected promises. It's similar to Promise.race() with the difference that rejected promises are ignored, and so therefore the results of Promise.any() is always gonna be a fulfilled promise, unless of course all of them reject.
 Promise.any([
     Promise.resolve('Success'),
     Promise.reject('ERROR'),
@@ -8399,13 +8417,13 @@ Promise.any([
 
 /* // Ejemplo 33: Excercise no. 3
 // Your tasks:
-// 1. Write an async function 'loadNPause' that recreates Challenge #2, this time using async/await (only the part where the promise is consumed, reuse the 'createImage' 
+// 1. Write an async function 'loadNPause' that recreates Challenge #2, this time using async/await (only the part where the promise is consumed, reuse the 'createImage'
 //    function from before). Compare the two versions, think about the big differences, and see which one you like more
 
 // 2. Create an async function 'loadAll' that receives an array of image paths 'imgArr'
 // 3. Use .map to loop over the array, to load all the images with the 'createImage' function (call the resulting array 'imgs')
 // 4. Check out the 'imgs' array in the console! Is it like you expected?
-// 5. Use a promise combinator function to actually get the images from the array 
+// 5. Use a promise combinator function to actually get the images from the array
 // 6. Add the 'parallel' class to all the images (it has some CSS styles)
 
 // Test data Part 2: ['img/img-1.jpg', 'img/img-2.jpg', 'img/img3.jpg']. To test, turn off the 'loadNPause' function
@@ -8429,14 +8447,14 @@ function createImage(imgPath){
 }
 
 function wait(seconds){
-    return new Promise(function(resolve){ //This doesn't need the reject function because it's impossible for the timer to fail. 
+    return new Promise(function(resolve){ //This doesn't need the reject function because it's impossible for the timer to fail.
         setTimeout(resolve, seconds);
     })
-} 
+}
 
 async function loadNPause(){
     try {
-        let img; 
+        let img;
 
         //Load image 1
         img = await createImage("imgs/img-1.jpg");
@@ -8491,9 +8509,9 @@ async function getLastPost() { //calling an async is not necessary because it re
     const res = await fetch('https://jsonplaceholder.typicode.com/posts');
     const data = await res.json();
 
-    return { 
-        title: data.at(-1).title, 
-        text: data.at(-1).body 
+    return {
+        title: data.at(-1).title,
+        text: data.at(-1).body
     };
 };
 

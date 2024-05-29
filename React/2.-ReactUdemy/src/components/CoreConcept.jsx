@@ -1,4 +1,4 @@
-export default function CoreConcept({ image, title, description }) {
+export default function CoreConcept({ description, image, title }) {
   return (
     <li>
       <img src={image} alt={title} />

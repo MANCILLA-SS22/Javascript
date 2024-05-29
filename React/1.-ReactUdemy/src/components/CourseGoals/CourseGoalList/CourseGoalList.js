@@ -1,11 +1,8 @@
 import React from 'react';
-
 import CourseGoalItem from '../CourseGoalItem/CourseGoalItem';
 import './CourseGoalList.css';
 
 function CourseGoalList(props){
-
-  
   return (
     <ul className="goal-list">
       {
