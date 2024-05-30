@@ -1,10 +1,8 @@
-import React from 'react'
 import Button from './Button';
 
 function ProjectsSidebar({onStartAddProject, projects, onSelectProject, selectedProjectId}) {
 
     const res = projects.map(function(event){
-        
         let classes = "w-full text-left px-2 py-1 rounded-sm my-1 hover:text-stone-200 hover:vg-stone-800";
         projects.id === selectedProjectId ? classes += " bg-stone-800 text-stone-200" : classes += " text-stone-400";
         return(

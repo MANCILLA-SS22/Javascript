@@ -1,3 +1,18 @@
+estefany
+oyuki
+salma
+gaby
+sandra
+yolanda
+mariana
+michelle
+yanet
+denisse
+jennifer
+karla
+edna
+evelin
+
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        
 
 
@@ -145,9 +160,12 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
        ~ Cuando creamos un custom hook, este puede ser utilizado en diferentes components. Y si este custom hook tiene un useState, al momento de utilizar dicho hook en 2 o mas diferentes components, los estados de cada componente no se 
          relacionaran los unos con los otros. Es decir, si cambia el estado en un custom hook utilizado en un componente, los estados del otro componente no se veran afectados aunque se utilice el mismo custom hook.
 
-    
+- forwardRef: 
 
-
+- createPortal: En React, createPortal se utiliza para renderizar un componente o elementos hijos fuera de la jerarquía del DOM del componente padre. Esto es útil en situaciones donde necesitas que un componente se renderice en una parte 
+  diferente del DOM, como para modales, tooltips, y popovers, que suelen necesitar estar en un nivel superior del DOM para evitar problemas de estilos y posicionamiento.
+  
+- useImperativeHandle: 
 
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        
 

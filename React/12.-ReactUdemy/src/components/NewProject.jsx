@@ -13,10 +13,7 @@ function NewProject({onAdd, onCancel}) {
         const enteredDescription = descriptionRef.current.value;
         const enteredDueDate = dueDateRef.current.value;
 
-        if(enteredTitle.trim() === "" || enteredDescription.trim() === "" || enteredDueDate === ""){
-            modal.current.open();
-            return;
-        }
+        if(enteredTitle.trim() === "" || enteredDescription.trim() === "" || enteredDueDate === "") return modal.current.abrir();
 
         onAdd({
             title: enteredTitle,
@@ -39,9 +36,9 @@ function NewProject({onAdd, onCancel}) {
                     <li><button className='px-6 py-2 rounded-md bg-stone-800 text-stone-50 hover:bg-stone-950' onClick={handleSave}>Save</button></li>
                 </menu>
                 <div>
-                    <Input type="text" ref={titleRef} label="Title"/>
-                    <Input ref={descriptionRef} label="Description" textarea/>
-                    <Input type="date" ref={dueDateRef} label="Due Date"/>
+                    <Input ref={titleRef} type="text" label="Title"/>
+                    <Input ref={descriptionRef} type="text" label="Description" textarea/>
+                    <Input ref={dueDateRef} type="date" label="Due Date"/>
                 </div>
             </div>
         </>
