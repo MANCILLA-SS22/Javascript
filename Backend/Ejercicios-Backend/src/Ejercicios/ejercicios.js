@@ -2825,7 +2825,15 @@ const usersWithProfiles = users.map((user) => {
 
 //Metodo 2
 // var array = [3 , 6, 2, 56, 32, 5, 89, 32],
-// largest = array.sort((a,b)=>a-b).reverse()[0]; //largest = array.sort((a,b)=>a-b)[array.length - 1]; */
+// largest = array.sort((a,b)=>a-b).reverse()[0]; //largest = array.sort((a,b)=>a-b)[array.length - 1]; 
+
+//Metodo 3
+function largestElement(arr) {
+    return arr.reduce((largest, current) => (current > largest ? current : largest), arr[0]);
+}
+
+let num1 = [10, 15, 38, 20, 13];
+console.log(largestElement(num1)); */
 
 /* //Ejemplo 41: Write a JavaScript program to convert an Object {} to an Array [] of key-value pairs in JavaScript
 
@@ -3489,16 +3497,15 @@ console.log(arr2); */
 /* //Ejemplo 59: Write a JavaScript program to find duplicate values in a JavaScript array.
 
 // //Metodo 1
-// // const arra1 = [1, 2, 9, 4, 5, 4, 7, 8, 7, 7, 1, 3, 6];
 // const arra1 = [1, 2, 5, 2, 2, 2, 3, 4, 5];
 // const object = [];
 // const result = [];
 
 // arra1.forEach(item => {
 //     if(!object[item]) object[item] = 0;
+//     console.log(object);
 
 //     object[item]++;
-//     console.log(object)
 // });
 
 // for (const prop in object) {
@@ -3619,12 +3626,12 @@ console.log(arr2); */
 
 //Metodo 11
 // let array = [6, 9, 15, 6, 13, 9, 11, 15];
-// let index = 0, newArr = [];
-// const length = array.length; // to get length of array
+// let index = 0; 
+// let newArr = [];
 
 // function findDuplicates(arr) {
-//     for (let i = 0; i < length - 1; i++) {
-//         for (let j = i + 1; j < length; j++) {
+//     for (let i=0; i<array.length-1; i++) {
+//         for (let j=i+1; j<array.length; j++) {
 //             if (arr[i] === arr[j]) {
 //                 newArr[index] = arr[i];
 //                 index++;
@@ -3634,7 +3641,8 @@ console.log(arr2); */
 //     return newArr;
 // }
 
-// findDuplicates(array); */
+// const res = findDuplicates(array);
+// console.log(res); */
 
 /* //Ejemplo 60: Write a JavaScript program to flatten a nested (any depth) array. If you pass shallow, the array will only be flattened to a single level
 
@@ -4006,19 +4014,16 @@ console.log(arr2); */
 
 // library.sort(function(a, b){
 //     let prop = "title"
-//     const [e1, e2] = [a[prop], b[prop]];   //return a[prop] === b[prop] ? 0 : a[prop] < b[prop] ? -1 : 1;
+//     // const [e1, e2] = [a[prop], b[prop]];  
+//     const e1 = a[prop];
+//     const e2 = b[prop];
     
-//     if(e1 === e2){
-//         return 0;
-//     }else if(e1 < e2){
-//         return -1;
-//     }else{
-//         return 1;
-//     }
-    
-// });
+//     if (e1 === e2) return 0; 
+//     if(e1 < e2) return -1;
+//     return 1;
+// }); //return a[prop] === b[prop] ? 0 : a[prop] < b[prop] ? -1 : 1;
 
-// console.log(library)
+// console.log(library);
 
 //Metodo 3
 // var library = [ 
@@ -5425,6 +5430,7 @@ const b = [...arr.map((innerArray) => [...innerArray])];
 b[1][1] = "X";
 console.log(b);
 console.log(arr); */
+
 
 //         $$$$$$$$$$$$$$$ STRINGS & MODERN OPERATORS $$$$$$$$$$$$$$$
 
