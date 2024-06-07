@@ -11,8 +11,21 @@ function App() {
   const selectedPlace = useRef();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [errorUpdatingPlaces, setErrorUpdatingPlaces] = useState();
+  const { isFetching,  error,  fetchedData,  setFetchedData } = useFetch(fetchUserPlaces, []); 
+  
+  const handleRemovePlace = useCallback(async function () {
+    setFetchedData((prevPickedPlaces) => prevPickedPlaces.filter((place) => place.id !== selectedPlace.current.id));
 
-  const {isFetching, fetchedData:userPlaces, error, setFetchedData: setUserPlaces} = useFetch(fetchUserPlaces, []); 
+    try {
+      await updateUserPlaces(fetchedData.filter(event => event.id !== selectedPlace.current.id));
+    } catch (error) {
+      setFetchedData(fetchedData);
+      setErrorUpdatingPlaces({ messaje: error.message || "Failed to delete place." })
+    }
+
+    setModalIsOpen(false);
+
+  }, [fetchedData, setFetchedData]);
 
   function handleStartRemovePlace(place) {
     setModalIsOpen(true);
@@ -28,33 +41,22 @@ function App() {
   }
 
   async function handleSelectPlace(selectedPlace) {
-    setUserPlaces((prevPickedPlaces) => {
+    setFetchedData(function(prevPickedPlaces){
       if (!prevPickedPlaces) prevPickedPlaces = [];
-      if (prevPickedPlaces.some((place) => place.id === selectedPlace.id)) return prevPickedPlaces;
+
+      const verify = prevPickedPlaces.some((place) => place.id === selectedPlace.id);
+      if (verify) return prevPickedPlaces;
+
       return [selectedPlace, ...prevPickedPlaces];
     });
 
     try {
-      await updateUserPlaces([selectedPlace, ...userPlaces]);
+      await updateUserPlaces([selectedPlace, ...fetchedData]);
     } catch (error) {
-      setUserPlaces(userPlaces);
+      setFetchedData(fetchedData);
       setErrorUpdatingPlaces({message: error.message || "Failed to update places."});
     }
   }
-
-  const handleRemovePlace = useCallback(async function handleRemovePlace() {
-    setUserPlaces((prevPickedPlaces) => prevPickedPlaces.filter((place) => place.id !== selectedPlace.current.id) );
-    
-    try {
-      await updateUserPlaces(userPlaces.filter(event => event.id !== selectedPlace.current.id));
-    } catch (error) {
-      setUserPlaces(userPlaces);
-      setErrorUpdatingPlaces({messaje: error.message || "Failed to delete place."})
-    }
-    
-    setModalIsOpen(false);
-
-  }, [userPlaces, setUserPlaces]);
 
   return (
     <>
@@ -73,7 +75,7 @@ function App() {
       </header>
       <main>
         {error && <Error title="An error ocurred!" message={error.message} />}
-        {!error && <Places title="I'd like to visit ..." fallbackText="Select the places you would like to visit below." isLoading={isFetching} loadingText="Fetching your places..." places={userPlaces} onSelectPlace={handleStartRemovePlace} />}
+        {!error && <Places title="I'd like to visit ..." fallbackText="Select the places you would like to visit below." isLoading={isFetching} loadingText="Fetching your places..." places={fetchedData} onSelectPlace={handleStartRemovePlace} />}
         <AvailablePlaces onSelectPlace={handleSelectPlace} />
       </main>
     </>

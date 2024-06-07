@@ -4,7 +4,6 @@ export function useFetch(fetchFn, initialValue){
     const [isFetching, setIsFetching] = useState();
     const [error, setError] = useState();
     const [fetchedData, setFetchedData] = useState(initialValue);
-
     useEffect(() => {
         async function fetchData() {
             setIsFetching(true);
@@ -14,17 +13,10 @@ export function useFetch(fetchFn, initialValue){
             } catch (error) {
                 setError({ message: error.message || 'Failed to fetch data.' });
             }
-        
             setIsFetching(false);
         }
-        
+
         fetchData();
     }, [fetchFn]);
-        
-    return {
-        isFetching: isFetching,
-        fetchedData: fetchedData,
-        setFetchedData: setFetchedData,
-        error: error
-    }
+    return { isFetching , fetchedData , setFetchedData , error }
 }

@@ -48,7 +48,7 @@ function App() {
     setModalIsOpen(false);
   }
 
-  const handleRemovePlace = useCallback(function handleRemovePlace(){
+  const handleRemovePlace = useCallback(function(){
     setPickedPlaces(prevPickedPlaces => prevPickedPlaces.filter((place) => place.id !== selectedPlace.current));
     setModalIsOpen(false)
 

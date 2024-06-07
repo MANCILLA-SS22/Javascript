@@ -3,9 +3,9 @@ import Modal from './UI/Modal.jsx';
 import { currencyFormatter } from '../util/formatting.js';
 import Input from './UI/Input.jsx';
 import Button from './UI/Button.jsx';
-import CartContext from '../Context/CartContext.jsx';
+import {CartContext} from '../Context/CartContext.jsx';
 import UserProgressContext from '../Context/UserProgressContext.jsx';
-import useHttp from './hooks/useHttp.js';
+import useHttp from '../hooks/useHttp.jsx';
 
 const requestConfig = {
     method: "POST",

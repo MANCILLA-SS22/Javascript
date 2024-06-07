@@ -1,23 +1,14 @@
 import Error from './Error.jsx';
 import MealItem from './MealItem.jsx';
-import useHttp from './hooks/useHttp.js';
+import useHttp from '../hooks/useHttp.jsx';
 
 const requestConfig = {};
 
 export default function Meals() {
-    const {
-        data: loadedMeals, 
-        isLoading: isLoading, 
-        error: error
-    } = useHttp("http://localhost:3000/meals", requestConfig, []);
+    const { data: loadedMeals,  isLoading: isLoading,  error: error } = useHttp("http://localhost:3000/meals", requestConfig, []);
 
-    if(isLoading){
-        return <p className='center'>Fetching meals...</p>;
-    }
-
-    if(error){
-        return <Error title="Filed to fetch meals" message={error}/>;
-    }
+    if (isLoading) return <p className='center'>Fetching meals...</p>;
+    if (error) return <Error title="Filed to fetch meals" message={error} />;
 
     return (
         <ul id="meals">
@@ -25,10 +16,6 @@ export default function Meals() {
         </ul>
     );
 }
-
-
-
-
 
 /* import { useState, useEffect } from 'react';
 import MealItem from './MealItem.jsx';

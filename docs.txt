@@ -20,6 +20,7 @@ https://tanstack.com/query/v5/docs/framework/react/reference/useQuery
 https://nextjs.org/docs/app/api-reference/file-conventions
 https://www.framer.com/motion/
 https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/context/#basic-example
+https://en.wikipedia.org/wiki/List_of_auto_parts
                                                                                                          ñ
 Documentaciones:
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/values    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array

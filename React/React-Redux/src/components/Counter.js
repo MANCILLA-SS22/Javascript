@@ -1,3 +1,44 @@
+import classes from '../components/css/Counter.module.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { counterActions } from '../store/counterSlice.js';
+
+function Counter() {
+  const counter = useSelector(state => state.counter.value);
+  const show = useSelector(state => state.counter.showCounter);
+  const dispatch = useDispatch()
+
+  function toggleCounterHandler() {
+    dispatch(counterActions.toggleCounter());
+  };
+
+  function incrementHandler() {
+    dispatch(counterActions.increment());
+  }
+
+  function decrementHandler() {
+    dispatch(counterActions.decrement());
+  }
+
+  function increaseHandler() {
+    dispatch(counterActions.increase(10)); //We can send any kind of data and we'll get an object with the following keys (they're deffault keys and aren't up to you) --> {type: SOME_UNIQUE_IDENTIFIER, payload: 10}
+  }
+
+  return (
+    <main className={classes.counter}>
+      <h1>Redux Counter</h1>
+      {show && <div className={classes.value}>{counter}</div>}
+      <div>
+        <button onClick={incrementHandler}>Increment</button>
+        <button onClick={increaseHandler}>Increase by 5</button>
+        <button onClick={decrementHandler}>Decrement</button>
+      </div>
+      <button onClick={toggleCounterHandler}>Toggle Counter</button>
+    </main>
+  );
+};
+
+export default Counter;
+
 /* //Method 1: Conventional way
 import classes from '../components/css/Counter.module.css';
 import { useSelector, useDispatch } from 'react-redux';
@@ -41,13 +82,13 @@ export default Counter; */
 
 /* //Method 2: Using classes
 import classes from '../components/css/Counter.module.css';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux'; //"connect" is only used when handling with class-based components
 import { Component } from "react";
 
 class Counter extends Component{
 
   toggleCounterHandler(){
-    
+    this.props.toggleCounter();
   }; 
 
   incrementHandler(){
@@ -56,6 +97,10 @@ class Counter extends Component{
 
   decrementHandler(){
     this.props.decrement();
+  }
+
+  increaseHandler(){
+    this.props.increase(10);
   }
   
   render(){ //Render in React JS is a fundamental part of class components. It is used to display the component on the UI returned as HTML or JSX components. The ReactDOM.render() function takes two arguments, HTML code and an HTML element.
@@ -74,9 +119,7 @@ class Counter extends Component{
 }
 
 function mapStateToProps(state){
-  return{
-    counter: state.counter
-  }
+  return { counter: state.counter }
 };
 
   function mapDispatchToProps(dispatch){
@@ -87,45 +130,3 @@ function mapStateToProps(state){
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Counter); */
-
-//Method 3: Using classes
-import classes from '../components/css/Counter.module.css';
-import { useSelector, useDispatch } from 'react-redux';
-import { counterActions } from '../store/counterSlice.js';
-
-function Counter(){
-  const counter = useSelector(state => state.counter.value);
-  const show = useSelector(state => state.counter.showCounter);
-  const dispatch = useDispatch()
-
-  function toggleCounterHandler(){
-    dispatch(counterActions.toggleCounter())
-  }; 
-
-  function incrementHandler(){
-    dispatch(counterActions.increment());
-  }
-
-  function decrementHandler(){
-    dispatch(counterActions.decrement());
-  }
-
-  function increaseHandler(){
-    dispatch(counterActions.increase(10)); //We can send any kind of data and we'll get an object with the following keys (they're deffault keys and aren't up to you) --> {type: SOME_UNIQUE_IDENTIFIER, payload: 10}
-  }
-
-  return (
-    <main className={classes.counter}>
-      <h1>Redux Counter</h1>
-      {show && <div className={classes.value}>{counter}</div>}
-      <div>
-        <button onClick={incrementHandler}>Increment</button>
-        <button onClick={increaseHandler}>Increase by 5</button>
-        <button onClick={decrementHandler}>Decrement</button>
-      </div>
-      <button onClick={toggleCounterHandler}>Toggle Counter</button>
-    </main>
-  );
-};
-
-export default Counter;

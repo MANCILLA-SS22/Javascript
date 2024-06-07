@@ -149,13 +149,12 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 - Ancho de banda: Teoricamente, es la longitud de la extensión de frecuencias, medida en hercios (Hz), en la que se concentra la mayor potencia de la señal.
   Es la máxima cantidad de datos transmitidos a través de una conexión a internet en cierta cantidad de tiempo. El ancho de banda por lo general se confunde con la velocidad de internet cuando en realidad es el volumen de información que se 
-  puede enviar a través de una conexión en una cantidad medida de megabits por segundo (Mbps).
-  Tambien se conoce como la cantidad máxima de datos que pueden ser transmitidos a través de una conexión a Internet en un tiempo determinado. Normalmente, el ancho de banda se representa en el número de bits, kilobits, megabits o 
-  gigabits que se pueden transmitir en 1 segundo.
-  Los términos velocidad de internet y ancho de banda suelen confundirse, pero aquí encontrarás la diferencia. La velocidad se refiere al ritmo al que se pueden transmitir los datos, mientras que el ancho de banda es la capacidad de esa 
-  velocidad. Utilizando una analogía, imagina una carretera, la velocidad dependerá del vehículo y el ancho de banda de cuantos vehículos pueden transitar al mismo tiempo por ella durante un tiempo determinado.
+  puede enviar a través de una conexión en una cantidad medida de megabits por segundo (Mbps) o kilobits por segundo (Kbps).
+  La velocidad se refiere al ritmo al que se pueden transmitir los datos, mientras que el ancho de banda es la capacidad de esa velocidad. Utilizando una analogía, imagina una carretera, la velocidad dependerá del vehículo y el ancho de banda 
+  de cuantos vehículos pueden transitar al mismo tiempo por ella durante un tiempo determinado.
   
-- Velocidad: Es la velocidad es cuán rápido esa información se recibe o descarga. Tambien se define como la velocidad de dígitos binarios transmitidos y se da en bits por segundo (bps).
+- Velocidad de internet: Hace referencia al ritmo al que se pueden transmitir los datos. Es decir, la velocidad es cuán rápido esa información se recibe o descarga. Tambien se define como la velocidad de dígitos binarios transmitidos y se da 
+  en bits por segundo (bps).
 
 - Rendimiento: es la cantidad de información que se entrega con éxito en una determinada cantidad de tiempo.
 

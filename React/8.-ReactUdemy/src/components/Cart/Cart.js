@@ -24,15 +24,8 @@ function Cart(props){
     }
 
     const zeta = cartCtx.items.map(function(event){
-                    return (<CartItem 
-                        key={event.id} 
-                        name={event.name} 
-                        amount={event.amount} 
-                        price={event.price} 
-                        onRemove={cartItemRemoveHandler.bind(null, event.id)} 
-                        onAdd={cartItemAddHandler.bind(null, event)} />
-                    )
-                })
+        return <CartItem  key={event.id}  name={event.name}  amount={event.amount}  price={event.price}  onRemove={cartItemRemoveHandler.bind(null, event.id)}  onAdd={cartItemAddHandler.bind(null, event)} />
+    });
 
     return (
         <Modal onClose={props.onClose}>
