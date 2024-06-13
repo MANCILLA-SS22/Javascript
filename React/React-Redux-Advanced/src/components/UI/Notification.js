@@ -3,12 +3,8 @@ import classes from './Notification.module.css';
 function Notification(props){
   let specialClasses = '';
 
-  if (props.status === 'error') {
-    specialClasses = classes.error;
-  }
-  if (props.status === 'success') {
-    specialClasses = classes.success;
-  }
+  if (props.status === 'error') specialClasses = classes.error;
+  if (props.status === 'success') specialClasses = classes.success;
 
   const cssClasses = `${classes.notification} ${specialClasses}`;
 

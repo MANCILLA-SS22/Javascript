@@ -2,12 +2,12 @@ import classes from './CartButton.module.css';
 import { uiActions } from '../../store/ui-slice';
 import {useDispatch, useSelector} from "react-redux";
 
-
 function CartButton(props){
   const dispatch = useDispatch();
   const cartQuantity = useSelector(state => state.cart.totalQuantity);
 
   function toggleCartHandler(){
+    console.log(uiActions)
     dispatch(uiActions.toggle());
   }
 

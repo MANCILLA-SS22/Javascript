@@ -1,160 +1,3 @@
-$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        
-
-
-                                                                                                                   React
-
-- Componentes (components): Es un conjunto de elementos que cumplen una función específica en la interfaz de usuario. Se utilizan para construir la jerarquía de todos esos elementos. Cada componente puede contener otros componentes como 
-  hijos. básicamente, las aplicaciones en React básicamente se construyen mediante los mismos. permiten separar la interfaz de usuario en piezas independientes, reutilizables y pensar en cada pieza de forma aislada.
-  
-- Propiedades (props): Son la forma que tiene React para pasar parámetros de un componente superior a sus hijos. Se utilizan para pasar datos de un componente padre a un componente hijo, manteniendo el flujo unidireccional 
-  de los datos. Las props son objetos que contienen datos específicos que un componente necesita para renderizarse correctamente. Esto permite la reutilización de componentes en diferentes partes de la aplicación con diferentes datos.
-  Si alguna prop es una función (callback), el componente hijo puede llamarla para provocar efectos secundarios en el componente padre.
-  
-- prop.childern: Children es una manera que tiene react de permitirnos proyectar/transcluir uno o más componentes dentro otro. Es ideal cuando necesitamos que un elemento quede dentro de otro, sin que sepan el uno del otro, y cuando   
-  necesitamos implementar patrones más complejos.  
-  El concepto de children es la forma en que React nos permite incluir un componente dentro de otro sin que al padre le importe exactamente qué componente o componentes hijos están siendo incluidos. Los elementos hijos son aquellos que se 
-  colocan dentro de la etiqueta de apertura y cierre del componente y la prop “children” se utiliza para acceder y manipular estos elementos hijos desde dentro del componente padre. 
-  De esta manera, podemos crear componentes más flexibles y reutilizables que acepten contenido personalizado y que puedan renderizarlo de manera dinámica. 
-    
-  La prop children es una prop especial que se pasa a los componentes. Es un objeto que contiene los elementos que envuelve un componente. Por ejemplo, si tenemos un componente Card que muestra una tarjeta con un título y un contenido, 
-  podemos usar la prop children para mostrar el contenido:
-    
-         function Card(props) {
-            return (
-              <div className="card">
-                 <h2>{props.title}</h2>
-                 <div>{props.children}</div>
-              </div>
-            )
-         }
-         
-    Y luego podemos usarlo de la siguiente forma:
-    
-         <Card title="Título de la tarjeta">
-           <p>Contenido de la tarjeta</p>
-         </Card>
-         
-    En este caso, la prop children contiene el elemento <p>Contenido de la tarjeta</p>.
-        
-
-- Render: The render method is a vital part of ReactJS, as it determines what gets displayed on the screen. It takes in the app’s state and renders it to a DOM node. This makes it easy to track what’s going on in your app, as the render 
-  method will always show the latest state. The render method is called automatically by ReactJS, so you don’t need to call it yourself. However, you can call it manually if you need to. 
-  The render method is also where you should do any processing that doesn’t need to happen every time the state changes. 
-  For example, if you have an extensive list of items, you might want only to render the part of the list that’s visible on the screen. Your app will be more efficient and won’t slow down as the state changes.
-  
-    > What Is The Use Of the Render Method in ReactJS? The render method in ReactJS functional component is the default lifecycle method that returns a single child component to be rendered by the parent. It’s important to use this method 
-      when you want to return a component from a parent to a child. This will ensure that the child receives the correct data and state from the parent.
-    > When Not To Use The Render Method In React Js? There may be times when you don’t want to use the render method. For example, if you’re working with higher-order components, stateless functional components, or memorization there, you 
-      may not need to use it. You can simply return whatever value is passed into the return method in these cases.
-    > 1) The render method will always return a single child component. 2) The render method sets up the child component’s initial state and lifecycle methods. 3) The render method is used when you want to create a new component. 4) The 
-      render method is more common.	
-
-- return: The return method in React is a way to return data from a component. It returns the data that was passed into the component, which the parent component can then use. The return method is generally used when you want to return a 
-  single value from a component. For example, if you want to return the text of a button from a Component, you would use the return method.
-   
-    > When To Use The Return Method In React Js? The return method can be used in a few different situations. One example would be when you want to return a default value from a function. Another instance would be when you wish to return a 
-      value from a component used as a stateless functional component. You can also use the return method to return values from higher-order components.
-    > When To Not Use The Return Method In React Js? The return method should not be used when you need to return multiple values from a function. In this case, the render method should be used instead. Additionally, the return method should 
-      not be used when you need to call a function that is not in the same component. 
-    > 1) The return method can return any value. 2) The return method returns a value. 3) The return method is used when you want to reuse an existing component. 4) The return method is less commonly used.
-  
-- Componentes basados en funciones: Hoy en día todos los componentes de React se crean a partir de funciones, lo que hace que sea mucho más fácil de escribir el código y entenderlo. Antes aquellos componentes que se encargaban del 
-  funcionamiento de la app, se creaban a partir de la clase Components para poder implementar las características de los componentes de React. Lo que hacía más complejo el modelo mental.
-  Pueden recibir propiedades (props). Tienen la capacidad de hacer render de un único elemento. Aunque este elemento puede tener muchos elementos dentro. Pueden tener estados.
-    
-- Controlled vs Uncontrolled Components & Stateless vs Stateful Components: 
-    
-- Render de un único elemento: Los componentes deben retornar un solo elemento o componente, pero este elemento o componente sí puede tener más de un elemento o componente hijo. En caso de no necesitar que el elemento padre forme parte del 
-  árbol del DOM, se puede utilizar React.Fragment, o lo que es lo mismo utilizar un tag sin tipo <></>.
-  
-- Key: En REACT, debemos incluir en cada elemento la propiedad key, que marque la identidad del elemento. Es decir, debemos poner algo que se encuentre en el array u objeto pero que estemos seguros de que NO SE REPETIRA (lo mas recomendable    
-  seria el id, ya que este empieza desde 1 hasta un numero indefinido pero que siempre estara cambiando). Esto ayudará a react a optimizar el rendering ante cambios en el array. De no tenerla podemos auto-generarla con el index provisto por 
-  el segundo parámetro de map, pero sólo optimizará si hay adiciones al final del array. Whenever the key changes on a component, even if that component is not part of a list, whenever it changes, REACT will destroy the old component 
-  instance and create a new one.
-   
- 
-  
-- States: Los estados de un componente en React se utilizan para representar la información que puede cambiar durante la vida útil del componente y afectar su representación en la interfaz de usuario. Todo cambio de estado va inicializar el 
-  proceso de render a partir del nodo donde se produjo el cambio de estado y así se generará el nuevo Virtual DOM que luego será reconciliado. Los estados son un concepto de React, no de JavaScript, por lo que para implementarlo vamos a 
-  necesitar de los Hooks de React.
-  
-  El estado en React es una de las maneras en las que se procesan datos. Desde el punto de vista de los datos que React puede manejar, tenemos el objeto props, con el que podemos insertar todo tipo de propiedades a un elemento, y tenemos los 
-  estados. El estado es un objeto que contiene datos que pueden cambiar en el tiempo. En React, el estado se usa para controlar los cambios en la interfaz. El objeto props nos permite insertar datos estáticos. Con esto nos referimos a que 
-  pasamos propiedades a un componente o elemento que luego se renderiza o visualiza de una determinada manera, con base a los datos que le pasamos. Entonces, si necesitamos darle dinamismo a un elemento, es decir, datos que se modifiquen a 
-  lo largo del tiempo, necesitaremos utilizar el estado en React.
-  
-  El estado en React, también conocido como state, es el segundo tipo de dato que maneja esta librería de JavaScript. Mientras que las props son los datos que podemos pasarle a un componente o elemento React desde afuera, un estado se 
-  conforma por los datos internos que un componente puede manejar. A medida que estos datos son modificados, ya sea por una interacción del usuario o por una recepción de datos de la API, el estado será modificado. Entonces, cada cambio de 
-  ese estado provocará que el elemento o componente se renderice de nuevo con una nueva representación en pantalla.
-  
-  Ten presente que podemos utilizar un estado en cualquier tipo de componente o elemento, sea del nivel más bajo o el nivel más alto. Allá donde necesitemos datos que cambian a lo largo del tiempo, podemos utilizar un estado.
-
-- Render y efectos: El funcionamiento de React está estrechamente ligado al cambio de estados. Cuando se produce un cambio de estado, React ejecuta un nuevo proceso de renderizado para ese componente y, de manera recursiva, para todos sus 
-  componentes hijos. Durante este proceso React ejecuta de nuevo las funciones de los componentes para generar el nuevo árbol de elementos de la interfaz de usuario.  Dentro de los componentes podemos tener funciones para realizar diferentes 
-  tareas, como, por ejemplo, una llamada a una api para obtener datos. Si en cada render se ejecuta esta llamada a la API, quiere decir que un cambio de estado está provocando efectos secundarios y no controlarlos puede traernos problemas. 
-
-- side effects: Side effects can be fetching data from a remote server, reading or writing to local storage, setting up event listeners, or setting up a subscription. These side effects can occur when a button is clicked, a form is submitted 
-  or when a component is mounted and unmounted. React’s useEffecthook allows functional components to do things when a component is mounted or when some properties or states change. This hook also allows cleaning up when the component is 
-  unmounted.
-
-- Hooks: Es una función especial que permite a los desarrolladores utilizar el estado y otras características de React en componentes de función, y utilizar las características de React en los componentes funcionales, en lugar de tener que 
-  usar la clase Component. Los hooks son funciones que se pueden usar dentro de los componentes funcionales para agregar funcionalidad adicional de React. Las caracteristicas de los Hooks son:
-    1) Comienzan con el prefijo “use” para que React pueda identificarlos y realizar validaciones.
-    2) Solamente pueden utilizarse dentro de componentes funcionales.
-    3) Deben ejecutarse siempre, es decir, en cada renderizado y el orden de ejecución debe ser siempre el mismo. No puede estar dentro de if, for, etc.
-    4) Deben ejecutarse siempre en el cuerpo de la función del componente, por lo que normalmente se los ejecuta al inicio.
-    5) Cuando los parametros del hook se quieran recuperar en una funcion a la que fueron mandados, se deben desestructurar. Es decir, poner como el siguiente ejemplo:  function Counter( {conteo, setConteo} ){
-    
-  Cualquier función que se declare con el prefijo “use”, React la tratará como un hook realizando las validaciones correspondientes y llamará a otros hooks dentro de esta función sin ser esta un componente, ya que si este hook padre cumple 
-  las validaciones y, dentro de él, los hooks cumplen los requisitos correspondientes, pasarán todas las validaciones y podrá ejecutarse sin problemas. A estos hooks declarados por el desarrollador para encapsular una lógica de componente 
-  específica se les llama custom hooks. Mientras el valor dentro del parentesis de useState no cambie (o se actualice), quiere decir que no se volvera a ejecutar la funcion, no hasta que haya un cambio.
-  
-  Lo más importante es que los hooks deben ser llamados únicamente en el nivel superior del componente funcional, nunca dentro de bucles, condiciones o funciones anidadas. 
-  Esto asegura que los hooks siempre sean llamados en el mismo orden en cada renderizado y mantener la relación con cada una de las fibras de React. 
-  También es importante tener en cuenta que los hooks no deben ser llamados desde funciones regulares. Si se llama a un hook desde una función regular, se producirá un error en tiempo de ejecución. 
-  React detecta que una función es un componente gracias a la convención PascalCase utilizada para nombrarlos.
-      
-    > Hooks de estado: El estado permite que un componente «recuerde» información como la entrada de un usuario. Por ejemplo, un componente de formulario puede utilizar un estado para guardar la entrada del valor mientras que un componente 
-      de galería de imágenes puede utilizar un estado para guardar el índice de la imagen seleccionada.
-      
-    > Hooks de contexto: El contexto permite a un componente recibir información de padres lejanos sin pasarlas como props. Por ejemplo, el componente en el nivel superior de tu aplicación puede pasar el actual tema de la UI a todos los 
-      componentes dentro, sin importar la profundidad dentro del componente.
-    
-    > Hooks de refs: Las refs le permiten a un componente mantener alguna información que no es utilizada para el renderizado como un nodo del DOM o el ID de un timeout. A diferencia del estado, actualizar una ref no vuelve a renderizar tu 
-      componente. Las refs son una «puerta de escape» del paradigma de React. Son útiles cuando necesitas trabajar con sistemas distintos de React, como las APIs integradas del navegador.
-
-    > Hooks de Efecto: El Hook de Efecto permite a un componente conectarse y sincronizarse con sistemas externos. Esto incluye lidiar con la red, el DOM del navegador, animaciones, widgets escritos utilizando una biblioteca de UI diferente 
-      y otro código que no es de React.
-
-    > Hooks de rendimiento: Una forma común de optimizar el rendimiento del rerenderizado es evitar trabajo innecesario. Por ejemplo, puedes decirle a React que reutilice un cálculo guardado en caché o que se salte un rerenderizado si los 
-      datos no han cambiado desde el renderizado anterior. Para evitar cálculos y renderizados innecesarios, usa uno de estos Hooks:
-
-    > Otros: Algunas veces no podrás evitar un rerenderizado porque la pantalla realmente necesita una actualización. En ese caso, puedes mejorar el rendimiento separando las actualizaciones bloqueantes que deben ser síncronas (como al
-      escribir dentro de una entrada de texto) de las actualizaciones no bloqueantes, que no necesitan bloquear la interfaz de usuario (como actualizar un gráfico). Para priorizar el renderizado, puedes usar: useTransition y useDeferredValue
-    
-    > Custom hooks: Los custom hooks en React son un tipo de función JavaScript que simula el funcionamiento de los hooks en React. Los custom hooks en React son muy útiles siempre que tengamos una lógica que se repite entre varios componen
-      En estos casos, podemos sacar esta lógica y aplicarla a un custom hook, es decir, una función que ejecute los pasos que necesitamos de manera automática.
-      Al no ser funciones cualquiera, los custom hooks en React deben seguir una serie de reglas para ser considerados hooks y no funciones. A continuación, te explicamos cuáles son.
-       ~ El nombre empieza por «use»: La primera regla de los custom hooks en React es que su nombre debe empezar con la palabra use. Esta convención se crea siguiendo los hooks originales de React (useEffect, useState, useRef) y los 
-         posteriores hooks en React Router (useParams, useLocation, useNavigate). Se considera que esto es una regla porque la comunidad ha decidido que es más sencillo reconocer un custom hook cuando sigue esta norma. Sin embargo, en teoría 
-         podrías crear uno con otro nombre.
-       ~ Puede llamar a otros hooks: Lo que realmente tienen de particular los custom hooks en React es que pueden llamar a otros hooks. En este orden de ideas, React considera como custom hook a aquella función que dentro llama a un hook 
-         original o a otro custom hook.
-       ~ Los custom hooks en React son muy útiles para extraer funcionalidades, hacer refactors y mantener nuestros componentes más simplificados. Esto es especialmente común cuando tenemos componentes que llaman a una API para obtener un 
-         dato, lo meten en un estado y ejecutan una acción determinada con él. Todos estos pasos, que al final son muy repetitivos, se simplifican con el uso de custom hooks.
-       ~ Cuando creamos un custom hook, este puede ser utilizado en diferentes components. Y si este custom hook tiene un useState, al momento de utilizar dicho hook en 2 o mas diferentes components, los estados de cada componente no se 
-         relacionaran los unos con los otros. Es decir, si cambia el estado en un custom hook utilizado en un componente, los estados del otro componente no se veran afectados aunque se utilice el mismo custom hook.
-
-- forwardRef: 
-
-- createPortal: En React, createPortal se utiliza para renderizar un componente o elementos hijos fuera de la jerarquía del DOM del componente padre. Esto es útil en situaciones donde necesitas que un componente se renderice en una parte 
-  diferente del DOM, como para modales, tooltips, y popovers, que suelen necesitar estar en un nivel superior del DOM para evitar problemas de estilos y posicionamiento.
-  
-- useImperativeHandle: 
-
-$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        
-
-
                                                                                                                    Nodejs
 
    
@@ -195,6 +38,90 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 - OS: 
 
 
+- Sobre los entornos: Para que un código esté listo para llegar al cliente, es necesario que pase por diferentes fases.
+  Sin embargo, para que estas fases se encuentren aisladas de las otras fases (no queremos que la fase de desarrollo tenga datos de producción, o que haya datos de producción en staging), necesitaremos crear entornos específicos para estas 
+  fases. Nuestras variables cambiarán según el entorno.
+  El primer uso radica en que una variable cambie según el entorno donde se esté corriendo, esto permite que pueda apuntar a una base de datos prueba o a una base de datos productiva con sólo cambiar el apuntador de dónde se está corriendo.
+  Otro factor importante es el factor seguridad. Con las variables de entorno podemos ocultar la información sensible de nuestro código, como credenciales, claves de acceso, tokens, secrets, etc.                                                                                                                   
+                                                                                                                   
+- process: Cada vez que corremos un proceso en nodejs, éste genera un objeto llamado process, el cual contiene información referente a todo lo implicado con el proceso, cosas como:
+    ✓ Uso de memoria 
+    ✓ Id del proceso en el sistema operativo 
+    ✓ En qué sistema operativo o plataforma está corriendo
+    ✓ En qué entorno está corriendo. 
+    ✓ Qué argumentos tiene el entorno.
+
+ > Algunos elementos importantes de process
+    ✓ process.cwd() : Directorio actual del proceso.
+    ✓ process.pid : id del proceso en el sistema
+    ✓ process.MemoryUsage() :
+    ✓ process.env : Accede al objeto del entorno actual
+    ✓ process.argv : Muestra los argumentos pasados por CLI (Los argumentos permiten iniciar la ejecución de un programa a partir de ciertos elementos iniciales)
+    ✓ process.version : Muestra la versión del proceso (node en este caso)
+    ✓ process.on() : Permite setear un listener de evento. Permitirá poner a nuestro proceso principal a la escucha de algún evento para poder ejecutar alguna acción en caso de que algo ocurra. (Listeners)
+      ~ process.on('exit'); //Para ejecutar un código justo antes de la finalización del proceso.
+      ~ process.on("warning"); //The 'warning' event is emitted whenever Node.js emits a process warning. A process warning is similar to an error in that it describes exceptional conditions that are being brought to the user's attention.
+      ~ process.on('message'); //para poder comunicarse con otro proceso      
+
+      ~ process.on("beforeExit"); //This event is emitted when node empties its event loop and has nothing else to schedule. Normally, the node exits when there is no work scheduled, but a listener for 'beforeExit' can make asynchronous 
+        calls, and cause the node to continue.
+        
+      ~ process.on("rejectionHandled"); //The 'rejectionHandled' event is emitted whenever a Promise has been rejected and an error handler was attached to it (using promise.catch(), for example) later than one turn of the Node.js event 
+        loop. The Promise object would have previously been emitted in an 'unhandledRejection' event, but during the course of processing gained a rejection handler.
+
+      ~ process.on('uncaughtException'); It is emitted when an uncaught JavaScript exception bubbles all the way back to the event loop. By default, Node.js handles 
+        such exceptions by printing the stack trace to stderr and exiting with code 1, overriding any previously set process.exitCode. Adding a handler for the 'uncaughtException' event overrides this default behavior. Alternatively, change 
+        the process.exitCode in the 'uncaughtException' handler which will result in the process exiting with the provided exit code. Otherwise, in the presence of such handler the process will exit with 0.
+        Para atrapar alguna excepción que no haya sido considerada en algún catch.
+        
+      ~ process.on("unhandledRejection"); //The 'unhandledRejection' event is emitted whenever a Promise is rejected and no error handler is attached to the promise within a turn of the event loop. When programming with Promises, exceptions 
+        are encapsulated as "rejected promises". Rejections can be caught and handled using promise.catch() and are propagated through a Promise chain. The 'unhandledRejection' event is useful for detecting and keeping track of promises that 
+        were rejected whose rejections have not yet been handled.               
+
+    ✓ process.exit() : Permite salir del proceso. Cuando ejecutamos una salida con process.exit() como argumento, podemos enviar un código que sirve como identificador para el desarrollador sobre la razón de la salida
+      Hay que conocer los códigos de salida para aber cómo utilizarlos. También podemos rear nuestros propios códigos. Algunos de los códigos importantes son:
+        0 : proceso finalizado normalmente. 
+        1 : proceso finalizado por excepción fatal 
+        5 : Error fatal del motor V8. 
+        9 : Para argumentos inválidos al momento de la ejecución.
+     
+ > arguments (commander): Commander es una librería para el manejo de argumentos. Permite realizar funciones como:
+    ✓ Convertir flags directamente en booleanos
+    ✓ Limitar sólo las flags configuradas (cualquier otra impide el procesamiento del programa)
+    ✓ Colocar argumentos predeterminados.
+      
+- Child process: Single-threaded, non-blocking performance in Node.js works great for a single process. But eventually, one process in one CPU is not going to be enough to handle the increasing workload of your application. No matter how 
+  powerful your server may be, a single thread can only support a limited load. The fact that Node.js runs in a single thread does not mean that we can’t take advantage of multiple processes and, of course, multiple machines as well.
+  Using multiple processes is the best way to scale a Node application. Node.js is designed for building distributed applications with many nodes. This is why it’s named Node. Scalability is baked into the platform and it’s not something you 
+  start thinking about later in the lifetime of an application.
+  
+  We can easily spin a child process using Node’s child_process module and those child processes can easily communicate with each other with a messaging system. The child_process module enables us to access Operating System functionalities 
+  by running any system command inside a, well, child process. We can control that child process input stream, and listen to its output stream. We can also control the arguments to be passed to the underlying OS command, and we can do 
+  whatever we want with that command’s output. We can, for example, pipe the output of one command as the input to another as all inputs and outputs of these commands can be presented to us using Node.js streams.
+
+  Existen casos en los que un proceso de node necesitará crear otro proceso para poder resolver una función de gran complejidad. Algunas operaciones requieren mucho procesamiento, como:
+    ✓ Lectura de archivos enormes
+    ✓ Consultas a bases muy complejas 
+  Por lo que, para no bloquear las tareas actuales de, un servidor, por ejemplo, ocupamos separar esa tarea en otro subproceso.
+  Existen diferentes formas para que un proceso de node pueda ejecutar otro proceso, hay cuatro operadores que pueden ser utilizados y manipulados de diferentes formas
+    --> https://www.freecodecamp.org/news/node-js-child-processes-everything-you-need-to-know-e69498fe970a/
+   
+    > fork(): The fork function is a variation of the spawn function for spawning node processes. The biggest difference between spawn and fork is that a communication channel is established to the child process when using fork, so we 
+      can use the send function on the forked process along with the global process object itself to exchange messages between the parent and forked processes. We do this through the EventEmitter module interface.
+      Se utiliza para ejecutar scripts Node.js en procesos secundarios y comunicarse con ellos.
+          
+    > spawn(): The spawn function launches a command in a new process and we can use it to pass that command any arguments. For example, here’s code to spawn a new process that will execute the pwd command.
+      Esta función se utiliza para ejecutar un comando en un nuevo proceso. Permite especificar el comando a ejecutar y los argumentos que se le pasarán. También proporciona una interfaz para interactuar con la entrada, salida y 
+      error estándar del proceso secundario en tiempo real. 
+      Se utiliza para ejecutar comandos del sistema operativo.
+   
+    > exec(): It is used to test for the match in a string. If there is a match this method returns the first match else it returns NULL. Esta función se utiliza para ejecutar un comando en un subproceso con una shell. Es útil cuando se 
+      necesita ejecutar comandos de shell con funcionalidades como expansión de comodines.
+    
+    > execFile(): 
+
+
+
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        
 
                                                                                                                    Express
@@ -204,104 +131,56 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
    ✓ Mejorar la estructura de nuestro proyecto.
    ✓ Manejar funcionalidades más complejas y utilización de middlewares. 
   
-  + Paso 1: npm init -y                                                                                                                   
-    Express no es nativo de nodejs, por lo tanto, necesitaremos primero contar con un package.json para gestionar las dependencias a instalar. 
-    Una vez que tenemos package.json en nuestra carpeta, podemos continuar instalando dependencias.
-  
-  + Paso 2: npm install express 
-    Procedemos a instalar de manera local express js. Al ejecutar este comando, notaremos cómo se genera una carpeta node_modules, que es donde se encuentra almacenado express.
-    A partir de este punto, ya contamos con la estructura elemental instalada, el resto es más “flexible”.
-
-  + Paso 3: Estructurar el proyecto 
-    Se recomienda tener una carpeta src, donde vivirá todo nuestro código, dentro del cual crearemos un archivo con el nombre “app.js”
-    Finalmente, el archivo app.js ya puede importar la dependencia instalada de express js, ya sea por commonjs:   const express = require ("express");
-    o bien por module (recordar colocar el type:”module” en package.json):   import express from "express";                                           
-  
-  + Ejemplo de una consulta en Express
-     ✓ Estructurar un servidor basado en express, el cual escuche peticiones en el puerto 8080
-     ✓ Realizar una función para el método GET en la ruta ‘/saludo’, el cual responderá con “¡Hola a todos, pero ahora desde express!”
-     ✓ Ejecutar con nodemon (npm install -g nodemon) y probar en el navegador el endpoint generado.
-     
 - Método GET: Método del protocolo HTTP que permite indicar al servidor que deseamos hacer na consulta de obtención de datos.       .get() 
-- Metodo POST: Sirve para “crear” recursos, POST se utiliza para operaciones donde no necesitamos  obtener un recurso, sino añadir uno. Algunos de los casos donde se utilizan son:
-    ✓ Registrar un usuario
-    ✓ Loguear un usuario
-    ✓ Crear un producto
-    ✓ Crear una mascota
-    ✓ Crear un carrito de compra
-    ✓ Enviar información para un correo electrónico.
-  Se apoya del recurso req.body, donde elbody representa la información que el cliente envía para crear.
-- Método PUT: Sirve Para poder trabajar con PUT, no sólo enviamos el body en el request, sino que demás mandamos por params el id, nombre,  cualquier identificador para que el servidor epa qué recurso específicamente debe ctualizar.
+- Metodo POST: Sirve para “crear” recursos, POST se utiliza para operaciones donde no necesitamos  obtener un recurso, sino añadir uno. Se apoya del recurso req.body, donde elbody representa la información que el cliente envía para crear.
+- Método PUT: Sirve Para poder trabajar con PUT, no sólo enviamos el body en el request, sino que demás mandamos por params el id, nombre, cualquier identificador para que el servidor epa qué recurso específicamente debe ctualizar.
   Hay dos formas de actualizar un recurso: actualizar sólo los campos requeridos, o bien mandar a actualizar el objeto completo, ambas formas son válidas cuando hablamos de actualización, y dependerá del contexto.
 - Método DELETE: Como bien lo indica el nombre, este método lo utilizamos cuando queremos eliminar algún recurso. Aquí no es necesario enviar nada desde el body, sin embargo, sí es importante indicar en el req.params el identificador para 
   que el servidor reconozca qué recurso debe eliminar.
-  
-  
+    
 - Metodos en express js
-  > // app.set(name, value); is used to assign the setting name to value. You may store any value that you want, but certain names can be used to configure the behavior of the server. 
+  > app.set(name, value); is used to assign the setting name to value. You may store any value that you want, but certain names can be used to configure the behavior of the server. 
 
       
-- Objeto request: Objeto usado dentro de los servicios de express para poder realizar consultas más complejas.
-  The req object represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, and so on. In this documentation and by convention, the object is always referred to as req (and 
-  the HTTP response is res) but its actual name is determined by the parameters to the callback function in which you’re working.  
+- request (req): The req object represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, and so on. In this documentation and by convention, the object is always referred to as req (and 
+  the HTTP response is res) but its actual name is determined by the parameters to the callback function in which you’re working. Objeto usado dentro de los servicios de express para poder realizar consultas más complejas.
   
   > req.query: Como su nombre lo indica, query refiere a las múltiples consultas que se pueden hacer a un determinado endpoint, basta conque en la url coloquemos el símbolo ? , entonces express reconocerá que hay que meter información al 
     objeto req.query para poder utilizarlo en el endpoint. Cuando buscamos algo en nuestro navegador, llamamos a un endpoint haciendo un determinado query. Se expresa como:    ?key=valor
     
-    Conforme incrementa el dinamismo en las urls, es importante configurar el servidor para que reciba datos complejos desde la url, por ello hay que utilizar la línea:
-                   app.use(express.urlencoded({ extended: true }));
-    La línea anterior permitirá que el servidor pueda interpretar mejor los datos complejos que viajen desde la url, y mapearlos correctamente en el req.query.
-    Es decir, cuando hagamos una peticion POST, cuando lleguen, que podamos recivir esos datos. Sino, llegara un objeto vacio. 
-    
-    Tambien tenemos la siguiente linea que dice que, cuando nosotros hagamos peticiones por POST, lleguen. O de lo cotrario, nos llegarian como undefined.
-                   app.use(express.json());
-  
   > req.params: Se utiliza cuando necesitamos obtener elementos dinámicos desde la ruta que está llamando el cliente. para poder definir un “parámetro” dentro de la ruta a trabajar, basta con colocar el símbolo de dos puntos (:) antes del 
     parámetro, de esta manera, express reconoce que queremos que ese elemento sea dinámico.
     
+  > req.body:  
+  
   > ¿Qué diferencia hay con params? 
     La principal diferencia que hay entre req.params y req.query, es que en req.query puedo meter la cantidad de consultas que yo así desee, ya que las queries no vienen inmersas en la ruta, sino que son un elemento aparte.
     Así, si desconozco el número de cosas que se van a consultar en mi ruta, la mejor opción es utilizar queries, mientras que, si sólo necesito un número específico y reducido de parámetros, habría que optar por params
     Al final, no hay una mejor que otra, sirven para casos diferentes e incluso podemos utilizar ambas en la misma consulta. 
     
-  > req.body:  
+    
+- app.use(express.urlencoded({ extended: true })); It parses incoming requests with urlencoded payloads and is based on body-parser. Returns middleware that only parses urlencoded bodies and only looks at requests where the Content-Type 
+  header matches the type option. This parser accepts only UTF-8 encoding of the body and supports automatic inflation of gzip and deflate encodings. permitirá que el servidor pueda interpretar mejor los datos complejos que viajen desde la 
+  url, y mapearlos correctamente en el req.query. Es decir, cuando hagamos una peticion POST, cuando lleguen, que podamos recivir esos datos. Sino, llegara un objeto vacio. 
+
+- app.use(express.json()); This is a built-in middleware function in Express. It parses incoming requests with JSON payloads and is based on body-parser.
   
-  > next(): Esta funcion representa un parametro en adicional a req y res (req, res, next) y se usa en middlewares, generalmente cuando se manejan errores. Si el middleware no presentan ningun inconveniente, la funcion next() no tendra 
-    ningun parametro, es decir, no hay error que enviar. Pero en caso de haberlo, entonces se debera mandar ese error dentro de los parentesis.
+- app.use(express.static('public')); Sirve para convertir una carpeta en un recurso estático. Express busca los archivos relativos al directorio estático, por lo que el nombre del directorio estático no forma parte del URL.
+    > Prefijo virtual: Para crear un prefijo virtual (donde el path de acceso no existe realmente en el sistema de archivos) para los archivos servidos por express.static, debemos especificar un path de acceso de montaje para el directorio 
+      estático:  app.use('/static', express.static('public'));
+      Así podemos cargar los archivos que hay en el directorio public desde el prefijo /static.
+      http://localhost:3000/static/hello.html
+      http://localhost:3000/static/images/kitten.jpg
+    
+   > Path absoluto: El path que se proporciona a la función express.static es relativo al directorio desde donde inicia el proceso node. Por eso si ejecutamos la aplicación Express desde cualquier otro directorio, es más seguro utilizar el 
+     path absoluto del directorio al que desea dar servicio:   app.use('/static', express.static(__dirname + '/public'))
+
+- next(): Esta funcion representa un parametro en adicional a req y res (req, res, next) y se usa en middlewares, generalmente cuando se manejan errores. Si el middleware no presentan ningun inconveniente, la funcion next() no tendra 
+  ningun parametro, es decir, no hay error que enviar. Pero en caso de haberlo, entonces se debera mandar ese error dentro de los parentesis.
         
 - Router en Express: Un router en express nos permitirá separar los endpoints “comunes” en entidades separadas que fungirán como “mini aplicaciones”, las cuales tomarán peticiones que concuerden con dicho endpoint y así redireccionarse a 
   esta mini aplicación. De esta manera, nuestro código resultará más organizado, y las diferentes entidades tendrán aislado el comportamiento interno, como configuraciones, middlewares, etc.
   
-  > ¿Cómo aplicar un router? Primero recordemos la estructura de nuestro proyecto, hasta el momento, sabemos que la estructura básica de nuestro proyecto consiste en la distribución como lo indica la imagen: una carpeta donde vive el 
-    proyecto, dentro una carpeta src donde vivirá nuestro código, y nuestro servidor dentro.
-    Despues, agregaremos una carpeta “routes” donde vivirán nuestros diferentes routers (Nota que app.js se queda fuera de routes, pero sigue dentro de src).
-
-- Servicio de archivos estáticos con Express: 
-   ✓ Nuestro servidor tiene la posibilidad de alojar recursos que pueden ser visibles para el cliente de manera directa.
-   ✓ Podemos configurar una carpeta para que el usuario pueda acceder y ver dichos recursos de manera directa sólo con acceder a la ruta donde se encuentra ubicada.
-   ✓ En este curso y en proyectos profesionales podrás encontrar estos archivos en la carpeta “public”, haciendo referencia como dice el nombre, a recursos públicos de fácil acceso para el cliente.
-  
-  Los dos casos principales para los cuales encontrarás el uso de esta carpeta “public” para archivos estáticos son:
-   ✓ Cuando necesitemos alojar imágenes y servirlas directamente al cliente.
-   ✓ Cuando necesitemos alojar una página web en todos sus sentidos: html, css, js. En esta clase haremos una página sencilla para mostrar el alcance de public.
-
-- ¿Cómo convertir una carpeta en un recurso estático? 
-  Para poder utilizar los recursos de una carpeta de manera estática, basta conque en el servidor especifiquemos como “express.static” dicha carpeta con la siguiente sintaxis: 
-                                                               app.use(express.static('public'));
-  Indicamos que, todo lo que viva en la carpeta public, podrá ser accedido directamente desde la carpeta public. A continuación podemos cargar los archivos que queramos en el directorio public:
-  http://localhost:3000/hello.html
-  http://localhost:3000/images/kitten.jpg
-  Nota: Express busca los archivos relativos al directorio estático, por lo que el nombre del directorio estático no forma parte del URL.
-  
-  > Prefijo virtual: Para crear un prefijo virtual (donde el path de acceso no existe realmente en el sistema de archivos) para los archivos servidos por express.static, debemos especificar un path de acceso de montaje para el directorio 
-    estático:  app.use('/static', express.static('public'));
-    Así podemos cargar los archivos que hay en el directorio public desde el prefijo /static.
-    http://localhost:3000/static/hello.html
-    http://localhost:3000/static/images/kitten.jpg
-    
-  > Path absoluto: El path que se proporciona a la función express.static es relativo al directorio desde donde inicia el proceso node. Por eso si ejecutamos la aplicación Express desde cualquier otro directorio, es más seguro utilizar el 
-    path absoluto del directorio al que desea dar servicio:   app.use('/static', express.static(__dirname + '/public'))
-    
 - middleware: Operación intermedia que ocurre entre la petición a la base de datos y la entrega del documento o los documentos correspondientes. 
   Funciones que se colocan en medio de la ruta y el callback (req, res) que se ejecutarán antes de comenzar a procesar la petición.
   Cada vez que utilizamos un app.use estamos utilizando un middleware. Éstas son operaciones que se ejecutan de manera intermedia entre la petición del cliente, y el servicio de nuestro servidor.
@@ -321,88 +200,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   ✓ Middleware incorporado
   ✓ Middleware de terceros
   
-$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        
-                                                       
-                                                                                                                   Multer  
-
-- Middleware de carga de archivos: MULTER Middleware desarrollado para poder realizar carga de archivos dentro de las peticiones, con el fin de que el cliente pueda manejar archivos como imágenes, vídeos o documentos; dentro de una petición.
-  En ocasiones el cliente necesitará subir una imagen, un vídeo o un archivo, según sea nuestra aplicación, ello nos lleva a configurar nuestro servidor para soportar estos archivos y poder almacenarlos en donde nosotros le indiquemos. Al
-  ser de terceros, necesitaremos instalarlo para poder utilizarlo. 
-    1) MULTER es una dependencia de terceros, de manera que, al igual que express, necesitaremos instalarlo dentro de nuestro package.json
-    2) Una vez que tenemos MULTER instalado, podemos importarlo en nuestro proyecto y configurarlo donde lo necesitemos (puede ser directamente en app, o bien se recomienda hacerlo en un archivo al mismo nivel de app llamado “utils”) Contar 
-       con un uploader externo a app.js, brindará más dinamismo al momento de utilizarlo, ya que podemos colocarlo en el router que necesitemos y no necesariamente instanciarlo a nivel general
-    3) Una vez que nuestro uploader está listo para utilizarse, podemos importarlo en el router que necesitemos y colocarlo en la ruta donde lo necesitemos, recuerda que, al ser un middleware, éste va enmedio de la ruta y de la función 
-       callback (req,res).    app.post("/", uploader.single("file"), function(request, response){}
-     
-       Podemos utilizar el uploader de dos formas principalmente:
-         ✓ uploader.single(‘nombre del campo’): permitirá subir un único archivo, su resultado estará en req.file
-         ✓ uploader.array(‘nombre de campos’): permitirá subir múltiples archivos, su resultado estará en req.files
-   
-   Cuando subimos un archivo (imagen, vídeo, etc), estamos hablando de un flujo de datos. lo cual no puede plasmarse en un JSON. Cuando enviamos información a un endpoint donde sabemos que utilizamos MULTER, debemos enviarlo como FormData, 
-   no como JSON.
-   
-                                                                                                               
+                                                                                                  
                                                                                                                    
-$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        
-
-                                                                                                                   Websocket
-                                                                                                                   
-- Websocket: es un protocolo de comunicación basado en TCP para poder establecer esa conexión entre el cliente y el servidor, justo como sabemos, es el mismo objetivo que cubre HTTP.  
-  A pesar de que websocket y HTTP son protocolos como lo mencionamos anteriormente, websocket tiene una característica muy importante: Su protocolo TCP establece dos endpoints de comunicación, a cada endpoint se le conoce como socket.
-  El contar con estos dos sockets permitirá establecer una comunicación bidireccional entre el cliente y el servidor. La comunicación bidireccional implica: 
-   ✓ Que el cliente puede obtener recursos del servidor cuando lo solicite (como en HTTP).
-   ✓ Que el servidor pueda entregar información al cliente sin necesidad de que el cliente haga una petición.                      
-   
-  Websockets es un protocolo excelente para esta situación ya que:  
-   ✓ El cliente no tendrá que estar actualizando la página constantemente 
-   ✓ En cuanto el servidor reciba una actualización de una nueva puja, actualizará a todos los clientes conectados, permitiendo dar información en tiempo real
-   ✓ Una vez que termina la subasta, el socket se cierra y el servidor deja de notificar innecesariamente al cliente.
-
-- Hanshake: Acuerdo entre cliente y servidor que permite establecer una conexión abierta entre ambos puntos.      
-   
-- Funcionamiento de un Websocket: Primero, el cliente tiene que enviar una solicitud HTTP llamada Handshake (apretón de manos). Este apretón de manos será un “acuerdo” o “contrato” de confianza para que el servidor pueda actualizar al 
-  cliente sin que éste se lo pida. El servidor recibe la petición de Handshake y procede a “responderle el saludo”, a esto se le llama “Abrir conexión”.
-  A partir de este punto, el canal queda abierto de manera bidireccional, por lo que el cliente se puede comunicar con el servidor cuando quiera y viceversa. La comunicación es “persistente” hasta que alguno de los dos lados decida cerrar el 
-  canal de comunicación.
-   
-- El protocolo Websocket: principios   
-  ✓ Websocket permitió por primera vez acceder a una web de forma dinámica en tiempo real.
-  ✓ Basta con que el cliente establezca una conexión con el servidor, que se confirma ediante el llamado apretón de manos o Websocket Protocol Handshake.
-  ✓ Con él, el cliente envía al servidor todos los datos de identificación necesarios para el intercambio de información.
-  ✓ El canal de comunicación queda “abierto” tras el handshake.
-  ✓ El servidor puede activarse por sí mismo y poner toda la información a disposición del cliente, sin que este tenga que pedírselo. Si dispone de nueva información, se lo comunica al cliente, sin necesidad de recibir una solicitud 
-    específica para ello.
-  ✓ Las notificaciones push de las páginas web funcionan según este principio.
-  
-- Websocket y comparación con HTTP: HTTP no es reemplazo de Websocket, ni websocket es reemplazo de HTTP. Ambos son complementos que se pueden utilizar en conjunto, con el fin de hacer sistemas completos y complejos.
-  HTTP --> Son peticiones al servidor que esperan una respuesta. Como un walkie talkie. 
-  Websocket --> Es un canal abierto entre servidor y cliente. Como una llamada telefónica.
-  HTTP --> Se solicita información y se espera una respuesta. Ej: un formulario de login
-  Websocket --> Se usa para comunicación en tiempo real. Ej: un chat
-  HTTP --> Se usa para consumir APIs y recursos web Se usa para escuchar información en tiempo real
-  Protocolo HTTP Es un protocolo de comunicación
-  HTTP --> Conexión de una sola vía 
-  Websocket --> Conexión de doble vía
-  HTTP --> No sustituye a WebSockets 
-  Websocket --> No sustituye a HTTP
-
-- Socket.io: 
-  ✓ Es una biblioteca de Javascript para poder implementar los sockets anteriormente mencionados.
-  ✓ Debido al funcionamiento que hemos visto en clase. socket.io debe instanciarse tanto de lado del cliente, como del servidor.
-  ✓ Permite utilizar todo el potencial mencionado de los websockets, y cuenta con una API casi idéntica para cliente y para servidor. 
-  ✓ Socket.IO utiliza principalmente el protocolo Websocket proporcionando la misma interfaz.
-  ✓ Se puede usar como un contenedor para Websocket aunque proporciona muchas más funciones, incluida la transmisión a múltiples sockets, el almacenamiento de datos asociados con cada cliente y E/S asíncronas.
-  ✓ Se puede instalar con npm.
-  ✓ Fiabilidad: Las conexiones se establecen incluso en presencia de:
-  ✓ proxies y balanceadores de carga.
-  ✓ firewall personal y software antivirus.
-  ✓ Soporte de reconexión automática: A menos que se le indique lo contrario, un cliente desconectado intentará siempre volver a conectarse, hasta que el servidor vuelva a estar disponible.
-  ✓ Detección de desconexión: Se implementa un mecanismo de heartbeat, lo que permite que tanto el servidor como el cliente sepan cuando el otro ya no responde.
-  ✓ Soporte binario: Se puede emitir cualquier estructura de datos serializable, que incluye:
-  ✓ ArrayBuffer y Blob en el navegador
-  ✓ ArrayBuffer y Buffer en Node.js
-
-
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        
 
                                                                                                                    MONGODB
@@ -618,44 +417,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        
 
-                                                                                                                   Cookies, auth, JWT
-    
-    
-- Cookies: Cuando desarrollamos un sitio web, tenemos que contemplar que la forma de interactuar de un cliente suele ser diferente, entonces es importante tener algún recurso para saber información sobre ciertos detalles de información y 
-  comportamiento de un cliente, para que el servidor pueda usar eso a su favor. Para seguir un rastro de los clientes de nuestro sitio web y poder obtener un poco más de información de contacto y/o de comportamiento sobre los clientes que 
-  nos visitan, se utilizan las cookies.
-  Una cookie es un pequeñísimo archivo de texto donde podremos almacenar información dentro del navegador, de manera que pueda viajar entre las peticiones y sirva como un ligero contenedor de información necesaria para poder procesar ciertas 
-  peticiones. Las cookies viven en el navegador, por lo que son fácilmente accesibles por múltiples elementos externos. Por ningún motivo guardamos información sensible en una cookie. Nunca guardamos información de métodos de pago, 
-  contraseñas, ni cualquier dato que pudiera comprometer la seguridad del clie nte. Algunos de los datos que se suelen guardar en una cookie son:
-    ✓ Nombres de usuario
-    ✓ IDs de sesiones (que abarcaremos más adelante)
-    ✓ Preferencias de navegación para tu página. 
-  
-  > Rastros que suele dejar un usuario al navegar en la web:
-    ~ El cliente hace login --> La cookie almacena el id de la sesión
-    ~ El cliente pone el fondo de la página en modo “obscuro” --> La cookie almacena: ✓ Id de sesión ✓ preferencias de configuración en página 
-    ~ El cliente busca --> productos específicos --> La cookie almacena: ✓ Id de sesión ✓ preferencias de configuración en página ✓ Búsquedas recientes
-    
-  > Caracteristicas: 
-     ✓ A las cookies se les puede configurar un tiempo de vida. Una vez finalizado el mismo, la cookie se elimina del navegador.
-     ✓ Al almacenarse del lado del cliente, el espacio con el que se cuenta es limitado, por lo que se recomienda elegir de forma adecuada lo que se vaya a guardar como cookie.
-     ✓ Podemos asignarles claves secretas para poder aumentar la seguridad
-     ✓ Viven en el navegador, así que no guardamos datos sensibles
-  
-  > Firmar una cookie: Como las cookies son almacenadas en el navegador, pueden llegar a ser alteradas mucho más fácilmente que si ésta viviera en el servidor. Se necesita agregar un factor de seguridad para que la cookie se “invalide” en 
-    caso de que haya sido modificada. No podemos evitar que alguien externo altere la cookie, pero sí podemos indicar que, en caso de que la cookie ya no sea exactamente idéntica a la generada, entonces la pase como cookie inválida.
-
-  > Session: Una sesión es un vínculo que se genera cuando el cliente conecta con un servidor, este vínculo se representa por una sessionId, la cual se guarda en el navegador como identificador de la sesión. 
-  > Storage: Lugar donde se almacenan las sesiones del lado del servidor. Es donde se consultan y comparan las sessionId.
-  > MemoryStorage : Almacenamiento por defecto de sesiones por express-session. Si el servidor cae, las sesiones caen.
-  > FileStorage: Almacenamiento alternativo que permite guardar las sesiones en archivos en una carpeta indicada. Cuando el servidor cae, aún puede consultar las sesiones de los archivos después.
-  > MongoStorage: Almacenamiento alternativo de sesión que permite guardar las sesiones en una base de datos. Es más accesible ya que tiene un sistema de autogestión que permite limpiar las sesiones expiradas.    
-    
-- Autorizacion: Es el proceso por el cual el servidor decide si, a pesar de las credenciales que tienes, tienes permitido acceder a un recurso o no. Es decir, que autorizar no hace referencia a que el servidor no sepa quién eres.  
-
-- Autenticación: Para que un cliente pueda autenticarse, debe existir un registro previo almacenado en algún lado. El cliente envía un identificador (como un email) y el servidor lo buscará en su base de datos para saber si sí existe 
-  previamente. En caso de que sí, podrá responder con sus credenciales completas (no sensibles). En caso de que un cliente intente autenticarse antes de haber generado un registro, el servidor no lo encontrará en la base y no habrá 
-  credenciales por devolverle.
+                                                                                                                   Passport
     
 - Passport: Generador de estrategias de autenticación y autorización, para mantener un código limpio, estructurado y altamente configurable. Se puede utilizar y configurar múltiples estrategias de autenticación y autorización con passport  
     ✓ Passport local siempre requerirá dos cosas: username y password. Si passport no encuentra alguno de estos dos elementos, devolverá un error y no permitirá proceder con la estrategia
@@ -667,132 +429,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       ○ Si pasamos done(null, false) indicamos que no hay error, pero el usuario no estará disponible.
     ✓ Cada estrategia que queramos configurar en passport es un middleware por sí solo, así que utilizaremos el elemento passport.use() para configurar diferentes middlewares/estrategias
 
-  > Serializar y deserializar: Estas funciones permiten a Passport.js manejar la información del usuario durante el proceso de autenticación, serializando y deserializando los usuarios para almacenar y recuperar información de la sesión. 
-    Permiten que la aplicación web gestione la autenticación de usuarios y recuerde la identidad del usuario autenticado entre las solicitudes HTTP.
-    ~ Serializar (Serialize): significa convertir el objeto de usuario en una forma que pueda ser almacenada y posteriormente recuperada. Esencialmente, esto implica tomar los datos de usuario relevantes (como el ID de usuario) y 
-      convertirlos en una representación que pueda ser almacenada, generalmente en una cookie de sesión o en una base de datos. Durante el proceso de serialización, Passport.js guarda el identificador único del usuario en la sesión del 
-      usuario actual. Esto permite que la aplicación recuerde que el usuario está autenticado entre las solicitudes, incluso cuando las solicitudes individuales HTTP son independientes entre sí.
-      En resumen, la serialización en Passport.js proporciona una forma de "recordar" la identidad del usuario autenticado entre las solicitudes HTTP.
-      
-    ~ Deserializar (Deserialize): Significa tomar la identificación del usuario que se almacenó durante la serialización y utilizarla para obtener los datos de usuario completos y autenticados.
-      Durante el proceso de deserialización, Passport.js recupera los datos del usuario basados en el identificador almacenado en la sesión y los proporciona a la aplicación para que pueda realizar operaciones con el usuario autenticado, 
-      como mostrar su perfil, permitirle acceder a recursos protegidos, etc. 
-      En resumen, la deserialización en Passport.js permite a la aplicación recuperar los datos del usuario completo y autenticado a partir del identificador almacenado durante la serialización.
-      
-- JsonWebToken (JWT): Es un estándar que soluciona el problema de consultas y escalabilidad que presenta session. Este se basa en encriptar la información del usuario en un token que se guardará del lado del cliente, y el cliente lo enviará 
-    al servidor en cada consulta, para poder desencriptar y obtener la información de usuario interna.
-    Es mecanismo para poder propagar entre dos partes, y de forma segura, la identidad de un determinado usuario, además con una serie de claims o privilegios. Estos privilegios están codificados en objetos de tipo JSON, que se incrustan 
-    dentro de del payload o cuerpo de un mensaje que va firmado digitalmente. Un token tres partes:
-    ~ Header: encabezado dónde se indica, al menos, el algoritmo y el tipo de token, que en el caso del ejemplo anterior era el algoritmo HS256 y un token JWT.
-    ~ Payload: donde aparecen los datos de usuario y privilegios, así como toda la información que queramos añadir, todos los datos que creamos convenientes. (tanto el Header como el Payload son texto plano que se codificara, pero No se 
-      encriptara)
-    ~ Signature: una firma que nos permite verificar si el token es válido, y aquí es donde radica el quid de la cuestión, ya que si estamos tratando de hacer una comunicación segura entre partes y hemos visto que podemos coger cualquier 
-      token y ver su contenido con una herramienta sencilla. This is typically a hash of the header and payload sections of the JWT. The algorithm which is used to create the signature is the same algorithm mentioned in the header section of 
-      the JWT. Signature is used to validate that the JWT token wasn’t modified or changed during transit. It can also be used to validate the sender. The header and Payload section of the JWT is always Base64 encoded.
-      
-    Es una implementación sin estado para poder mantener el ciclo de vida de la sesión de un usuario, sin el almacenamiento que este implica. Funciona de una manera diferente en session:
-      ✓ El servidor generará un token con la información del usuario y la enviará al navegador.
-      ✓ El navegador (front) almacenará dicho token y procederá a enviarlo en cada request por medio de los headers.
-      ✓ El servidor recibe las peticiones, busca el token de jwt en los headers. Si lo encuentra, podrá proceder, si no, entonces requerirá autenticación nuevamente.
-   
-   La necesidad de almacenar las sesiones de lado del servidor o de una base de datos genera conflictos:
-     ✓  Almacenamiento innecesario: Almacenar por miles, cientos de miles, o millones de usuarios, puede ser problemático a nivel almacenamiento.
-     ✓ Tráfico saturado: Al vivir en una base de datos, session debe conectar con ella siempre que haya que consultar una sesión. Puede implicar detalles de rendimiento o requerir particiones de más. 
-   
-   JWT delega responsabilidad a cada cliente: Para aligerar el peso de la operación, el servidor puede otorgar el token de acceso al cliente y éste almacenarlo dentro del navegador en una cookie . Así, el cliente tiene la responsabilidad de 
-   enviar sus credenciales con los datos de la sesión a manera de stateless. El servidor solo necesita descifrar el token para poder acceder a las credenciales del usuario . Esto le permite al servidor ser más ágil.
-   
-  > Working principle: When a user logs in or attempts to access a protected resource, the server generates a JWT after successful authentication. The client then stores this token, usually in local storage or a cookie. For every subsequent 
-    request that requires authentication, the client sends the JWT in the request headers. The server validates the token by checking the signature and decoding the payload to ensure the user’s authenticity and authorization.
-    
-  > Secret key: The secret key is combined with the header and the payload to create a unique hash. You are only able to verify this hash if you have the secret key. Secret key used for signing and verifying JWTs. It must be replaced with a 
-   strong secret key in production 
-   
-$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        
-
-                                                                                                                   Process & Child Process
                                                                                                                    
-- Sobre los entornos: Para que un código esté listo para llegar al cliente, es necesario que pase por diferentes fases.
-  Sin embargo, para que estas fases se encuentren aisladas de las otras fases (no queremos que la fase de desarrollo tenga datos de producción, o que haya datos de producción en staging), necesitaremos crear entornos específicos para estas 
-  fases. Nuestras variables cambiarán según el entorno.
-  El primer uso radica en que una variable cambie según el entorno donde se esté corriendo, esto permite que pueda apuntar a una base de datos prueba o a una base de datos productiva con sólo cambiar el apuntador de dónde se está corriendo.
-  Otro factor importante es el factor seguridad. Con las variables de entorno podemos ocultar la información sensible de nuestro código, como credenciales, claves de acceso, tokens, secrets, etc.                                                                                                                   
-                                                                                                                   
-- process: Cada vez que corremos un proceso en nodejs, éste genera un objeto llamado process, el cual contiene información referente a todo lo implicado con el proceso, cosas como:
-    ✓ Uso de memoria 
-    ✓ Id del proceso en el sistema operativo 
-    ✓ En qué sistema operativo o plataforma está corriendo
-    ✓ En qué entorno está corriendo. 
-    ✓ Qué argumentos tiene el entorno.
-
- > Algunos elementos importantes de process
-    ✓ process.cwd() : Directorio actual del proceso.
-    ✓ process.pid : id del proceso en el sistema
-    ✓ process.MemoryUsage() :
-    ✓ process.env : Accede al objeto del entorno actual
-    ✓ process.argv : Muestra los argumentos pasados por CLI (Los argumentos permiten iniciar la ejecución de un programa a partir de ciertos elementos iniciales)
-    ✓ process.version : Muestra la versión del proceso (node en este caso)
-    ✓ process.on() : Permite setear un listener de evento. Permitirá poner a nuestro proceso principal a la escucha de algún evento para poder ejecutar alguna acción en caso de que algo ocurra. (Listeners)
-      ~ process.on('exit'); //Para ejecutar un código justo antes de la finalización del proceso.
-      ~ process.on("warning"); //The 'warning' event is emitted whenever Node.js emits a process warning. A process warning is similar to an error in that it describes exceptional conditions that are being brought to the user's attention.
-      ~ process.on('message'); //para poder comunicarse con otro proceso      
-
-      ~ process.on("beforeExit"); //This event is emitted when node empties its event loop and has nothing else to schedule. Normally, the node exits when there is no work scheduled, but a listener for 'beforeExit' can make asynchronous 
-        calls, and cause the node to continue.
-        
-      ~ process.on("rejectionHandled"); //The 'rejectionHandled' event is emitted whenever a Promise has been rejected and an error handler was attached to it (using promise.catch(), for example) later than one turn of the Node.js event 
-        loop. The Promise object would have previously been emitted in an 'unhandledRejection' event, but during the course of processing gained a rejection handler.
-
-      ~ process.on('uncaughtException'); It is emitted when an uncaught JavaScript exception bubbles all the way back to the event loop. By default, Node.js handles 
-        such exceptions by printing the stack trace to stderr and exiting with code 1, overriding any previously set process.exitCode. Adding a handler for the 'uncaughtException' event overrides this default behavior. Alternatively, change 
-        the process.exitCode in the 'uncaughtException' handler which will result in the process exiting with the provided exit code. Otherwise, in the presence of such handler the process will exit with 0.
-        Para atrapar alguna excepción que no haya sido considerada en algún catch.
-        
-      ~ process.on("unhandledRejection"); //The 'unhandledRejection' event is emitted whenever a Promise is rejected and no error handler is attached to the promise within a turn of the event loop. When programming with Promises, exceptions 
-        are encapsulated as "rejected promises". Rejections can be caught and handled using promise.catch() and are propagated through a Promise chain. The 'unhandledRejection' event is useful for detecting and keeping track of promises that 
-        were rejected whose rejections have not yet been handled.               
-
-    ✓ process.exit() : Permite salir del proceso. Cuando ejecutamos una salida con process.exit() como argumento, podemos enviar un código que sirve como identificador para el desarrollador sobre la razón de la salida
-      Hay que conocer los códigos de salida para aber cómo utilizarlos. También podemos rear nuestros propios códigos. Algunos de los códigos importantes son:
-        0 : proceso finalizado normalmente. 
-        1 : proceso finalizado por excepción fatal 
-        5 : Error fatal del motor V8. 
-        9 : Para argumentos inválidos al momento de la ejecución.
-     
- > arguments (commander): Commander es una librería para el manejo de argumentos. Permite realizar funciones como:
-    ✓ Convertir flags directamente en booleanos
-    ✓ Limitar sólo las flags configuradas (cualquier otra impide el procesamiento del programa)
-    ✓ Colocar argumentos predeterminados.
-      
-- Child process: Single-threaded, non-blocking performance in Node.js works great for a single process. But eventually, one process in one CPU is not going to be enough to handle the increasing workload of your application. No matter how 
-  powerful your server may be, a single thread can only support a limited load. The fact that Node.js runs in a single thread does not mean that we can’t take advantage of multiple processes and, of course, multiple machines as well.
-  Using multiple processes is the best way to scale a Node application. Node.js is designed for building distributed applications with many nodes. This is why it’s named Node. Scalability is baked into the platform and it’s not something you 
-  start thinking about later in the lifetime of an application.
-  
-  We can easily spin a child process using Node’s child_process module and those child processes can easily communicate with each other with a messaging system. The child_process module enables us to access Operating System functionalities 
-  by running any system command inside a, well, child process. We can control that child process input stream, and listen to its output stream. We can also control the arguments to be passed to the underlying OS command, and we can do 
-  whatever we want with that command’s output. We can, for example, pipe the output of one command as the input to another as all inputs and outputs of these commands can be presented to us using Node.js streams.
-
-  Existen casos en los que un proceso de node necesitará crear otro proceso para poder resolver una función de gran complejidad. Algunas operaciones requieren mucho procesamiento, como:
-    ✓ Lectura de archivos enormes
-    ✓ Consultas a bases muy complejas 
-  Por lo que, para no bloquear las tareas actuales de, un servidor, por ejemplo, ocupamos separar esa tarea en otro subproceso.
-  Existen diferentes formas para que un proceso de node pueda ejecutar otro proceso, hay cuatro operadores que pueden ser utilizados y manipulados de diferentes formas
-    --> https://www.freecodecamp.org/news/node-js-child-processes-everything-you-need-to-know-e69498fe970a/
-   
-    > fork(): The fork function is a variation of the spawn function for spawning node processes. The biggest difference between spawn and fork is that a communication channel is established to the child process when using fork, so we 
-      can use the send function on the forked process along with the global process object itself to exchange messages between the parent and forked processes. We do this through the EventEmitter module interface.
-      Se utiliza para ejecutar scripts Node.js en procesos secundarios y comunicarse con ellos.
-          
-    > spawn(): The spawn function launches a command in a new process and we can use it to pass that command any arguments. For example, here’s code to spawn a new process that will execute the pwd command.
-      Esta función se utiliza para ejecutar un comando en un nuevo proceso. Permite especificar el comando a ejecutar y los argumentos que se le pasarán. También proporciona una interfaz para interactuar con la entrada, salida y 
-      error estándar del proceso secundario en tiempo real. 
-      Se utiliza para ejecutar comandos del sistema operativo.
-   
-    > exec(): It is used to test for the match in a string. If there is a match this method returns the first match else it returns NULL. Esta función se utiliza para ejecutar un comando en un subproceso con una shell. Es útil cuando se 
-      necesita ejecutar comandos de shell con funcionalidades como expansión de comodines.
-    
-    > execFile(): 
     
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        
 

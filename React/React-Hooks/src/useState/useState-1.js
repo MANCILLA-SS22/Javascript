@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 function App() {
-  
   // const [count, setCount] = useState(5);
   const [count, setCount] = useState(() => res()); //We can avoid useState running everytime we render our component. This is so we can avoid our program getting slow.
 
@@ -13,6 +12,7 @@ function App() {
   function incrementCount(){
     // setCount(count + 1);
     setCount(prevCount => prevCount + 1);
+    
   }
 
   function decrementCount(){
@@ -32,7 +32,7 @@ function App() {
 export default App;
 
 // To understand which method to use, let's consider that we duplicate this line of code and the previous one. So we'd have at the first leg:  
-    
+
     // setCount(count + 1);
     // setCount(count + 1);
 
@@ -42,7 +42,7 @@ export default App;
     // setCount(prevCount => prevCount + 1);
 
 // Without the prevCount function, and when clicking the decrement button, the number will decrease from 5 to 4 even though we duplicate the same line of code. The reason for 
-// this is that our count value in setCount(count + 1) is just the value of count when we render our function. So, we're calling setCount function and returning 4 twice. So, 
+// this is that our count value in setCount(count + 1) is just the value of count when we render our function. So, we're calling setCount function and returning 4 twice. And, 
 // they're overwriting each other.
 
 // On the other hand, when we duplicate the line of code with prevCount and we press the decrement button, then the number will decrease from 5 to 3 and so on. This is like so

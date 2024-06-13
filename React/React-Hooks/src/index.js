@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-// import App from './useState/useState-1.js';
+import App from './useState/useState-1.js';
 // import App from './useState/useState-2.js';
 // import App from './useEffect/useEffect-1.js';
 // import App from './useEffect/useEffect-2.js';
@@ -22,7 +22,7 @@ import ReactDOM from 'react-dom/client';
 // import App from "./useCallback/useCallback-2/App.js"
 // import App from "./useCallback/useCallback-3/App.js"
 // import App from "./useCallback/useCallback-4/App.js"
-import App from "./useCallback/useCallback-5/App.js"
+// import App from "./useCallback/useCallback-5/App.js"
 
 
 

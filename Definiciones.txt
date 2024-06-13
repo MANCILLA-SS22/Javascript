@@ -47,6 +47,11 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   > https://www.britannica.com/technology/data-compression
   > https://www.datamation.com/big-data/data-compression/
   > https://www.cisco.com/c/es_mx/support/docs/wan/data-compression/14156-compress-overview.html
+
+- Database:
+  > 
+  > 
+  > 
     
 - storage:
   > https://en.wikipedia.org/wiki/Computer_data_storage 
@@ -59,6 +64,22 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   > https://www.freecodecamp.org/news/web-storage-localstorage-vs-sessionstorage-in-javascript/
   > https://www.loginradius.com/blog/engineering/guest-post/local-storage-vs-session-storage-vs-cookies/
   > https://www.freecodecamp.org/news/how-web-storage-works/
+  
+- API (Application Programming Interfaces): 
+  > https://aws.amazon.com/what-is/api/#:~:text=API%20stands%20for%20Application%20Programming,other%20using%20requests%20and%20responses.
+  > https://www.mulesoft.com/resources/api/what-is-an-api
+  > https://www.ibm.com/topics/api
+  > https://stoplight.io/api-types#web-apis
+  > https://www.xataka.com/basics/api-que-sirve
+  > https://www.redhat.com/es/topics/api/what-are-application-programming-interfaces#:~:text=Una%20API%20o%20interfaz%20de,el%20software%20de%20las%20aplicaciones.
+  
+- Webshockets:
+  > https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API
+  > https://www.ionos.com/digitalguide/websites/web-development/what-is-websocket/
+  > https://www.pubnub.com/guides/websockets/
+  > https://www.ibm.com/docs/es/was/9.0.5?topic=applications-websocket
+  > https://www.geeksforgeeks.org/what-is-web-socket-and-how-it-is-different-from-the-http/
+  > https://www.linkedin.com/pulse/websocket-handshaking-explained-understanding-key-real-time-saafan/
 
 - Cookies: 
   > https://usa.kaspersky.com/resource-center/definitions/cookies
@@ -68,8 +89,10 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   > https://allaboutcookies.org/what-is-a-cookie#:~:text=4.-,Third-party%20cookies,%2C%20videos%2C%20or%20web%20banners.
   > https://www.geeksforgeeks.org/difference-between-local-storage-session-storage-and-cookies/
   > https://www.cookiescan.com/what-are-website-cookies-and-where-are-they-stored/#:~:text=one%20is%20removed.-,What%20Are%20Cookies%20Used%20For%3F,part%20of%20the%20internet%20experience.
+  > https://stackoverflow.com/questions/11897965/what-are-signed-cookies-in-connect-expressjs
   
-- Autenticacion y autorizacion: 
+- Authentication and authorization: 
+  > https://www.onelogin.com/learn/authentication-vs-authorization#:~:text=Authentication%20and%20authorization%20are%20two,authorization%20determines%20their%20access%20rights.
   > https://auth0.com/docs/get-started/identity-fundamentals/authentication-and-authorization
   > https://www.geeksforgeeks.org/difference-between-authentication-and-authorization/
   > https://www.onelogin.com/learn/authentication-vs-authorization#:~:text=Authentication%20and%20authorization%20are%20two,authorization%20determines%20their%20access%20rights.
@@ -288,7 +311,22 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 - Passport: 
   > https://www.passportjs.org
+  > https://medium.com/@prashantramnyc/node-js-with-passport-authentication-simplified-76ca65ee91e5
+  > https://www.passportjs.org/concepts/authentication/sessions/
+  > https://stackoverflow.com/questions/27637609/understanding-passport-serialize-deserialize
   > https://stackoverflow.com/questions/45428107/what-does-passport-js-do-and-why-we-need-it
+  > Serializar y deserializar: Estas funciones permiten a Passport.js manejar la información del usuario durante el proceso de autenticación, serializando y deserializando los usuarios para almacenar y recuperar información de la sesión. 
+    Permiten que la aplicación web gestione la autenticación de usuarios y recuerde la identidad del usuario autenticado entre las solicitudes HTTP.
+     ~ Serializar (Serialize): significa convertir el objeto de usuario en una forma que pueda ser almacenada y posteriormente recuperada. Esencialmente, esto implica tomar los datos de usuario relevantes (como el ID de usuario) y 
+       convertirlos en una representación que pueda ser almacenada, generalmente en una cookie de sesión o en una base de datos. Durante el proceso de serialización, Passport.js guarda el identificador único del usuario en la sesión del 
+       usuario actual. Esto permite que la aplicación recuerde que el usuario está autenticado entre las solicitudes, incluso cuando las solicitudes individuales HTTP son independientes entre sí.
+       En resumen, la serialización en Passport.js proporciona una forma de "recordar" la identidad del usuario autenticado entre las solicitudes HTTP.
+      
+     ~ Deserializar (Deserialize): Significa tomar la identificación del usuario que se almacenó durante la serialización y utilizarla para obtener los datos de usuario completos y autenticados.
+       Durante el proceso de deserialización, Passport.js recupera los datos del usuario basados en el identificador almacenado en la sesión y los proporciona a la aplicación para que pueda realizar operaciones con el usuario autenticado, 
+       como mostrar su perfil, permitirle acceder a recursos protegidos, etc. 
+       En resumen, la deserialización en Passport.js permite a la aplicación recuperar los datos del usuario completo y autenticado a partir del identificador almacenado durante la serialización.
+
 
 - Stripe: 
   > https://www.freshbooks.com/hub/payments/what-is-stripe
@@ -531,15 +569,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   > https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON
   > https://www.hostinger.es/tutoriales/que-es-json
   > https://aws.amazon.com/es/compare/the-difference-between-json-xml/
-     
-- API (Application Programming Interfaces): 
-  > https://aws.amazon.com/what-is/api/#:~:text=API%20stands%20for%20Application%20Programming,other%20using%20requests%20and%20responses.
-  > https://www.mulesoft.com/resources/api/what-is-an-api
-  > https://www.ibm.com/topics/api
-  > https://stoplight.io/api-types#web-apis
-  > https://www.xataka.com/basics/api-que-sirve
-  > https://www.redhat.com/es/topics/api/what-are-application-programming-interfaces#:~:text=Una%20API%20o%20interfaz%20de,el%20software%20de%20las%20aplicaciones.
-    
+         
 - API protocols: 
   > https://stoplight.io/api-types 
   > https://apidog.com/blog/8-api-protocol-types/
@@ -604,6 +634,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 - JSON Web Token (JWT): 
   > https://jwt.io/introduction
   > https://auth0.com/docs/secure/tokens/json-web-tokens
+  > https://stackoverflow.com/questions/31309759/what-is-secret-key-for-jwt-based-authentication-and-how-to-generate-it  
     
 - Stateless and stateful:
   > https://www.baeldung.com/cs/stateful-stateless-system

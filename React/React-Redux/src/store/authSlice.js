@@ -1,22 +1,16 @@
 import {createSlice} from "@reduxjs/toolkit";
 
-const authSlice = createSlice({
-    name: "authentication",
-    initialState: {
-        isAuthenticated: false
-    },
-    reducers: {
-        login(state){
-            state.isAuthenticated = true;
-        },
-        logout(state){
-            state.isAuthenticated = false;
-        }
-    }
-});
+const name = "authentication";
+const initialState = { isAuthenticated: false };
+const reducers = {
+    login(state){ state.isAuthenticated = true; },
+    logout(state){ state.isAuthenticated = false; }
+}
+
+const authSlice = createSlice({ name, initialState, reducers });
 
 export const authActions = authSlice.actions;
-export default authSlice.reducer;
+export const authReducer = authSlice.reducer;
 
 // For createSlice() we can have a couple of reducers so it is plural (the property name) and there inside it you have your login and logout reducers.
 

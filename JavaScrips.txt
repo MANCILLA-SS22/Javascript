@@ -1134,3 +1134,370 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       Así, dentro de una función async podemos utilizar la sentencia await vista previamente. Esto nos permite esperar a que se resuelvan las promesas vistas para continuar con la instrucción siguiente. 
 
    > micro-tasks queue: 
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        
+
+
+                                                                                                                   React
+
+- Componentes (components): Es un conjunto de elementos que cumplen una función específica en la interfaz de usuario. Se utilizan para construir la jerarquía de todos esos elementos. Cada componente puede contener otros componentes como 
+  hijos. básicamente, las aplicaciones en React básicamente se construyen mediante los mismos. permiten separar la interfaz de usuario en piezas independientes, reutilizables y pensar en cada pieza de forma aislada.
+  
+- Propiedades (props): Son la forma que tiene React para pasar parámetros de un componente superior a sus hijos. Se utilizan para pasar datos de un componente padre a un componente hijo, manteniendo el flujo unidireccional 
+  de los datos. Las props son objetos que contienen datos específicos que un componente necesita para renderizarse correctamente. Esto permite la reutilización de componentes en diferentes partes de la aplicación con diferentes datos.
+  Si alguna prop es una función (callback), el componente hijo puede llamarla para provocar efectos secundarios en el componente padre.
+  
+- prop.childern: Children es una manera que tiene react de permitirnos proyectar/transcluir uno o más componentes dentro otro. Es ideal cuando necesitamos que un elemento quede dentro de otro, sin que sepan el uno del otro, y cuando   
+  necesitamos implementar patrones más complejos.  
+  El concepto de children es la forma en que React nos permite incluir un componente dentro de otro sin que al padre le importe exactamente qué componente o componentes hijos están siendo incluidos. Los elementos hijos son aquellos que se 
+  colocan dentro de la etiqueta de apertura y cierre del componente y la prop “children” se utiliza para acceder y manipular estos elementos hijos desde dentro del componente padre. 
+  De esta manera, podemos crear componentes más flexibles y reutilizables que acepten contenido personalizado y que puedan renderizarlo de manera dinámica. 
+    
+  La prop children es una prop especial que se pasa a los componentes. Es un objeto que contiene los elementos que envuelve un componente. Por ejemplo, si tenemos un componente Card que muestra una tarjeta con un título y un contenido, 
+  podemos usar la prop children para mostrar el contenido:
+    
+         function Card(props) {
+            return (
+              <div className="card">
+                 <h2>{props.title}</h2>
+                 <div>{props.children}</div>
+              </div>
+            )
+         }
+         
+    Y luego podemos usarlo de la siguiente forma:
+    
+         <Card title="Título de la tarjeta">
+           <p>Contenido de la tarjeta</p>
+         </Card>
+         
+    En este caso, la prop children contiene el elemento <p>Contenido de la tarjeta</p>.
+        
+
+- Render: The render method is a vital part of ReactJS, as it determines what gets displayed on the screen. It takes in the app’s state and renders it to a DOM node. This makes it easy to track what’s going on in your app, as the render 
+  method will always show the latest state. The render method is called automatically by ReactJS, so you don’t need to call it yourself. However, you can call it manually if you need to. 
+  The render method is also where you should do any processing that doesn’t need to happen every time the state changes. 
+  For example, if you have an extensive list of items, you might want only to render the part of the list that’s visible on the screen. Your app will be more efficient and won’t slow down as the state changes.
+  
+    > What Is The Use Of the Render Method in ReactJS? The render method in ReactJS functional component is the default lifecycle method that returns a single child component to be rendered by the parent. It’s important to use this method 
+      when you want to return a component from a parent to a child. This will ensure that the child receives the correct data and state from the parent.
+    > When Not To Use The Render Method In React Js? There may be times when you don’t want to use the render method. For example, if you’re working with higher-order components, stateless functional components, or memorization there, you 
+      may not need to use it. You can simply return whatever value is passed into the return method in these cases.
+    > 1) The render method will always return a single child component. 2) The render method sets up the child component’s initial state and lifecycle methods. 3) The render method is used when you want to create a new component. 4) The 
+      render method is more common.	
+
+- return: The return method in React is a way to return data from a component. It returns the data that was passed into the component, which the parent component can then use. The return method is generally used when you want to return a 
+  single value from a component. For example, if you want to return the text of a button from a Component, you would use the return method.
+   
+    > When To Use The Return Method In React Js? The return method can be used in a few different situations. One example would be when you want to return a default value from a function. Another instance would be when you wish to return a 
+      value from a component used as a stateless functional component. You can also use the return method to return values from higher-order components.
+    > When To Not Use The Return Method In React Js? The return method should not be used when you need to return multiple values from a function. In this case, the render method should be used instead. Additionally, the return method should 
+      not be used when you need to call a function that is not in the same component. 
+    > 1) The return method can return any value. 2) The return method returns a value. 3) The return method is used when you want to reuse an existing component. 4) The return method is less commonly used.
+  
+- Componentes basados en funciones: Hoy en día todos los componentes de React se crean a partir de funciones, lo que hace que sea mucho más fácil de escribir el código y entenderlo. Antes aquellos componentes que se encargaban del 
+  funcionamiento de la app, se creaban a partir de la clase Components para poder implementar las características de los componentes de React. Lo que hacía más complejo el modelo mental.
+  Pueden recibir propiedades (props). Tienen la capacidad de hacer render de un único elemento. Aunque este elemento puede tener muchos elementos dentro. Pueden tener estados.
+    
+- Controlled vs Uncontrolled Components & Stateless vs Stateful Components: 
+    
+- Render de un único elemento: Los componentes deben retornar un solo elemento o componente, pero este elemento o componente sí puede tener más de un elemento o componente hijo. En caso de no necesitar que el elemento padre forme parte del 
+  árbol del DOM, se puede utilizar React.Fragment, o lo que es lo mismo utilizar un tag sin tipo <></>.
+  
+- Key: En REACT, debemos incluir en cada elemento la propiedad key, que marque la identidad del elemento. Es decir, debemos poner algo que se encuentre en el array u objeto pero que estemos seguros de que NO SE REPETIRA (lo mas recomendable    
+  seria el id, ya que este empieza desde 1 hasta un numero indefinido pero que siempre estara cambiando). Esto ayudará a react a optimizar el rendering ante cambios en el array. De no tenerla podemos auto-generarla con el index provisto por 
+  el segundo parámetro de map, pero sólo optimizará si hay adiciones al final del array. Whenever the key changes on a component, even if that component is not part of a list, whenever it changes, REACT will destroy the old component 
+  instance and create a new one.
+    
+- States: Los estados de un componente en React se utilizan para representar la información que puede cambiar durante la vida útil del componente y afectar su representación en la interfaz de usuario. Todo cambio de estado va inicializar el 
+  proceso de render a partir del nodo donde se produjo el cambio de estado y así se generará el nuevo Virtual DOM que luego será reconciliado. Los estados son un concepto de React, no de JavaScript, por lo que para implementarlo vamos a 
+  necesitar de los Hooks de React.
+  
+  El estado en React es una de las maneras en las que se procesan datos. Desde el punto de vista de los datos que React puede manejar, tenemos el objeto props, con el que podemos insertar todo tipo de propiedades a un elemento, y tenemos los 
+  estados. El estado es un objeto que contiene datos que pueden cambiar en el tiempo. En React, el estado se usa para controlar los cambios en la interfaz. El objeto props nos permite insertar datos estáticos. Con esto nos referimos a que 
+  pasamos propiedades a un componente o elemento que luego se renderiza o visualiza de una determinada manera, con base a los datos que le pasamos. Entonces, si necesitamos darle dinamismo a un elemento, es decir, datos que se modifiquen a 
+  lo largo del tiempo, necesitaremos utilizar el estado en React.
+  
+  El estado en React, también conocido como state, es el segundo tipo de dato que maneja esta librería de JavaScript. Mientras que las props son los datos que podemos pasarle a un componente o elemento React desde afuera, un estado se 
+  conforma por los datos internos que un componente puede manejar. A medida que estos datos son modificados, ya sea por una interacción del usuario o por una recepción de datos de la API, el estado será modificado. Entonces, cada cambio de 
+  ese estado provocará que el elemento o componente se renderice de nuevo con una nueva representación en pantalla.
+  
+  Ten presente que podemos utilizar un estado en cualquier tipo de componente o elemento, sea del nivel más bajo o el nivel más alto. Allá donde necesitemos datos que cambian a lo largo del tiempo, podemos utilizar un estado.
+
+- Render y efectos: El funcionamiento de React está estrechamente ligado al cambio de estados. Cuando se produce un cambio de estado, React ejecuta un nuevo proceso de renderizado para ese componente y, de manera recursiva, para todos sus 
+  componentes hijos. Durante este proceso React ejecuta de nuevo las funciones de los componentes para generar el nuevo árbol de elementos de la interfaz de usuario.  Dentro de los componentes podemos tener funciones para realizar diferentes 
+  tareas, como, por ejemplo, una llamada a una api para obtener datos. Si en cada render se ejecuta esta llamada a la API, quiere decir que un cambio de estado está provocando efectos secundarios y no controlarlos puede traernos problemas. 
+
+- side effects: Side effects can be fetching data from a remote server, reading or writing to local storage, setting up event listeners, or setting up a subscription. These side effects can occur when a button is clicked, a form is submitted 
+  or when a component is mounted and unmounted. React’s useEffecthook allows functional components to do things when a component is mounted or when some properties or states change. This hook also allows cleaning up when the component is 
+  unmounted.
+  
+- Server side rendering:
+
+- Hooks: Es una función especial que permite a los desarrolladores utilizar el estado y otras características de React en componentes de función, y utilizar las características de React en los componentes funcionales, en lugar de tener que 
+  usar la clase Component. Los hooks son funciones que se pueden usar dentro de los componentes funcionales para agregar funcionalidad adicional de React. Las caracteristicas de los Hooks son:
+    1) Comienzan con el prefijo “use” para que React pueda identificarlos y realizar validaciones.
+    2) Solamente pueden utilizarse dentro de componentes funcionales.
+    3) Deben ejecutarse siempre, es decir, en cada renderizado y el orden de ejecución debe ser siempre el mismo. No puede estar dentro de if, for, etc.
+    4) Deben ejecutarse siempre en el cuerpo de la función del componente, por lo que normalmente se los ejecuta al inicio.
+    5) Cuando los parametros del hook se quieran recuperar en una funcion a la que fueron mandados, se deben desestructurar. Es decir, poner como el siguiente ejemplo:  function Counter( {conteo, setConteo} ){
+    
+  Cualquier función que se declare con el prefijo “use”, React la tratará como un hook realizando las validaciones correspondientes y llamará a otros hooks dentro de esta función sin ser esta un componente, ya que si este hook padre cumple 
+  las validaciones y, dentro de él, los hooks cumplen los requisitos correspondientes, pasarán todas las validaciones y podrá ejecutarse sin problemas. A estos hooks declarados por el desarrollador para encapsular una lógica de componente 
+  específica se les llama custom hooks. Mientras el valor dentro del parentesis de useState no cambie (o se actualice), quiere decir que no se volvera a ejecutar la funcion, no hasta que haya un cambio.
+  
+  Lo más importante es que los hooks deben ser llamados únicamente en el nivel superior del componente funcional, nunca dentro de bucles, condiciones o funciones anidadas. 
+  Esto asegura que los hooks siempre sean llamados en el mismo orden en cada renderizado y mantener la relación con cada una de las fibras de React. 
+  También es importante tener en cuenta que los hooks no deben ser llamados desde funciones regulares. Si se llama a un hook desde una función regular, se producirá un error en tiempo de ejecución. 
+  React detecta que una función es un componente gracias a la convención PascalCase utilizada para nombrarlos.
+      
+    > Hooks de estado: El estado permite que un componente «recuerde» información como la entrada de un usuario. Por ejemplo, un componente de formulario puede utilizar un estado para guardar la entrada del valor mientras que un componente 
+      de galería de imágenes puede utilizar un estado para guardar el índice de la imagen seleccionada.
+      
+    > Hooks de contexto: El contexto permite a un componente recibir información de padres lejanos sin pasarlas como props. Por ejemplo, el componente en el nivel superior de tu aplicación puede pasar el actual tema de la UI a todos los 
+      componentes dentro, sin importar la profundidad dentro del componente.
+    
+    > Hooks de refs: Las refs le permiten a un componente mantener alguna información que no es utilizada para el renderizado como un nodo del DOM o el ID de un timeout. A diferencia del estado, actualizar una ref no vuelve a renderizar tu 
+      componente. Las refs son una «puerta de escape» del paradigma de React. Son útiles cuando necesitas trabajar con sistemas distintos de React, como las APIs integradas del navegador.
+
+    > Hooks de Efecto: El Hook de Efecto permite a un componente conectarse y sincronizarse con sistemas externos. Esto incluye lidiar con la red, el DOM del navegador, animaciones, widgets escritos utilizando una biblioteca de UI diferente 
+      y otro código que no es de React.
+
+    > Hooks de rendimiento: Una forma común de optimizar el rendimiento del rerenderizado es evitar trabajo innecesario. Por ejemplo, puedes decirle a React que reutilice un cálculo guardado en caché o que se salte un rerenderizado si los 
+      datos no han cambiado desde el renderizado anterior. Para evitar cálculos y renderizados innecesarios, usa uno de estos Hooks:
+
+    > Otros: Algunas veces no podrás evitar un rerenderizado porque la pantalla realmente necesita una actualización. En ese caso, puedes mejorar el rendimiento separando las actualizaciones bloqueantes que deben ser síncronas (como al
+      escribir dentro de una entrada de texto) de las actualizaciones no bloqueantes, que no necesitan bloquear la interfaz de usuario (como actualizar un gráfico). Para priorizar el renderizado, puedes usar: useTransition y useDeferredValue
+    
+    > Custom hooks: Los custom hooks en React son un tipo de función JavaScript que simula el funcionamiento de los hooks en React. Los custom hooks en React son muy útiles siempre que tengamos una lógica que se repite entre varios componen
+      En estos casos, podemos sacar esta lógica y aplicarla a un custom hook, es decir, una función que ejecute los pasos que necesitamos de manera automática.
+      Al no ser funciones cualquiera, los custom hooks en React deben seguir una serie de reglas para ser considerados hooks y no funciones. A continuación, te explicamos cuáles son.
+       ~ El nombre empieza por «use»: La primera regla de los custom hooks en React es que su nombre debe empezar con la palabra use. Esta convención se crea siguiendo los hooks originales de React (useEffect, useState, useRef) y los 
+         posteriores hooks en React Router (useParams, useLocation, useNavigate). Se considera que esto es una regla porque la comunidad ha decidido que es más sencillo reconocer un custom hook cuando sigue esta norma. Sin embargo, en teoría 
+         podrías crear uno con otro nombre.
+       ~ Puede llamar a otros hooks: Lo que realmente tienen de particular los custom hooks en React es que pueden llamar a otros hooks. En este orden de ideas, React considera como custom hook a aquella función que dentro llama a un hook 
+         original o a otro custom hook.
+       ~ Los custom hooks en React son muy útiles para extraer funcionalidades, hacer refactors y mantener nuestros componentes más simplificados. Esto es especialmente común cuando tenemos componentes que llaman a una API para obtener un 
+         dato, lo meten en un estado y ejecutan una acción determinada con él. Todos estos pasos, que al final son muy repetitivos, se simplifican con el uso de custom hooks.
+       ~ Cuando creamos un custom hook, este puede ser utilizado en diferentes components. Y si este custom hook tiene un useState, al momento de utilizar dicho hook en 2 o mas diferentes components, los estados de cada componente no se 
+         relacionaran los unos con los otros. Es decir, si cambia el estado en un custom hook utilizado en un componente, los estados del otro componente no se veran afectados aunque se utilice el mismo custom hook.
+
+- forwardRef: 
+
+- createPortal: En React, createPortal se utiliza para renderizar un componente o elementos hijos fuera de la jerarquía del DOM del componente padre. Esto es útil en situaciones donde necesitas que un componente se renderice en una parte 
+  diferente del DOM, como para modales, tooltips, y popovers, que suelen necesitar estar en un nivel superior del DOM para evitar problemas de estilos y posicionamiento.
+  
+- useImperativeHandle: 
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        
+
+
+                                                                                                                   MONGODB
+                                                                                                                   
+- Usar mongodb en la terminal: 
+  1) correr .\mongod.exe  en powershell
+  2) Abrir otra ventana de powershell y copiar el siguiente link --> cd 'C:\Program Files\MongoDB\Server\7.0\bin'
+  3) Despues ejecutar --> .\mongos.exe                                                                                                            
+
+- Base de datos: Una base de datos no es más que una recopilación organizada de datos. Dichos datos deben compartir algún contexto y son almacenados con poder convertirse posteriormente en información útil para utilizarse dentro de algún
+  sistema. La base de datos sólo se encargará de almacenar dichos datos.
+  Algunas de las cosas que podemos señalar sobre la utilidad de una base de datos son:
+   ✓ Almacenamiento más seguro: Los datos que viven en una base de datos no son modificables directamente, por lo que éstos no pueden ser cambiados tan fácilmente.
+   ✓ Segmentación de datos: Podemos separar los datos en “contextos”, permitiendo así tener separados los datos de interés. 
+     ○ Separar clientes potenciales de clientes sólo interesados. 
+     ○ Separar productos existentes de productos fuera de stock 
+     ○ Separar diferentes usuarios por género, nacionalidad, plan, etc.
+   ✓ Gestión sencilla una vez configurada: Una vez que hemos definido los esquemas principales de nuestra base de datos, podremos realizar operaciones sobre estos datos como:
+   ✓ Filtrar
+   ✓ Ordenar
+   ✓ Buscar datos específicos.
+   ✓ Actualizar un conjunto de datos sin afectar o tocar otros datos.
+
+- Modelo relacional: Gestión de datos que consiste en representar éstos como tablas relacionadas con el fin de brindar una estructura de relación sólida entre ellos.
+- Modelo no relacional: Gestión de datos flexible que sustituye las tablas relacionadas, por colecciones, garantizando facilidad y dinamismo en el manejo de los datos.
+- Base de datos relacional: se refiere a estructura, elación, dependencia y de cambio controlado.
+- Base de datos no relacional:  refiere a algo enos estructurado, con relaciones y ependencias más flexibles, y de cambios umamente rápidos.
+
+- Inconsistencia de datos
+
+- CRUD: es un acrónimo que hace referencia a las cuatro operaciones fundamentales de una base de datos:
+  ✓ C : Create (Crear un dato, insertarlo en la base de datos)
+  ✓ R : Read (Leer un dato, mostrarlo al cliente)
+  ✓ U : Update (Actualizar un dato, cambiar su información interna)
+  ✓ D : Delete (Eliminar un dato, removerlo de nuestra colección.
+  
+  
+- Comandos de apoyo
+  ✓ show dbs : Muestra las bases de datos existentes.
+  ✓ use <db name>: Crea una nueva base de datos (en caso de no existir) y se posiciona sobre ella
+  ✓ db: Muestra en qué base de datos estamos posicionado.
+  ✓ show collections: Muestra todas las colecciones disponibles en la base de datos posicionada.
+  ✓ db.createCollection(name): Crea una colección en la base de datos posicionada.
+  ✓ db.dropDatabase(): Elimina la base de datos actual.
+  ✓ db.collection.drop(): Elimina la colección de la base de datos posicionada.
+
+- Primeros comandos CRUD: CR
+  ✓ db.collection.insertOne(doc) : Agrega un nuevo documento a la colección seleccionada.
+  ✓ db.collection.insertMany(docs): Agrega múltiples documentos a la colección seleccionada (dado un arreglo de documentos).
+  ✓ db.collection.findOne(opt): Busca un elemento que cumpla con los criterios de búsqueda (opt), devuelve el primer documento que cumpla con dicho criterio.
+  ✓ db.collection.find(opt):Devuelve todos los documentos que cumplan con dicho criterio.
+  ✓ db.collection.find(opt).pretty(): Añadido para hacer más presentables los resultados de un find()    
+
+- Conteo de datos: Los comandos de conteo para determinar el número de documentos en una colección son
+  ✓ db.collection.estimatedDocumentC count() Cuenta el estimado más próximo al número de documentos según su metadata.
+  ✓ db.collection.countDocuments(opt) Cuenta los documentos que cumplan con el criterio definido en las opciones (opt).
+  
+- opt (options): agregando opciones
+  En muchas consultas encontramos el elemento (opt), esto hace referencia a las opciones de filtros de búsqueda que podemos realizar al momento de buscar un valor, la sintaxis elemental de un opt es: {propiedad:valor}
+                                                                             db.users.find({gender: "M})
+        
+- Filtros: Las búsquedas del mundo real no siempre requieren que un valor sea igual a otro. En ocasiones necesitamos que sea menor, mayor, diferente de, entre otras cosas. Los filtros pueden agregarse dentro de los elementos de criterio 
+  (opt) con ayuda del símbolo $, además, podemos agregar más de un filtro para asegurarnos que el documento se ajuste a criterios muy específicos. Entonces, la sintaxis general será:
+                                                                             db.coll.find( {key: {$operator: val}} )
+                                                                             
+- MongoDB: Operadores para Filtros de Query
+  ✓ $and: Realiza operación AND -> sintaxis: {$and: [ {},{} ] }
+  ✓ $or: Realiza operación OR -> sintaxis: {$or: [ {},{} ] }
+  ✓ $lt: Coincide con valores que son menores que un valor especificado.
+  ✓ $lte: Coincide con valores menores o iguales a un valor especificado.
+  ✓ $gt: Coincide con valores mayores a un valor especificado.
+  ✓ $gte: Coincide con valores mayores o iguales a un valor especificado.
+  ✓ $ne: Coincide con valores que no son iguales a un valor especificado.
+  ✓ $eq: Selecciona los documentos que son iguales a un valor especificado.                                                                                        
+  ✓ $exists: Selecciona los documentos según la existencia de un campo.
+  ✓ $in: Selecciona los documentos especificados en un array. sintaxis: {key:{$in: [array of values] } }
+  ✓ $nin: Coincide con ninguno de los valores especificados en un array.
+  ✓ $size: Coincide con el número de elementos especificados.
+  ✓ $all: Coincide con todos los valores definidos dentro de un array.
+  ✓ $elemMatch: Coincide con algún valor definido dentro del query.                                                                                             
+  
+- MongoDB: Búsqueda Avanzada
+  ✓ db.coll.distinct( val ) devuelve un array con los distintos valores que toma un determinado campo en los documentos de la colección.
+  ✓ db.coll.find({doc.subdoc:value}) Se utiliza para filtrar subdocumentos.
+  ✓ db.coll.find({name: /^Max$/i}) filtra utilizando expresiones regulares
+  
+- Proyecciones: En ocasiones no necesitamos toda la información de un documento. Si tenemos un documento con 100 propiedades, podemos definir sólo las propiedades que queremos obtener.
+  Una proyección se incluye al momento de hacer una búsqueda, (siempre como segundo argumento) y es el equivalente a decirle a la base de datos: “sólo necesito ésto”
+  Así, podríamos decir db.users.find({},{name:1}); Lo cual indica que, el campo “name” es el único que necesitamos obtener por parte del documento, ahorrándonos espacio y complejidad en el resultado
+  
+- Sort: Sirve para poder hacer un ordenamiento de la información. El ordenamiento se define con 1 o -1 para hacer el ordenamiento ascendente o descendente respectivamente.
+  La sintaxis es: db.collection.find().sort({val_A:1,val_B:-1})
+  La razón por la cual podemos agregar múltiples valores de ordenamiento, es en caso de que dos documentos tengan el mismo valor, podamos ordenarlos bajo otro criterio  
+  
+- Skip: Omite el número de documentos indicados:Podemos usarlo cuando hagamos paginaciones, cuando necesitemos ignorar un valor que sabemos que es innecesario, etc. Su sintaxis es: .skip(offset)
+- Limit: Limita el número de documentos devueltos. De manera que podamos hacer diferentes niveles de paginación (Tu página puede devolver 5 elementos por página, o bien 100, tú decides). Su sintaxis es: .limit(num)  
+  
+- CRUD (update): Las operaciones Update se pueden realizar de dos maneras: Actualizar un documento, o actualizar múltiples documentos.
+  ✓ db.collection.updateOne(query,update,option)
+  ✓ query: sirve para filtrar qué elementos actualizar (usa los filtros iguales al find)
+  ✓ update: Apartado para indicar qué actualizar de los documentos que cumplen con el filtro. Update tiene sus propios operadores como $set, $unset, $inc, $rename, $mul, $min, $max
+  ✓ option: Opciones a tomar en cuenta para la actualización (como upsert, que inserta el valor en caso de que el documento a actualizar ni siquiera exista).
+  ✓ db.collection.updateMany(query,update,options) Actualiza múltiples documentos que cumplan con el criterio.
+  
+- CRUD (Delete): Nuestra última operación es para eliminar datos, si bien hay muchas variantes de una eliminación, sólo veremos las dos principales.
+✓ db.collection.deleteOne({key:val}) : Elimina sólo el primer elemento que cumpla con el criterio, se usa principalmente para encontrar identificadores específicos. Se recomienda no utilizar si somos conscientes de que el valor a buscar no 
+   es repetido.
+✓ db.collection.deleteMany({key:val}) : Elimina todos los documentos que cumplan con el criterio, se usa cuando sabemos que más de un valor va a contar con ese valor y necesitamos hacer una limpieza general.  
+
+
+- Mongoose (population): Operación que permite transformar la referencia de un documento en su documento correspondiente en la colección indicada.
+  Una population implica obtener un documento referenciado dentro de otro documento, con el fin de obtener ambos en una sola búsqueda. Consiste en almacenar el id de un documento, como propiedad de otro documento. A esto se le     
+  conoce como “referencia”. Populate hace referencia a “poblar” de un id a un documento completo. (referencia a la población humana).
+  Algunas cosas a considerar antes de comenzar con su uso:
+    ✓ populate es un método propio de mongoose, por lo que tenemos que instalarlo.
+    ✓ Hay que tener siempre claro el nombre de la propiedad dentro del objeto, así también como la referencia de la colección, para poder hacer un populate efectivo.
+    ✓ Recuerda no guardar directamente el valor a referenciar en el _id, sino asignarle otro nombre (se profundizará en el ejemplo).
+
+- Mongoose (indexing): Indexes support the efficient execution of queries in MongoDB. Without indexes, MongoDB must perform a collection scan, i.e. scan every document in a collection, to select those documents that match the query 
+  statement. If an appropriate index exists for a query, MongoDB can use the index to limit the number of documents it must inspect.
+  Es un recurso utilizado en MongoDB para poder hacer consultas mucho más rápidas al colocarse en una propiedad de un documento. Éste nos permitirá tener una referencia previa al momento de buscar un documento, con el fin de evitar recorrer 
+  toda la colección, documento por documento, hasta encontrar dicho valor. El índice se asocia a un atributo del documento y permite que las búsquedas se hagan desde puntos específicos, evitando el recorrido completo de la colección.
+  Prever un buen plan de indexación evitará problemas de lentitud en las consultas y se considera una práctica necesaria a nivel enterprise, al momento de configurar los schemas de nuestros distintos modelos
+  
+  Un índice no debe ser utilizado en todos los campos, sólo deben ser utilizados en los campos que sepamos tienen repercusión en nuestras búsquedas. Colocar un índice en cada campo de cada documento, significa alentar procesos de escritura 
+  en cada insert, así también como generar un almacenamiento adicional e innecesario en la base de datos.
+  
+  > Tipos de indices: Prever un buen plan de indexación evitará problemas de lentitud en las consultas y se considera una práctica necesaria a nivel enterprise, al momento de configurar los schemas de nuestros distintos modelos.
+     ✓ compound: Se utiliza cuando requerimos utilizar más de una indexación y queremos definir el orden con el cual se realiza el ordenamiento (ordenando con 1 para ascendente y -1 para descendente, igual que un sort: {campo: 1 , campo: -1}
+     ✓ multikey: Se utiliza cuando requerimos hacer una indexación de valores que se encuentran de manera interna en un array.
+     ✓ text: Se utiliza para poder basarse en búsquedas de palabras “específicas” con el fin de poder tomar referencia de un texto a partir de dichas palabras.
+     ✓ geospatial: Se utiliza para almacenar data geoespacial de dos coordenadas, utiliza una esfera 2d para poder trabajar los datos. 
+
+  > population: Operación que permite transformar la referencia de un documento en su documento correspondiente en la colección indicada.
+    Una population implica obtener un documento referenciado dentro de otro documento, con el fin de obtener ambos en una sola búsqueda. Consiste en almacenar el id de un documento, como propiedad de otro documento. A esto se le     
+    conoce como “referencia”. Populate hace referencia a “poblar” de un id a un documento completo. (referencia a la población humana).
+    Algunas cosas a considerar antes de comenzar con su uso:
+      ✓ populate es un método propio de mongoose, por lo que tenemos que instalarlo.
+      ✓ Hay que tener siempre claro el nombre de la propiedad dentro del objeto, así también como la referencia de la colección, para poder hacer un populate efectivo.
+      ✓ Recuerda no guardar directamente el valor a referenciar en el _id, sino asignarle otro nombre (se profundizará en el ejemplo)
+
+  > Configurando una population por default: Para poder “poblar” el resultado de la operación find() del estudiante y obtener los cursos, fue necesario llamar a “populate” después de la operación. Sin embargo, tener que colocar el populate 
+    puede resultar molesto si utilizamos constantemente el modelo de estudiante. Mongoose tiene la posibilidad de definir “middlewares” para sus documentos y modelos con el fin de automatizar operaciones que consideremos recurrentes. 
+
+- Mongoose (aggregation): Consiste en la realización de múltiples operaciones, eneralmente sobre múltiples documentos. ueden utilizarse para:              https://stackoverflow.com/questions/24714166/full-text-search-with-weight-in-mongoose
+    ✓ Agrupar documentos con base en un criterio específico.
+    ✓ Realizar alguna operación sobre dichos documentos, con el fin de obtener un solo resultado.
+    ✓ Analizar cambios de información con el paso del tiempo.
+
+  > Funcionamiento: Los aggregation pipelines consistirán en un conjunto de pasos (stages), donde cada paso corresponderá a una operación a realizar. Podemos definir tantas stages como necesitemos con el fin de llegar a los resultados 
+    esperados. Los documentos resultantes de la stage que finalice, se utilizan como “input” de la siguiente stage, y así sucesivamente hasta llegar al final. 
+    Un ejemplo de un pipeline de aggregation puede ser: 
+    1. Primero filtra los documentos que tengan un valor x mayor a 20 2. Luego ordénalos de mayor a menor 3. Luego en un nuevo campo devuelve el valor máximo 4. Luego en un nuevo campo devuelve el valor mínimo 5. Luego en un nuevo campo 
+       devuelve la suma total de todos los documentos
+
+  > Principales stages disponibles en un aggregation pipeline
+    ✓ $count : Cuenta el número de documentos disponibles que se encuentren en la stage actual.
+    ✓ $group: Permite agrupar los documentos disponibles en nuevos grupos según un criterio especificado. cada grupo cuenta con un _id nuevo, además de los valores acumulados \
+    ✓ $limit: Limita el número de documentos que saldrán de dicha stage.
+    ✓ $lookup: Permite realizar un “left join” (combinación de campos), de una colección de la misma base de datos a los documentos de la stage actual.
+    ✓ $set / $addFields : Agregan una nueva propiedad a los documentos que se encuentren en dicha stage.
+    ✓ $skip: Devuelve sólo los documentos que se encuentren después del offset indicado.
+    ✓ $sort: Ordena los documentos en la stage actual.
+    ✓ $match -->  Devuelve sólo los documentos que cumplan con un criterio de búsqueda, podemos colocar filtros comunes aquí. Filters the document stream to allow only matching documents to pass unmodified into the next pipeline stage. 
+      It uses standard MongoDB queries. For each input document, outputs either one document (a match) or zero documents (no match).
+    ✓ $group --> Groups input documents by a specified identifier expression and applies the accumulator expression(s), if specified, to each group. Consumes all input documents and outputs one document per each distinct group. The output 
+       documents only contain the identifier field and, if specified, accumulated fields.
+    ✓ $sum --> Returns a sum of numerical values. Ignores non-numeric values.
+    ✓ $first --> Returns the result of an expression for the first document in a group of documents. Only meaningful when documents are in a defined order.
+    ✓ $sort ---> Reorders the document stream by a specified sort key. Only the order changes; the documents remain unmodified. For each input document, outputs one document.
+    ✓ $push --> returns an array of all values that result from applying an expression to documents.
+    ✓ $$ROOT --> significa los resultados del stage anterior
+    ✓ $project --> Reshapes each document in the stream, such as by adding new fields or removing existing fields. For each input document, outputs one document. Takes a document that can specify the inclusion of fields, the suppression of 
+       the _id field, the addition of new fields, and the resetting of the values of existing fields. Alternatively, you may specify the exclusion of fields.
+    ✓ $merge --> Escribe los resultados del pipeline en una colección. Debe ser la última stage del pipeline para poder funcionar.
+       Writes the resulting documents of the aggregation pipeline to a collection. The stage can incorporate (insert new documents, merge documents, replace documents, keep existing documents, fail the operation, process documents with a 
+       custom update pipeline) the results into an output collection. IT MUST BE USED BY USING A $project BEFORE.    
+    
+    
+- Mongoose (Paginate): Pagination is the process of separating print or digital content into discrete pages. For print documents and some online content, pagination also refers to the automated process of adding consecutive numbers to 
+  identify the sequential order of pages.                                  https://stackoverflow.com/questions/5539955/how-to-paginate-with-mongoose-in-node-js
+  
+  > mongoose-paginate-v2 is a pagination library having a page wrapper. The main usage of the plugin is you can alter the return value keys directly in the query itself so that you don't need any extra code for transformation.                                    
+
+  > Model.paginate([filter], [options], [callback])
+    ✓ docs: Los documentos devueltos en la página
+    ✓ totalDocs: Los documentos totales de la consulta realizada.
+    ✓ limit: Límite de resultados por página.
+    ✓ page: Página actual en la que nos encontramos
+    ✓ totalPages: Páginas totales que pueden ser solicitadas en la búsqueda.
+    ✓ hasNextPage: Indica si es posible avanzar a una página siguiente.
+    ✓ nextPage: Página siguiente en la búsqueda
+    ✓ hasPrevPage: Indica si es posible retroceder a una página anterior.
+    ✓ prevPage: Página anterior en la búsqueda.
+    ✓ pagingCounter: Número de documento en relación con la página actual      
+    
+- Mongoose (properties)
+   > index: This will help the database engine to scan through the needed documents and not all of them.
+   > virtual: Virtuals are document properties that you can get and set but that do not get persisted to MongoDB. The getters are useful for formatting or combining fields, while setters are useful for de-composing a single value into 
+     multiple values for storage.
+
+- Mongoose (middlewares)
+   > document: Document middleware is specific to individual documents (instances of a model). It’s triggered during actions like save, validate, remove, updateOne, and deleteOne.
+   > model: Model middleware operates on entire collections of documents. It’s triggered during actions like insertMany.
+   > query: Aggregate middleware is for operations performed using MyModel.aggregate(). It allows you to modify aggregation pipelines.
+   > aggregation: Query middleware lets you modify queries before or after they are executed. It’s triggered during actions like find, findOne, update, and remove.
+
+- Mongoose (functions): Database logic should be encapsulated within the data model. Mongoose provides 2 ways of doing this, methods and statics. Methods adds an instance method to documents whereas Statics adds static "class" methods to the 
+  Models itself.
+   > methods: It's a method that it's gonna be available on all documents of a certain collection
+   > statics: statics are the methods defined on the Model. Those functions are only used ONLY in the model and that exist ONLY in the model.

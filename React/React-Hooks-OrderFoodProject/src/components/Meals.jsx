@@ -4,18 +4,21 @@ import useHttp from '../hooks/useHttp.jsx';
 
 const requestConfig = {};
 
-export default function Meals() {
-    const { data: loadedMeals,  isLoading: isLoading,  error: error } = useHttp("http://localhost:3000/meals", requestConfig, []);
+function Meals() { //We must not convert our components function into an async function becuase that's not allowed by React
+    const { data,  isLoading,  error } = useHttp("http://localhost:3000/meals", requestConfig, []);
 
+    console.log(isLoading)
     if (isLoading) return <p className='center'>Fetching meals...</p>;
-    if (error) return <Error title="Filed to fetch meals" message={error} />;
+    if (error)     return <Error title="Filed to fetch meals" message={error} />;
 
     return (
         <ul id="meals">
-            { loadedMeals.map((meal) => (<MealItem key={meal.id} meal={meal}/>)) }
+            {data.map(meal => <MealItem key={meal.id} meal={meal}/>) }
         </ul>
     );
-}
+};
+
+export default Meals;
 
 /* import { useState, useEffect } from 'react';
 import MealItem from './MealItem.jsx';

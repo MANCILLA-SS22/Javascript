@@ -5,12 +5,15 @@ import {CartContext} from '../Context/CartContext.jsx';
 import UserProgressContext from '../Context/UserProgressContext.jsx';
 
 export default function Header() {
-    const cartCtx = useContext(CartContext);
-    const userProgressCtx = useContext(UserProgressContext);
-    const totalCartItems = cartCtx.items.reduce((acc, cur) => {return acc + cur.quantity}, 0);
+    const {items} = useContext(CartContext);
+    const {showCart} = useContext(UserProgressContext);
+    
+    const totalCartItems = items.reduce(function(acc, cur){
+        return acc + cur.quantity;
+    }, 0);
 
     function handleShowCart(){
-        userProgressCtx.showCart();
+        showCart();
     }
 
     return (

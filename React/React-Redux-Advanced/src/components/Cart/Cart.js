@@ -10,9 +10,7 @@ function Cart(props){
     <Card className={classes.cart}>
       <h2>Your Shopping Cart</h2>
       <ul>
-        {cartItems.map((item) => (
-          <CartItem key={item.id} item={{ id: item.id, title: item.name, quantity: item.quantity, total: item.totalPrice, price: item.price}} />
-        ))}
+        { cartItems.map(item => <CartItem key={item.id} item={{ id: item.id, title: item.name, quantity: item.quantity, total: item.totalPrice, price: item.price}} />) }
       </ul>
     </Card>
   );

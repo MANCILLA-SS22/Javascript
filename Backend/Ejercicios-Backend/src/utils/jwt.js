@@ -3,7 +3,7 @@ import {privateKey} from "../config/config.js";
 
 //JSON Web Tokens JWT --> Generate token JWT usando jwt.sign: Primer argumento: objeto a cifrar dentro del JWT Segundo argumento: La llave privada a firmar el token. Tercer argumento: Tiempo de expiración del token.
 function generateJWToken(user){ 
-    return jwt.sign({ user }, privateKey, { expiresIn: '60s' }); //Esta sirve para utilizarse al momento de hacer el cifrado del token  --> https://stackoverflow.com/questions/31309759/what-is-secret-key-for-jwt-based-authentication-and-how-to-generate-it
+    return jwt.sign({ user }, privateKey, { expiresIn: '60s' }); //Esta sirve para utilizarse al momento de hacer el cifrado del token
 };
 
 function authToken(req, res, next){ //El JWT token se guarda en los headers de autorización.
