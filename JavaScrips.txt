@@ -1148,43 +1148,10 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   Si alguna prop es una función (callback), el componente hijo puede llamarla para provocar efectos secundarios en el componente padre.
   
 - prop.childern: Children es una manera que tiene react de permitirnos proyectar/transcluir uno o más componentes dentro otro. Es ideal cuando necesitamos que un elemento quede dentro de otro, sin que sepan el uno del otro, y cuando   
-  necesitamos implementar patrones más complejos.  
+  necesitamos implementar patrones más complejos. La prop children es una prop especial que se pasa a los componentes. Es un objeto que contiene los elementos que envuelve un componente.
   El concepto de children es la forma en que React nos permite incluir un componente dentro de otro sin que al padre le importe exactamente qué componente o componentes hijos están siendo incluidos. Los elementos hijos son aquellos que se 
   colocan dentro de la etiqueta de apertura y cierre del componente y la prop “children” se utiliza para acceder y manipular estos elementos hijos desde dentro del componente padre. 
-  De esta manera, podemos crear componentes más flexibles y reutilizables que acepten contenido personalizado y que puedan renderizarlo de manera dinámica. 
-    
-  La prop children es una prop especial que se pasa a los componentes. Es un objeto que contiene los elementos que envuelve un componente. Por ejemplo, si tenemos un componente Card que muestra una tarjeta con un título y un contenido, 
-  podemos usar la prop children para mostrar el contenido:
-    
-         function Card(props) {
-            return (
-              <div className="card">
-                 <h2>{props.title}</h2>
-                 <div>{props.children}</div>
-              </div>
-            )
-         }
-         
-    Y luego podemos usarlo de la siguiente forma:
-    
-         <Card title="Título de la tarjeta">
-           <p>Contenido de la tarjeta</p>
-         </Card>
-         
-    En este caso, la prop children contiene el elemento <p>Contenido de la tarjeta</p>.
-        
-
-- Render: The render method is a vital part of ReactJS, as it determines what gets displayed on the screen. It takes in the app’s state and renders it to a DOM node. This makes it easy to track what’s going on in your app, as the render 
-  method will always show the latest state. The render method is called automatically by ReactJS, so you don’t need to call it yourself. However, you can call it manually if you need to. 
-  The render method is also where you should do any processing that doesn’t need to happen every time the state changes. 
-  For example, if you have an extensive list of items, you might want only to render the part of the list that’s visible on the screen. Your app will be more efficient and won’t slow down as the state changes.
-  
-    > What Is The Use Of the Render Method in ReactJS? The render method in ReactJS functional component is the default lifecycle method that returns a single child component to be rendered by the parent. It’s important to use this method 
-      when you want to return a component from a parent to a child. This will ensure that the child receives the correct data and state from the parent.
-    > When Not To Use The Render Method In React Js? There may be times when you don’t want to use the render method. For example, if you’re working with higher-order components, stateless functional components, or memorization there, you 
-      may not need to use it. You can simply return whatever value is passed into the return method in these cases.
-    > 1) The render method will always return a single child component. 2) The render method sets up the child component’s initial state and lifecycle methods. 3) The render method is used when you want to create a new component. 4) The 
-      render method is more common.	
+  De esta manera, podemos crear componentes más flexibles y reutilizables que acepten contenido personalizado y que puedan renderizarlo de manera dinámica.        
 
 - return: The return method in React is a way to return data from a component. It returns the data that was passed into the component, which the parent component can then use. The return method is generally used when you want to return a 
   single value from a component. For example, if you want to return the text of a button from a Component, you would use the return method.
@@ -1289,6 +1256,150 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   
 - useImperativeHandle: 
 
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        
+
+
+                                                                                                                   Redux-Toolkit & React-Redux
+
+- Provider: The <Provider> component makes the Redux store available to any nested components that need to access the Redux store. Since any React component in a React Redux app can be connected to the store, most applications will render a 
+ <Provider> at the top level, with the entire app’s component tree inside of it. Typically, you only need to pass <Provider store={store}>.
+
+- store: The Redux store is like a giant container that holds all the data for your application.
+
+- action: An action is an object that describes what changes need to be made to the state of your application. It sends data from your application to the Redux store and serves as the only way to update the store. An action must have a 
+  "type" property describing the action being performed. This "type" property is typically defined as a string constant to ensure consistency and avoid typos.
+  In addition to the "type" property, an action can have a "payload" property. The "payload" property represents the data that provides additional information about the action being performed. For example, if an action type is ADD_TASK, the 
+  payload might be an object containing a new task item's "id", "text", and "completed status". 
+  "actions" doesn't allow to access the reducers methods to find up, but instead we get methods created automatically by Redux Toolkit, which when called will create action objects for us. These methods on the actions object which we can 
+  call will create action objects for us. Therefore these methods are called action creators and they will create action objects for us where these objects already have a type property with a unique identifier per action. Automatically 
+  created behind the scenes. So we don't have to worry about action identifiers. We don't have to create those action objects on our own. We can tap into this actions key into this actions object on our createSlice and execute these action 
+  creator methods, which with their name match our reducer methods to dispatch actions, which will then ultimately trigger those different reducer methods.
+
+- dispatch: dispatch is a function provided by the store that allows you to send an action to update the state of your application. When you call dispatch, the store runs an action through all of the available reducers, which in turn update 
+  the state accordingly. You can think of dispatch as a mail carrier who delivers mail to different departments in a large company. Just like how the mail carrier delivers mail to different departments, dispatch delivers actions to various 
+  reducers in your Redux store. Each reducer is like a department in the company that processes the mail and updates its own part of the company's data.
+
+- reducer: A reducer is a function that takes in the current state of an application and an action as arguments, and returns a new state based on the action.
+  Remember that reducer functions must be pure, side-effect free and synchronous. So your reducer functions should take some input in the case of the Redux reducer, the old state and the action, and then produce some output. And that's, by 
+  the way not just the case for Redux reducer function. The reducer function you pass to use reducer, is react hook, works in the same way. It has nothing to do with redux, but it just general reducer concept that you have a pure, side 
+  effects synchronous function that takes input and produces some output. And for the same input, for the same values, it will always produce the same output, without any side effects that happen along the way without any asynchronous code 
+  that blocks it. No code of that kind must be part of your reducer functions.
+    
+- action creators and action types: These are fundamental concepts used to manage state in a Redux store. RTK simplifies and streamlines the process of working with these concepts compared to plain Redux.
+    > action types: Action types are constants that represent the type of action being performed. They are typically defined as strings and are used to identify actions in the reducers. 
+      In Redux Toolkit, you don't usually need to define these explicitly, as they are generated automatically when you create actions.
+      Constants that represent the type of action being performed. In Redux Toolkit, they are usually generated automatically.
+    > action creators: Action creators are functions that return action objects. An action object contains a type property (representing the action type) and an optional payload property 
+      (containing any data needed to perform the action). Redux Toolkit simplifies the creation of action creators using functions like createAction and createSlice.
+      Functions that return action objects. They can be created using createAction or automatically generated by createSlice.  
+      
+- thunk: It's a term that means "a piece of code that does some delayed work. So it's simply a function, that delays an action until later, until something else finished. We could write an action creator as a thunk, to write an action 
+  creator, which does not immediately return the action object, but which instead, returns another function which eventually returns the action. So that we can run some other code before we then dispatch the actual action object that we did 
+  want to create. 
+  In RTK, a "thunk" is a middleware function that allows you to write action creators that return a function instead of an action. This function can then perform asynchronous operations, such as fetching data from an API or dispatching 
+  multiple actions sequentially.
+  In RTK, actions are usually plain objects, but when you need to perform asynchronous tasks, plain action objects are not sufficient. Thunks in Redux Toolkit enable you to manage asynchronous operations and complex synchronous logic 
+  efficiently. By using thunks, you can keep your components clean and focus on handling side effects in a structured manner. Redux Toolkit’s createAsyncThunk further simplifies this process by automatically generating action types and 
+  creators, making it easier to manage different states of asynchronous operations.
+                                                                                                                   
+- The "prepare" callback: It is a function used in createSlice to customize the payload and meta properties of an action. This is useful when you need to preprocess the action's payload or add additional metadata before the action is handled 
+  by the reducer. It returns the action payload as it needs to be formatted. 
+  If you need to customize the creation of the payload value of an action creator by means of a prepare callback, the value of the appropriate field of the reducers argument object should be an object instead of a function. This object must 
+  contain two properties: reducer and prepare. The value of the reducer field should be the case reducer function while the value of the prepare field should be the prepare callback function.
+  
+- The "extraReducers" builder callback" notation: Sometimes a slice reducer needs to respond to other actions that weren't defined as part of the slices reducers, and that is like what happens when using "createAsyncThunk" or responding to 
+  an action from another slice. It receives a builder object that has methods like addCase and addMatcher which are used to add additional reducers. And this builder parameter is an object that lets us definie additional case reducers that 
+  run in response to the actions refined outside of the slice. However, unlike the reducers field, each individual case reducer inside of extraReducers will not generate a new action type or action creator. 
+  If two fields from reducers and extraReducers happen to end up with the same action type string, the function from reducers will be used to handle that action type.
+  We would use extraReducers when dealing with an action that we have already defined somewhere else. The extrareducers property in createSlice can be used as a function or as an object. extraReducers in Redux Toolkit provides a powerful way 
+  to handle actions that are not defined within the slice itself. It is especially useful for managing the side effects of asynchronous actions and for ensuring that your slices remain decoupled and maintainable. By using extraReducers, you 
+  can keep your action handling logic organized and clear, making your Redux store easier to manage and extend.
+
+
+                                                                                               $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+- configureStore(): The standard method for creating a Redux store. It wraps createStore to provide simplified configuration options and good defaults. It can automatically combine your slice reducers, adds whatever Redux middleware you 
+  supply, includes redux-thunk by default. It accepts a reducer function as a named argument and automatically sets up the store with good default settings.
+
+- createSlice(): Accepts an object of reducer functions, a slice name, and an initial state value, and automatically generates a slice reducer with corresponding action creators and action types. This function is a more powerful and 
+  convenient way to define a slice of the state, including action creators and reducers. It automatically generates action types and action creators based on the reducer functions you provide.
+  
+- createAsyncThunk: Accepts an action type string and a function that returns a promise, and generates a thunk that dispatches pending/fulfilled/rejected action types based on that promise. The first argument is a string that's used as the 
+  prefix for the generated action type. The second argument is a creator payload callback adnd this function should return a promise that contains some data or rejected primise with an error. 
+  It simplifies the process of handling asynchronous actions by abstracting much of the boilerplate code required in traditional Redux. Here's a detailed look at how createAsyncThunk works behind the scenes:
+    1. Thunk Action Creator: createAsyncThunk generates an action creator that returns a thunk function when dispatched.
+    2. Lifecycle Actions: It automatically generates three action types for each async operation: pending, fulfilled, and rejected.
+    3. Middleware: Redux Thunk middleware intercepts these thunks and executes them, allowing side effects to be handled.
+  
+- createAction(): Generates an action creator function for the given action type string. It generates an action creator function. 
+  
+- createReducer(): That lets you supply a lookup table of action types to case reducer functions, rather than writing switch statements. In addition, it automatically uses the immer library to let you write simpler immutable updates with 
+  normal mutative code, like state.todos[3].completed = true.
+
+- combineSlices(): Combines multiple slices into a single reducer, and allows "lazy loading" of slices after initialisation.
+
+- createEntityAdapter: Generates a set of reusable reducers and selectors to manage normalized data in the store
+
+- createSelector: The createSelector Utility from the Reselect library, re-exported for ease of use.
+
+- createApi(): The core of RTK Query's functionality. It allows you to define a set of endpoints and describe how to retrieve data from a series of endpoints, including configuration of how to fetch and transform that data. In most cases, 
+  you should use this once per app, with "one API slice per base URL" as a rule of thumb.
+
+- fetchBaseQuery(): A small wrapper around fetch that aims to simplify requests. Intended as the recommended baseQuery to be used in createApi for the majority of users.
+
+- <ApiProvider />: Can be used as a Provider if you do not already have a Redux store.
+
+- setupListeners(): A utility used to enable refetchOnMount and refetchOnReconnect behaviors.
+
+- useSelector: Read data from the store. Allows you to extract data from the Redux store state for use in this component, using a selector function.
+  The selector will be called with the entire Redux store state as its only argument. The selector may return any value as a result, including directly returning a value that was nested inside state, or deriving new values. The return value 
+  of the selector will be used as the return value of the useSelector() hook.
+  The selector will be run whenever the function component renders (unless its reference hasn't changed since a previous render of the component so that a cached result can be returned by the hook without re-running the selector). 
+  useSelector() will also subscribe to the Redux store, and run your selector whenever an action is dispatched.
+  When an action is dispatched, useSelector() will do a reference comparison of the previous selector result value and the current result value. If they are different, the component will be forced to re-render. If they are the same, the 
+  component will not re-render. useSelector() uses strict === reference equality checks by default, not shallow equality (see the following section for more details).
+  You may call useSelector() multiple times within a single function component. Each call to useSelector() creates an individual subscription to the Redux store. Because of the React update batching behavior used in React Redux v7, a 
+  dispatched action that causes multiple useSelector()s in the same component to return new values should only result in a single re-render.
+
+- useDispatch: This hook returns a reference to the dispatch function from the Redux store. It returns the store's dispatch method to let you dispatch actions (which are into "reducers" or "createAsyncThunk").                                                                                                                
+  In react-redux, the useDispatch hook is used to obtain the dispatch function from the Redux store. This function allows you to dispatch actions to the Redux store, which then triggers the appropriate reducer functions to update the state.
+ 
+                                                                                                                
+                                                                                                              
+                                                                                                                   
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        
+
+
+                                                                                                                   React Router
+                                                                                                                   
+                                                                                                                   
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        
+
+
+                                                                                                                   TanStackQuery
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        
+
+
+                                                                                                                   FramerMotion
+                                                                                                                   
+                                                                                                                   
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        
+
+
+                                                                                                                   NextJS
+                                                                                                                   
+                                                                                                                   
+                                                                                                                   
+                                                                                                                   
+                                                                                                                   
+                                                                                                                   
+                                                                                                                   
+                                                                                                                   
+                                                                                                                   
+                                                                                                                   
+                                                                                                                   
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        
 
 
@@ -1501,3 +1612,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   Models itself.
    > methods: It's a method that it's gonna be available on all documents of a certain collection
    > statics: statics are the methods defined on the Model. Those functions are only used ONLY in the model and that exist ONLY in the model.
+
+
+                                                                                                                   

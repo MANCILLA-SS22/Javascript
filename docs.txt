@@ -17,7 +17,12 @@ https://www.mongodb.com/docs/manual/   https://www.mongodb.com/docs/atlas/      
 https://mongoosejs.com/docs/queries.html
 https://socket.io/docs/v4/
 https://docs.nestjs.com/recipes/prisma
-https://docs.docker.com/guides/   https://docs.docker.com/storage/volumes/#volumes        https://hub.docker.com/repositories/germanss22
+https://www.passportjs.org/packages/
+https://nodemailer.com
+https://www.twilio.com/docs/libraries/reference/twilio-node/5.0.0-rc.1/
+https://editor.swagger.io
+https://stripe.com/en-mx     
+https://docs.docker.com/guides/
 https://kubernetes.io/docs/home/
 https://minikube.sigs.k8s.io/docs/start/
 https://us-west-1.console.aws.amazon.com/console/services?region=us-west-1

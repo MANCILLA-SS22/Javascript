@@ -271,6 +271,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 - Redux: 
   > https://redux.js.org/tutorials/fundamentals/part-1-overview#:~:text=Redux%20helps%20you%20manage%20"global,behave%20when%20those%20changes%20occur.
   > https://blog.logrocket.com/understanding-redux-tutorial-examples/#when-use-redux
+  > https://www.freecodecamp.org/news/redux-and-redux-toolkit-for-beginners/#:~:text=the%20company%27s%20data.-,Reducers,action)%20%7B%20switch(action.
   
 - React-Router: 
   > https://www.geeksforgeeks.org/reactjs-router/ 
