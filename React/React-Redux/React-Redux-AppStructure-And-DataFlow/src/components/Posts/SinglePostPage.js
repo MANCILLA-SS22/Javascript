@@ -10,7 +10,6 @@ function SinglePostPage() {
     const { postId } = useParams();
 
     const post = useSelector(state => selectPostById(state, Number(postId))); //This is the same as -->  const post = useSelector(state => state.posts.posts.find(post => post.id === Number(postId)));
-
     if (!post) return <section><h2>Post not found!</h2></section>
 
     return (

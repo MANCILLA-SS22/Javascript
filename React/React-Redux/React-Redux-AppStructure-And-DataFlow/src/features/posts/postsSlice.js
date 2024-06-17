@@ -1,9 +1,23 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, createSelector, createEntityAdapter } from "@reduxjs/toolkit";
 import axios from "axios";
 import { sub } from "date-fns";
 
 const POSTS_URL = 'https://jsonplaceholder.typicode.com/posts';
-const initialState = { posts: [], status: "idle", error: null };
+const postsAdapter = createEntityAdapter({ sortComparer: (a, b) => b.date.localeCompare(a.date) }); 
+const initialState = postsAdapter.getInitialState({ /* posts: [],  */status: "idle", error: null, count: 0 }); //We comment out the "posts" parameter because our initial state will already (even if we didn't put anything in it) return the normalized object where we have an array of the items ids, and then we have the  that entities object that will actually have all the items.
+const { selectAll: selectAllPosts, selectById: selectPostById, selectIds: selectPostIds } = postsAdapter.getSelectors(state => state.posts); //getSelectors creates these selectors and we rename them with aliases using destructuring so they match up with our existing code.
+const selectUsersState = (state, userId) => userId;
+//const selectPostById = (state, postId) => state.posts.posts.find(post => post.id === postId);
+
+//function selectAllPosts(state) { return state.posts.posts };
+function getPostsStatus(state) { return state.posts.status };
+function getPostsError(state) { return state.posts.error };
+function getCount(state) { return state.posts.count };
+
+const selectPostsByUser = createSelector(                            //(1)
+    [selectAllPosts, selectUsersState],                              //(2)
+    (posts, userId) => posts.filter(post => post.userId === userId)  //(3)
+);
 
 const fetchPosts = createAsyncThunk('posts/fetchPosts', async function () { 
     const response = await axios.get(POSTS_URL);
@@ -61,8 +75,12 @@ const postsSlice = createSlice({
         }, */
         reactionAdded(state, action) {
             const { postId, reaction } = action.payload;
-            const existingPost = state.posts.find(post => post.id === postId);
+            // const existingPost = state.posts.find(post => post.id === postId);
+            const existingPost = state.entities[postId];
             if (existingPost) existingPost.reactions[reaction]++;
+        },
+        increaseCount(state, action) {
+            state.count = state.count + 1
         }
     },
     extraReducers(builder) {
@@ -78,7 +96,8 @@ const postsSlice = createSlice({
                 post.reactions = { thumbsUp: 0, wow: 0, heart: 0, rocket: 0, coffee: 0 };
                 return post;
             });
-            state.posts = state.posts.concat(loadedPosts);// Add any fetched posts to the array
+            // state.posts = state.posts.concat(loadedPosts);// Add any fetched posts to the array
+            postsAdapter.upsertMany(state, loadedPosts)
         })
         .addCase(fetchPosts.rejected, function(state, action){
             state.status = 'failed';
@@ -95,40 +114,52 @@ const postsSlice = createSlice({
             action.payload.date = new Date().toISOString();
             action.payload.reactions = { thumbsUp: 0, wow: 0, heart: 0, rocket: 0, coffee: 0 };
             console.log(action.payload);
-            state.posts.push(action.payload);
+            // state.posts.push(action.payload);
+            postsAdapter.addOne(state, action.payload);
         })
         .addCase(updatePost.fulfilled, function(state, action){
             if (!action.payload?.id) {
-                console.log('Update could not complete');
-                console.log(action.payload);
+                console.log('Update could not complete', action.payload);
                 return;
             }
-            const { id } = action.payload;
             action.payload.date = new Date().toISOString();
-            const posts = state.posts.filter(post => post.id !== id);
-            state.posts = [...posts, action.payload];
+            // const { id } = action.payload;
+            // const posts = state.posts.filter(post => post.id !== id);
+            // state.posts = [...posts, action.payload];
+            postsAdapter.upsertOne(state, action.payload);
         })
         .addCase(deletePost.fulfilled, function(state, action){
             if (!action.payload?.id){
-                console.log('Delete could not complete');
-                console.log(action.payload);
+                console.log('Delete could not complete', action.payload);
                 return;
             }
             const { id } = action.payload;
-            const posts = state.posts.filter(post => post.id !== id);
-            state.posts = posts;
+            // state.posts = state.posts.filter(post => post.id !== id);
+            postsAdapter.removeOne(state, id)
         })
     }
 });
 
-function selectAllPosts(state) { return state.posts.posts };
-function getPostsStatus(state) { return state.posts.status };
-function getPostsError(state) { return state.posts.error };
-function selectPostById(state, postId) {return state.posts.posts.find(post => post.id === postId)};
 const postsReducer = postsSlice.reducer;
 const postsActions = postsSlice.actions;
 
-export { postsReducer, postsActions, selectAllPosts, getPostsStatus, getPostsError, selectPostById, fetchPosts, addNewPost, updatePost, deletePost };
+export { 
+    postsReducer, postsActions, 
+    selectAllPosts, selectPostById, selectPostIds, selectPostsByUser,
+    getPostsStatus, getPostsError, getCount,
+    fetchPosts, addNewPost, updatePost, deletePost 
+};
+
+//Steps to uunderstand the use of createSelector
+//(1) createSelector is a function that generates memoized selectors that will only recalculate results when the inputs change. It accepts one or more input functions and and they've got to be inside of an array.
+//(2) These are input selectors and are simple functions that take the whole state and return a slice of it. They don't perform any computations. If one of the two parameters (in this case, "posts" or "userId")
+//    changes essentially, that's the only time that we'll get something new from the selector.
+//    "selectAllPosts" is a function that receives the global state of the app and returns the list of all posts. This function is used to get all of the posts from the Redux global state.
+//    "selectUsersState" receives two parameters, the global state and the userId. This funcion simply returns the userId that was passed in. This means that this function can access both the global state and an Id.
+//    When using createSelector with an array of input selectors, this creates a selector which take the global state and additional arguments, and then passes the results of the input selectors to the output selector
+//(3) This is an output selector function (also called "transformation function"). When we call selectPostsByUser(state, userId), createSelector will pass all of the arguments into each of our input selectors.
+//    Whatever those input selectors return becomes the arguments for the output selector. If we try calling selectPostsByUser multiple times, it will only re-run the output selector if either posts or userId has changed
+// [selectAllPosts, selectUsersState] stands for the input selectors which provide the necessary data to the selector. Then they'll be used in the output selector to get the posts that belong to the specific user.
 
 //1. Define an Async Thunk: createAsyncThunk creates an action that handles async logic. It accepts two arguments: a string action type and an async function that returns a promise.
 //2. Create a Slice: createSlice defines your slice of the state. In extraReducers, you handle the different states of the async thunk (pending, fulfilled, rejected) using the builder API.
