@@ -1,0 +1,171 @@
+                                                                                                                   Redux-Toolkit & React-Redux
+
+- Provider: The <Provider> component makes the Redux store available to any nested components that need to access the Redux store. Since any React component in a React Redux app can be connected to the store, most applications will render a 
+  <Provider> at the top level, with the entire app’s component tree inside of it. Typically, you only need to pass <Provider store={store}>.
+  
+- ApiProvider: It simplifies data fetching and caching in your Redux applications. ApiProvider is a component that integrates with the store and provides context for the API services created using createApi. It sets up the necessary 
+  middleware and manages the caching, invalidation, polling, and other aspects of data fetching.
+    1. Context Provider: ApiProvider provides the context needed for RTK Query to function correctly. It ensures that the API service's hooks and other functionality are connected to the Redux store.
+    2. Middleware Setup: When using ApiProvider, it automatically sets up the required middleware for handling API requests and responses, which includes caching, re-fetching, and more.
+    3. Simplifies Configuration: Using ApiProvider simplifies the configuration needed to start using RTK Query. It abstracts away the manual setup of middleware and store enhancements required for API slices.
+
+- store: The Redux store is like a giant container that holds all the data for your application.
+
+- selector: It is a function used to extract and compute derived data from the Redux store state. Selectors help in selecting specific pieces of state and can also be used to transform or compute data based on that state. They play a crucial 
+  role in ensuring that components only receive the data they need, thus improving performance and maintainability.
+    > State Extraction: Selectors are primarily used to read and return a specific part of the Redux state.
+    > Derived data: Selectors can compute derived data, meaning they can perform calculations or transformations on the state to produce new data that components might need.
+    > Memoization: When created using "createSelector", selectors are memoized. This means they remember the previous inputs and outputs and only recompute the result if the inputs change, thus optimizing performance.
+    > Reusability and composability: They can be composed from other selectors, promoting code reuse and modularity. They can be reused across different parts of the application, making it easier to maintain consistent data access patterns.
+
+  It is any function that accepts the Redux state tree as an argument, and returns some extracted or derived data. They typically expect the entire Redux state object as an argument, while slice reducers only have access to a specific subset 
+  of the entire Redux state
+
+- action: An action is an object that describes what changes need to be made to the state of your application. It sends data from your application to the Redux store and serves as the only way to update the store. An action must have a 
+  "type" property describing the action being performed. This "type" property is typically defined as a string constant to ensure consistency and avoid typos.
+  In addition to the "type" property, an action can have a "payload" property. The "payload" property represents the data that provides additional information about the action being performed. For example, if an action type is ADD_TASK, the 
+  payload might be an object containing a new task item's "id", "text", and "completed status". 
+  "actions" doesn't allow to access the reducers methods to find up, but instead we get methods created automatically by Redux Toolkit, which when called will create action objects for us. These methods on the actions object which we can 
+  call will create action objects for us. Therefore these methods are called action creators and they will create action objects for us where these objects already have a type property with a unique identifier per action. Automatically 
+  created behind the scenes. So we don't have to worry about action identifiers. We don't have to create those action objects on our own. We can tap into this actions key into this actions object on our createSlice and execute these action 
+  creator methods, which with their name match our reducer methods to dispatch actions, which will then ultimately trigger those different reducer methods.
+
+- dispatch: dispatch is a function provided by the store that allows you to send an action to update the state of your application. When you call dispatch, the store runs an action through all of the available reducers, which in turn update 
+  the state accordingly. You can think of dispatch as a mail carrier who delivers mail to different departments in a large company. Just like how the mail carrier delivers mail to different departments, dispatch delivers actions to various 
+  reducers in your Redux store. Each reducer is like a department in the company that processes the mail and updates its own part of the company's data.
+
+- reducer: A reducer is a function that takes in the current state of an application and an action as arguments, and returns a new state based on the action.
+  Remember that reducer functions must be pure, side-effect free and synchronous. So your reducer functions should take some input in the case of the Redux reducer, the old state and the action, and then produce some output. And that's, by 
+  the way not just the case for Redux reducer function. The reducer function you pass to use reducer, is react hook, works in the same way. It has nothing to do with redux, but it just general reducer concept that you have a pure, side 
+  effects synchronous function that takes input and produces some output. And for the same input, for the same values, it will always produce the same output, without any side effects that happen along the way without any asynchronous code 
+  that blocks it. No code of that kind must be part of your reducer functions.
+    
+- action creators and action types: These are fundamental concepts used to manage state in a Redux store. RTK simplifies and streamlines the process of working with these concepts compared to plain Redux.
+    > action types: Action types are constants that represent the type of action being performed. They are typically defined as strings and are used to identify actions in the reducers. 
+      In Redux Toolkit, you don't usually need to define these explicitly, as they are generated automatically when you create actions.
+      Constants that represent the type of action being performed. In Redux Toolkit, they are usually generated automatically.
+    > action creators: Action creators are functions that return action objects. An action object contains a type property (representing the action type) and an optional payload property 
+      (containing any data needed to perform the action). Redux Toolkit simplifies the creation of action creators using functions like createAction and createSlice.
+      Functions that return action objects. They can be created using createAction or automatically generated by createSlice.  
+      
+- thunk: It's a term that means "a piece of code that does some delayed work. So it's simply a function, that delays an action until later, until something else finished. We could write an action creator as a thunk, to write an action 
+  creator, which does not immediately return the action object, but which instead, returns another function which eventually returns the action. So that we can run some other code before we then dispatch the actual action object that we did 
+  want to create. 
+  In RTK, a "thunk" is a middleware function that allows you to write action creators that return a function instead of an action. This function can then perform asynchronous operations, such as fetching data from an API or dispatching 
+  multiple actions sequentially.
+  In RTK, actions are usually plain objects, but when you need to perform asynchronous tasks, plain action objects are not sufficient. Thunks in Redux Toolkit enable you to manage asynchronous operations and complex synchronous logic 
+  efficiently. By using thunks, you can keep your components clean and focus on handling side effects in a structured manner. Redux Toolkit’s createAsyncThunk further simplifies this process by automatically generating action types and 
+  creators, making it easier to manage different states of asynchronous operations.
+                                                                                                                   
+- The "prepare" callback: It is a function used in createSlice to customize the payload and meta properties of an action. This is useful when you need to preprocess the action's payload or add additional metadata before the action is handled 
+  by the reducer. It returns the action payload as it needs to be formatted. 
+  If you need to customize the creation of the payload value of an action creator by means of a prepare callback, the value of the appropriate field of the reducers argument object should be an object instead of a function. This object must 
+  contain two properties: reducer and prepare. The value of the reducer field should be the case reducer function while the value of the prepare field should be the prepare callback function.
+  
+- The "extraReducers" builder callback" notation: Sometimes a slice reducer needs to respond to other actions that weren't defined as part of the slices reducers, and that is like what happens when using "createAsyncThunk" or responding to 
+  an action from another slice. It receives a builder object that has methods like addCase and addMatcher which are used to add additional reducers. And this builder parameter is an object that lets us definie additional case reducers that 
+  run in response to the actions refined outside of the slice. However, unlike the reducers field, each individual case reducer inside of extraReducers will not generate a new action type or action creator. 
+  If two fields from reducers and extraReducers happen to end up with the same action type string, the function from reducers will be used to handle that action type.
+  We would use extraReducers when dealing with an action that we have already defined somewhere else. The extrareducers property in createSlice can be used as a function or as an object. extraReducers in Redux Toolkit provides a powerful way 
+  to handle actions that are not defined within the slice itself. It is especially useful for managing the side effects of asynchronous actions and for ensuring that your slices remain decoupled and maintainable. By using extraReducers, you 
+  can keep your action handling logic organized and clear, making your Redux store easier to manage and extend.
+
+- Entity: It refers to a structured and normalized way of storing (or manage) collections of related items within the Redux state, in a normalized and efficient manner. This concept isused in conjunction with the createEntityAdapter utility, 
+  which helps manage such collections efficiently.
+  The term "Entity" is used to refer to a unique type of data object in an application. Entities are individual pieces of data, typically objects, that are identified by a unique key (usually an ID). Storing data as entities involves 
+  normalizing the state, which means storing the data in a flat structure rather than deeply nested objects. This makes it easier to update, delete, and retrieve specific items without affecting other parts of the state.  
+  For example, in a blogging application, you might have User, Post, and Comment data objects, with many instances of each being stored in the 
+  client and persisted on the server. User is an "entity" - a unique type of data object that the application uses. Each unique instance of an entity is assumed to have a unique ID value in a specific field.
+
+- Memoization: Storing the results of expensive function calls and returning the cached result when the same inputs occur again.
+
+- Normalization: It refers to the process of structuring your Redux state in a flat and organized manner, rather than deeply nested. This concept is borrowed from database design, where data is stored in a way that minimizes redundancy and 
+  ensures consistency.
+    1. Simplifies Updates: Updating deeply nested state can be complex and error-prone. Normalized state makes updates straightforward.
+    2. Avoids Redundancy: By storing each entity in a single place, you avoid duplicating data and reduce the risk of inconsistencies.
+    3. Improves Performance: Selectors can efficiently access and compute derived data without needing to traverse nested structures.
+    4. Easier Debugging: A flat state structure is easier to inspect and understand. 
+  In a normalized state, entities are stored in a flat structure, typically using an object where keys are entity IDs and values are the entity objects. Additionally, an array of IDs is maintained to keep track of the 
+  order of entities. Normalized state structure is a recommended approach for storing items, and normalization means no duplication of data and it also means keeping the items stored in a lookup table by item id.
+  
+- Optimistic update:   
+
+                                                                                               $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+- configureStore(): The standard method for creating a Redux store. It wraps createStore to provide simplified configuration options and good defaults. It can automatically combine your slice reducers, adds whatever Redux middleware you 
+  supply, includes redux-thunk by default. It accepts a reducer function as a named argument and automatically sets up the store with good default settings.
+
+- createSlice(): Accepts an object of reducer functions, a slice name, and an initial state value, and automatically generates a slice reducer with corresponding action creators and action types. This function is a more powerful and 
+  convenient way to define a slice of the state, including action creators and reducers. It automatically generates action types and action creators based on the reducer functions you provide.
+  
+- createAsyncThunk: Accepts an action type string and a function that returns a promise, and generates a thunk that dispatches pending/fulfilled/rejected action types based on that promise. The first argument is a string that's used as the 
+  prefix for the generated action type. The second argument is a creator payload callback adnd this function should return a promise that contains some data or rejected primise with an error. 
+  It simplifies the process of handling asynchronous actions by abstracting much of the boilerplate code required in traditional Redux. Here's a detailed look at how createAsyncThunk works behind the scenes:
+    1. Thunk Action Creator: createAsyncThunk generates an action creator that returns a thunk function when dispatched.
+    2. Lifecycle Actions: It automatically generates three action types for each async operation: pending, fulfilled, and rejected.
+    3. Middleware: Redux Thunk middleware intercepts these thunks and executes them, allowing side effects to be handled.
+    
+- createSelector: This is a function that generates memoized selectors that will only recalculate results when the inputs change. It is used to create memoized selectors that can efficiently derive computed data from the RTK, ensuring that 
+  the computations are only done when the state slices involved in the selector change.
+  (Memoization ensures that a selector only recalculates its result if one of its input selectors has changed, which can significantly improve performance, especially with complex state transformations).
+  It takes one or more input selectors and an output selector. The output selector computes the derived state. The result is cached, and the output selector is only recomputed if the inputs change. By leveraging memoization, createSelector 
+  helps optimize performance, especially for complex state transformations, and makes your codebase more maintainable and readable. Here are the key reasons for using createSelector:
+    > Memoization: 
+      ~ Efficiency: createSelector memoizes the results of selector functions. This means that if the inputs to a selector haven't changed, it will return the cached result instead of recalculating. This avoids unnecessary recalculations and 
+        renders, improving the efficiency of your application.
+      ~ Performance: In large applications with complex state, recalculating derived data can be costly. Memoization ensures that computations are only performed when necessary.
+    > Compatibility: 
+      ~ Modularity: createSelector allows you to compose selectors from smaller selectors. This modular approach makes your code easier to read, maintain, and test.
+      ~ Reuse: You can reuse selectors across different parts of your application, promoting DRY (Don't Repeat Yourself) principles.
+    > Separation of Concerns:
+      ~ Logic Encapsulation: Selectors encapsulate the logic of extracting and transforming state data. This keeps your component code clean and focused on presentation logic, while selectors handle data manipulation.
+      ~ Centralized Logic: By defining data derivation logic in selectors, you ensure that changes to how data is derived are centralized, reducing the risk of bugs and making the logic easier to update.
+    > Improved Readability and Maintainability:
+      ~ Declarative Data Selection: Selectors provide a declarative way to specify what data your components need, making the data dependencies of your components explicit and easier to understand.
+      ~ Ease of Testing: Selectors can be tested independently of your components, allowing you to verify that data derivation logic is correct without involving the UI layer.
+  
+- createEntityAdapter: Generates a set of reusable reducers and selectors to manage normalized data in the store. In summary, the createEntityAdapter function in Redux Toolkit primarily accepts an object with two optional properties: 
+  selectId and sortComparer, allowing you to customize how entities are identified and sorted in your state.
+  It is a function that generates a set of prebuilt reducers and selectors for performing CRUD operations on a normalized state structure containing instances of a particular type of data object. These reducer functions may be passed as case 
+  reducers to createReducer and createSlice. They may also be used as "mutating" helper functions inside of createReducer and createSlice.
+    > "selectAll" is a selector that allows you to replace all the entities in the state with a new set of entities, effectively resetting the collection This can be particularly useful when you need to update the state with a new list of 
+      items, such as when fetching data from an API. It returns all entities in the collection as an array. It's a convenient way to access the entire list of entities stored in the normalized state.
+      To use selectAll, you need to first set up your entity adapter and include it in your Redux slice and store. It s a convenient way to retrieve all entities in your state as an array. It simplifies the process of accessing and 
+      displaying a list of entities in your application. By using selectAll, you can ensure that your component remains efficient and easy to read.
+  
+- createApi(): The core of RTK Query's functionality. It allows you to define a set of endpoints and describe how to retrieve data from a series of endpoints, including configuration of how to fetch and transform that data. In most cases, 
+  you should use this once per app, with "one API slice per base URL" as a rule of thumb.  
+    > "transformResponse" allows you to modify or process the response data before it is stored in the Redux state, and also manipulate the data returned by a query or mutation. In some cases, you may want to manipulate the data returned 
+      from a query before you put it in the cache. In this instance.
+    > "providesTags" facilitates efficient caching and automatic re-fetching of data. It is part of the caching mechanism that RTK Query uses to manage and invalidate cache entries. It allows you to define a list of tags that a query 
+      endpoint provides. These tags can then be used to invalidate or refetch data whenever certain mutations (like creating, updating, or deleting data) occur. By specifying tags, you enable RTK Query to automatically know which queries 
+      need to be re-fetched when related data changes, thus keeping your application state up-to-date with minimal manual intervention.
+    > "invalidatesTags" is used by mutation endpoints. Determines which cached data should be either re-fetched or removed from the cache. Expects the same shapes as providesTags.
+  
+- fetchBaseQuery(): A small wrapper around fetch that aims to simplify requests. Intended as the recommended baseQuery to be used in createApi for the majority of users.  
+  
+- createAction(): Generates an action creator function for the given action type string. It generates an action creator function. 
+  
+- createReducer(): That lets you supply a lookup table of action types to case reducer functions, rather than writing switch statements. In addition, it automatically uses the immer library to let you write simpler immutable updates with 
+  normal mutative code, like state.todos[3].completed = true.
+
+- combineSlices(): Combines multiple slices into a single reducer, and allows "lazy loading" of slices after initialisation.
+
+- setupListeners(): A utility used to enable refetchOnMount and refetchOnReconnect behaviors.
+  
+                                                                                               $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$  
+  
+- useSelector: Read data from the store. Allows you to extract data from the Redux store state for use in this component, using a selector function.
+  The selector will be called with the entire Redux store state as its only argument. The selector may return any value as a result, including directly returning a value that was nested inside state, or deriving new values. The return value 
+  of the selector will be used as the return value of the useSelector() hook.
+  The selector will be run whenever the function component renders (unless its reference hasn't changed since a previous render of the component so that a cached result can be returned by the hook without re-running the selector). 
+  useSelector() will also subscribe to the Redux store, and run your selector whenever an action is dispatched.
+  When an action is dispatched, useSelector() will do a reference comparison of the previous selector result value and the current result value. If they are different, the component will be forced to re-render. If they are the same, the 
+  component will not re-render. useSelector() uses strict === reference equality checks by default, not shallow equality (see the following section for more details).
+  You may call useSelector() multiple times within a single function component. Each call to useSelector() creates an individual subscription to the Redux store. Because of the React update batching behavior used in React Redux v7, a 
+  dispatched action that causes multiple useSelector()s in the same component to return new values should only result in a single re-render.
+
+- useDispatch: This hook returns a reference to the dispatch function from the Redux store. It returns the store's dispatch method to let you dispatch actions (which are into "reducers" or "createAsyncThunk").                                                                                                                
+  In react-redux, the useDispatch hook is used to obtain the dispatch function from the Redux store. This function allows you to dispatch actions to the Redux store, which then triggers the appropriate reducer functions to update the state.  
+
+- <ApiProvider />: Can be used as a Provider if you do not already have a Redux store.

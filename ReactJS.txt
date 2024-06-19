@@ -1,0 +1,117 @@
+                                                                                                                   React
+
+- Componentes (components): Es un conjunto de elementos que cumplen una función específica en la interfaz de usuario. Se utilizan para construir la jerarquía de todos esos elementos. Cada componente puede contener otros componentes como 
+  hijos. básicamente, las aplicaciones en React básicamente se construyen mediante los mismos. permiten separar la interfaz de usuario en piezas independientes, reutilizables y pensar en cada pieza de forma aislada.
+  
+- Propiedades (props): Son la forma que tiene React para pasar parámetros de un componente superior a sus hijos. Se utilizan para pasar datos de un componente padre a un componente hijo, manteniendo el flujo unidireccional 
+  de los datos. Las props son objetos que contienen datos específicos que un componente necesita para renderizarse correctamente. Esto permite la reutilización de componentes en diferentes partes de la aplicación con diferentes datos.
+  Si alguna prop es una función (callback), el componente hijo puede llamarla para provocar efectos secundarios en el componente padre.
+  
+- prop.childern: Children es una manera que tiene react de permitirnos proyectar/transcluir uno o más componentes dentro otro. Es ideal cuando necesitamos que un elemento quede dentro de otro, sin que sepan el uno del otro, y cuando   
+  necesitamos implementar patrones más complejos. La prop children es una prop especial que se pasa a los componentes. Es un objeto que contiene los elementos que envuelve un componente.
+  El concepto de children es la forma en que React nos permite incluir un componente dentro de otro sin que al padre le importe exactamente qué componente o componentes hijos están siendo incluidos. Los elementos hijos son aquellos que se 
+  colocan dentro de la etiqueta de apertura y cierre del componente y la prop “children” se utiliza para acceder y manipular estos elementos hijos desde dentro del componente padre. 
+  De esta manera, podemos crear componentes más flexibles y reutilizables que acepten contenido personalizado y que puedan renderizarlo de manera dinámica.        
+
+- return: The return method in React is a way to return data from a component. It returns the data that was passed into the component, which the parent component can then use. The return method is generally used when you want to return a 
+  single value from a component. For example, if you want to return the text of a button from a Component, you would use the return method.
+   
+    > When To Use The Return Method In React Js? The return method can be used in a few different situations. One example would be when you want to return a default value from a function. Another instance would be when you wish to return a 
+      value from a component used as a stateless functional component. You can also use the return method to return values from higher-order components.
+    > When To Not Use The Return Method In React Js? The return method should not be used when you need to return multiple values from a function. In this case, the render method should be used instead. Additionally, the return method should 
+      not be used when you need to call a function that is not in the same component. 
+    > 1) The return method can return any value. 2) The return method returns a value. 3) The return method is used when you want to reuse an existing component. 4) The return method is less commonly used.
+  
+- Componentes basados en funciones: Hoy en día todos los componentes de React se crean a partir de funciones, lo que hace que sea mucho más fácil de escribir el código y entenderlo. Antes aquellos componentes que se encargaban del 
+  funcionamiento de la app, se creaban a partir de la clase Components para poder implementar las características de los componentes de React. Lo que hacía más complejo el modelo mental.
+  Pueden recibir propiedades (props). Tienen la capacidad de hacer render de un único elemento. Aunque este elemento puede tener muchos elementos dentro. Pueden tener estados.
+    
+- Controlled vs Uncontrolled Components & Stateless vs Stateful Components: 
+    
+- Render de un único elemento: Los componentes deben retornar un solo elemento o componente, pero este elemento o componente sí puede tener más de un elemento o componente hijo. En caso de no necesitar que el elemento padre forme parte del 
+  árbol del DOM, se puede utilizar React.Fragment, o lo que es lo mismo utilizar un tag sin tipo <></>.
+  
+- Key: En REACT, debemos incluir en cada elemento la propiedad key, que marque la identidad del elemento. Es decir, debemos poner algo que se encuentre en el array u objeto pero que estemos seguros de que NO SE REPETIRA (lo mas recomendable    
+  seria el id, ya que este empieza desde 1 hasta un numero indefinido pero que siempre estara cambiando). Esto ayudará a react a optimizar el rendering ante cambios en el array. De no tenerla podemos auto-generarla con el index provisto por 
+  el segundo parámetro de map, pero sólo optimizará si hay adiciones al final del array. Whenever the key changes on a component, even if that component is not part of a list, whenever it changes, REACT will destroy the old component 
+  instance and create a new one.
+    
+- States: Los estados de un componente en React se utilizan para representar la información que puede cambiar durante la vida útil del componente y afectar su representación en la interfaz de usuario. Todo cambio de estado va inicializar el 
+  proceso de render a partir del nodo donde se produjo el cambio de estado y así se generará el nuevo Virtual DOM que luego será reconciliado. Los estados son un concepto de React, no de JavaScript, por lo que para implementarlo vamos a 
+  necesitar de los Hooks de React.
+  
+  El estado en React es una de las maneras en las que se procesan datos. Desde el punto de vista de los datos que React puede manejar, tenemos el objeto props, con el que podemos insertar todo tipo de propiedades a un elemento, y tenemos los 
+  estados. El estado es un objeto que contiene datos que pueden cambiar en el tiempo. En React, el estado se usa para controlar los cambios en la interfaz. El objeto props nos permite insertar datos estáticos. Con esto nos referimos a que 
+  pasamos propiedades a un componente o elemento que luego se renderiza o visualiza de una determinada manera, con base a los datos que le pasamos. Entonces, si necesitamos darle dinamismo a un elemento, es decir, datos que se modifiquen a 
+  lo largo del tiempo, necesitaremos utilizar el estado en React.
+  
+  El estado en React, también conocido como state, es el segundo tipo de dato que maneja esta librería de JavaScript. Mientras que las props son los datos que podemos pasarle a un componente o elemento React desde afuera, un estado se 
+  conforma por los datos internos que un componente puede manejar. A medida que estos datos son modificados, ya sea por una interacción del usuario o por una recepción de datos de la API, el estado será modificado. Entonces, cada cambio de 
+  ese estado provocará que el elemento o componente se renderice de nuevo con una nueva representación en pantalla.
+  
+  Ten presente que podemos utilizar un estado en cualquier tipo de componente o elemento, sea del nivel más bajo o el nivel más alto. Allá donde necesitemos datos que cambian a lo largo del tiempo, podemos utilizar un estado.
+
+- Render y efectos: El funcionamiento de React está estrechamente ligado al cambio de estados. Cuando se produce un cambio de estado, React ejecuta un nuevo proceso de renderizado para ese componente y, de manera recursiva, para todos sus 
+  componentes hijos. Durante este proceso React ejecuta de nuevo las funciones de los componentes para generar el nuevo árbol de elementos de la interfaz de usuario.  Dentro de los componentes podemos tener funciones para realizar diferentes 
+  tareas, como, por ejemplo, una llamada a una api para obtener datos. Si en cada render se ejecuta esta llamada a la API, quiere decir que un cambio de estado está provocando efectos secundarios y no controlarlos puede traernos problemas. 
+
+- side effects: Side effects can be fetching data from a remote server, reading or writing to local storage, setting up event listeners, or setting up a subscription. These side effects can occur when a button is clicked, a form is submitted 
+  or when a component is mounted and unmounted. React’s useEffecthook allows functional components to do things when a component is mounted or when some properties or states change. This hook also allows cleaning up when the component is 
+  unmounted.
+  
+- Server side rendering:
+
+- Hooks: Es una función especial que permite a los desarrolladores utilizar el estado y otras características de React en componentes de función, y utilizar las características de React en los componentes funcionales, en lugar de tener que 
+  usar la clase Component. Los hooks son funciones que se pueden usar dentro de los componentes funcionales para agregar funcionalidad adicional de React. Las caracteristicas de los Hooks son:
+    1) Comienzan con el prefijo “use” para que React pueda identificarlos y realizar validaciones.
+    2) Solamente pueden utilizarse dentro de componentes funcionales.
+    3) Deben ejecutarse siempre, es decir, en cada renderizado y el orden de ejecución debe ser siempre el mismo. No puede estar dentro de if, for, etc.
+    4) Deben ejecutarse siempre en el cuerpo de la función del componente, por lo que normalmente se los ejecuta al inicio.
+    5) Cuando los parametros del hook se quieran recuperar en una funcion a la que fueron mandados, se deben desestructurar. Es decir, poner como el siguiente ejemplo:  function Counter( {conteo, setConteo} ){
+    
+  Cualquier función que se declare con el prefijo “use”, React la tratará como un hook realizando las validaciones correspondientes y llamará a otros hooks dentro de esta función sin ser esta un componente, ya que si este hook padre cumple 
+  las validaciones y, dentro de él, los hooks cumplen los requisitos correspondientes, pasarán todas las validaciones y podrá ejecutarse sin problemas. A estos hooks declarados por el desarrollador para encapsular una lógica de componente 
+  específica se les llama custom hooks. Mientras el valor dentro del parentesis de useState no cambie (o se actualice), quiere decir que no se volvera a ejecutar la funcion, no hasta que haya un cambio.
+  
+  Lo más importante es que los hooks deben ser llamados únicamente en el nivel superior del componente funcional, nunca dentro de bucles, condiciones o funciones anidadas. 
+  Esto asegura que los hooks siempre sean llamados en el mismo orden en cada renderizado y mantener la relación con cada una de las fibras de React. 
+  También es importante tener en cuenta que los hooks no deben ser llamados desde funciones regulares. Si se llama a un hook desde una función regular, se producirá un error en tiempo de ejecución. 
+  React detecta que una función es un componente gracias a la convención PascalCase utilizada para nombrarlos.
+      
+    > Hooks de estado: El estado permite que un componente «recuerde» información como la entrada de un usuario. Por ejemplo, un componente de formulario puede utilizar un estado para guardar la entrada del valor mientras que un componente 
+      de galería de imágenes puede utilizar un estado para guardar el índice de la imagen seleccionada.
+      
+    > Hooks de contexto: El contexto permite a un componente recibir información de padres lejanos sin pasarlas como props. Por ejemplo, el componente en el nivel superior de tu aplicación puede pasar el actual tema de la UI a todos los 
+      componentes dentro, sin importar la profundidad dentro del componente.
+    
+    > Hooks de refs: Las refs le permiten a un componente mantener alguna información que no es utilizada para el renderizado como un nodo del DOM o el ID de un timeout. A diferencia del estado, actualizar una ref no vuelve a renderizar tu 
+      componente. Las refs son una «puerta de escape» del paradigma de React. Son útiles cuando necesitas trabajar con sistemas distintos de React, como las APIs integradas del navegador.
+
+    > Hooks de Efecto: El Hook de Efecto permite a un componente conectarse y sincronizarse con sistemas externos. Esto incluye lidiar con la red, el DOM del navegador, animaciones, widgets escritos utilizando una biblioteca de UI diferente 
+      y otro código que no es de React.
+
+    > Hooks de rendimiento: Una forma común de optimizar el rendimiento del rerenderizado es evitar trabajo innecesario. Por ejemplo, puedes decirle a React que reutilice un cálculo guardado en caché o que se salte un rerenderizado si los 
+      datos no han cambiado desde el renderizado anterior. Para evitar cálculos y renderizados innecesarios, usa uno de estos Hooks:
+
+    > Otros: Algunas veces no podrás evitar un rerenderizado porque la pantalla realmente necesita una actualización. En ese caso, puedes mejorar el rendimiento separando las actualizaciones bloqueantes que deben ser síncronas (como al
+      escribir dentro de una entrada de texto) de las actualizaciones no bloqueantes, que no necesitan bloquear la interfaz de usuario (como actualizar un gráfico). Para priorizar el renderizado, puedes usar: useTransition y useDeferredValue
+    
+    > Custom hooks: Los custom hooks en React son un tipo de función JavaScript que simula el funcionamiento de los hooks en React. Los custom hooks en React son muy útiles siempre que tengamos una lógica que se repite entre varios componen
+      En estos casos, podemos sacar esta lógica y aplicarla a un custom hook, es decir, una función que ejecute los pasos que necesitamos de manera automática.
+      Al no ser funciones cualquiera, los custom hooks en React deben seguir una serie de reglas para ser considerados hooks y no funciones. A continuación, te explicamos cuáles son.
+       ~ El nombre empieza por «use»: La primera regla de los custom hooks en React es que su nombre debe empezar con la palabra use. Esta convención se crea siguiendo los hooks originales de React (useEffect, useState, useRef) y los 
+         posteriores hooks en React Router (useParams, useLocation, useNavigate). Se considera que esto es una regla porque la comunidad ha decidido que es más sencillo reconocer un custom hook cuando sigue esta norma. Sin embargo, en teoría 
+         podrías crear uno con otro nombre.
+       ~ Puede llamar a otros hooks: Lo que realmente tienen de particular los custom hooks en React es que pueden llamar a otros hooks. En este orden de ideas, React considera como custom hook a aquella función que dentro llama a un hook 
+         original o a otro custom hook.
+       ~ Los custom hooks en React son muy útiles para extraer funcionalidades, hacer refactors y mantener nuestros componentes más simplificados. Esto es especialmente común cuando tenemos componentes que llaman a una API para obtener un 
+         dato, lo meten en un estado y ejecutan una acción determinada con él. Todos estos pasos, que al final son muy repetitivos, se simplifican con el uso de custom hooks.
+       ~ Cuando creamos un custom hook, este puede ser utilizado en diferentes components. Y si este custom hook tiene un useState, al momento de utilizar dicho hook en 2 o mas diferentes components, los estados de cada componente no se 
+         relacionaran los unos con los otros. Es decir, si cambia el estado en un custom hook utilizado en un componente, los estados del otro componente no se veran afectados aunque se utilice el mismo custom hook.
+
+- forwardRef: 
+
+- createPortal: En React, createPortal se utiliza para renderizar un componente o elementos hijos fuera de la jerarquía del DOM del componente padre. Esto es útil en situaciones donde necesitas que un componente se renderice en una parte 
+  diferente del DOM, como para modales, tooltips, y popovers, que suelen necesitar estar en un nivel superior del DOM para evitar problemas de estilos y posicionamiento.
+  
+- useImperativeHandle: 

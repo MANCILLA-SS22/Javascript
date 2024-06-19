@@ -1,18 +1,23 @@
-// add imports
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash, faUpload } from '@fortawesome/free-solid-svg-icons'
-import { useState } from "react"
+import { useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faUpload } from '@fortawesome/free-solid-svg-icons';
+import { useGetTodosQuery, useUpdateTodoMutation, useDeleteTodoMutation, useAddTodoMutation } from "../api/apiSlice";
 
-const TodoList = () => {
-    const [newTodo, setNewTodo] = useState('')
+function TodoList() {
+    const [newTodo, setNewTodo] = useState('');
 
-    function handleSubmit (e){
+    const { data: todos, isLoading, isSuccess, isError, error } = useGetTodosQuery(); //useGetTodosQuery provides the following parameters. On the other hand, the other hooks provides only one parameter which can be named in any way.
+    const [addTodo] = useAddTodoMutation();
+    const [updateTodo] = useUpdateTodoMutation();
+    const [deleteTodo] = useDeleteTodoMutation();
+
+    function handleSubmit(e) {
         e.preventDefault();
-        //addTodo
+        addTodo({ userId: 1, title: newTodo, completed: false });
         setNewTodo('');
     }
 
-    const newItemSection =
+    const newItemSection = (
         <form onSubmit={handleSubmit}>
             <label htmlFor="new-todo">Enter a new todo item</label>
             <div className="new-todo">
@@ -22,10 +27,26 @@ const TodoList = () => {
                 <FontAwesomeIcon icon={faUpload} />
             </button>
         </form>
-
+    );
 
     let content;
-    // Define conditional content
+    if (isLoading) content = <p>Loading...</p>
+    if (isError) content = <p>{error}</p>;
+    if (isSuccess) {
+        content = todos.map(function(todo) { //JSON.stringify(data)
+            return (
+                <article key={todo.id}>
+                    <div className="todo">
+                        <input type="checkbox" checked={todo.completed} id={todo.id} onChange={() => updateTodo({ ...todo, completed: !todo.completed })} />
+                        <label htmlFor={todo.id}>{todo.title}</label>
+                    </div>
+                    <button className="trash" onClick={() => deleteTodo({ id: todo.id })}>
+                        <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                </article>
+            );
+        })
+    }
 
     return (
         <main>
@@ -35,4 +56,4 @@ const TodoList = () => {
         </main>
     )
 }
-export default TodoList
+export default TodoList;

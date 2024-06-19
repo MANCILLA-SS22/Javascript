@@ -1,10 +1,13 @@
+//Using react-toolkit, thunks and axios, without redux query. If you want to use this file, then you should ignore postSlice.js
 import { createSlice, createAsyncThunk, createSelector, createEntityAdapter } from "@reduxjs/toolkit";
 import axios from "axios";
 import { sub } from "date-fns";
 
 const POSTS_URL = 'https://jsonplaceholder.typicode.com/posts';
-const postsAdapter = createEntityAdapter({ sortComparer: (a, b) => b.date.localeCompare(a.date) }); 
-const initialState = postsAdapter.getInitialState({ /* posts: [],  */status: "idle", error: null, count: 0 }); //We comment out the "posts" parameter because our initial state will already (even if we didn't put anything in it) return the normalized object where we have an array of the items ids, and then we have the  that entities object that will actually have all the items.
+const postsAdapter = createEntityAdapter({
+    // selectId: (state => state.userId), //This line of code is useful to display all post in the app according to their ID's. 
+    sortComparer: (a, b) => b.date.localeCompare(a.date)
+});
 const { selectAll: selectAllPosts, selectById: selectPostById, selectIds: selectPostIds } = postsAdapter.getSelectors(state => state.posts); //getSelectors creates these selectors and we rename them with aliases using destructuring so they match up with our existing code.
 const selectUsersState = (state, userId) => userId;
 //const selectPostById = (state, postId) => state.posts.posts.find(post => post.id === postId);
@@ -19,7 +22,7 @@ const selectPostsByUser = createSelector(                            //(1)
     (posts, userId) => posts.filter(post => post.userId === userId)  //(3)
 );
 
-const fetchPosts = createAsyncThunk('posts/fetchPosts', async function () { 
+const fetchPosts = createAsyncThunk('posts/fetchPosts', async function () {
     const response = await axios.get(POSTS_URL);
     return response.data;
 });
@@ -53,7 +56,7 @@ const deletePost = createAsyncThunk('posts/deletePost', async function (initialP
 
 const postsSlice = createSlice({
     name: "posts",
-    initialState: initialState,
+    initialState: postsAdapter.getInitialState({ /* posts: [],  */status: "idle", error: null, count: 0 }), //We comment out the "posts" parameter because our initial state will already (even if we didn't put anything in it) return the normalized object where we have an array of the items ids, and then we have the  that entities object that will actually have all the items.
     reducers: {
         /* //Customizing Generated Action Creators
         postAdded: {
@@ -85,70 +88,65 @@ const postsSlice = createSlice({
     },
     extraReducers(builder) {
         builder
-        .addCase(fetchPosts.pending, function(state, action){
-            state.status = 'loading';
-        })
-        .addCase(fetchPosts.fulfilled, function (state, action) { //When we get fetchPosts.fulfilled, the "fetchPosts" function is executed first and then return an answer in "action.payload". After that, the rest of the code is executed
-            state.status = 'succeeded';
-            let min = 1;
-            const loadedPosts = action.payload.map(function (post){ // Adding date and reactions
-                post.date = sub(new Date(), { minutes: min++ }).toISOString();
-                post.reactions = { thumbsUp: 0, wow: 0, heart: 0, rocket: 0, coffee: 0 };
-                return post;
-            });
-            // state.posts = state.posts.concat(loadedPosts);// Add any fetched posts to the array
-            postsAdapter.upsertMany(state, loadedPosts)
-        })
-        .addCase(fetchPosts.rejected, function(state, action){
-            state.status = 'failed';
-            state.error = action.error.message;
-        })
-        .addCase(addNewPost.fulfilled, function (state, action) {
-            const sortedPosts = state.posts.sort((a, b) => { // Fix for API post IDs: Creating sortedPosts & assigning the id would be not be needed if the fake API returned accurate new post IDs
-                if (a.id > b.id) return 1
-                if (a.id < b.id) return -1
-                return 0
-            });
-            action.payload.id = sortedPosts[sortedPosts.length - 1].id + 1;
-            action.payload.userId = Number(action.payload.userId); // End fix for fake API post IDs 
-            action.payload.date = new Date().toISOString();
-            action.payload.reactions = { thumbsUp: 0, wow: 0, heart: 0, rocket: 0, coffee: 0 };
-            console.log(action.payload);
-            // state.posts.push(action.payload);
-            postsAdapter.addOne(state, action.payload);
-        })
-        .addCase(updatePost.fulfilled, function(state, action){
-            if (!action.payload?.id) {
-                console.log('Update could not complete', action.payload);
-                return;
-            }
-            action.payload.date = new Date().toISOString();
-            // const { id } = action.payload;
-            // const posts = state.posts.filter(post => post.id !== id);
-            // state.posts = [...posts, action.payload];
-            postsAdapter.upsertOne(state, action.payload);
-        })
-        .addCase(deletePost.fulfilled, function(state, action){
-            if (!action.payload?.id){
-                console.log('Delete could not complete', action.payload);
-                return;
-            }
-            const { id } = action.payload;
-            // state.posts = state.posts.filter(post => post.id !== id);
-            postsAdapter.removeOne(state, id)
-        })
+            .addCase(fetchPosts.pending, function (state, action) {
+                state.status = 'loading';
+            })
+            .addCase(fetchPosts.fulfilled, function (state, action) { //When we get fetchPosts.fulfilled, the "fetchPosts" function is executed first and then return an answer in "action.payload". After that, the rest of the code is executed
+                state.status = 'succeeded';
+                let min = 1;
+                const loadedPosts = action.payload.map(function (post) { // Adding date and reactions
+                    post.date = sub(new Date(), { minutes: min++ }).toISOString();
+                    post.reactions = { thumbsUp: 0, wow: 0, heart: 0, rocket: 0, coffee: 0 };
+                    return post;
+                });
+                // state.posts = state.posts.concat(loadedPosts);// Add any fetched posts to the array
+                postsAdapter.upsertMany(state, loadedPosts)
+            })
+            .addCase(fetchPosts.rejected, function (state, action) {
+                state.status = 'failed';
+                state.error = action.error.message;
+            })
+            .addCase(addNewPost.fulfilled, function (state, action) {
+                const sortedPosts = state.posts.sort((a, b) => { // Fix for API post IDs: Creating sortedPosts & assigning the id would be not be needed if the fake API returned accurate new post IDs
+                    if (a.id > b.id) return 1
+                    if (a.id < b.id) return -1
+                    return 0
+                });
+                action.payload.id = sortedPosts[sortedPosts.length - 1].id + 1;
+                action.payload.userId = Number(action.payload.userId); // End fix for fake API post IDs 
+                action.payload.date = new Date().toISOString();
+                action.payload.reactions = { thumbsUp: 0, wow: 0, heart: 0, rocket: 0, coffee: 0 };
+                console.log(action.payload);
+                // state.posts.push(action.payload);
+                postsAdapter.addOne(state, action.payload);
+            })
+            .addCase(updatePost.fulfilled, function (state, action) {
+                if (!action.payload?.id) {
+                    console.log('Update could not complete', action.payload);
+                    return;
+                }
+                action.payload.date = new Date().toISOString();
+                // const { id } = action.payload;
+                // const posts = state.posts.filter(post => post.id !== id);
+                // state.posts = [...posts, action.payload];
+                postsAdapter.upsertOne(state, action.payload);
+            })
+            .addCase(deletePost.fulfilled, function (state, action) {
+                if (!action.payload?.id) {
+                    console.log('Delete could not complete', action.payload);
+                    return;
+                }
+                const { id } = action.payload;
+                // state.posts = state.posts.filter(post => post.id !== id);
+                postsAdapter.removeOne(state, id)
+            })
     }
 });
 
 const postsReducer = postsSlice.reducer;
 const postsActions = postsSlice.actions;
 
-export { 
-    postsReducer, postsActions, 
-    selectAllPosts, selectPostById, selectPostIds, selectPostsByUser,
-    getPostsStatus, getPostsError, getCount,
-    fetchPosts, addNewPost, updatePost, deletePost 
-};
+export { postsReducer, postsActions, selectAllPosts, selectPostById, selectPostIds, selectPostsByUser, getPostsStatus, getPostsError, getCount, fetchPosts, addNewPost, updatePost, deletePost };
 
 //Steps to uunderstand the use of createSelector
 //(1) createSelector is a function that generates memoized selectors that will only recalculate results when the inputs change. It accepts one or more input functions and and they've got to be inside of an array.

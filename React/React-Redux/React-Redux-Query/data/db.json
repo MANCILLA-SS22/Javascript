@@ -880,7 +880,7 @@
       "userId": 8,
       "id": 151,
       "title": "accusamus adipisci dicta qui quo ea explicabo sed vero",
-      "completed": true
+      "completed": false
     },
     {
       "userId": 8,
@@ -1175,12 +1175,6 @@
       "id": 200,
       "title": "ipsam aperiam voluptates qui",
       "completed": false
-    },
-    {
-      "userId": 1,
-      "title": "New todo!",
-      "completed": false,
-      "id": 201
     }
   ]
 }

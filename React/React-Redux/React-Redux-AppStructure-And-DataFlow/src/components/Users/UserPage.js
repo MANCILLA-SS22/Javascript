@@ -28,7 +28,7 @@ function UserPage(){
 
 export default UserPage;
 
-//We select all post with "selectAllPosts" and then we're returning all posts but it's filtered. So, we're running into a problem whenever we use "fitler" (nothing wrong with "filter") 
+//We select all post with "re returning all posts but it's filtered. So, we're running into a problem whenever we use "fitler" (nothing wrong with "filter") 
 //because it just returns a new array every time and useSelector will run every time an action is dispatched, and so when we dispatch that increase count in the Header, then whe useSelector
 //runs again and it forces a componenet to re-render if a new value reference is returned. We're returning a new value everu time with filter so that's why we're rendering the UserPage.
 //What we really need is a way to only calculate the new filtered array if either state.posts or userId have changed. If they haven't changed, we want to return the same filtered array reference as the last time.
