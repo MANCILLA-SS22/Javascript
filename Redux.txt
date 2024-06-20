@@ -78,6 +78,15 @@
   client and persisted on the server. User is an "entity" - a unique type of data object that the application uses. Each unique instance of an entity is assumed to have a unique ID value in a specific field.
 
 - Memoization: Storing the results of expensive function calls and returning the cached result when the same inputs occur again.
+  Memoization in RTK Query refers to the process of caching the results of a function so that if the function is called again with the same arguments, the cached result is returned instead of recalculating the result. This is particularly 
+  useful in reducing redundant network requests and improving performance by reusing previously fetched data. In the context of RTK Query (Redux Toolkit Query), memoization helps in the following ways:
+    > Caching Requests: When a query is made, RTK Query caches the response. If the same query is requested again with the same parameters, RTK Query returns the cached response instead of making a new network request. This reduces 
+      unnecessary API calls and speeds up the application.
+    > Selective Refetching: RTK Query can be configured to refetch data only when specific conditions are met (e.g., after a certain time has passed or when the data becomes stale). This ensures that the application has the latest data 
+      without overwhelming the server with requests.
+    > Avoiding Recalculation: By memoizing query results, RTK Query avoids recalculating the data when the input parameters haven't changed. This leads to more efficient data management and rendering in the application.
+
+    
 
 - Normalization: It refers to the process of structuring your Redux state in a flat and organized manner, rather than deeply nested. This concept is borrowed from database design, where data is stored in a way that minimizes redundancy and 
   ensures consistency.
@@ -94,6 +103,13 @@
 
 - configureStore(): The standard method for creating a Redux store. It wraps createStore to provide simplified configuration options and good defaults. It can automatically combine your slice reducers, adds whatever Redux middleware you 
   supply, includes redux-thunk by default. It accepts a reducer function as a named argument and automatically sets up the store with good default settings.
+    > "reducer": A callback which will receive getDefaultMiddleware as its argument, and should return a middleware array. If this option is provided, it should return all the middleware functions you want added to the store. configureStore 
+      will automatically pass those to applyMiddleware. If not provided, configureStore will call getDefaultMiddleware and use the array of middleware functions it returns.
+    > "middleware": A callback which will receive getDefaultMiddleware as its argument, and should return a middleware array. If this option is provided, it should return all the middleware functions you want added to the store. 
+      configureStore will automatically pass those to applyMiddleware. If not provided, configureStore will call getDefaultMiddleware and use the array of middleware functions it returns.
+        ~ getDefaultMiddleware: Returns an array containing the default list of middleware. By default, configureStore adds some middleware to the Redux store setup automatically If you want to customize the list of middleware, you can supply 
+          an array of middleware functions to configureStore.When you supply the middleware option, you are responsible for defining all the middleware you want added to the store. configureStore will not add any extra middleware beyond what 
+          you listed. It's useful if you want to add some custom middleware, but also still want to have the default middleware added as well.
 
 - createSlice(): Accepts an object of reducer functions, a slice name, and an initial state value, and automatically generates a slice reducer with corresponding action creators and action types. This function is a more powerful and 
   convenient way to define a slice of the state, including action creators and reducers. It automatically generates action types and action creators based on the reducer functions you provide.
@@ -128,10 +144,12 @@
   selectId and sortComparer, allowing you to customize how entities are identified and sorted in your state.
   It is a function that generates a set of prebuilt reducers and selectors for performing CRUD operations on a normalized state structure containing instances of a particular type of data object. These reducer functions may be passed as case 
   reducers to createReducer and createSlice. They may also be used as "mutating" helper functions inside of createReducer and createSlice.
+  
     > "selectAll" is a selector that allows you to replace all the entities in the state with a new set of entities, effectively resetting the collection This can be particularly useful when you need to update the state with a new list of 
       items, such as when fetching data from an API. It returns all entities in the collection as an array. It's a convenient way to access the entire list of entities stored in the normalized state.
       To use selectAll, you need to first set up your entity adapter and include it in your Redux slice and store. It s a convenient way to retrieve all entities in your state as an array. It simplifies the process of accessing and 
       displaying a list of entities in your application. By using selectAll, you can ensure that your component remains efficient and easy to read.
+   > ".getSelectors()" Can create a set of memoized selectors based on the location of this entity state.
   
 - createApi(): The core of RTK Query's functionality. It allows you to define a set of endpoints and describe how to retrieve data from a series of endpoints, including configuration of how to fetch and transform that data. In most cases, 
   you should use this once per app, with "one API slice per base URL" as a rule of thumb.  
@@ -140,9 +158,12 @@
     > "providesTags" facilitates efficient caching and automatic re-fetching of data. It is part of the caching mechanism that RTK Query uses to manage and invalidate cache entries. It allows you to define a list of tags that a query 
       endpoint provides. These tags can then be used to invalidate or refetch data whenever certain mutations (like creating, updating, or deleting data) occur. By specifying tags, you enable RTK Query to automatically know which queries 
       need to be re-fetched when related data changes, thus keeping your application state up-to-date with minimal manual intervention.
-    > "invalidatesTags" is used by mutation endpoints. Determines which cached data should be either re-fetched or removed from the cache. Expects the same shapes as providesTags.
+    > "invalidatesTags" is used by mutation endpoints. Determines which cached data should be either re-fetched or removed from the cache. Expects the same shapes as providesTags. For example, if we add, update or eliminate a new element, 
+       we'll have to find a way to display it on the screen without reloading our app. So, "invalidatesTags" takes the obsolete cache values and will invalidate them so that it can extract the new values from the server (without reloading).
+    > "keepUnusedDataFor" Defaults to 60 (this value is in seconds). This is how long RTK Query will keep your data cached for after the last component unsubscribes. For example, if you query an endpoint, then unmount the component, then 
+      mount another component that makes the same request within the given time frame, the most recent value will be served from the cache. It may be used either inside "endpoints" or outside (together with reducerPath).
   
-- fetchBaseQuery(): A small wrapper around fetch that aims to simplify requests. Intended as the recommended baseQuery to be used in createApi for the majority of users.  
+- fetchBaseQuery(): A small wrapper around fetch that aims to simplify requests. Intended as the recommended baseQuery to be used in createApi for the majority of users. It's an optimal way to replace axios or "fetch". Avoiding complex logic.
   
 - createAction(): Generates an action creator function for the given action type string. It generates an action creator function. 
   

@@ -8,7 +8,9 @@ const postsAdapter = createEntityAdapter({
     // selectId: (state => state.userId), //This line of code is useful to display all post in the app according to their ID's. 
     sortComparer: (a, b) => b.date.localeCompare(a.date)
 });
-const { selectAll: selectAllPosts, selectById: selectPostById, selectIds: selectPostIds } = postsAdapter.getSelectors(state => state.posts); //getSelectors creates these selectors and we rename them with aliases using destructuring so they match up with our existing code.
+
+//getSelectors creates these selectors and we rename them with aliases using destructuring so they match up with our existing code.
+const { selectAll: selectAllPosts, selectById: selectPostById, selectIds: selectPostIds } = postsAdapter.getSelectors(state => state.posts);
 const selectUsersState = (state, userId) => userId;
 //const selectPostById = (state, postId) => state.posts.posts.find(post => post.id === postId);
 

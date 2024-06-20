@@ -5,7 +5,7 @@ const apiSlice = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3500' }),
     tagTypes: ['Todos'],
     endpoints: (builder) => ({
-        getTodos: builder.query({ //Only the "get" method use builder.query. The rest of the methods will use builder.mutation due to the fact that they can change the data we're not just requesting or querying the data.
+        getTodos: builder.query({
             query: () => '/todos',
             transformResponse: res => res.sort((a, b) => b.id - a.id),
             providesTags: ['Todos']

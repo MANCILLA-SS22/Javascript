@@ -23,9 +23,10 @@ const usersApiSlice = apiSlice.injectEndpoints({
     }
 });
 
-const { useGetUsersQuery } = usersApiSlice;
-const selectUsersResult = usersApiSlice.endpoints.getUsers.select(); // returns the query result object
-const selectUsersData = createSelector(selectUsersResult, function (usersResult) { return usersResult.data }); // Creates memoized selector.
-const { selectAll: selectAllUsers, selectById: selectUserById, selectIds: selectUserIds } = usersAdapter.getSelectors(state => selectUsersData(state) ?? initialState); // Pass in a selector that returns the posts slice of state
+const selectUsersResult = usersApiSlice.endpoints.getUsers.select();
+const selectUsersResultData = (usersResult) => usersResult.data;
+const selectUsersData = createSelector(selectUsersResult, selectUsersResultData);
+const { selectAll: selectAllUsers, selectById: selectUserById, selectIds: selectUserIds } = usersAdapter.getSelectors(state => selectUsersData(state) ?? initialState);
 
-export { usersApiSlice, useGetUsersQuery, selectUsersResult, selectUsersData, selectAllUsers, selectUserById, selectUserIds };
+export const { useGetUsersQuery } = usersApiSlice;
+export { usersApiSlice, selectUsersResult, selectAllUsers, selectUserById, selectUserIds };
