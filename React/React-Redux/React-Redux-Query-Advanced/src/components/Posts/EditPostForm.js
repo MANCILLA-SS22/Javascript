@@ -10,7 +10,7 @@ function EditPostForm() {
     const navigate = useNavigate();
 
     const [updatePost, { isLoading }] = useUpdatePostMutation();
-    const [deletePost] = useDeletePostMutation()
+    const [deletePost] = useDeletePostMutation();
 
     const post = useSelector((state) => selectPostById(state, Number(postId)));
     const users = useSelector(selectAllUsers);

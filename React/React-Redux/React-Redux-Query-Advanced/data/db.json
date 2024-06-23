@@ -904,6 +904,20 @@
       "body": "check one two three",
       "userId": 2,
       "date": "2022-04-26T23:03:52.299Z"
+    },
+    {
+      "id": "26ef",
+      "title": "C++",
+      "body": "New programming course!",
+      "userId": 4,
+      "date": "2024-06-22T20:14:30.493Z",
+      "reactions": {
+        "thumbsUp": 0,
+        "wow": 0,
+        "heart": 0,
+        "rocket": 0,
+        "coffee": 0
+      }
     }
   ]
 }

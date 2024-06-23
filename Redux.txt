@@ -1,5 +1,16 @@
                                                                                                                    Redux-Toolkit & React-Redux
 
+https://redux.js.org/usage/deriving-data-selectors
+https://redux-toolkit.js.org/api/createSlice#reducers
+https://redux-toolkit.js.org/rtk-query/usage/automated-refetching#definitions 
+https://redux-toolkit.js.org/rtk-query/api/createApi#tagtypes
+https://redux-toolkit.js.org/rtk-query/usage/queries#selecting-data-from-a-query-result
+https://redux-toolkit.js.org/rtk-query/usage/mutations
+https://redux-toolkit.js.org/rtk-query/usage/manual-cache-updates#optimistic-updates
+https://redux-toolkit.js.org/rtk-query/api/created-api/hooks#usequery
+https://redux-toolkit.js.org/rtk-query/usage/queries
+https://redux-toolkit.js.org/rtk-query/usage/customizing-queries
+
 - Provider: The <Provider> component makes the Redux store available to any nested components that need to access the Redux store. Since any React component in a React Redux app can be connected to the store, most applications will render a 
   <Provider> at the top level, with the entire app’s component tree inside of it. Typically, you only need to pass <Provider store={store}>.
   
@@ -77,6 +88,8 @@
   For example, in a blogging application, you might have User, Post, and Comment data objects, with many instances of each being stored in the 
   client and persisted on the server. User is an "entity" - a unique type of data object that the application uses. Each unique instance of an entity is assumed to have a unique ID value in a specific field.
 
+- Query: 
+
 - Memoization: Storing the results of expensive function calls and returning the cached result when the same inputs occur again.
   Memoization in RTK Query refers to the process of caching the results of a function so that if the function is called again with the same arguments, the cached result is returned instead of recalculating the result. This is particularly 
   useful in reducing redundant network requests and improving performance by reusing previously fetched data. In the context of RTK Query (Redux Toolkit Query), memoization helps in the following ways:
@@ -86,7 +99,8 @@
       without overwhelming the server with requests.
     > Avoiding Recalculation: By memoizing query results, RTK Query avoids recalculating the data when the input parameters haven't changed. This leads to more efficient data management and rendering in the application.
 
-    
+-Tags: They are just a name that you can give to a specific collection of data to control caching and invalidation behavior for re-fetching purposes. It can be considered as a 'label' attached to cached data that is read after a mutation, to 
+ decide whether the data should be affected by the mutation.   
 
 - Normalization: It refers to the process of structuring your Redux state in a flat and organized manner, rather than deeply nested. This concept is borrowed from database design, where data is stored in a way that minimizes redundancy and 
   ensures consistency.
@@ -97,8 +111,50 @@
   In a normalized state, entities are stored in a flat structure, typically using an object where keys are entity IDs and values are the entity objects. Additionally, an array of IDs is maintained to keep track of the 
   order of entities. Normalized state structure is a recommended approach for storing items, and normalization means no duplication of data and it also means keeping the items stored in a lookup table by item id.
   
-- Optimistic update:   
-
+- Error handling: If your query or mutation happens to throw an error when using fetchBaseQuery, it will be returned in the error property of the respective hook. The component will re-render when that occurs, and you can show appropriate UI 
+  based on the error data if desired. Some Error Display Examples are "Query Error" and "Mutation Error". If you need to access the error or success payload immediately after a mutation, you can chain .unwrap().  
+  
+- Manual Cache Updates: There are use cases when manual cache updates are necessary, such as "optimistic" or "pessimistic" updates, or modifying data as part of cache entry lifecycles. RTK Query exports thunks for these use cases, attached to 
+  api.utils: updateQueryData and upsertQueryData. Since these are thunks, you can dispatch them anywhere you have access to dispatch. They're both utility functions that allow you to directly manipulate the cached data for a given query. 
+    > Updating existing cache entries: For updates of existing cache entries, use updateQueryData. updateQueryData is strictly intended to perform updates to existing cache entries, not create new entries. If an updateQueryData thunk action 
+      is dispatched and the endpointName + args combination that does not match any existing cache entry, the provided recipe callback will not be called, and no patches or inversePatches will be returned.
+      Use cases for manual update of cache entries:
+        ~ Providing immediate feedback to the user when a mutation is attempted
+        ~ After a mutation, updating a single item in a large list of items that is already cached, rather than re-fetching the whole list
+        ~ Debouncing a large number of mutations with immediate feedback as though they are being applied, followed by a single request sent to the server to update the debounced attempts
+    > Creating new cache entries or replacing existing ones: To create or replace existing cache entries, use upsertQueryData. upsertQueryData is intended to perform replacements to existing cache entries or creation of new ones. Since 
+      upsertQueryData does not have access to the previous state of the cache entry, the update may be performed only as a replacement. In comparison, updateQueryData allows patching of the existing cache entry, but cannot create a new one.
+      One example use case is pessimistic updates. If the client makes an API call to create a Post, the backend could return its complete data including the id. Then we can use upsertQueryData to create a new cache entry for the 
+      getPostById(id) query, preventing an extra fetch to retrieve the item later.
+      
+- Optimistic updates: It's used when we wish to perform an update to cache data immediately after a mutation is triggered (assuming that the server operation will succeed). If the operation fails, the changes are reverted. This can be a 
+  useful pattern for when you want to give the user the impression that their changes are immediate, even while the mutation request is still in flight. We should use optimistic updates when: 
+   > Enhanced User Experience: When you want the application to feel more responsive and immediate, providing feedback to the user without waiting for server confirmation.
+   > Low Failure Rate: When server operations have a high success rate and errors are rare.
+   > Non-Critical Data: When the data being updated is not critical or when temporary inconsistencies can be tolerated.
+   > Undo Functionality: When you provide an option to undo actions, allowing users to revert changes if something goes wrong.  
+  The core concepts for an optimistic update are:
+   > when you start a query or mutation, onQueryStarted will be executed
+   > you manually update the cached data by dispatching api.util.updateQueryData within onQueryStarted
+   > then,in the case that queryFulfilled rejects: you roll it back via the .undo property of the obj you got back from the earlier dispatch, or, you invalidate the cache data via api.util.invalidateTags to trigger a full re-fetch of the data
+  Where many mutations are potentially triggered in short succession causing overlapping requests, you may encounter race conditions if attempting to roll back patches using the .undo property on failures. For these scenarios, it is often 
+  simplest and safest to invalidate the tags on error instead, and re-fetch truly up-to-date data from the server.
+   
+- Pessimistic updates: It's used when we wish to perform an update to cache data based on the response received from the server after a mutation is triggered. It waits for the server operation to complete before updating the UI. The UI is 
+  only updated if the operation succeeds. The distinction between a pessimistic update and an optimistic update is that the pessimistic update will instead wait for the response from the server prior to updating the cached data. Basically, it 
+  wait for the server operation to complete before updating the UI. The UI is only updated if the operation succeeds. We should use pessimistic updates when: 
+   > High Failure Rate: When server operations frequently fail, and it’s crucial to ensure data consistency.
+   > Critical Data: When updating critical data where consistency and accuracy are paramount.
+   > Complex Error Handling: When the failure of the operation requires complex error handling or user intervention.
+   > Real-Time Synchronization: When you need to ensure the client state is always synchronized with the server state.
+  The core concepts for a pessimistic update are:
+   > when you start a query or mutation, onQueryStarted will be executed
+   > you await queryFulfilled to resolve to an object containing the transformed response from the server in the data property
+   > you manually update the cached data by dispatching api.util.updateQueryData within onQueryStarted, using the data in the response from the server for your draft updates
+   > you manually create a new cache entry by dispatching api.util.upsertQueryData within onQueryStarted, using the complete Post object returned by backend.
+  
+  
+  
                                                                                                $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 - configureStore(): The standard method for creating a Redux store. It wraps createStore to provide simplified configuration options and good defaults. It can automatically combine your slice reducers, adds whatever Redux middleware you 
@@ -122,10 +178,23 @@
     3. Middleware: Redux Thunk middleware intercepts these thunks and executes them, allowing side effects to be handled.
     
 - createSelector: This is a function that generates memoized selectors that will only recalculate results when the inputs change. It is used to create memoized selectors that can efficiently derive computed data from the RTK, ensuring that 
-  the computations are only done when the state slices involved in the selector change.
+  the computations are only done when the state slices involved in the selector change. If the generated output selector is called multiple times, the output will only be recalculated when the extracted values have changed.
   (Memoization ensures that a selector only recalculates its result if one of its input selectors has changed, which can significantly improve performance, especially with complex state transformations).
-  It takes one or more input selectors and an output selector. The output selector computes the derived state. The result is cached, and the output selector is only recomputed if the inputs change. By leveraging memoization, createSelector 
-  helps optimize performance, especially for complex state transformations, and makes your codebase more maintainable and readable. Here are the key reasons for using createSelector:
+  It takes one or more input selectors (An array of input selectors, can also be passed as separate arguments) and an output selector, which is a function that takes the results of the input selectors as separate arguments. The output 
+  selector computes the derived state. The result is cached, and the output selector is only recomputed if the inputs change. And finally, it returns a memoized selector.
+  The output selectors created by createSelector have several additional properties attached to them:
+    > resultFunc                       The final function passed to createSelector.
+    > memoizedResultFunc               The memoized version of resultFunc.
+    > lastResult                       Returns the last result calculated by memoizedResultFunc.
+    > dependencies                     The array of the input selectors used by createSelector to compose resultFunc.
+    > recomputations                   Counts the number of times memoizedResultFunc has been recalculated.
+    > resetRecomputations              Resets the count of recomputations count to 0.
+    > dependencyRecomputations         Counts the number of times the input selectors (dependencies) have been recalculated. This is distinct from recomputations, which tracks the recalculations of the result function.
+    > resetDependencyRecomputations    Resets the dependencyRecomputations count to 0.
+    > memoize                          Function used to memoize the resultFunc.
+    > argsMemoize                      Function used to memoize the arguments passed into the output selector.  
+  
+  By leveraging memoization, createSelector helps optimize performance, especially for complex state transformations, and makes your codebase more maintainable and readable. Here are the key reasons for using createSelector:
     > Memoization: 
       ~ Efficiency: createSelector memoizes the results of selector functions. This means that if the inputs to a selector haven't changed, it will return the cached result instead of recalculating. This avoids unnecessary recalculations and 
         renders, improving the efficiency of your application.
@@ -143,16 +212,31 @@
 - createEntityAdapter: Generates a set of reusable reducers and selectors to manage normalized data in the store. In summary, the createEntityAdapter function in Redux Toolkit primarily accepts an object with two optional properties: 
   selectId and sortComparer, allowing you to customize how entities are identified and sorted in your state.
   It is a function that generates a set of prebuilt reducers and selectors for performing CRUD operations on a normalized state structure containing instances of a particular type of data object. These reducer functions may be passed as case 
-  reducers to createReducer and createSlice. They may also be used as "mutating" helper functions inside of createReducer and createSlice.
+  reducers to createReducer and createSlice. They may also be used as "mutating" helper functions inside of createReducer and createSlice. It may be called multiple times in an application. If you are using it with plain JavaScript, you may 
+  be able to reuse a single adapter definition with multiple entity types if they're similar enough (such as all having an entity.id field).
+  A "entity adapter" instance. An entity adapter is a plain JS object (not a class) containing the generated reducer functions, the original provided selectId and sortComparer callbacks, a method to generate an initial "entity state" value, 
+  and functions to generate a set of globalized and non-globalized memoized selector functions for this entity type.
   
+    > "getInitialState": Returns a new entity state object like {ids: [], entities: {}}. It accepts an optional object as an argument. The fields in that object will be merged into the returned initial state value. For example, perhaps you 
+       want your slice to also track some loading state
     > "selectAll" is a selector that allows you to replace all the entities in the state with a new set of entities, effectively resetting the collection This can be particularly useful when you need to update the state with a new list of 
       items, such as when fetching data from an API. It returns all entities in the collection as an array. It's a convenient way to access the entire list of entities stored in the normalized state.
       To use selectAll, you need to first set up your entity adapter and include it in your Redux slice and store. It s a convenient way to retrieve all entities in your state as an array. It simplifies the process of accessing and 
       displaying a list of entities in your application. By using selectAll, you can ensure that your component remains efficient and easy to read.
    > ".getSelectors()" Can create a set of memoized selectors based on the location of this entity state.
-  
-- createApi(): The core of RTK Query's functionality. It allows you to define a set of endpoints and describe how to retrieve data from a series of endpoints, including configuration of how to fetch and transform that data. In most cases, 
-  you should use this once per app, with "one API slice per base URL" as a rule of thumb.  
+      The entity adapter will contain a getSelectors() function that returns a set of selectors that know how to read the contents of an entity state object:
+      selectIds: returns the state.ids array. selectEntities: returns the state.entities lookup table. selectAll: maps over the state.ids array, and returns an array of entities in the same order. selectTotal: returns the total number of 
+      entities being stored in this state.  selectById: given the state and an entity ID, returns the entity with that ID or undefined.
+      Because selector functions are dependent on knowing where in the state tree this specific entity state object is kept, getSelectors() can be called in two ways:
+       ~ If called without any arguments (or with undefined as the first parameter), it returns an "unglobalized" set of selector functions that assume their state argument is the actual entity state object to read from.
+       ~ It may also be called with a selector function that accepts the entire Redux state tree and returns the correct entity state object.
+      
+- createApi():The core of RTK Query's functionality. It allows you to define a set of endpoints and describe how to retrieve data from a series of endpoints, including configuration of how to fetch and transform that data. In most cases, you 
+  should use this once per app, with "one API slice per base URL" as a rule of thumb.  
+    > "baseQuery": The base query used by each endpoint if no queryFn option is specified. RTK Query exports a utility called fetchBaseQuery as a lightweight wrapper around fetch for common use-cases.
+      ~ args: The return value of the query function for a given endpoint. This arguments comes from the "query" method.
+      ~ api: The BaseQueryApi object contains the following parameters: signal, abort, dispatch, getState, extra, endpoint, type and forced. (It's a built-in method by redux, whilst "args" are the parameters we sent manually).
+      ~ extraOptions: The value of the optional extraOptions property provided for a given endpoint
     > "transformResponse" allows you to modify or process the response data before it is stored in the Redux state, and also manipulate the data returned by a query or mutation. In some cases, you may want to manipulate the data returned 
       from a query before you put it in the cache. In this instance.
     > "providesTags" facilitates efficient caching and automatic re-fetching of data. It is part of the caching mechanism that RTK Query uses to manage and invalidate cache entries. It allows you to define a list of tags that a query 
@@ -162,18 +246,63 @@
        we'll have to find a way to display it on the screen without reloading our app. So, "invalidatesTags" takes the obsolete cache values and will invalidate them so that it can extract the new values from the server (without reloading).
     > "keepUnusedDataFor" Defaults to 60 (this value is in seconds). This is how long RTK Query will keep your data cached for after the last component unsubscribes. For example, if you query an endpoint, then unmount the component, then 
       mount another component that makes the same request within the given time frame, the most recent value will be served from the cache. It may be used either inside "endpoints" or outside (together with reducerPath).
-  
-- fetchBaseQuery(): A small wrapper around fetch that aims to simplify requests. Intended as the recommended baseQuery to be used in createApi for the majority of users. It's an optimal way to replace axios or "fetch". Avoiding complex logic.
-  
+    > ".unwrap()": If you need to access the error or success payload immediately after a mutation, you can chain this command. (Remember that this must be in an async function). 
+      It's used to handle the results of asynchronous thunks more conveniently, especially when dealing with fulfilled or rejected states of those thunks. The main uses are:
+        ~ Access Data Directly: It returns the actual data from a fulfilled action, making it easier to work with the results without having to extract it from the action payload.
+        ~ Error Handling: It throws an error if the thunk was rejected, allowing you to use try...catch blocks for error handling in a more straightforward way.
+        ~ Simplified Access to Payload: When a thunk resolves successfully, the returned action contains the result in the payload property. Without .unwrap(), you need to manually extract this data. With .unwrap(), you directly get the 
+          result, avoiding the need for extra property access.
+        ~ Error Handling: If a thunk is rejected, the action still resolves, but you have to check the rejected status and handle errors separately. Using .unwrap(), if the thunk rejects, it throws an error, which you can catch using 
+          try...catch. This makes error handling more natural and integrates well with async/await syntax.
+ 
+- fetchBaseQuery(): A small wrapper around fetch that aims to simplify requests. Intended as the recommended baseQuery to be used in createApi for the majority of users. It's an optimal way to replace axios or "fetch", avoiding complex logic.
+  This return a base query function (which is used internally by RTK Query) that handles making network requests, which is used as the base query in an RTK Query API slice, and you can use to define how API requests are made. You can also 
+  customize request behavior using options like baseUrl, credentials, and prepareHeaders. It abstracts the underlying fetch logic and allows you to customize how requests are prepared, sent, and handled. When you call fetchBaseQuery with a 
+  configuration object. This base query function takes an argument that includes the endpoint details and the request parameters, and it returns a promise that resolves with the response data or an error.
+   > baseUrl: Sets the base URL for the API requests. For example: 'http://localhost:3500'
+   > "credentials": It instructs the browser to include credentials (such as cookies, authorization headers, authentication tokens or TLS client certificates) and if they should be should be sent in the fetch request to the specified baseUrl. 
+    It's particularly important when making cross-origin requests to ensure that cookies (like session tokens) are sent to the server. It's crucial for authentication scenarios where the server relies on cookies to verify the client's session
+      ~ 'omit': Never send or receive cookies.
+      ~ 'same-origin': Send cookies only if the request is to the same origin as the script calling the fetch.
+      ~ 'include': Always send cookies, even for cross-origin requests. It's crucial becasue our application needs to maintain a user session across multiple requests, which is common in authenticated applications. The server requires cookies 
+         to authenticate requests and manage sessions, especially in cross-origin requests. And we need to ensure that cookies are always sent with the request, regardless of whether the request is to the same origin or a different origin.
+   > prepareHeaders: Allows you to inject or modify headers on every request. You can specify (customize) headers of your API requests at the endpoint level. By accessing the current Redux state, you can add authentication tokens, setting 
+     content types, or including any other necessary headers dynamically to ensure that your requests are properly configured before they are sent. This is essential for handling authenticated requests, setting content types, or including any 
+     custom headers required by your API. This function provides a way to dynamically add or alter headers based on the current state or other conditions. The main porpose is that it's used to customize the headers for each request. This is 
+     particularly useful for adding authentication tokens, setting content types, or including any other necessary headers dynamically.    
+     It takes two arguments: headers and, as a convenience mechanism, the second argument allows you to use getState to access your redux store in the event you store information you'll need there such as an auth token. 
+     Additionally, it provides access to extra, endpoint, type, and forced to unlock more granular conditional behaviors. You can mutate the headers argument directly, and returning it is optional.
+       
 - createAction(): Generates an action creator function for the given action type string. It generates an action creator function. 
   
 - createReducer(): That lets you supply a lookup table of action types to case reducer functions, rather than writing switch statements. In addition, it automatically uses the immer library to let you write simpler immutable updates with 
   normal mutative code, like state.todos[3].completed = true.
 
-- combineSlices(): Combines multiple slices into a single reducer, and allows "lazy loading" of slices after initialisation.
 
-- setupListeners(): A utility used to enable refetchOnMount and refetchOnReconnect behaviors.
-  
+- updateQueryData: It updates an already existing cache entry. For updates of existing cache entries, use this. It requires the endpoint name and cache key arguments, so it knows which piece of cache state to update.
+  We could use it when we have a list of posts cached, and we want to add a new post to this list.
+    > Purpose: This function is used to update the existing cached data for a specific query.
+    > Behavior: It modifies the current cached data based on the provided updater function. This means you need to have some existing data in the cache for the query; otherwise, updateQueryData has no effect.
+    > Usage: You provide a query endpoint, query arguments, and an updater function that receives the current cached data and returns the new data.
+  Some key differences are: I requires existing cached data to work. It uses an updater function to modify the existing data. And, when you need to modify existing cached data (e.g., adding a new item to a list).
+
+- upsertQueryData: It creates or replaces cache entries. We could use it when we want to make sure that a specific list of posts is in the cache, regardless of whether it was there before.
+    > Purpose: This function is used to update the cached data if it exists, or insert new data if it doesn't.
+    > Behavior: It first checks if there is existing cached data for the query. If there is, it updates it; if not, it sets the provided data as the new cache.
+    > Usage: You provide a query endpoint, query arguments, and the new data to be upserted into the cache.
+  Some jey differeneces are: It does not require existing cached data and will insert new data if none exists. It directly sets or updates the cached data with the provided new data. And when we need to ensure the data is present in the 
+  cache, either by inserting it if it's missing or updating it if it already exists.
+
+- onQueryStarted(): It is a lifecycle hook that is used to run additional logic when a query or mutation is initiated. This can be particularly useful for handling optimistic updates, triggering side effects, or dispatching additional actions 
+  when a query begins. The key Use Cases for onQueryStarted are:
+    1. Optimistic Updates: Immediately update the UI based on the assumption that the server operation will succeed, providing a more responsive user experience.
+    2. Side Effects: Perform additional operations, such as logging, analytics tracking, or dispatching other Redux actions.
+    3. Error Handling: Manage errors in a centralized way by handling them when the query fails.
+  When defining an endpoint in RTK Query, you can include the onQueryStarted option in the object of "builder" configuration. This function receives the argument of the query/mutation and an object with several utilities (dispatch, getState, 
+  extra, requestId, queryFulfilled, etc.). Them, it's executed right after the query is started, but before it's resolved or fails, allowing you to handle a variety of use cases. 
+  With onQueryStarted, optimistic updates make the app feel faster and more responsive, allows handling of side effects related to queries in a centralized manner, and provides a straightforward way to manage errors specific to a query.
+  When using this hook, we have to keep into account that the 2nd parameter is the destructured `MutationLifecycleApi`. And we'll get the following parameters: dispatch, getState, queryFulfilled, requestId, extra, getCacheEntry.
+  As for the first paramaeter, they'll be those values (variables) we created previously.
                                                                                                $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$  
   
 - useSelector: Read data from the store. Allows you to extract data from the Redux store state for use in this component, using a selector function.

@@ -9,21 +9,6 @@ const postsAdapter = createEntityAdapter({
     sortComparer: (a, b) => b.date.localeCompare(a.date)
 });
 
-//getSelectors creates these selectors and we rename them with aliases using destructuring so they match up with our existing code.
-const { selectAll: selectAllPosts, selectById: selectPostById, selectIds: selectPostIds } = postsAdapter.getSelectors(state => state.posts);
-const selectUsersState = (state, userId) => userId;
-//const selectPostById = (state, postId) => state.posts.posts.find(post => post.id === postId);
-
-//function selectAllPosts(state) { return state.posts.posts };
-function getPostsStatus(state) { return state.posts.status };
-function getPostsError(state) { return state.posts.error };
-function getCount(state) { return state.posts.count };
-
-const selectPostsByUser = createSelector(                            //(1)
-    [selectAllPosts, selectUsersState],                              //(2)
-    (posts, userId) => posts.filter(post => post.userId === userId)  //(3)
-);
-
 const fetchPosts = createAsyncThunk('posts/fetchPosts', async function () {
     const response = await axios.get(POSTS_URL);
     return response.data;
@@ -144,6 +129,21 @@ const postsSlice = createSlice({
             })
     }
 });
+
+//getSelectors creates these selectors and we rename them with aliases using destructuring so they match up with our existing code.
+const { selectAll: selectAllPosts, selectById: selectPostById, selectIds: selectPostIds } = postsAdapter.getSelectors(state => state.posts);
+const selectUsersState = (state, userId) => userId;
+//const selectPostById = (state, postId) => state.posts.posts.find(post => post.id === postId);
+
+//function selectAllPosts(state) { return state.posts.posts };
+function getPostsStatus(state) { return state.posts.status };
+function getPostsError(state) { return state.posts.error };
+function getCount(state) { return state.posts.count };
+
+const selectPostsByUser = createSelector(                            //(1)
+    [selectAllPosts, selectUsersState],                              //(2)
+    (posts, userId) => posts.filter(post => post.userId === userId)  //(3)
+);
 
 const postsReducer = postsSlice.reducer;
 const postsActions = postsSlice.actions;

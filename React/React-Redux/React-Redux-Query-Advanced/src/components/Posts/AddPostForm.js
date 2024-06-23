@@ -30,7 +30,8 @@ function AddPostForm() {
     async function onSavePostClicked() {
         if (canSave) {
             try {
-                await addNewPost({ title, body: content, userId }).unwrap();
+                const post = await addNewPost({ title, body: content, userId }).unwrap(); 
+                console.log(post);
                 setTitle('');
                 setContent('');
                 setUserId('');

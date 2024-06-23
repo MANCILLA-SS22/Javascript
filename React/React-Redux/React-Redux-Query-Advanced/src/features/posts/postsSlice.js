@@ -1,7 +1,6 @@
 import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
 import { sub } from 'date-fns';
 import { apiSlice } from "../api/apiSlice";
-import { useSelector } from "react-redux";
 
 const postsAdapter = createEntityAdapter({ sortComparer: (a, b) => b.date.localeCompare(a.date) });
 const initialState = postsAdapter.getInitialState();
@@ -103,17 +102,17 @@ const extendedApiSlice = apiSlice.injectEndpoints({ //(1)
                         body: { reactions } // In a real app, we'd probably need to base this on user ID somehow so that a user can't do the same reaction more than once
                     }
                 },
-                async onQueryStarted({ postId, reactions }, { dispatch, queryFulfilled }) {
+                async onQueryStarted({ postId, reactions }, { dispatch, queryFulfilled }) { //(10)
                     const patchResult = dispatch(
-                        extendedApiSlice.util.updateQueryData('getPosts', undefined, function (draft){// `updateQueryData` requires the endpoint name and cache key arguments, so it knows which piece of cache state to update
-                            const post = draft.entities[postId]; // The `draft` is Immer-wrapped and can be "mutated" like in createSlice
+                        extendedApiSlice.util.updateQueryData('getPosts', undefined, function (draft) { //(11)
+                            const post = draft.entities[postId];
                             if (post) post.reactions = reactions;
                         })
                     );
-                    try {
-                        await queryFulfilled;
+                    try { //(12)
+                        await queryFulfilled; // Wait for the query to be fulfilled
                     } catch {
-                        patchResult.undo();
+                        patchResult.undo(); // Revert the optimistic update if the query fails
                     }
                 }
             })
@@ -121,7 +120,6 @@ const extendedApiSlice = apiSlice.injectEndpoints({ //(1)
     }
 });
 
-const { useGetPostsQuery, useGetPostsByUserIdQuery, useAddNewPostMutation, useUpdatePostMutation, useDeletePostMutation, useAddReactionMutation } = extendedApiSlice;
 const selectPostsData = createSelector(           //(6)
     extendedApiSlice.endpoints.getPosts.select(), //(5)
     (postsResult) => postsResult.data || []
@@ -129,7 +127,8 @@ const selectPostsData = createSelector(           //(6)
 
 const { selectAll: selectAllPosts, selectById: selectPostById, selectIds: selectPostIds } = postsAdapter.getSelectors(state => selectPostsData(state) ?? initialState); //(7)
 
-export { extendedApiSlice, selectPostsData, useGetPostsQuery, useGetPostsByUserIdQuery, useAddNewPostMutation, useUpdatePostMutation, useDeletePostMutation, useAddReactionMutation, selectAllPosts, selectPostById, selectPostIds };
+export const { useGetPostsQuery, useGetPostsByUserIdQuery, useAddNewPostMutation, useUpdatePostMutation, useDeletePostMutation, useAddReactionMutation } = extendedApiSlice;
+export { extendedApiSlice, selectPostsData, selectAllPosts, selectPostById, selectPostIds };
 
 //(0) Only the "get" method use builder.query. The rest of the methods will use builder.mutation due to the fact that they can change the data we're not just requesting or querying the data.
 
@@ -149,6 +148,7 @@ export { extendedApiSlice, selectPostsData, useGetPostsQuery, useGetPostsByUserI
 
 //(6) Creates memoized selector. "createSelector" accepts input functions and then has output functions. Our output (selectPostResultData) is taking that result from the input function (selectPostsResult)
 //    and then just looking at the data property. And that ".data" property holds our normalized state object that has the ids array and then the entities as well.
+//    First, we pass input selectors with typed arguments (line 124), then extracted values are passed to the result function for recalculation (line 125).
 
 //(7) We pass in a selector that returns the posts slice of state. Then, we use "selectPostsData" to say where the state is and it returns our normalized state. Not that it could be null espeically the
 //    first time the app loads. To solve this, we use nulish operator (&&). So, if it's null, then it'll return what's on the right side.
@@ -161,13 +161,29 @@ export { extendedApiSlice, selectPostsData, useGetPostsQuery, useGetPostsByUserI
 //      > Tags for Individual Items  --> ...result.ids.map(id => ({ type: 'Post', id: id }));
 //        This line spreads the array returned by result.ids.map. result.ids is assumed to be an array of identifiers for individual posts.
 //        The map function creates a tag for each post with the type 'Post' and the respective id. This allows for granular cache invalidation and re - fetching of individual posts.
-//"id" se utiliza para identificar específicamente qué conjunto de datos o entidad se debe invalidar en la cache. Es un concepto clave para gestionar eficientemente la invalidación de datos en RTK Query,
-//permitiendo una actualización precisa y controlada del estado de la aplicación. Es una forma de etiquetar de manera única un grupo de datos o una entidad específica en el cache. En este caso, 'LIST' es un
-//identificador simbólico que se utiliza para representar la lista de posts (El conjunto de ambos es "posts-LIST"). Esto permite que RTK Query sepa exactamente qué parte del cache debe invalidarse y refetcharse.
-//  > Usar id: 'LIST' indica que la invalidación afecta específicamente a la lista completa de publicaciones, no a una publicación individual.
-//  > Permite diferenciar entre invalidar una entidad individual(como un solo post) y un grupo de entidades(como una lista de posts).
-//  > Al usar IDs específicos como 'LIST', se evita la confusión sobre qué datos deben invalidarse y refetcharse.
+//    "id" se utiliza para identificar específicamente qué conjunto de datos o entidad se debe invalidar en la cache. Es un concepto clave para gestionar eficientemente la invalidación de datos en RTK Query,
+//    permitiendo una actualización precisa y controlada del estado de la aplicación. Es una forma de etiquetar de manera única un grupo de datos o una entidad específica en el cache. En este caso, 'LIST' es un
+//    identificador simbólico que se utiliza para representar la lista de posts (El conjunto de ambos es "posts-LIST"). Esto permite que RTK Query sepa exactamente qué parte del cache debe invalidarse y refetcharse.
+//       > Usar id: 'LIST' indica que la invalidación afecta específicamente a la lista completa de publicaciones, no a una publicación individual.
+//       > Permite diferenciar entre invalidar una entidad individual(como un solo post) y un grupo de entidades(como una lista de posts).
+//       > Al usar IDs específicos como 'LIST', se evita la confusión sobre qué datos deben invalidarse y refetcharse.
 
 //(9) This is an object passed to the invalidatesTags function as a parameter. arg.id is accessing the id property of the arg object.
 //    The mentioned object, in this case, contains the data coming from EditPostFor.js, which is the following line of code --> await updatePost({ id: post.id, title, body: content, userId }).unwrap();
 //    Therefore, arg.id helps in specifying the particular resource (post in this case) whose cache should be invalidated.
+
+//(10) We don't want to reload our list every time we add a reaction. To solve this, we'll use an optimistic update. What we're doing inside "patchResult" is updating our cash and that's happening optimistically 
+//     possibly before the data at the api has been updated. So we're instantly seeing that in our UI. 
+//     In onQueryStarted, the dispatch function is used to immediately apply an optimistic update to the local cache using api.util.updateQueryData. This makes the UI reflect the change instantly.
+//     It's important to note that we don't always need to use "invalidatesTags" because we don't wanna re-fetch the list every time a reaction is added. So we're not going to invalidate any post or list.
+//     What we're going to do is optimistically update the cache and not have to do another request but we're going to update the data at the api as well.
+//     "patchResult" is the result of the dispatch and contains an undo method to revert the optimistic update if necessary. This optimistic update immediately updates the Redux store's cache with the new reactions, 
+//     making the UI reflect this change before the actual API request completes.
+
+//(11) "updateQueryData" requires the endpoint name and cache key arguments, so it knows which piece of cache state to update. dispatch and queryFulfilled functions provided by RTK Query.
+//     The "dispatch" function is used to apply an optimistic update to the cached data. The parameters within "updateQueryData" means:
+//      > getPosts is the query endpoint.
+//      > undefined means it applies to all instances of the getPosts query (you could specify query arguments if needed).
+//      > The updater function modifies the cached data (draft). It looks up the post with postId and updates its reactions if the post is found. It's a Immer-wrapped and can be "mutated" like in createSlice
+
+//(12) The queryFulfilled promise is used to wait for the actual query response. If the query fails, patchResult.undo() reverts the optimistic update, ensuring the UI is consistent with the server state.
