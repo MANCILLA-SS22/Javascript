@@ -1,12 +1,12 @@
-const Employee = require('../model/Employee');
+import Employee from '../model/Employee.js';
 
-const getAllEmployees = async (req, res) => {
+async function getAllEmployees (req, res){
     const employees = await Employee.find();
     if (!employees) return res.status(204).json({ 'message': 'No employees found.' });
     res.json(employees);
 }
 
-const createNewEmployee = async (req, res) => {
+async function createNewEmployee (req, res){
     if (!req?.body?.firstname || !req?.body?.lastname) {
         return res.status(400).json({ 'message': 'First and last names are required' });
     }
@@ -23,7 +23,7 @@ const createNewEmployee = async (req, res) => {
     }
 }
 
-const updateEmployee = async (req, res) => {
+async function updateEmployee (req, res){
     if (!req?.body?.id) {
         return res.status(400).json({ 'message': 'ID parameter is required.' });
     }
@@ -38,7 +38,7 @@ const updateEmployee = async (req, res) => {
     res.json(result);
 }
 
-const deleteEmployee = async (req, res) => {
+async function deleteEmployee (req, res){
     if (!req?.body?.id) return res.status(400).json({ 'message': 'Employee ID required.' });
 
     const employee = await Employee.findOne({ _id: req.body.id }).exec();
@@ -49,7 +49,7 @@ const deleteEmployee = async (req, res) => {
     res.json(result);
 }
 
-const getEmployee = async (req, res) => {
+async function getEmployee (req, res){
     if (!req?.params?.id) return res.status(400).json({ 'message': 'Employee ID required.' });
 
     const employee = await Employee.findOne({ _id: req.params.id }).exec();
@@ -59,10 +59,4 @@ const getEmployee = async (req, res) => {
     res.json(employee);
 }
 
-module.exports = {
-    getAllEmployees,
-    createNewEmployee,
-    updateEmployee,
-    deleteEmployee,
-    getEmployee
-}
+export { getAllEmployees, createNewEmployee, updateEmployee, deleteEmployee, getEmployee };

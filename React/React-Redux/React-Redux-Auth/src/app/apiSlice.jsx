@@ -1,10 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { authActions } from '../features/authSlice';
+import { authActions } from '../features/auth/authSlice'
 
 const setCredentials = authActions.setCredentials;
 const logOut = authActions.logOut;
 
-const baseQueryObj = fetchBaseQuery({ //This returns a function with the following parameters: async (arg, api) => {...}
+const baseQueryObj = fetchBaseQuery({ //This returns an async function with the following parameters: async (arg, api) => {...}
     baseUrl: 'http://localhost:3500',
     credentials: 'include', //This will send back our http only secure cookie so you want the cookie to send with every query.
     prepareHeaders: function (headers, { getState }) { //This is because we wanna send ouur access token every time.
@@ -15,8 +15,9 @@ const baseQueryObj = fetchBaseQuery({ //This returns a function with the followi
 });
 
 async function baseQueryWithReauth(args, api) { //(1)
-    let result = await baseQueryObj(args, api); 
-    if (result?.error?.originalStatus === 403) { console.log('sending refresh token'); //If the initial request results in a 403 Forbidden error, it tries to refresh the token by making a request to /refresh.
+    let result = await baseQueryObj(args, api);
+    if (result?.error?.originalStatus === 403) { //If the initial request results in a 403 Forbidden error, it tries to refresh the token by making a request to /refresh.
+        console.log('sending refresh token'); 
         const refreshResult = await baseQueryObj('/refresh', api); console.log(refreshResult); // send refresh token to get new access token 
         if (refreshResult?.data) { //If the refresh request is successful, it updates the state with the new token and retries the original request
             const user = api.getState().auth.user;

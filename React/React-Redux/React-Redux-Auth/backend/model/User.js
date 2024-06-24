@@ -1,7 +1,6 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import mongoose from "mongoose";
 
-const userSchema = new Schema({
+const userSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true
@@ -21,4 +20,6 @@ const userSchema = new Schema({
     refreshToken: [String]
 });
 
-module.exports = mongoose.model('User', userSchema);
+const userModel = mongoose.model('User', userSchema);
+
+export default userModel;

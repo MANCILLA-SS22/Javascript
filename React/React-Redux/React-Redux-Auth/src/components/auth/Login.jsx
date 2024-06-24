@@ -1,9 +1,9 @@
 import { useRef, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { authActions } from '../../features/authSlice';
-import { useLoginMutation } from '../../features/authApiSlice';
 
+import { useDispatch } from 'react-redux'
+import { useLoginMutation } from '../../features/auth/authApiSlice'
+import { authActions } from '../../features/auth/authSlice'
 
 const setCredentials = authActions.setCredentials;
 
@@ -34,23 +34,12 @@ function Login() {
             setUser('');
             setPwd('');
             navigate('/welcome');
-        } catch (err) {
-            if (!err?.originalStatus) {
-                // isLoading: true until timeout occurs
-                setErrMsg('No Server Response');
-            } else if (err.originalStatus === 400) {
-                setErrMsg('Missing Username or Password');
-            } else if (err.originalStatus === 401) {
-                setErrMsg('Unauthorized');
-            } else {
-                setErrMsg('Login Failed');
-            }
-            // errRef.current.focus();            
-            // if (!err?.originalStatus) setErrMsg('No Server Response'); // isLoading: true until timeout occurs
-            // if (err.originalStatus === 400) setErrMsg('Missing Username or Password');
-            // if (err.originalStatus === 401) setErrMsg('Unauthorized');
-            // setErrMsg('Login Failed');
-            // errRef.current.focus(); 
+        } catch (err) {      
+            if (!err?.originalStatus) setErrMsg('No Server Response'); // isLoading: true until timeout occurs
+            if (err.originalStatus === 400) setErrMsg('Missing Username or Password');
+            if (err.originalStatus === 401) setErrMsg('Unauthorized');
+            setErrMsg('Login Failed');
+            errRef.current.focus(); 
         }
     }
 

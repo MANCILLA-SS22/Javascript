@@ -8,6 +8,8 @@ https://redux-toolkit.js.org/rtk-query/usage/queries#selecting-data-from-a-query
 https://redux-toolkit.js.org/rtk-query/usage/mutations
 https://redux-toolkit.js.org/rtk-query/usage/manual-cache-updates#optimistic-updates
 https://redux-toolkit.js.org/rtk-query/api/created-api/hooks#usequery
+https://redux-toolkit.js.org/rtk-query/api/createApi#basequery
+https://redux-toolkit.js.org/rtk-query/api/fetchBaseQuery#baseurl
 https://redux-toolkit.js.org/rtk-query/usage/queries
 https://redux-toolkit.js.org/rtk-query/usage/customizing-queries
 
@@ -258,7 +260,8 @@ https://redux-toolkit.js.org/rtk-query/usage/customizing-queries
 - fetchBaseQuery(): A small wrapper around fetch that aims to simplify requests. Intended as the recommended baseQuery to be used in createApi for the majority of users. It's an optimal way to replace axios or "fetch", avoiding complex logic.
   This return a base query function (which is used internally by RTK Query) that handles making network requests, which is used as the base query in an RTK Query API slice, and you can use to define how API requests are made. You can also 
   customize request behavior using options like baseUrl, credentials, and prepareHeaders. It abstracts the underlying fetch logic and allows you to customize how requests are prepared, sent, and handled. When you call fetchBaseQuery with a 
-  configuration object. This base query function takes an argument that includes the endpoint details and the request parameters, and it returns a promise that resolves with the response data or an error.
+  configuration object. This base query function takes an argument that includes the endpoint details and the request parameters, and it returns a promise that resolves with the response data or an error. For example, we would get the 
+  following object depending on the response:  { data:{...}, meta:{...} } or { error:{...}, meta:{...} }
    > baseUrl: Sets the base URL for the API requests. For example: 'http://localhost:3500'
    > "credentials": It instructs the browser to include credentials (such as cookies, authorization headers, authentication tokens or TLS client certificates) and if they should be should be sent in the fetch request to the specified baseUrl. 
     It's particularly important when making cross-origin requests to ensure that cookies (like session tokens) are sent to the server. It's crucial for authentication scenarios where the server relies on cookies to verify the client's session
@@ -270,9 +273,11 @@ https://redux-toolkit.js.org/rtk-query/usage/customizing-queries
      content types, or including any other necessary headers dynamically to ensure that your requests are properly configured before they are sent. This is essential for handling authenticated requests, setting content types, or including any 
      custom headers required by your API. This function provides a way to dynamically add or alter headers based on the current state or other conditions. The main porpose is that it's used to customize the headers for each request. This is 
      particularly useful for adding authentication tokens, setting content types, or including any other necessary headers dynamically.    
-     It takes two arguments: headers and, as a convenience mechanism, the second argument allows you to use getState to access your redux store in the event you store information you'll need there such as an auth token. 
+     It takes two arguments: the headers object and, as a convenience mechanism, the second argument allows you to use getState to access your redux store in the event you store information you'll need there such as an auth token. 
      Additionally, it provides access to extra, endpoint, type, and forced to unlock more granular conditional behaviors. You can mutate the headers argument directly, and returning it is optional.
-       
+       ~ getState(): function provides access to the current Redux state. This can be useful when you need to customize the behavior of your fetchBaseQuery or include dynamic data from the state in your requests. This function allows you to 
+         access the Redux state, which can be useful for dynamically setting headers based on the current state, such as including an authentication token. It'll return two parameters: "api and "auth".
+
 - createAction(): Generates an action creator function for the given action type string. It generates an action creator function. 
   
 - createReducer(): That lets you supply a lookup table of action types to case reducer functions, rather than writing switch statements. In addition, it automatically uses the immer library to let you write simpler immutable updates with 

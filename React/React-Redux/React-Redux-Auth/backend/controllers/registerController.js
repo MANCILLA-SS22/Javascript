@@ -1,7 +1,7 @@
-const User = require('../model/User');
-const bcrypt = require('bcrypt');
+import User from '../model/User.js';
+import bcrypt from 'bcrypt';
 
-const handleNewUser = async (req, res) => {
+async function handleNewUser (req, res){
     const { user, pwd } = req.body;
     if (!user || !pwd) return res.status(400).json({ 'message': 'Username and password are required.' });
 
@@ -25,6 +25,6 @@ const handleNewUser = async (req, res) => {
     } catch (err) {
         res.status(500).json({ 'message': err.message });
     }
-}
+};
 
-module.exports = { handleNewUser };
+export {handleNewUser};

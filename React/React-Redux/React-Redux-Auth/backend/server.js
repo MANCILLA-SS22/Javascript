@@ -1,68 +1,50 @@
-require('dotenv').config();
-const express = require('express');
+import express from "express";
+import dotenv from 'dotenv';
+import path from "path";
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import mongoose from 'mongoose';
+
+import { __dirname } from "./dirname.js";
+import corsOptions from "./config/corsOptions.js";
+import { logger } from "./middleware/logEvents.js";
+import errorHandler from './middleware/errorHandler.js';
+import verifyJWT from './middleware/verifyJWT.js';
+import credentials from './middleware/credentials.js';
+import connectDB from './config/dbConn.js';
+import root from './routes/root.js';
+import register from './routes/register.js';
+import auth from './routes/auth.js';
+import refresh from './routes/refresh.js';
+import logout from './routes/logout.js';
+import employees from './routes/api/employees.js';
+import users from './routes/api/users.js';
+import main from "./config/main.js";
+
+
 const app = express();
-const path = require('path');
-const cors = require('cors');
-const corsOptions = require('./config/corsOptions');
-const { logger } = require('./middleware/logEvents');
-const errorHandler = require('./middleware/errorHandler');
-const verifyJWT = require('./middleware/verifyJWT');
-const cookieParser = require('cookie-parser');
-const credentials = require('./middleware/credentials');
-const mongoose = require('mongoose');
-const connectDB = require('./config/dbConn');
+dotenv.config();
 const PORT = process.env.PORT || 3500;
+connectDB(); // Connect to MongoDB
 
-// Connect to MongoDB
-connectDB();
+app.use(logger); // custom middleware logger
+app.use(credentials); // Handle options credentials check - before CORS!  and fetch cookies credentials requirement
+app.use(cors(corsOptions)); // Cross Origin Resource Sharing
+app.use(express.urlencoded({ extended: false })); // built-in middleware to handle urlencoded form data
+app.use(express.json()); // built-in middleware for json 
+app.use(cookieParser()); //middleware for cookies
+app.use(express.static(`${__dirname}/public`)); //serve static files
+// app.use('/', express.static(path.join(__dirname, '/public'))); 
 
-// custom middleware logger
-app.use(logger);
-
-// Handle options credentials check - before CORS!
-// and fetch cookies credentials requirement
-app.use(credentials);
-
-// Cross Origin Resource Sharing
-app.use(cors(corsOptions));
-
-// built-in middleware to handle urlencoded form data
-app.use(express.urlencoded({ extended: false }));
-
-// built-in middleware for json 
-app.use(express.json());
-
-//middleware for cookies
-app.use(cookieParser());
-
-//serve static files
-app.use('/', express.static(path.join(__dirname, '/public')));
-
-// routes
-app.use('/', require('./routes/root'));
-app.use('/register', require('./routes/register'));
-app.use('/auth', require('./routes/auth'));
-app.use('/refresh', require('./routes/refresh'));
-app.use('/logout', require('./routes/logout'));
-
+app.use('/', root);
+app.use('/register', register);
+app.use('/auth', auth);
+app.use('/refresh', refresh);
+app.use('/logout', logout);
 app.use(verifyJWT);
-app.use('/employees', require('./routes/api/employees'));
-app.use('/users', require('./routes/api/users'));
-
-app.all('*', (req, res) => {
-    res.status(404);
-    if (req.accepts('html')) {
-        res.sendFile(path.join(__dirname, 'views', '404.html'));
-    } else if (req.accepts('json')) {
-        res.json({ "error": "404 Not Found" });
-    } else {
-        res.type('txt').send("404 Not Found");
-    }
-});
-
+app.use('/employees', employees);
+app.use('/users', users);
+app.all('*', main);
 app.use(errorHandler);
 
-mongoose.connection.once('open', () => {
-    console.log('Connected to MongoDB');
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-});
+mongoose.connection.once('open', () => app.listen(PORT, () => console.log(`Connected to MongoDB. Server running on port ${PORT}`)));

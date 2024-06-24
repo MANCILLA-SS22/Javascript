@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom"
 
-function Layout(){
+function Layout() {
     return <Outlet />
 }
 

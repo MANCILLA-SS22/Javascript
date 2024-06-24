@@ -14,15 +14,13 @@
 /* || GENERAL STYLES */
 
 body {
-  font: 1.5rem 'Nunito', sans-serif;
-  ;
+  font: 1.5rem 'Nunito', sans-serif;;
   min-height: 100vh;
   background-color: #0F172A;
   color: #fff;
 }
 
-input,
-button {
+input, button {
   font: inherit;
 }
 
@@ -36,13 +34,11 @@ section {
   width: min(100%, 500px);
 }
 
-a,
-a:visited {
+a, a:visited {
   color: whitesmoke;
 }
 
-a:hover,
-a:focus {
+a:hover, a:focus {
   color: rgba(245, 245, 245, 0.9);
 }
 
@@ -55,17 +51,14 @@ a:focus {
   margin-top: 1rem;
 }
 
-.login input,
-.login button {
+.login input, .login button {
   padding: 0.5em;
   border-radius: 15px;
 }
 
 /* || PAGES */
 
-.public,
-.welcome,
-.users {
+.public, .welcome, .users {
   display: flex;
   flex-direction: column;
   gap: 1rem;

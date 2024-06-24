@@ -1,8 +1,8 @@
-const User = require('../model/User');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+import User from '../model/User.js';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
-const handleLogin = async (req, res) => {
+async function handleLogin (req, res){
     const cookies = req.cookies;
 
     const { user, pwd } = req.body;
@@ -10,32 +10,20 @@ const handleLogin = async (req, res) => {
 
     const foundUser = await User.findOne({ username: user }).exec();
     if (!foundUser) return res.sendStatus(401); //Unauthorized 
-    // evaluate password 
-    const match = await bcrypt.compare(pwd, foundUser.password);
+    
+    const match = await bcrypt.compare(pwd, foundUser.password); // evaluate password 
     if (match) {
         const roles = Object.values(foundUser.roles).filter(Boolean);
-        // create JWTs
-        const accessToken = jwt.sign(
-            {
+        const objUser = {
                 "UserInfo": {
                     "username": foundUser.username,
                     "roles": roles
                 }
-            },
-            process.env.ACCESS_TOKEN_SECRET,
-            { expiresIn: '10s' }
-        );
-        const newRefreshToken = jwt.sign(
-            { "username": foundUser.username },
-            process.env.REFRESH_TOKEN_SECRET,
-            { expiresIn: '15s' }
-        );
-
-        // Changed to let keyword
-        let newRefreshTokenArray =
-            !cookies?.jwt
-                ? foundUser.refreshToken
-                : foundUser.refreshToken.filter(rt => rt !== cookies.jwt);
+            }
+        const accessToken = jwt.sign(objUser, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '10s' }); // create JWTs
+        const newRefreshToken = jwt.sign( { "username": foundUser.username }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '15s' } );
+        
+        let newRefreshTokenArray =!cookies?.jwt ? foundUser.refreshToken : foundUser.refreshToken.filter(rt => rt !== cookies.jwt); // Changed to let keyword
 
         if (cookies?.jwt) {
 
@@ -72,4 +60,4 @@ const handleLogin = async (req, res) => {
     }
 }
 
-module.exports = { handleLogin };
+export { handleLogin };

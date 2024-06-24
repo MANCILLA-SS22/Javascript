@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-function Public(){
+function Public() {
 
     const content = (
         <section className="public">

@@ -1,4 +1,4 @@
-import { apiSlice } from "../app/apiSlice";
+import { apiSlice } from "../../app/apiSlice"
 
 const usersApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
@@ -11,4 +11,4 @@ const usersApiSlice = apiSlice.injectEndpoints({
 
 const { useGetUsersQuery } = usersApiSlice;
 
-export {usersApiSlice, useGetUsersQuery}
+export { usersApiSlice, useGetUsersQuery }
