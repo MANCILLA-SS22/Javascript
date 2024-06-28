@@ -1,31 +1,30 @@
 import { Link } from 'react-router-dom';
-import classes from './EventsList.module.css';
+import classes from '../styles/EventsList.module.css';
 
-function render(events){
-  const val = events.map(function (event){
-    return <li key={event.id} className={classes.item}>
-      <Link to={`/events/${event.id}`}>
-        <img src={event.image} alt={event.title} />
-        <div className={classes.content}>
-          <h2>{event.title}</h2>
-          <time>{event.date}</time>
-        </div>
-      </Link>
-    </li>    
-  });
-  return val;
-};
-
-export default function EventsList({ events }){ 
+function EventsList({ events }){ 
   return (
     <div className={classes.events}>
       <h1>All Events</h1>
       <ul className={classes.list}>
-        {render(events)}
+        {
+          events.map(function(event) {
+            return <li key={event.id} className={classes.item}>
+              <Link to={`/events/${event.id}`}>
+                <img src={event.image} alt={event.title} />
+                <div className={classes.content}>
+                  <h2>{event.title}</h2>
+                  <time>{event.date}</time>
+                </div>
+              </Link>
+            </li>
+          })
+        }
       </ul>
     </div>
   );
 };
+
+export default EventsList;
 
 //The links for <EventsList/> and <EventDetails/> would be broken when we click on a single event. To fix that, we need to change: 
 // <Link to={event.id}></Link>      to      <Link to={`/events/${event.id}`}>   (abolute links)

@@ -8,8 +8,6 @@ function MainNavigation(){
             <nav>
                 <ul className={classes.list}>
                     <li>
-                        {/* end: This indicates that this link should only be considered active if the currently active route ends with this path after the URL. So now this link 
-                        will only be considered active if we are on our domain slash nothing and not if we're on slash products. */}
                         <NavLink to="/" className={({isActive}) => isActive ? classes.active : undefined } end={true}>Home</NavLink>
                     </li>
                     <li>

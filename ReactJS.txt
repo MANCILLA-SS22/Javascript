@@ -115,3 +115,6 @@
   diferente del DOM, como para modales, tooltips, y popovers, que suelen necesitar estar en un nivel superior del DOM para evitar problemas de estilos y posicionamiento.
   
 - useImperativeHandle: 
+
+
+- <Suspense>: This component can be used in situations to show a fallback whilst we're waiting fro other data to arrive.

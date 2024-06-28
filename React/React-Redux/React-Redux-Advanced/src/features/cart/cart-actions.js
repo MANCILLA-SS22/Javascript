@@ -3,6 +3,7 @@ import { uiActions } from "../ui/ui-slice";
 
 function fetchCartData(){
     return async function(dispatch){
+        
         async function fetchData(){
             const response = await fetch('https://redux-c54d2-default-rtdb.firebaseio.com/cart.json');
             if (!response.ok) throw new Error('Could not fetch cart data!')
@@ -22,6 +23,7 @@ function fetchCartData(){
 
 function sentCartData(cart){
     return async function(dispatch){
+
         async function sendRequest(){
             const parameters = {method: "PUT", body: JSON.stringify({ items: cart.items, totalQuantity: cart.totalQuantity })};
             const response = await fetch("https://redux-c54d2-default-rtdb.firebaseio.com/cart.json", parameters);

@@ -27,7 +27,7 @@ function App() {
     }
 
     if (cart.changed) dispatch(sentCartData(cart));
-  },[cart, dispatch]);
+  }, [cart, dispatch]);
 
   return (
     <>

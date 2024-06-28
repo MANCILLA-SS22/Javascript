@@ -8,11 +8,7 @@ function ErrorPage(){
     let title = "An error ocurred!";
     let message = "Something went wrong!";
 
-    if(error.status === 500) {
-        // message = JSON.parse(error.data).message; //Solo funciona si NO usamos: return json({message: "Could not getch events!", status: 500});   en Events.jsx
-        message = error.data.message;
-    };
-
+    if(error.status === 500) message = error.data.message;
     if(error.status === 404) {
         title = "Not found!"
         message = "Could not find resourse or page.";
@@ -26,4 +22,4 @@ function ErrorPage(){
     </>
 }
 
-export default ErrorPage
+export default ErrorPage;

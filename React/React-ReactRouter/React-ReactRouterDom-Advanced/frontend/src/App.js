@@ -1,17 +1,25 @@
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
+
 import HomePage from "./pages/Home.jsx";
-import {EventsPage, eventsLoader} from "./pages/Events.jsx";
-import {EventDetailPage, EventDetailLoader, actionEventDetail} from "./pages/EventDetail.jsx";
 import NewEventPage from "./pages/NewEvent.jsx";
 import EditEventPage from "./pages/EditEvent.jsx";
 import RootLayout from "./pages/Root.jsx";
 import EventsRoot from "./pages/EventsRoot.jsx";
 import ErrorPage from "./pages/Error.jsx";
-import { actionNewEvent } from "./components/EventForm.jsx";
-import { NewsletterPage, newsletterAction } from "./pages/Newsletter.jsx";
-import {actionAuth, AuthenticationPage} from "./pages/Authentication.jsx";
-import { logoutAction } from "./pages/Logout.jsx";
-import { checkAuthLoader, tokenLoader } from "./utils/auth.jsx";
+import NewsletterPage from "./pages/NewsLetterPage.jsx";
+import EventsPage from "./pages/Events.jsx";
+import EventDetailPage from "./pages/EventDetail.jsx";
+import AuthenticationPage from "./components/AuthenticationPage.jsx"
+
+import { checkAuthLoader } from "./features/loaders/auth.jsx";
+import { tokenLoader } from "./features/loaders/auth.jsx";
+import { eventDetailLoader } from "./features/loaders/eventDetail.jsx";
+import { eventsLoader } from "./features/loaders/events.jsx";
+import { actionAuth } from "./features/actions/auth.jsx";
+import { actionEventDetail } from "./features/actions/eventDetail.jsx";
+import { logoutAction } from "./features/actions/logout.jsx";
+import { newsletterAction } from "./features/actions/newsletter.jsx";
+import { actionNewEvent } from "./features/actions/newEvent.jsx";
 
 const router = createBrowserRouter([
   {
@@ -25,22 +33,22 @@ const router = createBrowserRouter([
       { 
         path: "events",
         element: <EventsRoot/>,
-        children: [ //We use relative urls because it's nested in the "/" route
-          { index: true, element: <EventsPage/>, loader: eventsLoader}, // loader: It's a property that wants a function as a value. This function will be executed by a ract router whnenever we are about to visit this route. So just before this route gets rendered, just before this <EventsPage/> gets rendered, the loader function will be triggered.
+        children: [ //We use relative urls because they're nested in the "/" route.
+          { index: true, element: <EventsPage/>, loader: eventsLoader},
           {
             path: ":id", 
             id: "event-detail",
-            loader: EventDetailLoader,
+            loader: eventDetailLoader, //This is like a global loader that could be used by the children componenets. In this case, both "EventDetailPage" and "EditEventPage" will be able to get access to this loader
             children: [
               { index: true, element: <EventDetailPage/>, action: actionEventDetail},
-              { path: "edit", element: <EditEventPage/>, action: actionNewEvent, loader: checkAuthLoader} ,
+              { path: "edit", element: <EditEventPage/>, action: actionNewEvent, loader: checkAuthLoader}
             ],
           },
-          { path: "new", element: <NewEventPage/>, action: actionNewEvent, loader: checkAuthLoader}, //Here, <NewEventPage/> is first executed, then the "action" is executed.
+          { path: "new", element: <NewEventPage/>, action: actionNewEvent, loader: checkAuthLoader} //Here, <NewEventPage/> is first executed, then the "action" is executed.
         ]
       },
       {
-        path: "/auth",
+        path: "/auth", //This is an absolute path because it starts with a slash. This means that it's always seen from after the domain name.
         element: <AuthenticationPage/>,
         action: actionAuth
       },
@@ -54,59 +62,15 @@ const router = createBrowserRouter([
         action: logoutAction
       }
     ]
-  }
+  },
 ]);
 
 export default function App() {
   return <RouterProvider router={router}/>;
 };
 
-
-/* import { lazy, Suspense } from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-
-// import BlogPage, { loader as postsLoader } from './pages/Blog';
-import HomePage from './pages/Home';
-// import PostPage, { loader as postLoader } from './pages/Post';
-import RootLayout from './pages/Root';
-
-const BlogPage = lazy(() => import('./pages/Blog'));
-const PostPage = lazy(() => import('./pages/Post'));
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <RootLayout />,
-    children: [
-      { index: true, element: <HomePage /> },
-      {
-        path: 'posts',
-        children: [
-          {
-            index: true,
-            element: (
-              <Suspense fallback={<p>Loading...</p>}>
-                <BlogPage />
-              </Suspense>
-            ),
-            loader: () => import('./pages/Blog').then((module) => module.loader()), },
-          {
-            path: ':id',
-            element: (
-              <Suspense fallback={<p>Loading...</p>}>
-                <PostPage />
-              </Suspense>
-            ),
-            loader: (meta) => import('./pages/Post').then((module) => module.loader(meta))
-          },
-        ],
-      },
-    ],
-  },
-]);
-
-function App() {
-  return <RouterProvider router={router} />;
-}
-
-export default App; */
+//If we would have the following lines of code, 
+// { path: "/events/:eventId", element: <EditEventPage/> }
+// { path: "/events/new", element: <EditEventPage/> }
+//The route with teh path "/events/new" might actually never get activated because "new" could also be treated or seen as a value for the eventId. So whenever we enter "/events/new" in the URL bar, 
+//React Router could actually load the "/events/:eventId" route instead of "/events/new" because it treats new as a value for eventId.

@@ -1,17 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const name = "ui";
-const initialState = { cartIsVisible: false, notification: null };
-const reducers = { //RTK allows us to write "mutating" logic in reducers. It doesn't actually mutate the state because it uses the Immer library, which detects changes to a "draft state" and produces a brand new immutable state based off those changes.
-    toggle(state) {
-        state.cartIsVisible = !state.cartIsVisible;
-    },
-    showNotification(state, action) {
-        state.notification = { status: action.payload.status, title: action.payload.title, message: action.payload.message };
+const uiSlice = createSlice({
+    name: "ui", 
+    initialState: { cartIsVisible: false, notification: null }, 
+    reducers: { //RTK allows us to write "mutating" logic in reducers. It doesn't actually mutate the state because it uses the Immer library, which detects changes to a "draft state" and produces a brand new immutable state based off those changes.
+        toggle(state) {
+            state.cartIsVisible = !state.cartIsVisible;
+        },
+        showNotification(state, action) {
+            state.notification = { status: action.payload.status, title: action.payload.title, message: action.payload.message };
+        }
     }
-};
-
-const uiSlice = createSlice({ name, initialState, reducers });
+});
 
 export const uiActions = uiSlice.actions; //These are object which have the reducer method names as keys.
 export const uiReducer = uiSlice.reducer;

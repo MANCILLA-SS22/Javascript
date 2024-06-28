@@ -1,5 +1,5 @@
 import { Form, Link, useSearchParams, useActionData, useNavigation } from 'react-router-dom';
-import classes from './AuthForm.module.css';
+import classes from '../styles/AuthForm.module.css';
 
 function AuthForm() {
   const data = useActionData();
