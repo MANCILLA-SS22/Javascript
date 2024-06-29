@@ -16,7 +16,7 @@ async function loadEvents() { //(2)
 
 async function eventDetailLoader({ request, params }) {
     const { id } = params;
-    return defer({ //We defer here because "load" take a while because we have a two second timeOut on the backend whereas "load" should be rather fast.
+    return defer({
         event: await loadEvent(id), //(3)
         events: loadEvents()
     });

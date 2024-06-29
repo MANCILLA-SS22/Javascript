@@ -95,18 +95,20 @@
 - <Form>: The Form component is a wrapper around a plain HTML form that emulates the browser for client side routing and data mutations. It is not a form validation/state management library like you might be used to in the React ecosystem 
   (for that, we recommend the browser's built in HTML Form Validation and data validation on your backend server). All of this will trigger state updates to any rendered useNavigation hooks so you can build pending indicators and optimistic 
   UI while the async operations are in-flight. If the form doesn't feel like navigation, you probably want useFetcher.
-   > action: It's the url to which the form will be submitted, just like HTML form action. The only difference is the default action. With HTML forms, it defaults to the full URL. With <Form>, it defaults to the relative URL of the closest 
-     route in context.
-   > method: This determines the HTTP verb to be used. The same as plain HTML form method, except it also supports "put", "patch", and "delete" in addition to "get" and "post". The default is "get". (Get submissions will not call an action).
-   > navigate: You can tell the form to skip the navigation and use a fetcher internally by specifying <Form navigate={false}>. This is essentially a shorthand for useFetcher() + <fetcher.Form> where you don't care about the resulting data 
-     and only want to kick off a submission and access the pending state via useFetchers().
-   > fetcherKey: When using a non-navigating Form, you may also optionally specify your own fetcher key to use via <Form navigate={false} fetcherKey="my-key">.
-   > replace: Instructs the form to replace the current entry in the history stack, instead of pushing the new entry.
-   > relative: By default, paths are relative to the route hierarchy, so .. will go up one Route level. Occasionally, you may find that you have matching URL patterns that do not make sense to be nested, and you're prefer to use relative path 
-     routing. You can opt into this behavior with <Form to="../some/where" relative="path">
-   > reloadDocument: Instructs the form to skip React Router and submit the form with the browser's built in behavior. 
-   > state: The state property can be used to set a stateful value for the new location which is stored inside history state. This value can subsequently be accessed via useLocation().
-   > preventScrollReset: this lets you prevent the scroll position from being reset to the top of the window when the form action redirects to a new location.
+    > action: It's the url to which the form will be submitted, just like HTML form action. The only difference is the default action. With HTML forms, it defaults to the full URL. With <Form>, it defaults to the relative URL of the closest 
+      route in context.
+    > method: This determines the HTTP verb to be used. The same as plain HTML form method, except it also supports "put", "patch", and "delete" in addition to "get" and "post". The default is "get". (Get submissions will not call an action).
+    > navigate: You can tell the form to skip the navigation and use a fetcher internally by specifying <Form navigate={false}>. This is essentially a shorthand for useFetcher() + <fetcher.Form> where you don't care about the resulting data 
+      and only want to kick off a submission and access the pending state via useFetchers().
+    > fetcherKey: When using a non-navigating Form, you may also optionally specify your own fetcher key to use via <Form navigate={false} fetcherKey="my-key">.
+    > replace: Instructs the form to replace the current entry in the history stack, instead of pushing the new entry.
+    > relative: By default, paths are relative to the route hierarchy, so .. will go up one Route level. Occasionally, you may find that you have matching URL patterns that do not make sense to be nested,and you're prefer to use relative path 
+      routing. You can opt into this behavior with <Form to="../some/where" relative="path">
+    > reloadDocument: Instructs the form to skip React Router and submit the form with the browser's built in behavior. 
+    > state: The state property can be used to set a stateful value for the new location which is stored inside history state. This value can subsequently be accessed via useLocation().
+    > preventScrollReset: this lets you prevent the scroll position from being reset to the top of the window when the form action redirects to a new location.
+  The "Form" tag will make sure that the browser default of sending a request to the backend will be omitted, but it will take that request that would've been sent and give it to our action. This is pretty useful because that request will 
+  contain all the data that was submitted as part of the form. That's to say, the 'post' method in Form won't be sent to the backend automatically, but instead to the our action and it will include all the form data.
   
 - <Await>: Used to render deferred values with automatic error handling. Make sure to review the Deferred Data Guide since there are a few APIs that work together with this component. It expects to be rendered inside of a <React.Suspense> or 
   <React.SuspenseList> parent to enable the fallback UI. If you do not provide an errorElement, the rejected value will bubble up to the nearest route-level errorElement and be accessible via the useRouteError hook.
@@ -115,7 +117,7 @@
      UI via the useAsyncError hook.
    > resolve: Takes a promise returned from a deferred loader value to be resolved and rendered.
 
-- redirect: Because you can return or throw responses in loaders and actions, you can use redirect to redirect to another route. It's recommended to use redirect in loaders and actions rather than useNavigate in your components when the 
+- redirect: When you wanna return or throw responses in loaders and actions, you can use redirect to redirect to another route. It's recommended to use redirect in loaders and actions rather than useNavigate in your components when the 
   redirect is in response to data.
 
 - json: It's used for handling and parsing JSON responses within loader and action functions. Loader and action functions are responsible for fetching and managing data. These functions return a response object, and the json() utility 
@@ -139,18 +141,112 @@
   of child routes deeper in the tree. Basically, it allow us to get access to a higher level loader (by means of an id) from a route that doesn't have a loader. 
   React Router stores data internally with deterministic, auto-generated route ids, but you can supply your own route id to make this hook much easier to work with. Consider a router with a route that defines an id.
 
+- useSubmit: The imperative version of <Form> that lets you, the programmer, submit a form instead of the user. It's used to programmatically submit a form. It's particularly useful in scenarios where you need to trigger a form submission 
+  without using a traditional form submit button, and based on some custom logic or events that are not directly tied to the form's submit button. This give you more control over how and when forms are submitted in your React applications.
+  It's important to keep in mind that we must use and "action" function so we can retrieve the data coming from useSubmit. For example, we'd have our action function like this:    async function actionEventDetail({ request, params }) {}
+  and this data is related to the "request" variable. 
+  The first argument to submit accepts many different values. You can submit any form or form input element. You can submit FormData, URLSearchParams or anything that the URLSearchParams constructor accepts. This data will automatically be 
+  wrapped in a form data object which we then could extract by using "request.formData()
+  The second argument is a set of options that map (mostly) directly to form submission attributes. Some of those arguments are: 
+    > method: The HTTP method to use (e.g., 'post', 'get').
+    > action: The URL to submit the form to.
+    > replace": A boolean indicating whether to replace the current entry in the history stack.
+    > fetcherKey: 
+    > navigate:  
+    > preventScrollReset: 
+    > relative: 
+    > state: 
+
 - useRouteError: Inside of an errorElement, this hook returns anything THROWN during an action, loader, or rendering.
 
-- useActionData:
+- useAsyncError: Returns the rejection value from the nearest [<Await>][await] component. This is useful when handling errors by means of the "defer" utility. 
 
-- useNavigate: 
+- useNavigate: The useNavigate hook returns a function that lets you navigate programmatically, for example in an effect. The navigate function has two signatures: Either pass a To value (same type as <Link to>) with an optional second 
+  options argument (similar to the props you can pass to <Link>). Or pass the delta you want to go in the history stack. For example, navigate(-1) is equivalent to hitting the back button.
 
-- useNavigation: 
-
-- useSubmit  
-  
-- useFetcher  
+- useNavigation: This hook tells you everything you need to know about a page navigation to build pending navigation indicators and optimistic UI on data mutations. Things like: Global loading indicators, Disabling forms while a mutation is 
+  happening, Adding busy indicators to submit buttons, Optimistically showing a new record while it's being created on the server,and Optimistically showing the new state of a record while it's being updated. 
+  When using this hook, we'll be able to get access to the following methods:
+    > state: When using this method, we'll get the following 3 answers: 
+       ~ idle - There is no navigation pending.
+       ~ submitting - A route action is being called due to a form submission using POST, PUT, PATCH, or DELETE
+       ~ loading - The loaders for the next routes are being called to render the next page
+      Normal navigations and GET form submissions transition through these states:       idle → loading → idle
+      Form submissions with POST, PUT, PATCH, or DELETE transition through these states: idle → submitting → loading → idle
+    > location: This tells you what the next location is going to be.
+    > formData: Any POST, PUT, PATCH, or DELETE navigation that started from a <Form> or useSubmit will have your form's submission data attached to it. This is primarily useful to build "Optimistic UI" with the submission.formData FormData 
+      object: In the case of a GET form submission, formData will be empty and the data will be reflected in navigation.location.search.
+    > json: Any POST, PUT, PATCH, or DELETE navigation that started from a useSubmit(payload, { encType: "application/json" }) will have your JSON value available in navigation.json.
+    > text: Any POST, PUT, PATCH, or DELETE navigation that started from a useSubmit(payload, { encType: "text/plain" }) will have your text value available in navigation.text.
+    > formAction: Any POST, PUT, PATCH, or DELETE navigation that started from a <Form> or useSubmit will have form's submission action route's path value available in navigation.formAction. In the case of a GET form submission, 
+      navigation.formAction will be empty. If you submitted the form at example.com/id, then navigation.formAction would be "/id"
+    > formMethod: Any POST, PUT, PATCH, or DELETE navigation that started from a <Form> or useSubmit will have form's submission method value available in navigation.formMethod. In the case of a GET form submission, navigation.formMethod will 
+      be empty. Here is an example.
    
+- useFetcher: In HTML/HTTP, data mutations and loads are modeled with navigation: <a href> and <form action>. Both cause a navigation in the browser. The React Router equivalents are <Link> and <Form>.
+  But sometimes you want to call a loader outside of navigation, or call an action (and get the data on the page to revalidate) without changing the URL or reloading. Or you need to have multiple mutations in-flight at the same time.
+  Many interactions with the server aren't navigation events. This hook lets you plug your UI into your actions and loaders without navigating.   
+  
+  It should be used in different cases:
+    > Whenever we wanna trigger actions, loaders or perform side effects such as loading data or submitting data (like forms) without actually navigating to the page to which the loader or action belongs. That's to say, avoid moving to a 
+      different route transition or re-loading the page. If we use just Form then we'll be forwarded to the other route after submitting.
+    > Fetching Data: It can be used to load data from an external source, such as an API endpoint, without triggering a navigation. Basically, without navigating away from the current page. This allows you to fetch data when certain events 
+      occur, like when a component mounts or when a button is clicked.
+    > Submitting Forms: You can use it to submit forms programmatically or asynchronously and handle the form submission lifecycle, including loading states and handling responses.
+    > handle multiple concurrent submissions in a list (typical "todo app" list where you can click multiple buttons and all should be pending at the same time)
+    > infinite scroll containers
+    > creating seamless user experiences where data loading and form handling happen in the background.
+    > Provides a streamlined way to manage loading states, handle errors, and manage form submission responses.
+    > You can programmatically control the form submission process, including handling responses and updating UI state based on the outcome of the submission.
+
+  Fetchers have a lot of built-in behavior:
+    > Automatically handles cancellation on interruptions of the fetch
+    > When submitting with an HTTP method, the action's called first after the action completes, the data on the page is revalidated to capture any mutations that may have happened, automatically keeping your UI in sync with your server state
+    > When multiple fetchers are inflight at once, it will commit the freshest available data as they each land, and ensure no stale loads override fresher data, no matter which order the responses return.
+    > Handles uncaught errors by rendering the nearest errorElement (just like a normal navigation from <Link> or <Form>)
+    > Will redirect the app if your action/loader being called returns a redirect (just like a normal navigation from <Link> or <Form>)
+    
+  This hook owns the folloing properties: 
+    > Form: Just like <Form> except it doesn't cause a navigation.
+    > state: You can know the state of the fetcher with fetcher.state. It will be one of:
+      ~ idle - nothing is being fetched.
+      ~ submitting - A route action is being called due to a fetcher submission using POST, PUT, PATCH, or DELETE
+      ~ loading - The fetcher is calling a loader (from a fetcher.load) or is being revalidated after a separate submission or useRevalidator call
+    > submit(): The imperative version of <fetcher.Form>. If a user interaction should initiate the fetch, you should use <fetcher.Form>. But if you, the programmer are initiating the fetch (not in response to a user clicking a button, etc.), 
+      then use this function.
+    > data: The returned data from the loader or action is stored here. Once the data is set, it persists on the fetcher even through reloads and resubmissions.
+    > json: When using fetcher.submit(data, { formEncType: "application/json" }), the submitted JSON is available via fetcher.json.
+    > text: When using fetcher.submit(data, { formEncType: "text/plain" }), the submitted text is available via fetcher.text.
+    > formData: When using <fetcher.Form> or fetcher.submit(), the form data is available to build optimistic UI.
+    > formAction: Tells you the action url the form is being submitted to.
+    > formMethod: Tells you the method of the form being submitted: get, post, put, patch, or delete.
+
+- useSubmit: 
+   
+- useActionData:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

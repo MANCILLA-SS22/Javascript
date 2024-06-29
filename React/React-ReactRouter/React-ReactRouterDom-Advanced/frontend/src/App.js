@@ -1,12 +1,12 @@
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 
 import HomePage from "./pages/Home.jsx";
-import NewEventPage from "./pages/NewEvent.jsx";
 import EditEventPage from "./pages/EditEvent.jsx";
+import NewEventPage from "./pages/NewEvent.jsx";
 import RootLayout from "./pages/Root.jsx";
 import EventsRoot from "./pages/EventsRoot.jsx";
 import ErrorPage from "./pages/Error.jsx";
-import NewsletterPage from "./pages/NewsLetterPage.jsx";
+import NewsletterPage from "./pages/NewsLetter.jsx";
 import EventsPage from "./pages/Events.jsx";
 import EventDetailPage from "./pages/EventDetail.jsx";
 import AuthenticationPage from "./components/AuthenticationPage.jsx"
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
               { path: "edit", element: <EditEventPage/>, action: actionNewEvent, loader: checkAuthLoader}
             ],
           },
-          { path: "new", element: <NewEventPage/>, action: actionNewEvent, loader: checkAuthLoader} //Here, <NewEventPage/> is first executed, then the "action" is executed.
+          { path: "new", element: <NewEventPage />, action: actionNewEvent, loader: checkAuthLoader} //Here, <NewEventPage/> is first executed, then the "action" is executed.
         ]
       },
       {

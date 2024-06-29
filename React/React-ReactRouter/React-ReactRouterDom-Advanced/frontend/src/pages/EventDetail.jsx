@@ -9,7 +9,7 @@ function EventDetailPage(){
     return <>
 
         <Suspense fallback={<p style={{textAlign: "center"}}>Loading...</p>}>
-            <Await resolve={data.event}> {/* <Await resolve={data.event} errorElement={<ReviewsError />}> */}
+            <Await resolve={data.event}>
                 {loadEventAwait => <EventItem event={loadEventAwait}/>}
             </Await>
         </Suspense>

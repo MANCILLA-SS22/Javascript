@@ -13,4 +13,4 @@ async function actionEventDetail({ request, params }) {
     return redirect("/events")
 };
 
-export {actionEventDetail};
+export { actionEventDetail };

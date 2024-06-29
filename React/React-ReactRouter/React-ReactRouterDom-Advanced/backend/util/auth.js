@@ -17,20 +17,23 @@ function isValidPassword(password, storedPassword) {
 }
 
 function checkAuthMiddleware(req, res, next) {
+  console.log(req.method)
   if (req.method === 'OPTIONS') return next();
   if (!req.headers.authorization) {
     console.log('NOT AUTH. AUTH HEADER MISSING.');
     return next(new NotAuthError('Not authenticated.'));
   }
-  const authFragments = req.headers.authorization.split(' ');
+  const authFragments = req.headers.authorization.split(' '); console.log(authFragments)
 
   if (authFragments.length !== 2) {
     console.log('NOT AUTH. AUTH HEADER INVALID.');
     return next(new NotAuthError('Not authenticated.'));
   }
   const authToken = authFragments[1];
+  
   try {
     const validatedToken = validateJSONToken(authToken);
+    console.log(validatedToken)
     req.token = validatedToken;
   } catch (error) {
     console.log('NOT AUTH. TOKEN INVALID.');

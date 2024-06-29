@@ -3,11 +3,11 @@ import classes from '../styles/EventItem.module.css';
 
 function EventItem({ event, params }) {
   const token = useRouteLoaderData("root");
-  const submit = useSubmit();
+  const submit = useSubmit(); //This hook return a function
 
   function startDeleteHandler() {
     const proceed = window.confirm("Are you sure?");
-    if(proceed) submit(null, {method: "delete"}); //the first argument in "submit" is the data that we wanna submit. And that data will be wrapped in a form data object which we could extract.
+    if (proceed) submit(null, { method: "delete" });//We won't always use the Form component so send data. So we could just use a button instead of a full Form to send an http method, like PATCH or DELETE. 
   }
 
   return (

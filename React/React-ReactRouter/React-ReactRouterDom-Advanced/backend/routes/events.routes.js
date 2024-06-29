@@ -5,9 +5,10 @@ import { isValidText, isValidDate, isValidImageUrl } from '../util/validation.js
 
 const router = Router();
 
+
 router.get('/', async function (req, res, next){
-  // console.log(req.token);
   try {
+    console.log("Hey")
     const events = await getAll();
     res.json({ events: events });
   } catch (error) {
@@ -27,7 +28,7 @@ router.get('/:id', async function (req, res, next){
 router.use(checkAuthMiddleware);
 
 router.post('/', async function (req, res, next){
-  // console.log(req.token);
+  console.log(req.token);
   const data = req.body;
   let errors = {};
 
