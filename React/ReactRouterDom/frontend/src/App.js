@@ -44,7 +44,7 @@ const router = createBrowserRouter([
               { path: "edit", element: <EditEventPage/>, action: actionNewEvent, loader: checkAuthLoader}
             ],
           },
-          { path: "new", element: <NewEventPage />, action: actionNewEvent, loader: checkAuthLoader} //Here, <NewEventPage/> is first executed, then the "action" is executed.
+          { path: "new", element: <NewEventPage />, action: actionNewEvent, loader: checkAuthLoader } //Here, the "loader" is first executed, then the <NewEventPage/> is rendered and will execute the "action" method
         ]
       },
       {

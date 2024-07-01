@@ -115,7 +115,7 @@
    > children: Can either be React elements or a function.
    > errorElement: The error element renders instead of the children when the promise rejects. You can access the error with useAsyncError. If the promise rejects, you can provide an optional errorElement to handle that error in a contextual 
      UI via the useAsyncError hook.
-   > resolve: Takes a promise returned from a deferred loader value to be resolved and rendered.
+   > resolve: Takes a promise returned from a deferred loader value to be resolved and rendered. That's to say, the promise comiong from the "defer" utility.
 
 - redirect: When you wanna return or throw responses in loaders and actions, you can use redirect to redirect to another route. It's recommended to use redirect in loaders and actions rather than useNavigate in your components when the 
   redirect is in response to data.
@@ -132,8 +132,16 @@
         headers: { "Content-Type": "application/json; utf-8" },
       });  
       
-- defer: This utility allows you to defer values returned from loaders by passing promises instead of resolved values.
-
+- defer: This utility allows you to defer values returned from loaders by passing promises instead of resolved values. It's used to defer the loading of data until it is actually needed. This can be particularly useful for optimizing the 
+  loading experience of your application. When data fetching is deferred, it means that the rendering of a component or a route can proceed without waiting for the data to be fully loaded, and the data can be loaded asynchronously in the 
+  background. It's important to note that this must be used with help of <Await> and <Suspense>.
+  Here’s a basic explanation of how defer works:
+    > Deferring Data Loading: Instead of fetching all necessary data before rendering a route, defer allows you to fetch the data after the route has been matched and the component has been rendered. This can improve the perceived performance 
+      of your application by reducing the initial load time.
+    > Loading States: While the data is being fetched, you can display a loading indicator or a placeholder UI. Once the data is loaded, it can be seamlessly injected into the component.
+    > Optimizing Route Rendering: By deferring the data fetching, you can avoid blocking the rendering of your routes and provide a smoother user experience.
+ By using defer, the component can start rendering immediately, and the data will be injected once it is available, providing a smoother and faster user experience.
+ 
 - useLoaderData: It's a speciall hook which allow us to get access to the closest loader data. That's to say, you can retrieve data from the "loader" function used in the router "createBrowserRouter". You can use it in the elements that's 
   assigned to a route and in all compo0nents that might be used inside that element.
 
