@@ -4,7 +4,9 @@ import Events from './components/Events/Events.jsx';
 import EventDetails from './components/Events/EventDetails.jsx';
 import NewEvent from './components/Events/NewEvent.jsx';
 // import EditEvent from './components/Events/EditEvent.jsx';
-import {EditEvent, editEventAction, editEventLoader} from './components/Events/EditEventX2.jsx';
+import EditEvent from './components/Events/EditEventX2.jsx';
+import { editEventAction} from './features/actions/editEventAction.jsx';
+import { editEventLoader } from "./features/loaders/editEventLoader.jsx"
 import { queryClient } from './utils/http.jsx';
 
 const router = createBrowserRouter([

@@ -1,8 +1,8 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import Modal from '../UI/Modal.jsx';
-import EventForm from './EventForm.jsx';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { fetchEvent, queryClient, updateEvent } from '../../utils/http.jsx';
+import Modal from '../UI/Modal.jsx';
+import EventForm from './EventForm.jsx';
 import LoadingIndicator from '../UI/LoadingIndicator.jsx';
 import ErrorBlock from '../UI/ErrorBlock.jsx';
 
@@ -12,29 +12,19 @@ function EditEvent() {
 
   const {data, isPending, isError, error} = useQuery({
     queryKey: ["events", params.id], //We use "params.id" because this query depends on the ID of the event which we're trying to edit.
-    queryFn: function({signal}){
-      return fetchEvent({signal, id: params.id});
-    },
+    queryFn: function({signal}){ return fetchEvent({signal, id: params.id}) },
   });
 
   const {mutate} = useMutation({ //We can extract the "mutate" function out of this object so that we can call it (mutate) to trigger the updateEvent function.
-    
     mutationFn: updateEvent,
-
     onMutate: async function(data){
       await queryClient.cancelQueries({queryKey: ["events", params.id]});
       const previousEvent = queryClient.getQueryData([["events", params.id]]);
       queryClient.setQueryData(["events", params.id], data.event);
       return {previousEvent}
     },
-
-    onError: function(error, data, context){
-      return queryClient.setQueryData(["events", params.id], context.previousEvent);
-    },
-
-    onSettled: function(){
-      return queryClient.invalidateQueries(["events", params.id]);
-    }
+    onError: function(error, data, context){ return queryClient.setQueryData(["events", params.id], context.previousEvent) },
+    onSettled: function(){ return queryClient.invalidateQueries(["events", params.id]) }
   })
 
   function handleSubmit(formData) {
@@ -73,9 +63,7 @@ function EditEvent() {
     </>
   }
 
-  return (
-    <Modal onClose={handleClose}>{content}</Modal>
-  );
+  return <Modal onClose={handleClose}>{content}</Modal>
 }
 
 export default EditEvent;
