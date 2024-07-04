@@ -14,7 +14,9 @@ function EventDetails(){
 
   const {data, isPending, isError, error} = useQuery({
     queryKey: ["events", id],
-    queryFn: function ({ signal }) { return fetchEvent({ id, signal }) } //(2)
+    queryFn: function ({ signal }) {
+      return fetchEvent({ id, signal });
+    }
   });
 
   const {mutate, isPending: isPendingDeletion, isError: isErrorDeletion, error: deleteError} = useMutation({

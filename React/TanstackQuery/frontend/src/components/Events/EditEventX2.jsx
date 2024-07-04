@@ -41,7 +41,8 @@ function EditEvent() {
   if(data){
     content = (
       <EventForm inputData={data} onSubmit={handleSubmit}>
-        {state === "submitting" ? (<p>Sending data...</p>) : <>
+        {
+          state === "submitting" ? (<p>Sending data...</p>) : <>
             <Link to="../" className="button-text">Cancel</Link>
             <button type="submit" className="button">Update</button>
           </>
@@ -50,9 +51,7 @@ function EditEvent() {
     )
   }
 
-  return (
-    <Modal onClose={handleClose}>{content}</Modal>
-  );
+  return <Modal onClose={handleClose}>{content}</Modal>;
 };
 
 export default EditEvent;

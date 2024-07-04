@@ -23,6 +23,7 @@ async function fetchEvents({signal, searchTerm, max}) {
 }
 
 async function createNewEvent(eventData) {
+    console.log(eventData)
     const response = await fetch(`http://localhost:3000/events`, {
         method: 'POST',
         body: JSON.stringify(eventData),
