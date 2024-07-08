@@ -9,13 +9,14 @@ import ErrorBlock from '../UI/ErrorBlock.jsx';
 function EditEvent() {
   const navigate = useNavigate();
   const submit = useSubmit();
-  const {state} = useNavigation()
+  const navigation = useNavigation();
   const params = useParams();
+  const id = params.id;
 
   const {data, isError, error} = useQuery({
-    queryKey: ["events", params.id], //We use "params.id" because this query depends on the ID of the event which we're trying to edit.
+    queryKey: ["events", id], //We use "id" because this query depends on the ID of the event which we're trying to edit.
     queryFn: function({signal}){
-      return fetchEvent({signal, id: params.id});
+      return fetchEvent({signal, id: id});
     },
     staleTime: 10000
   });
@@ -42,7 +43,7 @@ function EditEvent() {
     content = (
       <EventForm inputData={data} onSubmit={handleSubmit}>
         {
-          state === "submitting" ? (<p>Sending data...</p>) : <>
+          navigation.state === "submitting" ? (<p>Sending data...</p>) : <>
             <Link to="../" className="button-text">Cancel</Link>
             <button type="submit" className="button">Update</button>
           </>

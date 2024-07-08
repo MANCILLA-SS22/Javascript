@@ -1,11 +1,12 @@
 import React from 'react';
-import classes from "./page.module.css";
-import Image from 'next/image';
-import { getMeal } from '@/lib/meals';
 import { notFound } from 'next/navigation';
 
+import { getMeal } from '@/lib/meals';
+import Image from 'next/image';
+import classes from "./page.module.css";
+
 //NOTE: The "metadata" object and "generateMetadata" function exports are only supported in Server Components.
-export async function generateMetadata({params}){ //When we wanna export dynamic metadata, we must use an async function
+async function generateMetadata({params}){ //When we wanna export dynamic metadata, we must use an async function
     const meal = getMeal(params.mealSlug);
     if (!meal) notFound();
     return {title: meal.title, description: meal.summary};
@@ -40,6 +41,7 @@ function MealDetailsPage({params}){
     )
 }
 
+export {generateMetadata};
 export default MealDetailsPage;
 
 //dangerouslySetInnerHTML is a feature in React that lets you inject raw HTML into your components.We use it when we need to render HTML content that comes from a source we don't fully trust, or when 

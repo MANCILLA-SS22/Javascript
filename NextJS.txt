@@ -1,0 +1,46 @@
+                                                                                                                   NextJS
+
+- Definition: https://nextjs.org/docs
+
+- Next.js Project Structure: This page provides an overview of the project structure of a Next.js application. It covers top-level files and folders, configuration files, and routing conventions within the app and pages directories.
+
+- Top-level folders: https: Top-level folders are used to organize your application's code and static assets.
+  > app: 
+  > page: 
+  > public: 
+  > src: 
+  
+- app Routing Convention: The following file conventions are used to define routes and handle metadata in the app router. These filenames are only reserved when creating them inside of the app/ folder (or any subfolder). Outside of the app/ 
+  folder, these filenames are not treated in any special way.
+   > page.js:  Create a new page (e.g., app/about/page.js creates a <your-domain>/about page)
+   > layout.js: Create a new layout that wraps sibling and nested pages
+   > not-found.js: Fallback page for "Not Found" errors (thrown by sibling or nested pages or layouts)
+   > error.js: Fallback page for other errors (thrown by sibling pages or nested pages or layouts)
+   > loading.js: Fallback page which is shown whilst sibling or nested pages (or layouts) are fetching data
+   > route.js: Allows you to create an API route (i.e., a page which does NOT return JSX code but instea
+
+- <Link>: It's a React component that extends the HTML <a> element to provide prefetching and client-side navigation between routes. It is the primary way to navigate between routes in Next.js.
+
+
+- Loader in image: A loader is a function that generates the URLs for your image. It modifies the provided src, and generates multiple URLs to request the image at different sizes. These multiple URLs are used in the automatic srcset 
+  generation, so that visitors to your site will be served an image that is the right size for their viewport.
+  The default loader for Next.js applications uses the built-in Image Optimization API, which optimizes images from anywhere on the web, and then serves them directly from the Next.js web server. If you would like to serve your images directly 
+  from a CDN or image server, you can write your own loader function with a few lines of JavaScript.
+
+- Layout shift: refers to unexpected movement of web page elements while the page is still loading or when dynamic content is being added to the page. This can be a frustrating experience for users as it may cause them to lose track of what 
+  they were reading or accidentally click on something they didn't intend to. In the context of Next.js (and web development in general), layout shifts can occur due to several reasons, such as:
+    > Late Loading Images: When images don't have specified dimensions, the browser doesn't know how much space to allocate for them, leading to a shift in layout once the image loads.
+    > Dynamic Content Injection: Content loaded dynamically via JavaScript can cause elements to move around.
+    > Fonts: Custom fonts that are not initially loaded can cause text to re-render with a different size once the font is available.
+    > Ads and Embeds: Ads or third-party embeds can load and push content around.
+
+- blur-up placeholders: It refer to a technique used to enhance the user experience when loading images. This method involves displaying a low-resolution, blurred version of an image while the high-resolution version is being loaded. 
+  Here's how it works and why it's used:
+    > Low-Resolution Placeholder: A small, low-resolution version of the image is initially loaded. This image is quick to download because of its small size.
+    > Blur Effect: This low-resolution image is displayed with a blur effect. The blur makes the low quality less noticeable and provides a smooth visual transition to the high-resolution image.
+    > High-Resolution Image: As the high-resolution image finishes loading, it replaces the blurred placeholder.
+  The benefits of using blur-up placeholders include:
+  > Improved Perceived Performance: Users see something related to the final content quickly, reducing the perception of waiting.
+  > Smooth Transition: The gradual transition from a blurred placeholder to a sharp image is visually pleasing and less jarring than loading the image in chunks or displaying a blank space.
+  
+- Largest Contentful Paint (LCP): LCP reports the render time of the largest image or text block visible in the viewport, relative to when the user first navigated to the page.

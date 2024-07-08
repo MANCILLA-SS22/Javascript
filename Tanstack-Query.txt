@@ -84,7 +84,9 @@
 
 - queryClient.fetchQuery: It is an ASYNCHRONOUS method that can be used to fetch and cache a query. It will either resolve with the data or throw with the error. Use the prefetchQuery method if you just want to fetch a query without needing 
   the result. If the query exists and the data is not invalidated or older than the given staleTime, then the data from the cache will be returned. Otherwise it will try to fetch the latest data.  
-  It will ensure that duplicate requests for this query are not created with useQuery instances for the same query are rendered while the data is fetching
+  It will ensure that duplicate requests for this query are not created with useQuery instances for the same query are rendered while the data is fetching. 
+  The options for fetchQuery are exactly the same as those of useQuery, except the following: enabled, refetchInterval, refetchIntervalInBackground, refetchOnWindowFocus, refetchOnReconnect, refetchOnMount, notifyOnChangeProps, throwOnError, 
+  select, suspense, placeholderData; which are strictly for useQuery and useInfiniteQuery.
 
 - queryClient.refetchQueries: Refetches queries matching a certain key or filter without invalidating them. It can be used to refetch queries based on certain conditions.
 - queryClient.removeQueries: Removes queries matching a certain key or filter from the cache. It's be used to remove queries from the cache based on their query keys or any other functionally accessible property/state of the query.
@@ -179,6 +181,8 @@
           call you've made.
         ~ onError: This function will fire if the mutation encounters an error and will be passed the error. Void function, the returned value will be ignored
         ~ onSettled: This function will fire when the mutation is either successfully fetched or encounters an error and be passed either the data or error. Void function, the returned value will be ignored
+
+- useIsFetching(): It is an optional hook that returns the number of the queries that your application is loading or fetching in the background (useful for app-wide loading indicators).
         
 - Optimistic Updates (Via the cache): When you optimistically update your state before performing a mutation, there is a chance that the mutation will fail. In most of these failure cases, you can just trigger a refetch for your optimistic 
   queries to revert them to their true server state. In some circumstances though, refetching may not work correctly and the mutation error could represent some type of server issue that won't make it possible to refetch. In this event, you 

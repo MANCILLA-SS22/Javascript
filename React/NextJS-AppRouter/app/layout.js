@@ -12,8 +12,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <MainHeader/>
-        {children}
+        {children} {/* Here are rendered the rest of the layouts coming from the nested components */}
       </body>
     </html>
   );
-}
+};

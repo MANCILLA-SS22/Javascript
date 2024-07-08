@@ -13,7 +13,7 @@ function EditEvent() {
 
   const {data, isPending, isError, error} = useQuery({
     queryKey: ["events", id], // Keep in mind that ["events", id] is used both in "EditEvent" and "EventDetails". So the same cashed data is available in both components.
-    queryFn: function({signal}){ 
+    queryFn: function({signal}){
       return fetchEvent({signal, id});
     },
   });
@@ -27,7 +27,7 @@ function EditEvent() {
       queryClient.setQueryData(["events", id], data.event);  // Optimistically update to the new value.
       return { previousEvent }; //Return a context object with the snapshotted value. "previousEvent" is being sended to "onErrror" and it'll be used with help of "context"
     },
-    onError: function (error, data, context) { // If the mutation fails, use the context returned from onMutate to roll back.     "data" stands for the data which was submitted to the mutationFn
+    onError: function (error, data, context) { //If the mutation fails, use the context returned from onMutate to roll back.     "data" stands for the data which was submitted to the mutationFn
       return queryClient.setQueryData(["events", id], context.previousEvent);
     },
     onSettled: function () {  // Always refetch after error or success

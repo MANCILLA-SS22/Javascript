@@ -80,10 +80,10 @@ async function deleteEvent({ id }) {
     return response.json();
 }
 
-async function updateEvent({ id, event }) {
+async function updateEvent({ id, updatedEventData }) {
     const response = await fetch(`http://localhost:3000/events/${id}`, {
         method: 'PUT',
-        body: JSON.stringify({ event }),
+        body: JSON.stringify({ updatedEventData }),
         headers: { 'Content-Type': 'application/json' }
     });
 

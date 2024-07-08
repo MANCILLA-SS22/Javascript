@@ -12,6 +12,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 - URL: 
   > https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/What_is_a_URL
   > https://www.hostinger.com/tutorials/what-is-a-url
+  > https://blog.hubspot.com/marketing/parts-url
 
 - URI: 
   > https://www.hypr.com/security-encyclopedia/uniform-resource-identifier-uri#:~:text=Uniform%20Resource%20Identifier%20(URI),-A%20Uniform%20Resource&text=URIs%20enable%20the%20protocols%20over,connected%20devices%20and%20other%20resources.
@@ -234,6 +235,12 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 - Query builder: 
 
 - ORM/ODM:   
+
+- Server-Side Rendering (SSR): 
+  > https://en.wikipedia.org/wiki/Server-side_scripting
+  
+- Static Site Generation (SSG): 
+
 
 
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$                                                                                                       
@@ -646,14 +653,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   > https://www.apisec.ai/blog/business-logic-vs-application-logic#:~:text=The%20key%20difference%20between%20business,user%20interacts%20with%20the%20app.
   > https://jonascleveland.com/difference-of-business-logic-vs-application-logic/
   
-- Software architecture patterns: 
-  > https://www.redhat.com/architect/14-software-architecture-patterns
-  > https://www.geeksforgeeks.org/types-of-software-architecture-patterns/
-  > https://www.turing.com/blog/software-architecture-patterns-types/
-  
-- The SOLID principles of software architecture: 
-  > https://www.developer.com/design/solid-principles-software-architecture/#:~:text=The%20SOLID%20principles%20of%20software,high%20cohesion%20and%20low%20coupling.
-  > https://www.freecodecamp.org/news/solid-principles-explained-in-plain-english/
 
 - Escalamiento vertical y horizontal: 
   > https://www.geeksforgeeks.org/horizontal-and-vertical-scaling-in-databases/
@@ -685,11 +684,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   > https://www.vmware.com/topics/glossary/content/container-orchestration.html#:~:text=Container%20orchestration%20is%20the%20automation,networking%2C%20load%20balancing%20and%20more.
   > https://cloud.google.com/discover/what-is-container-orchestration
   > https://stackoverflow.com/questions/52453146/what-is-the-difference-between-clustering-management-and-orchestration-in-docker
-  
-  
-  
-  
-  
+    
   
   
   

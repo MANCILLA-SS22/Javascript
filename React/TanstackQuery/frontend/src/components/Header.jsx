@@ -4,7 +4,9 @@ function Header({ children }) {
   const fetching = useIsFetching();
   return (
     <>
-      <div id="main-header-loading">{fetching > 0 && <progress />}</div>
+      <div id="main-header-loading">
+        {fetching > 0 && <progress />}
+      </div>
       <header id="main-header">
         <div id="header-title">
           <h1>React Events</h1>
