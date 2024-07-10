@@ -89,6 +89,7 @@
   select, suspense, placeholderData; which are strictly for useQuery and useInfiniteQuery.
 
 - queryClient.refetchQueries: Refetches queries matching a certain key or filter without invalidating them. It can be used to refetch queries based on certain conditions.
+
 - queryClient.removeQueries: Removes queries matching a certain key or filter from the cache. It's be used to remove queries from the cache based on their query keys or any other functionally accessible property/state of the query.
 
 - useQuery: This hook is used to fetch and cache data in React apps. It's recommended to be used to only get data, NOT to send or update data even though it's possible. To send or update data, you should use useMutation().

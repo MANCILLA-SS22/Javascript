@@ -1,13 +1,13 @@
-'use server'; //The additional "use server" directive inside our function, just ensures that function code is never sent to the client side, and it also sets up a link (some client-side code) to send requests to the server (this function in particular) from the client when our form is submitted.
+'use server'; //It sets up a link (some client-side code) to send requests to the server (this function in particular) from the client when our form is submitted.
 import { redirect } from "next/navigation";
-import { saveMeal } from "./meals";
 import { revalidatePath } from "next/cache";
+import { saveMeal } from "./meals";
 
 function isInvalidText(text){
     return !text || text.trim() === '';
 }
 
-async function shareMeal(prevState, formData) { //This creates a so-called Server Action, which is a function that's guaranteed to execute on the server, and only there. We've got to use "async" whenever we use 'use server'
+export async function shareMeal(prevState, formData) {
     const meal = {
         title: formData.get('title'),
         summary: formData.get('summary'),
@@ -23,13 +23,11 @@ async function shareMeal(prevState, formData) { //This creates a so-called Serve
     }
 
     await saveMeal(meal);
-    revalidatePath("/meals"/* , 'layout' */);
+    revalidatePath("/meals"/* , 'layout' */); //(1)
     redirect("/meals");
-}
+};
 
-export { shareMeal }
-
-//revalidatePath();
+//(1);
 //This function tells NextJS to revalidate the cache that belongs to a certain route path. So for example, if I know that I want to visit the meals page and that the meals
 //page depends on data that changed now, I can tell NextJS to revalidate the / meals path. And with that, that path would be revalidated.
 //Now what's important is that, by default, only that path will be revalidated, no nested paths. So if I had some nested path there in my meals folder,

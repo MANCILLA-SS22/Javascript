@@ -125,6 +125,90 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   > https://aws.amazon.com/what-is/cdn/
   > https://www.cloudflare.com/learning/cdn/what-is-a-cdn/
 
+- JSON (JavaScript Object Notation): 
+  > https://www.json.org/json-en.html
+  > https://www.oracle.com/database/what-is-json/
+  > https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON
+  > https://www.hostinger.es/tutoriales/que-es-json
+  > https://aws.amazon.com/es/compare/the-difference-between-json-xml/
+         
+- API protocols: 
+  > https://stoplight.io/api-types 
+  > https://apidog.com/blog/8-api-protocol-types/
+  > https://immune.institute/blog/que-es-la-api/
+
+- Api rest: 
+  > https://radixweb.com/blog/rest-vs-restful-api
+  > https://aws.amazon.com/what-is/restful-api/
+  > https://www.ibm.com/topics/rest-apis
+  > https://www.scrapingbee.com/blog/six-characteristics-of-rest-api/
+  > https://www.redhat.com/en/topics/api/what-is-a-rest-api
+  > https://blog.hubspot.es/website/que-es-api-rest   
+  
+- BODY, HEADERS & PARAMS
+  > https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers
+  > https://developer.mozilla.org/en-US/docs/Web/API/Request/body
+  > https://guides.emberjs.com/release/routing/query-params/
+  > https://www.branch.io/glossary/query-parameters/#:~:text=Query%20parameters%20are%20a%20defined,on%20the%20data%20being%20passed.
+  > https://www.botify.com/learn/basics/what-are-url-parameters#:~:text=URL%20parameters%20(also%20known%20as,by%20the%20%27%26%27%20symbol.
+
+- RPC (Remote Procedure Calls): 
+  > https://www.ibm.com/docs/en/aix/7.3?topic=concepts-remote-procedure-call
+  > https://www.geeksforgeeks.org/remote-procedure-call-rpc-in-operating-system/
+  > https://www.lenovo.com/us/en/glossary/what-is-rpc/?orgRef=https%253A%252F%252Fwww.google.com%252F
+   
+- Query: 
+  > https://www.techopedia.com/definition/5736/query
+  > https://www.macrometa.com/articles/what-are-queries
+  > https://aulacm.com/que-es/query-significado-definicion/
+
+- Asincrónia: 
+  > https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Introducing
+  > https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/
+  > https://www.freecodecamp.org/news/asynchronous-programming-in-javascript/
+  > https://lenguajejs.com/javascript/asincronia/que-es/
+  > https://www.freecodecamp.org/espanol/news/sincrono-vs-asincrono-en-javascript/ 
+    
+- AJAX (Asynchronous JavaScript and XML): 
+  > https://aws.amazon.com/what-is/ajax/
+  > https://developer.mozilla.org/en-US/docs/Glossary/AJAX
+  > https://www.freecodecamp.org/news/ajax-tutorial/
+  > https://www.hostinger.es/tutoriales/que-es-ajax#:~:text=AJAX%20significa%20JavaScript%20asíncrono%20y,al%20servidor%20en%20segundo%20plano.
+  > https://www.ibm.com/docs/es/rational-soft-arch/9.6.1?topic=page-asynchronous-javascript-xml-ajax-overview
+  > https://ebac.mx/blog/que-es-ajax
+ 
+- Promesas (promise): 
+  > https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+  > https://www.freecodecamp.org/news/guide-to-javascript-promises/
+  > https://www.geeksforgeeks.org/javascript-promise/
+  > https://lenguajejs.com/javascript/asincronia/promesas/
+  > https://es.javascript.info/promise-basics
+  
+- XML (Extensible Markup Language): 
+  > https://aws.amazon.com/what-is/xml/#:~:text=Extensible%20Markup%20Language%20(XML)%20lets,%2C%20and%20third-party%20applications.
+  > https://developer.mozilla.org/en-US/docs/Web/XML/XML_introduction
+  > https://rockcontent.com/es/blog/que-es-xml/
+   
+- HTTP response status codes: 
+  > https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
+  > https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
+  
+- JSON Web Token (JWT): 
+  > https://jwt.io/introduction
+  > https://auth0.com/docs/secure/tokens/json-web-tokens
+  > https://stackoverflow.com/questions/31309759/what-is-secret-key-for-jwt-based-authentication-and-how-to-generate-it  
+
+- Client-side rendering (CSR) and Server-side Rendering (SSR): 
+  > https://www.geeksforgeeks.org/server-side-rendering-vs-client-side-rendering-vs-server-side-generation/
+  > https://www.bairesdev.com/blog/server-side-rendering-react/
+  > https://www.searchenginejournal.com/client-side-vs-server-side/482574/
+  
+- Static site generator (SSG): 
+
+- Single-Page Application (SPA): 
+
+- Search Engine Optimization (SEO): 
+
 - Hoisting:
   > https://www.hostinger.com/tutorials/what-is-web-hosting/
   > https://www.techopedia.com/definition/29023/web-hosting
@@ -235,12 +319,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 - Query builder: 
 
 - ORM/ODM:   
-
-- Server-Side Rendering (SSR): 
-  > https://en.wikipedia.org/wiki/Server-side_scripting
-  
-- Static Site Generation (SSG): 
-
 
 
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$                                                                                                       
@@ -570,80 +648,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   > https://www.computerhope.com/jargon/f/fetch.htm
   > https://www.geeksforgeeks.org/javascript-fetch-method/
   > https://www.freecodecamp.org/news/javascript-fetch-api-for-beginners/
-     
-- JSON (JavaScript Object Notation): 
-  > https://www.json.org/json-en.html
-  > https://www.oracle.com/database/what-is-json/
-  > https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON
-  > https://www.hostinger.es/tutoriales/que-es-json
-  > https://aws.amazon.com/es/compare/the-difference-between-json-xml/
          
-- API protocols: 
-  > https://stoplight.io/api-types 
-  > https://apidog.com/blog/8-api-protocol-types/
-  > https://immune.institute/blog/que-es-la-api/
-
-- Api rest: 
-  > https://radixweb.com/blog/rest-vs-restful-api
-  > https://aws.amazon.com/what-is/restful-api/
-  > https://www.ibm.com/topics/rest-apis
-  > https://www.scrapingbee.com/blog/six-characteristics-of-rest-api/
-  > https://www.redhat.com/en/topics/api/what-is-a-rest-api
-  > https://blog.hubspot.es/website/que-es-api-rest   
-  
-- BODY, HEADERS & PARAMS
-  > https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers
-  > https://developer.mozilla.org/en-US/docs/Web/API/Request/body
-  > https://guides.emberjs.com/release/routing/query-params/
-  > https://www.branch.io/glossary/query-parameters/#:~:text=Query%20parameters%20are%20a%20defined,on%20the%20data%20being%20passed.
-  > https://www.botify.com/learn/basics/what-are-url-parameters#:~:text=URL%20parameters%20(also%20known%20as,by%20the%20%27%26%27%20symbol.
-
-- RPC (Remote Procedure Calls): 
-  > https://www.ibm.com/docs/en/aix/7.3?topic=concepts-remote-procedure-call
-  > https://www.geeksforgeeks.org/remote-procedure-call-rpc-in-operating-system/
-  > https://www.lenovo.com/us/en/glossary/what-is-rpc/?orgRef=https%253A%252F%252Fwww.google.com%252F
-   
-- Query: 
-  > https://www.techopedia.com/definition/5736/query
-  > https://www.macrometa.com/articles/what-are-queries
-  > https://aulacm.com/que-es/query-significado-definicion/
-
-- Asincrónia: 
-  > https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Introducing
-  > https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/
-  > https://www.freecodecamp.org/news/asynchronous-programming-in-javascript/
-  > https://lenguajejs.com/javascript/asincronia/que-es/
-  > https://www.freecodecamp.org/espanol/news/sincrono-vs-asincrono-en-javascript/ 
-    
-- AJAX (Asynchronous JavaScript and XML): 
-  > https://aws.amazon.com/what-is/ajax/
-  > https://developer.mozilla.org/en-US/docs/Glossary/AJAX
-  > https://www.freecodecamp.org/news/ajax-tutorial/
-  > https://www.hostinger.es/tutoriales/que-es-ajax#:~:text=AJAX%20significa%20JavaScript%20asíncrono%20y,al%20servidor%20en%20segundo%20plano.
-  > https://www.ibm.com/docs/es/rational-soft-arch/9.6.1?topic=page-asynchronous-javascript-xml-ajax-overview
-  > https://ebac.mx/blog/que-es-ajax
- 
-- Promesas (promise): 
-  > https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
-  > https://www.freecodecamp.org/news/guide-to-javascript-promises/
-  > https://www.geeksforgeeks.org/javascript-promise/
-  > https://lenguajejs.com/javascript/asincronia/promesas/
-  > https://es.javascript.info/promise-basics
-  
-- XML (Extensible Markup Language): 
-  > https://aws.amazon.com/what-is/xml/#:~:text=Extensible%20Markup%20Language%20(XML)%20lets,%2C%20and%20third-party%20applications.
-  > https://developer.mozilla.org/en-US/docs/Web/XML/XML_introduction
-  > https://rockcontent.com/es/blog/que-es-xml/
-   
-- HTTP response status codes: 
-  > https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
-  > https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
-  
-- JSON Web Token (JWT): 
-  > https://jwt.io/introduction
-  > https://auth0.com/docs/secure/tokens/json-web-tokens
-  > https://stackoverflow.com/questions/31309759/what-is-secret-key-for-jwt-based-authentication-and-how-to-generate-it  
-    
 - Stateless and stateful:
   > https://www.baeldung.com/cs/stateful-stateless-system
   > https://www.geeksforgeeks.org/difference-between-stateless-and-stateful-protocol/
@@ -653,7 +658,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   > https://www.apisec.ai/blog/business-logic-vs-application-logic#:~:text=The%20key%20difference%20between%20business,user%20interacts%20with%20the%20app.
   > https://jonascleveland.com/difference-of-business-logic-vs-application-logic/
   
-
 - Escalamiento vertical y horizontal: 
   > https://www.geeksforgeeks.org/horizontal-and-vertical-scaling-in-databases/
   > https://www.mongodb.com/resources/basics/horizontal-vs-vertical-scaling

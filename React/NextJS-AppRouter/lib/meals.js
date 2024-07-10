@@ -4,6 +4,8 @@ import sql from "better-sqlite3";
 import slugify from "slugify";
 import xss from "xss";
 
+const db = sql("meals.db");
+
 const s3 = new S3({
     region: 'us-west-1',
     // credentials: {
@@ -11,8 +13,6 @@ const s3 = new S3({
     //     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
     // },
 });
-
-const db = sql("meals.db");
 
 async function getMeals(){
     await new Promise(resolve => setTimeout(resolve, 2000));
@@ -30,7 +30,6 @@ async function saveMeal(meal){
 
     const extension = meal.image.name.split(".").pop();
     const fileName = `${meal.slug}.${extension}`;
-
     const bufferedImage = await meal.image.arrayBuffer();
     
     await s3.putObject({

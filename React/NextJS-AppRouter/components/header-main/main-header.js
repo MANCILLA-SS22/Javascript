@@ -17,10 +17,10 @@ function MainHeader() {
             <nav className={classes.nav}>
                 <ul>
                     <li>
-                        <NavLink href="/meals"></NavLink>
+                        <NavLink href="/meals">Browse Meals</NavLink>
                     </li>
                     <li>
-                        <NavLink href="/community"></NavLink>
+                        <NavLink href="/community">Foodies Community</NavLink>
                     </li>
                 </ul>
             </nav>
@@ -33,4 +33,4 @@ export default MainHeader;
 //We use separate components here so we can use 'use client' in other file that will be used only to execute client-side components. This way, we avoiud this main-header 
 //component to be converted to a client component and is therefore still rendered on the server. And instead only the <li> parts are rendered on the client.
 
-//We use "priority" to make sure that this is loaded with priority and hence we avoid "lazy loading
+//We use "priority" to make sure that this is loaded with priority and hence we avoid "lazy loading"
