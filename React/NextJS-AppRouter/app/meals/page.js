@@ -35,8 +35,3 @@ function MealsPage(){
 };
 
 export default MealsPage;
-
-//<Suspense>
-//It's a component provided by React that allow us to handle loading states and show fallback content until some data or resource has been loadad.
-//And NextJS embraces the suspense component and this React concept, and makes sure that whenever you have a component like "Meals", which performs some data 
-//fetching and returns such a promise up there, that such components will trigger suspense to show the fallback until they're done. So you don't need to do anything else.

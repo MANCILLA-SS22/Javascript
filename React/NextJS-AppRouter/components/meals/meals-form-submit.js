@@ -1,13 +1,10 @@
 'use client';
 
-import { useFormStatus } from "react-dom";
+import { useFormStatus } from "react-dom"; //It gives you status information of the last form submission and ONLY if it's inside a form for which it should give us th status
 
 function MealsFormSubmit() {
-    const { pending } = useFormStatus();
-    return <button disabled={pending}>{pending ? 'Submitting...' : "Share Meal"}</button> //(1)
+    const { pending } = useFormStatus(); //pending: A boolean. If true, this means the parent <form> is pending submission. Otherwise, false.
+    return <button disabled={pending}>{pending ? 'Submitting...' : "Share Meal"}</button> //We want to disable the button if we are submitting.
 }
 
 export default MealsFormSubmit;
-
-//(1)
-//We want to disable the button if we are submitting. So we'll set the disabled prop to pending, so that we do disable the button if the surrounding form is being submitted and we enable it, if that's not the case.

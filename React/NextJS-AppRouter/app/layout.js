@@ -1,7 +1,7 @@
 import './globals.css';
 import MainHeader from '@/components/header-main/main-header';
 
-export const metadata = {
+export const metadata = { //If we add this metadata to the layout, it'll automatically be added to all the pages that are wrapped by this layout unless a page specifies its own metadata.
   title: 'NextLevel Food',
   description: 'Delicious meals, shared by a food-loving community.',
 };

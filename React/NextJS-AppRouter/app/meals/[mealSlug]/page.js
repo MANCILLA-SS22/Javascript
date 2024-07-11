@@ -4,14 +4,16 @@ import { notFound } from 'next/navigation';
 import { getMeal } from '@/lib/meals';
 import classes from "./page.module.css";
 
-export async function generateMetadata({params}){ //When we wanna export dynamic metadata, we must use an async function
-    const meal = getMeal(params.mealSlug);
+export async function generateMetadata({params}){
+    const id = params.mealSlug
+    const meal = getMeal(id);
     if (!meal) notFound();
     return {title: meal.title, description: meal.summary};
 };
 
 function MealDetailsPage({params}){
-    const meal = getMeal(params.mealSlug);
+    const id = params.mealSlug
+    const meal = getMeal(id);
     if(!meal) notFound();
     meal.instructions = meal.instructions.replace(/\n/g, '<br />');
     return <>

@@ -56,7 +56,7 @@ export default ShareMealPage;
 //The first argument is the actual server-action that should be triggered when the form is submitted.
 //The second argument is the initial state of this component that should be returned by "useFormState" before the shareMeal has been triggered and yielded a repsonse.
 
-//"state" is the current response of this page here (component). So the latest response returned by this Server Action in the end or this initial state if no response has been received yet.
+//"state" is the current response of the component. So the latest response returned by this Server Action the initial state if no response has been received yet.
 //That state (shareMeal) depends on the execution of that Server Action and its response. And, we can the use this state, which will essentially be either "{messaje: null}" or
 //any response we got back from ShareMeal to output data in this component.
 
