@@ -42,24 +42,23 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   proceso de render a partir del nodo donde se produjo el cambio de estado y así se generará el nuevo Virtual DOM que luego será reconciliado. Los estados son un concepto de React, no de JavaScript, por lo que para implementarlo vamos a 
   necesitar de los Hooks de React.
   
-  El estado en React es una de las maneras en las que se procesan datos. Desde el punto de vista de los datos que React puede manejar, tenemos el objeto props, con el que podemos insertar todo tipo de propiedades a un elemento, y tenemos los 
-  estados. El estado es un objeto que contiene datos que pueden cambiar en el tiempo. En React, el estado se usa para controlar los cambios en la interfaz. El objeto props nos permite insertar datos estáticos. Con esto nos referimos a que 
-  pasamos propiedades a un componente o elemento que luego se renderiza o visualiza de una determinada manera, con base a los datos que le pasamos. Entonces, si necesitamos darle dinamismo a un elemento, es decir, datos que se modifiquen a 
-  lo largo del tiempo, necesitaremos utilizar el estado en React.
+  Es una de las maneras en las que se procesan datos. El estado es un objeto que contiene datos que pueden cambiar en el tiempo y se usa para controlar los cambios en la interfaz. El objeto props nos permite insertar datos estáticos. Con 
+  esto nos referimos a que pasamos propiedades a un componente o elemento que luego se renderiza o visualiza de una determinada manera, con base a los datos que le pasamos. Entonces, si necesitamos darle dinamismo a un elemento, es decir, 
+  datos que se modifiquen a lo largo del tiempo, necesitaremos utilizar el estado en React.
   
-  El estado en React, también conocido como state, es el segundo tipo de dato que maneja esta librería de JavaScript. Mientras que las props son los datos que podemos pasarle a un componente o elemento React desde afuera, un estado se 
-  conforma por los datos internos que un componente puede manejar. A medida que estos datos son modificados, ya sea por una interacción del usuario o por una recepción de datos de la API, el estado será modificado. Entonces, cada cambio de 
-  ese estado provocará que el elemento o componente se renderice de nuevo con una nueva representación en pantalla.
-  
+  Mientras que las props son los datos que podemos pasarle a un componente o elemento React desde afuera, un estado se conforma por los datos internos que un componente puede manejar. A medida que estos datos son modificados, ya sea por una 
+  interacción del usuario o por una recepción de datos de la API, el estado será modificado. Entonces, cada cambio de ese estado provocará que el elemento o componente se renderice de nuevo con una nueva representación en pantalla.
   Ten presente que podemos utilizar un estado en cualquier tipo de componente o elemento, sea del nivel más bajo o el nivel más alto. Allá donde necesitemos datos que cambian a lo largo del tiempo, podemos utilizar un estado.
-
+  
+- side effects: Side effects can be fetching data from a remote server, reading or writing to local storage, setting up event listeners, or setting up a subscription. These side effects can occur when a button is clicked, a form is submitted 
+  or when a component is mounted and unmounted. React’s useEffecthook allows functional components to do things when a component is mounted or when some properties or states change. 
+  
+  Put another way, it refers to any operations or behaviors that occur in a component after rendering, and that don’t directly impact the current component render cycle. These side effects can include tasks such as data fetching, 
+  subscriptions, manually changing the DOM, or other interactions with the outside world. One common use case for handling a side effect is making an asynchronous data request, such as fetching data from an API.
+  
 - Render y efectos: El funcionamiento de React está estrechamente ligado al cambio de estados. Cuando se produce un cambio de estado, React ejecuta un nuevo proceso de renderizado para ese componente y, de manera recursiva, para todos sus 
   componentes hijos. Durante este proceso React ejecuta de nuevo las funciones de los componentes para generar el nuevo árbol de elementos de la interfaz de usuario.  Dentro de los componentes podemos tener funciones para realizar diferentes 
-  tareas, como, por ejemplo, una llamada a una api para obtener datos. Si en cada render se ejecuta esta llamada a la API, quiere decir que un cambio de estado está provocando efectos secundarios y no controlarlos puede traernos problemas. 
-
-- side effects: Side effects can be fetching data from a remote server, reading or writing to local storage, setting up event listeners, or setting up a subscription. These side effects can occur when a button is clicked, a form is submitted 
-  or when a component is mounted and unmounted. React’s useEffecthook allows functional components to do things when a component is mounted or when some properties or states change. This hook also allows cleaning up when the component is 
-  unmounted.
+  tareas, como, por ejemplo, una llamada a una api para obtener datos. Si en cada render se ejecuta esta llamada a la API, quiere decir que un cambio de estado está provocando efectos secundarios y no controlarlos puede traernos problemas.   
   
 - Hydration: It's how React attaches to existing HTML that was already rendered by React in a server environment. During hydration, React will attempt to attach event listeners to the existing markup and take over rendering the app on the 
   cli It refers to the process of taking a server-rendered HTML markup and making it interactive by attaching event handlers or event listeners to the DOM, and converting it into a fully functional React application on the client side 
@@ -994,8 +993,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
        server-specific code while offloading client-specific logic to the browser.
     3. Clarity in Code: It provides clarity in your codebase, making it clear which components are meant for client-side rendering. This can improve maintainability and reduce bugs related to rendering context (server vs. client).
 
-- Server Actions: Server Actions are asynchronous functions that are executed on the server. They can be used in Server and Client Components to handle form submissions and data mutations in Next.js applications. A Server Action can be 
-  defined with the React "use server" directive. You can place the directive at the top of an async function to mark the function as a Server Action, or at the top of a separate file to mark all exports of that file as Server Actions.
+- Server Actions: They're asynchronous functions that are executed on the server. They can be used in Server and Client Components to handle form submissions and data mutations. They can be defined with the React "use server" directive.
   We've got to always use "async" whenever we use 'use server'.
 
 - Server Components: They can use the inline function level or module level "use server" directive. To inline a Server Action, add "use server" to the top of the function body. 
@@ -1020,7 +1018,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 - 'use server': It is needed only if you’re using React Server Components or building a library compatible with them, and marks server-side functions that can be called from client-side code. This directive explicitly tells Next.js that the 
   component or function should be executed on the server side rather than the client side. This is particularly useful for optimizing performance and controlling where specific logic is executed in your application.
 
-  To use it, you must add 'use server' at the top of an async function body to mark the function as callable by the client. We call these functions Server Actions.
+  To use it, you must add 'use server' at the top of an async function body to mark the function as callable by the client (Server Action), or at the top of a separate file to mark all exports of that file as Server Actions.
   When calling a Server Action on the client, it'll make a network request to the server that includes a serialized copy of any arguments passed. If the Server Action returns a value, that value will be serialized and returned to the client.
   Instead of individually marking functions with 'use server', you can add the directive to the top of a file to mark all exports within that file as Server Actions that can be used anywhere, including imported in client code.
     > It must be at the very beginning of their function or module; above any other code including imports (comments above directives are OK). They must be written with single or double quotes, not backticks.
@@ -1103,6 +1101,24 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   your website is able to instantly see the finished page without having to wait for anything to render. Then, NextJS caches those pre-rendered pages so that it's able to serve them to all visitors. 
   But the downside of this, is that it never re-fetches the server-actions because the code is never executes again. Instead, it just uses pre-generated pages.
   
+- Parallel routes: It allows you to simultaneously or conditionally render one or more pages within the same layout. They are useful for highly dynamic sections of an app, such as dashboards and feeds on social sites.
+    > Slots: Parallel routes are created using named slots. Slots are defined with the @folder convention. And Slots are passed as props to the shared parent layout. However, slots are not route segments and do not affect the URL structure.
+      It's important to keep in mind that the "children" prop is an implicit slot that does not need to be mapped to a folder. 
+    > Active state and navigation: By default, Next.js keeps track of the active state (or subpage) for each slot. However, the content rendered within a slot will depend on the type of navigation:
+      ~ Soft Navigation: During client-side navigation, Next.js will perform a partial render, changing the subpage within the slot, while maintaining the other slot's active subpages, even if they don't match the current URL.
+      ~ Hard Navigation: After a full-page load (browser refresh), Next.js cannot determine the active state for the slots that don't match the current URL. Instead, it will render a default.js file for the unmatched slots, or 404 if 
+        default.js doesn't exist. The 404 for unmatched routes helps ensure that you don't accidentally render a parallel route on a page that it was not intended for. You can instead define a default.js file to render as a fallback for 
+        unmatched slots during the initial load or full-page reload.
+        
+  A clear benefit of parallel routes is their ability to split a single layout into various slots, making the code more manageable. This is particularly advantageous when different teams work on various sections of the page.
+  However, the true benefit of parallel routes lies in their capacity for independent route handling and sub-navigation. Let’s take a closer look at these benefits.
+    > Independent route handling: One of the most compelling features of parallel routes is the ability to handle each route independently. This means that each slot of your layout, such as user analytics or activity logs, can have its own  
+      loading and error states. This granular control is particularly beneficial in scenarios where different sections of the page load at varying speeds or encounter unique errors. For instance, if the user analytics data takes longer to 
+      load, you can display a loading spinner specifically for that section, while other parts of the dashboard remain interactive. Similarly, if there's an error in fetching revenue metrics, you can show an error message in that specific 
+      section without affecting the rest of the dashboard. This level of detail in handling states not only improves the user experience but also simplifies debugging and maintenance.
+    >  Sub-navigation in routes: Another significant advantage of using parallel routes is their capability to offer a seamless sub-navigation experience within each parallel route. Each slot of your dashboard can essentially function as a 
+       mini-application, complete with its own navigation and state management. This is especially useful in a complex application such as our dashboard where different sections serve distinct purposes.
+   https://www.builder.io/blog/nextjs-14-parallel-routes
 
                                                                $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$                                                                                                       
                                                                
