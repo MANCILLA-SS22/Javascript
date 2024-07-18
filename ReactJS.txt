@@ -33,6 +33,14 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 - Render de un único elemento: Los componentes deben retornar un solo elemento o componente, pero este elemento o componente sí puede tener más de un elemento o componente hijo. En caso de no necesitar que el elemento padre forme parte del 
   árbol del DOM, se puede utilizar React.Fragment, o lo que es lo mismo utilizar un tag sin tipo <></>.
   
+- map(): Creates a new array with the result of calling a function for each array element. El método map() crea un nuevo array con todos los elementos del original transformados según las operaciones de la función enviada por parámetro. 
+  Tiene la misma cantidad de elementos pero los almacenados son el return de la función. En el ejemplo, la función retorna la propiedad nombre de cada elemento y eso es lo que se almacena en el nuevo array nombres. Map() se utiliza 
+  mucho para transformación de arrays.
+  En REACT, debemos incluir en cada elemento la propiedad key, que marque la identidad del elemento. Es decir, debemos poner algo que se encuentre en el array u objeto pero que estemos seguros de que NO SE REPETIRA (lo mas 
+  recomendable seria el id, ya que este empieza desde 1 hasta un numero indefinido pero que siempre estara cambiando). Esto ayudará a react a optimizar el rendering ante cambios en el array. De no tenerla podemos auto-generarla con el 
+  index provisto por el segundo parámetro de map, pero sólo optimizará si hay adiciones al final del array.
+  Whenever the key changes on a component, even if that component is not part of a list, whenever it changes, REACT will destroy the old component instance and create a new one.  
+  
 - Key: En REACT, debemos incluir en cada elemento la propiedad key, que marque la identidad del elemento. Es decir, debemos poner algo que se encuentre en el array u objeto pero que estemos seguros de que NO SE REPETIRA (lo mas recomendable    
   seria el id, ya que este empieza desde 1 hasta un numero indefinido pero que siempre estara cambiando). Esto ayudará a react a optimizar el rendering ante cambios en el array. De no tenerla podemos auto-generarla con el index provisto por 
   el segundo parámetro de map, pero sólo optimizará si hay adiciones al final del array. Whenever the key changes on a component, even if that component is not part of a list, whenever it changes, REACT will destroy the old component 
@@ -73,9 +81,37 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     4. Interactive Application: After hydration, the application becomes fully interactive, and React takes control of the DOM updates as usual.
   Hydration is crucial for combining the benefits of SSR and client-side rendering (CSR). It allows for faster initial page loads with server-rendered HTML while still enabling the rich, interactive user experiences provided by a client-side 
   React application.
-
   Put another way, It's like watering the “dry” HTML with the “water” of interactivity and event handlers. The server sends the client HTML along with a link to the JS to download. The JS gets downloaded and then “hydrates” the page taking 
   it from a plain page to one with interactivity meaning adding handlers to buttons, events to elements on the page like onClick and so forth.
+
+- Optimistic updates: Optimistic updates mean updating the state immediately as if an action has succeeded, before confirmation from the server. This gives users instant feedback and makes the application feel more responsive. Later, the 
+  actual outcome is handled, and the state is adjusted accordingly. If the operation fails, the changes are reverted. This can be a useful pattern for when you want to give the user the impression that their changes are immediate, even while 
+  the mutation request is still in flight. Put another way, it's used when we wish to perform an update to cache data immediately after a mutation is triggered (assuming that the server operation will succeed).
+  We should use optimistic updates when: 
+   > Enhanced User Experience: When you want the application to feel more responsive and immediate, providing feedback to the user without waiting for server confirmation.
+   > Low Failure Rate: When server operations have a high success rate and errors are rare.
+   > Non-Critical Data: When the data being updated is not critical or when temporary inconsistencies can be tolerated.
+   > Undo Functionality: When you provide an option to undo actions, allowing users to revert changes if something goes wrong.  
+  The core concepts for an optimistic update are:
+   > when you start a query or mutation, onQueryStarted will be executed
+   > you manually update the cached data by dispatching api.util.updateQueryData within onQueryStarted
+   > then,in the case that queryFulfilled rejects: you roll it back via the .undo property of the obj you got back from the earlier dispatch, or, you invalidate the cache data via api.util.invalidateTags to trigger a full re-fetch of the 
+     dataWhere many mutations are potentially triggered in short succession causing overlapping requests, you may encounter race conditions if attempting to roll back patches using the .undo property on failures. For these scenarios, it is 
+     often simplest and safest to invalidate the tags on error instead, and re-fetch truly up-to-date data from the server.
+   
+- Pessimistic updates: It's used when we wish to perform an update to cache data based on the response received from the server after a mutation is triggered. It waits for the server operation to complete before updating the UI. The UI is 
+  only updated if the operation succeeds. The distinction between a pessimistic update and an optimistic update is that the pessimistic update will instead wait for the response from the server prior to updating the cached data. Basically, 
+  it wait for the server operation to complete before updating the UI. The UI is only updated if the operation succeeds. We should use pessimistic updates when: 
+    > High Failure Rate: When server operations frequently fail, and it’s crucial to ensure data consistency.
+    > Critical Data: When updating critical data where consistency and accuracy are paramount.
+    > Complex Error Handling: When the failure of the operation requires complex error handling or user intervention.
+    > Real-Time Synchronization: When you need to ensure the client state is always synchronized with the server state.
+  The core concepts for a pessimistic update are:
+    > when you start a query or mutation, onQueryStarted will be executed
+    > you await queryFulfilled to resolve to an object containing the transformed response from the server in the data property
+    > you manually update the cached data by dispatching api.util.updateQueryData within onQueryStarted, using the data in the response from the server for your draft updates
+    > you manually create a new cache entry by dispatching api.util.upsertQueryData within onQueryStarted, using the complete Post object returned by backend.
+
 
 - Single-Page Application (SPA): 
 
@@ -132,19 +168,203 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
        ~ Cuando creamos un custom hook, este puede ser utilizado en diferentes components. Y si este custom hook tiene un useState, al momento de utilizar dicho hook en 2 o mas diferentes components, los estados de cada componente no se 
          relacionaran los unos con los otros. Es decir, si cambia el estado en un custom hook utilizado en un componente, los estados del otro componente no se veran afectados aunque se utilice el mismo custom hook.
 
-- forwardRef: 
+- forwardRef: Lets your component expose a DOM node to parent component with a ref.
 
 - createPortal: En React, createPortal se utiliza para renderizar un componente o elementos hijos fuera de la jerarquía del DOM del componente padre. Esto es útil en situaciones donde necesitas que un componente se renderice en una parte 
-  diferente del DOM, como para modales, tooltips, y popovers, que suelen necesitar estar en un nivel superior del DOM para evitar problemas de estilos y posicionamiento.
-  
-- useImperativeHandle: 
+  diferente del DOM, como para modales, tooltips, y popovers, que suelen necesitar estar en un nivel superior del DOM para evitar problemas de estilos y posicionamiento. 
 
 - <Suspense>: It's a component provided by React that allow us to handle loading states and show fallback content until some data or resource has been loadad.
   This component can be used in situations to show a fallback whilst we're waiting from other data to arrive.
   When working with NextJS, it makes sure that whenever you have a component, which performs some data fetching and returns such a promise up there, that such  components will trigger suspense to show the fallback until they're done. So you 
   don't need to do anything else.
 
+- useState: useState es un hook de React que permite a los componentes funcionales tener estado. El estado permite que un componente «recuerde» información como la entrada de un usuario. Por ejemplo, un componente de formulario puede 
+  utilizar un estado para guardar la entrada del valor mientras que un componente de galería de imágenes puede utilizar un estado para guardar el índice de la imagen seleccionada.
+  La ejecución de la función Hook useState retorna un array con dos elementos:
+    ● El primer elemento es el valor actual del estado. (estado actual)
+    ● El segundo es una función que se utiliza para actualizar el estado, al llamar esta función con un nuevo valor pasado como argumento. 
+    ● El use useState(0) representa el valor inicial
 
+                                                       const [count, setCount] = useState(0);
+                                                               
+  Es importante destacar que esta función no actualiza el valor del estado de manera síncrona, sino que React lo actualiza cuando inicia el próximo ciclo de renderizado.
+  Para inicializar el estado, se debe proporcionar un valor inicial como argumento a useState. Como esta función retorna un array de dos elementos podemos desestructurarlo para darle un nombre más apropiado a nuestro estado y a su 
+  función de actualización. El nombre debe ser representativo del contenido y la función debe ser el mismo nombre con el prefijo “set”.
+  Ahora, cuando queremos agregar algo mas a la variable y NO pisar ese valor contenido, lo que tenemos que hacer es usar el operador spread (...). Por ejemplo, si tengo el siguiente hook y quisiera pisar (cambiar) un dato contenio en 
+  useState, simplemente hacemos lo de la segunda linea. Ahora, si se desea mantener el valor contenido en "cats" pero tener ahora un valor diferente, lo que debemos usar es usar el spread (...), y quedara como la tercer linea.
+                                               
+                                                       const [myThings, changeMyThings] = useState({cats: 'yes', strings: 'yellow', pizza: true });
+                                                       changeMyThings({ cats: 'no' })               //Cambiando el valor iniciar
+                                                       changeMyThings({ ...myThings, cats: 'no' })  //Agregar un valor diferente al que ya se encuentra, sin pisar o modificar el anterior.  
+
+- useEffect: Sirve para sincronizar componentes con sistemas externos. Va a ser el hook que nos permita controlar efectos secundarios provocados por cambios de estados, es decir, se ejecuta cada que el estado ha cambiado. Utilizado 
+  normalmente para sincronizar un componente con un sistema externo. Este hook recibe dos argumentos:
+    ● El primero es una función de callback con acciones a ejecutar.
+    ● El segundo es un array de dependencias, donde se indicará qué estados (pueden venir por props) deben cambiar para que se vuelva a ejecutar la función del primer argumento. 
+   
+  Para completar este array de dependencias la pregunta que debo hacerme es: ¿Con que estados debo sincronizar este efecto?
+     useEffect(fn) // Con todos los estados
+     useEffect(fn, []) // Con ningún estado (Se ejecutara solo una vez sin importar que los estados cambien simultaneamente)
+     useEffect(fn, [esos, estados]) //Se recomienda generalmente usar props o estados dentro de la variable de de penedencia
+         
+  1) useEffect hook without mentioning any dependency array like.. useEffect(someCallbackFuction); runs for every render of the functional component in which its included..
+  2) useEffect hook with an empty dependency array like this..  useEffect(callbackFunc , [] ) is executed only for the the initial render of the the functional component. And then it will not run in the further renders of the same
+     functional Component.
+  3) useEffect hook with some dependencies inside the dependency array like this.. useEffect(callbackFunc , [dependency] ); will run for the initial render as well as when the render happen due to change in dependencies mentioned in 
+     the dependency array.
+             
+  Hay que tener en cuenta que useEffect se ejecuta siempre después del renderizado y por lo menos una vez al montar el componente.
+  En la función de callback escribiremos el bloque de código que deseamos sincronizar en el cuerpo y retornaremos una función, llamada función de limpieza, que se ejecutará tantas veces como se haya ejecutado la función que la retorna. 
+  Es decir, que el proceso es simétrico.
+  Dado que la función se ejecutará por lo menos una vez al montar el componente, la función que se retorna se ejecutará una vez al desmontar el componente. En caso de tener dependencias de estados, la limpieza se ejecutará antes de 
+  volver a ejecutar el efecto frente a un cambio en una de sus dependencias. ESTE HOOK SE EJECUTA SIEMPRE AL FINAL (cuando el componente se monte).
+  Como podemos utilizar todos los useEffect que deseemos, es conveniente separar responsabilidades. Cada useEffect encargándose de un solo efecto y limpieza.
+  Actualmente el modo estricto de React ejecuta dos veces la función del primer argumento. Por eso puede ser que veas dos veces un mismo console.log que se ejecutó dentro de esta función.
+       
+   ~ Cleanup: It is a function of the useEffect hook that allows us to stop side effects that no longer need to be executed before our component is unmounted. This cleanup function is executed after the first render, that's to say, our 
+     first render won't take it into account, but after that, it'll execute the cleanup function and then the next useEffect, and so on. useEffectis built in such a way that we can return a function inside it and this return function is 
+     where the cleanup happens. I.e, Component A requests the API to get a list of products, but while making that asynchronous request, Component A is removed from the DOM (it’s unmounted). There is no need to complete that asynchronous 
+     request. So as a cleanup method to improve your application, you can clean up (cancel) the asynchronous request so that it’s not completed.
+      
+     React’s useEffect cleanup function saves applications from unwanted behaviors like memory leaks by cleaning up effects. In doing so, we can optimize our application’s performance. What is the useEffect cleanup function? Just like the 
+     name implies, the useEffect cleanup is a function in the useEffect Hook that allows us to tidy up our code before our component unmounts. When our code runs and reruns for every render, useEffect also cleans up after 
+     itself using the cleanup function.
+     The useEffect Hook is built in a way that we can return a function inside it and this return function is where the cleanup happens. The cleanup function prevents memory leaks and removes some unnecessary and unwanted behaviors. the 
+     useEffect cleanup function helps developers clean effects that prevent unwanted behaviors and optimizes application performance. However, it is pertinent to note that the useEffect cleanup function does not only run when our 
+     component wants to unmount, it also runs right before the execution of the next scheduled effect.
+           
+   ~ What to add & Not to add as Dependencies
+     You should add "everything" you use in the effect function as a dependency - i.e. all state variables and functions you use in there. That is correct, but there are a few exceptions you should be aware of:
+      ` You DON'T need to add state updating functions (as we did in the last lecture with setFormIsValid): React guarantees that those functions never change, hence you don't need to add them as dependencies (you could though)
+      ` You also DON'T need to add "built-in" APIs or functions like fetch(), localStorage etc (functions and features built-into the browser and hence available globally): These browser APIs / global functions are not related to the 
+        React component render cycle and they also never change.
+      ` You also DON'T need to add variables or functions you might've defined OUTSIDE of your components (e.g. if you create a new helper function in a separate file): Such functions or variables also are not created inside of a 
+        component function and hence changing them won't affect your components (components won't be re-evaluated if such variables or functions change and vice-versa).
+      ` So long story short: You must add all "things" you use in your effect function if those "things" could change because your component (or some parent component) re-rendered. That's why variables or state defined in component 
+        functions, props or functions defined in component functions have to be added as dependencies.
+                   
+                                                                                                    
+- useReducer: It is a React Hook that lets you add a reducer to your component. The useReducer() hook is similar to useState() since it also provides a way to manage state changes and updates in a functional component but is intended to 
+  handle more complex state changes more efficiently. It:
+    ` Takes a reducer() function as the first argument. This reducer() function is a pure function that takes in the current state, an action, and returns a new state. It does not modify the original state, but rather returns a new state 
+      based on the action passed to it.
+    ` Takes an initial state value as the second argument.
+    ` Takes an (optional) initializer function that can be used to initialize state as the third argument. 
+    ` And returns an array containing the current state value and a dispatch() function that can be used to trigger state changes by dispatching actions to the reducer.
+
+                    const [state, dispatch] = useReducer(reducer, initialArg, init?);
+                    
+  > Parameters
+    ~ state: It's the current state.
+    ~ reducer: The reducer function that specifies how the state gets updated. It must be pure, should take the state and action as arguments, and should return the next state. State and action can be of any types.
+    ~ initialState: The value from which the initial state is calculated. It can be a value of any type. How the initial state is calculated from it depends on the next init argument.
+      optional init: The initializer function that should return the initial state. If it’s not specified, the initial state is set to initialArg. Otherwise, the initial state is set to the result of calling init(initialArg).
+  > Return 
+    useReducer returns an array with exactly two values:
+    The current state. During the first render, it’s set to init(initialState) or initialState(if there’s no init).
+    The dispatch function that lets you update the state to a different value and trigger a re-render. Basically, what the "state" or "reducer" parameter recieves are the state (coming from initialState), and action (coming from dispatch). 
+    And of course this will return the new state.
+  > Caveats 
+    useReducer is a Hook, so you can only call it at the top level of your component or your own Hooks. You can’t call it inside loops or conditions. If you need that, extract a new component and move the state into it.
+    In Strict Mode, React will call your reducer and initializer twice in order to help you find accidental impurities. This is development-only behavior and does not affect production. If your reducer and initializer are pure (as they 
+    should be), this should not affect your logic. The result from one of the calls is ignored. 
+  > dispatch function 
+    The dispatch function returned by useReducer lets you update the state to a different value and trigger a re-render. You need to pass the action as the only argument to the dispatch function. (The dispatch function will basically run the 
+    "reducer" function"). React will set the next state to the result of calling the reducer function you’ve provided with the current state and the action you’ve passed to dispatch. Now, by calling "reducer" we'll get the next function.
+    It's important to remmind that the "state" parameter always needs to be returned.        function reducer(state, action){};
+    
+- useContext: El contexto permite a un componente recibir información de padres lejanos sin pasarlas como props. Por ejemplo, el componente en el nivel superior de tu aplicación puede pasar el actual tema de la UI a todos los 
+  componentes dentro, sin importar la profundidad dentro del componente.     
+    > useContext(SomeContext): Call useContext at the top level of your component to read and subscribe to context.
+       ~ SomeContext: The context that you’ve previously created with createContext. The context itself does not hold the information, it only represents the kind of information you can provide or read from components.
+    > Returns: useContext returns the context value for the calling component. It is determined as the value passed to the closest SomeContext.Provider above the calling component in the tree. If there is no such provider, then the returned 
+      value will be the defaultValue you have passed to createContext for that context. The returned value is always up-to-date. React automatically re-renders components that read some context if it changes.
+    > Caveats: 
+      ~ useContext() call in a component is not affected by providers returned from the same component. The corresponding <Context.Provider> needs to be above the component doing the useContext() call.
+      ~ React automatically re-renders all the children that use a particular context starting from the provider that receives a different value. The previous and the next values are compared with the Object.is comparison. Skipping re-
+        renders with memo does not prevent the children receiving fresh context values.
+      ~ If your build system produces duplicates modules in the output (which can happen with symlinks), this can break context. Passing something via context only works if SomeContext that you use to provide context and SomeContext that you 
+        use to read it are exactly the same object, as determined by a === comparison.
+    
+- useRef: This allows you to persist values between renders.This allows us to get access to other DOM elements and work with them. We can set up a connection between a HTML element which is being rendered in the end, and our JS code. 
+  In difference with useState, useRef doesn't trigger a render and re-render of the component. It is not used for something that we're rendering, it's a hook that is used for values that are not needded for rendering.
+  Se utiliza para crear una referencia mutable. Este hook retorna un objeto con una propiedad current la cual apuntará a un valor y podremos mutar. Se utiliza a menudo para acceder a elementos del DOM y modificarlos directamente. Esto 
+  puede ser especialmente útil cuando se trabaja con librerías de terceros que requieren acceso directo a elementos del DOM. Es recomendable, siempre que sea posible, dejarle a React la responsabilidad de manejar el DOM. Además, useRef 
+  también puede ser utilizado para mantener valores persistentes en el componente, lo que puede ser útil para realizar cálculos o para almacenar datos temporales que no deben ser expuestos al estado del componente. Es decir, cuando 
+  actualizamos un estado o modificamos todo el contenido del componente, pero no los pertenecientes a useRef(). Esto es de gran ayuda porque en ocaciones dichas variables se pueden llegar a perder con los cambios de estado, y al utilizar 
+  useRef(), esas variables siempre seguiran existiendo y con el mismo valor que le asignamos en un principio. Pero, si nosotros cambiamos el nombre de esa varaible, nuestra aplicacion no volvera a renderizarse, o sea, no se vera reflejado el 
+  cambio en nuestra aplicacion pero si podriamos verlo en un console.log(), ya que internamente si cambiara. Pero, si el estado cambia o se actualiza la aplicacion, ahi SI se vera reflejado el cambio en esa variable de useref().
+                                        const refObject = useRef( initialValue ); //initial value: pass the initial value to the useRef hook    //ref: React returns an object with a current property
+  
+  > Parameters 
+    ~ initialValue: The value you want the ref object’s current property to be initially. It can be a value of any type. This argument is ignored after the initial render.
+  > Returns: useRef returns an object with a single property:
+    ~ current: Initially, it’s set to the initialValue you have passed. You can later set it to something else. If you pass the ref object to React as a ref attribute to a JSX node, React will set its current property.
+      On the next renders, useRef will return the same object.
+  > Caveats 
+    ~ You can mutate the ref.current property. Unlike state, it is mutable. However, if it holds an object that is used for rendering (for example, a piece of your state), then you shouldn’t mutate that object.
+    ~ When you change the ref.current property, React does not re-render your component. React is not aware of when you change it because a ref is a plain JavaScript object.
+    ~ Do not write or read ref.current during rendering, except for initialization. This makes your component’s behavior unpredictable.
+    ~ In Strict Mode, React will call your component function twice in order to help you find accidental impurities. This is development-only behavior and does not affect production. Each ref object will be created twice, but one of the 
+      versions will be discarded. If your component function is pure (as it should be), this should not affect the behavior.
+
+- useCallback: permite guardar en caché una función definida antes de pasarla a un componente optimizado. useCallback is a React Hook that lets you cache a function definition between re-renders.
+  > Parameters 
+    ~ fn: The function value that you want to cache. It can take any arguments and return any values. React will return (not call!) your function back to you during the initial render. On next renders, React will give you the same function 
+      again if the dependencies have not changed since the last render. Otherwise, it will give you the function that you have passed during the current render, and store it in case it can be reused later. React will not call your function. 
+      The function is returned to you so you can decide when and whether to call it.
+    ~ dependencies: The list of all reactive values referenced inside of the fn code. Reactive values include props, state, and all the variables and functions declared directly inside your component body. If your linter is configured for 
+      React, it will verify that every reactive value is correctly specified as a dependency. The list of dependencies must have a constant number of items and be written inline like [dep1, dep2, dep3]. React will compare each dependency 
+      with its previous value using the Object.is comparison algorithm.
+  > Returns: 
+    On the initial render, useCallback returns the fn function you have passed. During subsequent renders, it will either return an already stored fn  function from the last render (if the dependencies haven’t changed), or return the fn 
+    function you have passed during this render.
+  > Caveats 
+    ~ useCallback is a Hook, so you can only call it at the top level of your component or your own Hooks. You can’t call it inside loops or conditions. If you need that, extract a new component and move the state into it.
+      React will not throw away the cached function unless there is a specific reason to do that. For example, in development, React throws away the cache when you edit the file of your component. Both in development and in production, React 
+      will throw away the cache if your component suspends during the initial mount. In the future, React may add more features that take advantage of throwing away the cache—for example, if React adds built-in support for virtualized lists 
+      in the future, it would make sense to throw away the cache for items that scroll out of the virtualized table viewport. This should match your expectations if you rely on useCallback as a performance optimization. Otherwise, a state 
+      variable or a ref may be more appropriate.
+        
+- useMemo: permite guardar en caché los resultados de un cálculo costoso de una funcion, y dicha funcion se volvera a ejecutar cuando una de sus dependencias (las cuales nosotros mismos definimos) cambie.
+
+- useImperativeHandle: permite personalizar la ref expuesta por tu componente. Esto rara vez se usa. 
+  We can call this hook in this component function to define properties and methods that should be accessible on this component here from outside this component.
+  ref: The ref you received as the second argument from the forwardRef render function.
+  function: A function that takes no arguments and returns the ref handle you want to expose. That ref handle can have any type. Usually, you will return an object with the methods you want to expose.
+    
+- useLayoutEffect: se activa antes de que el navegador vuelva a pintar la pantalla. Aquí puedes hacer cálculos de maquetación (layout).
+- useInsertionEffect: se activa antes de que React haga cambios en el DOM. Aquí las bibliotecas pueden insertar CSS dinámico.   
+- useTransition: permite marcar una transición de estado como no bloqueante y permitir que otras actualizaciones la interrumpan.
+- useDeferredValue: te permite aplazar la actualización de una parte no crítica de la interfaz de usuario y dejar que otras partes se actualicen primero.
+- useDebugValue: permite personalizar la etiqueta que las Herramientas de Desarrollo de React muestran para tu Hook personalizado.
+- useId: permite que un componente se asocie un ID único. Normalmente, se utiliza con las APIs de accesibilidad.
+- useSyncExternalStore: permite que un componente se subscriba a un almacenamiento (store) externo.
+
+- useFormState / useActionState: It is a Hook that allows you to update state based on the result of a form action.
+  Call useActionState at the top level of your component to create component state that is updated when a form action is invoked. You pass useActionState an existing form action function as well as an initial state, and it returns a new 
+  action that you use in your form, along with the latest form state. The latest form state is also passed to the function that you provided.
+  
+- useOptimistic: It lets you show a different state while an async action is underway. It accepts some state as an argument and returns a copy of that state that can be different during the duration of an async action such as a network 
+  request. You provide a function that takes the current state and the input to the action, and returns the optimistic state to be used while the action is pending. This state is called the “optimistic” state because it is usually used to 
+  immediately present the user with the result of performing an action, even though the action actually takes time to complete.  
+                                      -->  const [optimisticState, addOptimistic] = useOptimistic(state, funcion(currentState, optimisticValue){});
+    > state: Also knon as "prevState", the value to be returned initially and whenever no action is pending.
+    > updateFn(currentState, optimisticValue): a function that takes the current state and the optimistic value passed to addOptimistic and returns the resulting optimistic state. It must be a pure function. The return value will be the 
+      merged value of the currentState and optimisticValue.
+    > optimisticState: The resulting and final optimistic state. It is equal to state unless an action is pending, in which case it is equal to the value returned by updateFn.
+    > addOptimistic: addOptimistic is the dispatching function to call when you have an optimistic update. It takes one argument, optimisticValue, of any type and will call the updateFn with state and optimisticValue. 
+      In this case, "optimisticValue" will catch the value we passed in the "addOptimistic()" function.
+  The useOptimistic Hook provides a way to optimistically update the user interface before a background operation, like a network request, completes. In the context of forms, this technique helps to make apps feel more responsive. When a  
+  user submits a form, instead of waiting for the server’s response to reflect the changes, the interface is immediately updated with the expected outcome.
+  For example, when a user types a message into the form and hits the “Send” button, the useOptimistic Hook allows the message to immediately appear in the list with a “Sending…” label, even before the message is actually sent to a server. 
+  This “optimistic” approach gives the impression of speed and responsiveness. The form then attempts to truly send the message in the background. Once the server confirms the message has been received, the “Sending…” label is removed.
+  
+  useOptimistic helps manage the temporary optimistic state and the final state after the server response. It typically involves these steps:
+    1. Initial State Setup: Define the initial state and the state that will be shown optimistically.
+    2. Optimistic Update Function: Create a function that updates the state optimistically.
+    3. Reverting Changes: Handle the case where the server responds with an error by reverting the state.
+  
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$                                                                                                       
 
 
@@ -522,34 +742,7 @@ https://redux-toolkit.js.org/rtk-query/usage/customizing-queries
     > Creating new cache entries or replacing existing ones: To create or replace existing cache entries, use upsertQueryData. upsertQueryData is intended to perform replacements to existing cache entries or creation of new ones. Since 
       upsertQueryData does not have access to the previous state of the cache entry, the update may be performed only as a replacement. In comparison, updateQueryData allows patching of the existing cache entry, but cannot create a new one.
       One example use case is pessimistic updates. If the client makes an API call to create a Post, the backend could return its complete data including the id. Then we can use upsertQueryData to create a new cache entry for the 
-      getPostById(id) query, preventing an extra fetch to retrieve the item later.
-      
-- Optimistic updates: It's used when we wish to perform an update to cache data immediately after a mutation is triggered (assuming that the server operation will succeed). If the operation fails, the changes are reverted. This can be a 
-  useful pattern for when you want to give the user the impression that their changes are immediate, even while the mutation request is still in flight. We should use optimistic updates when: 
-   > Enhanced User Experience: When you want the application to feel more responsive and immediate, providing feedback to the user without waiting for server confirmation.
-   > Low Failure Rate: When server operations have a high success rate and errors are rare.
-   > Non-Critical Data: When the data being updated is not critical or when temporary inconsistencies can be tolerated.
-   > Undo Functionality: When you provide an option to undo actions, allowing users to revert changes if something goes wrong.  
-  The core concepts for an optimistic update are:
-   > when you start a query or mutation, onQueryStarted will be executed
-   > you manually update the cached data by dispatching api.util.updateQueryData within onQueryStarted
-   > then,in the case that queryFulfilled rejects: you roll it back via the .undo property of the obj you got back from the earlier dispatch, or, you invalidate the cache data via api.util.invalidateTags to trigger a full re-fetch of the 
-     dataWhere many mutations are potentially triggered in short succession causing overlapping requests, you may encounter race conditions if attempting to roll back patches using the .undo property on failures. For these scenarios, it is 
-     often simplest and safest to invalidate the tags on error instead, and re-fetch truly up-to-date data from the server.
-   
-- Pessimistic updates: It's used when we wish to perform an update to cache data based on the response received from the server after a mutation is triggered. It waits for the server operation to complete before updating the UI. The UI is 
-  only updated if the operation succeeds. The distinction between a pessimistic update and an optimistic update is that the pessimistic update will instead wait for the response from the server prior to updating the cached data. Basically, 
-  it wait for the server operation to complete before updating the UI. The UI is only updated if the operation succeeds. We should use pessimistic updates when: 
-   > High Failure Rate: When server operations frequently fail, and it’s crucial to ensure data consistency.
-   > Critical Data: When updating critical data where consistency and accuracy are paramount.
-   > Complex Error Handling: When the failure of the operation requires complex error handling or user intervention.
-   > Real-Time Synchronization: When you need to ensure the client state is always synchronized with the server state.
-  The core concepts for a pessimistic update are:
-   > when you start a query or mutation, onQueryStarted will be executed
-   > you await queryFulfilled to resolve to an object containing the transformed response from the server in the data property
-   > you manually update the cached data by dispatching api.util.updateQueryData within onQueryStarted, using the data in the response from the server for your draft updates
-   > you manually create a new cache entry by dispatching api.util.upsertQueryData within onQueryStarted, using the complete Post object returned by backend.
-  
+      getPostById(id) query, preventing an extra fetch to retrieve the item later.       
   
                                                                                                  $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                                                                                                
@@ -1099,9 +1292,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   production, NextJS goes ahead and actually generates, pre-renders all the pages of your app that can be pre-generated, so basically all non-dynamic pages.
   All that data is fetched and rendered during the build process. And NextJS is doing that because by pre-rendering all pages, it of course has those pages available right from the start after being deployed. And so the very first visitor of 
   your website is able to instantly see the finished page without having to wait for anything to render. Then, NextJS caches those pre-rendered pages so that it's able to serve them to all visitors. 
-  But the downside of this, is that it never re-fetches the server-actions because the code is never executes again. Instead, it just uses pre-generated pages.
-  
-  
+  But the downside of this, is that it never re-fetches the server-actions because the code is never executes again. Instead, it just uses pre-generated pages.  
   
 - Parallel routes: It allows you to simultaneously or conditionally render one or more pages within the same layout. They are useful for highly dynamic sections of an app, such as dashboards and feeds on social sites.
     > Slots: Parallel routes are created using named slots. Slots are defined with the @folder convention. And Slots are passed as props to the shared parent layout. However, slots are not route segments and do not affect the URL structure.
@@ -1152,7 +1343,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 - Middlewares: 
 
-
+- NextResponse: 
 
                                                                $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$                                                                                                       
                                                                
@@ -1191,9 +1382,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     > Currently, revalidatePath invalidates all the routes in the client-side Router Cache. This behavior is temporary and will be updated in the future to apply only to the specific path.
     > Using revalidatePath invalidates only the specific path in the server-side Route Cache.
     > It does not return any value.
-  
-- NextResponse:   
-  
+    
 - usePathname: It is a Client Component hook that lets you read the current URL's pathname.
 
 - useRouter: It allows you to programmatically change routes inside Client Components. It's recommendated to use the <Link> component for navigation unless you have a specific requirement for using useRouter.
@@ -1207,7 +1396,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   The <Link> component automatically prefetch routes as they become visible in the viewport.
   refresh() could re-produce the same result if fetch requests are cached. Other dynamic functions like cookies and headers could also change the response.
 
-
+- useFormState: It is a Hook that allows you to update state based on the result of a form action.
     
     
     
