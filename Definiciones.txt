@@ -255,6 +255,20 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   > https://www.forcepoint.com/cyber-edu/firewall
   > https://latam.kaspersky.com/resource-center/definitions/firewall
 
+- cache: 
+  > https://aws.amazon.com/caching/
+  > https://wpengine.com/resources/what-is-cached-data/
+  > https://learn.g2.com/what-is-cached-data
+  > https://www.fortinet.com/resources/cyberglossary/what-is-caching
+  > https://kinsta.com/blog/what-is-cached-data/
+  
+- Drivers: 
+  > https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/what-is-a-driver-
+  > https://www.bobology.com/public/What-is-a-Software-Driver.cfm
+  > https://www.hp.com/us-en/shop/tech-takes/what-are-computer-drivers#:~:text=A%20driver%2C%20or%20device%20driver,external%20peripherals%2C%20like%20a%20printer.
+  > https://learn.microsoft.com/es-es/windows-hardware/drivers/gettingstarted/what-is-a-driver-
+  
+
 - Ancho de banda: Teoricamente, es la longitud de la extensión de frecuencias, medida en hercios (Hz), en la que se concentra la mayor potencia de la señal.
   Es la máxima cantidad de datos transmitidos a través de una conexión a internet en cierta cantidad de tiempo. El ancho de banda por lo general se confunde con la velocidad de internet cuando en realidad es el volumen de información que se 
   puede enviar a través de una conexión en una cantidad medida de megabits por segundo (Mbps) o kilobits por segundo (Kbps).
@@ -303,13 +317,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   
   Los buffer son datos crudos en hexadecimal optimizados para ser transportados de un punto de memoria a otro. Formalmente, se conocen como streams de datos binarios, pero almacenan los datos en hexadecimal, por lo que cada espacio tiene dos 
   dígitos. Las ventajas de trabajar con buffer radica en que nos permite trabajar con los datos en crudo y por ello quien envía los datos conoce de entrada el tipo de datos y quien recibe los datos también conoce el tipo de datos que contiene  
-  
-- Drivers: 
-  > https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/what-is-a-driver-
-  > https://www.bobology.com/public/What-is-a-Software-Driver.cfm
-  > https://www.hp.com/us-en/shop/tech-takes/what-are-computer-drivers#:~:text=A%20driver%2C%20or%20device%20driver,external%20peripherals%2C%20like%20a%20printer.
-  > https://learn.microsoft.com/es-es/windows-hardware/drivers/gettingstarted/what-is-a-driver-
-  
+    
 - Nucleo: 
 
 - CPU: 

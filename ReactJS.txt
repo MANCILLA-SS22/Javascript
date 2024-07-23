@@ -112,6 +112,25 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     > you manually update the cached data by dispatching api.util.updateQueryData within onQueryStarted, using the data in the response from the server for your draft updates
     > you manually create a new cache entry by dispatching api.util.upsertQueryData within onQueryStarted, using the complete Post object returned by backend.
 
+- Memoization: It's an optimization technique that makes applications more efficient and hence faster. It does this by caching (store) computation results of expensive function calls, and retrieving that same information from the cache the 
+  next time it's needed instead of computing it again. In simpler words, it consists of storing in cache the output of a function, and making the function check if each required computation is in the cache before computing it. 
+  This technique helps to avoid redundant calculations, thereby improving the efficiency of algorithms, especially those with overlapping subproblems like in dynamic programming. Memoization only applies to the GET method in fetch requests.
+
+  A cache is simply a temporary data store that holds data so that future requests for that data can be served faster. 
+  Memoization is a simple but powerful trick that can help speed up our code, especially when dealing with repetitive and heavy computing functions.
+  The concept of memoization in JavaScript relies on two concepts:
+    > Closures: The combination of a function and the lexical environment within which that function was declared. You can read more about them here and here.
+    > Higher Order Functions: Functions that operate on other functions, either by taking them as arguments or by returning them. You can read more about them here.
+  The Benefits of Memoization are:
+    > Memoization optimizes performance by caching expensive function results.
+    > It conserves computational resources, reducing latency and improving efficiency.
+    > Memoized functions are more scalable, handling larger datasets or higher request volumes effectively.
+    > Memoization simplifies code by encapsulating caching logic within functions, promoting maintainability.
+    > In user-facing applications, memoization enhances responsiveness and reduces loading times.
+    > In React, memoization techniques like React.memo() and useMemo() lead to faster UI updates and smoother interactions.
+    
+- Cache: It is a high-speed data storage layer which stores a subset of data, typically transient in nature, so that future requests for that data are served up faster than is possible by accessing the data’s primary storage location. 
+  Caching allows you to efficiently reuse previously retrieved or computed data.
 
 - Single-Page Application (SPA): 
 
@@ -1233,6 +1252,10 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     > Data Transfer: This payload is transferred from the server to the client.
     > Deserialization: On the client side, the payload is deserialized to reconstruct the component state and render it in the browser.
     > Rehydration: The client uses the payload to rehydrate the server-rendered components, making them interactive.  
+  The React Server Component Payload contains:
+    > The rendered result of Server Components
+    > Placeholders for where Client Components should be rendered and references to their JavaScript files
+    > Any props passed from a Server Component to a Client Component
     
 - Client-side rendering (CSR): It means rendering all pages directly in the browser using JavaScript. When all the data fetching is done by the browser instead of a server then it is pretty obvious that the page loading will be slow leading 
   to a bad user experience. It is faster after the first load since there are no server requests to change pages, which makes it insanely fast, and provides a better UX (user experience) because it gives a native-app feel to the page.
@@ -1343,7 +1366,28 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 - Middlewares: 
 
-- NextResponse: 
+- NextResponse:  
+
+- Caching in Next.js: By default, Next.js will cache as much as possible to improve performance and reduce cost. This means routes are statically rendered and data requests are cached unless you opt out. The diagram below shows the default 
+  caching behavior: when a route is statically rendered at build time and when a static route is first visited. Caching behavior changes depending on whether the route is statically or dynamically rendered, data is cached or uncached, and 
+  whether a request is part of an initial visit or a subsequent navigation. Depending on your use case, you can configure the caching behavior for individual routes and data requests.
+    > Duration: The cache lasts the lifetime of a server request until the React component tree has finished rendering.
+    > Revalidating: Since the memoization is not shared across server requests and only applies during rendering, there is no need to revalidate it.
+    > Opting out: Memoization only applies to the GET method in fetch requests, other methods, such as POST and DELETE, are not memoized. This default behavior is a React optimization and we do not recommend opting out of it.
+
+To manage individual requests, you can use the signal property from AbortController. However, this will not opt requests out of memoization, rather, abort in-flight requests.
+
+- Request Memoization: React extends the fetch API to automatically memoize requests that have the same URL and options. This means you can call a fetch function for the same data in multiple places in a React component tree while only 
+  executing it once. 
+  For example, if you need to use the same data across a route (e.g. in a Layout, Page, and multiple components), you do not have to fetch data at the top of the tree, and forward props between components. Instead, you can fetch data in the 
+  components that need it without worrying about the performance implications of making multiple requests across the network for the same data.
+
+- Data cache
+
+- Full route cache
+
+- Router cache
+
 
                                                                $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$                                                                                                       
                                                                
