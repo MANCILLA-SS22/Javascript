@@ -1442,7 +1442,21 @@ To manage individual requests, you can use the signal property from AbortControl
 
 - useFormState: It is a Hook that allows you to update state based on the result of a form action.
     
-    
+- unstable_cache:
+
+- unstable_noStore: 
+
+- await fetch('http://localhost:8080', { cache: 'force-cache' }): It is the default parameter, which in the end tells NextJS that the data should absolutely be cached and reused from that cache whenever possible.
+
+- await fetch('http://localhost:8080', { cache: 'no-store' }): It will tell NextJS that in this fetch (only one, not other fetch requests with exactly the same name) the data should not be cached. Instead now with this setting, I'm forcing 
+  NextJS to always send a new request and use the response data of that request instead of caching and reusing the data.
+  
+- await fetch('http://localhost:8080', { next: { revalidate: 5 } }): We define a number, which will be the number of seconds NextJS should continue reusing the cache data until it will revalidate and throw away the cache. So if I set this to 
+  five, I'm telling NextJS that the cached data should be reused for five seconds, and then thereafter it should throw away the cached data and send a new request and get some new data and within that five second timeframe, if any requests 
+  to this page would be sent, it would instead not send extra requests to a backend, but reuse the cached data.
+
+- await fetch('http://localhost:8080', { next: { tags: ['msg'] }, }): This tags will be connected to the cached data, and if you then call revalidateTag("msg") with a certain tag, NextJS will revalidate and throw away any cached data that 
+  has that tag. So that would allow you to clear the cache of multiple pages if those different pages would assign the same tags to their requests.
     
     
     

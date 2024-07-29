@@ -29,15 +29,16 @@ export default function Posts({ posts }) { //(1)
     <ul className="posts">
       {
         optimisticPosts.map(function(post){
-          return <>
+          return (
             <li key={post.id}>
               <Post post={post} action={updatePost} />
             </li>
-          </>
+          )
         })
       }
     </ul>
   );
+
 };
 
 //(1)

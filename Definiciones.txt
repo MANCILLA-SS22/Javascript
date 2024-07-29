@@ -121,7 +121,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   > https://www.cloudflare.com/learning/dns/what-is-dns/
   > https://aws.amazon.com/route53/what-is-dns/
   
-- DNS: 
+- CDN:
   > https://aws.amazon.com/what-is/cdn/
   > https://www.cloudflare.com/learning/cdn/what-is-a-cdn/
 
@@ -268,66 +268,128 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   > https://www.hp.com/us-en/shop/tech-takes/what-are-computer-drivers#:~:text=A%20driver%2C%20or%20device%20driver,external%20peripherals%2C%20like%20a%20printer.
   > https://learn.microsoft.com/es-es/windows-hardware/drivers/gettingstarted/what-is-a-driver-
   
-
-- Ancho de banda: Teoricamente, es la longitud de la extensión de frecuencias, medida en hercios (Hz), en la que se concentra la mayor potencia de la señal.
-  Es la máxima cantidad de datos transmitidos a través de una conexión a internet en cierta cantidad de tiempo. El ancho de banda por lo general se confunde con la velocidad de internet cuando en realidad es el volumen de información que se 
-  puede enviar a través de una conexión en una cantidad medida de megabits por segundo (Mbps) o kilobits por segundo (Kbps).
-  La velocidad se refiere al ritmo al que se pueden transmitir los datos, mientras que el ancho de banda es la capacidad de esa velocidad. Utilizando una analogía, imagina una carretera, la velocidad dependerá del vehículo y el ancho de banda 
-  de cuantos vehículos pueden transitar al mismo tiempo por ella durante un tiempo determinado.
+- Cumulative Layout Shift (CLS): 
+  > https://nextjs.org/learn-pages-router/seo/web-performance/cls
+  > https://www.semrush.com/blog/cumulative-layout-shift/  
   
-- Velocidad de internet: Hace referencia al ritmo al que se pueden transmitir los datos. Es decir, la velocidad es cuán rápido esa información se recibe o descarga. Tambien se define como la velocidad de dígitos binarios transmitidos y se da 
-  en bits por segundo (bps).
+- Ancho de banda: 
+  > https://www.solarwinds.com/resources/it-glossary/network-bandwidth
+  > https://www.techtarget.com/searchnetworking/definition/bandwidth
+  > https://www.geeksforgeeks.org/introduction-to-bandwidth/
+  > https://www.verizon.com/articles/internet-essentials/bandwidth-definition/
 
-- Rendimiento: es la cantidad de información que se entrega con éxito en una determinada cantidad de tiempo.
-
-- Latencia: La latencia a veces se refiere a una demora o tasa de ping. Es la demora que experimentas mientras esperas que algo se cargue. Si el ancho de banda es la cantidad de información enviada por segundo, la demora es la cantidad de 
-  tiempo que demora esa información en ir de la fuente hasta ti.
-
-- Transmicion: El rendimiento es cómo la información realmente se entrega en una determinada cantidad de tiempo. De modo que si el ancho de banda es la cantidad máxima de datos, el rendimiento es cuántos de esos datos llegan a su destino, 
-  teniendo en cuenta la latencia, velocidad de red, pérdida de paquete y otros factores.
-
-- Frecuencia: La frecuencia es la magnitud física que mide las veces por unidad de tiempo en que se repite un ciclo de una señal periódica. Una señal periódica de una sola frecuencia tiene un ancho de banda mínimo. En general, si la señal 
-  periódica tiene componentes en varias frecuencias, su ancho de banda es mayor, y su variación temporal depende de sus componentes frecuenciales.
-
-- Hertz: Los microprocesadores manejan velocidades de proceso de datos en el sistema, y eso se llama Hertz. Esta velocidad es la velocidad de reloj y a medida que va subiendo el nivel de velocidad, es mejor el rendimiento del microprocesador.
-  Unidad de medida de la frecuencia electromagnética. Se utiliza para medir la velocidad de los procesadores. Equivale a un ciclo por segundo. En informática se utiliza para dar una idea de la velocidad del microprocesador, indicando cual es 
-  la frecuencia de su clock (componente de los microprocesadores que genera una señal cuya frecuencia es utilizada para enmarcar el funcionamiento del procesador: a mayor frecuencia mayor velocidad).
-
-- Frecuencia de refresco: representa el número de veces que se actualiza la imagen completa que vemos en la pantalla en cada segundo. Así, una frecuencia de 60 Hz significa que en realidad el monitor está mostrando 60 imágenes en un solo 
-  segundo, si hablamos de 144 Hz entonces este lo hará 144 veces, uno de 240 Hz lo hará 240 veces. Si hablamos en términos comunes esto viene a significar lo suaves que son las transiciones de imágenes en la pantalla, ya que cuantas más 
-  imágenes se generen por segundo, menos «saltos» de imagen veremos y más suave irá la acción del juego. Cuando hablamos de tasa de refresco nos estamos refiriendo a algo que es relativo al hardware (del monitor).
-
-- Cache: Una memoria caché puede ser usada a veces como un búfer, y viceversa. Sin embargo, una caché opera con el supuesto de que los mismos datos van a ser utilizados múltiples veces, que los datos escritos serán leídos en un periodo corto    
-  de tiempo, o teniendo en cuenta la posibilidad de múltiples lecturas o escrituras para formar un único bloque más grande. Su premisa básica es reducir los accesos a los almacenamientos de nivel más bajo, los cuales son bastante lentos. La 
-  caché también es normalmente una capa de abstracción que está diseñada para ser invisible.
-  Una caché de disco o archivo de caché guarda las estadísticas de los datos almacenados en él y proporciona datos con un tiempo máximo de espera en modos de escritura en diferido. Un búfer, por el contrario, no hace nada de esto, sino que es 
-  utilizado normalmente en entrada, salida y a veces, almacenamiento temporal de datos que se enrutan entre distintos dispositivos o que van a ser modificados de manera no secuencial antes de ser escritos o leídos de manera secuencial.
-
-- Buffer: Un buffer es un espacio en memoria en el que se almacenan datos de manera temporal. Su principal función es evitar que el programa o recurso que los requiere, ya sea hardware o software, se quede sin datos durante una transferencia 
-  (entrada/salida) de datos irregular o por la velocidad del proceso. 
-  Normalmente los datos se almacenan en un búfer mientras son transferidos desde un dispositivo de entrada (como un ratón o mouse) o justo antes de enviarlos a un dispositivo de salida (por ejemplo: altavoces). También puede utilizarse para 
-  transferir datos entre procesos, de una forma parecida a los búferes utilizados en telecomunicaciones. Un ejemplo de esto último ocurre en una comunicación telefónica, en la que al realizar una llamada esta se almacena, se disminuye su 
-  calidad y el número de bytes a ser transferidos, y luego se envían estos datos modificados al receptor.
+- Data Rate (velocidad de internet): 
+  > https://resources.pcb.cadence.com/blog/2022-data-rates-in-wireless-communication-channels
+  > https://www.geeksforgeeks.org/difference-between-bandwidth-and-data-rate/
   
-  Un buffer se basa en respuestas rápidas. Sirve para optimizar el proceso de transferencia de datos entre un software y otro o entre un hardware y un software. Ese dato se guarda en el almacenamiento buffer para que, mientras se realiza el 
-  proceso de conexión, éste no se vea afectado. Los buffer suelen ser implementados por software (aunque también puede ser físico) y pueden ser utilizados para todo tipo de sistemas digitales, como vídeos, música, etc.
-  No hay que confundir el buffer con la caché del ordenador, aunque ambas cosas tienen un funcionamiento parecido. La diferencia principal es que la caché opera con la premisa de que los datos serán utilizados muchas veces mientras el buffer 
-  sirve para un almacenamiento temporal de los datos, es decir, que almacena la información pero sin mantenerla más del tiempo que tarda ésta en enviarse.
-  Su función principal es paliar la diferencia de velocidad de transmisión o procesamiento entre dos dispositivos o procesos, y por eso se encuentran por todas partes en un ordenador: disco duro, RAM, impresora, procesador, etc.
+- Throughput (Rendimiento): 
+  > https://nilesecure.com/network-management/what-is-network-throughput-how-to-measure-and-improve-it
+  > https://www.zenarmor.com/docs/network-basics/what-is-network-throughput#what-is-throughput-in-networking-1
+  > https://aws.amazon.com/compare/the-difference-between-throughput-and-latency/#:~:text=Throughput%20measures%20the%20volume%20of,latency%20causes%20a%20network%20delay.
+  > https://www.dnsstuff.com/network-throughput-bandwidth
   
-  Los buffer son datos crudos en hexadecimal optimizados para ser transportados de un punto de memoria a otro. Formalmente, se conocen como streams de datos binarios, pero almacenan los datos en hexadecimal, por lo que cada espacio tiene dos 
-  dígitos. Las ventajas de trabajar con buffer radica en que nos permite trabajar con los datos en crudo y por ello quien envía los datos conoce de entrada el tipo de datos y quien recibe los datos también conoce el tipo de datos que contiene  
-    
-- Nucleo: 
+- Latency (Latencia):   
+  > https://aws.amazon.com/what-is/latency/#:~:text=Network%20latency%20is%20the%20delay,response%20times%20have%20low%20latency.
+  > https://www.cloudflare.com/learning/performance/glossary/what-is-latency/
+  > https://www.ibm.com/topics/latency
+  > https://www.geeksforgeeks.org/what-is-latency/
 
-- CPU: 
+- Frequency:
+  > https://www.geeksforgeeks.org/what-is-frequency/
+  > https://circuitglobe.com/difference-between-frequency-and-bandwidth.html
+  
+- Hertz:
+  > https://60sec.site/terms/what-is-hz-in-computing-hertz
 
-- Hilos:   
+- Refresh rate (Frecuencia de refresco):
+  > www.intel.com/content/www/us/en/gaming/resources/highest-refresh-rate-gaming.html#:~:text=The%20refresh%20rate%20of%20your,image%20144%20times%20per%20second.
+  > https://www.hp.com/au-en/shop/tech-takes/post/what-is-refresh-rate
+  > https://insights.samsung.com/2022/03/07/how-does-refresh-rate-work-for-monitors/
+
+- Cache:
+  > https://aws.amazon.com/caching/
+  > https://www.spiceworks.com/tech/tech-101/articles/what-is-cache/
+  > https://en.wikipedia.org/wiki/Cache_(computing)
+  > https://www.britannica.com/technology/cache-memory
+  > https://www.geeksforgeeks.org/cache-memory-in-computer-organization/
+  > https://sematext.com/glossary/cache/#:~:text=Definition%3A%20What%20Is%20a%20Cache,browsers%20to%20speed%20load%20times.
+
+- Buffer: 
+  > https://stackoverflow.com/questions/648309/what-does-it-mean-by-buffer
+  > https://en.wikipedia.org/wiki/Data_buffer
+  > https://www.geeksforgeeks.org/buffering-in-computer-network/
+  > https://www.baeldung.com/cs/buffer
+  > https://techterms.com/definition/buffer
+  > https://www.quora.com/What-does-the-word-buffer-refer-to-in-programming#:~:text=·%207y,and%20used%20by%20the%20application.
+
+- Core: 
+  > https://www.supermicro.com/en/glossary/core#:~:text=In%20computing%2C%20a%20%27Core%27,tasks%20like%20rendering%203D%20images.
+  > https://www.lenovo.com/us/en/glossary/cpu-core/?orgRef=https%253A%252F%252Fwww.google.com%252F
+  > https://www.tomshardware.com/news/cpu-core-definition,37658.html
+  > https://www.geekompc.com/what-is-a-core-in-a-cpu/
+
+- Threads: 
+  > https://en.wikipedia.org/wiki/Thread_(computing)
+  > https://simple.wikipedia.org/wiki/Thread_(computer_science)
+  > https://ioflood.com/blog/what-are-cpu-threads-cores-vs-threads-explained/#:~:text=Threads%20are%20sequences%20of%20instructions,performed%20concurrently%20by%20the%20CPU.
+  > https://www.geeksforgeeks.org/what-are-threads-in-computer-processor-or-cpu/
+  > https://www.liquidweb.com/blog/difference-cpu-cores-thread/
+  
+- CPU processor:
+  > https://support.microsoft.com/en-us/windows/all-about-processors-cpus-06dc72ec-3de2-4eb8-8cc2-7e5f2417b90b
+  > https://en.wikipedia.org/wiki/Central_processing_unit
+  > https://www.intel.com/content/www/us/en/business/small-business/resources/ram-vs-processor.html
+  > https://www.techopedia.com/definition/28254/processor
+  > https://www.coursereport.com/blog/what-is-a-processor
+  
+- GPU processor:  
+
+- RAM: 
+  > https://www.intel.com/content/www/us/en/tech-tips-and-tricks/computer-ram.html
+  > https://www.spiceworks.com/tech/hardware/articles/what-is-ram/
+  > https://www.crucial.com/articles/about-memory/support-what-does-computer-memory-do
+  > https://www.ign.com/articles/what-is-ram
+  > https://en.wikipedia.org/wiki/Random-access_memory
+
+- ROM: 
+  > https://www.lenovo.com/us/en/glossary/what-is-rom/?orgRef=https%253A%252F%252Fwww.google.com%252F
+  > https://www.geeksforgeeks.org/read-only-memory-rom/
+  > https://en.wikipedia.org/wiki/Read-only_memory
+  > https://www.arrow.com/en/research-and-events/articles/what-is-rom-types-of-rom-explained
+  > https://www.hp.com/us-en/shop/tech-takes/ram-vs-rom#:~:text=ROM%20(read-only%20memory)%20is%20a%20non-volatile,software%20or%20your%20startup%20programs.
+  
+- SSD: 
+  >   
 
 - Query builder: 
 
-- ORM/ODM:   
+- ORM/ODM: 
 
+
+- Stateless and stateful:
+  > https://www.baeldung.com/cs/stateful-stateless-system
+  > https://www.geeksforgeeks.org/difference-between-stateless-and-stateful-protocol/
+  > https://www.tutorialspoint.com/difference-between-stateless-and-stateful-protocols
+
+- container (docker):
+  > https://www.docker.com/resources/what-container/#:~:text=A%20Docker%20container%20image%20is,tools%2C%20system%20libraries%20and%20settings.
+  > https://docs.docker.com/guides/walkthroughs/what-is-a-container/
+
+- dockerfile: 
+  > https://www.cloudbees.com/blog/what-is-a-dockerfile
+  > https://docs.docker.com/reference/dockerfile/
+
+- Image (docker): 
+  > https://www.geeksforgeeks.org/what-is-docker-image/
+  > https://docs.docker.com/guides/docker-concepts/the-basics/what-is-an-image/
+  
+- Imagen base: Escribimos en nuestro código --> FROM node. Esto significa que estaremos tomand una imagen base del entorno de node, para poder configurar nuestra app. 
+
+- Clusterización y Orquestación: 
+  > https://aws.amazon.com/what-is/container-orchestration/
+  > https://www.vmware.com/topics/glossary/content/container-orchestration.html#:~:text=Container%20orchestration%20is%20the%20automation,networking%2C%20load%20balancing%20and%20more.
+  > https://cloud.google.com/discover/what-is-container-orchestration
+  > https://stackoverflow.com/questions/52453146/what-is-the-difference-between-clustering-management-and-orchestration-in-docker
 
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$                                                                                                       
                                                                                                        
@@ -407,20 +469,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   > https://www.passportjs.org
   > https://medium.com/@prashantramnyc/node-js-with-passport-authentication-simplified-76ca65ee91e5
   > https://www.passportjs.org/concepts/authentication/sessions/
-  > https://stackoverflow.com/questions/27637609/understanding-passport-serialize-deserialize
-  > https://stackoverflow.com/questions/45428107/what-does-passport-js-do-and-why-we-need-it
-  > Serializar y deserializar: Estas funciones permiten a Passport.js manejar la información del usuario durante el proceso de autenticación, serializando y deserializando los usuarios para almacenar y recuperar información de la sesión. 
-    Permiten que la aplicación web gestione la autenticación de usuarios y recuerde la identidad del usuario autenticado entre las solicitudes HTTP.
-     ~ Serializar (Serialize): significa convertir el objeto de usuario en una forma que pueda ser almacenada y posteriormente recuperada. Esencialmente, esto implica tomar los datos de usuario relevantes (como el ID de usuario) y 
-       convertirlos en una representación que pueda ser almacenada, generalmente en una cookie de sesión o en una base de datos. Durante el proceso de serialización, Passport.js guarda el identificador único del usuario en la sesión del 
-       usuario actual. Esto permite que la aplicación recuerde que el usuario está autenticado entre las solicitudes, incluso cuando las solicitudes individuales HTTP son independientes entre sí.
-       En resumen, la serialización en Passport.js proporciona una forma de "recordar" la identidad del usuario autenticado entre las solicitudes HTTP.
-      
-     ~ Deserializar (Deserialize): Significa tomar la identificación del usuario que se almacenó durante la serialización y utilizarla para obtener los datos de usuario completos y autenticados.
-       Durante el proceso de deserialización, Passport.js recupera los datos del usuario basados en el identificador almacenado en la sesión y los proporciona a la aplicación para que pueda realizar operaciones con el usuario autenticado, 
-       como mostrar su perfil, permitirle acceder a recursos protegidos, etc. 
-       En resumen, la deserialización en Passport.js permite a la aplicación recuperar los datos del usuario completo y autenticado a partir del identificador almacenado durante la serialización.
-
 
 - Stripe: 
   > https://www.freshbooks.com/hub/payments/what-is-stripe
@@ -645,64 +693,4 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
      
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$                                                                                                       
 
-                                                                                                                   
-- Callback function: 
-  > https://developer.mozilla.org/en-US/docs/Glossary/Callback_function
-  > https://www.geeksforgeeks.org/javascript-callbacks/
-  > https://www.freecodecamp.org/espanol/news/funciones-callback-en-javascript-que-son-los-callback-en-js-y-como-usarlos/#:~:text=Los%20callbacks%20aseguran%20que%20una,salvo%20de%20problemas%20y%20errores.
-  
-- fetch: 
-  > https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
-  > https://www.computerhope.com/jargon/f/fetch.htm
-  > https://www.geeksforgeeks.org/javascript-fetch-method/
-  > https://www.freecodecamp.org/news/javascript-fetch-api-for-beginners/
-         
-- Stateless and stateful:
-  > https://www.baeldung.com/cs/stateful-stateless-system
-  > https://www.geeksforgeeks.org/difference-between-stateless-and-stateful-protocol/
-  > https://www.tutorialspoint.com/difference-between-stateless-and-stateful-protocols
-  
-- Application logic vs Business logic: 
-  > https://www.apisec.ai/blog/business-logic-vs-application-logic#:~:text=The%20key%20difference%20between%20business,user%20interacts%20with%20the%20app.
-  > https://jonascleveland.com/difference-of-business-logic-vs-application-logic/
-  
-- Escalamiento vertical y horizontal: 
-  > https://www.geeksforgeeks.org/horizontal-and-vertical-scaling-in-databases/
-  > https://www.mongodb.com/resources/basics/horizontal-vs-vertical-scaling
-  > https://www.cloudzero.com/blog/horizontal-vs-vertical-scaling/#:~:text=While%20horizontal%20scaling%20refers%20to,%2C%20storage%2C%20or%20network%20speed.
-  > https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#:~:text=Horizontal%20scaling%20means%20that%20the,already%20running%20for%20the%20workload.
-  > https://www.nops.io/blog/horizontal-vs-vertical-scaling/
-  > https://www.arsys.es/blog/escalado-horizontal-vs-vertical
-
-- Cluster: 
-  > https://nodejs.org/api/cluster.html#cluster
-    
-- container (docker):
-  > https://www.docker.com/resources/what-container/#:~:text=A%20Docker%20container%20image%20is,tools%2C%20system%20libraries%20and%20settings.
-  > https://docs.docker.com/guides/walkthroughs/what-is-a-container/
-
-- dockerfile: 
-  > https://www.cloudbees.com/blog/what-is-a-dockerfile
-  > https://docs.docker.com/reference/dockerfile/
-
-- Image (docker): 
-  > https://www.geeksforgeeks.org/what-is-docker-image/
-  > https://docs.docker.com/guides/docker-concepts/the-basics/what-is-an-image/
-  
-- Imagen base: Escribimos en nuestro código --> FROM node. Esto significa que estaremos tomand una imagen base del entorno de node, para poder configurar nuestra app. 
-
-- Clusterización y Orquestación: 
-  > https://aws.amazon.com/what-is/container-orchestration/
-  > https://www.vmware.com/topics/glossary/content/container-orchestration.html#:~:text=Container%20orchestration%20is%20the%20automation,networking%2C%20load%20balancing%20and%20more.
-  > https://cloud.google.com/discover/what-is-container-orchestration
-  > https://stackoverflow.com/questions/52453146/what-is-the-difference-between-clustering-management-and-orchestration-in-docker
-    
-  
-  
-  
-  
-  
-  
-  
-  
   

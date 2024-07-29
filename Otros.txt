@@ -95,6 +95,9 @@
   Using multiple processes is the best way to scale a Node application. Node.js is designed for building distributed applications with many nodes. This is why it’s named Node. Scalability is baked into the platform and it’s not something you 
   start thinking about later in the lifetime of an application.
   
+- Cluster: 
+  > https://nodejs.org/api/cluster.html#cluster    
+  
   We can easily spin a child process using Node’s child_process module and those child processes can easily communicate with each other with a messaging system. The child_process module enables us to access Operating System functionalities 
   by running any system command inside a, well, child process. We can control that child process input stream, and listen to its output stream. We can also control the arguments to be passed to the underlying OS command, and we can do 
   whatever we want with that command’s output. We can, for example, pipe the output of one command as the input to another as all inputs and outputs of these commands can be presented to us using Node.js streams.
@@ -426,6 +429,19 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       ○ El segundo parámetro debe ser el usuario generado, por lo tanto, para devolver un usuario, hacemos done(null, user).
       ○ Si pasamos done(null, false) indicamos que no hay error, pero el usuario no estará disponible.
     ✓ Cada estrategia que queramos configurar en passport es un middleware por sí solo, así que utilizaremos el elemento passport.use() para configurar diferentes middlewares/estrategias
+    
+- Serializar y deserializar: Estas funciones permiten a Passport.js manejar la información del usuario durante el proceso de autenticación, serializando y deserializando los usuarios para almacenar y recuperar información de la sesión. 
+  Permiten que la aplicación web gestione la autenticación de usuarios y recuerde la identidad del usuario autenticado entre las solicitudes HTTP.
+   ~ Serializar (Serialize): significa convertir el objeto de usuario en una forma que pueda ser almacenada y posteriormente recuperada. Esencialmente, esto implica tomar los datos de usuario relevantes (como el ID de usuario) y 
+     convertirlos en una representación que pueda ser almacenada, generalmente en una cookie de sesión o en una base de datos. Durante el proceso de serialización, Passport.js guarda el identificador único del usuario en la sesión del 
+     usuario actual. Esto permite que la aplicación recuerde que el usuario está autenticado entre las solicitudes, incluso cuando las solicitudes individuales HTTP son independientes entre sí.
+     En resumen, la serialización en Passport.js proporciona una forma de "recordar" la identidad del usuario autenticado entre las solicitudes HTTP.
+      
+   ~ Deserializar (Deserialize): Significa tomar la identificación del usuario que se almacenó durante la serialización y utilizarla para obtener los datos de usuario completos y autenticados.
+     Durante el proceso de deserialización, Passport.js recupera los datos del usuario basados en el identificador almacenado en la sesión y los proporciona a la aplicación para que pueda realizar operaciones con el usuario autenticado, 
+     como mostrar su perfil, permitirle acceder a recursos protegidos, etc. 
+     En resumen, la deserialización en Passport.js permite a la aplicación recuperar los datos del usuario completo y autenticado a partir del identificador almacenado durante la serialización.
+  
 
                                                                                                                    
     
@@ -709,3 +725,17 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   A user could have 100’s of orders. If we stored them as embedded documents, the amount of data returned for the user query would grow significantly over time. Additionally, it would return a large amount of data that isn’t used on the 
   majority of the website. To add a new order, we would need to read the entire user document, append the new order, and then re-write the entire document.
   Using referenced documents however, we can simply insert a new document into the orders collection, tied to the user ID, and we don’t have to read the user collection at all (or any other orders!).
+  
+  
+  - Application logic vs Business logic: 
+  > https://www.apisec.ai/blog/business-logic-vs-application-logic#:~:text=The%20key%20difference%20between%20business,user%20interacts%20with%20the%20app.
+  > https://jonascleveland.com/difference-of-business-logic-vs-application-logic/
+  
+- Escalamiento vertical y horizontal: 
+  > https://www.geeksforgeeks.org/horizontal-and-vertical-scaling-in-databases/
+  > https://www.mongodb.com/resources/basics/horizontal-vs-vertical-scaling
+  > https://www.cloudzero.com/blog/horizontal-vs-vertical-scaling/#:~:text=While%20horizontal%20scaling%20refers%20to,%2C%20storage%2C%20or%20network%20speed.
+  > https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#:~:text=Horizontal%20scaling%20means%20that%20the,already%20running%20for%20the%20workload.
+  > https://www.nops.io/blog/horizontal-vs-vertical-scaling/
+  > https://www.arsys.es/blog/escalado-horizontal-vs-vertical
+

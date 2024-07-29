@@ -1134,4 +1134,16 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       Así, dentro de una función async podemos utilizar la sentencia await vista previamente. Esto nos permite esperar a que se resuelvan las promesas vistas para continuar con la instrucción siguiente. 
 
    > micro-tasks queue: 
+
+
+- Callback function: 
+  > https://developer.mozilla.org/en-US/docs/Glossary/Callback_function
+  > https://www.geeksforgeeks.org/javascript-callbacks/
+  > https://www.freecodecamp.org/espanol/news/funciones-callback-en-javascript-que-son-los-callback-en-js-y-como-usarlos/#:~:text=Los%20callbacks%20aseguran%20que%20una,salvo%20de%20problemas%20y%20errores.
+  
+- fetch: 
+  > https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
+  > https://www.computerhope.com/jargon/f/fetch.htm
+  > https://www.geeksforgeeks.org/javascript-fetch-method/
+  > https://www.freecodecamp.org/news/javascript-fetch-api-for-beginners/
                      
