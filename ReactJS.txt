@@ -1261,7 +1261,12 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   to a bad user experience. It is faster after the first load since there are no server requests to change pages, which makes it insanely fast, and provides a better UX (user experience) because it gives a native-app feel to the page.
   It always loads a blank page and the markup only gets displayed after the JS has completely loaded. Keep in mind that this is only for the first render i.e. the first time React tree gets rendered from the DOM
   
-- Server-side Rendering (SSR): Server-side rendering uses servers' request-response process to render the pages using JavaScript. Data fetching is done by the servers and hence it has good user experience.  
+  In Client-Side Rendering (CSR) with React, the browser downloads a minimal HTML page and the JavaScript needed for the page. The JavaScript is then used to update the DOM and render the page. When the application is first loaded, the user 
+  may notice a slight delay before they can see the full page, this is because the page isn't fully rendered until all the JavaScript is downloaded, parsed, and executed.
+  After the page has been loaded for the first time, navigating to other pages on the same website is typically faster, as only necessary data needs to be fetched, and JS can re-render parts of the page without requiring a full page refresh.  
+  
+- Server-side Rendering (SSR): It uses servers' request-response process to render the pages using JavaScript. Data fetching is done by the servers and hence it has good user experience. If a page uses Server-side Rendering, the page HTML is 
+  generated on each request.
   The reason is that in SSR the server first loads the HTML content for the user to at least have some content on the web page while the JavaScript is being loaded in the background. 
   Put another way, it is the process of rendering web pages on the client using JavaScript. In this approach, the server sends the initial HTML file, but the client then uses JavaScript to dynamically update the page as needed. This allows 
   for more interactive and responsive web pages, as the client can update specific parts of the page without needing to reload the entire page. One example of a popular CSR framework is React. With React, you can write JavaScript code that 
@@ -1280,14 +1285,24 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
    > Can reduce the need for additional server requests
 
 - Static site generator (SSG): SSG has similarities with SSR. The page is also generated in the server, however, the page is rendered at build time. So, instead of rendering the page on the server upon the receival of a request, the page is 
-  already rendered in the server, waiting to be served to the client. I’ll discuss the advantages and disadvantages of this approach, and compare it with SSR further below.
+  already rendered in the server, waiting to be served to the client.
+  
+  A static site generator is a tool that generates a full static HTML website based on raw data and a set of templates. Essentially, a static site generator automates the task of coding individual HTML pages and gets those pages ready to 
+  serve to users ahead of time. Because these HTML pages are pre-built, they can load very quickly in users' browsers.
+  Static site generators are an alternative to content management systems (CMS) — another type of tool for managing web content, generating webpages, and implementing templates. (A template is a reusable format for web content; developers 
+  use templates to avoid writing the same formatting over and over.) Static site generators are typically part of a JAMstack web development approach.
+
+- Incremental Static Regeneration (ISR): It allows you to create or update static pages after you’ve built your site. This means you can incrementally regenerate static pages without needing to rebuild the entire site. With ISR, you can 
+  retain the benefits of static while scaling to millions of pages.
+
+- JAMstack: JAMstack is an approach to frontend web development (the construction of content and interfaces that users interact with). It allows developers to quickly create and efficiently serve static websites to users.
+  In a JAMstack web application, as much HTML as possible is pre-built and stored in a content delivery network (CDN). Instead of running a monolithic backend application on the server side to generate dynamic content, dynamic components of 
+  the application are based on APIs. Ideally, this results in a much faster user experience and a much simpler developer experience.
 
 - Difference between SSR and SSG: The difference between these two is that in SSR the server needs to render the page before sending it to the user (render at runtime), and with SSG this is not necessary, because it's done at build time. You 
   may feel like "why on earth should I use SSR then?". It's simple: most websites usually have dynamic, stateful data (e.g.: user email/logo on the navbar when a user is logged in). This means we can't pre-render at build time templates with 
   this data, so the only way to have this data with SSG would be to import it via Javascript (which would defeat SSG's core purpose).
-  
-- Incremental Static Regeneration (ISR): It allows you to create or update static pages after you’ve built your site. This means you can incrementally regenerate static pages without needing to rebuild the entire site.
-  
+    
 - Loader in image: A loader is a function that generates the URLs for your image. It modifies the provided src, and generates multiple URLs to request the image at different sizes. These multiple URLs are used in the automatic srcset 
   generation, so that visitors to your site will be served an image that is the right size for their viewport.
   The default loader for Next.js applications uses the built-in Image Optimization API, which optimizes images from anywhere on the web, and then serves them directly from the Next.js web server. If you would like to serve your images 

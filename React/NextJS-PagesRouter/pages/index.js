@@ -3,16 +3,13 @@ import MeetupList from '../components/meetups/MeetupList';
 import { mongodb } from "./mongo.js";
 
 function HomePage(props) {
-    return (
-        <>
-            <Head>
-                <title>React Meetups</title>
-                <meta name='description' content='Browse a huge list of highly active React meetups!' />
-            </Head>
-
-            <MeetupList values={props.meetups} />;
-        </>
-    )
+    return <>
+        <Head>
+            <title>React Meetups</title>
+            <meta name='description' content='Browse a huge list of highly active React meetups!' />
+        </Head>
+        <MeetupList values={props.meetups} />;
+    </>
 }
 
 // export async function getServerSideProps(context) {
