@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { getEventById, getFeaturedEvents } from '../../helpers/api-utils';
 import EventSummary from '../../components/event-detail/event-summary';
 import EventLogistics from '../../components/event-detail/event-logistics';
@@ -9,6 +10,10 @@ function EventDetailPage(props) {
     if (!event) return <div className="center"><p>Loading...</p></div>
 
     return <>
+        <Head>
+            <title>{event.title}</title>
+            <meta name='description' content='Fund a lot of great evebts that allow you to envolve...' />
+        </Head>
         <EventSummary title={event.title} />
         <EventLogistics date={event.date} address={event.location} image={event.image} imageAlt={event.title} />
         <EventContent>

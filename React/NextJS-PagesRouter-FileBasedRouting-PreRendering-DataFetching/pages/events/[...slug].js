@@ -1,11 +1,19 @@
-//Using Server-side Rendering (SSR)
+/* //Using Server-side Rendering (SSR)
 import { getFilteredEvents } from '../../helpers/api-utils';
 import EventList from '../../components/events/event-list';
 import ResultsTitle from '../../components/events/results-title';
 import Button from '../../components/ui/button';
 import ErrorAlert from '../../components/ui/error-alert';
+import Head from 'next/head';
 
 function FilteredEventsPage(props) {
+    const pageHeadData = (
+        <Head>
+            <title>Filtered events</title>
+            <meta name='description' content={`All events for ${props.date.month}/${props.date.year}.`} />
+        </Head>
+    )
+
     if (props.hasError) {
         return <>
             <ErrorAlert>
@@ -20,6 +28,7 @@ function FilteredEventsPage(props) {
     const filteredEvents = props.events;
     if (!filteredEvents || filteredEvents.length === 0) {
         return <>
+            {pageHeadData}
             <ErrorAlert>
                 <p>No events found for the chosen filter!</p>
             </ErrorAlert>
@@ -32,6 +41,7 @@ function FilteredEventsPage(props) {
     const date = new Date(props.date.year, props.date.month - 1);
 
     return <>
+        {pageHeadData}
         <ResultsTitle date={date} />
         <EventList items={filteredEvents} />
     </>
@@ -67,16 +77,19 @@ export async function getServerSideProps({ params }) {
 export default FilteredEventsPage;
 
 //The advantage of using SSR is, that the finished page (i.e. a page that contains ALL the content) is served for all requests - including requests coming from search engine crawlers. Pages that load + render 
-//content on the client-side only, might be crawled in an incomplete state. Crawlers typically do not wait until more content was loaded or rendered => They crawl the initial state of the website.
+//content on the client-side only, might be crawled in an incomplete state. Crawlers typically do not wait until more content was loaded or rendered => They crawl the initial state of the website. */
 
-/* //Using Client-side Data Fetching
+//Using Client-side Data Fetching
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
+import useSWR from 'swr';
 import EventList from '../../components/events/event-list';
 import ResultsTitle from '../../components/events/results-title';
 import Button from '../../components/ui/button';
 import ErrorAlert from '../../components/ui/error-alert';
 
-function FilteredEventsPage(props) {
+function FilteredEventsPage() {
     const [loadedEvents, setLoadedEvents] = useState();
     const router = useRouter();
     const filterData = router.query.slug;
@@ -95,14 +108,35 @@ function FilteredEventsPage(props) {
         }
     }, [data]); //This effect should re-run whenever the data that we fetched changes.
 
+    let pageHeadData = (
+        <Head>
+            <title>Filtered events</title>
+            <meta name='description' content={`A list of filtered events.`} />
+        </Head>
+    )
+    
+    if (!loadedEvents){
+        return <>
+            {pageHeadData}
+            <p className='center'>Loading...</p>
+        </>
+    }
+
     const filteredYear = filterData[0];
     const filteredMonth = filterData[1];
     const numYear = +filteredYear;
     const numMonth = +filteredMonth;
+    pageHeadData = (
+        <Head>
+            <title>Filtered events</title>
+            <meta name='description' content={`All events for ${numMonth}/${numYear}.`} />
+        </Head>
+    );
 
-    if (!loadedEvents) return <p className='center'>Loading...</p>;
+    
     if (isNaN(numYear) || isNaN(numMonth) || numYear > 2030 || numYear < 2021 || numMonth < 1 || numMonth > 12 || error) {
         return <>
+            {pageHeadData}
             <ErrorAlert>
                 <p>Invalid filter. Please adjust your values!</p>
             </ErrorAlert>
@@ -119,6 +153,7 @@ function FilteredEventsPage(props) {
 
     if (!filteredEvents || filteredEvents.length === 0) {
         return <>
+            {pageHeadData}
             <ErrorAlert>
                 <p>No events found for the chosen filter!</p>
             </ErrorAlert>
@@ -131,9 +166,10 @@ function FilteredEventsPage(props) {
     const date = new Date(numYear, numMonth - 1);
 
     return <>
+        {pageHeadData}
         <ResultsTitle date={date} />
         <EventList items={filteredEvents} />
     </>
 }
 
-export default FilteredEventsPage; */
+export default FilteredEventsPage;
