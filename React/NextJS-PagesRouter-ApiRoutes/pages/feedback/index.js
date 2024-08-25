@@ -1,34 +1,42 @@
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 import { buildFeedbackPath, extractFeedback } from '../api/feedback/index';
 
 function FeedbackPage(props) {
   const [feedbackData, setFeedbackData] = useState();
 
-  async function loadFeedbackHandler(id) {// /api/some-feedback-id
-    const fetchingData = fetch(`/api/feedback/${id}`);
-    const data = (await fetchingData).json();
-    setFeedbackData(data.feedback);
+  async function loadFeedbackHandler(id) {
+    try {
+      const response = await fetch(`/api/feedback/${id}`);
+      const data = await response.json();
+      setFeedbackData(data.feedback);
+    } catch (error) {
+      console.error('Error fetching feedback:', error);
+    }
   }
 
-  return (
-    <Fragment>
-      {feedbackData && <p>{feedbackData.email}</p>}
-      <ul>
-        {props.feedbackItems.map((item) => (
-          <li key={item.id}>
-            {item.text}{' '}
-            <button onClick={loadFeedbackHandler.bind(null, item.id)}>Show Details</button>
-          </li>
-        ))}
-      </ul>
-    </Fragment>
-  );
+  return <>
+    {feedbackData && <p>{feedbackData.email}</p>}
+    <ul>
+      {
+        props.feedbackItems.map(function(item){
+          return (
+            <li key={item.id}>
+              {item.text}{' '}
+              <button onClick={loadFeedbackHandler.bind(null, item.id)}>Show Details</button>
+            </li>
+          )
+        })
+      }
+    </ul>
+  </>
 }
 
 export async function getStaticProps() {
   const filePath = buildFeedbackPath();
   const data = extractFeedback(filePath);
-  return { props: { feedbackItems: data } };
+  return {
+    props: { feedbackItems: data }
+  };
 }
 
 export default FeedbackPage;

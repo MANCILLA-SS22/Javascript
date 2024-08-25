@@ -114,8 +114,8 @@ function FilteredEventsPage() {
             <meta name='description' content={`A list of filtered events.`} />
         </Head>
     )
-    
-    if (!loadedEvents){
+
+    if (!loadedEvents) {
         return <>
             {pageHeadData}
             <p className='center'>Loading...</p>
@@ -133,7 +133,7 @@ function FilteredEventsPage() {
         </Head>
     );
 
-    
+
     if (isNaN(numYear) || isNaN(numMonth) || numYear > 2030 || numYear < 2021 || numMonth < 1 || numMonth > 12 || error) {
         return <>
             {pageHeadData}
