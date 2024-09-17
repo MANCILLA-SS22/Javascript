@@ -3494,24 +3494,24 @@ console.log(arr2); */
 
 // console.log(Arrays_sum([1,0,2,3,4], [3,5,6,7,8,13])); */
 
-//Ejemplo 59: Write a JavaScript program to find duplicate values in a JavaScript array.
+/* //Ejemplo 59: Write a JavaScript program to find duplicate values in a JavaScript array.
 
 //Metodo 1
-const arra1 = [1, 2, 5, 2, 2, 2, 3, 4, 5];
-const object = [];
-const result = [];
+// const arra1 = [1, 2, 5, 2, 2, 2, 3, 4, 5];
+// const object = [];
+// const result = [];
 
-arra1.forEach(function(item){
-    if(!object[item]) object[item] = 0;
-    console.log(object);
-    object[item]++;
-});
+// arra1.forEach(function(item){
+//     if(!object[item]) object[item] = 0;
+//     console.log(object);
+//     object[item]++;
+// });
 
-for (const prop in object) {
-    if(object[prop] > 1) result.push(prop);
-}
+// for (const prop in object) {
+//     if(object[prop] > 1) result.push(prop);
+// }
 
-console.log(result);
+// console.log(result);
 //Si no existe object[item], entonces lo inicializamos con 0. Por ejemplo, al iterar "arra1", el primer valor es 1, por lo que, verificamos 
 //ahora si el array "object" en la posicion de 1, existe. Como no existe, inicializamos la posicion object[1]=0 y despues se le suma 1 
 //para indicar que ha sido encontrado una vez. Ahora, en caso de que se toque un numero repetido, como en el caso del valor 2, 
@@ -3641,7 +3641,7 @@ console.log(result);
 // }
 
 // const res = findDuplicates(array);
-// console.log(res);
+// console.log(res); */
 
 /* //Ejemplo 60: Write a JavaScript program to flatten a nested (any depth) array. If you pass shallow, the array will only be flattened to a single level
 

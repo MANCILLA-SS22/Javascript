@@ -1,4 +1,4 @@
-import { mongodb } from "../mongo.js";
+import { mongodb } from "../../lib/mongo.js";
 import MeetupDetail from '../../components/meetups/MeetupDetail';
 import { ObjectId } from "mongodb";
 import Head from "next/head.js";

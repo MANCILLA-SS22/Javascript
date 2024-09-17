@@ -7,7 +7,6 @@ import Comments from '../../components/input/comments';
 
 function EventDetailPage(props) {
     const event = props.selectedEvent;
-
     if (!event) return <div className="center"><p>Loading...</p></div>
 
     return <>
@@ -34,7 +33,7 @@ export async function getStaticProps(context) {
     };
 }
 
-export async function getStaticPaths() {
+export async function getStaticPaths() { //When exporting a function called getStaticPaths from a page that uses Dynamic Routes, Next.js will statically pre-render all the paths specified by getStaticPaths.
     const events = await getFeaturedEvents();
     const paths = events.map(function (event){
         return { params: { eventId: event.id } }
@@ -42,7 +41,7 @@ export async function getStaticPaths() {
 
     return {
         paths: paths,
-        fallback: 'blocking' //NextJS will not serve anything until we're done generating this page
+        fallback: 'blocking' //NextJS will not serve anything until we're done generating this page. 'notFound' is not needed for "fallback: false" mode as only paths returned from getStaticPaths will be pre-rendered.
     };
 }
 

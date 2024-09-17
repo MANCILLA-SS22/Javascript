@@ -727,15 +727,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   Using referenced documents however, we can simply insert a new document into the orders collection, tied to the user ID, and we don’t have to read the user collection at all (or any other orders!).
   
   
-  - Application logic vs Business logic: 
+- Application logic vs Business logic: 
   > https://www.apisec.ai/blog/business-logic-vs-application-logic#:~:text=The%20key%20difference%20between%20business,user%20interacts%20with%20the%20app.
   > https://jonascleveland.com/difference-of-business-logic-vs-application-logic/
-  
-- Escalamiento vertical y horizontal: 
-  > https://www.geeksforgeeks.org/horizontal-and-vertical-scaling-in-databases/
-  > https://www.mongodb.com/resources/basics/horizontal-vs-vertical-scaling
-  > https://www.cloudzero.com/blog/horizontal-vs-vertical-scaling/#:~:text=While%20horizontal%20scaling%20refers%20to,%2C%20storage%2C%20or%20network%20speed.
-  > https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#:~:text=Horizontal%20scaling%20means%20that%20the,already%20running%20for%20the%20workload.
-  > https://www.nops.io/blog/horizontal-vs-vertical-scaling/
-  > https://www.arsys.es/blog/escalado-horizontal-vs-vertical
-

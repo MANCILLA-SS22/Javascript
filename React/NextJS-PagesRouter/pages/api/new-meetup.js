@@ -5,8 +5,7 @@ async function handler(req, res){
 
     const data = req.body;
     const { client, meetupsCollection } = await mongodb();
-    const result = await meetupsCollection.insertOne(data);
-    console.log(result);
+    await meetupsCollection.insertOne(data);
     client.close();
     res.status(201).json({ message: 'Meetup inserted!' })
 }

@@ -10,8 +10,7 @@ function NewMeetupPage() {
             body: JSON.stringify(enteredMeetupData),
             headers: { "Content-Type": "application/json" }
         });
-        const data = await response.json();
-        console.log(data);
+        await response.json();
         router.push("/")
     }
 

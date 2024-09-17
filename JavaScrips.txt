@@ -268,16 +268,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
      ~ Code Reusability: Promotes code reusability
      ~ Abstract Classes: Can extend abstract classes
 
-  > implements: It is used in a class to indicate that the class is going to implement a particular interface. It ensures that the class includes all the properties and methods specified by the interface.
-    In Typescript an implements clause can be used to verify that a class conforms to a specific interface. If a class fails to implement an interface correctly, an error will be generated. Classes can implement a single 
-    interface or multiple interfaces at once. 
-    implements means that The new class can be treated as the same "shape", but it is not a child. It could be passed to any method where Person is required, regardless of having a different parent than Person.
-     ~ Inheritance: Implements is used for interface implementation. It enables a class to provide specific implementations for the methods defined in an interface.
-     ~ Multiple Inheritance: A class can implement multiple interfaces
-     ~ Implementation of Methods: Requires the class to provide concrete implementations for all methods declared in the interface.
-     ~ Code Reusability: Promotes code reusability and abstraction through interfaces.
-     ~ Abstract Classes: Cannot extend abstract classes but can implement abstract methods.
-
   > readonly: It is used to prevent compile-time reassignment, however, it makes no guarantee that your code is “safe” and cannot be reassigned elsewhere.
     se utiliza para declarar propiedades de solo lectura en una clase o en un tipo de objeto. Esto significa que una vez que se inicializa una propiedad con la palabra clave "readonly", su valor no puede ser modificado posteriormente fuera 
     del constructor de la clase.
@@ -1134,16 +1124,116 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       Así, dentro de una función async podemos utilizar la sentencia await vista previamente. Esto nos permite esperar a que se resuelvan las promesas vistas para continuar con la instrucción siguiente. 
 
    > micro-tasks queue: 
+   
+   
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        
+
+                                                                                                                   Typescript   
+
+https://stackoverflow.com/questions/37233735/interfaces-vs-types-in-typescript
+https://blog.logrocket.com/types-vs-interfaces-typescript/
+
+- interface:
+
+- type: 
+
+- class: 
+
+- implements: It is used in a class to indicate that the class is going to implement a particular interface. It ensures that the class includes all the properties and methods specified by the interface.
+  In Typescript an implements clause can be used to verify that a class conforms to a specific interface. If a class fails to implement an interface correctly, an error will be generated. Classes can implement a single 
+  interface or multiple interfaces at once. 
+  implements means that The new class can be treated as the same "shape", but it is not a child. It could be passed to any method where Person is required, regardless of having a different parent than Person.
+   ~ Inheritance: Implements is used for interface implementation. It enables a class to provide specific implementations for the methods defined in an interface.
+   ~ Multiple Inheritance: A class can implement multiple interfaces
+   ~ Implementation of Methods: Requires the class to provide concrete implementations for all methods declared in the interface.
+   ~ Code Reusability: Promotes code reusability and abstraction through interfaces.
+   ~ Abstract Classes: Cannot extend abstract classes but can implement abstract methods.
+   
+- extends: 
+
+- declare:
+
+- as: 
+
+                                                                 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
-- Callback function: 
-  > https://developer.mozilla.org/en-US/docs/Glossary/Callback_function
-  > https://www.geeksforgeeks.org/javascript-callbacks/
-  > https://www.freecodecamp.org/espanol/news/funciones-callback-en-javascript-que-son-los-callback-en-js-y-como-usarlos/#:~:text=Los%20callbacks%20aseguran%20que%20una,salvo%20de%20problemas%20y%20errores.
-  
-- fetch: 
-  > https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
-  > https://www.computerhope.com/jargon/f/fetch.htm
-  > https://www.geeksforgeeks.org/javascript-fetch-method/
-  > https://www.freecodecamp.org/news/javascript-fetch-api-for-beginners/
-                     
+- Types by Inference
+
+- Composing Types
+  > Unions
+  > Generics
+
+- Structural Type System
+
+- Gradual typing
+
+- Structural typing: 
+     type One = { p: string };
+     interface Two { p: string };
+     class Three { p = "Hello" };
+     
+     let x: One = { p: "hi" };
+     let two: Two = x;
+     two = new Three();
+
+- Arrays: 
+
+- Functions: 
+
+- Object types: 
+
+- Union types: 
+
+- Type Aliases: 
+
+- Interfaces: 
+
+- Differences Between Type Aliases and Interfaces
+
+- Type annotations: 
+
+- Type Assertions:
+
+- Literal Types: 
+
+- Literal Inference: 
+
+- Unions
+
+- Unit types:
+
+- Rest parameters and arguments:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
