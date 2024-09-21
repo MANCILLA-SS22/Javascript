@@ -1155,6 +1155,10 @@ https://blog.logrocket.com/types-vs-interfaces-typescript/
 
 - as: 
 
+- keyof
+
+- Record: 
+
                                                                  $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
@@ -1205,8 +1209,16 @@ https://blog.logrocket.com/types-vs-interfaces-typescript/
 
 - Rest parameters and arguments:
 
+- classes
+  > visibility modifiers
+  > Implementing an interface to a class
+  > Getters and Setters
 
+- Index Signatures & keyof Assertions
 
+- Generics
+  > partial
+  > 
 
 
 
