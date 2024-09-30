@@ -1,4 +1,4 @@
-- HTML <script> Tag: The <script> tag is used to embed a client-side script (JavaScript). The <script> element either contains scripting statements, or it points to an external script file through the src attribute. Common uses for 
+ - HTML <script> Tag: The <script> tag is used to embed a client-side script (JavaScript). The <script> element either contains scripting statements, or it points to an external script file through the src attribute. Common uses for 
   JavaScript are image manipulation, form validation, and dynamic changes of content.
 
     ~ <script src="./main.js"></script>         
@@ -1133,7 +1133,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 https://stackoverflow.com/questions/37233735/interfaces-vs-types-in-typescript
 https://blog.logrocket.com/types-vs-interfaces-typescript/
 
-- interface:
+- interface: 
+  Remember that In an interface, you cannot use a traditional function definition with the function keyword or include a function body ({ ... }). You can only use arrow functions.
 
 - type: 
 
@@ -1185,6 +1186,8 @@ https://blog.logrocket.com/types-vs-interfaces-typescript/
 
 - Functions: 
 
+- Tuple: A tuple type is another sort of Array type that knows exactly how many elements it contains, and exactly which types it contains at specific positions.
+
 - Object types: 
 
 - Union types: 
@@ -1217,12 +1220,23 @@ https://blog.logrocket.com/types-vs-interfaces-typescript/
 - Index Signatures & keyof Assertions
 
 - Generics
-  > partial
-  > 
+
+- Utility Types
+  > Partial 
+  > Required
+  > readonly
+  > Record
+  > Pick
+  > Omit
+  > Exclude
+  > Extract
+  > NonNullable
+  > ReturnType
+  > Parameters
+  > Awaited
 
 
-
-
+ 
 
 
 
