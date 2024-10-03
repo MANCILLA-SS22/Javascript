@@ -103,7 +103,7 @@
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Functions %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-//Type aliases
+/* //Type aliases
 type stringOrNumber = string | number;
 type stringOrNumberArray = (string | number)[];
 
@@ -114,15 +114,15 @@ type Guitarrist = {
 };
 
 type UserId = stringOrNumber;
-// interface PostId = stringOrNumber; //This won't work because "interface" think about those more as object or clases, and "type" as an alias for any type of TS type that we might assign.
+// interface PostId = stringOrNumber; //This won't work because "interface" think about those more as object or clases, and "type" as an alias for any type of TS type that we might assign. */
 
-//Literal types
+/* //Literal types
 let myName: 'German';
 // myName = 'Mancilla'; //This won't work because "myName" is an string of "German" type, not string.
 let username: 'Dave' | 'John' | 'Amy';
-username = 'Amy';
+username = 'Amy'; */
 
-//functions
+/* //functions
 function adding(a: number, b: number): number { //"number" afer parentheses means that we'll return a "number". We can ommit this pattern because TS will infer what we're trying to return.
     return a + b;
 }
@@ -165,9 +165,9 @@ function sumAll(a: number = 10, b: number, c: number = 2): number {
 console.log(addAll(2, 3, 3));
 console.log(addAll(2,3));
 console.log(sumAll(2,3));
-console.log(sumAll(undefined, 3));
+console.log(sumAll(undefined, 3)); */
 
-//Rest parameters
+/* //Rest parameters
 function total(a: number, ...nums: number[]): number { //In TS, the type annotation on these parameters is implicitly any[] instead of any, and any type annotation given must be of the form Array<T> or T[], or a tuple type
     return a + nums.reduce((prev, curr) => prev+curr)
 };
@@ -198,7 +198,7 @@ function numerOrString(value: number | string): string{
 
 console.log(numerOrString("Hey!"));
 console.log(numerOrString(1));
-// console.log(numerOrString(true));
+// console.log(numerOrString(true)); */
 
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Type assertions %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -603,12 +603,12 @@ logStudentKey(student, 'GPA'); */
 
 /* //Exercise #5
 type Streams = 'salary' | 'bonus' | 'sidehustle';
-type Incomes = Record<Streams, number | string>; //It allow us to use string literals as the different types that are ewxpected. number | string menas that one of these values can be either string or number.
+type Incomes = Record<Streams, number | string>; //It allow us to use string literals as the different types that are expected. number | string menas that one of these values can be either string or number.
 
 const monthlyIncomes: Incomes = {
     salary: 500,
     bonus: 100,
-    sidehustle: 250
+    sidehustle: 250,
 };
 
 for(const key in monthlyIncomes){
