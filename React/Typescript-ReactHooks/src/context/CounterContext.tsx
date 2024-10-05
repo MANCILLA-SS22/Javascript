@@ -1,4 +1,6 @@
-import { createContext, useReducer, ChangeEvent, ReactElement, useCallback, useContext } from "react"
+import { createContext, useReducer, ChangeEvent, ReactElement, useCallback } from "react";
+
+const enum REDUCER_ACTION_TYPE { INCREMENT, DECREMENT, NEW_INPUT };
 
 type StateType = {
     count: number;
@@ -10,36 +12,21 @@ type ReducerAction = {
     payload?: string,
 }
 
-type UseCounterContextType = ReturnType<typeof useCounterContext>;
-
 type ChildrenType = {
     children?: ReactElement | ReactElement[] | undefined
 };
 
-type UseCounterHookType = {
-    count: number,
-    increment: () => void,
-    decrement: () => void,
-};
-
-type UseCounterTextHookType = {
-    text: string,
-    handleTextInput: (e: ChangeEvent<HTMLInputElement>) => void,
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 const initState: StateType = { count: 0, text: '' };
-const enum REDUCER_ACTION_TYPE { INCREMENT, DECREMENT, NEW_INPUT, };
 
+type UseCounterContextType = ReturnType<typeof useCounterContext>;
 const initContextState: UseCounterContextType = {
     state: initState,
-    increment: () => { },
-    decrement: () => { },
+    increment: (): void => { },
+    decrement: (): void => { },
     handleTextInput: (e: ChangeEvent<HTMLInputElement>) => { },
 };
 
-const CounterContext = createContext<UseCounterContextType>(initContextState);
+const CounterContext = createContext<UseCounterContextType>(initContextState); //Step 1 to use context
 
 function reducer(state: StateType, action: ReducerAction): StateType {
     switch (action.type) {
@@ -60,11 +47,11 @@ function reducer(state: StateType, action: ReducerAction): StateType {
 function useCounterContext(initState: StateType) {
     const [state, dispatch] = useReducer(reducer, initState)
 
-    const increment = useCallback(function(){
+    const increment = useCallback(function () {
         dispatch({ type: REDUCER_ACTION_TYPE.INCREMENT });
     }, []);
 
-    const decrement = useCallback(function(){
+    const decrement = useCallback(function () {
         dispatch({ type: REDUCER_ACTION_TYPE.DECREMENT });
     }, []);
 
@@ -78,7 +65,7 @@ function useCounterContext(initState: StateType) {
     return { state, increment, decrement, handleTextInput };
 }
 
-function CounterProvider({ children }: ChildrenType): ReactElement {
+function CounterProvider({ children }: ChildrenType): ReactElement { ////Step 2 to use context
     return (
         <CounterContext.Provider value={useCounterContext(initState)}>
             {children}
@@ -86,14 +73,4 @@ function CounterProvider({ children }: ChildrenType): ReactElement {
     );
 };
 
-function useCounter(): UseCounterHookType {
-    const { state: { count }, increment, decrement } = useContext(CounterContext);
-    return { count, increment, decrement };
-};
-
-function useCounterText(): UseCounterTextHookType {
-    const { state: { text }, handleTextInput } = useContext(CounterContext);
-    return { text, handleTextInput };
-};
-
-export { CounterProvider, useCounter, useCounterText }
+export { CounterContext, CounterProvider };
