@@ -1,0 +1,35 @@
+{
+  "name": "react-native-template-redux-typescript",
+  "version": "1.0.1",
+  "description": "Clean and minimalist React Native template for a quick start with Redux and TypeScript.",
+  "scripts": {
+    "test": "exit 0",
+    "buildjs": "babel --extensions .ts,.tsx template -d template-js --copy-files"
+  },
+  "files": [
+    "template",
+    "template.config.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rahsheen/react-native-template-redux-typescript.git"
+  },
+  "keywords": [
+    "react-native",
+    "typescript",
+    "jest",
+    "template",
+    "boilerplate"
+  ],
+  "author": "Rahsheen Porter <info@rah.codes>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rahsheen/react-native-template-redux-typescript/issues"
+  },
+  "homepage": "https://github.com/rahsheen/react-native-template-redux-typescript#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.19.3",
+    "@babel/core": "^7.19.6",
+    "@babel/preset-typescript": "^7.18.6"
+  }
+}

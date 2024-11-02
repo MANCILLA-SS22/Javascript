@@ -558,7 +558,7 @@ class ListItem implements Item {
 //This approach keeps the internal state of the class hidden and allows you to control how the values are accessed or modified, which is an important principle in object - oriented programming(encapsulation).
 //You could also use different names for the fields and getters, but using an underscore is a common way to maintain consistency and readability. */
 
-/* //Another way of declare 
+/* //Exercise #5: Another way of declare 
 interface Item {
     id: string,
     item: string,
@@ -600,6 +600,36 @@ class ListItem implements Item {
         this._checked = checked;
     };
 }; */
+
+/* //Exercise #6: Fields with inheritance 
+class Vehicle {
+    constructor(public color: string) { }
+
+    protected honk(): void {
+        console.log('beep');
+    }
+}
+
+const vehicle = new Vehicle('orange');
+console.log(vehicle.color);
+
+class Car extends Vehicle {
+    constructor(public wheels: number, color: string) {
+        super(color);
+    }
+
+    private drive(): void {
+        console.log('vroom');
+    }
+
+    startDrivingProcess(): void {
+        this.drive();
+        this.honk();
+    }
+}
+
+const car = new Car(4, 'red');
+car.startDrivingProcess(); */
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Index Signatures & keyof Assertions %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
