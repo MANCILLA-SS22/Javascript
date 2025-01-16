@@ -1129,12 +1129,28 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$        
 
                                                                                                                    Typescript   
+npm create vite@latest
+npm install -g npm@10.9.0
+npm i nodemon concurrently
+npm i @types/node
+
+tsc --init
+npx tsx src/index.ts
+ts-node src/index.ts
+
+"start:build": "tsc -w",
+"start:run": "nodemon build/index.js",
+"start": "concurrently npm:start:*",
+"start:db": "json-server -p 3000 -w db.json",
+"dev": "vite",
+"build": "tsc && vite build",
+"preview": "vite preview"
 
 https://stackoverflow.com/questions/37233735/interfaces-vs-types-in-typescript
 https://blog.logrocket.com/types-vs-interfaces-typescript/
 
 - interface: 
-  Remember that In an interface, you cannot use a traditional function definition with the function keyword or include a function body ({ ... }). You can only use arrow functions.
+  Remember that In an interface or type, you cannot use a traditional function definition with the function keyword or include a function body ({ ... }). You can only use arrow functions.
 
 - type: 
 
@@ -1149,10 +1165,11 @@ https://blog.logrocket.com/types-vs-interfaces-typescript/
    ~ Implementation of Methods: Requires the class to provide concrete implementations for all methods declared in the interface.
    ~ Code Reusability: Promotes code reusability and abstraction through interfaces.
    ~ Abstract Classes: Cannot extend abstract classes but can implement abstract methods.
-   
-- extends: 
 
 - declare:
+
+   
+- extends
 
 - as: 
 
@@ -1233,6 +1250,8 @@ https://blog.logrocket.com/types-vs-interfaces-typescript/
 - Index Signatures & keyof Assertions
 
 - Generics
+
+- Generic Constraints
 
 - Utility Types
   > Partial 

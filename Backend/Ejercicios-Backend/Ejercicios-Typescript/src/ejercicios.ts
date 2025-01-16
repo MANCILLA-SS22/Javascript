@@ -280,11 +280,12 @@ console.log(sumAll(2,3));
 console.log(sumAll(undefined, 3)); */
 
 /* //Using rest parameters
-function total(a: number, ...nums: number[]): number { //In TS, the type annotation on these parameters is implicitly any[] instead of any, and any type annotation given must be of the form Array<T> or T[], or a tuple type
+//In TS, the type annotation on these parameters is implicitly any[] instead of any, and any type annotation given must be of the form Array<T> or T[], or a tuple type
+function total(a: number, ...nums: number[]): number {
     return a + nums.reduce((prev, curr) => prev+curr)
 };
 
-logMsg(total(10,2,3));
+// logMsg(total(10,2,3));
 
 function infinite(){
     let i: number = 1;
@@ -828,7 +829,7 @@ function isTrue<T>(arg: T): BoolCheck<T> {
     }
 }; */
 
-/* //Exercise #4: extends
+/* //Exercise #4: Using extends
 interface HasId {
     id: number
 }
@@ -840,64 +841,92 @@ function processUser<T extends HasId>(user: T): T {
 console.log(processUser({ id: 1, name: "german" }));
 // console.log(processUser({ name: "german" })); */
 
-/* //Exercise #5:
+/* //Exercise #5: Using extends keyof
+interface HasId {
+    id: number;
+}
+
+function processUser<T extends HasId>(user: T): number { //keyof HasId === "id"
+    return user.id; // Access the `id` property of the `HasId` object
+}
+
+// Example usage
+console.log(processUser({ id: 1 })); // Output: 1 */
+
+/* //Exercise #6: Analyzing an error with "Using extends keyof"
 interface HasId {
     id: number
+}
+
+function processUser<T extends keyof HasId>(user: T): number {
+    return user;
 };
 
-interface Geo {
-    lat: string;
-    lng: string;
+console.log(processUser(1));
+
+// What Does keyof HasId Mean? 
+// 1. keyof HasId evaluates to a union type of the keys of the HasId interface. In this case: keyof HasId === "id". So, the generic type T is constrained to only "id", not number.
+// 2. Why Does processUser(1) Fail? R= In the call processUser(1), the argument 1 is a number. However, the constraint T extends keyof HasId means that the argument must be of type "id", not number.
+// 3. What Do You Want to Achieve? R= Based on your code, it seems like you want processUser to accept a HasId object(or something closely related) and return its id property.
+//The right code is shown in the Excercise #5  */
+
+/* //Exercise #7: Using extends keyof
+interface UserProps {
+    name?: string;
+    age?: number;
 }
 
-interface Address {
-    street: string;
-    suite: string;
-    city: string;
-    zipcode: string;
-    geo: Geo;
+class User {
+    constructor(private data: UserProps) { }
+
+    get<K extends keyof UserProps>(propName: K): number | string {
+        return this.data[propName]!; //! (non-null assertion operator) tells TS to assume that the value at propName is not undefined or null. This is necessary because the properties in UserProps are optional (?).
+    }
+
+    set(update: UserProps): void {
+        Object.assign(this.data, update);
+    }
 }
 
-interface Company{
-    name: string;
-    catchPhrase: string;
-    bs: string;
-}
+export default User;
 
-interface User {
-    id: number;
-    name: string;
-    username: string;
-    email: string;
-    address: Address;
-    phone: string;
-    website: string
-    company: Company
-}
+//The "extends keyof" constraint in TypeScript is used to ensure type safety when working with object keys and their corresponding values.
+//The primary purpose of using "extends keyof" is to restrict the type of a generic parameter (K) to only valid keys of a given object type(UserProps).This guarantees that any operations involving the keys of an
+//object are valid and won't result in runtime errors.
 
-// T extends HasId --> The generic T is constrained to types that have at least an id property (from the HasId interface).
-// K extends keyof T --> The generic K represents a key of the type T. This means K can be any string literal type that corresponds to a property of T, such as "id" or also "name", "username", "email", etc.
-// T[K] --> This is TS's way of looking up the type of the property K in the object T. So if K = "id", then T["id"] will refer to the type of id, which in this case is number.
-//     Put another way, it T[K] represents the type of the property K for the object T. For example, if T is an object with { id: number; name: string; }, and K = "id", then T[K] is number.
-//     T[K] refers to a single value of the property K. But you are working with an array of objects (users: T[]), and you want to extract that property from every object, resulting in an array of values.
-// T[K][] --> The reason you use T[K][] (an array of T[K]) instead of just T[K] in the function's return type is because of how the map function works in TypeScript and JavaScript.
-//     Since the function works on an array of users (T[]), it extracts the K property from each user and collects all of those property values into an array.
-//     Therefore, if T[K] is number(for id), the result is an array of numbers: number[].
-//     Hence, the return type of the function is T[K][], which means "an array of values of type T[K]".
-//     If you just used T[K] instead of T[K][], the return type would indicate that the function returns a single value of type T[K], which is incorrect because you're actually returning an array of values.
-//     T[K] represents a single property value (like number or string), not an array of them.
-//     For example, this would imply that getUsersProperty(users, "id") should return just one id(like 1), instead of an array of IDs([1, 2, 3]), which is not what you want.
-//     You need to use T[K][] because:
-//      > The function operates on an array(T[]) and returns an array.
-//      > The map function produces a new array where each element is of type T[K], so the entire result is of type T[K][] (an array of the property values).
-//     Without the[], you'd be implying that the function only returns a single value of type T[K], which is incorrect for this situation.
-// users.map(user => user[key]); --> map is a higher-order function that operates on arrays. It iterates over an array and applies a function to each element, returning a new array of results.
-//     In this case, you are calling users.map(user => user[key]). For each user in users, it extracts the value of the property key (which has type T[K]), and then it returns an array of those values.
-//     map always returns an array, so your function should return an array as well.
-function getUsersProperty<T extends HasId, K extends keyof T>(users: T[], key: K): T[K][] {
-    return users.map(user => user[key]);
-};
+//What Happens Without extends keyof? If you don't constrain the generic parameter K with extends keyof, the propName argument could be any type, not necessarily a key from the target object type (UserProps). This could lead to:
+// 1. Accessing Non-Existent Properties: If propName isn't constrained to the keys of the data object, you could accidentally pass an invalid key.
+// 2. Loss of Type Inference: Without extends keyof, TypeScript can't infer the type of the value at the specified key, so the return type would have to be overly generic (e.g., any or unknown), losing the benefits of strong typing.
 
+//How extends keyof Solves this? By using K extends keyof T, you constrain the generic parameter K to only allow values that are keys of T. This ensures:
+// - Type Safety: The compiler verifies at compile time that the key being accessed actually exists in the object.
+// - Precise Return Type: The return type UserProps[K] dynamically adjusts based on the specific key(K) passed.This allows the method to accurately reflect the type of the value for a given property.
+// - Intelligent Code Completion: Using extends keyof enables editor features like IntelliSense, showing only valid keys when calling the method.
+
+// Why Is This Important in Your Example? 
+// - The propName: K parameter is constrained by K extends keyof UserProps, meaning it can only be "name" or "age".
+// - The return type UserProps[K] reflects the type of the property being accessed(string | number for name and age, respectively).
+// - This guarantees that: only valid properties of data can be accessed, and that TS enforces compile-time checks to prevent invalid usage.
+
+
+//What Happens Without keyof?
+// - 1. Lack of Type Safety
+//    a) Issue: Without keyof, there's no guarantee that the propName argument corresponds to a valid key of data.
+//    b) Consequence: You can pass any string, even if it doesn't exist as a key on data, and TypeScript won't complain.
+// - 2. Overly Broad Return Type
+//      Without keyof, TypeScript cannot infer the return type based on the provided key.The return type becomes overly generic, such as any or unknown.
+// - 3. No Compile-Time Validation
+//      Without keyof, TypeScript cannot catch invalid property access at compile time.
+// Why Use keyof? Using keyof ensures that K is constrained to the valid keys of the object type.This provides:
+// - 1. Type Safety:
+//     The method only accepts keys that actually exist in data.
+// - 2. Accurate Return Type:
+//     The return type is derived from the type of the property being accessed.
+//     For example, user.get("name") will return a string, while user.get("age") will return a number.
+// - 3. Compile - Time Validation:
+//     Invalid keys are caught at compile time, preventing potential runtime errors. */
+
+/* //Exercise #8:
 const usersArray: User[] = [
     {
         "id": 1,
@@ -947,10 +976,69 @@ const usersArray: User[] = [
     },
 ];
 
-console.log(getUsersProperty(usersArray, "email"));
-console.log(getUsersProperty(usersArray, "username")); */
+interface HasId {
+    id: number
+};
 
-/* //Exercise #6:
+interface Geo {
+    lat: string;
+    lng: string;
+}
+
+interface Address {
+    street: string;
+    suite: string;
+    city: string;
+    zipcode: string;
+    geo: Geo;
+}
+
+interface Company{
+    name: string;
+    catchPhrase: string;
+    bs: string;
+}
+
+interface User {
+    id: number;
+    name: string;
+    username: string;
+    email: string;
+    address: Address;
+    phone: string;
+    website: string
+    company: Company
+} 
+
+// extends keyof --> The extends keyof constraint in TypeScript is used to ensure type safety when working with object keys and their corresponding values
+// T extends HasId --> The generic T is constrained to types that have at least an id property (from the HasId interface).
+// K extends keyof T --> The generic K represents a key of the type T. This means K can be any string literal type that corresponds to a property of T, such as "id" or also "name", "username", "email", etc.
+// T[K] --> This is TS's way of looking up the type of the property K in the object T. So if K = "id", then T["id"] will refer to the type of id, which in this case is number.
+//     Put another way, it T[K] represents the type of the property K for the object T. For example, if T is an object with { id: number; name: string; }, and K = "id", then T[K] is number.
+//     T[K] refers to a single value of the property K. But you are working with an array of objects (users: T[]), and you want to extract that property from every object, resulting in an array of values.
+// T[K][] --> The reason you use T[K][] (an array of T[K]) instead of just T[K] in the function's return type is because of how the map function works in TypeScript and JavaScript.
+//     Since the function works on an array of users (T[]), it extracts the K property from each user and collects all of those property values into an array.
+//     Therefore, if T[K] is number(for id), the result is an array of numbers: number[].
+//     Hence, the return type of the function is T[K][], which means "an array of values of type T[K]".
+//     If you just used T[K] instead of T[K][], the return type would indicate that the function returns a single value of type T[K], which is incorrect because you're actually returning an array of values.
+//     T[K] represents a single property value (like number or string), not an array of them.
+//     For example, this would imply that getUsersProperty(users, "id") should return just one id(like 1), instead of an array of IDs([1, 2, 3]), which is not what you want.
+//     You need to use T[K][] because:
+//      > The function operates on an array(T[]) and returns an array.
+//      > The map function produces a new array where each element is of type T[K], so the entire result is of type T[K][] (an array of the property values).
+//     Without the[], you'd be implying that the function only returns a single value of type T[K], which is incorrect for this situation.
+// users.map(user => user[key]); --> map is a higher-order function that operates on arrays. It iterates over an array and applies a function to each element, returning a new array of results.
+//     In this case, you are calling users.map(user => user[key]). For each user in users, it extracts the value of the property key (which has type T[K]), and then it returns an array of those values.
+//     map always returns an array, so your function should return an array as well.
+
+function getUsersProperty<T extends HasId, K extends keyof T>(users: T[], key: K): T[K][] {
+    return users.map(user => user[key]);
+};
+
+console.log(getUsersProperty(usersArray, "email"));
+console.log(getUsersProperty(usersArray, "username"));*/
+
+/* //Exercise #9:
 class StateObject<T> {
     private data: T
 
@@ -980,6 +1068,53 @@ storedNumber.state = 66;
 const myState = new StateObject<(string | number | boolean)[]>([]); //Before we pass anything in yet we'll use angle brackets and we're going to say this is going to accept an array of "string", "number" or "boolean".
 myState.state = ['Dave', 42, true];
 console.log(myState.state); */
+
+/* //Exercise #10: 
+class ArrayOfAnything<T> {
+    constructor(public collection: T[]) { }
+
+    get(index: number): T {
+        return this.collection[index];
+    }
+};
+
+new ArrayOfAnything<string>(['a', 'b', 'c']);
+
+function printAnything<T>(arr: T[]): void {
+    for (let i = 0; i < arr.length; i++) {
+        console.log(arr[i]);
+    }
+}
+
+printAnything<string>(['a', 'b', 'c']); */
+
+/* //Exercise #11: Generics constrains
+
+class Car{
+    print(){
+        console.log('I am a car');
+    }
+}
+
+class House {
+    print() {
+        console.log('I am a house');
+    }
+}
+
+interface Printable{
+    print(): void;
+}
+
+function printHousesOrCars<T extends Printable>(arr: T[]): void{
+    for (let i = 0; i < arr.length; i++) {
+        arr[i].print();
+    }
+}
+
+printHousesOrCars<House>([new House(), new House ()]);
+printHousesOrCars<Car>([new Car(), new Car()]); */
+
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Utility Types %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

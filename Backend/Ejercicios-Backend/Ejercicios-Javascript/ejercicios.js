@@ -1,4 +1,4 @@
-// node src/Frontend/frontend.js
+// node Backend/Ejercicios-Backend/Ejercicios-Javascript/ejercicios.js
 
 //         $$$$$$$$$$$$$$$ Funciones $$$$$$$$$$$$$$$
 
@@ -562,6 +562,7 @@ unPaciente.apellidos = "res";
 unPaciente.nombre = "SS22";
 unPaciente.DNI = 44555666;
 unPaciente["edad"] = 33;
+unPaciente["ciudad"] = 'Tijuana';
 console.log("Los datos actualizados son: ", unPaciente); */
 
 /* //Ejemplo 3: Definicion de un objeto sin datos definidos para sus propiedades.
@@ -8529,17 +8530,3 @@ console.log("lastPost2", lastPost2); */
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// node src/Ejercicios/ejercicios.js
