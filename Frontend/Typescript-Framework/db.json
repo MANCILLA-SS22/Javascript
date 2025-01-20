@@ -2,13 +2,13 @@
   "users": [
     {
       "id": "2c5d",
-      "name": "Myname",
-      "age": 20
+      "name": "Daniel",
+      "age": 27
     },
     {
       "id": "e492",
-      "name": "Myname",
-      "age": 20
+      "name": "Edna",
+      "age": 24
     }
   ]
 }

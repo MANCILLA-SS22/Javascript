@@ -1,4 +1,4 @@
-import axios, { AxiosPromise } from "axios";
+import axios, { AxiosPromise, AxiosResponse } from "axios";
 
 interface HasId{
     id?: number | string;
@@ -8,18 +8,23 @@ class Sync <T extends HasId>{ //(1)
 
     constructor(public rootUrl: string){}
 
-    fetch(id: number): AxiosPromise {
+    fetch(id: number | string): AxiosPromise {
         return axios.get(`${this.rootUrl}/${id}`);
     }
 
     save(data: T): AxiosPromise {
         const {id} = data;
-        if (id) return axios.put(`${this.rootUrl}/${id}`, data);
-        return axios.post(this.rootUrl, data);
+        if (id) {
+            const res = axios.put(`${this.rootUrl}/${id}`, data);
+            console.log('res', res);
+        }
+        else {
+            return axios.post(this.rootUrl, data);
+        }
     }
 }
 
-export default Sync;
+export {Sync};
 
 // What it means: The generic type T must extend (or conform to) the HasId interface, meaning it must have an id property of type number.
 // Why it's important: This ensures that any type used for T in the Sync class has an id property, which is necessary for the save method to work correctly.

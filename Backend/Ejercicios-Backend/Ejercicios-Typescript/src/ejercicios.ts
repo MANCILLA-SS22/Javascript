@@ -879,7 +879,8 @@ interface UserProps {
 class User {
     constructor(private data: UserProps) { }
 
-    get<K extends keyof UserProps>(propName: K): number | string {
+    // get<K extends keyof UserProps>(propName: K): string | number {
+    get<K extends keyof UserProps>(propName: K): UserProps[K] {
         return this.data[propName]!; //! (non-null assertion operator) tells TS to assume that the value at propName is not undefined or null. This is necessary because the properties in UserProps are optional (?).
     }
 

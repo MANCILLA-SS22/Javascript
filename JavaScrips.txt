@@ -237,8 +237,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         ~ In an event, this refers to the element that received the event.
         ~ Methods like call(), apply(), and bind() can refer this to any object.  
       
-     En resumen, this se utiliza para hacer referencia al objeto en el contexto actual, y su valor puede cambiar dependiendo del contexto en el que se invoca una función o método. Conocer cómo funciona this en diferentes contextos es 
-     esencial para escribir código efectivo en JavaScript.       https://www.freecodecamp.org/espanol/news/la-guia-completa-sobre-this-en-javascript/   https://www.programiz.com/javascript/this
+     En resumen, this se utiliza para hacer referencia al objeto en el contexto actual, y su valor puede cambiar dependiendo del contexto en el que se invoca una función o método. 
+         https://www.freecodecamp.org/espanol/news/la-guia-completa-sobre-this-en-javascript/   https://www.programiz.com/javascript/this
 
   > call ();  Permite que una función/método que pertenece a un objeto, ser asignada y llamada para un objeto diferente. Provee un nuevo valor de this a la función/método. Podemos escribir un método ona vez y heredarlo a otro objeto, 
     sin tener que reescribir el método en el nuevo objeto. No recive una lista de argumentos despues del this. 
@@ -251,6 +251,10 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
   > bind (); El método bind() crea una nueva función, que cuando es llamada, asigna a su operador this el valor entregado, con una secuencia de argumentos dados precediendo a cualquiera entregados cuando la función es llamada. El 
     valor de this es ignorado cuando la función es llamada con el operador new. 
+    Cuándo es necesario usar bind(this)?
+      ~ Cuando pasas métodos como callbacks: Si necesitas pasar un método como callback a otra función o componente (por ejemplo, en React o eventos DOM), es crucial que conserve el contexto.
+      ~ Cuando usas métodos fuera de su contexto original: Si desglosas un método para usarlo de forma independiente, sin que esté explícitamente llamado desde la instancia.
+    
     Allows us to manually set "this" for any function call. With the bind() method, an object can borrow a method from another object. Bind doesn't immediately call the function. Instead, it returns a new function where the "this" is bound. 
     So it's set to whatever value we pass into bind. Sometimes the bind() method has to be used to prevent losing this.
 
