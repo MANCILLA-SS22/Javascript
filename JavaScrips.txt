@@ -240,6 +240,17 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
      En resumen, this se utiliza para hacer referencia al objeto en el contexto actual, y su valor puede cambiar dependiendo del contexto en el que se invoca una función o método. 
          https://www.freecodecamp.org/espanol/news/la-guia-completa-sobre-this-en-javascript/   https://www.programiz.com/javascript/this
 
+- TypeError: this is undefined
+    The error "TypeError: this is undefined" occurs because of how the this keyword behaves in the callback function within the forEach method inside your fetch method. In JavaScript, the behavior of this depends on how a function is called, 
+    not where it is defined:
+      - Arrow functions inherit the this value from their enclosing lexical scope.
+      - Regular functions(function (value: UserProps)) create their own this, which defaults to undefined in strict mode(or the global object in non - strict mode).
+     The array methods callback are regular functions, so "this" inside them refers to undefined (in strict mode). It does not inherit the this from the enclosing fetch method.
+     The solutions are: 
+       1. Use an Arrow Function: Arrow functions inherit the this value from the surrounding lexical scope, which in this case is the fetch method.
+       2. Store 'this' in a Variable: Before the forEach loop, you can store the value of this in a variable, and then use the variable inside the callback.
+       3. Use .bind(this): You can explicitly bind the correct this to the callback function using .bind.
+
   > call ();  Permite que una función/método que pertenece a un objeto, ser asignada y llamada para un objeto diferente. Provee un nuevo valor de this a la función/método. Podemos escribir un método ona vez y heredarlo a otro objeto, 
     sin tener que reescribir el método en el nuevo objeto. No recive una lista de argumentos despues del this. 
     You can write a method that can be used on different objects. It takes arguments separately. It can be used to invoke (call) a method with an owner object as an argument (parameter). With call(), an object can use a method belonging to 
@@ -271,6 +282,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
      ~ Implementation of Methods: No direct implementation of methods.
      ~ Code Reusability: Promotes code reusability
      ~ Abstract Classes: Can extend abstract classes
+    When you use the extends keyword in TypeScript, you are inheriting all members of the parent class, which includes properties, methods, and behavior. However, it does not implicitly inherit or invoke the constructor of the parent class. 
+    Instead, you must explicitly call the parent class's constructor in the subclass if it needs initialization.
 
   > readonly: It is used to prevent compile-time reassignment, however, it makes no guarantee that your code is “safe” and cannot be reassigned elsewhere.
     se utiliza para declarar propiedades de solo lectura en una clase o en un tipo de objeto. Esto significa que una vez que se inicializa una propiedad con la palabra clave "readonly", su valor no puede ser modificado posteriormente fuera 
@@ -301,11 +314,11 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       ~ Rendimiento mejorado: al utilizar métodos estáticos en lugar de métodos de instancia, puedes reducir el uso de memoria y mejorar el rendimiento de tu aplicación.
     Sin embargo, es importante tener en cuenta que el uso excesivo de propiedades y métodos estáticos puede derivar en un código menos flexible y acoplado.
   
-  > interface: 
-
     The static keyword defines a static method or field for a class, or a static initialization block. Static properties cannot be directly accessed on instances of the class. Instead, they're accessed on the class itself. 
     Static methods are often utility functions, such as functions to create or clone objects, whereas static properties are useful for caches, fixed-configuration, or any other data you don't need to be replicated across instances.
     Usually, static methods are used to implement functions that belong to the class as a whole, but not to any particular object of it. (You cannot call a static method on an object, only on an object class).
+
+  > interface: 
   
   > Metodo: Los métodos de los objetos también son técnicamente funciones, sólo que se limitan a poder ser ejecutados solo desde el mismo objeto. Se requiere un objeto y puede no retornar un valor.
         function Persona(nombre, edad, calle) {

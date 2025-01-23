@@ -1,21 +1,24 @@
-import { User } from "./models/User";
+// import { User } from "./models/User";
+import { UserForm } from "./models/views/UserForm";
 
-// const user = new User({ name: 'new record', age: 0 });
-const user = new User({ id: '2c5d', name: 'Daniel', age: 27 });
-// const res = user.get("name");
-// console.log(res);
+const userForm = new UserForm(document.querySelector("#root"));
+
+// const collection = User.buildUserCollection();
+
+// collection.on("change", function(){
+//     console.log('collection', collection);
+// });
+
+// collection.fetch();
+
+// import { User } from "./models/User";
 
 
+// const user = User.buildUser({ id: 1 });//Using "static" in the User.ts file
+// // const user = new User({ }); //Using "constructor and the "super" class in the User.ts file
 
+// user.on("change", function () {
+//     console.log("User", user);
+// });
 
-// setTimeout(function(){
-//     console.log(user);
-// }, 4000);
-
-user.on("save", function () {
-    console.log("User", user);
-});
-
-user.save();
-
-// user.set({name: 'New name'});
+// user.fetch();

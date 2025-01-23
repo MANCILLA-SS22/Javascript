@@ -16,7 +16,6 @@ class Eventing {
     }
 
     trigger(eventName: string): void{
-        console.log("eventName", eventName);
         const handlers = this.events[eventName];
         if (!handlers || handlers.length === 0) return;
 

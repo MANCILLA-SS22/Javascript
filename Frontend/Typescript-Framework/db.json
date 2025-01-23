@@ -1,14 +1,14 @@
 {
   "users": [
     {
-      "id": "2c5d",
+      "id": "1",
       "name": "Daniel",
       "age": 27
     },
     {
-      "id": "e492",
-      "name": "Edna",
-      "age": 24
+      "name": "new record",
+      "age": 0,
+      "id": "2"
     }
   ]
 }

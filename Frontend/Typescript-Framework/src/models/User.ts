@@ -1,7 +1,8 @@
-import { AxiosResponse } from "axios";
+import { ApiSync } from "./ApiSync";
 import { Attributes } from "./Attribute";
-import {Eventing} from "./Eventing";
-import {Sync} from "./Sync";
+import { Collection } from "./Collection";
+import { Eventing } from "./Eventing";
+import { Model } from "./Model";
 
 interface UserProps {
     id?: number | string;
@@ -9,57 +10,31 @@ interface UserProps {
     age?: number;
 }
 
-class User {
-    public events: Eventing = new Eventing(); //(1)
-    public sync: Sync<UserProps> = new Sync<UserProps>('http://localhost:3000/users');
-    public attributes: Attributes<UserProps>;
+const rootUrl = 'http://localhost:3000/users';
 
-    constructor(attrs: UserProps){ //attrs may be like {id: "ss22"}, {name: german} or {age: 26}
-        this.attributes = new Attributes<UserProps>(attrs);
+class User extends Model<UserProps>{
+    //Method 1: Using "constructor and the "super" class
+    // constructor(attrs: UserProps) {
+    //     super(new Attributes<UserProps>(attrs), new Eventing(), new ApiSync<UserProps>(rootUrl));
+    // }
+
+    // static buildUserCollection(): Collection<User, UserProps> {
+    //     return new Collection<User, UserProps>(rootUrl, (attrs: UserProps) => new User(attrs));
+    // }
+
+    //Method 2: Using "static"
+    static buildUser(attrs: UserProps): User { //attrs may be like {id: "ss22"}, {name: german} or {age: 26}
+        return new User(new Attributes<UserProps>(attrs), new Eventing(), new ApiSync<UserProps>(rootUrl));
     }
 
-    get on(){
-        return this.events.on;
-    }
-
-    get trigger(){
-        return this.events.trigger;
-    }
-
-    get get(){
-        return this.attributes.get;
-    }
-
-    set(update: UserProps): void{
-        this.attributes.set(update);
-        this.events.trigger("change");
-    }
-
-    async fetch(): Promise<void>{
-        try {
-            const id: string | number = this.get('id');
-            if(typeof id !== 'number' && typeof id !== 'string') throw new Error('Cannot fetch without an id');
-            const response: AxiosResponse = await this.sync.fetch(id);
-            this.set(response.data);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    async save(): Promise<void>{
-        try {
-            const response: AxiosResponse = await this.sync.save(this.attributes.getAll());
-            this.trigger("save")
-            console.log('response', response);
-        } catch (error) {
-            console.log('error');
-        }
+    static buildUserCollection(): Collection<User, UserProps> {
+        return new Collection<User, UserProps>(rootUrl, (attrs: UserProps) => User.buildUser(attrs));
     }
 }
 
-export { User, UserProps}
+export { User, UserProps }
 
-// (1)
+// public events: Eventing = new Eventing(); //(1)
 // 1. "public events" declares a property named events that belongs to the User class. The public keyword means:
 //      - The property is accessible from outside the class.
 //      - You can access it directly using an instance of the class, like user.events.
