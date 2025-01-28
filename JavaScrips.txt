@@ -132,36 +132,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     minificar nuestro código, la notación del punto no es válida, debemos usar la notación de corchetes. La notación con corchetes, a diferencia de la notación con punto, puede usarse con variables. Si usas una variable con notación con 
     corchetes, la variable debe hacer referencia a una string.
     Dot Notation only allows static keys while Bracket Notation accepts dynamic keys. Static key here means that the key is typed directly, while Dynamic key here means that the key is evaluated from an expression.
-    
-(1) const obj = {                                  (2) const obj = {                                    (3) const obj = {
-    name: "deeecode",                                  name: "deeecode",                                    name: "deeecode",
-    age: 80,                                           age: 80,                                             age: 80,
-    language: "javascript",                            language: "javascript",                              language: "javascript",
-    }                                                  }                                                    }
-    
-    const myKey = "language";                          const myKey = "language";                            const myKey = "language";
-    const target = obj.myKey;                          const target = obj[myKey];                           const target = obj["myKey"];
-    console.log(target);                               console.log(target);                                 console.log(target);
-    //undefined                                        // javascript                                        // undefined
-    
-(4) const obj = {                                  (5) const obj = {                                        
-    name: "deeecode",                                  name: "deeecode",                                    
-    age: 80,                                           age: 80,                                             
-    language: "javascript",                            language: "javascript",                              
-    }                                                  }                   
-                                     
-    const target = obj.name;                           const target = obj["name"];                            
-    console.log(target);                               console.log(target);                             
-    //deecode                                          // javascript                                       
-    
-    
-    
-    1. Here, I assigned the value "language" to a myKey variable. What I would expect here is that when I use the dot notation, like obj.myKey, "myKey", should be replaced with "language". So it would read as obj.language and that would 
-       return "javascript". But that's not what happens. Instead, the result is undefined. The reason for this is that Dot Notation only accepts static keys. So when you do obj.myKey, JavaScript looks for the property with the key myKey in 
-       obj. But that property does not exist, so we get undefined. The Bracket Notation, on the other hand, allows dynamic keys. Because this notation accepts expressions, you can use any expression that evaluates to a value.
-    2. The expression we passed to the square brackets is myKey which is a variable. This expression evaluates to "language" which is the value of the variable. Using this value, the square brackets can get the value of the property, which 
-       is "javascript".
-    3. This is because the string expression "myKey" evaluates to the value "myKey" which serves as the key for accessing the property. Since there's no myKey key on obj, the returned value is undefined.
 
   > Como crear un metodo en un objeto: En este caso se hace de la misma manera que cuando creamos una funcion global, con la diferencia de que en lugar de usar (=) usamos (:) solo cuando esta dentro del objeto
   

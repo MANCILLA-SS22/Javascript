@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import { Eventing } from "./Eventing";
 
 
-// 1. Use .bind(this)
+/* // 1. Use .bind(this)
 class Collection<T, K> {
     models: T[] = [];
     events: Eventing = new Eventing();
@@ -34,7 +34,7 @@ class Collection<T, K> {
     }
 }
 
-export { Collection }
+export { Collection } */
 
 /* // 2. Use an Arrow Function
 class Collection<T, K>{
@@ -69,7 +69,7 @@ class Collection<T, K>{
 
 export {Collection} */
 
-/* // 3. Store this in a Variable
+// 3. Store this in a Variable
 class Collection<T, K>{
     models: T[] = [];
     events: Eventing = new Eventing();
@@ -89,9 +89,10 @@ class Collection<T, K>{
         try {
             const response: AxiosResponse = await axios.get(this.rootUrl);
             const self = this;
+            console.log('self', self);
 
             response.data.forEach(function (value: K) { //(1)
-                self.models.push(this.deserialize(value));
+                self.models.push(self.deserialize(value));
             });
 
             this.trigger('change');
@@ -102,7 +103,7 @@ class Collection<T, K>{
     }
 } 
 
-export { Collection }*/
+export { Collection }
 
 //(1)
 //The error "TypeError: this is undefined" occurs because of how the this keyword behaves in the callback function within the forEach method inside your fetch method.

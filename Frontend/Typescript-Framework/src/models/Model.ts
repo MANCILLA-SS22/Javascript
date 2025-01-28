@@ -23,23 +23,23 @@ interface HasId {
 class Model<T extends HasId> {
     constructor(private attributes: ModelAttributes<T>, private events: Events, private sync: Sync<T>) {}
 
-    //Method 1
-    on = this.events.on;
-    trigger = this.events.trigger;
-    get = this.attributes.get;
+    // //Method 1
+    // on = this.events.on;
+    // trigger = this.events.trigger;
+    // get = this.attributes.get;
 
-    //Method 2
-    // get on() {
-    //     return this.events.on;
-    // }
+    // Method 2
+    get on() {
+        return this.events.on;
+    }
 
-    // get trigger() {
-    //     return this.events.trigger;
-    // }
+    get trigger() {
+        return this.events.trigger;
+    }
 
-    // get get() {
-    //     return this.attributes.get;
-    // }
+    get get() {
+        return this.attributes.get;
+    }
 
     set(update: T): void {
         this.attributes.set(update);
@@ -48,7 +48,7 @@ class Model<T extends HasId> {
 
     async fetch(): Promise<void> {
         try {
-            const id: string | number = this.get('id');
+            const id: T["id"] = this.get('id');
             if (typeof id !== 'number' && typeof id !== 'string') throw new Error('Cannot fetch without an id');
             const response: AxiosResponse = await this.sync.fetch(id);
             this.set(response.data);
@@ -68,4 +68,4 @@ class Model<T extends HasId> {
     }
 }
 
-export { Model }
+export { Model, HasId }

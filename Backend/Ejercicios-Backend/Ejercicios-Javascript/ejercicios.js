@@ -5875,7 +5875,7 @@ const [firstName, lastName] = 'Jonas Schmedtmann'.split(' ');
 const newName = ['Mr.', firstName, lastName.toUpperCase()].join(' ');
 console.log(newName);
 
-const capitalizeName = function (name) {
+function capitalizeName (name) {
     const names = name.split(' ');
     const namesUpper = [];
 

@@ -13,7 +13,7 @@ class ApiSync <T extends HasId>{ //(1)
     }
 
     save(data: T): AxiosPromise {
-        const id: number | string = data.id;
+        const id: number | string = data.id!;
         if (id) {
             return axios.put(`${this.rootUrl}/${id}`, data);
         }
