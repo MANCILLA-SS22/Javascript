@@ -26,7 +26,6 @@ abstract class View<T extends Model<K>, K extends HasId> { //(1)
 
     eventsMap(): { [key: string]: () => void } { //We remove the "abstract" keyword from eventsMap() becasue we're saying that eventsMap is no longer required to be implemented in a child class (UserShow).
         return {}; //The type definition is saying 'if we ever look up a key in this object, we should get back a function that doesnt return anything'. That type definition doesn't say that there has to be a property in there, only that if there is a property, we should get X.
-
     }
     
     bindModel = (): void => {

@@ -13,23 +13,24 @@ interface UserProps {
 const rootUrl = 'http://localhost:3000/users';
 
 class User extends Model<UserProps>{
-    //Method 1: Using "constructor and the "super" class
-    // constructor(attrs: UserProps) {
-    //     super(new Attributes<UserProps>(attrs), new Eventing(), new ApiSync<UserProps>(rootUrl));
-    // }
+    
+    // Method 1: Using "constructor and the "super" class
+    constructor(attrs: UserProps) {
+        super(new Attributes<UserProps>(attrs), new Eventing(), new ApiSync<UserProps>(rootUrl));
+    }
 
-    // static buildUserCollection(): Collection<User, UserProps> {
-    //     return new Collection<User, UserProps>(rootUrl, (attrs: UserProps) => new User(attrs));
-    // }
+    static buildUserCollection(): Collection<User, UserProps> {
+        return new Collection<User, UserProps>(rootUrl, (attrs: UserProps) => new User(attrs));
+    }
 
-    //Method 2: Using "static"
+    /* //Method 2: Using "static"
     static buildUser(attrs: UserProps): User { //attrs may be like {id: "ss22"}, {name: german} or {age: 26}
         return new User(new Attributes<UserProps>(attrs), new Eventing(), new ApiSync<UserProps>(rootUrl));
     }
 
     static buildUserCollection(): Collection<User, UserProps> {
         return new Collection<User, UserProps>(rootUrl, (attrs: UserProps) => User.buildUser(attrs));
-    }
+    } */
 
     setRandomAge(): void{
         const age = Math.round(Math.random() * 100);

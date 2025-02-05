@@ -1,0 +1,26 @@
+{
+  "name": "typescript-express",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start:build": "tsc -w",
+    "start:run": "nodemon build/index.js",
+    "start": "concurrently npm:start:*"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@types/body-parser": "^1.19.5",
+    "@types/cookie-session": "^2.0.49",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.12.0",
+    "body-parser": "^1.20.3",
+    "concurrently": "^9.1.2",
+    "cookie-parser": "^1.4.7",
+    "cookie-session": "^2.1.0",
+    "express": "^4.21.2",
+    "nodemon": "^3.1.9"
+  }
+}

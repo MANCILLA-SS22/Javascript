@@ -1,8 +1,39 @@
 import axios, { AxiosResponse } from "axios";
 import { Eventing } from "./Eventing";
 
+// 1. Use an Arrow Function
+class Collection<T, K> {
+    models: T[] = [];
+    events: Eventing = new Eventing();
 
-/* // 1. Use .bind(this)
+    constructor(public rootUrl: string, public deserialize: (json: K) => T) { }
+
+    get on() {
+        return this.events.on;
+    };
+
+    get trigger() {
+        return this.events.trigger;
+    };
+
+    async fetch(): Promise<void> {
+        try {
+            const response: AxiosResponse = await axios.get(this.rootUrl);
+            response.data.forEach((value: K) => { //(1)
+                this.models.push(this.deserialize(value));
+            });
+
+            this.trigger('change');
+
+        } catch (error) {
+            console.log('error', error);
+        };
+    };
+};
+
+export { Collection }
+
+/* // 2. Use .bind(this)
 class Collection<T, K> {
     models: T[] = [];
     events: Eventing = new Eventing();
@@ -36,40 +67,7 @@ class Collection<T, K> {
 
 export { Collection } */
 
-/* // 2. Use an Arrow Function
-class Collection<T, K>{
-    models: T[] = [];
-    events: Eventing = new Eventing();
-
-    constructor(public rootUrl: string, public deserialize: (json: K) => T){}
-
-    get on(){
-        return this.events.on;
-    }
-
-    get trigger() {
-        return this.events.trigger;
-    }
-
-    async fetch(): Promise<void>{
-        try {
-            const response: AxiosResponse = await axios.get(this.rootUrl);
-            
-            response.data.forEach((value: K) => { //(1)
-                this.models.push(this.deserialize(value));
-            });
-
-            this.trigger('change');
-
-        } catch (error) {
-            console.log('error', error);
-        }
-    }
-}
-
-export {Collection} */
-
-// 3. Store this in a Variable
+/* // 3. Store this in a Variable
 class Collection<T, K>{
     models: T[] = [];
     events: Eventing = new Eventing();
@@ -103,7 +101,7 @@ class Collection<T, K>{
     }
 } 
 
-export { Collection }
+export { Collection } */
 
 //(1)
 //The error "TypeError: this is undefined" occurs because of how the this keyword behaves in the callback function within the forEach method inside your fetch method.

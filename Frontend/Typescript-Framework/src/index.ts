@@ -2,22 +2,23 @@ import { UserList } from './views/UserList';
 import { Collection } from './models/Collection';
 import { UserProps, User } from './models/User';
 
-const users = new Collection('http://localhost:3000/users', (json: UserProps) => {
-        return User.buildUser(json);
-    }
-);
+
+function func(json: UserProps) {
+    // const user = User.buildUser(json);
+    const user = new User(json); //Using "constructor and the "super" class in the User.ts file
+    console.log('user', user);
+    return user;
+}
+
+const users = new Collection('http://localhost:3000/users', func);
+console.log('users', users);
 
 users.on('change', () => {
     const root = document.getElementById('root');
-
-    if (root) {
-        new UserList(root, users).render();
-    }
+    if (root) new UserList(root, users).render();
 });
 
 users.fetch();
-
-
 
 // const user = User.buildUser({ name: "NAME", age: 20 });
 // const root = document.querySelector("#root");
@@ -42,7 +43,7 @@ users.fetch();
 
 
 // const user = User.buildUser({ id: 1 });//Using "static" in the User.ts file
-// // const user = new User({ }); //Using "constructor and the "super" class in the User.ts file
+// const user = new User({ }); //Using "constructor and the "super" class in the User.ts file
 
 // user.on("change", function () {
 //     console.log("User", user);

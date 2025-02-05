@@ -763,9 +763,9 @@ for(const key in monthlyIncomes){
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Generics %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 /* //Exercise #1
-// function echo<T>(arg: T): T {
-//     return arg;
-// };
+function echo<T>(arg: T): T {
+    return arg;
+};
 
 function isObj<T>(arg: T): boolean {
     return (typeof arg === 'object' && !Array.isArray(arg) && arg !== null);
@@ -1039,7 +1039,7 @@ function getUsersProperty<T extends HasId, K extends keyof T>(users: T[], key: K
 console.log(getUsersProperty(usersArray, "email"));
 console.log(getUsersProperty(usersArray, "username"));*/
 
-/* //Exercise #9:
+/* //Exercise #9: Generic Class
 class StateObject<T> {
     private data: T
 
@@ -1336,3 +1336,5 @@ async function fetchAndLogUsers(): Promise<void>{
 
 fetchAndLogUsers(); */
 
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Decorators %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
