@@ -1,4 +1,7 @@
-// Run this --> npx tsx Ejercicios-Typescript/src/ejercicios.ts
+// Run this --> npx tsx Theory/Ejercicios-Typescript/src/ejercicios.ts
+// Run this --> ts-node Theory/Ejercicios-Typescript/src/ejercicios.ts
+
+// import test from "node:test";
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Primitives %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1338,3 +1341,66 @@ fetchAndLogUsers(); */
 
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Decorators %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+/* //Exercise #1:
+class Boat{
+    color: string = 'red'; //This is a property
+
+    get formatColor(): string { //This is an assessor
+        return `This boats color is ${this.color}`;
+    };
+
+    @logError //This is a decorator
+    pilot(): void { //This is a method
+        throw new Error();
+    };
+};
+
+function logError(target: any, propertyKey: string, descriptor: PropertyDescriptor): void{
+    const method = descriptor.value;
+    descriptor.value = function(){
+        try {
+            method();
+        } catch (error) {
+            console.log('Ops, boat was sunk');
+        }
+    }
+};
+
+new Boat().pilot(); */
+
+/* //Exercise #2: 
+class Boat {
+    @testDecorator
+    color: string = 'red'; //This is a property
+
+    @testDecorator
+    get formatColor(): string { //This is an assessor
+        return `This boats color is ${this.color}`;
+    };
+
+    @logError('Something bad!') //This is a decorator
+    pilot(): void { //This is a method
+        throw new Error();
+    };
+};
+
+function testDecorator(target: any, propertyKey: string): void{
+    console.log('propertyKey', propertyKey);
+}
+
+function logError(errorMessage: string) {
+    return function (target: any, propertyKey: string, descriptor: PropertyDescriptor): void{ 
+        const method = descriptor.value;
+        descriptor.value = function () {
+            try {
+                method();
+            } catch (error) {
+                console.log(errorMessage);
+            }
+        }
+    }
+};
+
+new Boat().pilot(); */
+

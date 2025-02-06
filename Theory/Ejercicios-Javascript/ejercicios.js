@@ -1,4 +1,4 @@
-// node Backend/Ejercicios-Backend/Ejercicios-Javascript/ejercicios.js
+// node Theory/Ejercicios-Javascript/ejercicios.js
 
 //         $$$$$$$$$$$$$$$ Funciones $$$$$$$$$$$$$$$
 
