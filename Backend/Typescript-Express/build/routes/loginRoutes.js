@@ -13,21 +13,6 @@ function requreAuth(req, res, next) {
 }
 const router = (0, express_1.Router)();
 exports.router = router;
-router.get("/login", function (req, res) {
-    res.send(`
-        <form method="POST">
-            <div>
-            <label>Email</label>
-            <input name="email"/>
-            </div>
-            <div>
-            <label>Password</label>
-            <input name="password" type="password"/>
-            </div>
-            <button>Submit</button>
-        </form>
-    `);
-});
 router.post("/login", function (req, res) {
     const { email, password } = req.body;
     if (email && password && email === "hi@hi.com" && password) {
@@ -59,4 +44,7 @@ router.get("/", function (req, res) {
             </div>
         `);
     }
+});
+router.get('/protected', requreAuth, function (req, res) {
+    res.send('Welcome to protected route, logged in user');
 });

@@ -1404,3 +1404,65 @@ function logError(errorMessage: string) {
 
 new Boat().pilot(); */
 
+/* //Exercise #3: Metadata (theory)
+import 'reflect-metadata';
+
+const plane = {
+    color: "red"
+}
+
+// Reflect.defineMetadata('note', 'Hi there!', plane);
+// Reflect.defineMetadata('height', 10, plane);
+
+// const note = Reflect.getMetadata('note', plane);
+// console.log(note);
+
+Reflect.defineMetadata('note', 'hi there' , plane, 'color');
+const note = Reflect.getMetadata('note', plane, 'color');
+console.log(note);
+ */
+
+/* //Exercise #4: Metadata
+import 'reflect-metadata';
+
+class Plane {
+    color: string = 'red';
+
+    @markFunction
+    fly(): void {
+        console.log("Vrrrrrr");
+    }
+};
+
+function markFunction(target: Plane, key: string){
+    Reflect.defineMetadata("secret", 123, target, key);
+};
+
+const secret = Reflect.getMetadata("secret", Plane.prototype, 'fly');
+console.log(secret); */
+
+/* //Exercise #5: Metadata
+import 'reflect-metadata';
+
+@controller
+class Plane {
+    color: string = 'red';
+
+    @get('/login')
+    fly(): void {
+        console.log("Vrrrrrr");
+    }
+};
+
+function get(path: string) {
+    return function (target: Plane, key: string) {
+        Reflect.defineMetadata("path", path, target, key);
+    };
+};
+
+function controller(target: typeof Plane) { //Whenever we apply a deocorator to a class, the type argument is going to be of type "constructor" function. So, typeof Plane is a reference to the contructor function of the Plane class.
+    for (const key in target.prototype) {
+        const path = Reflect.getMetadata("path", target.prototype, key);
+        console.log(path);
+    };
+}; */
