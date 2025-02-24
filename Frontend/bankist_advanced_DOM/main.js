@@ -118,12 +118,12 @@ headerObserver.observe(header);
 const allSections = document.querySelectorAll(".section");
 
 const revealSection = function(entries, observer){
-    const [entry] = entries;     //console.log(entry)
-
-    if(entry.isIntersecting === false) return;
-    entry.target.classList.remove("section--hidden");
-
-    observer.unobserve(entry.target);
+    //console.log(entry)
+    entries.forEach(function (entry){
+        if(entry.isIntersecting === false) return;
+        entry.target.classList.remove("section--hidden");  
+        observer.unobserve(entry.target);
+    });
 };
 const opciones = {
     root: null,

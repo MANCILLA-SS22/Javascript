@@ -106,15 +106,24 @@ function formatCur(value, locale, currency){
 }
 
 function displayMovements(acc, sort=false){
-
     containerMovements.innerHTML="";
-    const movs = sort ? acc.movements.slice().sort((a,b) => a - b) : acc.movements;
+    const combinedMosDates = acc.movements.map(function(mov, i){
+        return {
+            movement: mov,
+            movementDate: acc.movementsDates.at(i)
+        }
+    });
+    if(sort) combinedMosDates.sort((a,b) => a.movement - b.movement);
+
+    // const movs = sort ? acc.movements.slice().sort((a,b) => a - b) : acc.movements;
     
-    movs.forEach(function(mov, i) {
+    combinedMosDates.forEach(function(obj, i) {
+        const { movement, movementDate } = obj;
+
+        // const date = new Date(movementDate); //Accedemos a las fechas que estan en account1.movementsDates[]
         const date = new Date(acc.movementsDates[i]); //Accedemos a las fechas que estan en account1.movementsDates[]
         const displayDate = formatMovementDate(date, acc.locale);
-
-        const type = mov > 0 ? "deposit" : "withdrawal";    
+        const type = movement > 0 ? "deposit" : "withdrawal";    
 
         //METODO 1
         // const html = `
@@ -126,7 +135,7 @@ function displayMovements(acc, sort=false){
         // containerMovements.insertAdjacentHTML("afterbegin", html);
 
         //METODO 2
-        const formattedMov = formatCur(mov, acc.locale, acc.currency);
+        const formattedMov = formatCur(movement, acc.locale, acc.currency);
         const html = `
             <div class="movements__row">
                 <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
@@ -281,7 +290,8 @@ btnLoan.addEventListener("click", function(evento){
 btnSort.addEventListener("click", function(evento){
     evento.preventDefault();
 
-    displayMovements(currentAccount.movements, !sorted); //When clicking the button, then that variable changes to true and the array is sorted.
+    // displayMovements(currentAccount.movements, !sorted); //When clicking the button, then that variable changes to true and the array is sorted.
+    displayMovements(currentAccount, !sorted); //When clicking the button, then that variable changes to true and the array is sorted.
     sorted =! sorted; //After that, we need to change the "sorted" variable to the opposite boolean value. We do this so that when we press the button again, this back to normal (unsorted).
 })
 
