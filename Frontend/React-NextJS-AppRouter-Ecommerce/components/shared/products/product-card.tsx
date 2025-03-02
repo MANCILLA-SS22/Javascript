@@ -2,12 +2,13 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import Image from 'next/image';
 import Link from 'next/link';
 import ProductPrice from './product-price';
+import { Product } from '@/types';
 
-function ProductCard ({ product }: { product: any }){
+function ProductCard ({ product }: { product: Product }){
 
     function render(){
         if (product.stock > 0){
-            return <ProductPrice value={+product.price}/>
+            return <ProductPrice value={Number(product.price)}/>
         }else{
             return <p className='text-destructive'>Out Of Stock</p>;
         };

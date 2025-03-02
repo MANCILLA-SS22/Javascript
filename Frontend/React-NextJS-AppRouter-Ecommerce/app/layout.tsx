@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import './assets/styles/globals.css';
+import '@/assets/styles/globals.css';
 import { APP_DESCRIPTION, APP_NAME, SERVER_URL } from "@/lib/constants";
 import { ThemeProvider } from "next-themes";
 
@@ -26,6 +26,3 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     </html>
   );
 };
-
-//                            https://github.com/bradtraversy/prostore/commits/main/?before=14ab015616d6377a223d6da8361eb4ab9b0afc75+140
-//                            cd Frontend/React-NextJS-AppRouter-Ecommerce

@@ -6,7 +6,7 @@ function ProductPrice({ value, className }: { value: number; className?: string 
 
     return (
         <p className={cn('text-2xl', className)}>
-            <span className="text-xs align-super">$</span>
+            <span className="text-xs align-super">$</span>{intVaue}
             <span className="text-xs align-super">.{floatValue}</span>
         </p>
     );

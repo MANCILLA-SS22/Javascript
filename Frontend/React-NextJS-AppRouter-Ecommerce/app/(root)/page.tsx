@@ -1,22 +1,9 @@
 import ProductList from "@/components/shared/products/product-list";
-import sampleData from "@/db/sample-data";
+import { getLatestProducts } from "@/lib/actions/product.action";
 
-
-function Homepage() {
-    return <ProductList data={sampleData.products} title='Newst Arrivals' limit={4}/>
+async function Homepage() {
+    const latestProducts = await getLatestProducts();
+    return <ProductList data={latestProducts} title='Newst Arrivals'/>
 }
 
 export default Homepage;
-
-/* function delay(ms: number){
-    return new Promise((res) => setTimeout(res, ms))
-}
-
-async function Homepage() {
-    await delay(2000)
-    return (
-        <></>
-    )
-}
-
-export default Homepage; */
