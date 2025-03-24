@@ -1,9 +1,24 @@
+// https://github.com/bradtraversy/prostore/commits/main/?before=14ab015616d6377a223d6da8361eb4ab9b0afc75+140
+// cd Frontend/React-NextJS-AppRouter-Ecommerce
+
 // (1) npm install prisma --save-dev
 // (2) npm install @prisma/client
 // (3) npx prisma init
 // (4) npx prisma generate
 // (5) npx prisma migrate dev --name init
 // (6) npx prisma studio
+// (7) npx prisma generate
+// (8) npx prisma migrate dev --name add_user_based_tables
+// (9) npx tsx ./db/seed
+//(10) npm install next-auth
+//(12) npm install @auth/prisma-adapter
+
+// npx tsx ./db/seed
+// npm run build
+
+// npm run dev
+// npx prisma studio
+
 
 generator client {
   provider        = "prisma-client-js"
@@ -33,5 +48,54 @@ model Product {
   createdAt   DateTime @default(now()) @db.Timestamp(6)
 }
 
-//                            https://github.com/bradtraversy/prostore/commits/main/?before=14ab015616d6377a223d6da8361eb4ab9b0afc75+140
-//                            cd Frontend/React-NextJS-AppRouter-Ecommerce
+model User {
+  id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name          String    @default("NO_NAME")
+  email         String    @unique(map: "user_email_idx")
+  emailVerified DateTime? @db.Timestamp(6)
+  image         String?
+  password      String?
+  address       Json      @db.Json
+  payment       String?
+  role          String    @default("user")
+  createdAt     DateTime  @default(now()) @db.Timestamp(6)
+  updatedAt     DateTime  @updatedAt
+  account       Account[]
+  Session       Session[]
+}
+
+model Account {
+  userId            String   @db.Uuid
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+}
+
+model Session {
+  sessionToken String   @id
+  userId       String   @db.Uuid
+  expires      DateTime @db.Timestamp(6)
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now()) @db.Timestamp(6)
+  updatedAt    DateTime @updatedAt
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
+}
