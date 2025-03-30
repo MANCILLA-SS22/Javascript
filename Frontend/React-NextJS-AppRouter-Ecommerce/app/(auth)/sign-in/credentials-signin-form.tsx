@@ -1,19 +1,26 @@
 'use client'
 
+import { useActionState } from 'react';
+import { useFormStatus } from 'react-dom';
+
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+
 import { signInWithCredentials } from '@/lib/actions/user.actions';
 import { signInDefaultValues } from '@/lib/constants';
+
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { useActionState } from 'react';
-import { useFormStatus } from 'react-dom';
 
 function CredentialsSignInForm() {
     const [data, action] = useActionState(signInWithCredentials, {
         success: false,
         message: ""
     });
+
+    const searchParams = useSearchParams();
+    const callbackUrl = searchParams.get("callbackUrl") || "/";
 
     function SignInButton() {
         const { pending } = useFormStatus();
@@ -27,6 +34,7 @@ function CredentialsSignInForm() {
 
     return (
         <form action={action}>
+            <input type="hidden" name="callbackUrl" value={callbackUrl} />
             <div className="space-y-6">
                 <div>
                     <Label>Email</Label>
@@ -37,11 +45,7 @@ function CredentialsSignInForm() {
                     <Input id='password' name='password' type='password' required autoComplete='password' defaultValue={signInDefaultValues.password} />
                 </div>
                 <div>
-                    <Button className='w-full' variant='default'>Sign In</Button>
-                </div>
-
-                <div>
-                    <SignInButton />
+                    {SignInButton()}
                 </div>
 
                 {data && !data.success && <div className='text-center text-destructive'>{data.message}</div>}

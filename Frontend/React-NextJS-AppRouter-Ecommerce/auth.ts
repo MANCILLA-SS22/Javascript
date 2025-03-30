@@ -3,17 +3,17 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "./db/prisma";
 import CredentialsProvider from "next-auth/providers/credentials"
 import { compareSync } from 'bcrypt-ts-edge';
-import type {AuthOptions} from 'next-auth'
+import type {NextAuthConfig} from 'next-auth'
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+    secret: process.env.NEXT_SECRET,
     pages: {
         signIn: '/sign-in',
-        error: '/error'
+        error: '/sign-in'
     },
     session: {
-        strategy: "database",
+        strategy: "jwt",
         maxAge: 30 * 24 * 60 * 60, // 30 days
-        updateAge: 24 * 60 * 60,   // 24 hours
     },
     adapter: PrismaAdapter(prisma),
     providers: [
@@ -28,7 +28,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                 if (!credentials) return null;
                 const user = await prisma.user.findFirst({
                     where: { email: credentials!.email as string }
-                })
+                });
+
+                console.log("user", user);
 
                 if (user && user.password) {
                     const isMatch = compareSync(credentials.password as string, user.password);
@@ -46,4 +48,4 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             return session;
         },
     }
-} satisfies AuthOptions);
+} satisfies NextAuthConfig);

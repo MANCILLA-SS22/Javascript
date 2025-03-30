@@ -3,16 +3,16 @@ import {hashSync} from 'bcrypt-ts-edge'
 const sampleData = {
   users: [
     {
-      name: 'John',
-      email: 'admin@example.com',
-      password: hashSync('1234456', 10),
+      name: 'German',
+      email: 'xxel.tiradorxx@gmail.com',
+      password: hashSync('merengue', 10),
       address: 'fgrgrteg',
       role: 'admin'
     },
     {
-      name: 'Jane',
-      email: 'user@example.com',
-      password: hashSync('1234456', 10),
+      name: 'Mancilla',
+      email: 'xxcodigo.rojoxx@gmail.com',
+      password: hashSync('merengue', 10),
       address: 'fgrgrteg',
       role: 'user'
     }
