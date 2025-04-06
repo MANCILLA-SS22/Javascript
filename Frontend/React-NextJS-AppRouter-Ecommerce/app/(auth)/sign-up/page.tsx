@@ -4,20 +4,20 @@ import { redirect } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
-import { APP_NAME } from "@/lib/constants";
 import { auth } from "@/auth";
-import CredentialsSignInForm from "./credentials-signin-form";
+import { APP_NAME } from "@/lib/constants";
+import SignUpForm from "./sign-up-form";
 
 export const metadata: Metadata = {
-    title: 'Sign In'
+    title: 'Sign Up'
 }
 
 type Params = Promise<{ slug: string }>
 type SearchParams = Promise<{ [key: string]: string | undefined }>
 
-// async function SignInPage(props: { praams: Params, searchParams: SearchParams }) {
-async function SignInPage({ params, searchParams }: { params: Params, searchParams: SearchParams }) {
-    const { callbackUrl } = await searchParams; // const callbackUrl = (await props.searchParams).callbackUrl;
+// async function SignUpPage({ params, searchParams }: { params: Params, searchParams: SearchParams }) {
+async function SignUpPage(props: { params: Params, searchParams: SearchParams }) {
+    const { callbackUrl } = await props.searchParams; // const callbackUrl = (await props.searchParams).callbackUrl;
     const session = await auth();
     if (session) return redirect(callbackUrl || "/");
 
@@ -28,15 +28,15 @@ async function SignInPage({ params, searchParams }: { params: Params, searchPara
                     <Link href='/' className='flex-center'>
                         <Image src='/images/logo.svg' width={100} height={100} alt={`${APP_NAME} logo`} priority={true} />
                     </Link>
-                    <CardTitle className='text-center'>Sign In</CardTitle>
-                    <CardDescription className='text-center'>Sign in to your account</CardDescription>
+                    <CardTitle className='text-center'>Create account</CardTitle>
+                    <CardDescription className='text-center'>Enter your information below to sign up</CardDescription>
                 </CardHeader>
                 <CardContent className='space-y-4'>
-                    <CredentialsSignInForm />
+                    <SignUpForm/>
                 </CardContent>
             </Card>
         </div>
     );
 }
 
-export default SignInPage;
+export default SignUpPage;
