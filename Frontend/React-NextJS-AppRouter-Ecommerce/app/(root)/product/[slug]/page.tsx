@@ -1,20 +1,22 @@
+import AddToCart from "@/components/shared/products/add-to-cart";
 import ProductImages from "@/components/shared/products/product-images";
 import ProductPrice from "@/components/shared/products/product-price";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { getMyCart } from "@/lib/actions/cart.actions";
 import { getProductBySlug } from "@/lib/actions/product.action";
-import { Product } from "@/types";
+import { Cart, Product } from "@/types";
 import { notFound } from "next/navigation";
 
 async function ProductDetailsPage(props: { params: Promise<{ slug: string }> }) { //When using TypeScript, you can add types for params depending on your configured route segment.
     try {
         const { slug } = await props.params;
-        const productData = await getProductBySlug(slug);
+        const productData: Product | null = await getProductBySlug(slug);
         if (!productData) notFound();
         const product: Product = productData; // Now TypeScript knows it's not null
+        const cart: Cart | undefined = await getMyCart();
 
-        function render1() {
+        function render1(): React.JSX.Element {
             if (product.stock > 0) {
                 return <Badge variant='outline'>In Stock</Badge>;
             } else {
@@ -22,11 +24,12 @@ async function ProductDetailsPage(props: { params: Promise<{ slug: string }> }) 
             }
         }
 
-        function render2() {
+        function render2(): React.JSX.Element | undefined {
             if (product.stock > 0) {
+                const item = { productId: product.id, name: product.name, slug: product.slug, price: product.price, qty: 1, image: product.images![0] }
                 return (
                     <div className='flex-center'>
-                        <Button className='w-full'>Add To Cart</Button>
+                        <AddToCart cart={cart} item={item} />
                     </div>
                 )
             }
@@ -36,12 +39,10 @@ async function ProductDetailsPage(props: { params: Promise<{ slug: string }> }) 
             <section>
                 <div className='grid grid-cols-1 md:grid-cols-5'>
 
-                    {/* Images Column */}
                     <div className='col-span-2'>
                         <ProductImages images={product.images} />
                     </div>
 
-                    {/* Details Column */}
                     <div className='col-span-2 p-5'>
                         <div className='flex flex-col gap-6'>
                             <p>{product.brand} {product.category}</p>
@@ -57,7 +58,6 @@ async function ProductDetailsPage(props: { params: Promise<{ slug: string }> }) 
                         </div>
                     </div>
 
-                    {/* Action Column */}
                     <div>
                         <Card>
                             <CardContent className='p-4'>

@@ -1441,6 +1441,15 @@ To manage individual requests, you can use the signal property from AbortControl
     > Using revalidatePath invalidates only the specific path in the server-side Route Cache.
     > It does not return any value.
     
+  When we add something to the database a lot of times, we need to revalidate an specific page because we want to clear the cache. And in this case, it's app/(root)/product/[slug]/page.tsx
+  This function is used when you want to manually trigger a cache revalidation for a specific route. It ensures that a server-rendered path is updated with fresh data the next time it’s requested. Like saying:    
+                                                                             “Hey, Next.js! This page is stale, go fetch a fresh version.”
+  Why use revalidatePath()? 
+  Because Next.js caches server - rendered pages or data by default — especially when using Static Site Generation (SSG) or Route Handlers with caching. But sometimes your app’s data changes dynamically, 
+  like after a form submission, database update, or API call — and you want the user to see the updated info immediately. Without revalidation, they might still see the old, cached content.    
+  This function only works in Server Actions or Route Handlers (like POST), and it’s part of the App Router (app/ directory, not pages/).
+  
+  
 - usePathname: It is a Client Component hook that lets you read the current URL's pathname.
 
 - useRouter: It allows you to programmatically change routes inside Client Components. It's recommendated to use the <Link> component for navigation unless you have a specific requirement for using useRouter.

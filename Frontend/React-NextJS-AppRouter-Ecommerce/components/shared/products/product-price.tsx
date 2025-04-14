@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 function ProductPrice({ value, className }: { value: number; className?: string }) {
-    const stringValue: string = value.toFixed();
+    const stringValue: string = value.toFixed(2);
     const [intVaue, floatValue] = stringValue.split('.');
 
     return (

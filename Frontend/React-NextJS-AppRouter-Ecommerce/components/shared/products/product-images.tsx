@@ -6,8 +6,6 @@ import { cn } from '@/lib/utils';
 function ProductImages({ images }: { images: string[] }) {
     const [current, setCurrent] = useState(0);
 
-    console.log(current);
-
     function render(): React.JSX.Element[]{
         const res: React.JSX.Element[] = images.map(function(image, index){
             return (

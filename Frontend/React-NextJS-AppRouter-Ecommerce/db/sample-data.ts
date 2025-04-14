@@ -6,14 +6,12 @@ const sampleData = {
       name: 'German',
       email: 'xxel.tiradorxx@gmail.com',
       password: hashSync('merengue', 10),
-      // address: 'fgrgrteg',
       role: 'admin'
     },
     {
       name: 'Mancilla',
       email: 'xxcodigo.rojoxx@gmail.com',
       password: hashSync('merengue', 10),
-      // address: 'fgrgrteg',
       role: 'user'
     }
   ],

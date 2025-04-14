@@ -3,17 +3,18 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "./db/prisma";
 import CredentialsProvider from "next-auth/providers/credentials"
 import { compareSync } from 'bcrypt-ts-edge';
-import type { NextAuthConfig } from 'next-auth'
+import type { NextAuthConfig } from 'next-auth';
+import { authConfig } from './auth.config';
 
-export const { handlers, auth, signIn, signOut } = NextAuth({
+const obj = {
     secret: process.env.NEXT_SECRET,
     pages: {
         signIn: '/sign-in',
         error: '/sign-in'
     },
     session: {
-        strategy: "jwt",
-        maxAge: 30 * 24 * 60 * 60, // 30 days
+        strategy: "jwt" as const, //(1)
+        maxAge: 30 * 24 * 60 * 60,
     },
     adapter: PrismaAdapter(prisma),
     providers: [
@@ -41,12 +42,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     ],
     callbacks: {
         async session({ session, user, trigger, token }: any) {
-            // console.log("token", token);
-            // console.log("session", session);
-            session.user.id = token.sub; // Set the user ID from the token
+            session.user.id = token.sub;
             session.user.role = token.role;
             session.user.name = token.name;
-            if (trigger === 'update') session.user.name = user.name; // If there is an update, set the user name
+            if (trigger === 'update') session.user.name = user.name;
             return session;
         },
 
@@ -63,7 +62,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                 }
             };
             return token;
-        }
+        },
 
-    }
-} satisfies NextAuthConfig);
+        ...authConfig.callbacks || {}
+    },
+} satisfies NextAuthConfig;
+
+export const { handlers, auth, signIn, signOut } = NextAuth(obj);
+    
+//(1)
+// This is because this value has to be one of 3 values("jwt" | "database" | undefined) and we want to make sure it's always "jwt" and not a string that could be anything. Here,
+// strategy is no longer inferred as string; it is inferred as the literal type "jwt". If you don't add this, you will get an error for the config we pass into NextAuth at the end of the file.
