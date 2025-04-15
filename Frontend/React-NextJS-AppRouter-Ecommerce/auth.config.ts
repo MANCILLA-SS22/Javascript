@@ -6,7 +6,7 @@ export const authConfig = {
     secret: process.env.NEXT_SECRET,
     callbacks: {
         authorized({ request, auth }: { request: NextRequest; auth: Session | null; }) { //(1)
-            const protectedPaths: RegExp[] = [/\/shipping-address/, /\/payment-method/, /\/place-order/, /\/profile/, /\/user\/(.*)/, /\/order\/(.*)/, /\/admin/,]; //(2)
+            const protectedPaths: RegExp[] = [/\/shipping-address/, /\/payment-method/, /\/place-order/, /\/profile/, /\/user\/(.*)/, /\/order\/(.*)/, /\/admin/]; //(2)
             const { pathname }: { pathname: string } = request.nextUrl; // Get pathname from the req URL object
             const getProtectedPath: boolean = protectedPaths.some((path) => path.test(pathname)); //Verify if we get the same path            
             if (!auth && getProtectedPath) return false;// Check if user is not authenticated and accessing a protected path

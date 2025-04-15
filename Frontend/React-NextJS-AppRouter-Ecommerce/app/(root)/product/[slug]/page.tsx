@@ -1,12 +1,14 @@
+import { notFound } from "next/navigation";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+
 import AddToCart from "@/components/shared/products/add-to-cart";
 import ProductImages from "@/components/shared/products/product-images";
 import ProductPrice from "@/components/shared/products/product-price";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
+
 import { getMyCart } from "@/lib/actions/cart.actions";
 import { getProductBySlug } from "@/lib/actions/product.action";
 import { Cart, Product } from "@/types";
-import { notFound } from "next/navigation";
 
 async function ProductDetailsPage(props: { params: Promise<{ slug: string }> }) { //When using TypeScript, you can add types for params depending on your configured route segment.
     try {
@@ -14,26 +16,8 @@ async function ProductDetailsPage(props: { params: Promise<{ slug: string }> }) 
         const productData: Product | null = await getProductBySlug(slug);
         if (!productData) notFound();
         const product: Product = productData; // Now TypeScript knows it's not null
+        const item = { productId: product.id, name: product.name, slug: product.slug, price: product.price, qty: 1, image: product.images![0] }
         const cart: Cart | undefined = await getMyCart();
-
-        function render1(): React.JSX.Element {
-            if (product.stock > 0) {
-                return <Badge variant='outline'>In Stock</Badge>;
-            } else {
-                return <Badge variant='destructive'>Out Of Stock</Badge>
-            }
-        }
-
-        function render2(): React.JSX.Element | undefined {
-            if (product.stock > 0) {
-                const item = { productId: product.id, name: product.name, slug: product.slug, price: product.price, qty: 1, image: product.images![0] }
-                return (
-                    <div className='flex-center'>
-                        <AddToCart cart={cart} item={item} />
-                    </div>
-                )
-            }
-        }
 
         return (
             <section>
@@ -78,6 +62,15 @@ async function ProductDetailsPage(props: { params: Promise<{ slug: string }> }) 
                 </div>
             </section>
         );
+
+        function render1(): React.JSX.Element {
+            if (product.stock > 0) return <Badge variant='outline'>In Stock</Badge>;
+            return <Badge variant='destructive'>Out Of Stock</Badge>
+        }
+
+        function render2(): React.JSX.Element | undefined {
+            if (product.stock > 0) return <div className='flex-center'><AddToCart cart={cart} item={item} /></div>
+        }
 
     } catch (error) {
         console.log(error);

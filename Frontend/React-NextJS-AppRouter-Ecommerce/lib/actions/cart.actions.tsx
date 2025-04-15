@@ -13,12 +13,17 @@ import { Prisma } from "@prisma/client";
 
 function calcPrice(items: CartItem[]) {
     const sum: number = items.reduce((acc, item) => acc + (Number(item.price) * item.qty), 0);
-    const allPricesOfTheItems: number = round2(sum);
-    const shippingPrice: number = round2(allPricesOfTheItems > 100 ? 0 : 10);
-    const taxPrice: number = round2(allPricesOfTheItems * 0.15);
-    const totalPrice: number = round2(allPricesOfTheItems + taxPrice + shippingPrice);
+    const itemsPrice: number = round2(sum);
+    const shippingPrice: number = round2(itemsPrice > 100 ? 0 : 10);
+    const taxPrice: number = round2(itemsPrice * 0.15);
+    const totalPrice: number = round2(itemsPrice + taxPrice + shippingPrice);
 
-    return { allPricesOfTheItems: allPricesOfTheItems.toFixed(2), shippingPrice: shippingPrice.toFixed(2), taxPrice: taxPrice.toFixed(2), totalPrice: totalPrice.toFixed(2) }
+    return {
+        itemsPrice: itemsPrice.toFixed(2),
+        shippingPrice: shippingPrice.toFixed(2),
+        taxPrice: taxPrice.toFixed(2),
+        totalPrice: totalPrice.toFixed(2)
+    }
 }
 
 async function getInfo() {
@@ -58,7 +63,8 @@ async function addItemToCart(data: CartItem) {
 
         const cart = await getMyCart();
         if (!cart) {
-            const newCart = insertCartSchema.parse({ userId: userId, items: [item], sessionCartId: sessionCartId, ...calcPrice([item]) })
+            const newCart = insertCartSchema.parse({ userId: userId, items: [item], sessionCartId: sessionCartId, ...calcPrice([item]) });
+            console.log('newCart', newCart);
             await prisma.cart.create({ data: newCart });
             revalidatePath(`/product/${product.slug}`); //(1)
             return { success: true, message: `${product.name} added to cart` };

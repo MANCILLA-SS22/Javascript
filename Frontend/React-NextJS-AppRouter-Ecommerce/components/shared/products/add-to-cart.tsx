@@ -9,7 +9,7 @@ import { Plus, Minus, Loader } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { addItemToCart, removeItemFromCart } from "@/lib/actions/cart.actions";
 
-function AddToCart({ item, cart }: { item: CartItem, cart?: Cart }) {
+export default function AddToCart({ item, cart }: { item: CartItem, cart?: Cart }) {
     const { toast } = useToast();
     const router = useRouter();
     const [isPending, startTransition] = useTransition();
@@ -57,5 +57,3 @@ function AddToCart({ item, cart }: { item: CartItem, cart?: Cart }) {
         });
     };
 };
-
-export default AddToCart;
