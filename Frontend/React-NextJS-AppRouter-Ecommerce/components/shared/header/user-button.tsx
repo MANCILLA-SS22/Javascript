@@ -1,13 +1,14 @@
 import { auth } from "@/auth";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { getSession } from "@/lib/actions/cart.actions";
 import { signOutUser } from "@/lib/actions/user.actions";
 import { UserIcon } from "lucide-react";
 import { Session } from "next-auth";
 import Link from "next/link";
 
 async function UserButton() {
-    const session: Session | null = await auth();
+    const session: Session | null = await getSession();
 
     if(!session){
         return (

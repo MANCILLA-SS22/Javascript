@@ -58,6 +58,12 @@ export async function signUpUser(prevState: unknown, formData: FormData) {
     }
 }
 
+export async function getUserById(userId: string){
+    const user = await prisma.user.findFirst({ where: {id: userId} });
+    if(!user) throw new Error("User not found");
+    return user;
+}
+
 //(1)
 // Given any Zod schema, you can call its .parse method to check data is valid. If it is, a value is returned with full type information! Otherwise, an error is thrown.
 // The value returned by .parse is a deep clone of the variable you passed in.

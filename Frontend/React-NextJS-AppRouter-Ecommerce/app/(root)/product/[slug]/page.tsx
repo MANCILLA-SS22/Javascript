@@ -19,6 +19,15 @@ async function ProductDetailsPage(props: { params: Promise<{ slug: string }> }) 
         const item = { productId: product.id, name: product.name, slug: product.slug, price: product.price, qty: 1, image: product.images![0] }
         const cart: Cart | undefined = await getMyCart();
 
+        function render1(): React.JSX.Element {
+            if (product.stock > 0) return <Badge variant='outline'>In Stock</Badge>;
+            return <Badge variant='destructive'>Out Of Stock</Badge>
+        }
+
+        function render2(): React.JSX.Element | undefined {
+            if (product.stock > 0) return <div className='flex-center'><AddToCart cart={cart} item={item} /></div>
+        }
+
         return (
             <section>
                 <div className='grid grid-cols-1 md:grid-cols-5'>
@@ -62,16 +71,6 @@ async function ProductDetailsPage(props: { params: Promise<{ slug: string }> }) 
                 </div>
             </section>
         );
-
-        function render1(): React.JSX.Element {
-            if (product.stock > 0) return <Badge variant='outline'>In Stock</Badge>;
-            return <Badge variant='destructive'>Out Of Stock</Badge>
-        }
-
-        function render2(): React.JSX.Element | undefined {
-            if (product.stock > 0) return <div className='flex-center'><AddToCart cart={cart} item={item} /></div>
-        }
-
     } catch (error) {
         console.log(error);
     }

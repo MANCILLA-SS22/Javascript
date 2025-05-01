@@ -1,12 +1,13 @@
 'use client'
 
 import { useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "@/hooks/use-toast";
-import { Cart, CartItem } from "@/types";
 import { Plus, Minus, Loader } from "lucide-react";
-import { useRouter } from "next/navigation";
+
+import { Cart, CartItem } from "@/types";
 import { addItemToCart, removeItemFromCart } from "@/lib/actions/cart.actions";
 
 export default function AddToCart({ item, cart }: { item: CartItem, cart?: Cart }) {
@@ -17,18 +18,18 @@ export default function AddToCart({ item, cart }: { item: CartItem, cart?: Cart 
     if (existItem) {
         return (
             <div>
-                <Button type='button' variant='outline' onClick={handleRemoveFromCart}>
+                <Button type='button' variant='outline' onClick={() => handleRemoveFromCart()}>
                     {isPending ? (<Loader className='w-4 h-4 animate-spin' />) : (<Minus className='w-4 h-4' />)}
                 </Button>
                 <span className='px-2'>{existItem.qty}</span>
-                <Button type='button' variant='outline' onClick={handleAddToCart}>
+                <Button type='button' variant='outline' onClick={() => handleAddToCart()}>
                     {isPending ? (<Loader className='w-4 h-4 animate-spin' />) : (<Plus className='w-4 h-4' />)}
                 </Button>
             </div>
         )
     } else {
         return (
-            <Button className='w-full' type='button' onClick={handleAddToCart}>
+            <Button className='w-full' type='button' onClick={() => handleAddToCart()}>
                 {isPending ? (<Loader className='w-4 h-4 animate-spin' />) : (<Plus className='w-4 h-4' />)}{' '}Add To Cart
             </Button>
         )

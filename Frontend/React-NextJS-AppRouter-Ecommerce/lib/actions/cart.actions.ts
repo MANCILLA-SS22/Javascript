@@ -26,13 +26,18 @@ function calcPrice(items: CartItem[]) {
     }
 }
 
+async function getSession() {
+    const session: Session | null = await auth();
+    return session;
+}
+
 async function getInfo() {
     const cartCookies: ReadonlyRequestCookies = await cookies();
     const sessionCartId: string | undefined = cartCookies.get('sessionCartId')?.value;
     if (!sessionCartId) throw new Error("Cart session not found.");
-    const session: Session | null = await auth();
+    const session: Session | null = await getSession();
     const userId: string | undefined = session?.user?.id ? (session.user.id as string) : undefined;
-    return { sessionCartId, userId };
+    return { session, sessionCartId, userId };
 }
 
 async function getMyCart() {
@@ -43,7 +48,7 @@ async function getMyCart() {
 
     if (!cart) return undefined;
 
-    return convertToPlainObject({
+    const plainObject = convertToPlainObject({
         ...cart,
         items: cart.items as CartItem[],
         itemsPrice: cart.itemsPrice.toString(),
@@ -51,6 +56,8 @@ async function getMyCart() {
         shippingPrice: cart.shippingPrice.toString(),
         taxPrice: cart.taxPrice.toString(),
     });
+
+    return plainObject;
 }
 
 async function addItemToCart(data: CartItem) {
@@ -63,17 +70,17 @@ async function addItemToCart(data: CartItem) {
 
         const cart = await getMyCart();
         if (!cart) {
-            const newCart = insertCartSchema.parse({ userId: userId, items: [item], sessionCartId: sessionCartId, ...calcPrice([item]) });
+            const newCart = insertCartSchema.parse({ userId: userId, items: [item], sessionCartId: sessionCartId, ...calcPrice([item]) }); // Create new cart object
             console.log('newCart', newCart);
-            await prisma.cart.create({ data: newCart });
-            revalidatePath(`/product/${product.slug}`); //(1)
+            await prisma.cart.create({ data: newCart }); // Add to database
+            revalidatePath(`/product/${product.slug}`); // Revalidate product page    (1)
             return { success: true, message: `${product.name} added to cart` };
         } else {
             const existItem = cart.items as CartItem[];
             const findItem = existItem.find(x => x.productId === item.productId);
             if (findItem) {
                 if (product.stock < findItem.qty + 1) throw new Error("Not enough stock");
-                findItem.qty++;
+                (cart.items as CartItem[]).find((x) => x.productId === item.productId)!.qty = findItem.qty + 1;
             } else {
                 if (product.stock < 1) throw new Error("Not enough stock");
                 cart.items.push(item);
@@ -81,8 +88,10 @@ async function addItemToCart(data: CartItem) {
 
             await prisma.cart.update({
                 where: { id: cart.id },
-                data: { items: cart.items as Prisma.CartUpdateitemsInput[] },
-                ...calcPrice(cart.items as CartItem[])
+                data: { 
+                    items: cart.items as Prisma.CartUpdateitemsInput[] ,
+                    ...calcPrice(cart.items as CartItem[])
+                },
             });
 
             revalidatePath(`/product/${product.slug}`); //(1)
@@ -102,26 +111,28 @@ async function removeItemFromCart(productId: string) {
         if (!product) throw new Error("Product not found");
         const cart = await getMyCart();
         if (!cart) throw new Error("Cart not found");
-        const existItem = cart.items as CartItem[];
-        const findItem = existItem.find(x => x.productId === productId);
-        if (!findItem) throw new Error("Item not found");
+        const exist = (cart.items as CartItem[]);
+        const foundItem = exist.find((x) => x.productId === productId);
+        if (!foundItem) throw new Error("Item not found");
 
-        findItem.qty === 1 ? cart.items = (cart.items as CartItem[]).filter(x => x.productId !== productId) : findItem!.qty--;
+        foundItem.qty === 1 ? cart.items = exist.filter(x => x.productId !== productId) : foundItem!.qty = foundItem.qty - 1; //Using "!" ensures that foundItem.qty will be never null or undefined, even if the type system thinks it might be.
 
         await prisma.cart.update({
             where: { id: cart.id },
-            data: { items: cart.items as Prisma.CartUpdateitemsInput[] },
-            ...calcPrice(cart.items as CartItem[])
+            data: {
+                items: cart.items as Prisma.CartUpdateitemsInput[],
+                ...calcPrice(cart.items as CartItem[]),
+            },
         });
 
         revalidatePath(`/product/${product.slug}`); //(1)
         return { success: true, message: `${product.name} was removed from cart.` }
     } catch (error) {
-
+        console.log("error", error);
     }
 }
 
-export { addItemToCart, getMyCart, removeItemFromCart };
+export { getSession, getInfo, addItemToCart, getMyCart, removeItemFromCart };
 
 //(1)
 // When we add something to the database a lot of times, we need to revalidate an specific page because we want to clear the cache. And in this case, it's app/(root)/product/[slug]/page.tsx

@@ -1,3 +1,4 @@
+import { Session } from "next-auth";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
@@ -5,8 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { APP_NAME } from "@/lib/constants";
-import { auth } from "@/auth";
 import CredentialsSignInForm from "./credentials-signin-form";
+import { getSession } from "@/lib/actions/cart.actions";
 
 export const metadata: Metadata = {
     title: 'Sign In'
@@ -18,7 +19,7 @@ type SearchParams = Promise<{ [key: string]: string | undefined }>
 // async function SignInPage(props: { praams: Params, searchParams: SearchParams }) {
 async function SignInPage({ params, searchParams }: { params: Params, searchParams: SearchParams }) {
     const { callbackUrl } = await searchParams; // const callbackUrl = (await props.searchParams).callbackUrl;
-    const session = await auth();
+    const session: Session | null = await getSession();
     if (session) return redirect(callbackUrl || "/");
 
     return (
