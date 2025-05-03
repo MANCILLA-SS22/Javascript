@@ -6,3 +6,4 @@ export const DATABASE_URL = "postgres://neondb_owner:npg_7tZvGL8gHnJF@ep-empty-l
 export const signInDefaultValues = { email: '', password: '' }
 export const signUpDefaultValues = { name: '', email: '', password: '', confirmPassword: '' }
 export const shippingAddressDefaultValues = { fullName: 'German mancilla', streetAddress: '123 main st', city: 'Tijuana', postalCode: '12345', country: "Mexico" };
+// export const shippingAddressDefaultValues = { fullName: '', streetAddress: '', city: '', postalCode: '', country: "" };
