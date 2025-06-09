@@ -26,16 +26,11 @@ function calcPrice(items: CartItem[]) {
     }
 }
 
-async function getSession() {
-    const session: Session | null = await auth();
-    return session;
-}
-
 async function getInfo() {
     const cartCookies: ReadonlyRequestCookies = await cookies();
     const sessionCartId: string | undefined = cartCookies.get('sessionCartId')?.value;
     if (!sessionCartId) throw new Error("Cart session not found.");
-    const session: Session | null = await getSession();
+    const session: Session | null = await auth();
     const userId: string | undefined = session?.user?.id ? (session.user.id as string) : undefined;
     return { session, sessionCartId, userId };
 }
@@ -132,7 +127,7 @@ async function removeItemFromCart(productId: string) {
     }
 }
 
-export { getSession, getInfo, addItemToCart, getMyCart, removeItemFromCart };
+export { getInfo, addItemToCart, getMyCart, removeItemFromCart };
 
 //(1)
 // When we add something to the database a lot of times, we need to revalidate an specific page because we want to clear the cache. And in this case, it's app/(root)/product/[slug]/page.tsx

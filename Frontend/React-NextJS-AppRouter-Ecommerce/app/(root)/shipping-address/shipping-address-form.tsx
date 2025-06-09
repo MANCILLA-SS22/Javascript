@@ -4,7 +4,7 @@ import { useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod"
-import { ControllerRenderProps, useForm, SubmitHandler } from "react-hook-form"
+import { ControllerRenderProps, useForm } from "react-hook-form"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { ArrowRight, Loader } from "lucide-react";
 import { z } from "zod"
@@ -45,7 +45,7 @@ function ShippingAddressForm({ address }: { address: ShippingAddress }) {
                 <p className="text-sm text-mute-foreground">Please enter an address to ship to</p>
                 <Form {...form}>
                     <form method="post" className='space-y-4' onSubmit={form.handleSubmit(onSubmit)}>
-                        <div className="flex flex-col md:flex-row-gap-5">
+                        <div className="flex flex-col md:flex-row gap-5">
                             <FormField control={form.control} name="fullName" render={({ field }: { field: ControllerRenderProps<z.infer<typeof shippingAddressSchema>, 'fullName'> }) => //(1)
                                 <FormItem className="w-full">
                                     <FormLabel>Full Name</FormLabel>
@@ -56,16 +56,7 @@ function ShippingAddressForm({ address }: { address: ShippingAddress }) {
                                 </FormItem>
                             } />
                         </div>
-                    </form>
-                </Form>
-            </div>
-
-            <div className="nax-w-md mx-auto space-y-4">
-                <h1 className="h2-bold mt-4">Shipping Address</h1>
-                <p className="text-sm text-mute-foreground">Please enter an address to ship to</p>
-                <Form {...form}>
-                    <form method="post" className='space-y-4' onSubmit={form.handleSubmit(onSubmit)}>
-                        <div className="flex flex-col md:flex-row-gap-5">
+                        <div className="flex flex-col md:flex-row gap-5">
                             <FormField control={form.control} name="streetAddress" render={({ field }: { field: ControllerRenderProps<z.infer<typeof shippingAddressSchema>, 'streetAddress'> }) =>
                                 <FormItem className="w-full">
                                     <FormLabel>Address</FormLabel>
@@ -76,16 +67,7 @@ function ShippingAddressForm({ address }: { address: ShippingAddress }) {
                                 </FormItem>
                             } />
                         </div>
-                    </form>
-                </Form>
-            </div>
-
-            <div className="nax-w-md mx-auto space-y-4">
-                <h1 className="h2-bold mt-4">Shipping Address</h1>
-                <p className="text-sm text-mute-foreground">Please enter an address to ship to</p>
-                <Form {...form}>
-                    <form method="post" className='space-y-4' onSubmit={form.handleSubmit(onSubmit)}>
-                        <div className="flex flex-col md:flex-row-gap-5">
+                        <div className="flex flex-col md:flex-row gap-5">
                             <FormField control={form.control} name="city" render={({ field }: { field: ControllerRenderProps<z.infer<typeof shippingAddressSchema>, 'city'> }) =>
                                 <FormItem className="w-full">
                                     <FormLabel>City</FormLabel>
@@ -96,16 +78,7 @@ function ShippingAddressForm({ address }: { address: ShippingAddress }) {
                                 </FormItem>
                             } />
                         </div>
-                    </form>
-                </Form>
-            </div>
-
-            <div className="nax-w-md mx-auto space-y-4">
-                <h1 className="h2-bold mt-4">Shipping Address</h1>
-                <p className="text-sm text-mute-foreground">Please enter an address to ship to</p>
-                <Form {...form}>
-                    <form method="post" className='space-y-4' onSubmit={form.handleSubmit(onSubmit)}>
-                        <div className="flex flex-col md:flex-row-gap-5">
+                        <div className="flex flex-col md:flex-row gap-5">
                             <FormField control={form.control} name="postalCode" render={({ field }: { field: ControllerRenderProps<z.infer<typeof shippingAddressSchema>, 'postalCode'> }) =>
                                 <FormItem className="w-full">
                                     <FormLabel>Postal code</FormLabel>
@@ -116,16 +89,7 @@ function ShippingAddressForm({ address }: { address: ShippingAddress }) {
                                 </FormItem>
                             } />
                         </div>
-                    </form>
-                </Form>
-            </div>
-
-            <div className="nax-w-md mx-auto space-y-4">
-                <h1 className="h2-bold mt-4">Shipping Address</h1>
-                <p className="text-sm text-mute-foreground">Please enter an address to ship to</p>
-                <Form {...form}>
-                    <form method="post" className='space-y-4' onSubmit={form.handleSubmit(onSubmit)}>
-                        <div className="flex flex-col md:flex-row-gap-5">
+                        <div className="flex flex-col md:flex-row gap-5">
                             <FormField control={form.control} name="country" render={({ field }: { field: ControllerRenderProps<z.infer<typeof shippingAddressSchema>, 'country'> }) =>
                                 <FormItem className="w-full">
                                     <FormLabel>Country</FormLabel>
@@ -136,14 +100,13 @@ function ShippingAddressForm({ address }: { address: ShippingAddress }) {
                                 </FormItem>
                             } />
                         </div>
+                        <div className="flex gap-3">
+                            <Button type='submit' disabled={isPending}>
+                                {isPending ? <Loader className='w-4 h-4 animate-spin' /> : <ArrowRight className='w-4 h-4' />}{" "} Continue
+                            </Button>
+                        </div>
                     </form>
                 </Form>
-            </div>
-
-            <div className="flex gap-3">
-                <Button type='submit' disabled={isPending}>
-                    {isPending ? <Loader className='w-4 h-4 animate-spin' /> : <ArrowRight className='w-4 h-4' />}{" "} Continue
-                </Button>
             </div>
         </>
     );
@@ -161,7 +124,7 @@ export default ShippingAddressForm;
 //   - onChange: the function to call when the value changes
 //   - onBlur: when the input loses focus
 //   - name: the field name(like 'fullName')
-// When you use controlled components (like custom inputs or UI library inputs), react-hook-form wraps them using the <Controller> component. 
+// When you use controlled components (like custom inputs or UI library inputs), react-hook-form wraps them using the <Controller> component.
 // The render prop of Controller gives you access to an object called field, and ControllerRenderProps is the type of that field object.
 
 // z.infer<typeof shippingAddressSchema>

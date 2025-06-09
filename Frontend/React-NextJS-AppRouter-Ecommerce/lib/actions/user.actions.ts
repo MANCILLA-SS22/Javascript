@@ -1,17 +1,18 @@
 'use server';
 
+import { Session } from "next-auth";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
-import { hashSync } from "bcrypt-ts-edge";
 import { prisma } from "@/db/prisma"
-
+import { hashSync } from "bcrypt-ts-edge";
 import { auth, signIn, signOut } from "@/auth";
-import { shippingAddressSchema, signInFormSchema, signUpFormSchema } from "../constants/validators";
+
+import { paymentMethodSchema, shippingAddressSchema, signInFormSchema, signUpFormSchema } from "../constants/validators";
+import { PaymentMethods, ShippingAddress, User, UserSignUp } from "@/types";
 import { formatError } from "../utils";
-import { ShippingAddress } from "@/types";
 
 export async function signInWithCredentials(prevState: unknown, formData: FormData) {
     try {
-        const user = signInFormSchema.parse({ email: formData.get("email"), password: formData.get("password") }); //(1)
+        const user: UserSignUp = signInFormSchema.parse({ email: formData.get("email"), password: formData.get("password") }); //(1)
         await signIn('credentials', user); //(2)
         return { success: true, message: 'Signed in successfully' }
     } catch (error) {
@@ -86,9 +87,24 @@ export async function updateUserAddress(data: ShippingAddress){
     }
 }
 
+export async function updateUserPaymentMethod(data: PaymentMethods){
+    try {
+        const session: Session | null = await auth();
+        const currentUser: User = await prisma.user.findFirst({ where: { id: session?.user?.id } });
+        if(!currentUser) throw new Error("User not found");
+        const paymentMethod: PaymentMethods = paymentMethodSchema.parse(data);
+        await prisma.user.update({ where: {id: currentUser.id}, data: {payment: paymentMethod.type} });
+        return { success: true, message: "User updated successfully"}
+    } catch (error) {
+        return {success: false, message: formatError(error)};
+    }
+}
+
 //(1)
 // Given any Zod schema, you can call its .parse method to check data is valid. If it is, a value is returned with full type information! Otherwise, an error is thrown.
 // The value returned by .parse is a deep clone of the variable you passed in.
+// JavaScript and TypeScript don't validate data at runtime — they trust you. But you can’t trust external input (like data from APIs, users, forms, databases).
+// .parse() forces validation, ensuring the input matches your Zod schema.
 
 //(2)
 // In NextAuth.js, the signIn function allows you to authenticate users using different providers (e.g., Google, GitHub, Credentials, etc.). The first argument of signIn(provider, options) is the provider's

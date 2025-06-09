@@ -7,7 +7,7 @@ import Link from "next/link";
 
 import { APP_NAME } from "@/lib/constants";
 import CredentialsSignInForm from "./credentials-signin-form";
-import { getSession } from "@/lib/actions/cart.actions";
+import { auth } from "@/auth";
 
 export const metadata: Metadata = {
     title: 'Sign In'
@@ -19,7 +19,7 @@ type SearchParams = Promise<{ [key: string]: string | undefined }>
 // async function SignInPage(props: { praams: Params, searchParams: SearchParams }) {
 async function SignInPage({ params, searchParams }: { params: Params, searchParams: SearchParams }) {
     const { callbackUrl } = await searchParams; // const callbackUrl = (await props.searchParams).callbackUrl;
-    const session: Session | null = await getSession();
+    const session: Session | null = await auth();
     if (session) return redirect(callbackUrl || "/");
 
     return (
