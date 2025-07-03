@@ -1,8 +1,21 @@
 import { z } from "zod";
-import { cartItemSchema, insertCartSchema, insertOrderItemSchema, insertOrderSchema, insertProductSchema, paymentMethodSchema, shippingAddressSchema, signInFormSchema } from "@/lib/constants/validators";
+import { cartItemSchema, insertCartSchema, insertOrderItemSchema, insertOrderSchema, insertProductSchema, paymentMethodSchema, paymentResultSchema, shippingAddressSchema, signInFormSchema } from "@/lib/constants/validators";
 import { JsonValue } from "@prisma/client/runtime/library";
 
-export type User = { id: string, name: string, email: string, emailVerified: Date | null, image: string | null, password: string | null, address: JsonValue, payment: string | null, role: string, createdAt: Date, updatedAt: Date } | null
+export type User = { 
+    id: string, 
+    name: string, 
+    email: string, 
+    emailVerified: Date | null, 
+    image: string | null, 
+    password: string | null, 
+    address: JsonValue, 
+    payment: string | null, 
+    role: string, 
+    createdAt: Date, 
+    updatedAt: Date 
+} | null
+
 export type Product = z.infer<typeof insertProductSchema> & { id: string; rating: string; createdAt: Date; };
 export type Cart = z.infer<typeof insertCartSchema>;
 export type CartItem = z.infer<typeof cartItemSchema>;
@@ -17,9 +30,10 @@ export type Order = z.infer<typeof insertOrderSchema> & { //(1)
     paidAt: Date | null;
     isDelivered: Boolean;
     deliveredAt: Date | null;
-    orderitems: OrderItem[];
+    orderitem: OrderItem[];
     user: { name: string; email: string };
 };
+export type PaymentResult = z.infer<typeof paymentResultSchema>
 
 //(1)
 // This schema is likely used for creating a new order item — that is, for the input when a client submits a new item to add to an order. So, we only include the fields that the client is expected to send.

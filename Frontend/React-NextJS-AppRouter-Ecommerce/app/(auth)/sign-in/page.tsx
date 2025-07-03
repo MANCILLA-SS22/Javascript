@@ -13,8 +13,8 @@ export const metadata: Metadata = {
     title: 'Sign In'
 }
 
-type Params = Promise<{ slug: string }>
-type SearchParams = Promise<{ [key: string]: string | undefined }>
+type Params = Promise<{ slug: string }>;
+type SearchParams = Promise<{ [key: string]: string | undefined }>;
 
 // async function SignInPage(props: { praams: Params, searchParams: SearchParams }) {
 async function SignInPage({ params, searchParams }: { params: Params, searchParams: SearchParams }) {

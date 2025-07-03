@@ -8,3 +8,4 @@ export const signUpDefaultValues = { name: '', email: '', password: '', confirmP
 export const shippingAddressDefaultValues = { fullName: 'German mancilla', streetAddress: '123 main st', city: 'Tijuana', postalCode: '12345', country: "Mexico" }; // export const shippingAddressDefaultValues = { fullName: '', streetAddress: '', city: '', postalCode: '', country: "" };
 export const PAYMENT_METHODS = process.env.PAYMENT_METHODS ? process.env.PAYMENT_METHODS.split(", ") : ['PayPal', 'Stripe', 'CashOnDelivery'];
 export const DEFAULT_PAYMENT_METHOD = process.env.DEFAULT_PAYMENT_METHOD || 'PayPal';
+export const BASE_PAYPAL = process.env.BASE_PAYPAL || "https://api-m.sandbox.paypal.com";
