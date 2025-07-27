@@ -1,0 +1,194 @@
+                                                                                                             Tanstack Query
+                                                                                                                   
+
+- Definition: TanStack Query is often described as the missing data-fetching library for web applications, but in more technical terms, it makes fetching, caching, synchronizing and updating server state in your web pplications a breeze. It 
+  is a powerful data-fetching library for React applications. It simplifies the management of server-state and provides tools to handle data fetching, caching, synchronization, and more. 
+  Tanstack Query doesn't come with some built-in logic to send HTTP requests. Instead it comes with logic for managing those requests, for keeping track of the data and the possible errors that are yielded by these requests and so on.
+  Here are some key features and concepts:
+    > Data Fetching and Caching: Automatically caches data from server requests and synchronizes with the server, reducing the need for repetitive fetch requests.
+    > Stale-While-Revalidate: Keeps the UI fast and responsive by serving stale data from the cache while simultaneously fetching fresh data in the background.
+    > Automatic Refetching: Automatically refetches data when certain conditions are met, such as when the component mounts or the window is refocused.
+    > Pagination and Infinite Query: Easily handles paginated data and infinite scrolling scenarios.
+    > Query Invalidation: Allows you to invalidate specific queries, prompting a refetch to ensure the UI shows the most up-to-date data.
+    > Background Sync: Automatically refetches data at specified intervals to keep the UI in sync with the server.
+    > Optimistic Updates: Provides tools to perform optimistic updates, allowing the UI to be updated immediately while the server request is still in progress.
+    > DevTools: Offers a set of development tools to inspect queries, mutations, and cache status, which aids in debugging.
+  Some of the basic concepts are: 
+    > Queries: Represent asynchronous operations (like fetching data from an API). They are defined using the useQuery hook.
+    > Mutations: Represent operations that modify data (like sending data to an API). They are defined using the useMutation hook.
+    > Query Client: Manages the cache and orchestrates the fetching of data. It provides methods to manipulate the cache and refetch queries.
+ 
+- Queries: A query is a declarative dependency on an asynchronous source of data that is tied to a unique key. A query can be used with any Promise based method (including GET and POST methods) to fetch data from a server. If your method 
+  modifies data on the server, we recommend using Mutations instead. To subscribe to a query in your components or custom hooks, call the useQuery hook with at least:
+    > A unique key for the query. The unique key you provide is used internally for refetching, caching, and sharing your queries throughout your application.
+    > A function that returns a promise that resolves the data, or throws an error
+  The query result returned by useQuery contains all of the information about the query that you'll need for templating and any other usage of the data.
+
+- Query keys: 
+
+- <QueryClientProvider>: 
+
+- queryClient: The QueryClient can be used to interact with a cache. It is a central piece of the library responsible for managing queries, caching, triggering refetches, invalidate queries, and manage various states related to your data 
+  fetching, and interactions with the query cache. It acts as a service to the application by providing methods to fetch, cache, synchronize, and update data. 
+  The queryClient is used to:
+     1. Initiate Queries: Start fetching data and manage the state of the data fetching lifecycle.
+     2. Cache Data: Store data in a cache to prevent unnecessary network requests and provide instant access to previously fetched data. It handles the caching of query results, making it possible to share data across components and avoid 
+        unnecessary network requests.
+     3. Invalidate Queries: Mark queries as stale to trigger refetching. This is useful when you perform a mutation and want to ensure that the affected queries are refetched to reflect the latest data.
+     4. Update Queries: Programmatically update the data of a query.
+     5. Remove Queries: Remove queries from the cache.
+     6. Refetching: It can refetch queries on demand, which is useful for ensuring that your data is up-to-date.
+     7. Managing Query States: It allows you to manage the states of queries (loading, error, success) globally.
+
+- queryClient.invalidateQueries: Invalidates and refetches (automatically) single or multiple queries in the cache, matching a certain key, filter, or any other functionally accessible property/state of the query. So that allows us to tell 
+  RQ that the data fetched that's connected to some queries is outdated and that it should be marked as stale and that an immediate refetch should be triggered if the Query belongs to a component that's currently visible on the screen. 
+  By default, all matching queries are immediately marked as invalid and active queries are refetched in the background. 
+  If you want inactive queries to refetch, use the refetchType: 'all' option. If you do not want to active queries to refetch, and simply be marked as invalid, you can use the <refetchType: 'none'> option so you can you make sure that when 
+  you call "invalidateQueries", these existing queries will not automatically be triggered again immediately. Instead, they will just be invalidated and the next time they are required, they will run again. But they will not be re-triggered 
+  immediately which otherwise would be the default behavior.
+
+  It doesn't directly send a request to the backend. It marks the cached data associated with the query key as invalid. When someone tries to fetch that data again, the query client automatically triggers a request to the backend to refresh 
+  the data, using the information stored in the query key to construct the request. This will then invalidate all queries that include the an specific key on "queryKey".
+ 
+  It's important to note that we can have queryKey's with multiple keys inside but, if we'd have something like: queryClient.invalidateQueries({queryKey: ["events"]});
+  it means that we'd be invalidating queryKey's like: 
+     (1) queryKey: ["events"]
+     (2) queryKey: ["events", {searchTerm: searchTerm}]
+  The (2) will actually be invalidated because includes "events". Now, If we'd want to invalidate ONLY (1) and NOT the (2), then we should use: queryClient.invalidateQueries({queryKey: ["events"], exact: true}).
+  When using "events", all event related queries should be invalidated because they're all affected by the fact that an event has been deleted, updated, etc. After that, we invalidated all event related queries and we're still on that page.
+  And therefore, since we invalidated all queries. RQ went ahead and immediately triggered a refetch for the details query here.
+ 
+- queryClient.cancelQueries: The cancelQueries method can be used to cancel outgoing queries based on their query keys or any other functionally accessible property/state of the query. This is most useful when performing optimistic updates 
+  since you will likely need to cancel any outgoing query refetches so they don't clobber your optimistic update when they resolve. The queries being cancelled might involve network requests, which are inherently asynchronous. By making 
+  cancelQueries return a promise, it aligns with the asynchronous nature of network operations.
+  Put another way, It's used to cancel all active queries for a specific key by passing an object to cancel queries, and then setting a query key for which you want to cancel queries. With this, we're making sure that if we had any outgoing 
+  queries for that key, those queries would be canceled and we would not have clashing response data from those queries and our optimistically updated query data because if those ongoing queries finished before the updating request was done, 
+  we would've fetched old data again. (Keep in mind thas this returns a promise). So with that, we're canceling ongoing queries and then we'll set our own data with help of setQueryData. "cancelQueries" will not cancel the mutation it will 
+  really only cancel queries triggered with use query.
+  
+- queryClient.getQueryData: Retrieves the cached data for a query. It is a synchronous function that can be used to get an existing query's cached data. If the query does not exist, undefined will be returned.
+  Put another way, updating process on the backend could fail and in that case, we would now have outdated data in any modified data in the inputs. For example, if we delete something like the entire title (an input that's required) in a 
+  card, now it's updated in the frontend, but if we reload it's actually back because our backend code blocks this, the backend code need a title because it's a required parameter in the backend. So we wanna make sure that we roll back our 
+  optimistic update if it does fail on the backend. Then, to make sure that we can roll back, we also need to get the old data and store that old data somewhere so that we can roll back to that old data. And we should do that before we 
+  update the data. This method gives us the currently stored query data, which we of course want to execute before we set it to some new data. Now the getQueryData simply wants the key of the query for which we want to get the data. And with 
+  that we get our previous event. So the old event data. That's what we get with getQueryData. And now we wanna roll back to that event if our update mutation failed.  
+  
+- queryClient.setQueryData: It is a SYNCHRONOUS function that can be used to immediately update a query's cached data. If the query does not exist, it will be created. If the query is not utilized by a query hook in the default gcTime of 5 
+  minutes, the query will be garbage collected. To update multiple queries at once and match query keys partially, you need to use queryClient.setQueriesData instead. 
+  Directly sets the cached data for a specific query. This can be useful in scenarios where you need to update the query data locally, without making a network request. For example, after a mutation (like adding or updating an item), you 
+  might want to update the corresponding query's data to reflect the changes immediately.
+    
+  Put another way, we can manipulate that already stored data without waiting for a response. Normally it's manipulated by React Query whenever you got a new response that's being cached. It needs two arguments. The first one is the key of 
+  the query that you do want to edit. It is therefore the data that's stored for that event by React-Query which we wanna manipulate here without "waiting" for the response. The second one is the new data (updater) we wanna store under the 
+  query key. React Query actually passes the "data" variable, which you passed to "mutate", as a value to the "onMutate" function. So we automatically get that data which we did submit to the backend as input in the function in onMutate. Now 
+  that data we passed in from "mutate" to "onMutate" will manipulate the data behind the scenes without waiting for a response. 
+
+- queryClient.fetchQuery: It is an ASYNCHRONOUS method that can be used to fetch and cache a query. It will either resolve with the data or throw with the error. Use the prefetchQuery method if you just want to fetch a query without needing 
+  the result. If the query exists and the data is not invalidated or older than the given staleTime, then the data from the cache will be returned. Otherwise it will try to fetch the latest data.  
+  It will ensure that duplicate requests for this query are not created with useQuery instances for the same query are rendered while the data is fetching. 
+  The options for fetchQuery are exactly the same as those of useQuery, except the following: enabled, refetchInterval, refetchIntervalInBackground, refetchOnWindowFocus, refetchOnReconnect, refetchOnMount, notifyOnChangeProps, throwOnError, 
+  select, suspense, placeholderData; which are strictly for useQuery and useInfiniteQuery.
+
+- queryClient.refetchQueries: Refetches queries matching a certain key or filter without invalidating them. It can be used to refetch queries based on certain conditions.
+
+- queryClient.removeQueries: Removes queries matching a certain key or filter from the cache. It's be used to remove queries from the cache based on their query keys or any other functionally accessible property/state of the query.
+
+- useQuery: This hook is used to fetch and cache data in React apps. It's recommended to be used to only get data, NOT to send or update data even though it's possible. To send or update data, you should use useMutation().
+  It simplifies the process of making asynchronous requests and managing server state, providing features like caching, background updates, and automatic refetching:
+    > Data Fetching: Simplifies data fetching by managing the request and response cycle, including handling loading and error states.
+    > Caching: Automatically caches the fetched data to avoid unnecessary requests and improve performance.
+    > Background Refetching: Automatically refetches data in the background to keep it up-to-date.
+    > Stale-While-Revalidate: Serves stale data from the cache while fetching fresh data in the background.
+    > Automatic Retry: Retries failed requests automatically based on specified retry policies.
+    > Data Synchronization: Keeps multiple components synchronized with the latest data without manual intervention. 
+  Put another way, this hook will send an HTTP request, get us events data that we need and also give us information about loading state. So, if we are sending the request and potential errors. The {data} variable will exist on that object 
+  returned by useQuery and will be a property which holds the actual response data as a value so that, which in the end is returned by our custom fetching function, that data is what will end up in this data property as a value once this 
+  Query is done. But of course it will not be done instantly, instead as a first step, the request must be sent and we must wait for a response. Therefore, this object also contains an isPending property which tells us whether the request is 
+  currently still on its way or if we already get a response. And if we do have a response it must not necessarily be that data here. Instead, we could also be facing an error if something went wrong on the server.
+  
+  Here are some of the main options in this hook:
+    > queryKey: It's the query key to use for this query. The query key will be hashed into a stable hash. The query will automatically update when this key changes (as long as enabled is not set to false).
+      Put another way,every query or fetch request we are sending (every get HTTP request we are sending), also should have such a queryKey which will then internally be used by react-query to cache the data that's yielded by that request so 
+      that that response from that request could be used in the future if we're trying to send the same request again. And we can configure how long data should be stored and reused. This basically will make sure that data can be shown to 
+      the user quicker if we already have it because it doesn't need to be refetched all the time. That's why queryKey needs such a key and the key is actually an array of values which are then internally stored by react-query such that 
+      whenever we're using a similar array of fimilar values React Query sees that and is able to reuse existing data. Instead, React Query caches the response data you are getting back from your requests and it will reuse that data whenever 
+      it encounters a never useQuery execution with the same Query Key. 
+      For example: If we go back from other page to the an specific component, therefore, this component function executes again, React-Query will see that the queryKey has been used before and that it did already cache data for that key. 
+      And it will then instantly yield that data, but at the same time, also send the queryFn request again behind the scenes to see if the updated data is available. And then it will kind of silently replace that data with the updated data 
+      so that after a couple of seconds or however long it takes to fetch that data, we do have the updated data on the screen.
+    > queryFn: It's used to define the function responsible for fetching data. This function is called whenever a query is executed, and its return value is used to update the query's state. Essentially, queryFn is where you specify how and 
+      from where the data should be fetched. With this function we define the actual code that will be executed that will send the actual request and it'll return a promise. There are a few key concepts about this method which are: 
+        ~ This is required, but only if no default query function has been defined. 
+        ~ The function that the query will use to request data.
+        ~ Receives a QueryFunctionContext
+        ~ Must return a promise that will either resolve data or throw an error. The data cannot be undefined.
+      "signal" is used to handle request cancellation (abortion). If you, for example, left the page or navigate away from a page before the request was finished. You often define a queryFn that performs the data fetching. The signal method 
+      can be used within this function to check if a request has been cancelled, allowing you to abort the fetch request or any other async operation if necessary. This is particularly useful for improving performance and preventing memory 
+      leaks in applications by stopping unnecessary requests when a component unmounts or when a new request is triggered before the previous one completes. You can something like: 
+      queryFn: function({signal, queryKey}){};  If we extract that "signal" in the function it'll used to fetch the data, we can actually make sure that the request that is being sent is aborted if RQ thinks that it should be aborted.
+    > staleTime: This controls after which time react-query will send such a behind the scenes request to get updated data if it found data in your cache. 0 means that it will use data from the cache but it will then always also send such a 
+      Behind the Scenes request to get updated data. If you set staleTime to 5,000, for example, it will wait for 5,000 milliseconds before sending another request.
+    > gcTime: This is the Garbage Collection Time. This controls how long the data and the cache will be kept around. And the default here are five minutes. This would mean that the cached data would only be kept for 5 minutes and 
+      thereafter, it would be discarded. So thereafter, if this component needs to render again, there would be no cached data, and therefore, React Query would always need to send a new request to get some data before it can show anything.
+    > gcTime: The time in milliseconds that unused/inactive cache data remains in memory. When a query's cache becomes unused or inactive, that cache data will be garbage collected after this duration. When different garbage collection times 
+      are specified, the longest one will be used.
+    > staleTime: The time in milliseconds after data is considered stale. This value only applies to the hook it is defined on. If set to Infinity, the data will never be considered stale. If set to a function, the function will be executed 
+      with the query to compute a staleTime.
+    > enabled: Set this to false to disable this query from automatically running. If we set it to false, the query (request) is disabled and won't be sent, but if we set it to true, the query will be sent. It's important to note that when a 
+      query is disabled react-query treats the query as "pending" because we don'thave any data an instead we're waiting for that data to arrive, which can only happen once teh Query is enabled. Remember that you need to use the boolean 
+      "isLoading" method instead of using "isPending".
+      
+   Here are some of the main return values in this hook:
+    > isPending : A derived boolean from the status variable above, provided for convenience. The difference between is loading and is pending is that is loading will not be true if this Query is just disabled.
+    
+- useMutation(): It's a hook for creating, updating, or deleting data on the server. Unlike useQuery, which is primarily used for fetching data, useMutation handles actions that change data. Here are some key features and use cases:
+    1. Creating, Updating, Deleting Data: Use useMutation when you need to perform operations that modify data, such as POST, PUT, PATCH, or DELETE requests.
+    2. Optimistic Updates: useMutation supports optimistic updates, where the UI is updated immediately and then synchronized with the server response. This can improve the user experience by making the application feel more responsive.
+    3. Error Handling: It provides mechanisms for handling errors during mutations, allowing you to show appropriate error messages to users.
+    4. Side Effects: You can specify side effects to be performed before, during, and after the mutation using the onMutate, onError, onSuccess, and onSettled callbacks.
+    5. Invalidate Queries: After a mutation, you might want to invalidate certain queries to ensure that the UI reflects the latest data from the server. useMutation makes it easy to specify which queries should be invalidated upon success.
+  Put another way, this hook is optimized for such data changing queries, for example, simply by making sure that any requests are not sent instantly when the component renders as it by default is the case with useQuery. But that instead 
+  requests are only sent when you want to send them. We don't necessarily need to do use "mutationKey" because the idea with mutations typically isn't to cache their response data because they are primarily about changing something on your 
+  backend, not about getting and storing data in your fronted.
+
+  Here are some of the main options in this hook:
+    > mutationFn: Required, but only if no default mutation function has been defined. A function that performs an asynchronous task and returns a promise.
+      Even though the function in mutationFn needs some input data, we don't have to wrap it with an anonymous function if we don't want to.
+    > onSuccess: This function will fire when the mutation is successful and will be passed the mutation's result. If a promise is returned, it will be awaited and resolved before proceeding.
+      That's to say, we might want to wait for a mutation to be finished so we could navigate (let's say, by using useNavigate) to another page. So, the onSuccess function will ONLY be executed as soon as the mutationFn succeeds. On the 
+      other hand, if we were to use, like "useNavigate" withouth onSuccess, then our handler function would be executed no matter if "mutationFn" succeeds or fails.
+    > onMutate: This optional function will fire before "mutationFn" is fired (without waiting for a response of a backend) and is passed the same variables "mutationFn" would receive. It's useful to perform optimistic updates to a resource 
+      in hopes that the mutation succeeds, and the value returned from this function will be passed to both the onError and onSettled functions in the event of a mutation failure and can be useful for rolling back optimistic updates.
+      Put another way, This function will be executed right when you call "mutate". So before that process is done and before you got back a response. And it's in onMutate where you essentially wanna update the data that's cached by React 
+      Query where you wanna update the data that's stored behind the scenes. We must use queryClient because through it we can essentially interact with React Query and tell it to invalidate queries or to change the cached data. We 
+      should start by getting the currently stored data so that we can then manipulate and edit it.
+    > onError: This optional function will fire if the mutation encounters an error and will be passed the error. If a promise is returned, it will be awaited and resolved before proceeding.
+      Put another way, it's also wants a function which will be executed if this update mutation errors, so if it fails. It receives a couple of inputs that are passed in automatically by React Query. It receives the error object with which 
+      it failed, the data which was submitted to the mutationFn, and a "context" object that must come from the onMutate function.
+    > onSettled: This optional function will fire when the mutation is either successfully fetched or encounters an error and be passed either the data or error If a promise is returned, it will be awaited and resolved before proceeding
+      Put another way, It will simply be called whenever the "mutationFn" is done, no matter if it failed or succeeded. And in that case, just to be sure that you really got the same data in your frontEnd as you have on your backend. You 
+      should also, again use queryClient.invalidateQueries to invalidate our queries. And with this line and that property added in there we simply make sure that whenever this mutation finished, even though we did perform this optimistic 
+      updating and we rolled back if things went wrong, we still make sure that you fetched the latest data from the backend so that if the backend did something different and the data would be out of sync between backend and front end right 
+      now it gets back into sync by forcing React Query to refetch the data behind the scenes.
+
+  Here are some of the main return values in this hook:
+    > mutate: This function in the useMutation hook is used to trigger a mutation, which typically involves performing some operation that changes data on the server. This can include operations like creating, updating or deleting resources.
+      By using mutate, you can easily manage asynchronous operations that alter server-side data while integrating with Tanstack Query's powerful caching and synchronization features. Here's a basic overview of how the mutate function works:
+        1. Definition: You define a mutation by calling useMutation and passing it a function that performs the actual mutation (e.g., an API call).
+        2. Trigger: The mutate function returned by useMutation is called whenever you want to execute the mutation. You pass the necessary variables or data required by the mutation function. 
+        3. Callbacks: The mutate function can accept optional callbacks to handle the results of the mutation, including onSuccess, onError, and onSettled.
+      It is extremely important because this is now a function which you can call anywhere in a component to actually send a request, because useMutation, unlike useQuery does not automatically send a request 
+      when a component is rendered but instead only when you tell it to send that request, which you do with help of that mutationFn.
+        ~ onSuccess: This function will fire when the mutation is successful and will be passed the mutation's result. Void function, the returned value will be ignored. If you make multiple requests, onSuccess will fire only after the 
+          latest call you've made.
+        ~ onError: This function will fire if the mutation encounters an error and will be passed the error. Void function, the returned value will be ignored
+        ~ onSettled: This function will fire when the mutation is either successfully fetched or encounters an error and be passed either the data or error. Void function, the returned value will be ignored
+
+- useIsFetching(): It is an optional hook that returns the number of the queries that your application is loading or fetching in the background (useful for app-wide loading indicators).
+        
+- Optimistic Updates (Via the cache): When you optimistically update your state before performing a mutation, there is a chance that the mutation will fail. In most of these failure cases, you can just trigger a refetch for your optimistic 
+  queries to revert them to their true server state. In some circumstances though, refetching may not work correctly and the mutation error could represent some type of server issue that won't make it possible to refetch. In this event, you 
+  can instead choose to roll back your update.
+  To do this, useMutation's onMutate handler option allows you to return a value that will later be passed to both onError and onSettled handlers as the last argument. In most cases, it is most useful to pass a rollback function.
+  If you only have one place where the optimistic result should be shown, using variables and updating the UI directly is the approach that requires less code and is generally easier to reason about. For example, you don't need to handle 
+  rollbacks at all. However, if you have multiple places on the screen that would require to know about the update, manipulating the cache directly will take care of this for you automatically.

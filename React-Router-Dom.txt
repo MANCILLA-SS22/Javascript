@@ -1,0 +1,235 @@
+                                                                                                                  React-Router-Dom
+                                                                                                                   
+                                                                                                                   
+- Absolute paths: An absolute path is the location of a file or directory specified from the root directory. It represents the complete path from the start of the filesystem from the root directory.
+  The absolute path always begins from the start of the hard drive or other storage device, describing every step the user must take through the file system to end up in the specified location. Absolute paths are unambiguous and easy to 
+  understand, and they are useful when you need to specify a file or directory's location precisely, irrespective of your current working directory. However, absolute paths can also be inconvenient to work with, especially when working with 
+  deeply nested directories. They allow you to reference files and modules from any location in your project without specifying the relative path from the current file. This can make your code more readable and maintainable.
+  In React-Router-Dom,  they're complete paths that define the exact location in the application's route hierarchy. They always start with a slash (/). They're useful when you want to define a route that should always be accessed directly 
+  from the root of your application. For example: /about points directly to the /about route, regardless of the current location in the app.
+  Absolute Paths always start with /, define routes relative to the root of the application, and are useful for top-level routes. (This means that it's always seen from after the domain name.)
+
+- Relative paths: A relative path is the location of a file or directory relative to your current working directory. Unlike an absolute path, the relative path doesn't start with a slash or drive letter since it doesn't start from the root 
+  directory. Relative paths simplify working with files by minimizing the typing needed to specify the file or directory path. A relative path is used whenever you refer to a file or directory only by its name. That is the simplest form of a 
+  relative path, and the shell looks for the specified file name within the current directory.
+  In React-Router-Dom, they're partial paths that are relative to the current route. They do not start with a slash. They're useful when defining nested routes or links within a nested route structure. For example:
+  If you are currently on /dashboard and use a relative path settings, it will point to /dashboard/settings.
+  Relative Paths do not start with /, define routes relative to the current route, and are useful for nested routes or links within nested structures. (they're nested in the "/" route)
+                                                                                                                   
+- createBrowserRouter([{}]): This is the recommended router for all React Router web projects. It's a powerful function provided by React Router that simplifies the process of setting up a router using the HTML5 history API. It allows you to 
+  define routes declaratively and provides a clean, hash-free URL structure for your React applications.
+
+- Routes: Routes are perhaps the most important part of a React Router appThey couple URL segments to components, data loading and data mutations. Through route nesting, complex application layouts and data dependencies become simple and 
+  declarative. Routes are objects passed to the router creation functions.
+   > path: The path pattern to match against the URL to determine if this route matches a URL, link href, or form action.
+     ~ Dynamica Segments: If a path segment starts with : then it becomes a "dynamic segment". When the route matches the URL, the dynamic segment will be parsed from the URL and provided as params to other router APIs.
+     ~ Optional Segments: You can make a route segment optional by adding a ? to the end of the segment.
+     ~ Splats: Also known as "catchall" and "star" segments. If a route path pattern ends with /* then it will match any characters following the /, including other / characters.
+     ~ Layout route: is a route that is used to apply a common layout or structure to multiple child routes. This is particularly useful when you have a consistent layout that should be applied to several pages or sections of your 
+       pplication, such as a header, footer, or sidebar that remains the same while the content changes.  
+   > index: Determines if the route is an index route. Index routes render into their parent's <Outlet/> at their parent's URL (like a default child route). This property is used to specify that a particular route should act as the default 
+     or index route for a set of nested routes. This means that when a user navigates to the parent route, the index route will be rendered by default if no specific child route is matched. 
+     This index route, which acts as the default route within a set of nested routes. It simplifies the management of nested routes by ensuring that a default component is rendered when navigating to a parent route. This approach enhances 
+     the user experience by providing clear and intuitive navigation within your application.
+   > element: This' the React Element/Component to render when the route matches the URL. The element parameter is used to specify the component that should be rendered when the route matches. This is typically used within a route definition 
+     to determine what component should be displayed for a given path.
+   > errorElement: When a route throws an exception while rendering, in a loader or in an action, this React Element/Component will render instead of the normal element/Component. The errorElement parameter is used to specify a component 
+     that should be rendered when there is an error during the rendering of a route. This is useful for displaying custom error messages or handling errors gracefully within the routing system.
+   > id: It helps uniquely identify each route. This ID can be useful in various scenarios, such as:
+     ~ Error Handling: Each route can be assigned an id, and if an error occurs, the router can provide more detailed information about which specific route failed.
+     ~ Data Loading and Caching: When using data loaders, the id can help identify and manage the data associated with each route. This can improve caching mechanisms and make the data loading process more efficient.
+     ~ Nested Routes: In complex applications with nested routes, having unique identifiers for each route can simplify the process of locating and managing specific routes within the routing hierarchy.
+   > children: This parameter is used to define nested routes within a parent route. This allows for the creation of complex routing structures where a parent route can contain multiple child routes, each rendering different components based 
+     on the URL path. This also enables the creation of hierarchical routing structures, making it easier to manage complex applications with nested layouts or sections. By using the children parameter, you can ensure that nested routes are 
+     rendered within a common layout, promoting code reuse and maintaining a consistent user experience.
+   > loader: It's a function is used to load data asynchronously for a particular route. This function is part of the routing configuration and is called before the route component is rendered (then loader function will be triggered) and 
+     provides data for the element through useLoaderData. It allows you to fetch data that the component needs in advance, ensuring that the component has all the data available when the it's mounted (first rendered), helping to avoid 
+     loading states inside the component and improving the user experience by minimizing loading times and handling errors gracefully. This function returns a promise and allows you to load necessary data for a route and pass it to the 
+     component that the route renders. 
+   > action: It's called when a submission is sent to the route from a Form, fetcher, submission, navigation events, or other types of user interactions that trigger the route change. It is used to handle form submissions and other non-GET 
+     requests (such as POST, PUT, DELETE) within a route. It allows you to process the form data and perform any necessary side effects (e.g., updating a database) before the component renders. This function receives a request object and 
+     typically returns a response or a redirect. And you can use the useActionData hook to access the data returned from the action function in your component. Route actions are the "writes" to route loader "reads". 
+     Specifically, it can refer to the way navigation is handled when using hooks like useNavigate or components like <Navigate>. For instance, when you use the useNavigate hook, you can specify the action parameter to determine how the 
+     navigation should be performed.
+   > lazy: In order to keep your application bundles small and support code-splitting of your routes, each route can provide an async function that resolves the non-route-matching portions of your route definition (loader, action,     
+     Component/element, ErrorBoundary/errorElement, etc.). Lazy routes are resolved on initial load and during the loading or submitting phase of a navigation or fetcher call. You cannot lazily define route-matching properties (path, index, 
+     children, caseSensitive) since we only execute your lazy route functions after we've matched known routes. Each lazy function will typically return the result of a dynamic import.
+     In other words, this function is used to load components lazily, which means they are only loaded when needed. This can significantly improve the performance of your application by reducing the initial load time.
+     The lazy function works by dynamically importing the component only when it is needed for rendering. This is particularly useful for large applications where loading all components upfront can be inefficient.
+
+- <RouterProvider/>: All data router objects are passed to this component to render your app and enable the rest of the data APIs. It is used to wrap your entire application and provide the router instance you have configured to all the 
+  components in your application tree. It  acts as a context provider for the routing context, making the routing state and functionality available throughout your component tree. It takes a router instance created by functions like 
+  createBrowserRouter or createMemoryRouter as a prop. And, by using RouterProvider, you centralize the routing configuration and ensure all parts of your application can access and interact with the router.
+
+- <Outlet>: An <Outlet> should be used in parent route elements to render their child route elements. This allows nested UI to show up when child routes are rendered. If the parent route matched exactly, it will render a child index route or 
+  nothing if there is no index route. It's a placeholder that tells the router where to render the nested routes. This is particularly useful when building nested layouts, where you have a main layout and different content that changes based 
+  on the current route.  
+  If we were to use Outlet inside a <main> tag, then this tag specifies the main content of a document. The content inside the <main> element should be unique to the document. It should not contain any 
+  content that is repeated across documents such as sidebars, navigation links, copyright information, site logos, and search forms. Outlet is what represents the content that is unique to the app. So basically it loads different views based 
+  on the route that gets visited. So semantically using the main element makes sense but of course one can use any other element as well. There is no mandatory thing here.  
+  
+- <Link>: It's an element that lets the user navigate to another page by clicking or tapping on it. It renders an accessible <a> element with a real href that points to the resource it's linking to. it provides the following benefits:
+   > Client-side navigation: Instead of making a full page reload, <Link> allows the application to navigate between different routes on the client side, making the transitions faster and smoother.
+   > Preserves application state: By preventing full page reloads, it helps preserve the state of your application. This means that the state of components doesn't get reset upon navigation.
+   > Integration with Router: <Link> works seamlessly with React Router to handle routing logic, such as updating the URL, maintaining history, and triggering route changes.
+  You can use <Link reloadDocument> to skip client side routing and let the browser handle the transition normally (as if it were an <a href>).
+  You can also use "realtive", which means that links are relative to the route hierarchy (relative="path"), so ".." will go up one Route level from the current contextual route. Occasionally, you may find that you have matching URL patterns 
+  that do not make sense to be nested, and you'd prefer to use relative path routing from the current contextual route path. You can opt into this behavior with relative="path"
+  
+- <NavLink>: It is a special kind of <Link> that knows whether or not it is "active", "pending", or "transitioning". It is used to create navigation links with styling that can be automatically applied when the link is active, i.e., when the 
+  link's destination matches the current URL. This is useful when building a navigation menu, such as a breadcrumb or a set of tabs where you'd like to show which of them is currently selected. It provides useful context for assistive 
+  technology like screen readers. And, it provides a "transitioning" value to give you finer-grained control over View Transitions. This component has the following props: 
+   > active: By default, an active class is added to a <NavLink> component when it is active so you can use CSS to style it. This make it easy to highlight the active link.
+   > className: It works like a normal className, but you can also pass it a function to customize the classNames applied based on the active and pending state of the link.
+   > children: You can pass a render prop as children to customize the content of the <NavLink> based on the active and pending state, which is useful to change styles on internal elements.
+   > style: It works like a normal style prop, but you can also pass it a function to customize the styles applied based on the active and pending state of the link.
+   > to: The destination URLK (required).
+   > caseSensitive: Adding the caseSensitive prop changes the matching logic to make it case sensitive.
+   > end: It changes the matching logic for the active and pending states to only match to the "end" of the NavLink's to path. If the URL is longer than to, it will no longer be considered active. <NavLink to="/"> is an exceptional case 
+     because every URL matches /. To avoid this matching every single route by default, it effectively ignores the end prop and only matches when you're at the root route. For example: 
+       <NavLin
+       k to="/tasks"/>         --->  /tasks/123    --->   isActive = true
+       <NavLink to="/tasks" end/>     --->  /tasks/123    --->   isActive = false
+       <NavLink to="/tasks/" end />   --->	 /tasks        --->   isActive = false
+       <NavLink to="/tasks/" end />   --->  /tasks/       --->   isActive = true
+   
+- <Form>: The Form component is a wrapper around a plain HTML form that emulates the browser for client side routing and data mutations. It is not a form validation/state management library like you might be used to in the React ecosystem 
+  (for that, we recommend the browser's built in HTML Form Validation and data validation on your backend server). All of this will trigger state updates to any rendered useNavigation hooks so you can build pending indicators and optimistic 
+  UI while the async operations are in-flight. If the form doesn't feel like navigation, you probably want useFetcher.
+    > action: It's the url to which the form will be submitted, just like HTML form action. The only difference is the default action. With HTML forms, it defaults to the full URL. With <Form>, it defaults to the relative URL of the closest 
+      route in context.
+    > method: This determines the HTTP verb to be used. The same as plain HTML form method, except it also supports "put", "patch", and "delete" in addition to "get" and "post". The default is "get". (Get submissions will not call an action)
+    > navigate: You can tell the form to skip the navigation and use a fetcher internally by specifying <Form navigate={false}>. This is essentially a shorthand for useFetcher() + <fetcher.Form> where you don't care about the resulting data 
+      and only want to kick off a submission and access the pending state via useFetchers().
+    > fetcherKey: When using a non-navigating Form, you may also optionally specify your own fetcher key to use via <Form navigate={false} fetcherKey="my-key">.
+    > replace: Instructs the form to replace the current entry in the history stack, instead of pushing the new entry.
+    > relative: By default, paths are relative to the route hierarchy, so .. will go up one Route level. Occasionally, you may find that you have matching URL patterns that do not make sense to be nested,and you're prefer to use relative 
+      path routing. You can opt into this behavior with <Form to="../some/where" relative="path">
+    > reloadDocument: Instructs the form to skip React Router and submit the form with the browser's built in behavior. 
+    > state: The state property can be used to set a stateful value for the new location which is stored inside history state. This value can subsequently be accessed via useLocation().
+    > preventScrollReset: this lets you prevent the scroll position from being reset to the top of the window when the form action redirects to a new location.
+  The "Form" tag will make sure that the browser default of sending a request to the backend will be omitted, but it will take that request that would've been sent and give it to our action. This is pretty useful because that request will 
+  contain all the data that was submitted as part of the form. That's to say, the 'post' method in Form won't be sent to the backend automatically, but instead to the our action and it will include all the form data.
+  
+- <Await>: Used to render deferred values with automatic error handling. Make sure to review the Deferred Data Guide since there are a few APIs that work together with this component. It expects to be rendered inside of a <React.Suspense> or 
+  <React.SuspenseList> parent to enable the fallback UI. If you do not provide an errorElement, the rejected value will bubble up to the nearest route-level errorElement and be accessible via the useRouteError hook.
+   > children: Can either be React elements or a function.
+   > errorElement: The error element renders instead of the children when the promise rejects. You can access the error with useAsyncError. If the promise rejects, you can provide an optional errorElement to handle that error in a contextual 
+     UI via the useAsyncError hook.
+   > resolve: Takes a promise returned from a deferred loader value to be resolved and rendered. That's to say, the promise comiong from the "defer" utility.
+
+- redirect: When you wanna return or throw responses in loaders and actions, you can use redirect to redirect to another route. It's recommended to use redirect in loaders and actions rather than useNavigate in your components when the 
+  redirect is in response to data.
+
+- json: It's used for handling and parsing JSON responses within loader and action functions. Loader and action functions are responsible for fetching and managing data. These functions return a response object, and the json() utility 
+  simplifies the process of creating these responses with JSON content. The json() utility helps in creating a response object with the appropriate headers and JSON data. This is useful when you want to return JSON data from a loader or 
+  action function. And it makes it easier to handle and return errors with appropriate status codes and messages.   You can throw in your loader to break out of the current call stack (stop running the current code) and React Router will 
+  start over down the "error path". That's to say:
+   > return json()   --> return code with no errors
+   > throw json()    --> generate an error. Then, with help of "useRouteError" we'll be able to get that error.
+  
+  A shortcut for: 
+      new Response(JSON.stringify(someValue), {
+        headers: { "Content-Type": "application/json; utf-8" },
+      });  
+      
+- defer: This utility allows you to defer values returned from loaders by passing promises instead of resolved values. It's used to defer the loading of data until it is actually needed. This can be particularly useful for optimizing the 
+  loading experience of your application. When data fetching is deferred, it means that the rendering of a component or a route can proceed without waiting for the data to be fully loaded, and the data can be loaded asynchronously in the 
+  background. It's important to note that this must be used with help of <Await> and <Suspense>.
+  Here’s a basic explanation of how defer works:
+    > Deferring Data Loading: Instead of fetching all necessary data before rendering a route, defer allows you to fetch the data after the route has been matched and the component has been rendered. This can improve the perceived 
+      performance of your application by reducing the initial load time.
+    > Loading States: While the data is being fetched, you can display a loading indicator or a placeholder UI. Once the data is loaded, it can be seamlessly injected into the component.
+    > Optimizing Route Rendering: By deferring the data fetching, you can avoid blocking the rendering of your routes and provide a smoother user experience.
+ By using defer, the component can start rendering immediately, and the data will be injected once it is available, providing a smoother and faster user experience.
+ 
+- useLoaderData: It's a speciall hook which allow us to get access to the closest loader data. That's to say, you can retrieve data from the "loader" function used in the router "createBrowserRouter". You can use it in the elements that's 
+  assigned to a route and in all compo0nents that might be used inside that element.
+
+- useRouteLoaderData: This hook makes the data at any currently rendered route available anywhere in the tree. This is useful for components deep in the tree needing data from routes much farther up, as well as parent routes needing the data 
+  of child routes deeper in the tree. Basically, it allow us to get access to a higher level loader (by means of an id) from a route that doesn't have a loader. 
+  React Router stores data internally with deterministic, auto-generated route ids, but you can supply your own route id to make this hook much easier to work with. Consider a router with a route that defines an id.
+
+- useSubmit: The imperative version of <Form> that lets you, the programmer, submit a form instead of the user. It's used to programmatically submit a form. It's particularly useful in scenarios where you need to trigger a form submission 
+  without using a traditional form submit button, and based on some custom logic or events that are not directly tied to the form's submit button. This give you more control over how and when forms are submitted in your React applications.
+  It's important to keep in mind that we must use and "action" function so we can retrieve the data coming from useSubmit. For example, we'd have our action function like this:    async function actionEventDetail({ request, params }) {}
+  and this data is related to the "request" variable. 
+  The first argument to submit accepts many different values. You can submit any form or form input element. You can submit FormData, URLSearchParams or anything that the URLSearchParams constructor accepts. This data will automatically be 
+  wrapped in a form data object which we then could extract by using "request.formData()
+  The second argument is a set of options that map (mostly) directly to form submission attributes. Some of those arguments are: 
+    > method: The HTTP method to use (e.g., 'post', 'get').
+    > action: The URL to submit the form to.
+    > replace": A boolean indicating whether to replace the current entry in the history stack.
+    > fetcherKey: 
+    > navigate:  
+    > preventScrollReset: 
+    > relative: 
+    > state: 
+
+- useRouteError: Inside of an errorElement, this hook returns anything THROWN during an action, loader, or rendering.
+
+- useAsyncError: Returns the rejection value from the nearest [<Await>][await] component. This is useful when handling errors by means of the "defer" utility. 
+
+- useNavigate: The useNavigate hook returns a function that lets you navigate programmatically, for example in an effect. The navigate function has two signatures: Either pass a To value (same type as <Link to>) with an optional second 
+  options argument (similar to the props you can pass to <Link>). Or pass the delta you want to go in the history stack. For example, navigate(-1) is equivalent to hitting the back button.
+
+- useNavigation: This hook tells you everything you need to know about a page navigation to build pending navigation indicators and optimistic UI on data mutations. Things like: Global loading indicators, Disabling forms while a mutation is 
+  happening, Adding busy indicators to submit buttons, Optimistically showing a new record while it's being created on the server,and Optimistically showing the new state of a record while it's being updated. 
+  When using this hook, we'll be able to get access to the following methods:
+    > state: When using this method, we'll get the following 3 answers: 
+       ~ idle - There is no navigation pending.
+       ~ submitting - A route action is being called due to a form submission using POST, PUT, PATCH, or DELETE
+       ~ loading - The loaders for the next routes are being called to render the next page
+      Normal navigations and GET form submissions transition through these states:       idle → loading → idle
+      Form submissions with POST, PUT, PATCH, or DELETE transition through these states: idle → submitting → loading → idle
+    > location: This tells you what the next location is going to be.
+    > formData: Any POST, PUT, PATCH, or DELETE navigation that started from a <Form> or useSubmit will have your form's submission data attached to it. This is primarily useful to build "Optimistic UI" with the submission.formData FormData 
+      object: In the case of a GET form submission, formData will be empty and the data will be reflected in navigation.location.search.
+    > json: Any POST, PUT, PATCH, or DELETE navigation that started from a useSubmit(payload, { encType: "application/json" }) will have your JSON value available in navigation.json.
+    > text: Any POST, PUT, PATCH, or DELETE navigation that started from a useSubmit(payload, { encType: "text/plain" }) will have your text value available in navigation.text.
+    > formAction: Any POST, PUT, PATCH, or DELETE navigation that started from a <Form> or useSubmit will have form's submission action route's path value available in navigation.formAction. In the case of a GET form submission, 
+      navigation.formAction will be empty. If you submitted the form at example.com/id, then navigation.formAction would be "/id"
+    > formMethod: Any POST, PUT, PATCH, or DELETE navigation that started from a <Form> or useSubmit will have form's submission method value available in navigation.formMethod. In the case of a GET form submission, navigation.formMethod 
+      will be empty. Here is an example.
+   
+- useFetcher: In HTML/HTTP, data mutations and loads are modeled with navigation: <a href> and <form action>. Both cause a navigation in the browser. The React Router equivalents are <Link> and <Form>.
+  But sometimes you want to call a loader outside of navigation, or call an action (and get the data on the page to revalidate) without changing the URL or reloading. Or you need to have multiple mutations in-flight at the same time.
+  Many interactions with the server aren't navigation events. This hook lets you plug your UI into your actions and loaders without navigating.   
+  
+  It should be used in different cases:
+    > Whenever we wanna trigger actions, loaders or perform side effects such as loading data or submitting data (like forms) without actually navigating to the page to which the loader or action belongs. That's to say, avoid moving to a 
+      different route transition or re-loading the page. If we use just Form then we'll be forwarded to the other route after submitting.
+    > Fetching Data: It can be used to load data from an external source, such as an API endpoint, without triggering a navigation. Basically, without navigating away from the current page. This allows you to fetch data when certain events 
+      occur, like when a component mounts or when a button is clicked.
+    > Submitting Forms: You can use it to submit forms programmatically or asynchronously and handle the form submission lifecycle, including loading states and handling responses.
+    > handle multiple concurrent submissions in a list (typical "todo app" list where you can click multiple buttons and all should be pending at the same time)
+    > infinite scroll containers
+    > creating seamless user experiences where data loading and form handling happen in the background.
+    > Provides a streamlined way to manage loading states, handle errors, and manage form submission responses.
+    > You can programmatically control the form submission process, including handling responses and updating UI state based on the outcome of the submission.
+
+  Fetchers have a lot of built-in behavior:
+    > Automatically handles cancellation on interruptions of the fetch
+    > When submitting with an HTTP method, the action's called first after the action completes, the data on the page is revalidated to capture any mutations that may have happened,automatically keeping your UI in sync with your server state
+    > When multiple fetchers are inflight at once, it will commit the freshest available data as they each land, and ensure no stale loads override fresher data, no matter which order the responses return.
+    > Handles uncaught errors by rendering the nearest errorElement (just like a normal navigation from <Link> or <Form>)
+    > Will redirect the app if your action/loader being called returns a redirect (just like a normal navigation from <Link> or <Form>)
+    
+  This hook owns the folloing properties: 
+    > Form: Just like <Form> except it doesn't cause a navigation.
+    > state: You can know the state of the fetcher with fetcher.state. It will be one of:
+      ~ idle - nothing is being fetched.
+      ~ submitting - A route action is being called due to a fetcher submission using POST, PUT, PATCH, or DELETE
+      ~ loading - The fetcher is calling a loader (from a fetcher.load) or is being revalidated after a separate submission or useRevalidator call
+    > submit(): The imperative version of <fetcher.Form>. If a user interaction should initiate the fetch, you should use <fetcher.Form>. But if you, the programmer are initiating the fetch (not in response to a user clicking a button, 
+      etc.), then use this function.
+    > data: The returned data from the loader or action is stored here. Once the data is set, it persists on the fetcher even through reloads and resubmissions.
+    > json: When using fetcher.submit(data, { formEncType: "application/json" }), the submitted JSON is available via fetcher.json.
+    > text: When using fetcher.submit(data, { formEncType: "text/plain" }), the submitted text is available via fetcher.text.
+    > formData: When using <fetcher.Form> or fetcher.submit(), the form data is available to build optimistic UI.
+    > formAction: Tells you the action url the form is being submitted to.
+    > formMethod: Tells you the method of the form being submitted: get, post, put, patch, or delete.
+
+- useSubmit: 
+   
+- useActionData:

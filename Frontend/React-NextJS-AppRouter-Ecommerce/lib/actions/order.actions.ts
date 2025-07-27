@@ -1,5 +1,6 @@
 'use server';
 
+import { Session } from "next-auth";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { convertToPlainObject, formatError } from "../utils";
 import { auth } from "@/auth";
@@ -10,10 +11,11 @@ import { prisma } from "@/db/prisma";
 import { CartItem, PaymentResult } from "@/types";
 import { paypal } from "../paypal";
 import { revalidatePath } from "next/cache";
+import { PAGE_SIZE } from "../constants";
 
 export async function createOrder() {
     try {
-        const session = await auth();
+        const session = await auth(); 
         if (!session) throw new Error('User is not authenticated');
 
         const userId = session?.user?.id;
@@ -24,17 +26,20 @@ export async function createOrder() {
 
         const user = await getUserById(userId);
         if (!user.address) return { success: false, message: 'No shipping address', redirectTo: '/shipping-address' };
-        if (!user.payment) return { success: false, message: 'No payment method', redirectTo: '/payment-method' };
+        if (!user.paymentMethod) return { success: false, message: 'No payment method', redirectTo: '/payment-method' };
 
         const orderValidation = insertOrderSchema.parse({
             userId: user.id,
             shippingAddress: user.address,
-            payment: user.payment,
+            paymentMethod: user.paymentMethod,
             itemsPrice: cart.itemsPrice,
             shippingPrice: cart.shippingPrice,
             taxPrice: cart.taxPrice,
             totalPrice: cart.totalPrice,
         });
+        
+
+        console.log("orderValidation", orderValidation);
 
         const insertedOrderId: string = await prisma.$transaction(async function (tx) { //"tx" represents all the models in the "schema.prisma" file. Like: "Product", "User", "Account", "Session", "VerificationToken", "Cart", "Order" and "OrderItem"
             const insertedOrder = await tx.order.create({ data: orderValidation }); // Create order
@@ -56,6 +61,8 @@ export async function createOrder() {
 
             return insertedOrder.id;
         });
+
+        console.log("insertedOrderId", insertedOrderId);
 
         if (!insertedOrderId) throw new Error('Order not created');
         return { success: true, message: 'Order created', redirectTo: `/order/${insertedOrderId}` };
@@ -180,4 +187,21 @@ async function verifyOrder(orderId: string) {  //Get updated order after transac
     });
 
     if (!updatedOrder) throw new Error("Order not found");
+}
+
+export async function getMyOrders({ limit = PAGE_SIZE, page }: { limit?: number, page: number }) {
+    const session: Session | null = await auth();
+    if (!session) throw new Error('User not authorized');
+
+    const data = await prisma.order.findMany({
+        where: { userId: session.user?.id! },
+        orderBy: { createdAt: 'desc' },
+        take: limit,
+        skip: (page - 1) * limit
+    });
+
+    const dataCount: number = await prisma.order.count({ where: { userId: session.user?.id! } });
+    const totalPages: number = Math.ceil(dataCount / limit); 
+
+    return {  data, totalPages }
 }

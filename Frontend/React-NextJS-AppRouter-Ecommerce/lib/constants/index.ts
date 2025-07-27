@@ -9,3 +9,4 @@ export const shippingAddressDefaultValues = { fullName: 'German mancilla', stree
 export const PAYMENT_METHODS = process.env.PAYMENT_METHODS ? process.env.PAYMENT_METHODS.split(", ") : ['PayPal', 'Stripe', 'CashOnDelivery'];
 export const DEFAULT_PAYMENT_METHOD = process.env.DEFAULT_PAYMENT_METHOD || 'PayPal';
 export const BASE_PAYPAL = process.env.BASE_PAYPAL || "https://api-m.sandbox.paypal.com";
+export const PAGE_SIZE = Number(process.env.PAGE_SIZE) || 2;

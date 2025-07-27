@@ -10,7 +10,7 @@ export type User = {
     image: string | null, 
     password: string | null, 
     address: JsonValue, 
-    payment: string | null, 
+    paymentMethod: string | null, 
     role: string, 
     createdAt: Date, 
     updatedAt: Date 

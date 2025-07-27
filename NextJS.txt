@@ -1,0 +1,367 @@
+                                                                                                                   NextJS
+
+- Definition: https://nextjs.org/docs
+
+- Next.js Project Structure: This page provides an overview of the project structure of a Next.js application. It covers top-level files and folders, configuration files, and routing conventions within the app and pages directories.
+
+- app Routing Convention: The following file conventions are used to define routes and handle metadata in the app router. These filenames are only reserved when creating them inside of the app/ folder (or any subfolder). Outside of the app/ 
+  folder, these filenames are not treated in any special way.
+   > page.js:  Create a new page (e.g., app/about/page.js creates a <your-domain>/about page)
+   > layout.js: Create a new layout that wraps sibling and nested pages
+   > not-found.js: Fallback page for "Not Found" errors (thrown by sibling or nested pages or layouts)
+   > error.js: Fallback page for other errors (thrown by sibling pages or nested pages or layouts)
+   > loading.js: Fallback page which is shown whilst sibling or nested pages (or layouts) are fetching data
+   > route.js: Allows you to create an API route (i.e., a page which does NOT return JSX code but instea
+
+- Hydration: It's how React attaches to existing HTML that was already rendered by React in a server environment. During hydration, React will attempt to attach event listeners to the existing markup and take over rendering the app on the 
+  client. 
+  It refers to the process of taking a server-rendered HTML markup and making it interactive by attaching event handlers or event listeners to the DOM, and converting it into a fully functional React application on the client side 
+  to make the static HTML interactive. This is particularly important in scenarios involving server-side rendering (SSR), where the initial HTML is generated and sent by the server to ensure faster load times and better SEO. Here's a step-
+  by-step breakdown of the hydration process:
+    1. Server-Side Rendering (SSR): The React application is rendered to HTML on the server. This HTML is sent to the client as the initial response.
+    2. Initial Load: The client receives the server-rendered HTML, which can be displayed immediately. This helps with performance as users can see the content faster, and it improves SEO since search engines can crawl the HTML content.
+    3. Hydration: Once the HTML is loaded, React takes over and "hydrates" the application. This involves:
+       > React loading the JavaScript bundle.
+       > React attaching event listeners and making the HTML interactive.
+       > React reconciling the initial HTML markup with the current state of the React components.
+    4. Interactive Application: After hydration, the application becomes fully interactive, and React takes control of the DOM updates as usual.
+  Hydration is crucial for combining the benefits of SSR and client-side rendering (CSR). It allows for faster initial page loads with server-rendered HTML while still enabling the rich, interactive user experiences provided by a client-side 
+  React application.
+
+  Put another way, It's like watering the “dry” HTML with the “water” of interactivity and event handlers. The server sends the client HTML along with a link to the JS to download. The JS gets downloaded and then “hydrates” the page taking 
+  it from a plain page to one with interactivity meaning adding handlers to buttons, events to elements on the page like onClick and so forth.
+
+- Client components: They allow you to write interactive UI that is prerendered on the server and can use client JavaScript to run in the browser. Here are a couple of benefits to doing the rendering work on the client, including:
+   > Interactivity: Client Components can use state, effects, and event listeners, meaning they can provide immediate feedback to the user and update the UI.
+   > Browser APIs: Client Components have access to browser APIs, like geolocation or localStorage.
+
+  Put another way, it typically refers to components that are rendered and managed on the client-side, as opposed to being rendered on the server-side. Here's a breakdown of what client components involve:
+   1. Client-Side Rendering (CSR):
+      > Client components are rendered in the browser.
+      > The initial HTML content is minimal and serves as a placeholder.
+      > React code (JavaScript) is sent to the browser, which then takes over and dynamically generates and manages the content.
+      > The rendering happens entirely on the client side after the initial page load.
+   2. Advantages of Client Components:
+      > Interactivity: They allow for rich interactivity and dynamic updates without requiring a full page reload.
+      > Performance: For highly interactive applications, rendering on the client can reduce the load on the server and improve perceived performance for users.
+      > User Experience: They enable smooth transitions and animations, contributing to a better user experience.
+   3. Lifecycle Management:
+      > Client components have a full React lifecycle, meaning they go through phases like mounting, updating, and unmounting.
+      > This allows for complex state management and side effects handling directly in the browser.
+   4. Client-Side State:
+      > They can manage local state using hooks like useState, useEffect, and others.
+      > State changes trigger re-renders only on the client side, which can lead to more responsive and interactive applications.
+   5. Examples and Usage:
+      > Client components are typical in Single Page Applications (SPAs) where most of the application logic and UI updates are handled on the client side.
+      > They are commonly used in scenarios where real-time updates, such as chat applications, live dashboards, or interactive forms, are required.
+   
+- 'use client': To use Client Components, you can add the React "use client" directive at the top of a file, above your imports. It is used to declare a boundary between a Server and Client Component modules. This means that by defining a 
+  this in a file, all other modules imported into it, including child components, are considered part of the client bundle. 
+  Put another way, It is used to explicitly specify that a file or module should be treated as client-side code. This is part of Next.js's approach to server-side rendering (SSR) and client-side rendering (CSR), helping developers manage 
+  where and how their code runs. Here’s what it does:
+    1. Explicit Client-Side Execution: By adding 'use client' at the top of a file, you're indicating that this component should only run on the client side. This can be important for components that rely on browser-specific APIs (like 
+       window or document) or need to handle client-side state and effects.
+    2. Optimized Performance: Using this directive can help optimize performance by preventing certain parts of your application from being unnecessarily processed on the server. This separation allows the server to focus on rendering 
+       server-specific code while offloading client-specific logic to the browser.
+    3. Clarity in Code: It provides clarity in your codebase, making it clear which components are meant for client-side rendering. This can improve maintainability and reduce bugs related to rendering context (server vs. client).
+
+- Server Actions: They're asynchronous functions that are executed on the server. They can be used in Server and Client Components to handle form submissions and data mutations. They can be defined with the React "use server" directive.
+  We've got to always use "async" whenever we use 'use server'.
+
+- Server Components: They can use the inline function level or module level "use server" directive. To inline a Server Action, add "use server" to the top of the function body. 
+  server components are a feature introduced to improve the performance and flexibility of React applications. They allow you to render components on the server, sending the pre-rendered HTML to the client, which can then be hydrated with 
+  client-side interactivity as needed. Here’s a more detailed breakdown. Here's a breakdown of what server components involve:
+    1. Rendering on the Server: 
+       > Server components are rendered on the server, meaning the HTML is generated there and sent to the client.
+       > This can improve performance, as the client receives fully rendered HTML and can display it immediately, even before JavaScript loads.
+    2. Improved Performance:
+       > Server components can reduce the amount of JavaScript that needs to be sent to the client.
+       > They allow for better use of server-side resources, reducing the load on the client and improving overall performance, especially for slower devices or connections.
+    3. Data Fetching:
+       > Server components can fetch data directly from the server, which can simplify the data-fetching logic.
+       > They can leverage server-side APIs and databases directly without exposing sensitive data to the client.
+    4. Hydration:
+       > Once the HTML is rendered and sent to the client, it can be hydrated to add interactivity where needed.
+       > Only the necessary JavaScript for interactive parts of the page is sent, rather than the entire application.
+    5. Seamless Integration with Client Components:
+       > Server components can be used alongside client components, allowing for a mix of server-rendered and client-rendered content.
+       > This enables developers to choose the best rendering strategy for each part of their application. 
+
+- 'use server': It is needed only if you’re using React Server Components or building a library compatible with them, and marks server-side functions that can be called from client-side code. This directive explicitly tells Next.js that the 
+  component or function should be executed on the server side rather than the client side. This is particularly useful for optimizing performance and controlling where specific logic is executed in your application.
+
+  To use it, you must add 'use server' at the top of an async function body to mark the function as callable by the client (Server Action), or at the top of a separate file to mark all exports of that file as Server Actions.
+  When calling a Server Action on the client, it'll make a network request to the server that includes a serialized copy of any arguments passed. If the Server Action returns a value, that value will be serialized and returned to the client.
+  Instead of individually marking functions with 'use server', you can add the directive to the top of a file to mark all exports within that file as Server Actions that can be used anywhere, including imported in client code.
+    > It must be at the very beginning of their function or module; above any other code including imports (comments above directives are OK). They must be written with single or double quotes, not backticks.
+    > It can only be used in server-side files. The resulting Server Actions can be passed to Client Components through props. See supported types for serialization.
+    > To import a Server Action from client code, the directive must be used on a module level.
+    > Because the underlying network calls are always asynchronous, 'use server' can only be used on async functions.
+    > Always treat arguments to Server Actions as untrusted input and authorize any mutations. See security considerations.
+    > Server Actions should be called in a Transition. Server Actions passed to <form action> or formAction will automatically be called in a transition.
+    > Server Actions are designed for mutations that update server-side state; they are not recommended for data fetching. Accordingly, frameworks implementing Server Actions typically process one action at a time and do not have a way to 
+      cache the return value.
+
+- React Server Component Payload: refers to the data sent from the server to the client when using Server Components. React Server Components allow developers to render parts of their React applications on the server, which can improve 
+  performance by reducing the amount of JavaScript that needs to be sent to the client. 
+  When a React Server Component is rendered on the server, the output is serialized into a payload. This payload contains the necessary data and instructions for the client to understand and render the component on the client side. The 
+  payload is then sent to the client, where it is deserialized and used to rehydrate the component in the browser.
+  The benefits of using React Server Components include improved initial load times, better SEO, and the ability to use server-side data fetching more seamlessly within the component logic. The payload is a crucial part of this process as it 
+  ensures that the client receives the necessary information to correctly render the server-rendered components. Here are the key aspects of React Server Component Payload:
+    > Serialization: The server renders the components and serializes the output into a payload format.
+    > Data Transfer: This payload is transferred from the server to the client.
+    > Deserialization: On the client side, the payload is deserialized to reconstruct the component state and render it in the browser.
+    > Rehydration: The client uses the payload to rehydrate the server-rendered components, making them interactive.  
+  The React Server Component Payload contains:
+    > The rendered result of Server Components
+    > Placeholders for where Client Components should be rendered and references to their JavaScript files
+    > Any props passed from a Server Component to a Client Component
+    
+- Client-side rendering (CSR): It means rendering all pages directly in the browser using JavaScript. When all the data fetching is done by the browser instead of a server then it is pretty obvious that the page loading will be slow leading 
+  to a bad user experience. It is faster after the first load since there are no server requests to change pages, which makes it insanely fast, and provides a better UX (user experience) because it gives a native-app feel to the page.
+  It always loads a blank page and the markup only gets displayed after the JS has completely loaded. Keep in mind that this is only for the first render i.e. the first time React tree gets rendered from the DOM
+  
+  In Client-Side Rendering (CSR) with React, the browser downloads a minimal HTML page and the JavaScript needed for the page. The JavaScript is then used to update the DOM and render the page. When the application is first loaded, the user 
+  may notice a slight delay before they can see the full page, this is because the page isn't fully rendered until all the JavaScript is downloaded, parsed, and executed.
+  After the page has been loaded for the first time, navigating to other pages on the same website is typically faster, as only necessary data needs to be fetched, and JS can re-render parts of the page without requiring a full page refresh.  
+  
+- Server-side Rendering (SSR): It uses servers' request-response process to render the pages using JavaScript. Data fetching is done by the servers and hence it has good user experience. If a page uses Server-side Rendering, the page HTML is 
+  generated on each request.
+  The reason is that in SSR the server first loads the HTML content for the user to at least have some content on the web page while the JavaScript is being loaded in the background. 
+  Put another way, it is the process of rendering web pages on the client using JavaScript. In this approach, the server sends the initial HTML file, but the client then uses JavaScript to dynamically update the page as needed. This allows 
+  for more interactive and responsive web pages, as the client can update specific parts of the page without needing to reload the entire page. One example of a popular CSR framework is React. With React, you can write JavaScript code that 
+  updates the DOM as needed, providing a more interactive and dynamic web application. But, how SSR Works in ReactJS:
+    1. Request: The client (browser) makes a request to the server for a specific URL.
+    2. Server Processing: The server runs the React code to generate the HTML for the requested URL.
+    3. HTML Response: The server sends the fully rendered HTML back to the client.
+    4. Hydration: The client-side JavaScript bundle is downloaded and executed. React "hydrates" the server-rendered HTML, making it interactive by attaching event handlers.
+
+  Here are some of the most important beneffits: 
+   > SSR is better for slow connections because the HTML is immediately provided, whereas in CSR the user sees a blank page until the Javascript is loaded and renders the page's content.
+   > It allows better SEO (Search Engine Optimization) because the content doesn't have to be loaded by Javascript like in CSR, so the search engine's web crawlers can directly parse the information.
+   > SSR first load is usually faster because it doesn't need to fetch the whole website in a Javascript bundle as CSR does (some performance optimizations can be made in CSR to reduce this payload, like dynamic imports).
+   > More dynamic and interactive web applications
+   > Can provide a smoother and more seamless user experience
+   > Can reduce the need for additional server requests
+
+- Static site generator (SSG): SSG has similarities with SSR. The page is also generated in the server, however, the page is rendered at build time. So, instead of rendering the page on the server upon the receival of a request, the page is 
+  already rendered in the server, waiting to be served to the client.  
+  A static site generator is a tool that generates a full static HTML website based on raw data and a set of templates. Essentially, a static site generator automates the task of coding individual HTML pages and gets those pages ready to 
+  serve to users ahead of time. Because these HTML pages are pre-built, they can load very quickly in users' browsers.
+  Static site generators are an alternative to content management systems (CMS) — another type of tool for managing web content, generating webpages, and implementing templates. (A template is a reusable format for web content; developers 
+  use templates to avoid writing the same formatting over and over.) Static site generators are typically part of a JAMstack web development approach.
+
+- Incremental Static Regeneration (ISR): It allows you to create or update static pages after you’ve built your site. This means you can incrementally regenerate static pages without needing to rebuild the entire site. With ISR, you can 
+  retain the benefits of static while scaling to millions of pages.
+
+- JAMstack: JAMstack is an approach to frontend web development (the construction of content and interfaces that users interact with). It allows developers to quickly create and efficiently serve static websites to users.
+  In a JAMstack web application, as much HTML as possible is pre-built and stored in a content delivery network (CDN). Instead of running a monolithic backend application on the server side to generate dynamic content, dynamic components of 
+  the application are based on APIs. Ideally, this results in a much faster user experience and a much simpler developer experience.
+
+- Difference between SSR and SSG: The difference between these two is that in SSR the server needs to render the page before sending it to the user (render at runtime), and with SSG this is not necessary, because it's done at build time. You 
+  may feel like "why on earth should I use SSR then?". It's simple: most websites usually have dynamic, stateful data (e.g.: user email/logo on the navbar when a user is logged in). This means we can't pre-render at build time templates with 
+  this data, so the only way to have this data with SSG would be to import it via Javascript (which would defeat SSG's core purpose).
+    
+- Loader in image: A loader is a function that generates the URLs for your image. It modifies the provided src, and generates multiple URLs to request the image at different sizes. These multiple URLs are used in the automatic srcset 
+  generation, so that visitors to your site will be served an image that is the right size for their viewport.
+  The default loader for Next.js applications uses the built-in Image Optimization API, which optimizes images from anywhere on the web, and then serves them directly from the Next.js web server. If you would like to serve your images 
+  directly from a CDN or image server, you can write your own loader function with a few lines of JavaScript.
+
+- Layout shift: refers to unexpected movement of web page elements while the page is still loading or when dynamic content is being added to the page. This can be a frustrating experience for users as it may cause them to lose track of what 
+  they were reading or accidentally click on something they didn't intend to. In the context of Next.js (and web development in general), layout shifts can occur due to several reasons, such as:
+    > Late Loading Images: When images don't have specified dimensions, the browser doesn't know how much space to allocate for them, leading to a shift in layout once the image loads.
+    > Dynamic Content Injection: Content loaded dynamically via JavaScript can cause elements to move around.
+    > Fonts: Custom fonts that are not initially loaded can cause text to re-render with a different size once the font is available.
+    > Ads and Embeds: Ads or third-party embeds can load and push content around.
+
+- blur-up placeholders: It refer to a technique used to enhance the user experience when loading images. This method involves displaying a low-resolution, blurred version of an image while the high-resolution version is being loaded. 
+  Here's how it works and why it's used:
+    > Low-Resolution Placeholder: A small, low-resolution version of the image is initially loaded. This image is quick to download because of its small size.
+    > Blur Effect: This low-resolution image is displayed with a blur effect. The blur makes the low quality less noticeable and provides a smooth visual transition to the high-resolution image.
+    > High-Resolution Image: As the high-resolution image finishes loading, it replaces the blurred placeholder.
+  The benefits of using blur-up placeholders include:
+  > Improved Perceived Performance: Users see something related to the final content quickly, reducing the perception of waiting.
+  > Smooth Transition: The gradual transition from a blurred placeholder to a sharp image is visually pleasing and less jarring than loading the image in chunks or displaying a blank space.
+  
+- Largest Contentful Paint (LCP): LCP reports the render time of the largest image or text block visible in the viewport, relative to when the user first navigated to the page.
+  
+- Working in develoment-mode: NextJS performs pretty aggressive caching and there is one extra step it performs and goes through when preparing the app for production Because when you run this NPM run build command to prepare the app for 
+  production, NextJS goes ahead and actually generates, pre-renders all the pages of your app that can be pre-generated, so basically all non-dynamic pages.
+  All that data is fetched and rendered during the build process. And NextJS is doing that because by pre-rendering all pages, it of course has those pages available right from the start after being deployed. And so the very first visitor of 
+  your website is able to instantly see the finished page without having to wait for anything to render. Then, NextJS caches those pre-rendered pages so that it's able to serve them to all visitors. 
+  But the downside of this, is that it never re-fetches the server-actions because the code is never executes again. Instead, it just uses pre-generated pages.  
+  
+- Parallel routes: It allows you to simultaneously or conditionally render one or more pages within the same layout. They are useful for highly dynamic sections of an app, such as dashboards and feeds on social sites.
+    > Slots: Parallel routes are created using named slots. Slots are defined with the @folder convention. And Slots are passed as props to the shared parent layout. However, slots are not route segments and do not affect the URL structure.
+      It's important to keep in mind that the "children" prop is an implicit slot that does not need to be mapped to a folder. 
+    > Active state and navigation: By default, Next.js keeps track of the active state (or subpage) for each slot. However, the content rendered within a slot will depend on the type of navigation:
+      ~ Soft Navigation: During client-side navigation, Next.js will perform a partial render, changing the subpage within the slot, while maintaining the other slot's active subpages, even if they don't match the current URL.
+      ~ Hard Navigation: After a full-page load (browser refresh), Next.js cannot determine the active state for the slots that don't match the current URL. Instead, it will render a default.js file for the unmatched slots, or 404 if 
+        default.js doesn't exist. The 404 for unmatched routes helps ensure that you don't accidentally render a parallel route on a page that it was not intended for. You can instead define a default.js file to render as a fallback for 
+        unmatched slots during the initial load or full-page reload.
+        
+  A clear benefit of parallel routes is their ability to split a single layout into various slots, making the code more manageable. This is particularly advantageous when different teams work on various sections of the page.
+  However, the true benefit of parallel routes lies in their capacity for independent route handling and sub-navigation. Let’s take a closer look at these benefits.
+    > Independent route handling: One of the most compelling features of parallel routes is the ability to handle each route independently. This means that each slot of your layout, such as user analytics or activity logs, can have its own  
+      loading and error states. This granular control is particularly beneficial in scenarios where different sections of the page load at varying speeds or encounter unique errors. For instance, if the user analytics data takes longer to 
+      load, you can display a loading spinner specifically for that section, while other parts of the dashboard remain interactive. Similarly, if there's an error in fetching revenue metrics, you can show an error message in that specific 
+      section without affecting the rest of the dashboard. This level of detail in handling states not only improves the user experience but also simplifies debugging and maintenance.
+    >  Sub-navigation in routes: Another significant advantage of using parallel routes is their capability to offer a seamless sub-navigation experience within each parallel route. Each slot of your dashboard can essentially function as a 
+       mini-application, complete with its own navigation and state management. This is especially useful in a complex application such as our dashboard where different sections serve distinct purposes.
+   https://www.builder.io/blog/nextjs-14-parallel-routes
+   
+- Catch-all Routes: It refer to dynamic routes that can match multiple segments of a URL path. This is useful for scenarios where you need to handle nested routes or flexible routing structures without having to define each possible path 
+  explicitly. By using catch-all segments, you can simplify your routing logic and reduce the number of route files you need to maintain, while still supporting complex URL structures.  
+  They can be made optional by including the parameter in double square brackets: [[...folderName]]. The difference between catch-all and optional catch-all segments is that with optional, the route without the parameter is also matched. 
+
+- Interception Routes: Intercepting routes allows you to load a route from another part of your application within the current layout. This routing paradigm can be useful when you want to display the content of a route without the user 
+  switching to a different context. For example, when clicking on a photo in a feed, you can display the photo in a modal, overlaying the feed.
+  However, when navigating to the photo by clicking a shareable URL or by refreshing the page, the entire photo page should render instead of the modal. No route interception should occur.
+  Intercepting routes can be defined with the (..) convention, which is similar to relative path convention ../ but for segments. You can use:
+    --> (.)        to match segments on the same level
+    --> (..)       to match segments one level above
+    --> (..)(..)   to match segments two levels above
+    --> (...)      to match segments from the root app directory
+
+- Route Groups: In the app directory, nested folders are normally mapped to URL paths. However, you can mark a folder as a Route Group to prevent the folder from being included in the route's URL path. This allows you to organize your route 
+  segments and project files into logical groups without affecting the URL path structure. A route group can be created by wrapping a folder's name in parenthesis: (folderName).
+  Route groups are useful for:
+    > Organizing routes into groups e.g. by site section, intent, or team.
+    > Enabling nested layouts in the same route segment level:
+    > Creating multiple nested layouts in the same segment, including multiple root layouts
+    > Adding a layout to a subset of routes in a common segment
+  Good to know:
+    > The naming of route groups has no special significance other than for organization. They do not affect the URL path.
+    > Routes that include a route group should not resolve to the same URL path as other routes.
+    > If you use multiple root layouts without a top-level layout.js file, your home page.js file should be defined in one of the route groups, For example: app/(marketing)/page.js.
+    > Navigating across multiple root layouts will cause a full page load (as opposed to a client-side navigation).
+    
+- Route Handlers:  
+
+- Middlewares: 
+
+- NextResponse:  
+
+- Caching in Next.js: By default, Next.js will cache as much as possible to improve performance and reduce cost. This means routes are statically rendered and data requests are cached unless you opt out. The diagram below shows the default 
+  caching behavior: when a route is statically rendered at build time and when a static route is first visited. Caching behavior changes depending on whether the route is statically or dynamically rendered, data is cached or uncached, and 
+  whether a request is part of an initial visit or a subsequent navigation. Depending on your use case, you can configure the caching behavior for individual routes and data requests.
+    > Duration: The cache lasts the lifetime of a server request until the React component tree has finished rendering.
+    > Revalidating: Since the memoization is not shared across server requests and only applies during rendering, there is no need to revalidate it.
+    > Opting out: Memoization only applies to the GET method in fetch requests, other methods, such as POST and DELETE, are not memoized. This default behavior is a React optimization and we do not recommend opting out of it.
+
+To manage individual requests, you can use the signal property from AbortController. However, this will not opt requests out of memoization, rather, abort in-flight requests.
+
+- Request Memoization: React extends the fetch API to automatically memoize requests that have the same URL and options. This means you can call a fetch function for the same data in multiple places in a React component tree while only 
+  executing it once. 
+  For example, if you need to use the same data across a route (e.g. in a Layout, Page, and multiple components), you do not have to fetch data at the top of the tree, and forward props between components. Instead, you can fetch data in the 
+  components that need it without worrying about the performance implications of making multiple requests across the network for the same data.
+
+- Data cache
+
+- Full route cache
+
+- Router cache
+
+
+                                                               $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$                                                                                                       
+                                                               
+
+- <Link>: It's a React component that extends the HTML <a> element to provide prefetching and client-side navigation between routes. It is the primary way to navigate between routes in Next.js.
+
+- <Image>: This API reference will help you understand how to use props and configuration options available for the Image Component. For features and usage, please see the Image Component page.
+   > fill: A boolean that causes the image to fill the parent element, which is useful when the width and height are unknown.
+     The parent element must assign position: "relative", position: "fixed", or position: "absolute" style.
+     By default, the img element will automatically be assigned the position: "absolute" style.
+     If no styles are applied to the image, the image will stretch to fit the container. You may prefer to set object-fit: "contain" for an image which is letterboxed to fit the container and preserve aspect ratio.
+     Alternatively, object-fit: "cover" will cause the image to fill the entire container and be cropped to preserve aspect ratio. For this to look correct, the overflow: "hidden" style should be assigned to the parent element.
+
+- notFound(): The notFound function allows you to render the not-found file within a route segment as well as inject a <meta name="robots" content="noindex" /> tag. Invoking the notFound() function throws a NEXT_NOT_FOUND error and 
+  terminates rendering of the route segment in which it was thrown. Specifying a not-found file allows you to gracefully handle such errors by rendering a Not Found UI within the segment.  
+  Put another way, calling this function will stop this component from executing and will show the closest not-found or error page.
+
+- metadata: This built-in variable in Nextjs allow us to add a bunch of metadata which is then, let's say, exposed to search engine crawlers or which shows ip when you're sharing a link to a page on X or FB.
+
+- generateMetadata(): When we wanna export dynamic metadata, we must use an async function. Dynamic metadata depends on dynamic information, such as the current route parameters, external data, or metadata in parent segments, can be set by 
+  exporting a generateMetadata function that returns a Metadata object. generateMetadata should return a Metadata object containing one or more metadata fields.
+    > If metadata doesn't depend on runtime information, it should be defined using the static metadata object rather than generateMetadata.
+    > fetch requests are automatically memoized for the same data across generateMetadata, generateStaticParams, Layouts, Pages, and Server Components. React cache can be used if fetch is unavailable.
+    > searchParams are only available in page.js segments.
+    > The redirect() and notFound() Next.js methods can also be used inside generateMetadata.
+  "metadata" and "generateMetadata()" are only supported in Server Components.
+
+- redirect: It allows you to redirect the user to another URL. redirect can be used in Server Components, Route Handlers, and Server Actions. If a resource doesn't exist, you can use the notFound function instead. In Server Actions and Route 
+  Handlers, redirect should be called after the try/catch block.
+
+- revalidatePath: This function tells NextJS to revalidate the cache that belongs to a certain route path. It allows you to purge cached data on-demand for a specific path.
+  It is a function used in combination with the Incremental Static Regeneration (ISR) feature. This function specifically is used to trigger a revalidation (regeneration) of a specific static page. When you call this 
+  function, Next.js will regenerate the static page for the given path the next time it is requested, ensuring that it serves fresh content based on the latest data.
+    > Only invalidates the cache when the included path is next visited. This means calling revalidatePath with a dynamic route segment will not immediately trigger many revalidations at once. The invalidation only happens when the path is 
+      next visited.
+    > Currently, revalidatePath invalidates all the routes in the client-side Router Cache. This behavior is temporary and will be updated in the future to apply only to the specific path.
+    > Using revalidatePath invalidates only the specific path in the server-side Route Cache.
+    > It does not return any value.
+    
+  When we add something to the database a lot of times, we need to revalidate an specific page because we want to clear the cache. And in this case, it's app/(root)/product/[slug]/page.tsx
+  This function is used when you want to manually trigger a cache revalidation for a specific route. It ensures that a server-rendered path is updated with fresh data the next time it’s requested. Like saying:    
+                                                                             “Hey, Next.js! This page is stale, go fetch a fresh version.”
+  Why use revalidatePath()? 
+  Because Next.js caches server - rendered pages or data by default — especially when using Static Site Generation (SSG) or Route Handlers with caching. But sometimes your app’s data changes dynamically, 
+  like after a form submission, database update, or API call — and you want the user to see the updated info immediately. Without revalidation, they might still see the old, cached content.    
+  This function only works in Server Actions or Route Handlers (like POST), and it’s part of the App Router (app/ directory, not pages/).
+  
+  
+- usePathname: It is a Client Component hook that lets you read the current URL's pathname.
+
+- useRouter: It allows you to programmatically change routes inside Client Components. It's recommendated to use the <Link> component for navigation unless you have a specific requirement for using useRouter.
+    > router.push(href: string, { scroll: boolean }): Perform a client-side navigation to the provided route. Adds a new entry into the browser’s history stack.
+    > router.replace(href: string, { scroll: boolean }): Perform a client-side navigation to the provided route without adding a new entry into the browser’s history stack.
+    > router.refresh(): Refresh the current route. Making a new request to the server, re-fetching data requests, and re-rendering Server Components. The client will merge the updated React Server Component payload without losing unaffected 
+      client-side React (e.g. useState) or browser state (e.g. scroll position).
+    > router.prefetch(href: string): Prefetch the provided route for faster client-side transitions.
+    > router.back(): Navigate back to the previous route in the browser’s history stack.
+    > router.forward(): Navigate forwards to the next page in the browser’s history stack.
+  The <Link> component automatically prefetch routes as they become visible in the viewport.
+  refresh() could re-produce the same result if fetch requests are cached. Other dynamic functions like cookies and headers could also change the response.
+
+- useFormState: It is a Hook that allows you to update state based on the result of a form action.
+    
+- unstable_cache:
+
+- unstable_noStore: 
+
+- await fetch('http://localhost:8080', { cache: 'force-cache' }): It getStaticProps is the default parameter, which in the end tells NextJS that the data should absolutely be cached and reused from that cache whenever possible.
+
+- await fetch('http://localhost:8080', { cache: 'no-store' }): It will tell NextJS that in this fetch (only one, not other fetch requests with exactly the same name) the data should not be cached. Instead now with this setting, I'm forcing 
+  NextJS to always send a new request and use the response data of that request instead of caching and reusing the data.
+  
+- await fetch('http://localhost:8080', { next: { revalidate: 5 } }): We define a number, which will be the number of seconds NextJS should continue reusing the cache data until it will revalidate and throw away the cache. So if I set this to 
+  five, I'm telling NextJS that the cached data should be reused for five seconds, and then thereafter it should throw away the cached data and send a new request and get some new data and within that five second timeframe, if any requests 
+  to this page would be sent, it would instead not send extra requests to a backend, but reuse the cached data.
+
+- await fetch('http://localhost:8080', { next: { tags: ['msg'] }, }): This tags will be connected to the cached data, and if you then call revalidateTag("msg") with a certain tag, NextJS will revalidate and throw away any cached data that 
+  has that tag. So that would allow you to clear the cache of multiple pages if those different pages would assign the same tags to their requests.
+    
+    
+
+                                                               $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$                 
+                                                               
+                                                                                                                                                         
+                                                               
+- getStaticProps(): When using Static Generation, a page component is pre-rendered when you build your application, when you build the next project. So when you build it for production. With Static Generation, by default, your page is not 
+  pre-rendered on the fly on the server when a request reaches the server but instead, it is pre-rendered when you as a developer build your site for production. And that means that after it was deployed, that pre-rendered page does not 
+  change. At least not by default. Remember that NextJS prepares your pages. It by default generates your pages already statically and it by default does that during the build process but if you need to wait for data. 
+  If you need to add data fetching to a page component, you can do so with this function which is a reserved name. NextJS will look for a function with that name and if it finds it, it executes this function during this pre-
+  rendering process. So it will then not directly call your component function and use the returned JSX snapshot as HTML content but it will, first of all, call getStaticProps before it calls the component function. 
+  We use "async" in "getStaticProps" because NextJS will wait for this promise to resolve, which means it waits until your data is loaded and then you return the props for this component function. And with that, you're able to load data 
+  before this component function is executed so that this component can be rendered with the required data. 
+  Now, in "getStaticProps", you can also execute any code that would normally only run on a server. You could access a file system here 
+  or securely connect to a database because any code you write in here will never end up on the client side and it will never execute on the client side simply because this code is executed during the build process, not on the server and \
+  especially not on the clients of your visitors. So the code in here will never reach the machines of your visitors. It will never execute on their machines. (This now only works in your page component files, not in other component files. 
+  Only in component files inside of the pages folder).                                                               
+                                                               
+- getServerSideProps(): It is a function that can be used to fetch data and render the contents of a page at request time. You should use getServerSideProps if you need to render a page that relies on personalized user data, or information 
+  that can only be known at request time. For example, authorization headers or a geolocation. If you do not need to fetch the data at request time, or would prefer to cache the data and pre-rendered HTML, we recommend using getStaticProps. 
+  The difference to getStaticProps is that this function will now not run during the build process, but instead always on the server after deployment or for every request. Any code we write in getServerSideProps will always run on the 
+  server, never in the client. It's important to note that the data could be outdated. And this page is generated during the build process. So thereafter we deploy it. If we then add more "meetups" to our database this pre-generated page 
+  wouldn't knmow about them. And if we don't add any client-side data fetching we would always see the oudated meetups in the app. The disadvantage of using this is that we need to wait for our page to be generated on every incoming request. 
+  Now if we don't have data that changes all the time (Like when it changes multiple times every second), getStaticProps is a better choice. 

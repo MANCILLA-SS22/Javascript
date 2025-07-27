@@ -3,7 +3,6 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import OrderDetailsTable from "./order-details-table";
 import { ShippingAddress } from "@/types";
-import { shippingAddressSchema } from "@/lib/constants/validators";
 
 export const metadata: Metadata = {
     title: 'Order Details'
@@ -11,8 +10,10 @@ export const metadata: Metadata = {
 
 type Params = Promise<{ id: string }>;
 
-async function OrderDetailsPage({ params }: { params: Params }) { // async function SignInPage(props: { params: Params}) {
+// async function SignInPage(props: { params: Params}) {
+async function OrderDetailsPage({ params }: { params: Params }) {
     const { id } = await params; //const { id } = await props.params;
+    console.log("id", id);
     const order = await getOrderById(id);
     if (!order) notFound();
 

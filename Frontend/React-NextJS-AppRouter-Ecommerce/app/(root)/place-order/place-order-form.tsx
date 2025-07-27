@@ -10,7 +10,10 @@ function PlaceOrderForm() {
 
     async function handleSubmit(event: FormEvent) {
         event.preventDefault();
-        const res = await createOrder();
+        const res = await createOrder(); 
+        console.log("createOrder", res.message);
+        console.log("createOrder", res.success);
+        console.log("createOrder", res.redirectTo);
         if (res.redirectTo) router.push(res.redirectTo);
     };
 
