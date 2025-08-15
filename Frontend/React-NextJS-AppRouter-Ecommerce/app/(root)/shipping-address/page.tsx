@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 
 import { getMyCart } from "@/lib/actions/cart.actions";
 import { getUserById } from "@/lib/actions/user.actions";
-import CheckoutSteps from "@/components/shared/products/checkout-steps";
+import CheckoutSteps from "@/components/shared/checkout-steps";
 import ShippingAddressForm from "./shipping-address-form";
 import { ShippingAddress } from "@/types";
 import { auth } from "@/auth";

@@ -3,11 +3,14 @@ import Link from "next/link";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from '@/components/ui/table';
 import { formatCurrency, formatDateTime, formatId } from '@/lib/utils';
 import { getMyOrders } from "@/lib/actions/order.actions";
+import Pagination from "@/components/shared/pagination";
 
 export const metadata: Metadata = { title: 'My Orders' };
 
-async function OrdersPage({ searchParams }: { searchParams: Promise<{ page: string }> }) {
-    const { page }: { page: string } = await searchParams;
+type SearchParams = Promise<{ [page: string]: string | string[] | undefined }>
+
+async function OrdersPage({ searchParams }: { searchParams: SearchParams }) { //async function OrdersPage(props: { searchParams: SearchParams }) { 
+    const { page } = await searchParams;  //const { page } = await props.searchParams;
     const orders = await getMyOrders({ page: Number(page) || 1 });
 
     return (
@@ -46,6 +49,9 @@ async function OrdersPage({ searchParams }: { searchParams: Promise<{ page: stri
                         }
                     </TableBody>
                 </Table>
+                {
+                    orders.totalPages > 1 && <Pagination page={Number(page) || 1} totalPages={orders?.totalPages} />
+                }
             </div>
         </div>
     );

@@ -203,5 +203,9 @@ export async function getMyOrders({ limit = PAGE_SIZE, page }: { limit?: number,
     const dataCount: number = await prisma.order.count({ where: { userId: session.user?.id! } });
     const totalPages: number = Math.ceil(dataCount / limit); 
 
-    return {  data, totalPages }
+    console.log("data", data);
+    console.log("dataCount", dataCount);
+    console.log("totalPages", totalPages);
+
+    return { data, totalPages }
 }

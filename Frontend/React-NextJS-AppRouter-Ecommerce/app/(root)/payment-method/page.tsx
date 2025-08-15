@@ -5,7 +5,7 @@ import { Session } from "next-auth";
 import { auth } from "@/auth";
 import { getUserById } from "@/lib/actions/user.actions";
 import PaymentMethodForm from "./payment-method-form";
-import CheckoutSteps from "@/components/shared/products/checkout-steps";
+import CheckoutSteps from "@/components/shared/checkout-steps";
 import { User } from "@/types";
 
 export const metadata: Metadata = { title: 'Select Payment Method' }
